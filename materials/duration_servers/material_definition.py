@@ -63,6 +63,15 @@ long_grouping_server = datastructuretools.StatalServer(
         )
     )
 
+medium_grouping_server = datastructuretools.StatalServer(
+    sequencetools.remap_sequence_by_range_pairs(
+        _euler_hundreds,
+        [
+            ((0, 99), (1, 5)),
+            ],
+        )
+    )
+
 short_grouping_server = datastructuretools.StatalServer(
     sequencetools.remap_sequence_by_range_pairs(
         _euler_hundreds,

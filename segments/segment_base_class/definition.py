@@ -23,15 +23,15 @@ class SegmentBaseClass(abjad.abctools.AbjadObject):
 
     playing_duration_cursor = materials.medium_duration_server()
 
-    playing_grouping_cursor = materials.short_grouping_server()
+    playing_grouping_cursor = materials.medium_grouping_server()
 
-    resting_duration_cursor = materials.medium_duration_server()
+    resting_duration_cursor = materials.short_duration_server()
 
     segment_name = 'Segment One'
 
     segment_duration = abjad.Duration(8)
 
-    minimum_timespan_duration = abjad.Duration(1, 4)
+    minimum_timespan_duration = abjad.Duration(3, 16)
 
     tempo = materials.tempo_inventory[0]
 
@@ -137,9 +137,7 @@ class SegmentBaseClass(abjad.abctools.AbjadObject):
         return time_signatures, timespan_mapping
 
     def configure_score(self, score):
-            
-        for voice in abjad.iterate(score).by_class(abjad.Voice):
-            voice.engraver_consists.append('Horizontal_bracket_engraver')
+        abjad.override(score).horizontal_bracket.color = 'red'
 
     def configure_lilypond_file(self, lilypond_file):
         #title = 'Plague Water ({})'.format(self.segment_name)
@@ -171,8 +169,9 @@ class SegmentBaseClass(abjad.abctools.AbjadObject):
                     voice.extend(rests)
                 notes = abjad.sequencetools.flatten_sequence(
                     note_maker((x.duration for x in group)))
-                #bracket = abjad.spannertools.HorizontalBracketSpanner()
-                #abjad.attach(bracket, notes)
+                if 1 < len(notes):
+                    bracket = abjad.spannertools.HorizontalBracketSpanner()
+                    abjad.attach(bracket, notes)
                 voice.extend(notes)
                 current_offset = group_stop_offset
             rest_duration = actual_segment_duration - current_offset
@@ -185,8 +184,8 @@ class SegmentBaseClass(abjad.abctools.AbjadObject):
                 abjad.mutate(shard).rewrite_meter(
                     self.time_signatures[i],
                     )
-            #beam = abjad.spannertools.MeasuredComplexBeam()
-            #abjad.attach(beam, voice.select_leaves())
+            beam = abjad.spannertools.MeasuredComplexBeam()
+            abjad.attach(beam, voice.select_leaves())
 
     def populate_time_signature_context(self):
         measures = abjad.scoretools.make_spacer_skip_measures(

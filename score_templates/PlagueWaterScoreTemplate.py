@@ -2,7 +2,7 @@
 import collections
 from abjad import attach
 from abjad.tools import abctools
-from abjad.tools import instrumenttools
+from abjad.tools import indicatortools
 from abjad.tools import scoretools
 
 
@@ -19,14 +19,17 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
 
     def __call__(self):
 
+        percussion_clef = indicatortools.Clef('percussion')
+
         guitar_staff_group = scoretools.StaffGroup(
             [
-                scoretools.RhythmicStaff(
+                scoretools.Staff(
                     [
                         scoretools.Voice(
                             name='Guitar Voice',
                             ),
                         ],
+                    context_name='GuitarStaff',
                     name='Guitar Staff',
                     ),
                 scoretools.Context(
@@ -34,54 +37,57 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
                     name='Guitar Pedals',
                     ),
                 ],
+            context_name='GuitarStaffGroup',
             name='Guitar Staff Group',
             )
 
         percussion_staff_group = scoretools.StaffGroup(
             [
-                scoretools.RhythmicStaff(
+                scoretools.Staff(
                     [
                         scoretools.Voice(
                             name='Percussion Voice One',
                             ),
                         ],
+                    context_name='PercussionShakerStaff',
                     name='Percussion Shaker Staff',
                     ),
-                scoretools.RhythmicStaff(
+                scoretools.Staff(
                     [
                         scoretools.Voice(
                             name='Percussion Voice Two',
                             ),
                         ],
+                    context_name='PercussionDrumStaff',
                     name='Percussion Drum Staff',
                     ),
-                scoretools.RhythmicStaff([],
-                    name='Percussion Bass Drum Staff',
-                    ),
                 ],
+            context_name='PercussionStaffGroup',
             name='Percussion Staff Group',
             )
 
-        piano_staff_group = scoretools.PianoStaff(
+        piano_staff_group = scoretools.StaffGroup(
             [
-                scoretools.RhythmicStaff(
+                scoretools.Staff(
                     [
                         scoretools.Voice(
                             name='Piano Right-hand',
                             ),
                         ],
+                    context_name='PianoUpperStaff',
                     name='Piano Upper Staff',
                     ),
                 scoretools.Context(
                     context_name='Dynamics',
                     name='Piano Dynamics',
                     ),
-                scoretools.RhythmicStaff(
+                scoretools.Staff(
                     [
                         scoretools.Voice(
                             name='Piano Left-hand',
                             ),
                         ],
+                    context_name='PianoLowerStaff',
                     name='Piano Lower Staff',
                     ),
                 scoretools.Context(
@@ -89,20 +95,23 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
                     name='Piano Pedals',
                     ),
                 ],
+            context_name='PianoStaffGroup',
             name='Piano Staff Group',
             )
 
         saxophone_staff_group = scoretools.StaffGroup(
             [
-                scoretools.RhythmicStaff(
+                scoretools.Staff(
                     [
                         scoretools.Voice(
                             name='Saxophone Voice',
                             ),
                         ],
+                    context_name='SaxophoneStaff',
                     name='Saxophone Staff',
                     ),
                 ],
+            context_name='SaxophoneStaffGroup',
             name='Saxophone Staff Group',
             )
 
@@ -121,5 +130,12 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
                 ],
             name='Plague Water Score',
             )
+
+        attach(percussion_clef, score['Guitar Staff'])
+        attach(percussion_clef, score['Percussion Drum Staff'])
+        attach(percussion_clef, score['Percussion Shaker Staff'])
+        attach(percussion_clef, score['Piano Lower Staff'])
+        attach(percussion_clef, score['Piano Upper Staff'])
+        attach(percussion_clef, score['Saxophone Staff'])
 
         return score
