@@ -9,8 +9,8 @@
 
     \context {
         \Voice
-        \remove Forbid_line_break_engraver
         \consists Horizontal_bracket_engraver
+        \remove Forbid_line_break_engraver
     }
 
     \context {
@@ -165,10 +165,12 @@
         \accepts SaxophoneStaffGroup
         \accepts TimeSignatureContext
         \override BarLine #'hair-thickness = #0.5
-        \override BarNumber #'extra-offset = #'(-6 . -4)
+        \override BarNumber #'extra-offset = #'(-8 . -2)
+        \override BarNumber #'font-name = "Didot Italic"
         \override BarNumber #'font-size = #1
-        \override BarNumber #'padding = #4
-        \override BarNumber #'transparent = ##t
+        \override BarNumber #'X-extent = #'(0 . 0)
+        \override BarNumber #'Y-extent = #'(0 . 0)
+        \override BarNumber #'stencil = #(make-stencil-circler 0.1 0.7 ly:text-interface::print)
         \override Beam #'breakable = ##t
         \override DynamicLineSpanner #'Y-extent = #'(-1.5 . 1.5)
         \override Glissando #'breakable = ##t
@@ -176,6 +178,17 @@
         \override MetronomeMark #'font-size = #3
         \override NoteCollision #'merge-differently-dotted = ##t
         \override NoteColumn #'ignore-collision = ##t
+
+        \override RehearsalMark #'extra-offset = #'(-1.5 . 6)
+        \override RehearsalMark #'X-extent = #'(0 . 0)
+        \override RehearsalMark #'X-offset = #ly:self-alignment-interface::x-aligned-on-self
+        \override RehearsalMark #'Y-extent = #'(0 . 0)
+        \override RehearsalMark #'break-align-symbol = ##f
+        \override RehearsalMark #'break-visibility = #end-of-line-invisible
+        \override RehearsalMark #'font-size = #10
+        \override RehearsalMark #'font-name = "Didot"
+        \override RehearsalMark #'self-alignment-X = #CENTER
+
         \override SpacingSpanner #'strict-grace-spacing = ##t
         \override SpacingSpanner #'strict-note-spacing = ##t
         \override SpacingSpanner #'uniform-stretching = ##t
@@ -192,6 +205,7 @@
         \override TupletNumber #'font-size = #1
         \override TupletNumber #'text = #tuplet-number::calc-fraction-text
         autoBeaming = ##f
+        markFormatter = #format-mark-box-alphabet
         proportionalNotationDuration = #(ly:make-moment 1 64)
         tupletFullLength = ##t
     }

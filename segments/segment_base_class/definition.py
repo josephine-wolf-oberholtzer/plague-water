@@ -15,8 +15,10 @@ class SegmentBaseClass(abjad.abctools.AbjadObject):
     permitted_time_signatures = (
         (5, 16),
         (3, 8),
+        (7, 16),
         (2, 4),
         (4, 8),
+        (5, 8),
         (3, 4),
         (6, 8),
         )
@@ -25,7 +27,7 @@ class SegmentBaseClass(abjad.abctools.AbjadObject):
 
     playing_grouping_cursor = materials.medium_grouping_server()
 
-    resting_duration_cursor = materials.short_duration_server()
+    resting_duration_cursor = materials.medium_duration_server(reverse=True)
 
     segment_name = 'Segment One'
 
@@ -138,6 +140,26 @@ class SegmentBaseClass(abjad.abctools.AbjadObject):
 
     def configure_score(self, score):
         abjad.override(score).horizontal_bracket.color = 'red'
+        rehearsal_mark = abjad.indicatortools.LilyPondCommand(r'mark \default')
+        abjad.attach(rehearsal_mark, score['TimeSignatureContext'][0],
+            scope=abjad.scoretools.Context)
+        abjad.attach(self.tempo, score['TimeSignatureContext'][0])
+        score.add_double_bar()
+        right_column = abjad.markuptools.MarkupCommand(
+            'right-column', [
+                ' ',
+                ' ',
+                ' ',
+                'Jamaica Plain',
+                'December 2013 - February 2014',
+                ],
+            )
+        italic = abjad.markuptools.MarkupCommand(
+            'italic',
+            right_column,
+            )
+        final_markup = abjad.Markup(italic, 'down')
+        score.add_final_markup(final_markup)
 
     def configure_lilypond_file(self, lilypond_file):
         #title = 'Plague Water ({})'.format(self.segment_name)
