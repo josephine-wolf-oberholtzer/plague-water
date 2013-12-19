@@ -178,6 +178,7 @@
         \override MetronomeMark #'font-size = #3
         \override NoteCollision #'merge-differently-dotted = ##t
         \override NoteColumn #'ignore-collision = ##t
+        \override PhrasingSlur #'dash-definition = #'((0 1 0.1 0.75))
 
         \override RehearsalMark #'extra-offset = #'(-1.5 . 6)
         \override RehearsalMark #'X-extent = #'(0 . 0)

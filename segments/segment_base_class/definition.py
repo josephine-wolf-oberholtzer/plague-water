@@ -45,24 +45,15 @@ class SegmentBaseClass(abjad.abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self):
-        #template = abjad.templatetools.StringQuartetScoreTemplate()
         template = score_templates.PlagueWaterScoreTemplate()
-        #template = abjad.templatetools.GroupedRhythmicStavesScoreTemplate(
-        #    staff_count=4)
         self.score = template()
-        #time_signature_context = abjad.scoretools.Context(
-        #    context_name='TimeSignatureContext',
-        #    name='TimeSignatureContext',
-        #    )
-        #self.score.insert(0, time_signature_context)
         self.time_signatures, self.timespan_mapping = \
             self.build_time_signatures_and_timespan_mapping()
         self.populate_time_signature_context()
         self.populate_semantic_voice_contexts()
         self.configure_score(self.score)
-        self.lilypond_file = \
-            abjad.lilypondfiletools.make_floating_time_signature_lilypond_file(
-                self.score)
+        self.lilypond_file = abjad.lilypondfiletools.make_basic_lilypond_file(
+            self.score)
         self.configure_lilypond_file(self.lilypond_file)
         return self.lilypond_file
 
@@ -77,12 +68,10 @@ class SegmentBaseClass(abjad.abctools.AbjadObject):
         lilypond_file = segment()
         current_directory_path = os.path.dirname(os.path.abspath(
             os.path.expanduser(current_file_path)))
-        print current_directory_path
         lilypond_file_path = os.path.join(current_directory_path, 'output.ly')
         abjad.persist(lilypond_file).as_ly(lilypond_file_path)
         pdf_file_path = os.path.join(current_directory_path, 'output.pdf')
         abjad.persist(lilypond_file).as_pdf(pdf_file_path)
-        abjad.show(lilypond_file)
 
     def build_time_signatures_and_timespan_mapping(self):
         timespan_mapping = {}
@@ -205,6 +194,7 @@ class SegmentBaseClass(abjad.abctools.AbjadObject):
                 voice.extend(rests)
             for i, shard in enumerate(abjad.mutate(voice[:]).split(
                 time_signature_durations)):
+                pass
                 abjad.mutate(shard).rewrite_meter(
                     self.time_signatures[i],
                     )
