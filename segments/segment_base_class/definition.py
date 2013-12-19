@@ -75,7 +75,9 @@ class SegmentBaseClass(abjad.abctools.AbjadObject):
     def build_and_persist(class_, current_file_path):
         segment = class_()
         lilypond_file = segment()
-        current_directory_path = os.path.dirname(current_file_path)
+        current_directory_path = os.path.dirname(os.path.abspath(
+            os.path.expanduser(current_file_path)))
+        print current_directory_path
         lilypond_file_path = os.path.join(current_directory_path, 'output.ly')
         abjad.persist(lilypond_file).as_ly(lilypond_file_path)
         pdf_file_path = os.path.join(current_directory_path, 'output.pdf')
@@ -213,3 +215,8 @@ class SegmentBaseClass(abjad.abctools.AbjadObject):
         measures = abjad.scoretools.make_spacer_skip_measures(
             self.time_signatures)
         self.score['TimeSignatureContext'].extend(measures)
+
+
+if __name__ == '__main__':
+    segment = SegmentBaseClass()
+    segment.build_and_persist(__file__)
