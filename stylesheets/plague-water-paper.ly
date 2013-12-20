@@ -31,7 +31,7 @@
     oddHeaderMarkup = \markup \fill-line { " " }
     print-first-page-number = ##f
     print-page-number = ##t
-    ragged-bottom = ##t
+    %ragged-bottom = ##t
     ragged-last-bottom = ##t
     right-margin = 10\mm
     system-system-spacing =
