@@ -164,11 +164,14 @@ class SegmentBaseClass(abjad.abctools.AbjadObject):
         lilypond_file.global_staff_size = 14
 
     def populate_semantic_voice_contexts(self):
-        time_signature_durations = [x.duration for x in self.time_signatures]
-        actual_segment_duration = sum(time_signature_durations)
+        measure_durations = [x.duration for x in self.time_signatures]
+        measure_offsets = abjad.mathtools.cumulative_sums(
+            measure_durations)
+        actual_segment_duration = sum(measure_durations)
         note_maker = abjad.rhythmmakertools.NoteRhythmMaker()
         rest_maker = abjad.rhythmmakertools.RestRhythmMaker()
         for voice_name, timespan_inventory in self.timespan_mapping.items():
+            print voice_name
             voice = self.score[voice_name]
             current_offset = abjad.Offset(0)
             for group in timespan_inventory.partition(
@@ -179,25 +182,35 @@ class SegmentBaseClass(abjad.abctools.AbjadObject):
                 if rest_duration:
                     rests = abjad.sequencetools.flatten_sequence(
                         rest_maker((rest_duration,)))
-                    voice.extend(rests)
-                notes = abjad.sequencetools.flatten_sequence(
-                    note_maker((x.duration for x in group)))
-                if 1 < len(notes):
-                    bracket = abjad.spannertools.HorizontalBracketSpanner()
-                    abjad.attach(bracket, notes)
-                voice.extend(notes)
+                    rest_container = abjad.Container(rests)
+                    voice.append(rest_container)
+                notes = note_maker((x.duration for x in group))
+                note_containers = [abjad.Container(x) for x in notes]
+                bracket = abjad.spannertools.HorizontalBracketSpanner()
+                abjad.attach(bracket, note_containers)
+                voice.extend(note_containers)
                 current_offset = group_stop_offset
             rest_duration = actual_segment_duration - current_offset
             if rest_duration:
                 rests = abjad.sequencetools.flatten_sequence(
                     rest_maker((rest_duration,)))
-                voice.extend(rests)
+                rest_container = abjad.Container(rests)
+                voice.append(rest_container)
             for i, shard in enumerate(abjad.mutate(voice[:]).split(
-                time_signature_durations)):
-                pass
-                abjad.mutate(shard).rewrite_meter(
-                    self.time_signatures[i],
-                    )
+                measure_durations)):
+                print '\tSHARD:', shard
+                time_signature = self.time_signatures[i]
+                measure_offset = measure_offsets[i]
+                for cell in shard:
+                    cell_timespan = abjad.inspect(cell).get_timespan()
+                    cell_start_offset = cell_timespan.start_offset
+                    relative_offset = cell_start_offset - measure_offset
+                    print '\t\tCELL:', cell, relative_offset
+                    abjad.mutate(cell[:]).rewrite_meter(
+                        time_signature,
+                        #boundary_depth=1,
+                        initial_offset=relative_offset,
+                        )
             beam = abjad.spannertools.MeasuredComplexBeam()
             abjad.attach(beam, voice.select_leaves())
 
