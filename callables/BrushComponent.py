@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 from abjad import *
+from plague_water.callables.Color import Color
 
 
 class BrushComponent(abctools.AbjadObject):
@@ -24,6 +25,7 @@ class BrushComponent(abctools.AbjadObject):
         resting_durations=None,
         weight=1,
         ):
+        assert isinstance(color, Color)
         self._color = color
         # playing durations
         if isinstance(playing_durations, int):
