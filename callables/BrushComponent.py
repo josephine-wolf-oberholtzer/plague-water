@@ -6,7 +6,7 @@ class BrushComponent(abctools.AbjadObject):
 
     ### CLASS VARIABLES ###
 
-    __slots__(
+    __slots__ = (
         '_color',
         '_playing_durations',
         '_playing_groupings',
