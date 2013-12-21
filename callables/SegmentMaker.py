@@ -1,12 +1,12 @@
 #-*- encoding: utf-8 -*-
 import os
-import abjad
+from abjad import *
 from plague_water import materials
 from plague_water import plague_water_configuration
 from plague_water import score_templates
 
 
-class SegmentBaseClass(abjad.abctools.AbjadObject):
+class SegmentMaker(abctools.AbjadObject):
 
     ### CLASS VARIABLES ###
 
@@ -31,9 +31,9 @@ class SegmentBaseClass(abjad.abctools.AbjadObject):
 
     segment_name = 'Segment One'
 
-    segment_duration = abjad.Duration(8)
+    segment_duration = Duration(8)
 
-    minimum_timespan_duration = abjad.Duration(3, 16)
+    minimum_timespan_duration = Duration(3, 16)
 
     tempo = materials.tempo_inventory[0]
 
@@ -52,7 +52,7 @@ class SegmentBaseClass(abjad.abctools.AbjadObject):
         self.populate_time_signature_context()
         self.populate_semantic_voice_contexts()
         self.configure_score(self.score)
-        self.lilypond_file = abjad.lilypondfiletools.make_basic_lilypond_file(
+        self.lilypond_file = lilypondfiletools.make_basic_lilypond_file(
             self.score)
         self.configure_lilypond_file(self.lilypond_file)
         return self.lilypond_file
@@ -69,19 +69,19 @@ class SegmentBaseClass(abjad.abctools.AbjadObject):
         current_directory_path = os.path.dirname(os.path.abspath(
             os.path.expanduser(current_file_path)))
         lilypond_file_path = os.path.join(current_directory_path, 'output.ly')
-        abjad.persist(lilypond_file).as_ly(lilypond_file_path)
+        persist(lilypond_file).as_ly(lilypond_file_path)
         pdf_file_path = os.path.join(current_directory_path, 'output.pdf')
-        abjad.persist(lilypond_file).as_pdf(pdf_file_path)
+        persist(lilypond_file).as_pdf(pdf_file_path)
 
     def build_time_signatures_and_timespan_mapping(self):
         timespan_mapping = {}
-        offset_counter = abjad.datastructuretools.TypedCounter(
-            item_class=abjad.Offset,
+        offset_counter = datastructuretools.TypedCounter(
+            item_class=Offset,
             )
-        for voice in abjad.iterate(self.score).by_class(abjad.Voice):
-            timespan_inventory = abjad.timespantools.TimespanInventory()
+        for voice in iterate(self.score).by_class(Voice):
+            timespan_inventory = timespantools.TimespanInventory()
             timespan_mapping[voice.name] = timespan_inventory
-            current_offset = abjad.Offset(0)
+            current_offset = Offset(0)
             while current_offset < self.segment_duration:
                 rest_duration = self.resting_duration_cursor()[0]
                 current_offset += rest_duration
@@ -93,7 +93,7 @@ class SegmentBaseClass(abjad.abctools.AbjadObject):
                     next_offset = current_offset + play_duration
                     if self.segment_duration <= next_offset:
                         break
-                    timespan = abjad.timespantools.Timespan(
+                    timespan = timespantools.Timespan(
                         start_offset=current_offset,
                         stop_offset=next_offset,
                         )
@@ -101,15 +101,15 @@ class SegmentBaseClass(abjad.abctools.AbjadObject):
                     offset_counter[next_offset] += 1
                     timespan_inventory.append(timespan)
                     current_offset = next_offset
-        meters = abjad.metertools.Meter.fit_meters_to_expr(
+        meters = metertools.Meter.fit_meters_to_expr(
             offset_counter,
             self.permitted_time_signatures,
             )
         meters = tuple(meters)
         time_signatures = tuple(x.implied_time_signature for x in meters)
         if self.measure_segmentation_talea:
-            current_offset = abjad.Offset(0)
-            groups = abjad.sequencetools.partition_sequence_by_counts(
+            current_offset = Offset(0)
+            groups = sequencetools.partition_sequence_by_counts(
                 time_signatures,
                 self.measure_segmentation_talea,
                 cyclic=True,
@@ -119,7 +119,7 @@ class SegmentBaseClass(abjad.abctools.AbjadObject):
                 current_offset += sum(x.duration for x in group)
                 for voice_name, timespan_inventory in timespan_mapping.items():
                     new_timespan_inventory = \
-                        abjad.timespantools.TimespanInventory()
+                        timespantools.TimespanInventory()
                     for shard in timespan_inventory.split_at_offset(
                         current_offset):
                         new_timespan_inventory.extend(shard)
@@ -130,13 +130,13 @@ class SegmentBaseClass(abjad.abctools.AbjadObject):
         return time_signatures, timespan_mapping
 
     def configure_score(self, score):
-        abjad.override(score).horizontal_bracket.color = 'red'
-        rehearsal_mark = abjad.indicatortools.LilyPondCommand(r'mark \default')
-        abjad.attach(rehearsal_mark, score['TimeSignatureContext'][0],
-            scope=abjad.scoretools.Context)
-        abjad.attach(self.tempo, score['TimeSignatureContext'][0])
+        override(score).horizontal_bracket.color = 'red'
+        rehearsal_mark = indicatortools.LilyPondCommand(r'mark \default')
+        attach(rehearsal_mark, score['TimeSignatureContext'][0],
+            scope=scoretools.Context)
+        attach(self.tempo, score['TimeSignatureContext'][0])
         score.add_double_bar()
-        right_column = abjad.markuptools.MarkupCommand(
+        right_column = markuptools.MarkupCommand(
             'right-column', [
                 ' ',
                 ' ',
@@ -145,16 +145,16 @@ class SegmentBaseClass(abjad.abctools.AbjadObject):
                 'December 2013 - February 2014',
                 ],
             )
-        italic = abjad.markuptools.MarkupCommand(
+        italic = markuptools.MarkupCommand(
             'italic',
             right_column,
             )
-        final_markup = abjad.Markup(italic, 'down')
+        final_markup = Markup(italic, 'down')
         score.add_final_markup(final_markup)
 
     def configure_lilypond_file(self, lilypond_file):
         #title = 'Plague Water ({})'.format(self.segment_name)
-        #lilypond_file.header_block.title = abjad.Markup(title)
+        #lilypond_file.header_block.title = Markup(title)
         lilypond_file.remove(lilypond_file.header_block)
         lilypond_file.remove(lilypond_file.layout_block)
         lilypond_file.remove(lilypond_file.paper_block)
@@ -165,61 +165,61 @@ class SegmentBaseClass(abjad.abctools.AbjadObject):
 
     def populate_semantic_voice_contexts(self):
         measure_durations = [x.duration for x in self.time_signatures]
-        measure_offsets = abjad.mathtools.cumulative_sums(
+        measure_offsets = mathtools.cumulative_sums(
             measure_durations)
         actual_segment_duration = sum(measure_durations)
-        note_maker = abjad.rhythmmakertools.NoteRhythmMaker()
-        rest_maker = abjad.rhythmmakertools.RestRhythmMaker()
+        note_maker = rhythmmakertools.NoteRhythmMaker()
+        rest_maker = rhythmmakertools.RestRhythmMaker()
         for voice_name, timespan_inventory in self.timespan_mapping.items():
             print voice_name
             voice = self.score[voice_name]
-            current_offset = abjad.Offset(0)
+            current_offset = Offset(0)
             for group in timespan_inventory.partition(
                 include_tangent_timespans=True):
                 group_start_offset = group[0].start_offset
                 group_stop_offset = group[-1].stop_offset
                 rest_duration = group_start_offset - current_offset
                 if rest_duration:
-                    rests = abjad.sequencetools.flatten_sequence(
+                    rests = sequencetools.flatten_sequence(
                         rest_maker((rest_duration,)))
-                    rest_container = abjad.Container(rests)
+                    rest_container = Container(rests)
                     voice.append(rest_container)
                 notes = note_maker((x.duration for x in group))
-                note_containers = [abjad.Container(x) for x in notes]
-                bracket = abjad.spannertools.HorizontalBracketSpanner()
-                abjad.attach(bracket, note_containers)
+                note_containers = [Container(x) for x in notes]
+                bracket = spannertools.HorizontalBracketSpanner()
+                attach(bracket, note_containers)
                 voice.extend(note_containers)
                 current_offset = group_stop_offset
             rest_duration = actual_segment_duration - current_offset
             if rest_duration:
-                rests = abjad.sequencetools.flatten_sequence(
+                rests = sequencetools.flatten_sequence(
                     rest_maker((rest_duration,)))
-                rest_container = abjad.Container(rests)
+                rest_container = Container(rests)
                 voice.append(rest_container)
-            for i, shard in enumerate(abjad.mutate(voice[:]).split(
+            for i, shard in enumerate(mutate(voice[:]).split(
                 measure_durations)):
                 print '\tSHARD:', shard
                 time_signature = self.time_signatures[i]
                 measure_offset = measure_offsets[i]
                 for cell in shard:
-                    cell_timespan = abjad.inspect(cell).get_timespan()
+                    cell_timespan = inspect(cell).get_timespan()
                     cell_start_offset = cell_timespan.start_offset
                     relative_offset = cell_start_offset - measure_offset
                     print '\t\tCELL:', cell, relative_offset
-                    abjad.mutate(cell[:]).rewrite_meter(
+                    mutate(cell[:]).rewrite_meter(
                         time_signature,
                         #boundary_depth=1,
                         initial_offset=relative_offset,
                         )
-            beam = abjad.spannertools.MeasuredComplexBeam()
-            abjad.attach(beam, voice.select_leaves())
+            beam = spannertools.MeasuredComplexBeam()
+            attach(beam, voice.select_leaves())
 
     def populate_time_signature_context(self):
-        measures = abjad.scoretools.make_spacer_skip_measures(
+        measures = scoretools.make_spacer_skip_measures(
             self.time_signatures)
         self.score['TimeSignatureContext'].extend(measures)
 
 
 if __name__ == '__main__':
-    segment = SegmentBaseClass()
+    segment = SegmentMaker()
     segment.build_and_persist(__file__)
