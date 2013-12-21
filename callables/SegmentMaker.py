@@ -197,7 +197,8 @@ class SegmentMaker(abctools.AbjadObject):
         note_maker = rhythmmakertools.NoteRhythmMaker()
         rest_maker = rhythmmakertools.RestRhythmMaker()
         for voice_name, timespan_inventory in self.timespan_mapping.items():
-            print voice_name
+            message = 'VOICE: {}'.format(voice_name)
+            plague_water_configuration.debug(message)
             voice = self.score[voice_name]
             current_offset = Offset(0)
             for group in timespan_inventory.partition(
@@ -224,14 +225,16 @@ class SegmentMaker(abctools.AbjadObject):
                 voice.append(rest_container)
             for i, shard in enumerate(mutate(voice[:]).split(
                 measure_durations)):
-                print '\tSHARD:', shard
+                message = '\tSHARD: {}'.format(shard)
+                plague_water_configuration.debug(message)
                 meter = self.meters[i]
                 measure_offset = measure_offsets[i]
                 for cell in shard:
                     cell_timespan = inspect(cell).get_timespan()
                     cell_start_offset = cell_timespan.start_offset
                     relative_offset = cell_start_offset - measure_offset
-                    print '\t\tCELL:', cell, relative_offset
+                    message = '\t\tCELL: {} @ {}'.format(cell, relative_offset)
+                    plague_water_configuration.debug(message)
                     mutate(cell[:]).rewrite_meter(
                         meter,
                         #boundary_depth=1,
