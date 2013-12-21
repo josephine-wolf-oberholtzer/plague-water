@@ -47,8 +47,8 @@ class SegmentMaker(abctools.AbjadObject):
     def __call__(self):
         template = score_templates.PlagueWaterScoreTemplate()
         self.score = template()
-        self.time_signatures, self.timespan_mapping = \
-            self.build_time_signatures_and_timespan_mapping()
+        self.meters, self.time_signatures, self.timespan_mapping = \
+            self.build_meters_time_signatures_and_timespan_mapping()
         self.populate_time_signature_context()
         self.populate_semantic_voice_contexts()
         self.configure_score(self.score)
@@ -73,7 +73,7 @@ class SegmentMaker(abctools.AbjadObject):
         pdf_file_path = os.path.join(current_directory_path, 'output.pdf')
         persist(lilypond_file).as_pdf(pdf_file_path)
 
-    def build_time_signatures_and_timespan_mapping(self):
+    def build_meters_time_signatures_and_timespan_mapping(self):
         timespan_mapping = {}
         offset_counter = datastructuretools.TypedCounter(
             item_class=Offset,
@@ -127,7 +127,7 @@ class SegmentMaker(abctools.AbjadObject):
         for voice_name, timespan_inventory in timespan_mapping.items():
             timespan_inventory[:] = [x for x in timespan_inventory
                 if self.minimum_timespan_duration <= x.duration]
-        return time_signatures, timespan_mapping
+        return meters, time_signatures, timespan_mapping
 
     def configure_score(self, score):
         override(score).horizontal_bracket.color = 'red'
@@ -199,7 +199,7 @@ class SegmentMaker(abctools.AbjadObject):
             for i, shard in enumerate(mutate(voice[:]).split(
                 measure_durations)):
                 print '\tSHARD:', shard
-                time_signature = self.time_signatures[i]
+                meter = self.meters[i]
                 measure_offset = measure_offsets[i]
                 for cell in shard:
                     cell_timespan = inspect(cell).get_timespan()
@@ -207,7 +207,7 @@ class SegmentMaker(abctools.AbjadObject):
                     relative_offset = cell_start_offset - measure_offset
                     print '\t\tCELL:', cell, relative_offset
                     mutate(cell[:]).rewrite_meter(
-                        time_signature,
+                        meter,
                         #boundary_depth=1,
                         initial_offset=relative_offset,
                         )
