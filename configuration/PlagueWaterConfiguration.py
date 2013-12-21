@@ -9,6 +9,12 @@ class PlagueWaterConfiguration(systemtools.Configuration):
 
     abjad_configuration = systemtools.AbjadConfiguration()
 
+    ### PUBLIC METHODS ###
+
+    def debug(self, message):
+        if self['debug']:
+            print message
+
     ### PRIVATE PROPERTIES ###
 
     @property
@@ -24,7 +30,16 @@ class PlagueWaterConfiguration(systemtools.Configuration):
 
     @property
     def _option_definitions(self):
-        return {}
+        options = {
+            'debug': {
+                'comment': [
+                    '',
+                    'Print diagnostic information when True.',
+                    ],
+                'spec': 'boolean(default=True)',
+                },
+            }
+        return options
 
     ### PUBLIC PROPERTIES ###
 
