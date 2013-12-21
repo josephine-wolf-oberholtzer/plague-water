@@ -1,46 +1,72 @@
 #-*- encoding: utf-8 -*-
+import collections
 import os
 from abjad import *
-from plague_water import materials
 from plague_water import plague_water_configuration
 from plague_water import score_templates
 
 
 class SegmentMaker(abctools.AbjadObject):
 
-    ### CLASS VARIABLES ###
+    ### SCORE-LEVEL VARIABLES ###
 
-    measure_segmentation_talea = (1,)
+    measure_segmentation_talea = None
 
-    permitted_time_signatures = (
-        (5, 16),
-        (3, 8),
-        (7, 16),
-        (2, 4),
-        (4, 8),
-        (5, 8),
-        (3, 4),
-        (6, 8),
-        )
+    minimum_timespan_duration = None
 
-    playing_duration_cursor = materials.medium_duration_server()
+    permitted_time_signatures = None
 
-    playing_grouping_cursor = materials.medium_grouping_server()
+    segment_name = None
 
-    resting_duration_cursor = materials.medium_duration_server(reverse=True)
+    segment_target_duration = None
 
-    segment_name = 'Segment One'
+    tempo = None
 
-    segment_duration = Duration(8)
+    ### VOICE-LEVEL VARIABLES ###
 
-    minimum_timespan_duration = Duration(3, 16)
+    guitar_brush = None
 
-    tempo = materials.tempo_inventory[0]
+    piano_right_hand_brush = None
+
+    piano_left_hand_brush = None
+
+    percussion_right_hand_brush = None
+
+    percussion_left_hand_brush = None
+
+    saxophone_brush = None
 
     ### INITIALIZER ###
 
     def __init__(self):
-        pass
+        from plague_water import callables
+        assert isinstance(self.guitar_brush,
+            (callables.Brush, type(None)))
+        assert isinstance(self.measure_segmentation_talea,
+            collections.Iterable) and \
+            all(isinstance(x, int) and 0 < x
+                for x in self.measure_segmentation_talea)
+        assert isinstance(self.minimum_timespan_duration, Duration) and \
+            0 < self.minimum_timespan_duration < 1
+        assert isinstance(self.percussion_left_hand_brush,
+            (callables.Brush, type(None)))
+        assert isinstance(self.percussion_right_hand_brush,
+            (callables.Brush, type(None)))
+        assert isinstance(self.permitted_time_signatures,
+            collections.Iterable) and \
+            self.permitted_time_signatures and \
+            all(isinstance(x, TimeSignature)
+                for x in self.permitted_time_signatures)
+        assert isinstance(self.piano_left_hand_brush,
+            (callables.Brush, type(None)))
+        assert isinstance(self.piano_right_hand_brush,
+            (callables.Brush, type(None)))
+        assert isinstance(self.saxophone_brush,
+            (callables.Brush, type(None)))
+        assert isinstance(self.segment_target_duration, Duration) and \
+            1 <= self.segment_target_duration
+        assert isinstance(self.segment_name, str) and self.segment_name
+        assert isinstance(self.tempo, Tempo)
 
     ### SPECIAL METHODS ###
 
@@ -82,16 +108,16 @@ class SegmentMaker(abctools.AbjadObject):
             timespan_inventory = timespantools.TimespanInventory()
             timespan_mapping[voice.name] = timespan_inventory
             current_offset = Offset(0)
-            while current_offset < self.segment_duration:
+            while current_offset < self.segment_target_duration:
                 rest_duration = self.resting_duration_cursor()[0]
                 current_offset += rest_duration
-                if self.segment_duration <= current_offset:
+                if self.segment_target_duration <= current_offset:
                     break
                 play_grouping = self.playing_grouping_cursor()[0]
                 for play_duration in self.playing_duration_cursor(
                     play_grouping):
                     next_offset = current_offset + play_duration
-                    if self.segment_duration <= next_offset:
+                    if self.segment_target_duration <= next_offset:
                         break
                     timespan = timespantools.Timespan(
                         start_offset=current_offset,
@@ -167,7 +193,7 @@ class SegmentMaker(abctools.AbjadObject):
         measure_durations = [x.duration for x in self.time_signatures]
         measure_offsets = mathtools.cumulative_sums(
             measure_durations)
-        actual_segment_duration = sum(measure_durations)
+        actual_segment_target_duration = sum(measure_durations)
         note_maker = rhythmmakertools.NoteRhythmMaker()
         rest_maker = rhythmmakertools.RestRhythmMaker()
         for voice_name, timespan_inventory in self.timespan_mapping.items():
@@ -190,7 +216,7 @@ class SegmentMaker(abctools.AbjadObject):
                 attach(bracket, note_containers)
                 voice.extend(note_containers)
                 current_offset = group_stop_offset
-            rest_duration = actual_segment_duration - current_offset
+            rest_duration = actual_segment_target_duration - current_offset
             if rest_duration:
                 rests = sequencetools.flatten_sequence(
                     rest_maker((rest_duration,)))
@@ -218,8 +244,3 @@ class SegmentMaker(abctools.AbjadObject):
         measures = scoretools.make_spacer_skip_measures(
             self.time_signatures)
         self.score['TimeSignatureContext'].extend(measures)
-
-
-if __name__ == '__main__':
-    segment = SegmentMaker()
-    segment.build_and_persist(__file__)
