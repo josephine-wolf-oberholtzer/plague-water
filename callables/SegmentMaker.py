@@ -225,7 +225,7 @@ class SegmentMaker(abctools.AbjadObject):
                 voice.append(rest_container)
             for i, shard in enumerate(mutate(voice[:]).split(
                 measure_durations)):
-                message = '\tSHARD: {}'.format(shard)
+                message = '\tSHARD: {!s}'.format(shard)
                 plague_water_configuration.debug(message)
                 meter = self.meters[i]
                 measure_offset = measure_offsets[i]
@@ -233,7 +233,8 @@ class SegmentMaker(abctools.AbjadObject):
                     cell_timespan = inspect(cell).get_timespan()
                     cell_start_offset = cell_timespan.start_offset
                     relative_offset = cell_start_offset - measure_offset
-                    message = '\t\tCELL: {} @ {}'.format(cell, relative_offset)
+                    message = '\t\tCELL: {!s} @ {}'.format(
+                        cell, relative_offset)
                     plague_water_configuration.debug(message)
                     mutate(cell[:]).rewrite_meter(
                         meter,
