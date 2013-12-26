@@ -19,7 +19,26 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
 
     def __call__(self):
 
-        percussion_clef = indicatortools.Clef('percussion')
+        time_signature_context = scoretools.Context(
+            name='TimeSignatureContext',
+            context_name='TimeSignatureContext',
+            )
+
+        saxophone_staff_group = scoretools.StaffGroup(
+            [
+                scoretools.Staff(
+                    [
+                        scoretools.Voice(
+                            name='Saxophone Voice',
+                            ),
+                        ],
+                    context_name='SaxophoneStaff',
+                    name='Saxophone Staff',
+                    ),
+                ],
+            context_name='SaxophoneStaffGroup',
+            name='Saxophone Staff Group',
+            )
 
         guitar_staff_group = scoretools.StaffGroup(
             [
@@ -41,37 +60,12 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
             name='Guitar Staff Group',
             )
 
-        percussion_staff_group = scoretools.StaffGroup(
-            [
-                scoretools.Staff(
-                    [
-                        scoretools.Voice(
-                            name='Percussion Voice One',
-                            ),
-                        ],
-                    context_name='PercussionShakerStaff',
-                    name='Percussion Shaker Staff',
-                    ),
-                scoretools.Staff(
-                    [
-                        scoretools.Voice(
-                            name='Percussion Voice Two',
-                            ),
-                        ],
-                    context_name='PercussionDrumStaff',
-                    name='Percussion Drum Staff',
-                    ),
-                ],
-            context_name='PercussionStaffGroup',
-            name='Percussion Staff Group',
-            )
-
         piano_staff_group = scoretools.StaffGroup(
             [
                 scoretools.Staff(
                     [
                         scoretools.Voice(
-                            name='Piano Right-hand',
+                            name='Piano RH Voice',
                             ),
                         ],
                     context_name='PianoUpperStaff',
@@ -84,7 +78,7 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
                 scoretools.Staff(
                     [
                         scoretools.Voice(
-                            name='Piano Left-hand',
+                            name='Piano LH Voice',
                             ),
                         ],
                     context_name='PianoLowerStaff',
@@ -99,25 +93,29 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
             name='Piano Staff Group',
             )
 
-        saxophone_staff_group = scoretools.StaffGroup(
+        percussion_staff_group = scoretools.StaffGroup(
             [
                 scoretools.Staff(
                     [
                         scoretools.Voice(
-                            name='Saxophone Voice',
+                            name='Percussion RH Voice',
                             ),
                         ],
-                    context_name='SaxophoneStaff',
-                    name='Saxophone Staff',
+                    context_name='PercussionShakerStaff',
+                    name='Percussion Shaker Staff',
+                    ),
+                scoretools.Staff(
+                    [
+                        scoretools.Voice(
+                            name='Percussion LH Voice',
+                            ),
+                        ],
+                    context_name='PercussionDrumStaff',
+                    name='Percussion Drum Staff',
                     ),
                 ],
-            context_name='SaxophoneStaffGroup',
-            name='Saxophone Staff Group',
-            )
-
-        time_signature_context = scoretools.Context(
-            name='TimeSignatureContext',
-            context_name='TimeSignatureContext',
+            context_name='PercussionStaffGroup',
+            name='Percussion Staff Group',
             )
 
         score = scoretools.Score(
@@ -131,6 +129,7 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
             name='Plague Water Score',
             )
 
+        percussion_clef = indicatortools.Clef('percussion')
         attach(percussion_clef, score['Guitar Staff'])
         attach(percussion_clef, score['Percussion Drum Staff'])
         attach(percussion_clef, score['Percussion Shaker Staff'])
