@@ -312,9 +312,9 @@ class SegmentMaker(abctools.AbjadObject):
             )
         for group in groups:
             current_offset += sum(x.duration for x in group)
-            if timespan_inventory is None:
-                continue
             for timespan_inventory in timespan_inventories:
+                if timespan_inventory is None:
+                    continue
                 new_timespan_inventory = \
                     timespantools.TimespanInventory()
                 for shard in timespan_inventory.split_at_offset(
@@ -378,6 +378,8 @@ class SegmentMaker(abctools.AbjadObject):
             for timespan in timespan_inventory:
                 offset_counter[timespan.start_offset] += 1
                 offset_counter[timespan.stop_offset] += 1
+        if not offset_counter:
+            offset_counter[self.segment_target_duration] += 1
         meters = metertools.Meter.fit_meters_to_expr(
             offset_counter,
             self.permitted_time_signatures,
@@ -434,7 +436,13 @@ class SegmentMaker(abctools.AbjadObject):
         self.score['TimeSignatureContext'].extend(measures)
 
     def realize_lifeline_timespans(self, timespan_inventory, time_signatures):
-        return []
+        durations = [x.duration for x in time_signatures]
+        skip_maker = rhythmmakertools.SkipRhythmMaker()
+        skips = sequencetools.flatten_sequence(skip_maker(durations))
+        return skips
 
     def realize_semantic_timespans(self, timespan_inventory, time_signatures):
-        return []
+        durations = [x.duration for x in time_signatures]
+        rest_maker = rhythmmakertools.RestRhythmMaker()
+        rests = sequencetools.flatten_sequence(rest_maker(durations))
+        return rests
