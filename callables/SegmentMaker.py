@@ -27,13 +27,23 @@ class SegmentMaker(abctools.AbjadObject):
 
     ### SCORE-LEVEL VARIABLES ###
 
-    measure_segmentation_talea = None
+    measure_segmentation_talea = (1,)
 
-    minimum_timespan_duration = None
+    minimum_timespan_duration = Duration(3, 16)
 
-    permitted_time_signatures = None
-
-    segment_name = None
+    permitted_time_signatures = datastructuretools.TypedList(
+        [
+            (5, 16),
+            (3, 8),
+            (7, 16),
+            (2, 4),
+            (4, 8),
+            (5, 8),
+            (3, 4),
+            (6, 8),
+            ],
+        item_class=TimeSignature,
+        )
 
     segment_target_duration = None
 
@@ -90,7 +100,6 @@ class SegmentMaker(abctools.AbjadObject):
             (callables.Brush, type(None)))
         assert isinstance(self.segment_target_duration, Duration) and \
             1 <= self.segment_target_duration
-        assert isinstance(self.segment_name, str) and self.segment_name
         assert isinstance(self.tempo, Tempo)
         self.guitar_pedal_timespans = None
         self.guitar_timespans = None
@@ -446,3 +455,12 @@ class SegmentMaker(abctools.AbjadObject):
         rest_maker = rhythmmakertools.RestRhythmMaker()
         rests = sequencetools.flatten_sequence(rest_maker(durations))
         return rests
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def segment_name(self):
+        file_path = os.path.abspath(__file__)
+        directory_path = os.path.split(file_path)
+        base_name = os.path.basename(directory_path)
+        return 'Segment {}'.format(base_name.title())
