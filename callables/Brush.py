@@ -32,6 +32,8 @@ class Brush(abctools.AbjadObject):
                 )
             )
         self._brush_component_pairs = tuple(zip(pairs, self._brush_components))
+        if talea is None:
+            talea = materials.euler_numbers
         if isinstance(talea, int):
             talea = [talea]
         if isinstance(talea, (list, tuple)):

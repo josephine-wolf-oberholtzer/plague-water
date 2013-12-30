@@ -25,7 +25,7 @@ class BrushComponent(abctools.AbjadObject):
         resting_durations=None,
         weight=1,
         ):
-        assert isinstance(color, Color)
+        assert isinstance(color, (Color, type(None)))
         self._color = color
         # playing durations
         if isinstance(playing_durations, int):
