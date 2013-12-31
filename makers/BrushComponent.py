@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 from abjad import *
-from plague_water.makers.Color import Color
+from plague_water.makers.MusicMaker import MusicMaker
 
 
 class BrushComponent(abctools.AbjadObject):
@@ -8,7 +8,7 @@ class BrushComponent(abctools.AbjadObject):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_color',
+        '_music_maker',
         '_playing_durations',
         '_playing_groupings',
         '_resting_durations',
@@ -19,14 +19,14 @@ class BrushComponent(abctools.AbjadObject):
 
     def __init__(
         self,
-        color=None,
+        music_maker=None,
         playing_durations=None,
         playing_groupings=None,
         resting_durations=None,
         weight=1,
         ):
-        assert isinstance(color, (Color, type(None)))
-        self._color = color
+        assert isinstance(music_maker, (MusicMaker, type(None)))
+        self._music_maker = music_maker
         # playing durations
         if isinstance(playing_durations, int):
             playing_durations = datastructuretools.StatalServer(
@@ -85,7 +85,7 @@ class BrushComponent(abctools.AbjadObject):
             if maximum_offset <= stop_offset:
                 return timespan_inventory, False
             timespan = makers.PayloadedTimespan(
-                color=self.color,
+                music_maker=self.music_maker,
                 start_offset=start_offset,
                 stop_offset=stop_offset,
                 )
@@ -95,19 +95,19 @@ class BrushComponent(abctools.AbjadObject):
 
     def __makenew__(
         self,
-        color=None,
+        music_maker=None,
         playing_durations=None,
         playing_groupings=None,
         resting_durations=None,
         weight=None,
         ):
-        color = color or self.color
+        music_maker = music_maker or self.music_maker
         playing_durations = playing_durations or self.playing_durations
         playing_groupings = playing_groupings or self.playing_groupings
         resting_durations = resting_durations or self.resting_durations
         weight = weight or self.weight
         return type(self)(
-            color=color,
+            music_maker=music_maker,
             playing_durations=playing_durations,
             playing_groupings=playing_groupings,
             resting_durations=resting_durations,
@@ -117,8 +117,8 @@ class BrushComponent(abctools.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def color(self):
-        return self._color
+    def music_maker(self):
+        return self._music_maker
 
     @property
     def default_denominator(self):

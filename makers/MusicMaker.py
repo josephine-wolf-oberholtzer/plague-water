@@ -2,5 +2,5 @@
 from abjad import *
 
 
-class Color(abctools.AbjadObject):
+class MusicMaker(abctools.AbjadObject):
     pass
