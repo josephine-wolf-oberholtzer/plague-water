@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 from abjad import *
-from plague_water.callables.Color import Color
+from plague_water.makers.Color import Color
 
 
 class BrushComponent(abctools.AbjadObject):
@@ -70,7 +70,7 @@ class BrushComponent(abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, initial_offset, maximum_offset):
-        from plague_water import callables
+        from plague_water import makers
         assert isinstance(initial_offset, durationtools.Offset)
         assert isinstance(maximum_offset, durationtools.Offset)
         timespan_inventory = timespantools.TimespanInventory()
@@ -84,7 +84,7 @@ class BrushComponent(abctools.AbjadObject):
             stop_offset = stop_offset + playing_duration
             if maximum_offset <= stop_offset:
                 return timespan_inventory, False
-            timespan = callables.PayloadedTimespan(
+            timespan = makers.PayloadedTimespan(
                 color=self.color,
                 start_offset=start_offset,
                 stop_offset=stop_offset,

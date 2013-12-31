@@ -1,12 +1,12 @@
 # -*- encoding: utf-8 -*-
 from abjad import *
-from plague_water import callables
+from plague_water import makers
 from plague_water import materials
 
 
-class Segment(callables.SegmentMaker):
+class Segment(makers.SegmentMaker):
 
-    segment_name = 'Segment One'
+    ### SCORE-LEVEL VARIABLES ###
 
     segment_target_duration = Duration(6)
 
@@ -14,21 +14,33 @@ class Segment(callables.SegmentMaker):
 
     ### VOICE-LEVEL VARIABLES ###
 
-    guitar_brush = None
+    guitar_brush = makers.Brush([
+        makers.BrushComponent(),
+        ])
 
     guitar_lifeline_strategy = None
 
-    piano_lh_brush = None
+    piano_lh_brush = makers.Brush([
+        makers.BrushComponent(),
+        ])
 
     piano_lifeline_strategy = None
 
-    piano_rh_brush = None
+    piano_rh_brush = makers.Brush([
+        makers.BrushComponent(),
+        ])
 
-    percussion_lh_brush = None
+    percussion_lh_brush = makers.Brush([
+        makers.BrushComponent(),
+        ])
 
-    percussion_rh_brush = None
+    percussion_rh_brush = makers.Brush([
+        makers.BrushComponent(),
+        ])
 
-    saxophone_brush = None
+    saxophone_brush = makers.Brush([
+        makers.BrushComponent(),
+        ])
 
 
 if __name__ == '__main__':

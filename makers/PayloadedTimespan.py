@@ -18,8 +18,8 @@ class PayloadedTimespan(timespantools.Timespan):
         stop_offset=None,
         color=None,
         ):
-        from plague_water import callables
-        assert isinstance(color, (callables.Color, type(None)))
+        from plague_water import makers
+        assert isinstance(color, (makers.Color, type(None)))
         timespantools.Timespan.__init__(
             self,
             start_offset=start_offset,

@@ -70,11 +70,11 @@ class SegmentMaker(abctools.AbjadObject):
     ### INITIALIZER ###
 
     def __init__(self):
-        from plague_water import callables
+        from plague_water import makers
         assert isinstance(self.guitar_brush,
-            (callables.Brush, type(None)))
+            (makers.Brush, type(None)))
         assert isinstance(self.guitar_lifeline_strategy,
-            (callables.LifelineStrategy, type(None)))
+            (makers.LifelineStrategy, type(None)))
         assert isinstance(self.measure_segmentation_talea,
             collections.Iterable) and \
             all(isinstance(x, int) and 0 < x
@@ -82,22 +82,22 @@ class SegmentMaker(abctools.AbjadObject):
         assert isinstance(self.minimum_timespan_duration, Duration) and \
             0 < self.minimum_timespan_duration < 1
         assert isinstance(self.percussion_lh_brush,
-            (callables.Brush, type(None)))
+            (makers.Brush, type(None)))
         assert isinstance(self.percussion_rh_brush,
-            (callables.Brush, type(None)))
+            (makers.Brush, type(None)))
         assert isinstance(self.permitted_time_signatures,
             collections.Iterable) and \
             self.permitted_time_signatures and \
             all(isinstance(x, TimeSignature)
                 for x in self.permitted_time_signatures)
         assert isinstance(self.piano_lh_brush,
-            (callables.Brush, type(None)))
+            (makers.Brush, type(None)))
         assert isinstance(self.piano_lifeline_strategy,
-            (callables.LifelineStrategy, type(None)))
+            (makers.LifelineStrategy, type(None)))
         assert isinstance(self.piano_rh_brush,
-            (callables.Brush, type(None)))
+            (makers.Brush, type(None)))
         assert isinstance(self.saxophone_brush,
-            (callables.Brush, type(None)))
+            (makers.Brush, type(None)))
         assert isinstance(self.segment_target_duration, Duration) and \
             1 <= self.segment_target_duration
         assert isinstance(self.tempo, Tempo)

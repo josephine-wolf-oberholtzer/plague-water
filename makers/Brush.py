@@ -21,7 +21,7 @@ class Brush(abctools.AbjadObject):
         ):
         assert brush_components is not None
         assert len(brush_components)
-        assert all(isinstance(x, callables.BrushComponent)
+        assert all(isinstance(x, makers.BrushComponent)
             for x in brush_components)
         self._brush_components = tuple(brush_components)
         weights = [x.weight for x in self._brush_components]
