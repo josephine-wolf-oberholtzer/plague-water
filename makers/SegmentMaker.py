@@ -355,12 +355,19 @@ class SegmentMaker(abctools.AbjadObject):
         timespan_inventory=None,
         ):
         result = []
-        rest_maker = rhythmmakertools.RestRhythmMaker()
+
+        def make_rest_containers(durations):
+            rest_maker = rhythmmakertools.RestRhythmMaker()
+            rests = rest_maker(durations)
+            rest_containers = [Container(x) for x in rests]
+            for rest_container in rest_containers:
+                annotation = {'music_maker': None}
+                attach(annotation, rest_container)
+            return rest_containers
 
         if timespan_inventory is None:
-            rests = rest_maker(self.time_signatures)
-            rests = sequencetools.flatten_sequence(rests)
-            result.extend(rests)
+            rest_containers = make_rest_containers(self.time_signatures)
+            result.extend(rest_containers)
             return result
 
         previous_offset = Offset(0)
@@ -369,11 +376,9 @@ class SegmentMaker(abctools.AbjadObject):
             group_start_offset = partitioned_group.start_offset
             group_stop_offset = partitioned_group.stop_offset
             if previous_offset < group_start_offset:
-                resting_duration = group_start_offset - previous_offset
-                rests = rest_maker((resting_duration,))
-                rests = sequencetools.flatten_sequence(rests)
-                rests = Container(rests)
-                result.append(rests)
+                rest_duration = group_start_offset - previous_offset
+                rest_containers = make_rest_containers((rest_duration,))
+                result.extend(rest_containers)
 
             for music_maker, group in itertools.groupby(
                 partitioned_group,
@@ -385,16 +390,17 @@ class SegmentMaker(abctools.AbjadObject):
                     context_hierarchy=context_hierarchy,
                     context_name=context_name,
                     )
+                annotation = {'music_maker': music_maker}
+                attach(annotation, music)
                 result.append(music)
 
             previous_offset = group_stop_offset
 
         if previous_offset < self.segment_actual_duration:
-            resting_duration = self.segment_actual_duration - previous_offset
-            rests = rest_maker((resting_duration,))
-            rests = sequencetools.flatten_sequence(rests)
-            rests = Container(rests)
-            result.append(rests)
+            rest_duration = self.segment_actual_duration - previous_offset
+            rest_containers = make_rest_containers((rest_duration,))
+            result.extend(rest_containers)
+
         return result
 
     ### PUBLIC PROPERTIES ###
