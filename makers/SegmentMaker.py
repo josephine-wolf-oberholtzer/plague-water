@@ -1,5 +1,6 @@
 #-*- encoding: utf-8 -*-
 import collections
+import itertools
 import os
 from abjad import *
 from plague_water import plague_water_configuration
@@ -334,13 +335,12 @@ class SegmentMaker(abctools.AbjadObject):
             )
         for context_name, timespan_inventory in \
             context_names_and_timespan_inventories:
-            self.score[context_name].extend(
-                self.realize_timespans(
-                    context_hierarchy=self.context_hierarchy,
-                    context_name=context_name,
-                    time_signatures=self.time_signatures,
-                    timespan_inventory=timespan_inventory,
-                    ))
+            realization = self.realize_timespans(
+                context_hierarchy=self.context_hierarchy,
+                context_name=context_name,
+                timespan_inventory=timespan_inventory,
+                )
+            self.score[context_name].extend(realization)
 
     def populate_time_signature_context(self):
         print 'populate time signature context'
@@ -352,14 +352,49 @@ class SegmentMaker(abctools.AbjadObject):
         self,
         context_hierarchy=None,
         context_name=None,
-        time_signatures=None,
         timespan_inventory=None,
         ):
-        durations = [x.duration for x in time_signatures]
-        total_duration = sum(durations)
+        result = []
         rest_maker = rhythmmakertools.RestRhythmMaker()
-        rests = sequencetools.flatten_sequence(rest_maker(durations))
-        return rests
+        note_maker = rhythmmakertools.NoteRhythmMaker()
+
+        if timespan_inventory is None:
+            rests = rest_maker(self.time_signatures) 
+            rests = sequencetools.flatten_sequence(rests)
+            result.extend(rests)
+            return result
+
+        previous_offset = Offset(0)
+        for partitioned_group in timespan_inventory.partition(
+            include_tangent_timespans=True):
+            group_start_offset = partitioned_group.start_offset
+            group_stop_offset = partitioned_group.stop_offset
+            if previous_offset < group_start_offset:
+                resting_duration = group_start_offset - previous_offset
+                rests = rest_maker((resting_duration,))
+                rests = sequencetools.flatten_sequence(rests)
+                rests = Container(rests)
+                result.append(rests)
+
+            for music_maker, group in itertools.groupby(
+                partitioned_group,
+                lambda x: x.music_maker,
+                ):
+                timespan_durations = [x.duration for x in group]
+                notes = note_maker(timespan_durations)
+                notes = [Container(x) for x in notes]
+                notes = Container(notes)
+                result.append(notes)
+
+            previous_offset = group_stop_offset
+
+        if previous_offset < self.segment_actual_duration:
+            resting_duration = self.segment_actual_duration - previous_offset
+            rests = rest_maker((resting_duration,))
+            rests = sequencetools.flatten_sequence(rests)
+            rests = Container(rests)
+            result.append(rests)
+        return result
 
     ### PUBLIC PROPERTIES ###
 
