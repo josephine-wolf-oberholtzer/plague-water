@@ -4,45 +4,51 @@ from plague_water import makers
 from plague_water import materials
 
 
-class Segment(makers.SegmentMaker):
+segment_target_duration = Duration(6)
 
-    ### SCORE-LEVEL VARIABLES ###
+segment_tempo = materials.tempo_inventory[0]
 
-    segment_target_duration = Duration(6)
+guitar_brush = makers.Brush([
+    makers.BrushComponent(),
+    ])
 
-    tempo = materials.tempo_inventory[0]
+guitar_lifeline_strategy = None
 
-    ### VOICE-LEVEL VARIABLES ###
+piano_lh_brush = makers.Brush([
+    makers.BrushComponent(),
+    ])
 
-    guitar_brush = makers.Brush([
-        makers.BrushComponent(),
-        ])
+piano_lifeline_strategy = None
 
-    guitar_lifeline_strategy = None
+piano_rh_brush = makers.Brush([
+    makers.BrushComponent(),
+    ])
 
-    piano_lh_brush = makers.Brush([
-        makers.BrushComponent(),
-        ])
+percussion_lh_brush = makers.Brush([
+    makers.BrushComponent(),
+    ])
 
-    piano_lifeline_strategy = None
+percussion_rh_brush = makers.Brush([
+    makers.BrushComponent(),
+    ])
 
-    piano_rh_brush = makers.Brush([
-        makers.BrushComponent(),
-        ])
+saxophone_brush = makers.Brush([
+    makers.BrushComponent(),
+    ])
 
-    percussion_lh_brush = makers.Brush([
-        makers.BrushComponent(),
-        ])
-
-    percussion_rh_brush = makers.Brush([
-        makers.BrushComponent(),
-        ])
-
-    saxophone_brush = makers.Brush([
-        makers.BrushComponent(),
-        ])
+segment_maker = makers.SegmentMaker(
+    guitar_brush=guitar_brush,
+    guitar_lifeline_strategy=guitar_lifeline_strategy,
+    percussion_lh_brush=percussion_lh_brush,
+    percussion_rh_brush=percussion_rh_brush,
+    piano_lh_brush=piano_lh_brush,
+    piano_lifeline_strategy=piano_lifeline_strategy,
+    piano_rh_brush=piano_rh_brush,
+    saxophone_brush=saxophone_brush,
+    segment_target_duration=segment_target_duration,
+    segment_tempo=segment_tempo,
+    )
 
 
 if __name__ == '__main__':
-    segment = Segment()
-    segment.build_and_persist(__file__)
+    segment_maker.build_and_persist(__file__)
