@@ -4,29 +4,11 @@ from plague_water import makers
 from plague_water import materials
 
 
-guitar_brush = makers.Brush([
-    makers.BrushComponent(),
-    ])
+### SEGMENT PARAMETERS ###
 
-guitar_lifeline_strategy = None
+segment_target_duration = Duration(6)
 
-piano_lh_brush = makers.Brush([
-    makers.BrushComponent(),
-    ])
-
-piano_lifeline_strategy = None
-
-piano_rh_brush = makers.Brush([
-    makers.BrushComponent(),
-    ])
-
-percussion_lh_brush = makers.Brush([
-    makers.BrushComponent(),
-    ])
-
-percussion_rh_brush = makers.Brush([
-    makers.BrushComponent(),
-    ])
+segment_tempo = materials.tempo_inventory[0]
 
 permitted_time_signatures = [
     (2, 4),
@@ -39,13 +21,75 @@ permitted_time_signatures = [
     (7, 16),
     ]
 
-saxophone_brush = makers.Brush([
-    makers.BrushComponent(),
+### BRUSHES ###
+
+guitar_brush = makers.Brush([
+    makers.BrushComponent(
+        music_maker=None,
+        playing_durations=None,
+        playing_groupings=None,
+        resting_durations=None,
+        weight=1,
+        ),
     ])
 
-segment_target_duration = Duration(6)
+piano_lh_brush = makers.Brush([
+    makers.BrushComponent(
+        music_maker=None,
+        playing_durations=None,
+        playing_groupings=None,
+        resting_durations=None,
+        weight=1,
+        ),
+    ])
 
-segment_tempo = materials.tempo_inventory[0]
+piano_rh_brush = makers.Brush([
+    makers.BrushComponent(
+        music_maker=None,
+        playing_durations=None,
+        playing_groupings=None,
+        resting_durations=None,
+        weight=1,
+        ),
+    ])
+
+percussion_lh_brush = makers.Brush([
+    makers.BrushComponent(
+        music_maker=None,
+        playing_durations=None,
+        playing_groupings=None,
+        resting_durations=None,
+        weight=1,
+        ),
+    ])
+
+percussion_rh_brush = makers.Brush([
+    makers.BrushComponent(
+        music_maker=None,
+        playing_durations=None,
+        playing_groupings=None,
+        resting_durations=None,
+        weight=1,
+        ),
+    ])
+
+saxophone_brush = makers.Brush([
+    makers.BrushComponent(
+        music_maker=None,
+        playing_durations=None,
+        playing_groupings=None,
+        resting_durations=None,
+        weight=1,
+        ),
+    ])
+
+### LIFELINE STRATEGIES ###
+
+guitar_lifeline_strategy = None
+
+piano_lifeline_strategy = None
+
+### SEGMENT DEFINITION ###
 
 segment_maker = makers.SegmentMaker(
     guitar_brush=guitar_brush,
@@ -61,6 +105,7 @@ segment_maker = makers.SegmentMaker(
     segment_tempo=segment_tempo,
     )
 
+### MAIN ###
 
 if __name__ == '__main__':
     segment_maker.build_and_persist(__file__)
