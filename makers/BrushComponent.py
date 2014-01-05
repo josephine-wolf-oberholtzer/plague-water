@@ -1,6 +1,5 @@
 # -*- encoding: utf-8 -*-
 from abjad import *
-from plague_water.makers.MusicMaker import MusicMaker
 
 
 class BrushComponent(abctools.AbjadObject):
@@ -25,7 +24,10 @@ class BrushComponent(abctools.AbjadObject):
         resting_durations=None,
         weight=1,
         ):
-        assert isinstance(music_maker, (MusicMaker, type(None)))
+        from plague_water import makers
+        assert isinstance(music_maker, (makers.MusicMaker, type(None)))
+        if music_maker is None:
+            music_maker = makers.MusicMaker()
         self._music_maker = music_maker
         # playing durations
         if playing_durations is None:

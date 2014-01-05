@@ -263,7 +263,7 @@ class SegmentMaker(abctools.AbjadObject):
         lilypond_file = lilypondfiletools.LilyPondFile()
         score_block = lilypondfiletools.ScoreBlock()
         score_block.items.append(self.score)
-        lilypond_file.items.append(score_block) 
+        lilypond_file.items.append(score_block)
         for file_path in plague_water_configuration.stylesheets_file_paths:
             lilypond_file.file_initial_user_includes.append(file_path)
         lilypond_file.default_paper_size = '11x17', 'landscape'
@@ -323,7 +323,7 @@ class SegmentMaker(abctools.AbjadObject):
 
     def populate_voice_contexts(self):
         print 'populate voice contexts'
-        context_names_and_timespan_inventories = ( 
+        context_names_and_timespan_inventories = (
             ('Guitar Voice', self.guitar_timespans),
             ('Guitar Pedals', self.guitar_pedal_timespans),
             ('Percussion LH Voice', self.percussion_lh_timespans),
@@ -356,10 +356,9 @@ class SegmentMaker(abctools.AbjadObject):
         ):
         result = []
         rest_maker = rhythmmakertools.RestRhythmMaker()
-        note_maker = rhythmmakertools.NoteRhythmMaker()
 
         if timespan_inventory is None:
-            rests = rest_maker(self.time_signatures) 
+            rests = rest_maker(self.time_signatures)
             rests = sequencetools.flatten_sequence(rests)
             result.extend(rests)
             return result
@@ -380,11 +379,13 @@ class SegmentMaker(abctools.AbjadObject):
                 partitioned_group,
                 lambda x: x.music_maker,
                 ):
-                timespan_durations = [x.duration for x in group]
-                notes = note_maker(timespan_durations)
-                notes = [Container(x) for x in notes]
-                notes = Container(notes)
-                result.append(notes)
+                durations = [x.duration for x in group]
+                music = music_maker(
+                    durations,
+                    context_hierarchy=context_hierarchy,
+                    context_name=context_name,
+                    )
+                result.append(music)
 
             previous_offset = group_stop_offset
 
