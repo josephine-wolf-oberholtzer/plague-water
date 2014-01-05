@@ -71,8 +71,7 @@ class Brush(abctools.AbjadObject):
             if low <= seed < high:
                 selected_brush_component = brush_component
                 break
-        result = selected_brush_component()
-        return result
+        return selected_brush_component
 
     ### PUBLIC PROPERTIES ###
 

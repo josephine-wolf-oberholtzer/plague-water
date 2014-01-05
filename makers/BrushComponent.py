@@ -29,7 +29,7 @@ class BrushComponent(abctools.AbjadObject):
         self._music_maker = music_maker
         # playing durations
         if playing_durations is None:
-            playing_durations = Duration(1, 4)
+            playing_durations = [Duration(1, 4), Duration(1, 4)]
         if isinstance(playing_durations, Duration):
             playing_durations = [playing_durations]
         if isinstance(playing_durations, (list, tuple)):
@@ -42,7 +42,7 @@ class BrushComponent(abctools.AbjadObject):
         self._playing_durations = playing_durations
         # playing groupings
         if playing_groupings is None:
-            playing_groupings = 1
+            playing_groupings = [1, 1]
         if isinstance(playing_groupings, int):
             playing_groupings = [playing_groupings]
         if isinstance(playing_groupings, (list, tuple)):
@@ -55,7 +55,7 @@ class BrushComponent(abctools.AbjadObject):
         self._playing_groupings = playing_groupings
         # resting durations
         if resting_durations is None:
-            resting_durations = Duration(1, 4)
+            resting_durations = [Duration(1, 4), Duration(1, 4)]
         if isinstance(resting_durations, Duration):
             resting_durations = [resting_durations]
         if isinstance(resting_durations, (list, tuple)):
@@ -75,8 +75,8 @@ class BrushComponent(abctools.AbjadObject):
 
     def __call__(self, initial_offset, maximum_offset):
         from plague_water import makers
-        assert isinstance(initial_offset, durationtools.Offset)
-        assert isinstance(maximum_offset, durationtools.Offset)
+        assert isinstance(initial_offset, Duration), initial_offset
+        assert isinstance(maximum_offset, Duration), maximum_offset
         timespan_inventory = timespantools.TimespanInventory()
         resting_duration = self.resting_durations()[0]
         playing_grouping = self.playing_groupings()[0]
@@ -85,7 +85,7 @@ class BrushComponent(abctools.AbjadObject):
         if maximum_offset <= start_offset:
             return timespan_inventory, False
         for playing_duration in playing_durations:
-            stop_offset = stop_offset + playing_duration
+            stop_offset = start_offset + playing_duration
             if maximum_offset <= stop_offset:
                 return timespan_inventory, False
             timespan = makers.PayloadedTimespan(
@@ -134,7 +134,7 @@ class BrushComponent(abctools.AbjadObject):
 
     @property
     def resting_durations(self):
-        return self._resting_groupings
+        return self._resting_durations
 
     @property
     def weight(self):

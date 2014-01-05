@@ -7,7 +7,7 @@ class PayloadedTimespan(timespantools.Timespan):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_color',
+        '_music_maker',
         )
 
     ### INITIALIZER ###
@@ -16,19 +16,19 @@ class PayloadedTimespan(timespantools.Timespan):
         self,
         start_offset=None,
         stop_offset=None,
-        color=None,
+        music_maker=None,
         ):
         from plague_water import makers
-        assert isinstance(color, (makers.Color, type(None)))
+        assert isinstance(music_maker, (makers.MusicMaker, type(None)))
         timespantools.Timespan.__init__(
             self,
             start_offset=start_offset,
             stop_offset=stop_offset,
             )
-        self._color = color
+        self._music_maker = music_maker
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def color(self):
-        return self._color
+    def music_maker(self):
+        return self._music_maker

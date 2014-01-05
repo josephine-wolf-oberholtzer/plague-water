@@ -34,6 +34,7 @@ class SegmentMaker(abctools.AbjadObject):
         'saxophone_brush',
         'saxophone_timespans',
         'score',
+        'segment_actual_duration',
         'segment_target_duration',
         'segment_tempo',
         'time_signatures',
@@ -114,6 +115,7 @@ class SegmentMaker(abctools.AbjadObject):
         self.piano_rh_timespans = None
         self.saxophone_timespans = None
         self.score = None
+        self.segment_actual_duration = None
         self.time_signatures = None
 
     ### SPECIAL METHODS ###
@@ -125,15 +127,13 @@ class SegmentMaker(abctools.AbjadObject):
         self.meters = self.find_meters()
         self.time_signatures = tuple(meter.implied_time_signature
             for meter in self.meters)
-        self.segment_duration = sum(time_signature.duration
+        self.segment_actual_duration = sum(time_signature.duration
             for time_signature in self.time_signatures)
         self.cleanup_timespan_inventories()
         self.build_lifeline_timespan_inventories()
         self.populate_time_signature_context()
         self.populate_voice_contexts()
         self.configure_score()
-        self.lilypond_file = lilypondfiletools.make_basic_lilypond_file(
-            self.score)
         self.configure_lilypond_file()
         return self.lilypond_file
 
@@ -159,6 +159,7 @@ class SegmentMaker(abctools.AbjadObject):
     ### PUBLIC METHODS ###
 
     def build_and_persist(self, current_file_path):
+        print 'build and persist'
         current_directory_path = os.path.dirname(os.path.abspath(
             os.path.expanduser(current_file_path)))
         pdf_file_path = os.path.join(
@@ -171,6 +172,7 @@ class SegmentMaker(abctools.AbjadObject):
             )
 
     def build_lifeline_timespan_inventories(self):
+        print 'build lifeline timespan inventories'
         if self.guitar_lifeline_strategy is not None:
             self.guitar_pedal_timespans = self.guitar_lifeline_strategy(
                 self.guitar_timespans,
@@ -186,32 +188,40 @@ class SegmentMaker(abctools.AbjadObject):
                 )
 
     def build_semantic_voice_timespan_inventories(self):
+        print 'build semantic voice timespan inventories'
         if self.guitar_brush is not None:
+            print '\tguitar'
             self.guitar_timespans = self.guitar_brush(
                 segment_target_duration=self.segment_target_duration,
                 )
         if self.percussion_lh_brush is not None:
+            print '\tpercussion lh brush'
             self.percussion_lh_timespans = self.percussion_lh_brush(
                 segment_target_duration=self.segment_target_duration,
                 )
         if self.percussion_rh_brush is not None:
+            print '\tpercussion rh brush'
             self.percussion_rh_timespans = self.percussion_rh_brush(
                 segment_target_duration=self.segment_target_duration,
                 )
         if self.piano_lh_brush is not None:
+            print '\tpiano lh brush'
             self.piano_lh_timespans = self.piano_lh_brush(
                 segment_target_duration=self.segment_target_duration,
                 )
         if self.piano_rh_brush is not None:
+            print '\tpiano rh brush'
             self.piano_rh_timespans = self.piano_rh_brush(
                 segment_target_duration=self.segment_target_duration,
                 )
         if self.saxophone_brush is not None:
+            print '\tsaxophone brush'
             self.saxophone_timespans = self.saxophone_brush(
                 segment_target_duration=self.segment_target_duration,
                 )
 
     def cleanup_timespan_inventories(self):
+        print 'cleanup timespan inventories'
         measure_segmentation_talea = self.measure_segmentation_talea
         if not self.measure_segmentation_talea:
             measure_segmentation_talea = (1,)
@@ -245,19 +255,22 @@ class SegmentMaker(abctools.AbjadObject):
             if timespan_inventory is None:
                 continue
             timespan_inventory[:] = [x for x in timespan_inventory
-                if minimum_timespan_duration <= x.duration]
+                if self.minimum_timespan_duration <= x.duration]
 
     def configure_lilypond_file(self):
-        lilypond_file = self.lilypond_file
-        lilypond_file.remove(lilypond_file.header_block)
-        lilypond_file.remove(lilypond_file.layout_block)
-        lilypond_file.remove(lilypond_file.paper_block)
+        print 'configure lilypond file'
+        lilypond_file = lilypondfiletools.LilyPondFile()
+        score_block = lilypondfiletools.ScoreBlock()
+        score_block.items.append(self.score)
+        lilypond_file.items.append(score_block) 
         for file_path in plague_water_configuration.stylesheets_file_paths:
             lilypond_file.file_initial_user_includes.append(file_path)
         lilypond_file.default_paper_size = '11x17', 'landscape'
         lilypond_file.global_staff_size = 14
+        self.lilypond_file = lilypond_file
 
     def configure_score(self):
+        print 'configure score'
         override(self.score).horizontal_bracket.color = 'red'
         rehearsal_mark = indicatortools.LilyPondCommand(r'mark \default')
         attach(rehearsal_mark, self.score['TimeSignatureContext'][0],
@@ -281,6 +294,7 @@ class SegmentMaker(abctools.AbjadObject):
         self.score.add_final_markup(final_markup)
 
     def find_meters(self):
+        print 'find meters'
         offset_counter = datastructuretools.TypedCounter(
             item_class=Offset,
             )
@@ -307,6 +321,7 @@ class SegmentMaker(abctools.AbjadObject):
         return meters
 
     def populate_voice_contexts(self):
+        print 'populate voice contexts'
         context_names_and_timespan_inventories = ( 
             ('Guitar Voice', self.guitar_timespans),
             ('Guitar Pedals', self.guitar_pedal_timespans),
@@ -328,6 +343,7 @@ class SegmentMaker(abctools.AbjadObject):
                     ))
 
     def populate_time_signature_context(self):
+        print 'populate time signature context'
         measures = scoretools.make_spacer_skip_measures(
             self.time_signatures)
         self.score['TimeSignatureContext'].extend(measures)
