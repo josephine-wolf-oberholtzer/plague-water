@@ -127,8 +127,7 @@ class SegmentMaker(abctools.AbjadObject):
         self.cleanup_timespan_inventories()
         self.build_lifeline_timespan_inventories()
         self.populate_time_signature_context()
-        self.populate_semantic_voice_contexts()
-        self.populate_lifeline_contexts()
+        self.populate_voice_contexts()
         self.configure_score()
         self.lilypond_file = lilypondfiletools.make_basic_lilypond_file(
             self.score)
@@ -181,23 +180,29 @@ class SegmentMaker(abctools.AbjadObject):
 
     def build_semantic_voice_timespan_inventories(self):
         if self.guitar_brush is not None:
-            self.guitar_timespans = \
-                self.guitar_brush(segment_target_duration)
+            self.guitar_timespans = self.guitar_brush(
+                segment_target_duration=self.segment_target_duration,
+                )
         if self.percussion_lh_brush is not None:
-            self.percussion_lh_timespans = \
-                self.percussion_lh_brush(segment_target_duration)
+            self.percussion_lh_timespans = self.percussion_lh_brush(
+                segment_target_duration=self.segment_target_duration,
+                )
         if self.percussion_rh_brush is not None:
-            self.percussion_rh_timespans = \
-                self.percussion_rh_brush(segment_target_duration)
+            self.percussion_rh_timespans = self.percussion_rh_brush(
+                segment_target_duration=self.segment_target_duration,
+                )
         if self.piano_lh_brush is not None:
-            self.piano_lh_timespans = \
-                self.piano_lh_brush(segment_target_duration)
+            self.piano_lh_timespans = self.piano_lh_brush(
+                segment_target_duration=self.segment_target_duration,
+                )
         if self.piano_rh_brush is not None:
-            self.piano_rh_timespans = \
-                self.piano_rh_brush(segment_target_duration)
+            self.piano_rh_timespans = self.piano_rh_brush(
+                segment_target_duration=self.segment_target_duration,
+                )
         if self.saxophone_brush is not None:
-            self.saxophone_timespans = \
-                self.saxophone_brush(segment_target_duration)
+            self.saxophone_timespans = self.saxophone_brush(
+                segment_target_duration=self.segment_target_duration,
+                )
 
     def cleanup_timespan_inventories(self):
         measure_segmentation_talea = self.measure_segmentation_talea
@@ -294,63 +299,41 @@ class SegmentMaker(abctools.AbjadObject):
             )
         return meters
 
-    def populate_lifeline_contexts(self):
-        self.score['Guitar Pedals'].extend(
-            self.realize_lifeline_timespans(
-                self.guitar_pedal_timespans,
-                self.time_signatures,
-                ))
-        self.score['Piano Pedals'].extend(
-            self.realize_lifeline_timespans(
-                self.piano_pedal_timespans,
-                self.time_signatures,
-                ))
-
-    def populate_semantic_voice_contexts(self):
-        self.score['Guitar Voice'].extend(
-            self.realize_semantic_timespans(
-                self.guitar_timespans,
-                self.time_signatures,
-                ))
-        self.score['Percussion LH Voice'].extend(
-            self.realize_semantic_timespans(
-                self.percussion_lh_timespans,
-                self.time_signatures,
-                ))
-        self.score['Percussion RH Voice'].extend(
-            self.realize_semantic_timespans(
-                self.percussion_rh_timespans,
-                self.time_signatures,
-                ))
-        self.score['Piano LH Voice'].extend(
-            self.realize_semantic_timespans(
-                self.piano_lh_timespans,
-                self.time_signatures,
-                ))
-        self.score['Piano RH Voice'].extend(
-            self.realize_semantic_timespans(
-                self.piano_rh_timespans,
-                self.time_signatures,
-                ))
-        self.score['Saxophone Voice'].extend(
-            self.realize_semantic_timespans(
-                self.saxophone_timespans,
-                self.time_signatures,
-                ))
+    def populate_voice_contexts(self):
+        context_names_and_timespan_inventories = ( 
+            ('Guitar Voice', self.guitar_timespans),
+            ('Guitar Pedals', self.guitar_pedal_timespans),
+            ('Percussion LH Voice', self.percussion_lh_timespans),
+            ('Percussion RH Voice', self.percussion_rh_timespans),
+            ('Piano LH Voice', self.piano_lh_timespans),
+            ('Piano RH Voice', self.piano_rh_timespans),
+            ('Piano Pedals', self.piano_pedal_timespans),
+            ('Saxophone Voice', self.saxophone_timespans),
+            )
+        for context_name, timespan_inventory in \
+            context_names_and_timespan_inventories:
+            self.score[context_name].extend(
+                self.realize_timespans(
+                    context_hierarchy=self.context_hierarchy,
+                    context_name=context_name,
+                    time_signatures=self.time_signatures,
+                    timespan_inventory=timespan_inventory,
+                    ))
 
     def populate_time_signature_context(self):
         measures = scoretools.make_spacer_skip_measures(
             self.time_signatures)
         self.score['TimeSignatureContext'].extend(measures)
 
-    def realize_lifeline_timespans(self, timespan_inventory, time_signatures):
+    def realize_timespans(
+        self,
+        context_hierarchy=None,
+        context_name=None
+        time_signatures=None,
+        timespan_inventory=None,
+        ):
         durations = [x.duration for x in time_signatures]
-        skip_maker = rhythmmakertools.SkipRhythmMaker()
-        skips = sequencetools.flatten_sequence(skip_maker(durations))
-        return skips
-
-    def realize_semantic_timespans(self, timespan_inventory, time_signatures):
-        durations = [x.duration for x in time_signatures]
+        total_duration = sum(durations)
         rest_maker = rhythmmakertools.RestRhythmMaker()
         rests = sequencetools.flatten_sequence(rest_maker(durations))
         return rests
