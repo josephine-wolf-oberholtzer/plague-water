@@ -60,6 +60,8 @@ class SegmentMaker(abctools.AbjadObject):
         ):
         from plague_water import makers
         # verify
+        assert isinstance(context_hierarchy,
+            (datastructuretools.ContextHierarchy, type(None)))
         assert isinstance(guitar_brush, (makers.Brush, type(None)))
         assert isinstance(guitar_lifeline_strategy,
             (makers.LifelineStrategy, type(None)))
@@ -83,6 +85,7 @@ class SegmentMaker(abctools.AbjadObject):
         assert 1 <= segment_target_duration
         assert isinstance(tempo, Tempo)
         # set inputs
+        self.context_hierarchy = context_hierarchy
         self.guitar_brush = guitar_brush
         self.guitar_lifeline_strategy = guitar_lifeline_strategy
         self.measure_segmentation_talea = measure_segmentation_talea
@@ -131,6 +134,19 @@ class SegmentMaker(abctools.AbjadObject):
             self.score)
         self.configure_lilypond_file()
         return self.lilypond_file
+
+    def __makenew__(self, **kwargs):
+        from abjad.tools import systemtools
+        manager = systemtools.StorageFormatManager
+        keyword_argument_dictionary = \
+            manager.get_keyword_argument_dictionary(self)
+        for key, value in kwargs.iteritems():
+            if key in keyword_argument_dictionary:
+                keyword_argument_dictionary[key] = value
+            else:
+                raise KeyError(key)
+        result = type(self)(**keyword_argument_dictionary)
+        return result
 
     def __repr__(self):
         return '<Segment: {!r}>'.format(self.segment_name)
