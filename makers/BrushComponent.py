@@ -28,36 +28,40 @@ class BrushComponent(abctools.AbjadObject):
         assert isinstance(music_maker, (MusicMaker, type(None)))
         self._music_maker = music_maker
         # playing durations
-        if isinstance(playing_durations, int):
+        if playing_durations is None:
+            playing_durations = Duration(1, 4)
+        if isinstance(playing_durations, Duration):
+            playing_durations = [playing_durations]
+        if isinstance(playing_durations, (list, tuple)):
             playing_durations = datastructuretools.StatalServer(
-                [Duration(playing_durations, self.default_denominator)],
-                )()
-        elif isinstance(playing_durations, (list, tuple)):
-            playing_durations = datastructuretools.StatalServer(
-                playing_durations)()
-        elif isinstance(playing_durations, datastructuretools.StatalServer):
+                playing_durations)
+        if isinstance(playing_durations, datastructuretools.StatalServer):
             playing_durations = playing_durations()
         assert isinstance(playing_durations,
             datastructuretools.StatalServerCursor)
         self._playing_durations = playing_durations
         # playing groupings
+        if playing_groupings is None:
+            playing_groupings = 1
+        if isinstance(playing_groupings, int):
+            playing_groupings = [playing_groupings]
         if isinstance(playing_groupings, (list, tuple)):
             playing_groupings = datastructuretools.StatalServer(
-                playing_groupings)()
-        elif isinstance(playing_groupings, datastructuretools.StatalServer):
+                playing_groupings)
+        if isinstance(playing_groupings, datastructuretools.StatalServer):
             playing_groupings = playing_groupings()
         assert isinstance(playing_groupings,
             datastructuretools.StatalServerCursor)
         self._playing_groupings = playing_groupings
         # resting durations
-        if isinstance(resting_durations, int):
+        if resting_durations is None:
+            resting_durations = Duration(1, 4)
+        if isinstance(resting_durations, Duration):
+            resting_durations = [resting_durations]
+        if isinstance(resting_durations, (list, tuple)):
             resting_durations = datastructuretools.StatalServer(
-                [Duration(resting_durations, self.default_denominator)],
-                )()
-        elif isinstance(resting_durations, (list, tuple)):
-            resting_durations = datastructuretools.StatalServer(
-                resting_durations)()
-        elif isinstance(resting_durations, datastructuretools.StatalServer):
+                resting_durations)
+        if isinstance(resting_durations, datastructuretools.StatalServer):
             resting_durations = resting_durations()
         assert isinstance(resting_durations,
             datastructuretools.StatalServerCursor)
@@ -119,10 +123,6 @@ class BrushComponent(abctools.AbjadObject):
     @property
     def music_maker(self):
         return self._music_maker
-
-    @property
-    def default_denominator(self):
-        return 16
 
     @property
     def playing_durations(self):
