@@ -11,96 +11,92 @@ class SegmentMaker(abctools.AbjadObject):
     ### SLOTS ###
 
     __slots__ = (
+        'context_hierarchy',
+        'guitar_brush',
+        'guitar_lifeline_strategy',
         'guitar_pedal_timespans',
         'guitar_timespans',
         'lilypond_file',
+        'measure_segmentation_talea',
         'meters',
+        'minimum_timespan_duration',
+        'percussion_lh_brush',
         'percussion_lh_timespans',
+        'percussion_rh_brush',
         'percussion_rh_timespans',
+        'permitted_time_signatures',
+        'piano_lh_brush',
         'piano_lh_timespans',
+        'piano_lifeline_strategy',
         'piano_pedal_timespans',
+        'piano_rh_brush',
         'piano_rh_timespans',
+        'saxophone_brush',
         'saxophone_timespans',
         'score',
+        'segment_target_duration',
+        'tempo',
         'time_signatures',
         )
 
-    ### SCORE-LEVEL VARIABLES ###
-
-    measure_segmentation_talea = (1,)
-
-    minimum_timespan_duration = Duration(3, 16)
-
-    permitted_time_signatures = datastructuretools.TypedList(
-        [
-            (5, 16),
-            (3, 8),
-            (7, 16),
-            (2, 4),
-            (4, 8),
-            (5, 8),
-            (3, 4),
-            (6, 8),
-            ],
-        item_class=TimeSignature,
-        )
-
-    segment_target_duration = None
-
-    tempo = None
-
-    ### VOICE-LEVEL VARIABLES ###
-
-    guitar_brush = None
-
-    guitar_lifeline_strategy = None
-
-    piano_lh_brush = None
-
-    piano_lifeline_strategy = None
-
-    piano_rh_brush = None
-
-    percussion_lh_brush = None
-
-    percussion_rh_brush = None
-
-    saxophone_brush = None
-
     ### INITIALIZER ###
 
-    def __init__(self):
+    def __init__(
+        self,
+        context_hierarchy=None,
+        guitar_brush=None,
+        guitar_lifeline_strategy=None,
+        measure_segmentation_talea=None,
+        minimum_timespan_duration=None,
+        percussion_lh_brush=None,
+        percussion_rh_brush=None,
+        permitted_time_signatures=None,
+        piano_lh_brush=None,
+        piano_lifeline_strategy=None,
+        piano_rh_brush=None,
+        saxophone_brush=None,
+        segment_target_duration=None,
+        tempo=None,
+        ):
         from plague_water import makers
-        assert isinstance(self.guitar_brush,
-            (makers.Brush, type(None)))
-        assert isinstance(self.guitar_lifeline_strategy,
+        # verify
+        assert isinstance(guitar_brush, (makers.Brush, type(None)))
+        assert isinstance(guitar_lifeline_strategy,
             (makers.LifelineStrategy, type(None)))
-        assert isinstance(self.measure_segmentation_talea,
-            collections.Iterable) and \
-            all(isinstance(x, int) and 0 < x
-                for x in self.measure_segmentation_talea)
-        assert isinstance(self.minimum_timespan_duration, Duration) and \
-            0 < self.minimum_timespan_duration < 1
-        assert isinstance(self.percussion_lh_brush,
-            (makers.Brush, type(None)))
-        assert isinstance(self.percussion_rh_brush,
-            (makers.Brush, type(None)))
-        assert isinstance(self.permitted_time_signatures,
-            collections.Iterable) and \
-            self.permitted_time_signatures and \
-            all(isinstance(x, TimeSignature)
-                for x in self.permitted_time_signatures)
-        assert isinstance(self.piano_lh_brush,
-            (makers.Brush, type(None)))
-        assert isinstance(self.piano_lifeline_strategy,
+        assert isinstance(measure_segmentation_talea, collections.Iterable)
+        assert all(isinstance(x, int) for x in measure_segmentation_talea)
+        assert all(0 < x for x in measure_segmentation_talea)
+        assert isinstance(minimum_timespan_duration, Duration)
+        assert 0 < minimum_timespan_duration < 1
+        assert isinstance(percussion_lh_brush, (makers.Brush, type(None)))
+        assert isinstance(percussion_rh_brush, (makers.Brush, type(None)))
+        assert isinstance(permitted_time_signatures, collections.Iterable)
+        assert len(permitted_time_signatures)
+        assert all(isinstance(x, TimeSignature)
+            for x in permitted_time_signatures)
+        assert isinstance(piano_lh_brush, (makers.Brush, type(None)))
+        assert isinstance(piano_lifeline_strategy,
             (makers.LifelineStrategy, type(None)))
-        assert isinstance(self.piano_rh_brush,
-            (makers.Brush, type(None)))
-        assert isinstance(self.saxophone_brush,
-            (makers.Brush, type(None)))
-        assert isinstance(self.segment_target_duration, Duration) and \
-            1 <= self.segment_target_duration
-        assert isinstance(self.tempo, Tempo)
+        assert isinstance(piano_rh_brush, (makers.Brush, type(None)))
+        assert isinstance(saxophone_brush, (makers.Brush, type(None)))
+        assert isinstance(segment_target_duration, Duration)
+        assert 1 <= segment_target_duration
+        assert isinstance(tempo, Tempo)
+        # set inputs
+        self.guitar_brush = guitar_brush
+        self.guitar_lifeline_strategy = guitar_lifeline_strategy
+        self.measure_segmentation_talea = measure_segmentation_talea
+        self.minimum_timespan_duration = minimum_talea_duration
+        self.percussion_lh_brush = percussion_lh_brush
+        self.percussion_rh_brush = percussion_rh_brush
+        self.permitted_time_signatures = permitted_time_signatures
+        self.piano_lh_brush = piano_lh_brush
+        self.piano_lifeline_strategy = piano_lifeline_strategy
+        self.piano_rh_brush = piano_rh_brush
+        self.saxophone_brush = saxophone_brush
+        self.segment_target_duration = segment_target_duration
+        self.tempo = tempo
+        # set place holders
         self.guitar_pedal_timespans = None
         self.guitar_timespans = None
         self.lilypond_file = None
