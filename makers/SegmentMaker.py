@@ -65,17 +65,20 @@ class SegmentMaker(abctools.AbjadObject):
         assert isinstance(guitar_brush, (makers.Brush, type(None)))
         assert isinstance(guitar_lifeline_strategy,
             (makers.LifelineStrategy, type(None)))
-        assert isinstance(measure_segmentation_talea, collections.Iterable)
-        assert all(isinstance(x, int) for x in measure_segmentation_talea)
-        assert all(0 < x for x in measure_segmentation_talea)
-        assert isinstance(minimum_timespan_duration, Duration)
-        assert 0 < minimum_timespan_duration < 1
+        if not sequencetools.all_are_positive_integers(
+            measure_segmentation_talea):
+            measure_segmentation_talea = (1,)
+        if not isinstance(minimum_timespan_duration, Duration):
+            minimum_timespan_duration = Duration(3, 16)
+        assert Duration(0) < minimum_timespan_duration
         assert isinstance(percussion_lh_brush, (makers.Brush, type(None)))
         assert isinstance(percussion_rh_brush, (makers.Brush, type(None)))
         assert isinstance(permitted_time_signatures, collections.Iterable)
         assert len(permitted_time_signatures)
-        assert all(isinstance(x, TimeSignature)
-            for x in permitted_time_signatures)
+        if not all(isinstance(x, TimeSignature)
+            for x in permitted_time_signatures):
+            permitted_time_signatures = tuple(
+                TimeSignature(x) for x in permitted_time_signatures)
         assert isinstance(piano_lh_brush, (makers.Brush, type(None)))
         assert isinstance(piano_lifeline_strategy,
             (makers.LifelineStrategy, type(None)))
@@ -89,7 +92,7 @@ class SegmentMaker(abctools.AbjadObject):
         self.guitar_brush = guitar_brush
         self.guitar_lifeline_strategy = guitar_lifeline_strategy
         self.measure_segmentation_talea = measure_segmentation_talea
-        self.minimum_timespan_duration = minimum_talea_duration
+        self.minimum_timespan_duration = minimum_timespan_duration
         self.percussion_lh_brush = percussion_lh_brush
         self.percussion_rh_brush = percussion_rh_brush
         self.permitted_time_signatures = permitted_time_signatures
@@ -98,7 +101,7 @@ class SegmentMaker(abctools.AbjadObject):
         self.piano_rh_brush = piano_rh_brush
         self.saxophone_brush = saxophone_brush
         self.segment_target_duration = segment_target_duration
-        self.segment_tempo = tempo
+        self.segment_tempo = segment_tempo
         # set place holders
         self.guitar_pedal_timespans = None
         self.guitar_timespans = None
@@ -155,16 +158,17 @@ class SegmentMaker(abctools.AbjadObject):
 
     ### PUBLIC METHODS ###
 
-    @classmethod
-    def build_and_persist(class_, current_file_path):
-        segment = class_()
-        lilypond_file = segment()
+    def build_and_persist(self, current_file_path):
         current_directory_path = os.path.dirname(os.path.abspath(
             os.path.expanduser(current_file_path)))
-        lilypond_file_path = os.path.join(current_directory_path, 'output.ly')
-        persist(lilypond_file).as_ly(lilypond_file_path)
-        pdf_file_path = os.path.join(current_directory_path, 'output.pdf')
-        persist(lilypond_file).as_pdf(pdf_file_path)
+        pdf_file_path = os.path.join(
+            current_directory_path,
+            'output.pdf',
+            )
+        persist(self).as_pdf(
+            pdf_file_path=pdf_file_path,
+            remove_ly=False,
+            )
 
     def build_lifeline_timespan_inventories(self):
         if self.guitar_lifeline_strategy is not None:

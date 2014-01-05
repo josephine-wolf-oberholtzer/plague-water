@@ -19,6 +19,8 @@ class Brush(abctools.AbjadObject):
         brush_components=None,
         talea=None,
         ):
+        from plague_water import makers
+        from plague_water import materials
         assert brush_components is not None
         assert len(brush_components)
         assert all(isinstance(x, makers.BrushComponent)
