@@ -35,7 +35,7 @@ class SegmentMaker(abctools.AbjadObject):
         'saxophone_timespans',
         'score',
         'segment_target_duration',
-        'tempo',
+        'segment_tempo',
         'time_signatures',
         )
 
@@ -56,7 +56,7 @@ class SegmentMaker(abctools.AbjadObject):
         piano_rh_brush=None,
         saxophone_brush=None,
         segment_target_duration=None,
-        tempo=None,
+        segment_tempo=None,
         ):
         from plague_water import makers
         # verify
@@ -83,7 +83,7 @@ class SegmentMaker(abctools.AbjadObject):
         assert isinstance(saxophone_brush, (makers.Brush, type(None)))
         assert isinstance(segment_target_duration, Duration)
         assert 1 <= segment_target_duration
-        assert isinstance(tempo, Tempo)
+        assert isinstance(segment_tempo, Tempo)
         # set inputs
         self.context_hierarchy = context_hierarchy
         self.guitar_brush = guitar_brush
@@ -98,7 +98,7 @@ class SegmentMaker(abctools.AbjadObject):
         self.piano_rh_brush = piano_rh_brush
         self.saxophone_brush = saxophone_brush
         self.segment_target_duration = segment_target_duration
-        self.tempo = tempo
+        self.segment_tempo = tempo
         # set place holders
         self.guitar_pedal_timespans = None
         self.guitar_timespans = None
@@ -133,6 +133,9 @@ class SegmentMaker(abctools.AbjadObject):
             self.score)
         self.configure_lilypond_file()
         return self.lilypond_file
+
+    def __illustrate__(self):
+        return self()
 
     def __makenew__(self, **kwargs):
         from abjad.tools import systemtools
@@ -255,7 +258,7 @@ class SegmentMaker(abctools.AbjadObject):
         rehearsal_mark = indicatortools.LilyPondCommand(r'mark \default')
         attach(rehearsal_mark, self.score['TimeSignatureContext'][0],
             scope=scoretools.Context)
-        attach(self.tempo, self.score['TimeSignatureContext'][0])
+        attach(self.segment_tempo, self.score['TimeSignatureContext'][0])
         self.score.add_double_bar()
         right_column = markuptools.MarkupCommand(
             'right-column', [
@@ -328,7 +331,7 @@ class SegmentMaker(abctools.AbjadObject):
     def realize_timespans(
         self,
         context_hierarchy=None,
-        context_name=None
+        context_name=None,
         time_signatures=None,
         timespan_inventory=None,
         ):
