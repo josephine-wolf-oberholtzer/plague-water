@@ -134,7 +134,7 @@ class SegmentMaker(abctools.AbjadObject):
         self.build_lifeline_timespan_inventories()
         self.populate_time_signature_context()
         self.populate_voice_contexts()
-        self.cleanup_voice_contexts()
+        self.split_barline_crossing_silence_containers()
         self.configure_score()
         self.configure_lilypond_file()
         return self.lilypond_file
@@ -221,11 +221,6 @@ class SegmentMaker(abctools.AbjadObject):
             self.saxophone_timespans = self.saxophone_brush(
                 segment_target_duration=self.segment_target_duration,
                 )
-
-    def cleanup_voice_contexts(self):
-        for voice in iterate(self.score).by_class(Voice):
-            for container in voice:
-                pass
 
     def cleanup_timespan_inventories(self):
         print 'cleanup timespan inventories'
@@ -327,7 +322,7 @@ class SegmentMaker(abctools.AbjadObject):
             )
         return meters
 
-    def make_rest_containers(durations):
+    def make_rest_containers(self, durations):
         from plague_water import makers
         source_annotation = makers.SourceAnnotation()
         rest_maker = rhythmmakertools.RestRhythmMaker()
@@ -373,7 +368,7 @@ class SegmentMaker(abctools.AbjadObject):
         from plague_water import makers
         result = []
         if timespan_inventory is None:
-            rest_containers = make_rest_containers(self.time_signatures)
+            rest_containers = self.make_rest_containers(self.time_signatures)
             result.extend(rest_containers)
             return result
         previous_offset = Offset(0)
@@ -383,7 +378,7 @@ class SegmentMaker(abctools.AbjadObject):
             group_stop_offset = partitioned_group.stop_offset
             if previous_offset < group_start_offset:
                 rest_duration = group_start_offset - previous_offset
-                rest_containers = make_rest_containers((rest_duration,))
+                rest_containers = self.make_rest_containers((rest_duration,))
                 result.extend(rest_containers)
             for music_maker, group in itertools.groupby(
                 partitioned_group,
@@ -401,9 +396,39 @@ class SegmentMaker(abctools.AbjadObject):
             previous_offset = group_stop_offset
         if previous_offset < self.segment_actual_duration:
             rest_duration = self.segment_actual_duration - previous_offset
-            rest_containers = make_rest_containers((rest_duration,))
+            rest_containers = self.make_rest_containers((rest_duration,))
             result.extend(rest_containers)
         return result
+
+    def split_barline_crossing_silence_containers(self):
+        print 'split barline crossing silence containers'
+        from plague_water import makers
+        for voice in iterate(self.score).by_class(Voice):
+            print '\t{!r} '.format(voice)
+            split_durations = [x.duration for x in self.time_signatures]
+            split_offsets = mathtools.cumulative_sums(split_durations)
+            for container in voice[:]:
+                if not split_offsets:
+                    break
+                source_annotation = inspect(container).get_indicator(
+                    makers.SourceAnnotation)
+                if source_annotation.source is not None:
+                    continue
+                start_offset = inspect(container).get_timespan().start_offset
+                stop_offset = inspect(container).get_timespan().stop_offset
+                while split_offsets and split_offsets[0] <= start_offset:
+                    split_offsets.pop(0)
+                current_split_offsets = []
+                while split_offsets and split_offsets[0] < stop_offset:
+                    current_split_offsets.append(split_offsets.pop(0))
+                if current_split_offsets:
+                    current_split_offsets.insert(0, start_offset)
+                    current_split_durations = mathtools.difference_series(
+                        current_split_offsets)
+                    detach(source_annotation, container)
+                    for shard in \
+                        mutate(container).split(current_split_durations):
+                        attach(source_annotation, shard[0])
 
     ### PUBLIC PROPERTIES ###
 
