@@ -17,3 +17,9 @@ class SourceAnnotation(abctools.AbjadObject):
         from plague_water import makers
         assert isinstance(source, (makers.MusicMaker, type(None)))
         self._source = source
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def source(self):
+        return self._source
