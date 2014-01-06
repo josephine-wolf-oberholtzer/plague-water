@@ -44,6 +44,11 @@ class MusicMaker(abctools.AbjadObject):
         music = note_maker(durations)
         music = [Container(x) for x in music]
         music = Container(music)
+        beam = spannertools.DuratedComplexBeam(
+            durations=durations,
+            isolated_nib_direction=False,
+            )
+        attach(beam, music)
         return music
 
     def _build_parameters(
