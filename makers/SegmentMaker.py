@@ -412,7 +412,6 @@ class SegmentMaker(abctools.AbjadObject):
             current_time_signatures = list(time_signatures)
             current_offsets = list(offsets)
             for container in voice[:]:
-                print '\t\t{!r}'.format(container)
                 container_timespan = inspect(container).get_timespan()
                 container_start_offset = container_timespan.start_offset
                 while 2 < len(current_offsets) and \
@@ -425,6 +424,7 @@ class SegmentMaker(abctools.AbjadObject):
                     makers.SourceAnnotation)
                 if source_annotation.source is None:
                     initial_offset = container_start_offset - current_offset
+                    print '\t\t', container
                     mutate(container[:]).rewrite_meter(
                         current_time_signature,
                         boundary_depth=1,
@@ -437,8 +437,15 @@ class SegmentMaker(abctools.AbjadObject):
                             inspect(subcontainer).get_timespan()
                         subcontainer_start_offset = \
                             subcontainer_timespan.start_offset
+                        while 2 < len(current_offsets) and \
+                            current_offsets[1] <= subcontainer_start_offset:
+                            current_offsets.pop(0)
+                            current_time_signatures.pop(0)
+                        current_time_signature = current_time_signatures[0]
+                        current_offset = current_offsets[0]
                         initial_offset = \
                             subcontainer_start_offset - current_offset
+                        print '\t\t', subcontainer
                         mutate(subcontainer[:]).rewrite_meter(
                             current_time_signature,
                             boundary_depth=1,
