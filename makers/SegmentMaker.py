@@ -437,6 +437,12 @@ class SegmentMaker(abctools.AbjadObject):
                             inspect(subcontainer).get_timespan()
                         subcontainer_start_offset = \
                             subcontainer_timespan.start_offset
+                        while 2 < len(current_offsets) and \
+                            current_offsets[1] <= subcontainer_start_offset:
+                            current_offsets.pop(0)
+                            current_time_signatures.pop(0)
+                        current_time_signature = current_time_signatures[0]
+                        current_offset = current_offsets[0]
                         initial_offset = \
                             subcontainer_start_offset - current_offset
                         mutate(subcontainer[:]).rewrite_meter(
