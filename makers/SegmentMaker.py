@@ -402,6 +402,7 @@ class SegmentMaker(abctools.AbjadObject):
         return result
 
     def rewrite_meters(self):
+        from plague_water import makers
         print 'rewrite meters'
         time_signatures = self.time_signatures[:]
         offsets = list(mathtools.cumulative_sums(x.duration for x in
@@ -420,13 +421,30 @@ class SegmentMaker(abctools.AbjadObject):
                     current_time_signatures.pop(0)
                 current_time_signature = current_time_signatures[0]
                 current_offset = current_offsets[0]
-                initial_offset = container_start_offset - current_offset
-                mutate(container[:]).rewrite_meter(
-                    current_time_signature,
-                    boundary_depth=1,
-                    initial_offset=initial_offset,
-                    maximum_dot_count=2,
-                    )
+                source_annotation = inspect(container).get_indicator(
+                    makers.SourceAnnotation)
+                if source_annotation.source is None:
+                    initial_offset = container_start_offset - current_offset
+                    mutate(container[:]).rewrite_meter(
+                        current_time_signature,
+                        boundary_depth=1,
+                        initial_offset=initial_offset,
+                        maximum_dot_count=2,
+                        )
+                else:
+                    for subcontainer in container:
+                        subcontainer_timespan = \
+                            inspect(subcontainer).get_timespan()
+                        subcontainer_start_offset = \
+                            subcontainer_timespan.start_offset
+                        initial_offset = \
+                            subcontainer_start_offset - current_offset
+                        mutate(subcontainer[:]).rewrite_meter(
+                            current_time_signature,
+                            boundary_depth=1,
+                            initial_offset=initial_offset,
+                            maximum_dot_count=2,
+                            )
 
     def split_barline_crossing_silence_containers(self):
         print 'split barline crossing silence containers'
