@@ -135,6 +135,7 @@ class SegmentMaker(abctools.AbjadObject):
         self.populate_time_signature_context()
         self.populate_voice_contexts()
         self.split_barline_crossing_silence_containers()
+        self.rewrite_meters()
         self.configure_score()
         self.configure_lilypond_file()
         return self.lilypond_file
@@ -399,6 +400,33 @@ class SegmentMaker(abctools.AbjadObject):
             rest_containers = self.make_rest_containers((rest_duration,))
             result.extend(rest_containers)
         return result
+
+    def rewrite_meters(self):
+        print 'rewrite meters'
+        time_signatures = self.time_signatures[:]
+        offsets = list(mathtools.cumulative_sums(x.duration for x in
+            time_signatures))
+        for voice in iterate(self.score).by_class(Voice):
+            print '\t{!r}'.format(voice)
+            current_time_signatures = list(time_signatures)
+            current_offsets = list(offsets)
+            for container in voice[:]:
+                print '\t\t{!r}'.format(container)
+                container_timespan = inspect(container).get_timespan()
+                container_start_offset = container_timespan.start_offset
+                while 2 < len(current_offsets) and \
+                    current_offsets[1] <= container_start_offset:
+                    current_offsets.pop(0)
+                    current_time_signatures.pop(0)
+                current_time_signature = current_time_signatures[0]
+                current_offset = current_offsets[0]
+                initial_offset = container_start_offset - current_offset
+                mutate(container[:]).rewrite_meter(
+                    current_time_signature,
+                    boundary_depth=1,
+                    initial_offset=initial_offset,
+                    maximum_dot_count=2,
+                    )
 
     def split_barline_crossing_silence_containers(self):
         print 'split barline crossing silence containers'

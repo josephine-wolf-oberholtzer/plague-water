@@ -11,14 +11,13 @@ segment_target_duration = Duration(6)
 segment_tempo = materials.tempo_inventory[0]
 
 permitted_time_signatures = [
-    (2, 4),
-    (3, 4),
-    (4, 8),
     (5, 16),
-    (5, 4),
-    (5, 8),
-    (6, 8),
     (7, 16),
+    (2, 4),
+    (4, 8),
+    (5, 8),
+    (3, 4),
+    (6, 8),
     ]
 
 ### BRUSHES ###
