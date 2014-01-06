@@ -134,6 +134,7 @@ class SegmentMaker(abctools.AbjadObject):
         self.build_lifeline_timespan_inventories()
         self.populate_time_signature_context()
         self.populate_voice_contexts()
+        self.cleanup_voice_contexts()
         self.configure_score()
         self.configure_lilypond_file()
         return self.lilypond_file
@@ -220,6 +221,11 @@ class SegmentMaker(abctools.AbjadObject):
             self.saxophone_timespans = self.saxophone_brush(
                 segment_target_duration=self.segment_target_duration,
                 )
+
+    def cleanup_voice_contexts(self):
+        for voice in iterate(self.score).by_class(Voice):
+            for container in voice:
+                pass
 
     def cleanup_timespan_inventories(self):
         print 'cleanup timespan inventories'
@@ -321,6 +327,16 @@ class SegmentMaker(abctools.AbjadObject):
             )
         return meters
 
+    def make_rest_containers(durations):
+        from plague_water import makers
+        source_annotation = makers.SourceAnnotation()
+        rest_maker = rhythmmakertools.RestRhythmMaker()
+        rests = rest_maker(durations)
+        rest_containers = [Container(x) for x in rests]
+        for rest_container in rest_containers:
+            attach(source_annotation, rest_container)
+        return rest_containers
+
     def populate_voice_contexts(self):
         print 'populate voice contexts'
         context_names_and_timespan_inventories = (
@@ -354,22 +370,12 @@ class SegmentMaker(abctools.AbjadObject):
         context_name=None,
         timespan_inventory=None,
         ):
+        from plague_water import makers
         result = []
-
-        def make_rest_containers(durations):
-            rest_maker = rhythmmakertools.RestRhythmMaker()
-            rests = rest_maker(durations)
-            rest_containers = [Container(x) for x in rests]
-            for rest_container in rest_containers:
-                annotation = {'music_maker': None}
-                attach(annotation, rest_container)
-            return rest_containers
-
         if timespan_inventory is None:
             rest_containers = make_rest_containers(self.time_signatures)
             result.extend(rest_containers)
             return result
-
         previous_offset = Offset(0)
         for partitioned_group in timespan_inventory.partition(
             include_tangent_timespans=True):
@@ -379,28 +385,24 @@ class SegmentMaker(abctools.AbjadObject):
                 rest_duration = group_start_offset - previous_offset
                 rest_containers = make_rest_containers((rest_duration,))
                 result.extend(rest_containers)
-
             for music_maker, group in itertools.groupby(
                 partitioned_group,
                 lambda x: x.music_maker,
                 ):
+                source_annotation = makers.SourceAnnotation(source=music_maker)
                 durations = [x.duration for x in group]
                 music = music_maker(
                     durations,
                     context_hierarchy=context_hierarchy,
                     context_name=context_name,
                     )
-                annotation = {'music_maker': music_maker}
-                attach(annotation, music)
+                attach(source_annotation, music)
                 result.append(music)
-
             previous_offset = group_stop_offset
-
         if previous_offset < self.segment_actual_duration:
             rest_duration = self.segment_actual_duration - previous_offset
             rest_containers = make_rest_containers((rest_duration,))
             result.extend(rest_containers)
-
         return result
 
     ### PUBLIC PROPERTIES ###
