@@ -49,16 +49,15 @@ class Brush(abctools.AbjadObject):
 
     def __call__(self, segment_target_duration):
         current_offset = Offset(0)
-        can_continue = True
         timespan_inventory = timespantools.TimespanInventory()
-        while can_continue:
+        while current_offset < segment_target_duration:
             brush_component = self._choose_brush_component()
-            brush_component_timespan_inventory, can_continue = brush_component(
-                current_offset,
-                segment_target_duration,
-                )
+            brush_component_timespan_inventory, current_offset = \
+                brush_component(
+                    current_offset,
+                    segment_target_duration,
+                    )
             timespan_inventory.extend(brush_component_timespan_inventory)
-            current_offset = brush_component_timespan_inventory.stop_offset
         return timespan_inventory
 
     ### PRIVATE METHODS ###

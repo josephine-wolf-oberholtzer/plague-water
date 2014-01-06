@@ -7,10 +7,11 @@ class BrushComponent(abctools.AbjadObject):
     ### CLASS VARIABLES ###
 
     __slots__ = (
+        '_leading_rest_durations',
         '_music_maker',
         '_playing_durations',
         '_playing_groupings',
-        '_resting_durations',
+        '_tailing_rest_durations',
         '_weight',
         )
 
@@ -19,9 +20,10 @@ class BrushComponent(abctools.AbjadObject):
     def __init__(
         self,
         music_maker=None,
+        leading_rest_durations=None,
         playing_durations=None,
         playing_groupings=None,
-        resting_durations=None,
+        tailing_rest_durations=None,
         weight=1,
         ):
         from plague_water import makers
@@ -55,19 +57,36 @@ class BrushComponent(abctools.AbjadObject):
         assert isinstance(playing_groupings,
             datastructuretools.StatalServerCursor)
         self._playing_groupings = playing_groupings
-        # resting durations
-        if resting_durations is None:
-            resting_durations = [Duration(1, 4), Duration(1, 4)]
-        if isinstance(resting_durations, Duration):
-            resting_durations = [resting_durations]
-        if isinstance(resting_durations, (list, tuple)):
-            resting_durations = datastructuretools.StatalServer(
-                resting_durations)
-        if isinstance(resting_durations, datastructuretools.StatalServer):
-            resting_durations = resting_durations()
-        assert isinstance(resting_durations,
-            datastructuretools.StatalServerCursor)
-        self._resting_durations = resting_durations
+        # leading rest durations
+        if leading_rest_durations is None:
+            self._leading_rest_durations = leading_rest_durations
+        else:
+            if isinstance(leading_rest_durations, Duration):
+                leading_rest_durations = [leading_rest_durations]
+            if isinstance(leading_rest_durations, (list, tuple)):
+                leading_rest_durations = datastructuretools.StatalServer(
+                    leading_rest_durations)
+            if isinstance(leading_rest_durations,
+                datastructuretools.StatalServer):
+                leading_rest_durations = leading_rest_durations()
+            assert isinstance(leading_rest_durations,
+                datastructuretools.StatalServerCursor)
+            self._leading_rest_durations = leading_rest_durations
+        # tailing rest durations
+        if tailing_rest_durations is None:
+            self._tailing_rest_durations = tailing_rest_durations
+        else:
+            if isinstance(tailing_rest_durations, Duration):
+                tailing_rest_durations = [tailing_rest_durations]
+            if isinstance(tailing_rest_durations, (list, tuple)):
+                tailing_rest_durations = datastructuretools.StatalServer(
+                    tailing_rest_durations)
+            if isinstance(tailing_rest_durations,
+                datastructuretools.StatalServer):
+                tailing_rest_durations = tailing_rest_durations()
+            assert isinstance(tailing_rest_durations,
+                datastructuretools.StatalServerCursor)
+            self._tailing_rest_durations = tailing_rest_durations
         # weight
         weight = int(weight)
         assert 0 < weight
@@ -80,16 +99,21 @@ class BrushComponent(abctools.AbjadObject):
         assert isinstance(initial_offset, Duration), initial_offset
         assert isinstance(maximum_offset, Duration), maximum_offset
         timespan_inventory = timespantools.TimespanInventory()
-        resting_duration = self.resting_durations()[0]
+        leading_rest_duration = Duration(0)
+        if self.leading_rest_durations is not None:
+            leading_rest_duration = self.leading_rest_durations()[0]
         playing_grouping = self.playing_groupings()[0]
         playing_durations = self.playing_durations(playing_grouping)
-        start_offset = initial_offset + resting_duration
+        tailing_rest_duration = Duration(0)
+        if self.tailing_rest_durations is not None:
+            tailing_rest_duration = self.tailing_rest_durations()[0]
+        start_offset = initial_offset + leading_rest_duration
         if maximum_offset <= start_offset:
-            return timespan_inventory, False
+            return timespan_inventory, maximum_offset
         for playing_duration in playing_durations:
             stop_offset = start_offset + playing_duration
             if maximum_offset <= stop_offset:
-                return timespan_inventory, False
+                return timespan_inventory, maximum_offset
             timespan = makers.PayloadedTimespan(
                 music_maker=self.music_maker,
                 start_offset=start_offset,
@@ -97,30 +121,41 @@ class BrushComponent(abctools.AbjadObject):
                 )
             timespan_inventory.append(timespan)
             start_offset = stop_offset
-        return timespan_inventory, True
+        stop_offset = timespan_inventory.stop_offset + tailing_rest_duration
+        if maximum_offset < stop_offset:
+            stop_offset = maximum_offset
+        return timespan_inventory, stop_offset
 
     def __makenew__(
         self,
         music_maker=None,
         playing_durations=None,
         playing_groupings=None,
-        resting_durations=None,
+        leading_rest_durations=None,
         weight=None,
         ):
         music_maker = music_maker or self.music_maker
         playing_durations = playing_durations or self.playing_durations
         playing_groupings = playing_groupings or self.playing_groupings
-        resting_durations = resting_durations or self.resting_durations
+        leading_rest_durations = \
+            leading_rest_durations or self.leading_rest_durations
+        tailing_rest_durations = \
+            tailing_rest_durations or self.tailing_rest_durations
         weight = weight or self.weight
         return type(self)(
+            leading_rest_durations=leading_rest_durations,
             music_maker=music_maker,
             playing_durations=playing_durations,
             playing_groupings=playing_groupings,
-            resting_durations=resting_durations,
+            tailing_rest_durations=tailing_rest_durations,
             weight=weight,
             )
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def leading_rest_durations(self):
+        return self._leading_rest_durations
 
     @property
     def music_maker(self):
@@ -135,8 +170,8 @@ class BrushComponent(abctools.AbjadObject):
         return self._playing_groupings
 
     @property
-    def resting_durations(self):
-        return self._resting_durations
+    def tailing_rest_durations(self):
+        return self._leading_rest_durations
 
     @property
     def weight(self):
