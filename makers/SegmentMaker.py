@@ -373,6 +373,7 @@ class SegmentMaker(abctools.AbjadObject):
             result.extend(rest_containers)
             return result
         previous_offset = Offset(0)
+        seed = 0
         for partitioned_group in timespan_inventory.partition(
             include_tangent_timespans=True):
             group_start_offset = partitioned_group.start_offset
@@ -391,9 +392,11 @@ class SegmentMaker(abctools.AbjadObject):
                     durations,
                     context_hierarchy=context_hierarchy,
                     context_name=context_name,
+                    seed=seed,
                     )
                 attach(source_annotation, music)
                 result.append(music)
+                seed += 1
             previous_offset = group_stop_offset
         if previous_offset < self.segment_actual_duration:
             rest_duration = self.segment_actual_duration - previous_offset
