@@ -47,11 +47,21 @@ class Brush(abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, segment_target_duration):
+    def __call__(
+        self,
+        segment_target_duration,
+        context_hierarchy=None,
+        context_name=None,
+        ):
+        brush_component_pairs = self._build_brush_component_pairs(
+            context_hierarchy=context_hierarchy,
+            context_name=context_name,
+            )
         current_offset = Offset(0)
         timespan_inventory = timespantools.TimespanInventory()
         while current_offset < segment_target_duration:
-            brush_component = self._choose_brush_component()
+            brush_component = self._choose_brush_component(
+                brush_component_pairs)
             brush_component_timespan_inventory, current_offset = \
                 brush_component(
                     current_offset,
@@ -62,10 +72,33 @@ class Brush(abctools.AbjadObject):
 
     ### PRIVATE METHODS ###
 
-    def _choose_brush_component(self):
+    def _build_brush_component_pairs(
+        self,
+        context_hierarchy=None,
+        context_name=None,
+        ):
+        contexted_brush_components = []
+        for brush_component in self.brush_components:
+            parameter_map = brush_component.build_parameter_map(
+                context_hierarchy=context_hierarchy,
+                context_name=context_name,
+                )
+            contexted_brush_component = new(brush_component, **parameter_map)
+            contexted_brush_componets.append(contexted_brush_component)
+        weights = [x.weight for x in contexted_brush_components]
+        pairs = mathtools.cumulative_sums_pairwise(
+            mathtools.partition_integer_by_ratio(
+                10,
+                weights,
+                )
+            )
+        brush_component_pairs = tuple(zip(pairs, contexted_brush_components))
+        return brush_component_pairs
+
+    def _choose_brush_component(self, brush_component_pairs):
         seed = self.talea()[0]
         selected_brush_component = None
-        for pair, brush_component in self.brush_component_pairs:
+        for pair, brush_component in brush_component_pairs:
             low, high = pair
             if low <= seed < high:
                 selected_brush_component = brush_component

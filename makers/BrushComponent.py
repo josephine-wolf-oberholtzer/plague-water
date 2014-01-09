@@ -1,8 +1,9 @@
 # -*- encoding: utf-8 -*-
 from abjad import *
+from plague_water.makers.ContextAwareMaker import ContextAwareMaker
 
 
-class BrushComponent(abctools.AbjadObject):
+class BrushComponent(ContextAwareMaker):
 
     ### CLASS VARIABLES ###
 
@@ -19,8 +20,8 @@ class BrushComponent(abctools.AbjadObject):
 
     def __init__(
         self,
-        music_maker=None,
         leading_rest_durations=None,
+        music_maker=None,
         playing_durations=None,
         playing_groupings=None,
         tailing_rest_durations=None,
@@ -28,74 +29,44 @@ class BrushComponent(abctools.AbjadObject):
         ):
         from plague_water import makers
         assert isinstance(music_maker, (makers.MusicMaker, type(None)))
-        if music_maker is None:
-            music_maker = makers.MusicMaker()
         self._music_maker = music_maker
-        # playing durations
-        if playing_durations is None:
-            playing_durations = [Duration(1, 4), Duration(1, 4)]
-        if isinstance(playing_durations, Duration):
-            playing_durations = [playing_durations]
-        if isinstance(playing_durations, (list, tuple)):
-            playing_durations = datastructuretools.StatalServer(
-                playing_durations)
-        if isinstance(playing_durations, datastructuretools.StatalServer):
-            playing_durations = playing_durations()
-        assert isinstance(playing_durations,
-            datastructuretools.StatalServerCursor)
-        self._playing_durations = playing_durations
-        # playing groupings
-        if playing_groupings is None:
-            playing_groupings = [1, 1]
-        if isinstance(playing_groupings, int):
-            playing_groupings = [playing_groupings]
-        if isinstance(playing_groupings, (list, tuple)):
-            playing_groupings = datastructuretools.StatalServer(
-                playing_groupings)
-        if isinstance(playing_groupings, datastructuretools.StatalServer):
-            playing_groupings = playing_groupings()
-        assert isinstance(playing_groupings,
-            datastructuretools.StatalServerCursor)
-        self._playing_groupings = playing_groupings
-        # leading rest durations
-        if leading_rest_durations is None:
-            self._leading_rest_durations = leading_rest_durations
-        else:
-            if isinstance(leading_rest_durations, Duration):
-                leading_rest_durations = [leading_rest_durations]
-            if isinstance(leading_rest_durations, (list, tuple)):
-                leading_rest_durations = datastructuretools.StatalServer(
-                    leading_rest_durations)
-            if isinstance(leading_rest_durations,
-                datastructuretools.StatalServer):
-                leading_rest_durations = leading_rest_durations()
-            assert isinstance(leading_rest_durations,
-                datastructuretools.StatalServerCursor)
-            self._leading_rest_durations = leading_rest_durations
-        # tailing rest durations
-        if tailing_rest_durations is None:
-            self._tailing_rest_durations = tailing_rest_durations
-        else:
-            if isinstance(tailing_rest_durations, Duration):
-                tailing_rest_durations = [tailing_rest_durations]
-            if isinstance(tailing_rest_durations, (list, tuple)):
-                tailing_rest_durations = datastructuretools.StatalServer(
-                    tailing_rest_durations)
-            if isinstance(tailing_rest_durations,
-                datastructuretools.StatalServer):
-                tailing_rest_durations = tailing_rest_durations()
-            assert isinstance(tailing_rest_durations,
-                datastructuretools.StatalServerCursor)
-            self._tailing_rest_durations = tailing_rest_durations
-        # weight
+        self._playing_durations = self._setup_duration_cursor(
+            playing_durations)
+        self._playing_groupings = self._setup_grouping_cursor(
+            playing_groupings)
+        self._leading_rest_durations = self._setup_duration_cursor(
+            leading_rest_durations)
+        self._tailing_rest_durations = self._setup_duration_cursor(
+            tailing_rest_durations)
+        assert isinstance(self.leading_rest_durations,
+            (datastructuretools.StatalServerCursor, type(None)))
+        assert isinstance(self.playing_durations,
+            (datastructuretools.StatalServerCursor, type(None)))
+        assert isinstance(self.playing_groupings,
+            (datastructuretools.StatalServerCursor, type(None)))
+        assert isinstance(self.tailing_rest_durations,
+            (datastructuretools.StatalServerCursor, type(None)))
         weight = int(weight)
         assert 0 < weight
         self._weight = int(weight)
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, initial_offset, maximum_offset):
+    def __call__(
+        self,
+        initial_offset,
+        maximum_offset,
+        ):
         from plague_water import makers
+        assert isinstance(self.leading_rest_durations,
+            datastructuretools.StatalServerCursor)
+        assert isinstance(self.playing_durations,
+            datastructuretools.StatalServerCursor)
+        assert isinstance(self.playing_groupings,
+            datastructuretools.StatalServerCursor)
+        assert isinstance(self.tailing_rest_durations,
+            datastructuretools.StatalServerCursor)
+        assert isinstance(self.music_maker, makers.MusicMaker)
         assert isinstance(initial_offset, Duration), initial_offset
         assert isinstance(maximum_offset, Duration), maximum_offset
         timespan_inventory = timespantools.TimespanInventory()
@@ -126,30 +97,29 @@ class BrushComponent(abctools.AbjadObject):
             stop_offset = maximum_offset
         return timespan_inventory, stop_offset
 
-    def __makenew__(
-        self,
-        music_maker=None,
-        playing_durations=None,
-        playing_groupings=None,
-        leading_rest_durations=None,
-        weight=None,
-        ):
-        music_maker = music_maker or self.music_maker
-        playing_durations = playing_durations or self.playing_durations
-        playing_groupings = playing_groupings or self.playing_groupings
-        leading_rest_durations = \
-            leading_rest_durations or self.leading_rest_durations
-        tailing_rest_durations = \
-            tailing_rest_durations or self.tailing_rest_durations
-        weight = weight or self.weight
-        return type(self)(
-            leading_rest_durations=leading_rest_durations,
-            music_maker=music_maker,
-            playing_durations=playing_durations,
-            playing_groupings=playing_groupings,
-            tailing_rest_durations=tailing_rest_durations,
-            weight=weight,
-            )
+    ### PRIVATE METHODS ###
+
+    def _setup_duration_cursor(self, expr):
+        if expr is not None:
+            if isinstance(expr, Duration):
+                expr = [expr]
+            if isinstance(expr, (list, tuple)):
+                expr = datastructuretools.StatalServer(expr)
+            if isinstance(expr, datastructuretools.StatalServer):
+                expr = expr()
+            assert isinstance(expr, datastructuretools.StatalServerCursor)
+        return expr
+
+    def _setup_grouping_cursor(self, expr):
+        if expr is not None:
+            if isinstance(expr, int):
+                expr = [expr]
+            if isinstance(expr, (list, tuple)):
+                expr = datastructuretools.StatalServer(expr)
+            if isinstance(expr, datastructuretools.StatalServer):
+                expr = expr()
+            assert isinstance(expr, datastructuretools.StatalServerCursor)
+        return expr
 
     ### PUBLIC PROPERTIES ###
 

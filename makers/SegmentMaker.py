@@ -105,19 +105,20 @@ class SegmentMaker(abctools.AbjadObject):
         self.segment_target_duration = segment_target_duration
         self.segment_tempo = segment_tempo
         # set place holders
-        self.guitar_pedal_timespans = None
-        self.guitar_timespans = None
         self.lilypond_file = None
         self.meters = None
-        self.percussion_lh_timespans = None
-        self.percussion_rh_timespans = None
-        self.piano_lh_timespans = None
-        self.piano_pedal_timespans = None
-        self.piano_rh_timespans = None
-        self.saxophone_timespans = None
         self.score = None
         self.segment_actual_duration = None
         self.time_signatures = None
+        # set timespan inventories
+        self.guitar_pedal_timespans = timespantools.TimespanInventory()
+        self.guitar_timespans = timespantools.TimespanInventory()
+        self.percussion_lh_timespans = timespantools.TimespanInventory()
+        self.percussion_rh_timespans = timespantools.TimespanInventory()
+        self.piano_lh_timespans = timespantools.TimespanInventory()
+        self.piano_pedal_timespans = timespantools.TimespanInventory()
+        self.piano_rh_timespans = timespantools.TimespanInventory()
+        self.saxophone_timespans = timespantools.TimespanInventory()
 
     ### SPECIAL METHODS ###
 
@@ -192,36 +193,16 @@ class SegmentMaker(abctools.AbjadObject):
 
     def build_semantic_voice_timespan_inventories(self):
         print 'build semantic voice timespan inventories'
-        if self.guitar_brush is not None:
-            print '\tguitar'
-            self.guitar_timespans = self.guitar_brush(
+        for context_name in self.semantic_context_bundles:
+            print '\t{}'.format(context_name)
+            pair = self.semantic_context_bundles[context_name]
+            brush, timespan_inventory = pair
+            result = brush(
+                context_hierarchy=self.context_hierarchy,
+                context_name=context_name,
                 segment_target_duration=self.segment_target_duration,
                 )
-        if self.percussion_lh_brush is not None:
-            print '\tpercussion lh brush'
-            self.percussion_lh_timespans = self.percussion_lh_brush(
-                segment_target_duration=self.segment_target_duration,
-                )
-        if self.percussion_rh_brush is not None:
-            print '\tpercussion rh brush'
-            self.percussion_rh_timespans = self.percussion_rh_brush(
-                segment_target_duration=self.segment_target_duration,
-                )
-        if self.piano_lh_brush is not None:
-            print '\tpiano lh brush'
-            self.piano_lh_timespans = self.piano_lh_brush(
-                segment_target_duration=self.segment_target_duration,
-                )
-        if self.piano_rh_brush is not None:
-            print '\tpiano rh brush'
-            self.piano_rh_timespans = self.piano_rh_brush(
-                segment_target_duration=self.segment_target_duration,
-                )
-        if self.saxophone_brush is not None:
-            print '\tsaxophone brush'
-            self.saxophone_timespans = self.saxophone_brush(
-                segment_target_duration=self.segment_target_duration,
-                )
+            timespan_inventory[:] = result
 
     def cleanup_timespan_inventories(self):
         print 'cleanup timespan inventories'
@@ -335,18 +316,8 @@ class SegmentMaker(abctools.AbjadObject):
 
     def populate_voice_contexts(self):
         print 'populate voice contexts'
-        context_names_and_timespan_inventories = (
-            ('Guitar Voice', self.guitar_timespans),
-            ('Guitar Pedals', self.guitar_pedal_timespans),
-            ('Percussion LH Voice', self.percussion_lh_timespans),
-            ('Percussion RH Voice', self.percussion_rh_timespans),
-            ('Piano LH Voice', self.piano_lh_timespans),
-            ('Piano RH Voice', self.piano_rh_timespans),
-            ('Piano Pedals', self.piano_pedal_timespans),
-            ('Saxophone Voice', self.saxophone_timespans),
-            )
-        for context_name, timespan_inventory in \
-            context_names_and_timespan_inventories:
+        for context_name in self.all_context_bundles:
+            brush, timespan_inventory = self.all_context_bundles[context_name]
             realization = self.realize_timespans(
                 context_hierarchy=self.context_hierarchy,
                 context_name=context_name,
@@ -489,8 +460,56 @@ class SegmentMaker(abctools.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
+    def all_context_bundles(self):
+        bundles = self.parametric_context_bundles
+        bundles.update(self.semantic_context_bundles)
+        return bundles
+
+    @property
+    def parametric_context_bundles(self):
+        bundles = {}
+        bundles['Guitar Pedals'] = (
+            self.guitar_lifeline_strategy,
+            self.guitar_pedal_timespans,
+            )
+        bundles['Piano Pedals'] = (
+            self.guitar_lifeline_strategy,
+            self.piano_pedal_timespans,
+            )
+        return bundles
+
+    @property
+    def semantic_context_bundles(self):
+        bundles = {}
+        bundles['Guitar Voice'] = (
+            self.guitar_brush,
+            self.guitar_timespans,
+            )
+        bundles['Percussion LH Voice'] = (
+            self.percussion_lh_brush,
+            self.percussion_lh_timespans,
+            )
+        bundles['Percussion RH Voice'] = (
+            self.percussion_rh_brush,
+            self.percussion_rh_timespans,
+            )
+        bundles['Piano LH Voice'] = (
+            self.piano_lh_brush,
+            self.piano_lh_timespans,
+            )
+        bundles['Piano RH Voice'] = (
+            self.piano_rh_brush,
+            self.piano_rh_timespans,
+            )
+        bundles['Saxophone Voice'] = (
+            self.saxophone_brush,
+            self.saxophone_timespans,
+            )
+        return bundles
+
+    @property
     def segment_name(self):
         file_path = os.path.abspath(__file__)
-        directory_path = os.path.split(file_path)
+        directory_path = os.path.split(file_path)[0]
         base_name = os.path.basename(directory_path)
         return 'Segment {}'.format(base_name.title())

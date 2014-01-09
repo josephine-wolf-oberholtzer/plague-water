@@ -2,15 +2,22 @@
 from abjad import *
 from plague_water import makers
 from plague_water import materials
+from plague_water import score_templates
 
 
 ### SEGMENT PARAMETERS ###
 
-segment_target_duration = Duration(6)
+context_hierarchy = datastructuretools.ContextHierarchy(
+    score_templates.PlagueWaterScoreTemplate()())
+context_hierarchy.set(
+    'Plague Water Score', 'music_maker', makers.MusicMaker())
+context_hierarchy.set(
+    'Plague Water Score', 'playing_groupings', [1, 1])
 
-segment_tempo = materials.tempo_inventory[0]
-
+measure_segmentation_talea = (1,)
 permitted_time_signatures = materials.time_signature_inventories[0]
+segment_target_duration = Duration(6)
+segment_tempo = materials.tempo_inventory[0]
 
 ### BRUSHES ###
 
@@ -89,8 +96,10 @@ piano_lifeline_strategy = None
 ### SEGMENT DEFINITION ###
 
 segment_maker = makers.SegmentMaker(
+    context_hierarchy=context_hierarchy,
     guitar_brush=guitar_brush,
     guitar_lifeline_strategy=guitar_lifeline_strategy,
+    measure_segmentation_talea=measure_segmentation_talea,
     percussion_lh_brush=percussion_lh_brush,
     percussion_rh_brush=percussion_rh_brush,
     permitted_time_signatures=permitted_time_signatures,
