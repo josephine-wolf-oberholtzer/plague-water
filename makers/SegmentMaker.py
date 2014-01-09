@@ -263,7 +263,7 @@ class SegmentMaker(abctools.AbjadObject):
     def configure_lilypond_file(self):
         print 'configure lilypond file'
         lilypond_file = lilypondfiletools.LilyPondFile()
-        score_block = lilypondfiletools.ScoreBlock()
+        score_block = lilypondfiletools.Block(name='score')
         score_block.items.append(self.score)
         lilypond_file.items.append(score_block)
         for file_path in plague_water_configuration.stylesheets_file_paths:
