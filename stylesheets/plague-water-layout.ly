@@ -178,7 +178,6 @@
         \override RehearsalMark.outside-staff-padding = #6
         \override RehearsalMark.X-extent = #'(0 . 0)
         \override RehearsalMark.X-offset = #ly:self-alignment-interface::x-aligned-on-self
-        %\override RehearsalMark.Y-extent = #'(0 . 0)
         \override RehearsalMark.break-align-symbol = ##f
         \override RehearsalMark.break-visibility = #end-of-line-invisible
         \override RehearsalMark.font-size = #10
@@ -202,7 +201,6 @@
         \override TupletBracket.direction = #down
         \override TupletBracket.full-length-to-extent = ##f
         \override TupletBracket.padding = #2.0
-        %\override TupletBracket.padding = #0.75
         \override TupletNumber.font-size = #1
         \override TupletNumber.text = #tuplet-number::calc-fraction-text
         autoBeaming = ##f
