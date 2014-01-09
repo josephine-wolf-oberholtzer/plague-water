@@ -84,7 +84,7 @@ class Brush(abctools.AbjadObject):
                 context_name=context_name,
                 )
             contexted_brush_component = new(brush_component, **parameter_map)
-            contexted_brush_componets.append(contexted_brush_component)
+            contexted_brush_components.append(contexted_brush_component)
         weights = [x.weight for x in contexted_brush_components]
         pairs = mathtools.cumulative_sums_pairwise(
             mathtools.partition_integer_by_ratio(

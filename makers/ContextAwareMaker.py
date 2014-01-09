@@ -72,6 +72,6 @@ class ContextAwareMaker(abctools.AbjadObject):
                     continue
                 value = context_hierarchy.get(context_name, key)
                 parameters[key] = value
-        for key, value in parameters.iteritems():
-            assert value is not None, key
+#        for key, value in parameters.iteritems():
+#            assert value is not None, key
         return parameters

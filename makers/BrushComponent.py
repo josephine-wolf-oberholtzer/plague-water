@@ -59,13 +59,13 @@ class BrushComponent(ContextAwareMaker):
         ):
         from plague_water import makers
         assert isinstance(self.leading_rest_durations,
-            datastructuretools.StatalServerCursor)
+            (datastructuretools.StatalServerCursor, type(None)))
         assert isinstance(self.playing_durations,
             datastructuretools.StatalServerCursor)
         assert isinstance(self.playing_groupings,
             datastructuretools.StatalServerCursor)
         assert isinstance(self.tailing_rest_durations,
-            datastructuretools.StatalServerCursor)
+            (datastructuretools.StatalServerCursor, type(None)))
         assert isinstance(self.music_maker, makers.MusicMaker)
         assert isinstance(initial_offset, Duration), initial_offset
         assert isinstance(maximum_offset, Duration), maximum_offset

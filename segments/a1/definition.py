@@ -4,15 +4,23 @@ from plague_water import makers
 from plague_water import materials
 from plague_water import score_templates
 
-
-### SEGMENT PARAMETERS ###
+### CONTEXT HIERARCHY ###
 
 context_hierarchy = datastructuretools.ContextHierarchy(
-    score_templates.PlagueWaterScoreTemplate()())
+    score_templates.PlagueWaterScoreTemplate()(),
+    )
 context_hierarchy.set(
-    'Plague Water Score', 'music_maker', makers.MusicMaker())
+    'Plague Water Score',
+    'music_maker',
+    makers.MusicMaker(),
+    )
 context_hierarchy.set(
-    'Plague Water Score', 'playing_groupings', [1, 1])
+    'Plague Water Score',
+    'playing_groupings',
+    [1, 1],
+    )
+
+### SEGMENT PARAMETERS ###
 
 measure_segmentation_talea = (1,)
 permitted_time_signatures = materials.time_signature_inventories[0]
