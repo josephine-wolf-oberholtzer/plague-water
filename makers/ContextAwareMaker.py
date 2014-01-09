@@ -54,9 +54,9 @@ class ContextAwareMaker(abctools.AbjadObject):
             *positional_argument_values, **keyword_argument_dictionary)
         return result
 
-    ### PRIVATE METHODS ###
+    ### PUBLIC METHODS ###
 
-    def _build_parameters(
+    def build_parameter_map(
         self,
         context_hierarchy,
         context_name,

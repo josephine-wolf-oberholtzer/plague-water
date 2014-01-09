@@ -27,13 +27,14 @@ class MusicMaker(ContextAwareMaker):
         assert len(durations)
         assert all(isinstance(x, Duration) for x in durations)
         assert isinstance(seed, (int, type(None)))
-        parameters = self._build_parameters(context_hierarchy, context_name)
-        music = self._build_music(durations, parameters, seed)
+        parameter_map = self.build_parameter_map(
+            context_hierarchy, context_name)
+        music = self.build_music(durations, parameter_map, seed)
         return music
 
-    ### PRIVATE METHODS ###
+    ### PUBLIC METHODS ###
 
-    def _build_music(self, durations, parameters, seed):
+    def build_music(self, durations, parameters, seed):
         durations = [x.pair for x in durations]
         rhythm_maker = rhythmmakertools.OutputIncisedNoteRhythmMaker(
             prefix_talea=[-2, -1, -3, -1, -2, -2],
@@ -64,4 +65,3 @@ class MusicMaker(ContextAwareMaker):
             )
         attach(beam, music)
         return music
-
