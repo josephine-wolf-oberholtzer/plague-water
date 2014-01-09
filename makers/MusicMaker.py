@@ -1,8 +1,9 @@
 # -*- encoding: utf-8 -*-
 from abjad import *
+from plague_water.makers.ContextAwareMaker import ContextAwareMaker
 
 
-class MusicMaker(abctools.AbjadObject):
+class MusicMaker(ContextAwareMaker):
 
     ### CLASS VARIABLES ###
 
@@ -25,29 +26,15 @@ class MusicMaker(abctools.AbjadObject):
         ):
         assert len(durations)
         assert all(isinstance(x, Duration) for x in durations)
-        assert isinstance(context_hierarchy,
-            (datastructuretools.ContextHierarchy, type(None)))
-        assert isinstance(context_name, (str, type(None)))
         assert isinstance(seed, (int, type(None)))
         parameters = self._build_parameters(context_hierarchy, context_name)
         music = self._build_music(durations, parameters, seed)
         return music
 
-    def __eq__(self, expr):
-        if isinstance(expr, type(self)):
-            if format(expr, 'storage') == format(self, 'storage'):
-                return True
-        return False
-
     ### PRIVATE METHODS ###
 
     def _build_music(self, durations, parameters, seed):
         durations = [x.pair for x in durations]
-        #rhythm_maker = rhythmmakertools.NoteRhythmMaker()
-        #rhythm_maker = rhythmmakertools.EqualDivisionRhythmMaker(
-        #    leaf_count=4,
-        #    beam_each_cell=False,
-        #    )
         rhythm_maker = rhythmmakertools.OutputIncisedNoteRhythmMaker(
             prefix_talea=[-2, -1, -3, -1, -2, -2],
             prefix_lengths=[1, 1, 0, 1],
@@ -78,19 +65,3 @@ class MusicMaker(abctools.AbjadObject):
         attach(beam, music)
         return music
 
-    def _build_parameters(
-        self,
-        context_hierarchy,
-        context_name,
-        ):
-        manager = systemtools.StorageFormatManager
-        parameters = manager.get_keyword_argument_dictionary(self)
-        if context_hierarchy is not None and context_name is not None:
-            for key, value in parameters.items():
-                if value is not None:
-                    continue
-                value = context_hierarchy.get(context_name, key)
-                parameters[key] = value
-        for key, value in parameters.iteritems():
-            assert value is not None, key
-        return parameters
