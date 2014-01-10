@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+from abjad.tools import sequencetools
 
 
 euler_numbers = [
@@ -44,3 +45,11 @@ euler_numbers = [
     6, 9, 6, 5, 5, 2, 1, 2, 6, 7, 1, 5, 4, 6, 8, 8, 9, 5, 7, 0, 3, 5, 0, 3, 5,
     4, 0, 2, 1, 2, 3, 4, 0, 7, 8, 4, 9, 8, 1, 9, 3, 3, 4, 3, 2, 1, 0, 6, 8, 1,
     ]
+
+euler_hundreds = [int('{}{}'.format(_x, _y)) for _x, _y in
+    sequencetools.iterate_sequence_nwise_strict(euler_numbers, 2)]
+
+__all__ = (
+    'euler_hundreds',
+    'euler_numbers',
+    )

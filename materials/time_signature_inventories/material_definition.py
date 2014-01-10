@@ -38,6 +38,6 @@ time_signature_inventories = datastructuretools.TypedTuple(
     item_class=indicatortools.TimeSignatureInventory,
     )
 
-__all__ = [
+__all__ = (
     'time_signature_inventories',
-    ]
+    )

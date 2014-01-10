@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 from abjad import *
 from plague_water import makers
-from plague_water import materials
 from plague_water import score_templates
+from plague_water import materials
 
 
 ### SEGMENT PARAMETERS ###
