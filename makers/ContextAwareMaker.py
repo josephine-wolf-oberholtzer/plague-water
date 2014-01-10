@@ -19,7 +19,7 @@ class ContextAwareMaker(abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     @abc.abstractmethod
-    def __call__(self, context_hierarchy, context_name):
+    def __call__(self, context_map, context_name):
         raise NotImplemented
 
     def __eq__(self, expr):
@@ -58,20 +58,20 @@ class ContextAwareMaker(abctools.AbjadObject):
 
     def build_parameter_map(
         self,
-        context_hierarchy,
+        context_map,
         context_name,
         ):
-        assert isinstance(context_hierarchy,
-            (datastructuretools.ContextHierarchy, type(None)))
+        assert isinstance(context_map,
+            (datastructuretools.ContextMap, type(None)))
         assert isinstance(context_name, (str, type(None)))
         manager = systemtools.StorageFormatManager
         parameters = manager.get_keyword_argument_dictionary(self)
-        if context_hierarchy is not None and context_name is not None:
+        if context_map is not None and context_name is not None:
             for key, value in parameters.items():
                 if value is not None:
                     continue
-                if key in context_hierarchy[context_name]:
-                    value = context_hierarchy[context_name][key]
+                if key in context_map[context_name]:
+                    value = context_map[context_name][key]
                     parameters[key] = value
 #        for key, value in parameters.iteritems():
 #            assert value is not None, key

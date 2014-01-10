@@ -12,7 +12,7 @@ class SegmentMaker(abctools.AbjadObject):
     ### SLOTS ###
 
     __slots__ = (
-        'context_hierarchy',
+        'context_map',
         'guitar_brush',
         'guitar_lifeline_strategy',
         'guitar_pedal_timespans',
@@ -45,7 +45,7 @@ class SegmentMaker(abctools.AbjadObject):
 
     def __init__(
         self,
-        context_hierarchy=None,
+        context_map=None,
         guitar_brush=None,
         guitar_lifeline_strategy=None,
         measure_segmentation_talea=None,
@@ -62,8 +62,8 @@ class SegmentMaker(abctools.AbjadObject):
         ):
         from plague_water import makers
         # verify
-        assert isinstance(context_hierarchy,
-            (datastructuretools.ContextHierarchy, type(None)))
+        assert isinstance(context_map,
+            (datastructuretools.ContextMap, type(None)))
         assert isinstance(guitar_brush, (makers.Brush, type(None)))
         assert isinstance(guitar_lifeline_strategy,
             (makers.LifelineStrategy, type(None)))
@@ -90,7 +90,7 @@ class SegmentMaker(abctools.AbjadObject):
         assert 1 <= segment_target_duration
         assert isinstance(segment_tempo, Tempo)
         # set inputs
-        self.context_hierarchy = context_hierarchy
+        self.context_map = context_map
         self.guitar_brush = guitar_brush
         self.guitar_lifeline_strategy = guitar_lifeline_strategy
         self.measure_segmentation_talea = measure_segmentation_talea
@@ -122,7 +122,7 @@ class SegmentMaker(abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self):
+    def __call__(self, current_file_path=None):
         template = score_templates.PlagueWaterScoreTemplate()
         self.score = template()
         self.build_semantic_voice_timespan_inventories()
@@ -157,9 +157,6 @@ class SegmentMaker(abctools.AbjadObject):
         result = type(self)(**keyword_argument_dictionary)
         return result
 
-    def __repr__(self):
-        return '<Segment: {!r}>'.format(self.segment_name)
-
     ### PUBLIC METHODS ###
 
     def build_and_persist(self, current_file_path):
@@ -170,7 +167,8 @@ class SegmentMaker(abctools.AbjadObject):
             current_directory_path,
             'output.pdf',
             )
-        persist(self).as_pdf(
+        lilypond_file = self()
+        persist(lilypond_file).as_pdf(
             pdf_file_path=pdf_file_path,
             remove_ly=False,
             )
@@ -198,7 +196,7 @@ class SegmentMaker(abctools.AbjadObject):
             pair = self.semantic_context_bundles[context_name]
             brush, timespan_inventory = pair
             result = brush(
-                context_hierarchy=self.context_hierarchy,
+                context_map=self.context_map,
                 context_name=context_name,
                 segment_target_duration=self.segment_target_duration,
                 )
@@ -319,7 +317,7 @@ class SegmentMaker(abctools.AbjadObject):
         for context_name in self.all_context_bundles:
             brush, timespan_inventory = self.all_context_bundles[context_name]
             realization = self.realize_timespans(
-                context_hierarchy=self.context_hierarchy,
+                context_map=self.context_map,
                 context_name=context_name,
                 timespan_inventory=timespan_inventory,
                 )
@@ -333,7 +331,7 @@ class SegmentMaker(abctools.AbjadObject):
 
     def realize_timespans(
         self,
-        context_hierarchy=None,
+        context_map=None,
         context_name=None,
         timespan_inventory=None,
         ):
@@ -361,7 +359,7 @@ class SegmentMaker(abctools.AbjadObject):
                 durations = [x.duration for x in group]
                 music = music_maker(
                     durations,
-                    context_hierarchy=context_hierarchy,
+                    context_map=context_map,
                     context_name=context_name,
                     seed=seed,
                     )
@@ -507,9 +505,3 @@ class SegmentMaker(abctools.AbjadObject):
             )
         return bundles
 
-    @property
-    def segment_name(self):
-        file_path = os.path.abspath(__file__)
-        directory_path = os.path.split(file_path)[0]
-        base_name = os.path.basename(directory_path)
-        return 'Segment {}'.format(base_name.title())

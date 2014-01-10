@@ -20,7 +20,7 @@ class MusicMaker(ContextAwareMaker):
     def __call__(
         self,
         durations,
-        context_hierarchy=None,
+        context_map=None,
         context_name=None,
         seed=None,
         ):
@@ -28,7 +28,7 @@ class MusicMaker(ContextAwareMaker):
         assert all(isinstance(x, Duration) for x in durations)
         assert isinstance(seed, (int, type(None)))
         parameter_map = self.build_parameter_map(
-            context_hierarchy, context_name)
+            context_map, context_name)
         music = self.build_music(durations, parameter_map, seed)
         return music
 

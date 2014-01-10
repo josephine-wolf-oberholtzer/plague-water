@@ -4,13 +4,6 @@ from plague_water import makers
 from plague_water import materials
 from plague_water import score_templates
 
-### CONTEXT HIERARCHY ###
-
-context_hierarchy = datastructuretools.ContextHierarchy(
-    score_templates.PlagueWaterScoreTemplate()(),
-    )
-context_hierarchy['Plague Water Score']['music_maker'] = makers.MusicMaker()
-context_hierarchy['Plague Water Score']['playing_groupings'] = (1, 1)
 
 ### SEGMENT PARAMETERS ###
 
@@ -18,6 +11,14 @@ measure_segmentation_talea = (1,)
 permitted_time_signatures = materials.time_signature_inventories[0]
 segment_target_duration = Duration(6)
 segment_tempo = materials.tempo_inventory[0]
+
+### CONTEXT MAP ###
+
+context_map = datastructuretools.ContextMap(
+    score_templates.PlagueWaterScoreTemplate()(),
+    )
+context_map['Plague Water Score']['music_maker'] = makers.MusicMaker()
+context_map['Plague Water Score']['playing_groupings'] = (1, 1)
 
 ### BRUSHES ###
 
@@ -96,7 +97,7 @@ piano_lifeline_strategy = None
 ### SEGMENT DEFINITION ###
 
 segment_maker = makers.SegmentMaker(
-    context_hierarchy=context_hierarchy,
+    context_map=context_map,
     guitar_brush=guitar_brush,
     guitar_lifeline_strategy=guitar_lifeline_strategy,
     measure_segmentation_talea=measure_segmentation_talea,

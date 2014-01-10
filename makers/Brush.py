@@ -50,11 +50,11 @@ class Brush(abctools.AbjadObject):
     def __call__(
         self,
         segment_target_duration,
-        context_hierarchy=None,
+        context_map=None,
         context_name=None,
         ):
         brush_component_pairs = self._build_brush_component_pairs(
-            context_hierarchy=context_hierarchy,
+            context_map=context_map,
             context_name=context_name,
             )
         current_offset = Offset(0)
@@ -74,13 +74,13 @@ class Brush(abctools.AbjadObject):
 
     def _build_brush_component_pairs(
         self,
-        context_hierarchy=None,
+        context_map=None,
         context_name=None,
         ):
         contexted_brush_components = []
         for brush_component in self.brush_components:
             parameter_map = brush_component.build_parameter_map(
-                context_hierarchy=context_hierarchy,
+                context_map=context_map,
                 context_name=context_name,
                 )
             contexted_brush_component = new(brush_component, **parameter_map)
