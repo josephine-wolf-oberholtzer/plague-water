@@ -9,16 +9,8 @@ from plague_water import score_templates
 context_hierarchy = datastructuretools.ContextHierarchy(
     score_templates.PlagueWaterScoreTemplate()(),
     )
-context_hierarchy.set(
-    'Plague Water Score',
-    'music_maker',
-    makers.MusicMaker(),
-    )
-context_hierarchy.set(
-    'Plague Water Score',
-    'playing_groupings',
-    [1, 1],
-    )
+context_hierarchy['Plague Water Score']['music_maker'] = makers.MusicMaker()
+context_hierarchy['Plague Water Score']['playing_groupings'] = (1, 1)
 
 ### SEGMENT PARAMETERS ###
 
