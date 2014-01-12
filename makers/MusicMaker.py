@@ -8,6 +8,10 @@ class MusicMaker(ContextAwareMaker):
     ### CLASS VARIABLES ###
 
     __slots__ = (
+        '_articulation_maker',
+        '_dynamics_maker',
+        '_pitch_maker',
+        '_rhythm_maker',
         )
 
     ### INITIALIZER ###
@@ -42,19 +46,20 @@ class MusicMaker(ContextAwareMaker):
         context_name=None,
         seed=None,
         ):
+        from plague_water import makers
         assert len(durations)
         assert all(isinstance(x, Duration) for x in durations)
         assert isinstance(seed, (int, type(None)))
         parameter_map = self._build_parameter_map(
             context_map, context_name)
-        assert isinstance(parameter_map['articulation_maker'],
-            makers.ArticulationMaker)
-        assert isinstance(parameter_map['dynamics_maker'],
-            makers.DynamicsMaker)
-        assert isinstance(parameter_map['pitch_maker'],
-            makers.PitchMaker)
-        assert isinstance(parameter_map['rhythm_maker'],
-            rhythmmakertools.RhythmMaker)
+#        assert isinstance(parameter_map['articulation_maker'],
+#            makers.ArticulationMaker)
+#        assert isinstance(parameter_map['dynamics_maker'],
+#            makers.DynamicsMaker)
+#        assert isinstance(parameter_map['pitch_maker'],
+#            makers.PitchMaker)
+#        assert isinstance(parameter_map['rhythm_maker'],
+#            rhythmmakertools.RhythmMaker)
         music = self._build_music(durations, parameter_map, seed)
         return music
 
@@ -91,3 +96,21 @@ class MusicMaker(ContextAwareMaker):
             )
         attach(beam, music)
         return music
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def articulation_maker(self):
+        return self._articulation_maker
+
+    @property
+    def dynamics_maker(self):
+        return self._dynamics_maker
+
+    @property
+    def pitch_maker(self):
+        return self._pitch_maker
+
+    @property
+    def rhythm_maker(self):
+        return self._rhythm_maker
