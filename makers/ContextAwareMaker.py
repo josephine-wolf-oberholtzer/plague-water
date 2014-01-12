@@ -54,9 +54,9 @@ class ContextAwareMaker(abctools.AbjadObject):
             *positional_argument_values, **keyword_argument_dictionary)
         return result
 
-    ### PUBLIC METHODS ###
+    ### PRIVATE METHODS ###
 
-    def build_parameter_map(
+    def _build_parameter_map(
         self,
         context_map,
         context_name,
@@ -73,6 +73,19 @@ class ContextAwareMaker(abctools.AbjadObject):
                 if key in context_map[context_name]:
                     value = context_map[context_name][key]
                     parameters[key] = value
-#        for key, value in parameters.iteritems():
-#            assert value is not None, key
         return parameters
+
+    def _coerce_cursor_argument(self, argument):
+        if argument is not None:
+            assert isinstance(argument, (
+                collections.Sequence,
+                datastructuretools.StatalServer,
+                datastructuretools.StatalServerCursor,
+                ))
+            if isinstance(argument, collections.Sequence):
+                argument = datastructuretools.StatalServer(argument)
+            if isinstance(argument, datastructuretools.StatalServer):
+                argument = argument()
+        assert isinstance(argument,
+            (datastructuretools.StatalServerCursor, type(None)))
+        return argument
