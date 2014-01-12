@@ -7,6 +7,7 @@ from guitar_brushes import *
 from octave_transposition_mappings import *
 from percussion_brushes import *
 from piano_brushes import *
+from pitch_classes import *
 from rhythm_makers import *
 from saxophone_brushes import *
 from tempo_inventory import *
