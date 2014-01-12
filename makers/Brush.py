@@ -79,7 +79,7 @@ class Brush(abctools.AbjadObject):
         ):
         contexted_brush_components = []
         for brush_component in self.brush_components:
-            parameter_map = brush_component.build_parameter_map(
+            parameter_map = brush_component._build_parameter_map(
                 context_map=context_map,
                 context_name=context_name,
                 )
