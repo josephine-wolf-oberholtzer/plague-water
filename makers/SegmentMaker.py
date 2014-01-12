@@ -13,6 +13,7 @@ class SegmentMaker(abctools.AbjadObject):
 
     __slots__ = (
         'context_map',
+        'contexted_makers',
         'guitar_brush',
         'guitar_lifeline_strategy',
         'guitar_pedal_timespans',
@@ -105,6 +106,7 @@ class SegmentMaker(abctools.AbjadObject):
         self.segment_target_duration = segment_target_duration
         self.segment_tempo = segment_tempo
         # set place holders
+        self.contexted_makers = {}
         self.lilypond_file = None
         self.meters = None
         self.score = None
@@ -301,6 +303,13 @@ class SegmentMaker(abctools.AbjadObject):
             self.permitted_time_signatures,
             )
         return meters
+
+    def get_cached_maker(self, maker, context_map, context_name):
+        key = (maker, context_map, context_name)
+        if key not in self._contexted_makers:
+            contexted_maker = maker.from_context(context_map, context_name)
+            self._contexted_makers[key] = contexted_maker
+        return self._contexted_makers[key]
 
     def make_rest_containers(self, durations):
         from plague_water import makers
