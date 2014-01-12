@@ -12,8 +12,26 @@ class MusicMaker(ContextAwareMaker):
 
     ### INITIALIZER ###
 
-    def __init__(self):
-        pass
+    def __init__(
+        self,
+        articulation_maker=None,
+        dynamics_maker=None,
+        pitch_maker=None,
+        rhythm_maker=None,
+        ):
+        from plague_water import makers
+        assert isinstance(articulation_maker,
+            (makers.ArticulationMaker, type(None)))
+        assert isinstance(dynamics_maker,
+            (makers.DynamicsMaker, type(None)))
+        assert isinstance(pitch_maker,
+            (makers.PitchMaker, type(None)))
+        assert isinstance(rhythm_maker,
+            (rhythmmakertools.RhythmMaker, type(None)))
+        self._articulation_maker = articulation_maker
+        self._dynamics_maker = dynamics_maker
+        self._pitch_maker = pitch_maker
+        self._rhythm_maker = rhythm_maker
 
     ### SPECIAL METHODS ###
 
@@ -27,14 +45,22 @@ class MusicMaker(ContextAwareMaker):
         assert len(durations)
         assert all(isinstance(x, Duration) for x in durations)
         assert isinstance(seed, (int, type(None)))
-        parameter_map = self.build_parameter_map(
+        parameter_map = self._build_parameter_map(
             context_map, context_name)
-        music = self.build_music(durations, parameter_map, seed)
+        assert isinstance(parameter_map['articulation_maker'],
+            makers.ArticulationMaker)
+        assert isinstance(parameter_map['dynamics_maker'],
+            makers.DynamicsMaker)
+        assert isinstance(parameter_map['pitch_maker'],
+            makers.PitchMaker)
+        assert isinstance(parameter_map['rhythm_maker'],
+            rhythmmakertools.RhythmMaker)
+        music = self._build_music(durations, parameter_map, seed)
         return music
 
-    ### PUBLIC METHODS ###
+    ### PRIVATE METHODS ###
 
-    def build_music(self, durations, parameters, seed):
+    def _build_music(self, durations, parameters, seed):
         durations = [x.pair for x in durations]
         rhythm_maker = rhythmmakertools.OutputIncisedNoteRhythmMaker(
             prefix_talea=[-2, -1, -3, -1, -2, -2],
