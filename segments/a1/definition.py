@@ -19,6 +19,19 @@ context_map = datastructuretools.ContextMap(
     )
 context_map['Plague Water Score']['music_maker'] = makers.MusicMaker()
 context_map['Plague Water Score']['playing_groupings'] = (1, 1)
+context_map['Plague Water Score']['rhythm_maker'] = \
+    rhythm_maker = rhythmmakertools.OutputIncisedNoteRhythmMaker(
+        prefix_talea=(-2, -1, -3, -1, -2, -2),
+        prefix_lengths=(1, 1, 0, 1),
+        suffix_talea=(-1, -1, -2, -1, -1),
+        suffix_lengths=(1, 0, 1),
+        talea_denominator=32,
+        prolation_addenda=(0, 1, 1, 0, 2, 0),
+        secondary_divisions=(),
+        decrease_durations_monotonically=False,
+        beam_each_cell=False,
+        beam_cells_together=False,
+        )
 
 ### BRUSHES ###
 

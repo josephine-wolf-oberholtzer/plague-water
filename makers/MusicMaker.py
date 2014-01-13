@@ -42,51 +42,25 @@ class MusicMaker(ContextAwareMaker):
     def __call__(
         self,
         durations,
-        context_map=None,
-        context_name=None,
         seed=None,
         ):
-        from plague_water import makers
+        durations = [Duration(x) for x in durations]
+        seed = int(seed)
         assert len(durations)
-        assert all(isinstance(x, Duration) for x in durations)
-        assert isinstance(seed, (int, type(None)))
-        parameter_map = self._build_parameter_map(
-            context_map, context_name)
-#        assert isinstance(parameter_map['articulation_maker'],
-#            makers.ArticulationMaker)
-#        assert isinstance(parameter_map['dynamics_maker'],
-#            makers.DynamicsMaker)
-#        assert isinstance(parameter_map['pitch_maker'],
-#            makers.PitchMaker)
-#        assert isinstance(parameter_map['rhythm_maker'],
-#            rhythmmakertools.RhythmMaker)
-        music = self._build_music(durations, parameter_map, seed)
-        return music
-
-    ### PRIVATE METHODS ###
-
-    def _build_music(self, durations, parameters, seed):
-        durations = [x.pair for x in durations]
-        rhythm_maker = rhythmmakertools.OutputIncisedNoteRhythmMaker(
-            prefix_talea=(-2, -1, -3, -1, -2, -2),
-            prefix_lengths=(1, 1, 0, 1),
-            suffix_talea=(-1, -1, -2, -1, -1),
-            suffix_lengths=(1, 0, 1),
-            talea_denominator=32,
-            prolation_addenda=(0, 1, 1, 0, 2, 0),
-            secondary_divisions=(),
-            decrease_durations_monotonically=False,
-            beam_each_cell=False,
-            beam_cells_together=False,
-            )
-        music = rhythm_maker(durations, seeds=seed)
+        assert isinstance(self.rhythm_maker, rhythmmakertools.RhythmMaker)
+        music = self.rhythm_maker(durations, seeds=seed)
         for i, x in enumerate(music):
             if isinstance(x, Tuplet) and x.is_trivial:
                 music[i] = Container()
                 music[i].extend(x)
         music = Container(music)
+        if self.pitch_maker is not None:
+            self.pitch_maker(music, seed)
+        if self.dynamics_maker is not None:
+            self.dynamics_maker(music, seed)
+        if self.articulation_maker is not None:
+            self.articulation_maker(music, seed)
         beam = spannertools.GeneralizedBeam(
-            #durations=durations,
             include_long_duration_notes=False,
             include_long_duration_rests=False,
             isolated_nib_direction=None,

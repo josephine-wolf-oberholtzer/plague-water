@@ -343,10 +343,14 @@ class SegmentMaker(abctools.AbjadObject):
 
     def get_cached_maker(self, maker, context_map, context_name):
         key = (maker, context_map, context_name)
-        if key not in self._cached_makers:
-            contexted_maker = maker.from_context(context_map, context_name)
-            self._cached_makers[key] = contexted_maker
-        return self._cached_makers[key]
+        if key not in self.cached_makers:
+            parameter_map = maker._build_parameter_map(
+                context_map=context_map,
+                context_name=context_name,
+                )
+            contexted_maker = new(maker, **parameter_map)
+            self.cached_makers[key] = contexted_maker
+        return self.cached_makers[key]
 
     def make_rest_containers(self, durations):
         from plague_water import makers
@@ -397,10 +401,13 @@ class SegmentMaker(abctools.AbjadObject):
             durations = [x.duration for x in group]
             if music_maker is not None:
                 source_annotation = makers.SourceAnnotation(source=music_maker)
-                music = music_maker(
-                    durations,
+                contexted_music_maker = self.get_cached_maker(
+                    music_maker,
                     context_map=context_map,
                     context_name=context_name,
+                    )
+                music = contexted_music_maker(
+                    durations,
                     seed=seed,
                     )
                 seed += 1
@@ -524,4 +531,3 @@ class SegmentMaker(abctools.AbjadObject):
             self.saxophone_timespans,
             )
         return bundles
-
