@@ -240,7 +240,6 @@ class SegmentMaker(abctools.AbjadObject):
             for shard in silence_timespan_inventory.split_at_offsets(offsets):
                 timespan_inventory.extend(shard)
             timespan_inventory.sort()
-            print format(timespan_inventory)
 
     def cleanup_timespan_inventories(self):
         print 'cleanup timespan inventories'
@@ -432,12 +431,19 @@ class SegmentMaker(abctools.AbjadObject):
                     current_offset = current_offsets[0]
                     initial_offset = container_start_offset - current_offset
                     print '\t\t', current_meter, container
-                    mutate(container[:]).rewrite_meter(
-                        current_meter,
-                        boundary_depth=1,
-                        initial_offset=initial_offset,
-                        maximum_dot_count=2,
-                        )
+                    if isinstance(container, scoretools.Tuplet):
+                        mutate(container[:]).rewrite_meter(
+                            container._contents_duration,
+                            boundary_depth=1,
+                            maximum_dot_count=2,
+                            )
+                    else:
+                        mutate(container[:]).rewrite_meter(
+                            current_meter,
+                            boundary_depth=1,
+                            initial_offset=initial_offset,
+                            maximum_dot_count=2,
+                            )
 
     def split_barline_crossing_silence_containers(self):
         print 'split barline crossing silence containers'

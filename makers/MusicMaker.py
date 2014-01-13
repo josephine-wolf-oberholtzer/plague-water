@@ -84,7 +84,6 @@ class MusicMaker(ContextAwareMaker):
             if isinstance(x, Tuplet) and x.is_trivial:
                 music[i] = Container()
                 music[i].extend(x)
-        music = [Container([x]) for x in music]
         music = Container(music)
         beam = spannertools.GeneralizedBeam(
             #durations=durations,
