@@ -20,7 +20,6 @@ class SegmentMaker(abctools.AbjadObject):
         'guitar_timespans',
         'lilypond_file',
         'measure_segmentation_talea',
-        'meters',
         'minimum_timespan_duration',
         'percussion_lh_brush',
         'percussion_lh_timespans',
@@ -40,6 +39,7 @@ class SegmentMaker(abctools.AbjadObject):
         'segment_target_duration',
         'segment_tempo',
         'time_signatures',
+        'meters',
         )
 
     ### INITIALIZER ###
@@ -135,10 +135,17 @@ class SegmentMaker(abctools.AbjadObject):
             for time_signature in self.time_signatures)
         self.cleanup_timespan_inventories()
         self.build_lifeline_timespan_inventories()
+        self.build_silence_timespans()
         self.populate_time_signature_context()
         self.populate_voice_contexts()
-        self.split_barline_crossing_silence_containers()
-        self.rewrite_meters()
+        #self.split_barline_crossing_silence_containers()
+        #self.rewrite_meters()
+        systemtools.IOManager.profile_expr(
+            'self.rewrite_meters()',
+            global_context=globals(),
+            line_count=40,
+            local_context=locals(),
+            )
         self.configure_score()
         self.configure_lilypond_file()
         return self.lilypond_file
@@ -203,6 +210,37 @@ class SegmentMaker(abctools.AbjadObject):
                 segment_target_duration=self.segment_target_duration,
                 )
             timespan_inventory[:] = result
+
+    def build_silence_timespans(self):
+        print 'build silence timespans'
+        from plague_water import makers
+        offsets = mathtools.cumulative_sums(
+            x.duration for x in self.time_signatures)
+        for context_name in self.all_context_bundles:
+            print '\t{}'.format(context_name)
+            pair = self.all_context_bundles[context_name]
+            brush, timespan_inventory = pair
+            silence_timespan_inventory = timespantools.TimespanInventory()
+            previous_stop_offset = Offset(0)
+            for timespan in timespan_inventory:
+                current_start_offset = timespan.start_offset
+                if previous_stop_offset < current_start_offset:
+                    silence_timespan = makers.PayloadedTimespan(
+                        start_offset=previous_stop_offset,
+                        stop_offset=current_start_offset,
+                        )
+                    silence_timespan_inventory.append(silence_timespan)
+                previous_stop_offset = timespan.stop_offset
+            if previous_stop_offset < self.segment_actual_duration:
+                silence_timespan = makers.PayloadedTimespan(
+                    start_offset=previous_stop_offset,
+                    stop_offset=self.segment_actual_duration,
+                    )
+                silence_timespan_inventory.append(silence_timespan)
+            for shard in silence_timespan_inventory.split_at_offsets(offsets):
+                timespan_inventory.extend(shard)
+            timespan_inventory.sort()
+            print format(timespan_inventory)
 
     def cleanup_timespan_inventories(self):
         print 'cleanup timespan inventories'
@@ -317,13 +355,14 @@ class SegmentMaker(abctools.AbjadObject):
         rest_maker = rhythmmakertools.RestRhythmMaker()
         rests = rest_maker(durations)
         rest_containers = [Container(x) for x in rests]
-        for rest_container in rest_containers:
-            attach(source_annotation, rest_container)
-        return rest_containers
+        music = Container(rest_containers)
+        attach(source_annotation, music)
+        return music
 
     def populate_voice_contexts(self):
         print 'populate voice contexts'
         for context_name in self.all_context_bundles:
+            print '\t{}'.format(context_name)
             brush, timespan_inventory = self.all_context_bundles[context_name]
             realization = self.realize_timespans(
                 context_map=self.context_map,
@@ -347,43 +386,32 @@ class SegmentMaker(abctools.AbjadObject):
         from plague_water import makers
         result = []
         if timespan_inventory is None:
-            rest_containers = self.make_rest_containers(self.time_signatures)
-            result.extend(rest_containers)
+            music = self.make_rest_containers(self.time_signatures)
+            result.append(music)
             return result
-        previous_offset = Offset(0)
         seed = 0
-        for partitioned_group in timespan_inventory.partition(
-            include_tangent_timespans=True):
-            group_start_offset = partitioned_group.start_offset
-            group_stop_offset = partitioned_group.stop_offset
-            if previous_offset < group_start_offset:
-                rest_duration = group_start_offset - previous_offset
-                rest_containers = self.make_rest_containers((rest_duration,))
-                result.extend(rest_containers)
-            for music_maker, group in itertools.groupby(
-                partitioned_group,
-                lambda x: x.music_maker,
-                ):
+        for music_maker, group in itertools.groupby(
+            timespan_inventory,
+            lambda x: x.music_maker,
+            ):
+            group = timespantools.TimespanInventory(group)
+            durations = [x.duration for x in group]
+            if music_maker is not None:
                 source_annotation = makers.SourceAnnotation(source=music_maker)
-                durations = [x.duration for x in group]
                 music = music_maker(
                     durations,
                     context_map=context_map,
                     context_name=context_name,
                     seed=seed,
                     )
-                attach(source_annotation, music)
-                result.append(music)
                 seed += 1
-            previous_offset = group_stop_offset
-        if previous_offset < self.segment_actual_duration:
-            rest_duration = self.segment_actual_duration - previous_offset
-            rest_containers = self.make_rest_containers((rest_duration,))
-            result.extend(rest_containers)
+                attach(source_annotation, music)
+            else:
+                music = self.make_rest_containers(durations)
+            result.append(music)
         return result
 
     def rewrite_meters(self):
-        from plague_water import makers
         print 'rewrite meters'
         time_signatures = self.time_signatures[:]
         offsets = list(mathtools.cumulative_sums(x.duration for x in
@@ -392,18 +420,16 @@ class SegmentMaker(abctools.AbjadObject):
             print '\t{!r}'.format(voice)
             current_meters = list(self.meters)
             current_offsets = list(offsets)
-            for container in voice[:]:
-                container_timespan = inspect(container).get_timespan()
-                container_start_offset = container_timespan.start_offset
-                while 2 < len(current_offsets) and \
-                    current_offsets[1] <= container_start_offset:
-                    current_offsets.pop(0)
-                    current_meters.pop(0)
-                current_meter = current_meters[0]
-                current_offset = current_offsets[0]
-                source_annotation = inspect(container).get_indicator(
-                    makers.SourceAnnotation)
-                if source_annotation.source is None:
+            for grouping_container in voice[:]:
+                for container in grouping_container[:]:
+                    container_timespan = inspect(container).get_timespan()
+                    container_start_offset = container_timespan.start_offset
+                    while 2 < len(current_offsets) and \
+                        current_offsets[1] <= container_start_offset:
+                        current_offsets.pop(0)
+                        current_meters.pop(0)
+                    current_meter = current_meters[0]
+                    current_offset = current_offsets[0]
                     initial_offset = container_start_offset - current_offset
                     print '\t\t', current_meter, container
                     mutate(container[:]).rewrite_meter(
@@ -412,27 +438,6 @@ class SegmentMaker(abctools.AbjadObject):
                         initial_offset=initial_offset,
                         maximum_dot_count=2,
                         )
-                else:
-                    for subcontainer in container:
-                        subcontainer_timespan = \
-                            inspect(subcontainer).get_timespan()
-                        subcontainer_start_offset = \
-                            subcontainer_timespan.start_offset
-                        while 2 < len(current_offsets) and \
-                            current_offsets[1] <= subcontainer_start_offset:
-                            current_offsets.pop(0)
-                            current_meters.pop(0)
-                        current_meter = current_meters[0]
-                        current_offset = current_offsets[0]
-                        initial_offset = \
-                            subcontainer_start_offset - current_offset
-                        print '\t\t', current_meter, subcontainer
-                        mutate(subcontainer[:]).rewrite_meter(
-                            current_meter,
-                            boundary_depth=1,
-                            initial_offset=initial_offset,
-                            maximum_dot_count=2,
-                            )
 
     def split_barline_crossing_silence_containers(self):
         print 'split barline crossing silence containers'
