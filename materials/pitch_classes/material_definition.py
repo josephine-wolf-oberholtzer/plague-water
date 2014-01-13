@@ -49,13 +49,10 @@ def illustrate(sequences):
     voice = scoretools.Voice()
     voice.consists_commands.append('Horizontal_bracket_engraver')
     for sequence_group in sequences:
-        print sequence_group
         grouped_containers = []
         for sequence in sequence_group:
-            print '\t', sequence
             containers = []
             for subsequence in sequence:
-                print '\t\t', subsequence
                 notes = [scoretools.Note(x, (1, 32)) for x in subsequence]
                 container = scoretools.Container(notes)
                 bracket = spannertools.HorizontalBracketSpanner()
