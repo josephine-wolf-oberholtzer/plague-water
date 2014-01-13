@@ -19,7 +19,7 @@ class PayloadedTimespan(timespantools.Timespan):
         music_maker=None,
         ):
         from plague_water import makers
-        assert isinstance(music_maker, makers.MusicMaker)
+        assert isinstance(music_maker, (makers.MusicMaker, type(None)))
         timespantools.Timespan.__init__(
             self,
             start_offset=start_offset,
