@@ -13,7 +13,7 @@ class SegmentMaker(abctools.AbjadObject):
 
     __slots__ = (
         'context_map',
-        'contexted_makers',
+        'cached_makers',
         'guitar_brush',
         'guitar_lifeline_strategy',
         'guitar_pedal_timespans',
@@ -106,7 +106,7 @@ class SegmentMaker(abctools.AbjadObject):
         self.segment_target_duration = segment_target_duration
         self.segment_tempo = segment_tempo
         # set place holders
-        self.contexted_makers = {}
+        self.cached_makers = {}
         self.lilypond_file = None
         self.meters = None
         self.score = None
@@ -306,10 +306,10 @@ class SegmentMaker(abctools.AbjadObject):
 
     def get_cached_maker(self, maker, context_map, context_name):
         key = (maker, context_map, context_name)
-        if key not in self._contexted_makers:
+        if key not in self._cached_makers:
             contexted_maker = maker.from_context(context_map, context_name)
-            self._contexted_makers[key] = contexted_maker
-        return self._contexted_makers[key]
+            self._cached_makers[key] = contexted_maker
+        return self._cached_makers[key]
 
     def make_rest_containers(self, durations):
         from plague_water import makers
@@ -390,7 +390,7 @@ class SegmentMaker(abctools.AbjadObject):
             time_signatures))
         for voice in iterate(self.score).by_class(Voice):
             print '\t{!r}'.format(voice)
-            current_time_signatures = list(time_signatures)
+            current_meters = list(self.meters)
             current_offsets = list(offsets)
             for container in voice[:]:
                 container_timespan = inspect(container).get_timespan()
@@ -398,16 +398,16 @@ class SegmentMaker(abctools.AbjadObject):
                 while 2 < len(current_offsets) and \
                     current_offsets[1] <= container_start_offset:
                     current_offsets.pop(0)
-                    current_time_signatures.pop(0)
-                current_time_signature = current_time_signatures[0]
+                    current_meters.pop(0)
+                current_meter = current_meters[0]
                 current_offset = current_offsets[0]
                 source_annotation = inspect(container).get_indicator(
                     makers.SourceAnnotation)
                 if source_annotation.source is None:
                     initial_offset = container_start_offset - current_offset
-                    print '\t\t', container
+                    print '\t\t', current_meter, container
                     mutate(container[:]).rewrite_meter(
-                        current_time_signature,
+                        current_meter,
                         boundary_depth=1,
                         initial_offset=initial_offset,
                         maximum_dot_count=2,
@@ -421,14 +421,14 @@ class SegmentMaker(abctools.AbjadObject):
                         while 2 < len(current_offsets) and \
                             current_offsets[1] <= subcontainer_start_offset:
                             current_offsets.pop(0)
-                            current_time_signatures.pop(0)
-                        current_time_signature = current_time_signatures[0]
+                            current_meters.pop(0)
+                        current_meter = current_meters[0]
                         current_offset = current_offsets[0]
                         initial_offset = \
                             subcontainer_start_offset - current_offset
-                        print '\t\t', subcontainer
+                        print '\t\t', current_meter, subcontainer
                         mutate(subcontainer[:]).rewrite_meter(
-                            current_time_signature,
+                            current_meter,
                             boundary_depth=1,
                             initial_offset=initial_offset,
                             maximum_dot_count=2,
