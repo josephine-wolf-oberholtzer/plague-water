@@ -76,7 +76,6 @@ class MusicMaker(ContextAwareMaker):
             prolation_addenda=[0, 1, 1, 0, 2, 0],
             secondary_divisions=[],
             decrease_durations_monotonically=False,
-            tie_rests=False,
             beam_each_cell=False,
             beam_cells_together=False,
             )
