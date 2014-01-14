@@ -358,12 +358,14 @@ class SegmentMaker(abctools.AbjadObject):
 
     def populate_voice_contexts(self):
         print 'populate voice contexts'
+        seed = 0
         for context_name in self.all_context_bundles:
             print '\t{}'.format(context_name)
             brush, timespan_inventory = self.all_context_bundles[context_name]
-            realization = self.realize_timespans(
+            realization, seed = self.realize_timespans(
                 context_map=self.context_map,
                 context_name=context_name,
+                seed=seed,
                 timespan_inventory=timespan_inventory,
                 )
             self.score[context_name].extend(realization)
@@ -378,6 +380,7 @@ class SegmentMaker(abctools.AbjadObject):
         self,
         context_map=None,
         context_name=None,
+        seed=0,
         timespan_inventory=None,
         ):
         from plague_water import makers
@@ -398,7 +401,6 @@ class SegmentMaker(abctools.AbjadObject):
             attach(silence_source_annotation, music)
             result.append(music)
             return result
-        seed = 0
         for music_maker, group in itertools.groupby(
             timespan_inventory,
             lambda x: x.music_maker,
@@ -431,7 +433,7 @@ class SegmentMaker(abctools.AbjadObject):
                     )
                 attach(silence_source_annotation, music)
             result.append(music)
-        return result
+        return result, seed
 
     ### PUBLIC PROPERTIES ###
 
