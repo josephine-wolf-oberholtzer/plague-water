@@ -85,22 +85,15 @@ class MusicMaker(ContextAwareMaker):
 
     ### PRIVATE PROPERTIES ###
 
-    def _rewrite_meters(
+    def _iterate_music_and_meters(
         self,
-        music,
         initial_offset=None,
-        meter_cache=None,
         meters=None,
+        music=None,
         ):
-        if initial_offset is not None:
-            assert isinstance(initial_offset, Offset) and 0 <= initial_offset
-        if meters is not None:
-            assert all(isinstance(x, metertools.Meter) for x in meters)
-            assert len(meters)
-        if meter_cache is not None:
-            assert isinstance(meter_cache, dict)
-        if initial_offset is None or meters is None:
-            return
+        assert isinstance(initial_offset, Offset) and 0 <= initial_offset
+        assert all(isinstance(x, metertools.Meter) for x in meters)
+        assert len(meters)
         current_meters = list(meters)
         current_meter_offsets = list(mathtools.cumulative_sums(
             x.implied_time_signature.duration for x in meters))
@@ -111,6 +104,27 @@ class MusicMaker(ContextAwareMaker):
                 current_meter_offsets[1] <= container_start_offset:
                 current_meter_offsets.pop(0)
                 current_meters.pop(0)
+            current_meter = current_meters[0]
+            current_meter_offset = current_meter_offsets[0]
+            current_initial_offset = \
+                container_start_offset - current_meter_offset
+            yield container, current_meter, current_initial_offset
+
+    def _rewrite_meters(
+        self,
+        music,
+        initial_offset=None,
+        meter_cache=None,
+        meters=None,
+        ):
+        if meter_cache is not None:
+            assert isinstance(meter_cache, dict)
+        iterator = self._iterate_music_and_meters(
+            initial_offset=initial_offset,
+            meters=meters,
+            music=music,
+            )
+        for container, current_meter, current_initial_offset in iterator:
             if isinstance(container, scoretools.Tuplet):
                 contents_duration = container._contents_duration
                 if meter_cache is not None:
@@ -126,14 +140,11 @@ class MusicMaker(ContextAwareMaker):
                     maximum_dot_count=2,
                     )
             else:
-                current_meter = current_meters[0]
-                current_meter_offset = current_meter_offsets[0]
-                current_initial_offset = \
-                    container_start_offset - current_meter_offset
                 current_meter_duration = \
                     current_meter.implied_time_signature.duration
                 if inspect(container).get_duration() == \
                     current_meter_duration and \
+                    current_initial_offset == 0 and \
                     all(isinstance(x, Rest) for x in container):
                     multi_measure_rest = scoretools.MultimeasureRest(1)
                     multiplier = Multiplier(current_meter_duration)
