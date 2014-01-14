@@ -1,4 +1,4 @@
-% 2014-01-09 18:10
+% 2014-01-14 13:33
 
 \version "2.19.0"
 \language "english"
@@ -73,187 +73,180 @@
 				\clef "percussion"
 				\context Voice = "Saxophone Voice" {
 					{
-						r16
-					}
-					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								r16 [
-								c'8 ~
-								c'32
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							r16
 						}
 					}
 					{
-						r4
-					}
-					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								r16 [
-								c'8 ~
-								c'16.
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							\override Stem.stemlet-length = 0.75
+							r16 [
+							c'16 ~
+							c'16.
+							r32 ]
+							\revert Stem.stemlet-length
 						}
 					}
 					{
-						r16
-					}
-					{
 						{
-							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 5/6 {
-								\override Stem.stemlet-length = 0.75
-								c'4.
-								\revert Stem.stemlet-length
-							}
+							r4
 						}
 					}
 					{
-						r8
-					}
-					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								r32 [
-								c'32 ~
-								c'8 ~
-								c'8
-							}
-						}
-						{
-							{
-								c'8
-								r16 ]
-								\revert Stem.stemlet-length
-							}
+							\override Stem.stemlet-length = 0.75
+							r16 [
+							c'16 ~
+							c'8 ~
+							c'32
+							r32 ]
+							\revert Stem.stemlet-length
 						}
 					}
 					{
-						r8
-					}
-					{
 						{
-							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 10/11 {
-								\override Stem.stemlet-length = 0.75
-								r16. [
-								c'8. ~
-								c'32
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							r16
 						}
 					}
 					{
-						r8
-					}
-					{
-						r8.
-					}
-					{
-						{
-							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 6/7 {
-								\override Stem.stemlet-length = 0.75
-								r32 [
-								c'16 ~
-								c'8 ]
-								\revert Stem.stemlet-length
-							}
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 5/6 {
+							\override Stem.stemlet-length = 0.75
+							c'4.
+							\revert Stem.stemlet-length
 						}
 					}
 					{
-						r8
-						r4
-					}
-					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								c'8. [ ~
-								c'8 ~
-								c'16.
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							r8
 						}
 					}
 					{
-						r16 ~
-						r4
-					}
-					{
-						r8.
-						r8
-					}
-					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								r16 [
-								c'16 ~
-								c'32
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							\override Stem.stemlet-length = 0.75
+							r32 [
+							c'32 ~
+							c'8 ~
+							c'8
+						}
+						{
+							c'8
+							r16 ]
+							\revert Stem.stemlet-length
 						}
 					}
 					{
-						r8
-					}
-					{
 						{
-							\times 4/5 {
-								\override Stem.stemlet-length = 0.75
-								r16 [
-								c'8 ~
-								c'8
-							}
-						}
-						{
-							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 6/7 {
-								c'8.. ]
-								\revert Stem.stemlet-length
-							}
+							r8
 						}
 					}
 					{
-						r16
-					}
-					{
-						{
-							{
-								\override Stem.stemlet-length = 0.75
-								r32 [
-								c'32 ~
-								c'8 ~
-								c'8
-							}
-						}
-						{
-							{
-								c'8. ~
-								c'32
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 10/11 {
+							\override Stem.stemlet-length = 0.75
+							r16. [
+							c'8. ~
+							c'32
+							r32 ]
+							\revert Stem.stemlet-length
 						}
 					}
 					{
-						r16
+						{
+							r8
+						}
+						{
+							r8.
+						}
 					}
 					{
-						r8. ~
-						r8
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 6/7 {
+							\override Stem.stemlet-length = 0.75
+							r32 [
+							c'16 ~
+							c'8 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8
+							r4
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							c'4. ~
+							c'32 [
+							r32 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r16
+							r4
+						}
+						{
+							R1 * 5/16
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							r16 [
+							c'16.
+							r32 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8
+						}
+					}
+					{
+						\times 4/5 {
+							\override Stem.stemlet-length = 0.75
+							r16 [
+							c'8 ~
+							c'8
+						}
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 6/7 {
+							c'8.. ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r16
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							r32 [
+							c'16. ~
+							c'8.
+						}
+						{
+							c'16 ~
+							c'8 ~
+							c'32
+							r32 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r16
+						}
+						{
+							R1 * 5/16
+						}
 					}
 				}
 			}
@@ -263,173 +256,201 @@
 				\clef "percussion"
 				\context Voice = "Guitar Voice" {
 					{
-						r8.
-						r8
-					}
-					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								r16 [
-								c'8. ]
-							}
-						}
-						{
-							{
-								c'4 ~
-								c'16. [
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							R1 * 5/16
 						}
 					}
 					{
-						r8
-					}
-					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								r16 [
-								c'8 ~
-								c'8
-							}
+							\override Stem.stemlet-length = 0.75
+							r16 [
+							c'8.
 						}
 						{
-							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 10/11 {
-								c'8.. ~
-								c'16 ~
-								c'32
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							c'8 ~
+							c'8..
+							r32 ]
+							\revert Stem.stemlet-length
 						}
 					}
 					{
-						r16
-					}
-					{
 						{
-							\times 4/5 {
-								\override Stem.stemlet-length = 0.75
-								c'8. [ ~
-								c'8
-							}
-						}
-						{
-							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 12/13 {
-								c'8.. ~
-								c'16 ~
-								c'16 ~
-								c'16 ]
-								\revert Stem.stemlet-length
-							}
+							r8
 						}
 					}
 					{
-						r16
-					}
-					{
-						r4 ~
-						r16
-					}
-					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								r32 [
-								c'32 ~
-								c'8 ~
-								c'16
-								r16 ]
-								\revert Stem.stemlet-length
-							}
+							\override Stem.stemlet-length = 0.75
+							r16
+							c'4
+						}
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 10/11 {
+							c'8.. [ ~
+							c'16 ~
+							c'32
+							r32 ]
+							\revert Stem.stemlet-length
 						}
 					}
 					{
-						r8
-					}
-					{
 						{
-							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 12/13 {
-								\override Stem.stemlet-length = 0.75
-								r16.
-								c'4 ~
-								c'16
-							}
-						}
-						{
-							{
-								c'4 ~
-								c'16. [
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							r16
 						}
 					}
 					{
-						r8.
-						r8
-					}
-					{
-						{
-							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 6/7 {
-								\override Stem.stemlet-length = 0.75
-								r32 [
-								c'16 ~
-								c'8 ]
-								\revert Stem.stemlet-length
-							}
+						\times 4/5 {
+							\override Stem.stemlet-length = 0.75
+							c'8. [ ~
+							c'8
+						}
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 12/13 {
+							c'8.. ~
+							c'16 ~
+							c'16 ~
+							c'16 ]
+							\revert Stem.stemlet-length
 						}
 					}
 					{
-						r8
-					}
-					{
-						r8
-					}
-					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								c'4 ~
-								c'16. [
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							r16
+						}
+						{
+							r4
+							r16
 						}
 					}
 					{
-						r4.
-					}
-					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								r16 [
-								c'16 ~
-								c'32
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							\override Stem.stemlet-length = 0.75
+							r32 [
+							c'32 ~
+							c'8 ~
+							c'16
+							r16 ]
+							\revert Stem.stemlet-length
 						}
 					}
 					{
-						r16
+						{
+							r8
+						}
 					}
 					{
-						r8. ~
-						r8
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 12/13 {
+							\override Stem.stemlet-length = 0.75
+							r16.
+							c'4 ~
+							c'16
+						}
+						{
+							c'4 ~
+							c'16. [
+							r32 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							R1 * 5/16
+						}
+					}
+					{
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 6/7 {
+							\override Stem.stemlet-length = 0.75
+							r32 [
+							c'16 ~
+							c'8 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8
+						}
+						{
+							r8
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							c'8 [ ~
+							c'8..
+							r32 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r4.
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							r16 [
+							c'16 ~
+							c'32
+							r32 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r16
+						}
+						{
+							R1 * 5/16
+						}
 					}
 				}
 			}
 			\context Dynamics = "Guitar Pedals" {
 				{
-					r\longa.
+					{
+						R1 * 5/16
+					}
+					{
+						R1 * 5/8
+					}
+					{
+						R1 * 7/16
+					}
+					{
+						R1 * 5/16
+					}
+					{
+						R1 * 5/16
+					}
+					{
+						R1 * 7/16
+					}
+					{
+						R1 * 3/4
+					}
+					{
+						R1 * 3/4
+					}
+					{
+						R1 * 5/16
+					}
+					{
+						R1 * 5/16
+					}
+					{
+						R1 * 1/2
+					}
+					{
+						R1 * 5/8
+					}
+					{
+						R1 * 5/16
+					}
 				}
 			}
 		>>
@@ -439,188 +460,169 @@
 				\context Voice = "Piano RH Voice" {
 					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								r16 [
-								c'8 ~
-								c'8
-							}
+							\override Stem.stemlet-length = 0.75
+							r16 [
+							c'8 ~
+							c'8
+						}
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 12/13 {
+							c'8.. ~
+							c'16 ~
+							c'16 ~
+							c'16
+						}
+						\times 8/9 {
+							c'8. ~
+							c'16.
 						}
 						{
-							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 12/13 {
-								c'8.. ~
-								c'16 ~
-								c'16 ~
-								c'16
-							}
-						}
-						{
-							\times 8/9 {
-								c'8. ~
-								c'16. ]
-							}
-						}
-						{
-							{
-								c'4 ~
-								c'16. [
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							c'8. ~
+							c'8 ~
+							c'32
+							r32 ]
+							\revert Stem.stemlet-length
 						}
 					}
 					{
-						r16
-					}
-					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								r16 [
-								c'8 ~
-								c'32
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							r16
 						}
 					}
 					{
-						r16
-					}
-					{
 						{
-							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 5/6 {
-								\override Stem.stemlet-length = 0.75
-								c'4.
-							}
-						}
-						{
-							{
-								c'4..
-							}
-						}
-						{
-							{
-								c'8. [
-							}
-						}
-						{
-							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 14/15 {
-								c'16. ~
-								c'16 ~
-								c'16. ~
-								c'16 ~
-								c'16. ~
-								c'16 ]
-								\revert Stem.stemlet-length
-							}
+							\override Stem.stemlet-length = 0.75
+							r16 [
+							c'8 ~
+							c'32
+							r32 ]
+							\revert Stem.stemlet-length
 						}
 					}
 					{
-						r8
-					}
-					{
-						r16
-					}
-					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								r32 [
-								c'32 ~
-								c'8 ] ~
-								c'4
-							}
-						}
-						{
-							{
-								c'8 [
-								r16 ]
-								\revert Stem.stemlet-length
-							}
+							r16
 						}
 					}
 					{
-						r16
-					}
-					{
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 5/6 {
+							\override Stem.stemlet-length = 0.75
+							c'4.
+						}
 						{
-							\times 8/9 {
-								\override Stem.stemlet-length = 0.75
-								r16. [
-								c'16. ~
-								c'16
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							c'4..
+						}
+						{
+							c'8. [
+						}
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 14/15 {
+							c'16. ~
+							c'16 ~
+							c'16. ~
+							c'16 ~
+							c'16. ~
+							c'16 ]
+							\revert Stem.stemlet-length
 						}
 					}
 					{
-						r16
-					}
-					{
 						{
-							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 10/11 {
-								\override Stem.stemlet-length = 0.75
-								r32 [
-								c'16 ] ~
-								c'4
-							}
+							r8
 						}
 						{
-							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 6/7 {
-								c'8.. [
-							}
-						}
-						{
-							{
-								c'8. ~
-								c'8 ]
-								\revert Stem.stemlet-length
-							}
+							r16
 						}
 					}
 					{
-						r16
-					}
-					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								c'4
-							}
+							\override Stem.stemlet-length = 0.75
+							r32 [
+							c'32 ] ~
+							c'4 ~
+							c'8 [
 						}
 						{
-							{
-								c'8 [ ~
-								c'32
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							c'8
+							r16 ]
+							\revert Stem.stemlet-length
 						}
 					}
 					{
-						r8
-					}
-					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								r16 [
-								c'16 ~
-								c'32
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							r16
 						}
 					}
 					{
-						r8
+						\times 8/9 {
+							\override Stem.stemlet-length = 0.75
+							r16. [
+							c'16. ~
+							c'16
+							r32 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r16
+						}
+					}
+					{
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 10/11 {
+							\override Stem.stemlet-length = 0.75
+							r32 [
+							c'16 ] ~
+							c'4
+						}
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 6/7 {
+							c'8.. [
+						}
+						{
+							c'16 ] ~
+							c'4
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r16
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							c'16 [ ~
+							c'8.
+						}
+						{
+							c'16 ~
+							c'16.
+							r32 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							r16 [
+							c'16.
+							r32 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8
+						}
 					}
 				}
 			}
@@ -630,179 +632,216 @@
 				\clef "percussion"
 				\context Voice = "Piano LH Voice" {
 					{
-						r16
-					}
-					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								r16 [
-								c'8 ~
-								c'32
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							r16
 						}
 					}
 					{
-						r4
-					}
-					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								r16 [
-								c'8 ~
-								c'16.
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							\override Stem.stemlet-length = 0.75
+							r16 [
+							c'16 ~
+							c'16.
+							r32 ]
+							\revert Stem.stemlet-length
 						}
 					}
 					{
-						r16
-					}
-					{
-						r4..
-					}
-					{
 						{
-							\times 4/5 {
-								\override Stem.stemlet-length = 0.75
-								c'8. [ ~
-								c'8 ]
-								\revert Stem.stemlet-length
-							}
+							r4
 						}
 					}
 					{
-						r16
-					}
-					{
-						r16
-					}
-					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								r32 [
-								c'32 ~
-								c'8
-								r16 ]
-								\revert Stem.stemlet-length
-							}
+							\override Stem.stemlet-length = 0.75
+							r16 [
+							c'16 ~
+							c'8 ~
+							c'32
+							r32 ]
+							\revert Stem.stemlet-length
 						}
 					}
 					{
-						r4..
-					}
-					{
 						{
-							\times 8/9 {
-								\override Stem.stemlet-length = 0.75
-								r16. [
-								c'16. ~
-								c'16
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							r16
+						}
+						{
+							R1 * 7/16
 						}
 					}
 					{
-						r2
-					}
-					{
-						{
-							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 6/7 {
-								\override Stem.stemlet-length = 0.75
-								r32 [
-								c'16 ~
-								c'8 ]
-								\revert Stem.stemlet-length
-							}
+						\times 4/5 {
+							\override Stem.stemlet-length = 0.75
+							c'8. [ ~
+							c'8 ]
+							\revert Stem.stemlet-length
 						}
 					}
 					{
-						r8.
-					}
-					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								c'4 ~
-								c'16. [
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							r16
+						}
+						{
+							r16
 						}
 					}
 					{
-						r8
-					}
-					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								r16 [
-								c'8
-							}
-						}
-						{
-							\times 8/9 {
-								c'8. ~
-								c'16
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							\override Stem.stemlet-length = 0.75
+							r32 [
+							c'16. ~
+							c'16
+							r16 ]
+							\revert Stem.stemlet-length
 						}
 					}
 					{
-						r16
-					}
-					{
-						r8.
-					}
-					{
 						{
-							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 3/4 {
-								\override Stem.stemlet-length = 0.75
-								r16 [
-								c'8. ]
-								\revert Stem.stemlet-length
-							}
+							R1 * 7/16
 						}
 					}
 					{
-						r8
-					}
-					{
-						{
-							{
-								\override Stem.stemlet-length = 0.75
-								r32 [
-								c'32 ~
-								c'8 ~
-								c'8 ~
-								c'16.
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+						\times 8/9 {
+							\override Stem.stemlet-length = 0.75
+							r16. [
+							c'16. ~
+							c'16
+							r32 ]
+							\revert Stem.stemlet-length
 						}
 					}
 					{
-						r8.
+						{
+							r2
+						}
 					}
 					{
-						r8. ~
-						r8
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 6/7 {
+							\override Stem.stemlet-length = 0.75
+							r32 [
+							c'16 ~
+							c'8 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8.
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							c'4 ~
+							c'16. [
+							r32 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							r16 [
+							c'8
+						}
+						\times 8/9 {
+							c'8. ~
+							c'16
+							r32 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r16
+						}
+						{
+							r8.
+						}
+					}
+					{
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 3/4 {
+							\override Stem.stemlet-length = 0.75
+							r16 [
+							c'8. ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							r32 [
+							c'16. ] ~
+							c'4 ~
+							c'32 [
+							r32 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8.
+						}
+						{
+							R1 * 5/16
+						}
 					}
 				}
 			}
 			\context Dynamics = "Piano Pedals" {
 				{
-					r\longa.
+					{
+						R1 * 5/16
+					}
+					{
+						R1 * 5/8
+					}
+					{
+						R1 * 7/16
+					}
+					{
+						R1 * 5/16
+					}
+					{
+						R1 * 5/16
+					}
+					{
+						R1 * 7/16
+					}
+					{
+						R1 * 3/4
+					}
+					{
+						R1 * 3/4
+					}
+					{
+						R1 * 5/16
+					}
+					{
+						R1 * 5/16
+					}
+					{
+						R1 * 1/2
+					}
+					{
+						R1 * 5/8
+					}
+					{
+						R1 * 5/16
+					}
 				}
 			}
 		>>
@@ -811,173 +850,169 @@
 				\clef "percussion"
 				\context Voice = "Percussion RH Voice" {
 					{
-						r8.
-						r8
-					}
-					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								r16 [
-								c'8 ~
-								c'32
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							R1 * 5/16
 						}
 					}
 					{
-						r8
-					}
-					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								r16 [
-								c'8 ~
-								c'32
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							\override Stem.stemlet-length = 0.75
+							r16 [
+							c'16 ~
+							c'16.
+							r32 ]
+							\revert Stem.stemlet-length
 						}
 					}
 					{
-						r4..
-					}
-					{
 						{
-							\times 4/5 {
-								\override Stem.stemlet-length = 0.75
-								c'8. [ ~
-								c'8 ]
-								\revert Stem.stemlet-length
-							}
+							r8
 						}
 					}
 					{
-						r16
-					}
-					{
-						r8. ~
-						r8
-					}
-					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								r32 [
-								c'32 ~
-								c'8
-								r16 ]
-								\revert Stem.stemlet-length
-							}
+							\override Stem.stemlet-length = 0.75
+							r16 [
+							c'16 ~
+							c'16.
+							r32 ]
+							\revert Stem.stemlet-length
 						}
 					}
 					{
-						r16
-						r8
-					}
-					{
-						r8
-					}
-					{
 						{
-							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 14/15 {
-								\override Stem.stemlet-length = 0.75
-								r16. [
-								c'16 ~
-								c'16. ~
-								c'16 ~
-								c'8
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							R1 * 7/16
 						}
 					}
 					{
-						r8.
-					}
-					{
-						{
-							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 6/7 {
-								\override Stem.stemlet-length = 0.75
-								r32 [
-								c'16 ~
-								c'8 ]
-								\revert Stem.stemlet-length
-							}
+						\times 4/5 {
+							\override Stem.stemlet-length = 0.75
+							c'8. [ ~
+							c'8 ]
+							\revert Stem.stemlet-length
 						}
 					}
 					{
-						r8.
-					}
-					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								c'4 ~
-								c'16. [
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							r16
+						}
+						{
+							R1 * 5/16
 						}
 					}
 					{
-						r8. ~
-						r8
-					}
-					{
-						r8.
-						r8
-					}
-					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								r16 [
-								c'16 ~
-								c'8 ~
-								c'16.
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							\override Stem.stemlet-length = 0.75
+							r32 [
+							c'32 ~
+							c'8
+							r16 ]
+							\revert Stem.stemlet-length
 						}
 					}
 					{
-						r8
-					}
-					{
 						{
-							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 3/4 {
-								\override Stem.stemlet-length = 0.75
-								r16 [
-								c'8. ]
-								\revert Stem.stemlet-length
-							}
+							r16
+							r8
+						}
+						{
+							r8
 						}
 					}
 					{
-						r8.
-						r4
-					}
-					{
-						{
-							{
-								\override Stem.stemlet-length = 0.75
-								r32 [
-								c'32 ~
-								c'16 ~
-								c'32
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 14/15 {
+							\override Stem.stemlet-length = 0.75
+							r16. [
+							c'16 ~
+							c'16. ~
+							c'16 ~
+							c'8
+							r32 ]
+							\revert Stem.stemlet-length
 						}
 					}
 					{
-						r8
+						{
+							r8.
+						}
+					}
+					{
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 6/7 {
+							\override Stem.stemlet-length = 0.75
+							r32 [
+							c'16 ~
+							c'8 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8.
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							c'4 ~
+							c'16. [
+							r32 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							R1 * 5/16
+						}
+						{
+							R1 * 5/16
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							r16 [
+							c'8. ~
+							c'16.
+							r32 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8
+						}
+					}
+					{
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 3/4 {
+							\override Stem.stemlet-length = 0.75
+							r16 [
+							c'8. ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8.
+							r4
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							r32 [
+							c'32 ~
+							c'16.
+							r32 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8
+						}
 					}
 				}
 			}
@@ -985,192 +1020,187 @@
 				\clef "percussion"
 				\context Voice = "Percussion LH Voice" {
 					{
-						r16
-					}
-					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								r16 [
-								c'8 ~
-								c'32
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							r16
 						}
 					}
 					{
-						r4. ~
-						r4
-					}
-					{
-						r8.
-						r16
-					}
-					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								r16 [
-								c'8
-							}
-						}
-						{
-							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 6/7 {
-								c'16. ~
-								c'16 ~
-								c'32
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							\override Stem.stemlet-length = 0.75
+							r16 [
+							c'16 ~
+							c'16.
+							r32 ]
+							\revert Stem.stemlet-length
 						}
 					}
 					{
-						r8
-					}
-					{
-						r8. ~
-						r8
-					}
-					{
 						{
-							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 3/4 {
-								\override Stem.stemlet-length = 0.75
-								c'4
-								\revert Stem.stemlet-length
-							}
+							R1 * 5/8
+						}
+						{
+							r8.
+							r16
 						}
 					}
 					{
-						r4
-					}
-					{
-						r8
-					}
-					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								r32 [
-								c'16. ~
-								c'8 ~
-								c'16
-								r16 ]
-								\revert Stem.stemlet-length
-							}
+							\override Stem.stemlet-length = 0.75
+							r16 [
+							c'8
+						}
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 6/7 {
+							c'16. ~
+							c'16 ~
+							c'32
+							r32 ]
+							\revert Stem.stemlet-length
 						}
 					}
 					{
-						r4
-					}
-					{
 						{
-							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 12/13 {
-								\override Stem.stemlet-length = 0.75
-								r16.
-								c'4 ~
-								c'32 [
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							r8
+						}
+						{
+							R1 * 5/16
 						}
 					}
 					{
-						r8
-					}
-					{
-						{
-							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 6/7 {
-								\override Stem.stemlet-length = 0.75
-								r32 [
-								c'16 ~
-								c'8 ]
-								\revert Stem.stemlet-length
-							}
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 3/4 {
+							\override Stem.stemlet-length = 0.75
+							c'4
+							\revert Stem.stemlet-length
 						}
 					}
 					{
-						r16
-					}
-					{
-						r8. ~
-						r8
-					}
-					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								c'8. [ ~
-								c'16.
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							r4
+						}
+						{
+							r8
 						}
 					}
 					{
-						r8
-					}
-					{
 						{
-							{
-								\override Stem.stemlet-length = 0.75
-								r16 [
-								c'16 ~
-								c'32
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+							\override Stem.stemlet-length = 0.75
+							r32 [
+							c'16. ~
+							c'8.
+							r16 ]
+							\revert Stem.stemlet-length
 						}
 					}
 					{
-						r8.
-					}
-					{
 						{
-							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 6/7 {
-								\override Stem.stemlet-length = 0.75
-								r16 [
-								c'8 ] ~
-								c'4
-								\revert Stem.stemlet-length
-							}
+							r4
 						}
 					}
 					{
-						r4
-					}
-					{
-						{
-							{
-								\override Stem.stemlet-length = 0.75
-								r32 [
-								c'32 ~
-								c'16 ~
-								c'32
-								r32 ]
-								\revert Stem.stemlet-length
-							}
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 12/13 {
+							\override Stem.stemlet-length = 0.75
+							r16.
+							c'4 ~
+							c'32 [
+							r32 ]
+							\revert Stem.stemlet-length
 						}
 					}
 					{
-						r8
-							_ \markup {
-								\italic
-									\right-column
-										{
-											" "
-											" "
-											" "
-											"Jamaica Plain"
-											"December 2013 - February 2014"
-										}
-								}
-						\bar "|."
+						{
+							r8
+						}
+					}
+					{
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 6/7 {
+							\override Stem.stemlet-length = 0.75
+							r32 [
+							c'16 ~
+							c'8 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r16
+						}
+						{
+							R1 * 5/16
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							c'8. [ ~
+							c'16.
+							r32 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							r16 [
+							c'16 ~
+							c'32
+							r32 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8.
+						}
+					}
+					{
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 6/7 {
+							\override Stem.stemlet-length = 0.75
+							r16 [
+							c'8 ] ~
+							c'4
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r4
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							r32 [
+							c'32 ~
+							c'16.
+							r32 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8
+								_ \markup {
+									\italic
+										\right-column
+											{
+												" "
+												" "
+												" "
+												"Jamaica Plain"
+												"December 2013 - February 2014"
+											}
+									}
+							\bar "|."
+						}
 					}
 				}
 			}
