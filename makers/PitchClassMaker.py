@@ -3,7 +3,7 @@ from abjad import *
 from plague_water.makers.ContextAwareMaker import ContextAwareMaker
 
 
-class PitchMaker(ContextAwareMaker):
+class PitchClassMaker(ContextAwareMaker):
 
     ### CLASS VARIABLES ###
 
