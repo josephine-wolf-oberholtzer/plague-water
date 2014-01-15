@@ -12,15 +12,16 @@ class SegmentMaker(abctools.AbjadObject):
     ### SLOTS ###
 
     __slots__ = (
-        'context_map',
         'cached_makers',
         'cached_meters',
+        'context_map',
         'guitar_brush',
         'guitar_lifeline_strategy',
         'guitar_pedal_timespans',
         'guitar_timespans',
         'lilypond_file',
         'measure_segmentation_talea',
+        'meters',
         'minimum_timespan_duration',
         'percussion_lh_brush',
         'percussion_lh_timespans',
@@ -40,7 +41,6 @@ class SegmentMaker(abctools.AbjadObject):
         'segment_target_duration',
         'segment_tempo',
         'time_signatures',
-        'meters',
         )
 
     ### INITIALIZER ###
@@ -129,17 +129,29 @@ class SegmentMaker(abctools.AbjadObject):
     def __call__(self, current_file_path=None):
         template = score_templates.PlagueWaterScoreTemplate()
         self.score = template()
+
+        ### BUILD TIMESPAN STRUCTURES ###
         self.build_semantic_voice_timespan_inventories()
         self.meters = self.find_meters()
         self.time_signatures = tuple(meter.implied_time_signature
             for meter in self.meters)
         self.segment_actual_duration = sum(time_signature.duration
             for time_signature in self.time_signatures)
-        self.cleanup_timespan_inventories()
+        self.cleanup_semantic_voice_timespan_inventories()
         self.build_lifeline_timespan_inventories()
         self.build_silence_timespans()
+
+        ### CREATE NOTATION ###
         self.populate_time_signature_context()
-        self.populate_voice_contexts()
+        self.create_rhythms(rewrite_meter=True)
+        self.apply_pitch_classes()
+        self.apply_registrations()
+        self.apply_chords()
+        self.apply_articulations()
+        self.apply_dynamics()
+        self.apply_spanners()
+
+        ### APPLY LAYOUT ###
         self.configure_score()
         self.configure_lilypond_file()
         return self.lilypond_file
@@ -161,6 +173,24 @@ class SegmentMaker(abctools.AbjadObject):
         return result
 
     ### PUBLIC METHODS ###
+
+    def apply_pitch_classes(self):
+        pass
+
+    def apply_registrations(self):
+        pass
+
+    def apply_chords(self):
+        pass
+
+    def apply_articulations(self):
+        pass
+
+    def apply_dynamics(self):
+        pass
+
+    def apply_spanners(self):
+        pass
 
     def build_and_persist(self, current_file_path):
         print 'build and persist'
@@ -235,7 +265,7 @@ class SegmentMaker(abctools.AbjadObject):
                 timespan_inventory.extend(shard)
             timespan_inventory.sort()
 
-    def cleanup_timespan_inventories(self):
+    def cleanup_semantic_voice_timespan_inventories(self):
         print 'cleanup timespan inventories'
         measure_segmentation_talea = self.measure_segmentation_talea
         if not self.measure_segmentation_talea:
@@ -308,6 +338,85 @@ class SegmentMaker(abctools.AbjadObject):
         final_markup = Markup(italic, 'down')
         self.score.add_final_markup(final_markup)
 
+    def create_rhythms(
+        self,
+        rewrite_meter=True,
+        ):
+        print 'create rhythms'
+        seed = 0
+        for context_name in self.all_context_bundles:
+            print '\t{}'.format(context_name)
+            brush, timespan_inventory = self.all_context_bundles[context_name]
+            realization, seed = self.create_rhythms_for_one_voice(
+                context_map=self.context_map,
+                context_name=context_name,
+                rewrite_meter=rewrite_meter,
+                seed=seed,
+                timespan_inventory=timespan_inventory,
+                )
+            self.score[context_name].extend(realization)
+
+    def create_rhythms_for_one_voice(
+        self,
+        context_map=None,
+        context_name=None,
+        rewrite_meter=True,
+        seed=0,
+        timespan_inventory=None,
+        ):
+        from plague_water import makers
+        result = []
+        silence_music_maker = makers.MusicMaker(
+            rhythm_maker=rhythmmakertools.RestRhythmMaker(),
+            )
+        if timespan_inventory is None:
+            durations = [x.duration for x in self.time_signatures]
+            music = silence_music_maker.create_rhythms(
+                durations,
+                beam_music=False,
+                initial_offset=0,
+                meter_cache=self.cached_meters,
+                meters=self.meters,
+                rewrite_meter=rewrite_meter,
+                )
+            attach(silence_music_maker, music, scope=Voice)
+            result.append(music)
+            return result
+        for music_maker, group in itertools.groupby(
+            timespan_inventory,
+            lambda x: x.music_maker,
+            ):
+            group = timespantools.TimespanInventory(group)
+            durations = [x.duration for x in group]
+            if music_maker is not None:
+                contexted_music_maker = self.get_cached_maker(
+                    music_maker,
+                    context_map=context_map,
+                    context_name=context_name,
+                    )
+                music = contexted_music_maker.create_rhythms(
+                    durations,
+                    initial_offset=group.start_offset,
+                    meter_cache=self.cached_meters,
+                    meters=self.meters,
+                    rewrite_meter=rewrite_meter,
+                    seed=seed,
+                    )
+                seed += 1
+                attach(music_maker, music, scope=Voice)
+            else:
+                music = silence_music_maker.create_rhythms(
+                    durations,
+                    beam_music=False,
+                    initial_offset=group.start_offset,
+                    meter_cache=self.cached_meters,
+                    meters=self.meters,
+                    rewrite_meter=rewrite_meter,
+                    )
+                attach(silence_music_maker, music, scope=Voice)
+            result.append(music)
+        return result, seed
+
     def find_meters(self):
         print 'find meters'
         offset_counter = datastructuretools.TypedCounter(
@@ -346,94 +455,11 @@ class SegmentMaker(abctools.AbjadObject):
             self.cached_makers[key] = contexted_maker
         return self.cached_makers[key]
 
-    def make_rest_containers(self, durations):
-        from plague_water import makers
-        source_annotation = makers.SourceAnnotation()
-        rest_maker = rhythmmakertools.RestRhythmMaker()
-        rests = rest_maker(durations)
-        rest_containers = [Container(x) for x in rests]
-        music = Container(rest_containers)
-        attach(source_annotation, music)
-        return music
-
-    def populate_voice_contexts(self):
-        print 'populate voice contexts'
-        seed = 0
-        for context_name in self.all_context_bundles:
-            print '\t{}'.format(context_name)
-            brush, timespan_inventory = self.all_context_bundles[context_name]
-            realization, seed = self.realize_timespans(
-                context_map=self.context_map,
-                context_name=context_name,
-                seed=seed,
-                timespan_inventory=timespan_inventory,
-                )
-            self.score[context_name].extend(realization)
-
     def populate_time_signature_context(self):
         print 'populate time signature context'
         measures = scoretools.make_spacer_skip_measures(
             self.time_signatures)
         self.score['TimeSignatureContext'].extend(measures)
-
-    def realize_timespans(
-        self,
-        context_map=None,
-        context_name=None,
-        seed=0,
-        timespan_inventory=None,
-        ):
-        from plague_water import makers
-        result = []
-        silence_source_annotation = makers.SourceAnnotation()
-        silence_music_maker = makers.MusicMaker(
-            rhythm_maker=rhythmmakertools.RestRhythmMaker(),
-            )
-        if timespan_inventory is None:
-            durations = [x.duration for x in self.time_signatures]
-            music = silence_music_maker(
-                durations,
-                beam_music=False,
-                initial_offset=0,
-                meter_cache=self.cached_meters,
-                meters=self.meters,
-                )
-            attach(silence_source_annotation, music)
-            result.append(music)
-            return result
-        for music_maker, group in itertools.groupby(
-            timespan_inventory,
-            lambda x: x.music_maker,
-            ):
-            group = timespantools.TimespanInventory(group)
-            durations = [x.duration for x in group]
-            if music_maker is not None:
-                source_annotation = makers.SourceAnnotation(source=music_maker)
-                contexted_music_maker = self.get_cached_maker(
-                    music_maker,
-                    context_map=context_map,
-                    context_name=context_name,
-                    )
-                music = contexted_music_maker(
-                    durations,
-                    initial_offset=group.start_offset,
-                    meter_cache=self.cached_meters,
-                    meters=self.meters,
-                    seed=seed,
-                    )
-                seed += 1
-                attach(source_annotation, music)
-            else:
-                music = silence_music_maker(
-                    durations,
-                    beam_music=False,
-                    initial_offset=group.start_offset,
-                    meter_cache=self.cached_meters,
-                    meters=self.meters,
-                    )
-                attach(silence_source_annotation, music)
-            result.append(music)
-        return result, seed
 
     ### PUBLIC PROPERTIES ###
 
