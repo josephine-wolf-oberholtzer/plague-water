@@ -2,6 +2,7 @@
 import collections
 import itertools
 import os
+import sys
 from abjad import *
 from plague_water import plague_water_configuration
 from plague_water import score_templates
@@ -175,34 +176,99 @@ class SegmentMaker(abctools.AbjadObject):
 
     ### PUBLIC METHODS ###
 
-    def apply_pitch_classes(self):
-        from plague_water import makers
-        print 'applying pitch classes'
-        for leaf in iterate(self.score).by_timeline(component_class=Note):
-            logical_tie = inspect(leaf).get_logical_tie()
-            if leaf is not logical_tie.head:
-                continue
-            music_maker = inspect(leaf).get_effective(makers.MusicMaker)
-            music_maker.apply_pitch_classes(
-                logical_tie,
-                seed=0,
-                segment_actual_duration=self.segment_actual_duration,
-                )
-
-    def apply_registrations(self):
-        print 'applying registrations'
+    def apply_articulations(self):
+        message = 'applying articulations'
+        music_maker_seeds = collections.Counter()
+        with systemtools.ProgressIndicator(message) as progress_indicator:
+            for music, music_maker in \
+                self.iterate_containers_and_music_makers():
+                seed = music_maker_seeds[music_maker]
+                music_maker.apply_articulations(
+                    music,
+                    seed=seed,
+                    segment_actual_duration=self.segment_actual_duration,
+                    )
+                music_maker_seeds[music_maker] += 1
+                progress_indicator.advance()
 
     def apply_chords(self):
-        print 'applying chords'
-
-    def apply_articulations(self):
-        print 'applying articulations'
+        message = 'applying chords'
+        music_maker_seeds = collections.Counter()
+        with systemtools.ProgressIndicator(message) as progress_indicator:
+            for music, music_maker in \
+                self.iterate_containers_and_music_makers():
+                seed = music_maker_seeds[music_maker]
+                music_maker.apply_chords(
+                    music,
+                    seed=seed,
+                    segment_actual_duration=self.segment_actual_duration,
+                    )
+                music_maker_seeds[music_maker] += 1
+                progress_indicator.advance()
 
     def apply_dynamics(self):
-        print 'applying dynamics'
+        message = 'applying dynamics'
+        music_maker_seeds = collections.Counter()
+        with systemtools.ProgressIndicator(message) as progress_indicator:
+            for music, music_maker in \
+                self.iterate_containers_and_music_makers():
+                seed = music_maker_seeds[music_maker]
+                music_maker.apply_dynamics(
+                    music,
+                    seed=seed,
+                    segment_actual_duration=self.segment_actual_duration,
+                    )
+                music_maker_seeds[music_maker] += 1
+                progress_indicator.advance()
+
+    def apply_pitch_classes(self):
+        from plague_water import makers
+        message = 'applying pitch classes'
+        music_maker_seeds = collections.Counter()
+        with systemtools.ProgressIndicator(message) as progress_indicator:
+            for leaf in iterate(self.score).by_timeline(Note):
+                logical_tie = inspect(leaf).get_logical_tie()
+                if leaf is not logical_tie.head:
+                    continue
+                music_maker = inspect(leaf).get_effective(makers.MusicMaker)
+                seed = music_maker_seeds[music_maker]
+                music_maker.apply_pitch_classes(
+                    logical_tie,
+                    seed=seed,
+                    segment_actual_duration=self.segment_actual_duration,
+                    )
+                music_maker_seeds[music_maker] += 1
+                progress_indicator.advance()
+
+    def apply_registrations(self):
+        message = 'applying registrations'
+        music_maker_seeds = collections.Counter()
+        with systemtools.ProgressIndicator(message) as progress_indicator:
+            for music, music_maker in \
+                self.iterate_containers_and_music_makers():
+                seed = music_maker_seeds[music_maker]
+                music_maker.apply_registrations(
+                    music,
+                    seed=seed,
+                    segment_actual_duration=self.segment_actual_duration,
+                    )
+                music_maker_seeds[music_maker] += 1
+                progress_indicator.advance()
 
     def apply_spanners(self):
-        print 'apply spanners'
+        message = 'apply spanners'
+        music_maker_seeds = collections.Counter()
+        with systemtools.ProgressIndicator(message) as progress_indicator:
+            for music, music_maker in \
+                self.iterate_containers_and_music_makers():
+                seed = music_maker_seeds[music_maker]
+                music_maker.apply_spanners(
+                    music,
+                    seed=seed,
+                    segment_actual_duration=self.segment_actual_duration,
+                    )
+                music_maker_seeds[music_maker] += 1
+                progress_indicator.advance()
 
     def build_and_persist(self, current_file_path):
         print 'persisting'
@@ -237,7 +303,6 @@ class SegmentMaker(abctools.AbjadObject):
     def build_semantic_voice_timespan_inventories(self):
         print 'building semantic voice timespan inventories'
         for context_name in self.semantic_context_bundles:
-            print '\t{}'.format(context_name)
             pair = self.semantic_context_bundles[context_name]
             brush, timespan_inventory = pair
             result = brush(
@@ -253,26 +318,29 @@ class SegmentMaker(abctools.AbjadObject):
         offsets = mathtools.cumulative_sums(
             x.duration for x in self.time_signatures)
         for context_name in self.all_context_bundles:
-            print '\t{}'.format(context_name)
+            message = '\t{}'.format(context_name)
             pair = self.all_context_bundles[context_name]
             brush, timespan_inventory = pair
             silence_timespan_inventory = timespantools.TimespanInventory()
             previous_stop_offset = Offset(0)
-            for timespan in timespan_inventory:
-                current_start_offset = timespan.start_offset
-                if previous_stop_offset < current_start_offset:
+            with systemtools.ProgressIndicator(message) as progress_indicator:
+                for timespan in timespan_inventory:
+                    current_start_offset = timespan.start_offset
+                    if previous_stop_offset < current_start_offset:
+                        silence_timespan = makers.PayloadedTimespan(
+                            start_offset=previous_stop_offset,
+                            stop_offset=current_start_offset,
+                            )
+                        silence_timespan_inventory.append(silence_timespan)
+                    previous_stop_offset = timespan.stop_offset
+                    progress_indicator.advance()
+                if previous_stop_offset < self.segment_actual_duration:
                     silence_timespan = makers.PayloadedTimespan(
                         start_offset=previous_stop_offset,
-                        stop_offset=current_start_offset,
+                        stop_offset=self.segment_actual_duration,
                         )
                     silence_timespan_inventory.append(silence_timespan)
-                previous_stop_offset = timespan.stop_offset
-            if previous_stop_offset < self.segment_actual_duration:
-                silence_timespan = makers.PayloadedTimespan(
-                    start_offset=previous_stop_offset,
-                    stop_offset=self.segment_actual_duration,
-                    )
-                silence_timespan_inventory.append(silence_timespan)
+                    progress_indicator.advance()
             for shard in silence_timespan_inventory.split_at_offsets(offsets):
                 timespan_inventory.extend(shard)
             timespan_inventory.sort()
@@ -360,7 +428,6 @@ class SegmentMaker(abctools.AbjadObject):
         print 'creating rhythms'
         seed = 0
         for context_name in self.all_context_bundles:
-            print '\t{}'.format(context_name)
             brush, timespan_inventory = self.all_context_bundles[context_name]
             realization, seed = self.create_rhythms_for_one_voice(
                 context_map=self.context_map,
@@ -381,55 +448,59 @@ class SegmentMaker(abctools.AbjadObject):
         ):
         from plague_water import makers
         result = []
-        silence_music_maker = makers.MusicMaker(
-            rhythm_maker=rhythmmakertools.RestRhythmMaker(),
-            )
-        if timespan_inventory is None:
-            durations = [x.duration for x in self.time_signatures]
-            music = silence_music_maker.create_rhythms(
-                durations,
-                beam_music=False,
-                initial_offset=0,
-                meter_cache=self.cached_meters,
-                meters=self.meters,
-                rewrite_meter=rewrite_meter,
+        message = '\t{}'.format(context_name)
+        with systemtools.ProgressIndicator(message) as progress_indicator:
+            silence_music_maker = makers.MusicMaker(
+                rhythm_maker=rhythmmakertools.RestRhythmMaker(),
                 )
-            attach(silence_music_maker, music, scope=Voice)
-            result.append(music)
-            return result
-        for music_maker, group in itertools.groupby(
-            timespan_inventory,
-            lambda x: x.music_maker,
-            ):
-            group = timespantools.TimespanInventory(group)
-            durations = [x.duration for x in group]
-            if music_maker is not None:
-                contexted_music_maker = self.get_cached_maker(
-                    music_maker,
-                    context_map=context_map,
-                    context_name=context_name,
-                    )
-                music = contexted_music_maker.create_rhythms(
-                    durations,
-                    initial_offset=group.start_offset,
-                    meter_cache=self.cached_meters,
-                    meters=self.meters,
-                    rewrite_meter=rewrite_meter,
-                    seed=seed,
-                    )
-                seed += 1
-                attach(music_maker, music, scope=Voice)
-            else:
+            if timespan_inventory is None:
+                durations = [x.duration for x in self.time_signatures]
                 music = silence_music_maker.create_rhythms(
                     durations,
                     beam_music=False,
-                    initial_offset=group.start_offset,
+                    initial_offset=0,
                     meter_cache=self.cached_meters,
                     meters=self.meters,
                     rewrite_meter=rewrite_meter,
                     )
                 attach(silence_music_maker, music, scope=Voice)
-            result.append(music)
+                result.append(music)
+                progress_indicator.advance()
+            else:
+                for music_maker, group in itertools.groupby(
+                    timespan_inventory,
+                    lambda x: x.music_maker,
+                    ):
+                    group = timespantools.TimespanInventory(group)
+                    durations = [x.duration for x in group]
+                    if music_maker is not None:
+                        contexted_music_maker = self.get_cached_maker(
+                            music_maker,
+                            context_map=context_map,
+                            context_name=context_name,
+                            )
+                        music = contexted_music_maker.create_rhythms(
+                            durations,
+                            initial_offset=group.start_offset,
+                            meter_cache=self.cached_meters,
+                            meters=self.meters,
+                            rewrite_meter=rewrite_meter,
+                            seed=seed,
+                            )
+                        seed += 1
+                        attach(music_maker, music, scope=Voice)
+                    else:
+                        music = silence_music_maker.create_rhythms(
+                            durations,
+                            beam_music=False,
+                            initial_offset=group.start_offset,
+                            meter_cache=self.cached_meters,
+                            meters=self.meters,
+                            rewrite_meter=rewrite_meter,
+                            )
+                        attach(silence_music_maker, music, scope=Voice)
+                    result.append(music)
+                    progress_indicator.advance()
         return result, seed
 
     def find_meters(self):

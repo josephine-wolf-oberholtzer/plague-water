@@ -71,6 +71,20 @@ class MusicMaker(ContextAwareMaker):
                 )
         assert inspect(music).is_well_formed()
 
+    def apply_chords(
+        self,
+        music=None,
+        seed=0,
+        segment_actual_duration=None,
+        ):
+        if self.chord_maker is not None:
+            self.chord_maker(
+                music,
+                seed=seed,
+                segment_actual_duration=segment_actual_duration,
+                )
+        assert inspect(music).is_well_formed()
+
     def apply_dynamics(
         self,
         music=None,
@@ -93,7 +107,7 @@ class MusicMaker(ContextAwareMaker):
         ):
         pass
 
-    def apply_registration(
+    def apply_registrations(
         self,
         music=None,
         seed=0,
