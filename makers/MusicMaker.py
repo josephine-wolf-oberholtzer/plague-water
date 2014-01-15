@@ -14,32 +14,90 @@ class MusicMaker(ContextAwareMaker):
         '_rhythm_maker',
         )
 
+    _default_rhythm_maker = rhythmmakertools.NoteRhythmMaker()
+
     ### INITIALIZER ###
 
     def __init__(
         self,
         articulation_maker=None,
-        dynamics_maker=None,
-        pitch_maker=None,
+        chord_maker=None,
+        dynamic_maker=None,
+        pitch_class_maker=None,
+        registration_maker=None,
         rhythm_maker=None,
+        spanner_maker=None,
         ):
         from plague_water import makers
+        # prototype
         assert isinstance(articulation_maker,
             (makers.ArticulationMaker, type(None)))
-        assert isinstance(dynamics_maker,
-            (makers.DynamicsMaker, type(None)))
-        assert isinstance(pitch_maker,
-            (makers.PitchMaker, type(None)))
+        assert isinstance(chord_maker,
+            (makers.ChordMaker, type(None)))
+        assert isinstance(dynamic_maker,
+            (makers.DynamicMaker, type(None)))
+        assert isinstance(pitch_class_maker,
+            (makers.PitchClassMaker, type(None)))
+        assert isinstance(registration_maker,
+            (makers.RegistrationMaker, type(None)))
         assert isinstance(rhythm_maker,
             (rhythmmakertools.RhythmMaker, type(None)))
+        assert isinstance(spanner_maker,
+            (makers.SpannerMaker, type(None)))
         self._articulation_maker = articulation_maker
+        self._chord_maker = chord_maker
         self._dynamics_maker = dynamics_maker
-        self._pitch_maker = pitch_maker
+        self._pitch_class_maker = pitch_class_maker
+        self._registration_maker = registration_maker
         self._rhythm_maker = rhythm_maker
+        self._spanner_maker = spanner_maker
 
-    ### SPECIAL METHODS ###
+    ### PUBLIC METHODS ###
 
-    def __call__(
+    def apply_articulations(
+        self,
+        music=None,
+        seed=0,
+        segment_actual_duration=None,
+        ):
+        if self.articulation_maker is not None:
+            self.articulation_maker(music, seed)
+
+    def apply_dynamics(
+        self,
+        music=None,
+        seed=0,
+        segment_actual_duration=None,
+        ):
+        if self.dynamics_maker is not None:
+            self.dynamics_maker(music, seed)
+
+    def apply_pitch_classes(
+        self,
+        music=None,
+        seed=0,
+        segment_actual_duration=None,
+        ):
+        if self.pitch_maker is not None:
+            self.pitch_maker(music, seed)
+
+    def apply_registration(
+        self,
+        music=None,
+        seed=0,
+        segment_actual_duration=None,
+        ):
+        pass
+
+    def apply_spanners(
+        self,
+        music=None,
+        seed=0,
+        segment_actual_duration=None,
+        ):
+        pass
+
+    def create_rhythms(
         self,
         durations,
         beam_music=True,
@@ -51,7 +109,8 @@ class MusicMaker(ContextAwareMaker):
         beam_music = bool(beam_music)
         durations = [Duration(x) for x in durations]
         assert len(durations)
-        assert isinstance(self.rhythm_maker, rhythmmakertools.RhythmMaker)
+        rhythm_maker = self.rhythm_maker or self._default_rhythm_maker
+        assert isinstance(rhythm_maker, rhythmmakertools.RhythmMaker)
         seed = int(seed)
         music = self.rhythm_maker(durations, seeds=seed)
         for i, x in enumerate(music):
@@ -67,12 +126,6 @@ class MusicMaker(ContextAwareMaker):
             meter_cache=meter_cache,
             meters=meters,
             )
-        if self.pitch_maker is not None:
-            self.pitch_maker(music, seed)
-        if self.dynamics_maker is not None:
-            self.dynamics_maker(music, seed)
-        if self.articulation_maker is not None:
-            self.articulation_maker(music, seed)
         if beam_music:
             beam = spannertools.GeneralizedBeam(
                 include_long_duration_notes=False,
