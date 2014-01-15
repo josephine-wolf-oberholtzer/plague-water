@@ -20,18 +20,19 @@ context_map = datastructuretools.ContextMap(
 context_map['Plague Water Score']['music_maker'] = makers.MusicMaker()
 context_map['Plague Water Score']['playing_groupings'] = (1, 1)
 context_map['Plague Water Score']['rhythm_maker'] = \
-    rhythm_maker = rhythmmakertools.IncisedRhythmMaker(
+    rhythm_maker = rhythmmakertools.TaleaRhythmMaker(
         beam_cells_together=False,
         beam_each_cell=False,
-        decrease_durations_monotonically=False,
-        fill_with_notes=True,
-        incise_output=True,
-        prefix_lengths=(1, 1, 0, 1, 1, 1, 0),
-        prefix_talea=(-2, -1, -3, -1, -2, -2, -1, -1),
-        prolation_addenda=(0, 1, 1, 0, 2, 0),
-        secondary_divisions=(),
-        suffix_lengths=(1, 0, 1, 2, 1, 0, 1, 1),
-        suffix_talea=(-1, -1, -2, -1, -1),
+        burnish_output=True,
+        burnish_specifier=rhythmmakertools.BurnishSpecifier(
+            left_lengths=(1, 0, 1, 1),
+            lefts=(-1,),
+            middles=(0,),
+            right_lengths=(1, 0, 1),
+            rights=(-1,),
+            ),
+        prolation_addenda=(0, 2, 1),
+        talea=(2, -2,),
         talea_denominator=32,
         )
 
