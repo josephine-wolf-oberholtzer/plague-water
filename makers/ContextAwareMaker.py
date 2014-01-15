@@ -18,10 +18,6 @@ class ContextAwareMaker(abctools.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    @abc.abstractmethod
-    def __call__(self, context_map, context_name):
-        raise NotImplemented
-
     def __eq__(self, expr):
         if isinstance(expr, type(self)):
             if format(expr, 'storage') == format(self, 'storage'):
