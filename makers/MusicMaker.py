@@ -9,9 +9,12 @@ class MusicMaker(ContextAwareMaker):
 
     __slots__ = (
         '_articulation_maker',
-        '_dynamics_maker',
-        '_pitch_maker',
+        '_chord_maker',
+        '_dynamic_maker',
+        '_pitch_class_maker',
+        '_registration_maker',
         '_rhythm_maker',
+        '_spanner_maker',
         )
 
     _default_rhythm_maker = rhythmmakertools.NoteRhythmMaker()
@@ -46,7 +49,7 @@ class MusicMaker(ContextAwareMaker):
             (makers.SpannerMaker, type(None)))
         self._articulation_maker = articulation_maker
         self._chord_maker = chord_maker
-        self._dynamics_maker = dynamics_maker
+        self._dynamic_maker = dynamic_maker
         self._pitch_class_maker = pitch_class_maker
         self._registration_maker = registration_maker
         self._rhythm_maker = rhythm_maker
@@ -60,8 +63,7 @@ class MusicMaker(ContextAwareMaker):
         seed=0,
         segment_actual_duration=None,
         ):
-        if self.articulation_maker is not None:
-            self.articulation_maker(music, seed)
+        pass
 
     def apply_dynamics(
         self,
@@ -69,8 +71,7 @@ class MusicMaker(ContextAwareMaker):
         seed=0,
         segment_actual_duration=None,
         ):
-        if self.dynamics_maker is not None:
-            self.dynamics_maker(music, seed)
+        pass
 
     def apply_pitch_classes(
         self,
@@ -78,8 +79,7 @@ class MusicMaker(ContextAwareMaker):
         seed=0,
         segment_actual_duration=None,
         ):
-        if self.pitch_maker is not None:
-            self.pitch_maker(music, seed)
+        pass
 
     def apply_registration(
         self,
@@ -104,6 +104,7 @@ class MusicMaker(ContextAwareMaker):
         initial_offset=None,
         meter_cache=None,
         meters=None,
+        rewrite_meter=True,
         seed=0,
         ):
         beam_music = bool(beam_music)
@@ -120,12 +121,13 @@ class MusicMaker(ContextAwareMaker):
             elif isinstance(x, selectiontools.Selection):
                 music[i] = Container(x)
         music = Container(music)
-        self._rewrite_meters(
-            music,
-            initial_offset=initial_offset,
-            meter_cache=meter_cache,
-            meters=meters,
-            )
+        if rewrite_meter:
+            self._rewrite_meters(
+                music,
+                initial_offset=initial_offset,
+                meter_cache=meter_cache,
+                meters=meters,
+                )
         if beam_music:
             beam = spannertools.GeneralizedBeam(
                 include_long_duration_notes=False,
@@ -218,13 +220,25 @@ class MusicMaker(ContextAwareMaker):
         return self._articulation_maker
 
     @property
-    def dynamics_maker(self):
-        return self._dynamics_maker
+    def chord_maker(self):
+        return self._chord_maker
 
     @property
-    def pitch_maker(self):
-        return self._pitch_maker
+    def dynamic_maker(self):
+        return self._dynamic_maker
+
+    @property
+    def pitch_class_maker(self):
+        return self._pitch_class_maker
+
+    @property
+    def registration_maker(self):
+        return self._registration_maker
 
     @property
     def rhythm_maker(self):
         return self._rhythm_maker
+
+    @property
+    def spanner_maker(self):
+        return self._spanner_maker
