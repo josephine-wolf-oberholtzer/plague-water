@@ -63,7 +63,13 @@ class MusicMaker(ContextAwareMaker):
         seed=0,
         segment_actual_duration=None,
         ):
-        pass
+        if self.articulation_maker is not None:
+            self.articulation_maker(
+                music,
+                seed=seed,
+                segment_actual_duration=segment_actual_duration,
+                )
+        assert inspect(music).is_well_formed()
 
     def apply_dynamics(
         self,
@@ -71,7 +77,13 @@ class MusicMaker(ContextAwareMaker):
         seed=0,
         segment_actual_duration=None,
         ):
-        pass
+        if self.dynamic_maker is not None:
+            self.dynamic_maker(
+                music,
+                seed=seed,
+                segment_actual_duration=segment_actual_duration,
+                )
+        assert inspect(music).is_well_formed()
 
     def apply_pitch_classes(
         self,
@@ -87,7 +99,13 @@ class MusicMaker(ContextAwareMaker):
         seed=0,
         segment_actual_duration=None,
         ):
-        pass
+        if self.registration_maker is not None:
+            self.registration_maker(
+                music,
+                seed=seed,
+                segment_actual_duration=segment_actual_duration,
+                )
+        assert inspect(music).is_well_formed()
 
     def apply_spanners(
         self,
@@ -95,7 +113,13 @@ class MusicMaker(ContextAwareMaker):
         seed=0,
         segment_actual_duration=None,
         ):
-        pass
+        if self.spanner_maker is not None:
+            self.spanner_maker(
+                music,
+                seed=seed,
+                segment_actual_duration=segment_actual_duration,
+                )
+        assert inspect(music).is_well_formed()
 
     def create_rhythms(
         self,
@@ -136,6 +160,7 @@ class MusicMaker(ContextAwareMaker):
                 use_stemlets=True,
                 )
             attach(beam, music)
+        assert inspect(music).is_well_formed()
         return music
 
     ### PRIVATE PROPERTIES ###

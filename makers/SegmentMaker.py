@@ -153,6 +153,7 @@ class SegmentMaker(abctools.AbjadObject):
 
         ### APPLY LAYOUT ###
         self.configure_score()
+        assert inspect(self.score).is_well_formed()
         self.configure_lilypond_file()
         return self.lilypond_file
 
@@ -175,25 +176,36 @@ class SegmentMaker(abctools.AbjadObject):
     ### PUBLIC METHODS ###
 
     def apply_pitch_classes(self):
-        pass
+        from plague_water import makers
+        print 'applying pitch classes'
+        for leaf in iterate(self.score).by_timeline(component_class=Note):
+            logical_tie = inspect(leaf).get_logical_tie()
+            if leaf is not logical_tie.head:
+                continue
+            music_maker = inspect(leaf).get_effective(makers.MusicMaker)
+            music_maker.apply_pitch_classes(
+                logical_tie,
+                seed=0,
+                segment_actual_duration=self.segment_actual_duration,
+                )
 
     def apply_registrations(self):
-        pass
+        print 'applying registrations'
 
     def apply_chords(self):
-        pass
+        print 'applying chords'
 
     def apply_articulations(self):
-        pass
+        print 'applying articulations'
 
     def apply_dynamics(self):
-        pass
+        print 'applying dynamics'
 
     def apply_spanners(self):
-        pass
+        print 'apply spanners'
 
     def build_and_persist(self, current_file_path):
-        print 'build and persist'
+        print 'persisting'
         current_directory_path = os.path.dirname(os.path.abspath(
             os.path.expanduser(current_file_path)))
         pdf_file_path = os.path.join(
@@ -207,7 +219,7 @@ class SegmentMaker(abctools.AbjadObject):
             )
 
     def build_lifeline_timespan_inventories(self):
-        print 'build lifeline timespan inventories'
+        print 'building lifeline timespan inventories'
         if self.guitar_lifeline_strategy is not None:
             self.guitar_pedal_timespans = self.guitar_lifeline_strategy(
                 self.guitar_timespans,
@@ -223,7 +235,7 @@ class SegmentMaker(abctools.AbjadObject):
                 )
 
     def build_semantic_voice_timespan_inventories(self):
-        print 'build semantic voice timespan inventories'
+        print 'building semantic voice timespan inventories'
         for context_name in self.semantic_context_bundles:
             print '\t{}'.format(context_name)
             pair = self.semantic_context_bundles[context_name]
@@ -236,7 +248,7 @@ class SegmentMaker(abctools.AbjadObject):
             timespan_inventory[:] = result
 
     def build_silence_timespans(self):
-        print 'build silence timespans'
+        print 'building silence timespans'
         from plague_water import makers
         offsets = mathtools.cumulative_sums(
             x.duration for x in self.time_signatures)
@@ -266,7 +278,7 @@ class SegmentMaker(abctools.AbjadObject):
             timespan_inventory.sort()
 
     def cleanup_semantic_voice_timespan_inventories(self):
-        print 'cleanup timespan inventories'
+        print 'cleaning up timespan inventories'
         measure_segmentation_talea = self.measure_segmentation_talea
         if not self.measure_segmentation_talea:
             measure_segmentation_talea = (1,)
@@ -303,7 +315,7 @@ class SegmentMaker(abctools.AbjadObject):
                 if self.minimum_timespan_duration <= x.duration]
 
     def configure_lilypond_file(self):
-        print 'configure lilypond file'
+        print 'configuring lilypond file'
         lilypond_file = lilypondfiletools.LilyPondFile()
         score_block = lilypondfiletools.Block(name='score')
         score_block.items.append(self.score)
@@ -314,35 +326,38 @@ class SegmentMaker(abctools.AbjadObject):
         lilypond_file.global_staff_size = 14
         self.lilypond_file = lilypond_file
 
-    def configure_score(self):
-        print 'configure score'
+    def configure_score(self, is_final_segment=True):
+        print 'configuring score'
         override(self.score).horizontal_bracket.color = 'red'
         rehearsal_mark = indicatortools.LilyPondCommand(r'mark \default')
         attach(rehearsal_mark, self.score['TimeSignatureContext'][0],
             scope=scoretools.Context)
         attach(self.segment_tempo, self.score['TimeSignatureContext'][0])
-        self.score.add_double_bar()
-        right_column = markuptools.MarkupCommand(
-            'right-column', [
-                ' ',
-                ' ',
-                ' ',
-                'Jamaica Plain',
-                'December 2013 - February 2014',
-                ],
-            )
-        italic = markuptools.MarkupCommand(
-            'italic',
-            right_column,
-            )
-        final_markup = Markup(italic, 'down')
-        self.score.add_final_markup(final_markup)
+        if is_final_segment:
+            self.score.add_double_bar()
+            right_column = markuptools.MarkupCommand(
+                'right-column', [
+                    ' ',
+                    ' ',
+                    ' ',
+                    'Jamaica Plain',
+                    'December 2013 - February 2014',
+                    ],
+                )
+            italic = markuptools.MarkupCommand(
+                'italic',
+                right_column,
+                )
+            final_markup = Markup(italic, 'down')
+            self.score.add_final_markup(final_markup)
+        else:
+            self.score.add_double_bar()
 
     def create_rhythms(
         self,
         rewrite_meter=True,
         ):
-        print 'create rhythms'
+        print 'creating rhythms'
         seed = 0
         for context_name in self.all_context_bundles:
             print '\t{}'.format(context_name)
@@ -418,7 +433,7 @@ class SegmentMaker(abctools.AbjadObject):
         return result, seed
 
     def find_meters(self):
-        print 'find meters'
+        print 'finding meters'
         offset_counter = datastructuretools.TypedCounter(
             item_class=Offset,
             )
@@ -455,8 +470,16 @@ class SegmentMaker(abctools.AbjadObject):
             self.cached_makers[key] = contexted_maker
         return self.cached_makers[key]
 
+    def iterate_containers_and_music_makers(self):
+        from plague_water import makers
+        for voice in iterate(self.score).by_class(Voice):
+            for container in voice:
+                music_maker = \
+                    inspect(container).get_effective(makers.MusicMaker)
+                yield container, music_maker
+
     def populate_time_signature_context(self):
-        print 'populate time signature context'
+        print 'populating time signature context'
         measures = scoretools.make_spacer_skip_measures(
             self.time_signatures)
         self.score['TimeSignatureContext'].extend(measures)
