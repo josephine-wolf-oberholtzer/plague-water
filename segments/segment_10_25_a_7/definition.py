@@ -9,10 +9,11 @@ from plague_water import score_templates
 index = 10
 measure_segmentation_talea = (1,)
 permitted_time_signatures = materials.mixed_time_signatures
-segment_name = 'Segment {} ({}:{})'.format(
+segment_name = 'Segment {}a ({}:{}) (7:{})'.format(
     index,
     materials.proportions[index - 1],
     sum(materials.proportions),
+    materials.proportions[index - 1],
     )
 segment_tempo = materials.tempo_inventory[0]
 segment_target_duration = makers.SegmentMaker.get_segment_target_duration(
