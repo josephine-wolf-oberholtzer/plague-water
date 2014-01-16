@@ -166,7 +166,8 @@ class MusicMaker(ContextAwareMaker):
                 meter_cache=meter_cache,
                 meters=meters,
                 )
-        if beam_music:
+        if beam_music and \
+            self.rhythm_maker != rhythmmakertools.RestRhythmMaker():
             beam = spannertools.GeneralizedBeam(
                 include_long_duration_notes=False,
                 include_long_duration_rests=False,

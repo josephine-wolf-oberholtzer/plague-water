@@ -66,9 +66,11 @@ class BrushComponent(ContextAwareMaker):
             datastructuretools.StatalServerCursor)
         assert isinstance(self.tailing_rest_durations,
             (datastructuretools.StatalServerCursor, type(None)))
-        assert isinstance(self.music_maker, makers.MusicMaker)
         assert isinstance(initial_offset, Duration), initial_offset
         assert isinstance(maximum_offset, Duration), maximum_offset
+        music_maker = self.music_maker or makers.MusicMaker(
+            rhythm_maker=rhythmmakertools.RestRhythmMaker(),
+            )
         timespan_inventory = timespantools.TimespanInventory()
         leading_rest_duration = Duration(0)
         if self.leading_rest_durations is not None:
@@ -86,7 +88,7 @@ class BrushComponent(ContextAwareMaker):
             if maximum_offset <= stop_offset:
                 return timespan_inventory, maximum_offset
             timespan = makers.PayloadedTimespan(
-                music_maker=self.music_maker,
+                music_maker=music_maker,
                 start_offset=start_offset,
                 stop_offset=stop_offset,
                 )

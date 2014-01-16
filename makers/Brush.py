@@ -88,6 +88,13 @@ class Brush(abctools.AbjadObject):
                 )
             contexted_brush_component = new(brush_component, **parameter_map)
             contexted_brush_components.append(contexted_brush_component)
+        if not contexted_brush_components:
+            brush_component = makers.BrushComponent(
+                music_maker=makers.MusicMaker(
+                    rhythm_maker=rhythmmakertools.RestRhythmMaker(),
+                    ),
+                )
+            contexted_brush_components.append(brush_component)
         weights = [x.weight for x in contexted_brush_components]
         pairs = mathtools.cumulative_sums_pairwise(
             mathtools.partition_integer_by_ratio(

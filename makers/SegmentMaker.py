@@ -335,11 +335,15 @@ class SegmentMaker(abctools.AbjadObject):
             brush, timespan_inventory = pair
             silence_timespan_inventory = timespantools.TimespanInventory()
             previous_stop_offset = Offset(0)
+            silence_music_maker = makers.MusicMaker(
+                rhythm_maker=rhythmmakertools.RestRhythmMaker(),
+                )
             with systemtools.ProgressIndicator(message) as progress_indicator:
                 for timespan in timespan_inventory:
                     current_start_offset = timespan.start_offset
                     if previous_stop_offset < current_start_offset:
                         silence_timespan = makers.PayloadedTimespan(
+                            music_maker=silence_music_maker,
                             start_offset=previous_stop_offset,
                             stop_offset=current_start_offset,
                             )
@@ -348,12 +352,31 @@ class SegmentMaker(abctools.AbjadObject):
                     progress_indicator.advance()
                 if previous_stop_offset < self.segment_actual_duration:
                     silence_timespan = makers.PayloadedTimespan(
+                        music_maker=silence_music_maker,
                         start_offset=previous_stop_offset,
                         stop_offset=self.segment_actual_duration,
                         )
                     silence_timespan_inventory.append(silence_timespan)
                     progress_indicator.advance()
-            for shard in silence_timespan_inventory.split_at_offsets(offsets):
+            timespan_inventory.extend(silence_timespan_inventory)
+            all_silence_timespans = timespantools.TimespanInventory([
+                x for x in timespan_inventory
+                if x.music_maker == silence_music_maker
+                ])
+            all_silence_timespans.sort()
+            fused_silence_timespans = timespantools.TimespanInventory()
+            for group in all_silence_timespans.partition(
+                include_tangent_timespans=True,
+                ):
+                fused_silence_timespan = makers.PayloadedTimespan(
+                    music_maker=silence_music_maker,
+                    start_offset=group.start_offset,
+                    stop_offset=group.stop_offset,
+                    )
+                fused_silence_timespans.append(fused_silence_timespan)
+            timespan_inventory[:] = [x for x in timespan_inventory
+                if x.music_maker != silence_music_maker]
+            for shard in fused_silence_timespans.split_at_offsets(offsets):
                 timespan_inventory.extend(shard)
             timespan_inventory.sort()
 
@@ -568,8 +591,9 @@ class SegmentMaker(abctools.AbjadObject):
             tempo.duration_to_milliseconds(tempo.duration),
             1000,
             )
-        segment_target_duration = \
+        segment_target_duration = Duration((
             segment_target_duration_in_seconds / tempo_duration_in_seconds
+            ).limit_denominator(16))
         return segment_target_duration
 
     def iterate_containers_and_music_makers(self):
