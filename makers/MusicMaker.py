@@ -151,7 +151,7 @@ class MusicMaker(ContextAwareMaker):
         rhythm_maker = self.rhythm_maker or self._default_rhythm_maker
         assert isinstance(rhythm_maker, rhythmmakertools.RhythmMaker)
         seed = int(seed)
-        music = self.rhythm_maker(durations, seeds=seed)
+        music = rhythm_maker(durations, seeds=seed)
         for i, x in enumerate(music):
             if isinstance(x, Tuplet) and x.is_trivial:
                 music[i] = Container()

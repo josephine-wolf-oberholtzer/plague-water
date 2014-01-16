@@ -108,8 +108,10 @@ class SegmentMaker(abctools.AbjadObject):
         self.piano_rh_brush = piano_rh_brush
         self.saxophone_brush = saxophone_brush
         self.segment_name = segment_name
+        segment_target_duration = Duration(segment_target_duration)
+        assert isinstance(segment_target_duration, Duration)
         self.segment_target_duration = segment_target_duration
-        self.segment_tempo = segment_tempo
+        self.segment_tempo = Tempo(segment_tempo)
         # set place holders
         self.cached_makers = {}
         self.cached_meters = {}
@@ -304,10 +306,15 @@ class SegmentMaker(abctools.AbjadObject):
                 )
 
     def build_semantic_voice_timespan_inventories(self):
+        from plague_water import makers
         print 'building semantic voice timespan inventories'
         for context_name in self.semantic_context_bundles:
             pair = self.semantic_context_bundles[context_name]
             brush, timespan_inventory = pair
+            if brush is None:
+                brush = makers.Brush([
+                    makers.BrushComponent(),
+                    ])
             result = brush(
                 context_map=self.context_map,
                 context_name=context_name,
@@ -546,15 +553,17 @@ class SegmentMaker(abctools.AbjadObject):
 
     @staticmethod
     def get_segment_target_duration(
+        denominator=None,
         numerator=None,
         tempo=None,
+        total_duration_in_seconds=None,
         ):
         segment_target_duration_in_seconds = Duration(
-            480 * numerator,
-            sum(materials.proportions),
+            total_duration_in_seconds * numerator,
+            denominator,
             )
         tempo_duration_in_seconds = Duration(
-            segment_tempo.duration_to_milliseconds(segment_tempo.duration),
+            tempo.duration_to_milliseconds(tempo.duration),
             1000,
             )
         segment_target_duration = \
