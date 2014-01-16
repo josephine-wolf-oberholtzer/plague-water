@@ -427,6 +427,7 @@ class SegmentMaker(abctools.AbjadObject):
             lilypond_file.file_initial_user_includes.append(file_path)
         lilypond_file.default_paper_size = '11x17', 'landscape'
         lilypond_file.global_staff_size = 14
+        lilypond_file.file_initial_system_comments[:] = []
         self.lilypond_file = lilypond_file
 
     def configure_score(self):
