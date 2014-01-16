@@ -39,6 +39,7 @@ class SegmentMaker(abctools.AbjadObject):
         'saxophone_timespans',
         'score',
         'segment_actual_duration',
+        'segment_name',
         'segment_target_duration',
         'segment_tempo',
         'time_signatures',
@@ -60,6 +61,7 @@ class SegmentMaker(abctools.AbjadObject):
         piano_lifeline_strategy=None,
         piano_rh_brush=None,
         saxophone_brush=None,
+        segment_name=None,
         segment_target_duration=None,
         segment_tempo=None,
         ):
@@ -105,6 +107,7 @@ class SegmentMaker(abctools.AbjadObject):
         self.piano_lifeline_strategy = piano_lifeline_strategy
         self.piano_rh_brush = piano_rh_brush
         self.saxophone_brush = saxophone_brush
+        self.segment_name = segment_name
         self.segment_target_duration = segment_target_duration
         self.segment_tempo = segment_tempo
         # set place holders
@@ -540,6 +543,23 @@ class SegmentMaker(abctools.AbjadObject):
             contexted_maker = new(maker, **parameter_map)
             self.cached_makers[key] = contexted_maker
         return self.cached_makers[key]
+
+    @staticmethod
+    def get_segment_target_duration(
+        numerator=None,
+        tempo=None,
+        ):
+        segment_target_duration_in_seconds = Duration(
+            480 * numerator,
+            sum(materials.proportions),
+            )
+        tempo_duration_in_seconds = Duration(
+            segment_tempo.duration_to_milliseconds(segment_tempo.duration),
+            1000,
+            )
+        segment_target_duration = \
+            segment_target_duration_in_seconds / tempo_duration_in_seconds
+        return segment_target_duration
 
     def iterate_containers_and_music_makers(self):
         from plague_water import makers
