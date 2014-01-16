@@ -594,6 +594,7 @@ class SegmentMaker(abctools.AbjadObject):
         segment_target_duration = Duration((
             segment_target_duration_in_seconds / tempo_duration_in_seconds
             ).limit_denominator(16))
+        segment_target_duration *= tempo.duration
         return segment_target_duration
 
     def iterate_containers_and_music_makers(self):
