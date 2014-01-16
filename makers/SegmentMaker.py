@@ -284,12 +284,23 @@ class SegmentMaker(abctools.AbjadObject):
             current_directory_path,
             'output.pdf',
             )
-        lilypond_file = self()
-        print '\tpersisting'
-        persist(lilypond_file).as_pdf(
-            pdf_file_path=pdf_file_path,
-            remove_ly=False,
+        ly_file_path = os.path.join(
+            current_directory_path,
+            'output.ly',
             )
+        lilypond_file = self()
+        should_persist = True
+        if os.path.exists(ly_file_path):
+            new_lilypond_string = format(lilypond_file)
+            with open(ly_file_path, 'r') as f:
+                old_lilypond_string = f.read()
+            if old_lilypond_string == new_lilypond_string:
+                should_persist = False
+        if should_persist:
+            persist(lilypond_file).as_pdf(
+                pdf_file_path=pdf_file_path,
+                remove_ly=False,
+                )
 
     def build_lifeline_timespan_inventories(self):
         print '\tbuilding lifeline timespan inventories'
