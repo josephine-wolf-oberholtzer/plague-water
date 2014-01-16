@@ -44,8 +44,3 @@ segment_maker = makers.SegmentMaker(
     segment_target_duration=segment_target_duration,
     segment_tempo=segment_tempo,
     )
-
-### MAIN ###
-
-if __name__ == '__main__':
-    segment_maker.build_and_persist(__file__)
