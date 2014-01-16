@@ -1,5 +1,5 @@
-#(set-default-paper-size "11x17" 'landscape)
-#(set-global-staff-size 16)
+#(set-default-paper-size "11x17" 'portrait)
+#(set-global-staff-size 12)
 
 \paper {
     bottom-margin = 10\mm
@@ -38,7 +38,7 @@
         #'((basic-distance . 0)
         (minimum-distance . 14)
         (padding . 0)
-        (stretchability . 0))
+        (stretchability . 8))
     top-margin = 10\mm
     top-markup-spacing =
         #'((basic-distance . 0)
