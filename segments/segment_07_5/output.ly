@@ -1,5 +1,3 @@
-% 2014-01-16 16:51
-
 \version "2.19.0"
 \language "english"
 
