@@ -26,7 +26,6 @@ segment_target_duration = makers.SegmentMaker.get_segment_target_duration(
 
 score = score_templates.PlagueWaterScoreTemplate()()
 context_map = datastructuretools.ContextMap(score)
-context_map[score]['music_maker'] = makers.MusicMaker()
 context_map[score]['playing_durations'] = [1, 1]
 context_map[score]['playing_groupings'] = [1, 1]
 context_map[score]['leading_rest_durations'] = [1, 1]
