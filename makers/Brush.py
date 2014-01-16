@@ -59,7 +59,7 @@ class Brush(abctools.AbjadObject):
             )
         current_offset = Offset(0)
         timespan_inventory = timespantools.TimespanInventory()
-        message = '\t{}'.format(context_name)
+        message = '\t\t{}'.format(context_name)
         with systemtools.ProgressIndicator(message) as progress_indicator:
             while current_offset < segment_target_duration:
                 brush_component = self._choose_brush_component(

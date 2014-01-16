@@ -20,6 +20,7 @@ class SegmentMaker(abctools.AbjadObject):
         'guitar_lifeline_strategy',
         'guitar_pedal_timespans',
         'guitar_timespans',
+        'is_final_segment',
         'lilypond_file',
         'measure_segmentation_talea',
         'meters',
@@ -52,6 +53,7 @@ class SegmentMaker(abctools.AbjadObject):
         context_map=None,
         guitar_brush=None,
         guitar_lifeline_strategy=None,
+        is_final_segment=True,
         measure_segmentation_talea=None,
         minimum_timespan_duration=None,
         percussion_lh_brush=None,
@@ -98,6 +100,7 @@ class SegmentMaker(abctools.AbjadObject):
         self.context_map = context_map
         self.guitar_brush = guitar_brush
         self.guitar_lifeline_strategy = guitar_lifeline_strategy
+        self.is_final_segment = bool(is_final_segment)
         self.measure_segmentation_talea = measure_segmentation_talea
         self.minimum_timespan_duration = minimum_timespan_duration
         self.percussion_lh_brush = percussion_lh_brush
@@ -108,9 +111,7 @@ class SegmentMaker(abctools.AbjadObject):
         self.piano_rh_brush = piano_rh_brush
         self.saxophone_brush = saxophone_brush
         self.segment_name = segment_name
-        segment_target_duration = Duration(segment_target_duration)
-        assert isinstance(segment_target_duration, Duration)
-        self.segment_target_duration = segment_target_duration
+        self.segment_target_duration = Duration(segment_target_duration)
         self.segment_tempo = Tempo(segment_tempo)
         # set place holders
         self.cached_makers = {}
@@ -182,7 +183,7 @@ class SegmentMaker(abctools.AbjadObject):
     ### PUBLIC METHODS ###
 
     def apply_articulations(self):
-        message = 'applying articulations'
+        message = '\tapplying articulations'
         music_maker_seeds = collections.Counter()
         with systemtools.ProgressIndicator(message) as progress_indicator:
             for music, music_maker in \
@@ -197,7 +198,7 @@ class SegmentMaker(abctools.AbjadObject):
                 progress_indicator.advance()
 
     def apply_chords(self):
-        message = 'applying chords'
+        message = '\tapplying chords'
         music_maker_seeds = collections.Counter()
         with systemtools.ProgressIndicator(message) as progress_indicator:
             for music, music_maker in \
@@ -212,7 +213,7 @@ class SegmentMaker(abctools.AbjadObject):
                 progress_indicator.advance()
 
     def apply_dynamics(self):
-        message = 'applying dynamics'
+        message = '\tapplying dynamics'
         music_maker_seeds = collections.Counter()
         with systemtools.ProgressIndicator(message) as progress_indicator:
             for music, music_maker in \
@@ -228,7 +229,7 @@ class SegmentMaker(abctools.AbjadObject):
 
     def apply_pitch_classes(self):
         from plague_water import makers
-        message = 'applying pitch classes'
+        message = '\tapplying pitch classes'
         music_maker_seeds = collections.Counter()
         with systemtools.ProgressIndicator(message) as progress_indicator:
             for leaf in iterate(self.score).by_timeline(Note):
@@ -246,7 +247,7 @@ class SegmentMaker(abctools.AbjadObject):
                 progress_indicator.advance()
 
     def apply_registrations(self):
-        message = 'applying registrations'
+        message = '\tapplying registrations'
         music_maker_seeds = collections.Counter()
         with systemtools.ProgressIndicator(message) as progress_indicator:
             for music, music_maker in \
@@ -261,7 +262,7 @@ class SegmentMaker(abctools.AbjadObject):
                 progress_indicator.advance()
 
     def apply_spanners(self):
-        message = 'apply spanners'
+        message = '\tapplying spanners'
         music_maker_seeds = collections.Counter()
         with systemtools.ProgressIndicator(message) as progress_indicator:
             for music, music_maker in \
@@ -276,7 +277,7 @@ class SegmentMaker(abctools.AbjadObject):
                 progress_indicator.advance()
 
     def build_and_persist(self, current_file_path):
-        print 'persisting'
+        print 'Building {}'.format(self.segment_name)
         current_directory_path = os.path.dirname(os.path.abspath(
             os.path.expanduser(current_file_path)))
         pdf_file_path = os.path.join(
@@ -284,13 +285,14 @@ class SegmentMaker(abctools.AbjadObject):
             'output.pdf',
             )
         lilypond_file = self()
+        print '\tpersisting'
         persist(lilypond_file).as_pdf(
             pdf_file_path=pdf_file_path,
             remove_ly=False,
             )
 
     def build_lifeline_timespan_inventories(self):
-        print 'building lifeline timespan inventories'
+        print '\tbuilding lifeline timespan inventories'
         if self.guitar_lifeline_strategy is not None:
             self.guitar_pedal_timespans = self.guitar_lifeline_strategy(
                 self.guitar_timespans,
@@ -307,7 +309,7 @@ class SegmentMaker(abctools.AbjadObject):
 
     def build_semantic_voice_timespan_inventories(self):
         from plague_water import makers
-        print 'building semantic voice timespan inventories'
+        print '\tbuilding semantic voice timespan inventories'
         for context_name in self.semantic_context_bundles:
             pair = self.semantic_context_bundles[context_name]
             brush, timespan_inventory = pair
@@ -323,12 +325,12 @@ class SegmentMaker(abctools.AbjadObject):
             timespan_inventory[:] = result
 
     def build_silence_timespans(self):
-        print 'building silence timespans'
+        print '\tbuilding silence timespans'
         from plague_water import makers
         offsets = mathtools.cumulative_sums(
             x.duration for x in self.time_signatures)
         for context_name in self.all_context_bundles:
-            message = '\t{}'.format(context_name)
+            message = '\t\t{}'.format(context_name)
             pair = self.all_context_bundles[context_name]
             brush, timespan_inventory = pair
             silence_timespan_inventory = timespantools.TimespanInventory()
@@ -356,7 +358,7 @@ class SegmentMaker(abctools.AbjadObject):
             timespan_inventory.sort()
 
     def cleanup_semantic_voice_timespan_inventories(self):
-        print 'cleaning up timespan inventories'
+        print '\tcleaning up timespan inventories'
         measure_segmentation_talea = self.measure_segmentation_talea
         if not self.measure_segmentation_talea:
             measure_segmentation_talea = (1,)
@@ -393,7 +395,7 @@ class SegmentMaker(abctools.AbjadObject):
                 if self.minimum_timespan_duration <= x.duration]
 
     def configure_lilypond_file(self):
-        print 'configuring lilypond file'
+        print '\tconfiguring lilypond file'
         lilypond_file = lilypondfiletools.LilyPondFile()
         score_block = lilypondfiletools.Block(name='score')
         score_block.items.append(self.score)
@@ -404,15 +406,14 @@ class SegmentMaker(abctools.AbjadObject):
         lilypond_file.global_staff_size = 14
         self.lilypond_file = lilypond_file
 
-    def configure_score(self, is_final_segment=True):
-        print 'configuring score'
+    def configure_score(self):
+        print '\tconfiguring score'
         override(self.score).horizontal_bracket.color = 'red'
         rehearsal_mark = indicatortools.LilyPondCommand(r'mark \default')
         attach(rehearsal_mark, self.score['TimeSignatureContext'][0],
             scope=scoretools.Context)
         attach(self.segment_tempo, self.score['TimeSignatureContext'][0])
-        if is_final_segment:
-            self.score.add_double_bar()
+        if self.is_final_segment:
             right_column = markuptools.MarkupCommand(
                 'right-column', [
                     ' ',
@@ -428,14 +429,15 @@ class SegmentMaker(abctools.AbjadObject):
                 )
             final_markup = Markup(italic, 'down')
             self.score.add_final_markup(final_markup)
+            self.score.add_final_bar_line()
         else:
-            self.score.add_double_bar()
+            self.score.add_final_bar_line('||')
 
     def create_rhythms(
         self,
         rewrite_meter=True,
         ):
-        print 'creating rhythms'
+        print '\tcreating rhythms'
         seed = 0
         for context_name in self.all_context_bundles:
             brush, timespan_inventory = self.all_context_bundles[context_name]
@@ -458,7 +460,7 @@ class SegmentMaker(abctools.AbjadObject):
         ):
         from plague_water import makers
         result = []
-        message = '\t{}'.format(context_name)
+        message = '\t\t{}'.format(context_name)
         with systemtools.ProgressIndicator(message) as progress_indicator:
             silence_music_maker = makers.MusicMaker(
                 rhythm_maker=rhythmmakertools.RestRhythmMaker(),
@@ -514,7 +516,7 @@ class SegmentMaker(abctools.AbjadObject):
         return result, seed
 
     def find_meters(self):
-        print 'finding meters'
+        print '\tfinding meters'
         offset_counter = datastructuretools.TypedCounter(
             item_class=Offset,
             )
@@ -579,7 +581,7 @@ class SegmentMaker(abctools.AbjadObject):
                 yield container, music_maker
 
     def populate_time_signature_context(self):
-        print 'populating time signature context'
+        print '\tpopulating time signature context'
         measures = scoretools.make_spacer_skip_measures(
             self.time_signatures)
         self.score['TimeSignatureContext'].extend(measures)
