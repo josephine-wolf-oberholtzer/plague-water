@@ -8,7 +8,7 @@ from plague_water import materials
 ### SEGMENT PARAMETERS ###
 
 measure_segmentation_talea = (1,)
-permitted_time_signatures = materials.time_signature_inventories[0]
+permitted_time_signatures = materials.mixed_time_signatures
 segment_target_duration = Duration(6)
 segment_tempo = materials.tempo_inventory[0]
 

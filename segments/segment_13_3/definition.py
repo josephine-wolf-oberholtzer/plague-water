@@ -8,7 +8,7 @@ from plague_water import score_templates
 
 index = 13
 measure_segmentation_talea = (1,)
-permitted_time_signatures = materials.time_signature_inventories[0]
+permitted_time_signatures = materials.mixed_time_signatures
 segment_name = 'Segment {} ({}:{})'.format(
     index,
     materials.proportions[index - 1],
