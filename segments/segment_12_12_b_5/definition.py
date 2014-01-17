@@ -46,6 +46,7 @@ segment_maker = makers.SegmentMaker(
     is_final_segment=False,
     measure_segmentation_talea=measure_segmentation_talea,
     permitted_time_signatures=permitted_time_signatures,
+    segment_id=segment_id,
     segment_name=segment_name,
     segment_target_duration=segment_target_duration,
     segment_tempo=segment_tempo,
