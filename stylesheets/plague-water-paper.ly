@@ -1,4 +1,4 @@
-#(set-default-paper-size "11x17" 'portrait)
+#(set-default-paper-size "11x17" 'landscape)
 #(set-global-staff-size 12)
 
 \paper {
@@ -14,11 +14,12 @@
     }
     evenHeaderMarkup = \markup \fill-line { " " }
     left-margin = 30\mm
-    markup-system-spacing =
-        #'((basic-distance . 0)
+    markup-system-spacing = #'(
+        (basic-distance . 0)
         (minimum-distance . 60)
         (padding . 0)
-        (stretchability . 0))
+        (stretchability . 0)
+        )
     oddFooterMarkup = \markup \fill-line {
         " "
         \concat {
@@ -34,15 +35,17 @@
     %ragged-bottom = ##t
     ragged-last-bottom = ##t
     right-margin = 10\mm
-    system-system-spacing =
-        #'((basic-distance . 0)
+    system-system-spacing = #'(
+        (basic-distance . 0)
         (minimum-distance . 14)
-        (padding . 0)
-        (stretchability . 8))
+        (padding . 6)
+        (stretchability . 8)
+        )
     top-margin = 10\mm
-    top-markup-spacing =
-        #'((basic-distance . 0)
+    top-markup-spacing = #'(
+        (basic-distance . 0)
         (minimum-distance . 0)
         (padding . 8)
-        (stretchability . 0))
+        (stretchability . 0)
+        )
 }
