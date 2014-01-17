@@ -137,15 +137,28 @@
         \consists Time_signature_engraver
         \consists Axis_group_engraver
         \consists Metronome_mark_engraver
-        \consists Rehearsal_mark_engraver
+        \consists Mark_engraver
         \consists Bar_number_engraver
+        \override BarNumber.extra-offset = #'(-8 . -2)
+        \override BarNumber.font-name = "Didot Italic"
+        \override BarNumber.font-size = #1
+        \override BarNumber.X-extent = #'(0 . 0)
+        \override BarNumber.Y-extent = #'(0 . 0)
+        \override BarNumber.stencil = #(make-stencil-circler 0.1 0.7 ly:text-interface::print)
+        \override MetronomeMark.X-offset = #ly:self-alignment-interface::x-aligned-on-self
+        \override MetronomeMark.break-align-symbols = #'(time-signature)
+        \override MetronomeMark.extra-offset = #'(3 . -5.5)
+        \override RehearsalMark.break-align-symbols = #'(time-signature)
+        \override RehearsalMark.break-visibility = #end-of-line-invisible
+        \override RehearsalMark.extra-offset = #'(-1 . 0)
+        \override RehearsalMark.font-name = "Didot"
+        \override RehearsalMark.font-size = #10
+        \override RehearsalMark.self-alignment-X = #CENTER
         \override TimeSignature.X-extent = #'(0 . 0)
-        \override TimeSignature.X-offset = #ly:self-alignment-interface::x-aligned-on-self
-        \override TimeSignature.Y-extent = #'(0 . 0)
-        \override TimeSignature.break-align-symbol = ##f
+        \override TimeSignature.break-align-symbols = #'(staff-bar)
         \override TimeSignature.break-visibility = #end-of-line-invisible
+        \override TimeSignature.extra-offset = #'(-2 . 0)
         \override TimeSignature.font-size = #3
-        \override TimeSignature.self-alignment-X = #CENTER
         \override VerticalAxisGroup.default-staff-staff-spacing = #'(
             (basic-distance . 0)
             (minimum-distance . 10)
@@ -163,32 +176,17 @@
         \accepts SaxophoneStaffGroup
         \accepts TimeSignatureContext
         \remove Metronome_mark_engraver
-        \remove Rehearsal_mark_engraver
+        \remove Mark_engraver
         \remove Bar_number_engraver
         \override BarLine.hair-thickness = #0.5
-        \override BarNumber.extra-offset = #'(-8 . -2)
-        \override BarNumber.font-name = "Didot Italic"
-        \override BarNumber.font-size = #1
-        \override BarNumber.X-extent = #'(0 . 0)
-        \override BarNumber.Y-extent = #'(0 . 0)
-        \override BarNumber.stencil = #(make-stencil-circler 0.1 0.7 ly:text-interface::print)
         \override Beam.breakable = ##t
         \override DynamicLineSpanner.Y-extent = #'(-1.5 . 1.5)
         \override Glissando.breakable = ##t
-        \override MetronomeMark.extra-offset = #'(3 . -3)
+        \override MetronomeMark.extra-offset = #'(0 . -3)
         \override MetronomeMark.font-size = #3
         \override NoteCollision.merge-differently-dotted = ##t
         \override NoteColumn.ignore-collision = ##t
         \override PhrasingSlur.dash-definition = #'((0 1 0.1 0.75))
-        \override RehearsalMark.extra-offset = #'(-1.5 . 0)
-        \override RehearsalMark.outside-staff-padding = #2
-        \override RehearsalMark.X-extent = #'(0 . 0)
-        \override RehearsalMark.X-offset = #ly:self-alignment-interface::x-aligned-on-self
-        \override RehearsalMark.break-align-symbol = ##f
-        \override RehearsalMark.break-visibility = #end-of-line-invisible
-        \override RehearsalMark.font-size = #10
-        \override RehearsalMark.font-name = "Didot"
-        \override RehearsalMark.self-alignment-X = #CENTER
         \override SpacingSpanner.strict-grace-spacing = ##t
         \override SpacingSpanner.strict-note-spacing = ##t
         \override SpacingSpanner.uniform-stretching = ##t
