@@ -14,7 +14,7 @@
 	} <<
 		\context TimeSignatureContext = "TimeSignatureContext" {
 			{
-				\mark \default
+				\mark \markup { \override #'(box-padding . 0.5) \box 8 }
 				\tempo 4=72
 				\time 3/4
 				s1 * 3/4
