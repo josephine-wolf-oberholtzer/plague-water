@@ -6,18 +6,21 @@ from plague_water import score_templates
 
 ### SEGMENT PARAMETERS ###
 
-index = 1
+segment_id = 1
+numerator = 2
+denominator = 106
+segment_name = 'Segment {} ({}:{})'.format(
+    segment_id,
+    numerator,
+    denominator,
+    )
+
 measure_segmentation_talea = (1,)
 permitted_time_signatures = materials.mixed_time_signatures
-segment_name = 'Segment {} ({}:{})'.format(
-    index,
-    2,
-    106,
-    )
 segment_tempo = materials.tempo_inventory[0]
 segment_target_duration = makers.SegmentMaker.get_segment_target_duration(
-    denominator=106,
-    numerator=2,
+    denominator=denominator,
+    numerator=numerator,
     tempo=segment_tempo,
     total_duration_in_seconds=480,
     )
