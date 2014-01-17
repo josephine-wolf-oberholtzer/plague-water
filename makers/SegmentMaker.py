@@ -42,6 +42,7 @@ class SegmentMaker(ContextAwareMaker):
         'score',
         'segment_actual_duration',
         'segment_name',
+        'segment_id',
         'segment_target_duration',
         'segment_tempo',
         'time_signatures',
@@ -64,6 +65,7 @@ class SegmentMaker(ContextAwareMaker):
         piano_lifeline_strategy=None,
         piano_rh_brush=None,
         saxophone_brush=None,
+        segment_id=None,
         segment_name=None,
         segment_target_duration=None,
         segment_tempo=None,
@@ -82,6 +84,7 @@ class SegmentMaker(ContextAwareMaker):
             piano_lifeline_strategy=piano_lifeline_strategy,
             piano_rh_brush=piano_rh_brush,
             saxophone_brush=saxophone_brush,
+            segment_id=segment_id,
             segment_name=segment_name,
             segment_target_duration=segment_target_duration,
             segment_tempo=segment_tempo,
@@ -105,6 +108,7 @@ class SegmentMaker(ContextAwareMaker):
             piano_lifeline_strategy=self.piano_lifeline_strategy,
             piano_rh_brush=self.piano_rh_brush,
             saxophone_brush=self.saxophone_brush,
+            segment_id=self.segment_id,
             segment_name=self.segment_name,
             segment_target_duration=self.segment_target_duration,
             segment_tempo=self.segment_tempo,
@@ -172,6 +176,7 @@ class SegmentMaker(ContextAwareMaker):
         piano_lifeline_strategy=None,
         piano_rh_brush=None,
         saxophone_brush=None,
+        segment_id=None,
         segment_name=None,
         segment_target_duration=None,
         segment_tempo=None,
@@ -189,6 +194,7 @@ class SegmentMaker(ContextAwareMaker):
         self.piano_lifeline_strategy = piano_lifeline_strategy
         self.piano_rh_brush = piano_rh_brush
         self.saxophone_brush = saxophone_brush
+        self.segment_id = str(segment_id)
         self.segment_name = segment_name
         self.segment_target_duration = segment_target_duration
         self.segment_tempo = segment_tempo
@@ -225,6 +231,7 @@ class SegmentMaker(ContextAwareMaker):
         piano_lifeline_strategy=None,
         piano_rh_brush=None,
         saxophone_brush=None,
+        segment_id=None,
         segment_name=None,
         segment_target_duration=None,
         segment_tempo=None,
@@ -279,6 +286,7 @@ class SegmentMaker(ContextAwareMaker):
             piano_lifeline_strategy=piano_lifeline_strategy,
             piano_rh_brush=piano_rh_brush,
             saxophone_brush=saxophone_brush,
+            segment_id=segment_id,
             segment_name=segment_name,
             segment_target_duration=segment_target_duration,
             segment_tempo=segment_tempo,
@@ -299,6 +307,7 @@ class SegmentMaker(ContextAwareMaker):
         piano_lifeline_strategy=None,
         piano_rh_brush=None,
         saxophone_brush=None,
+        segment_id=None,
         segment_name=None,
         segment_target_duration=None,
         segment_tempo=None,
@@ -342,6 +351,7 @@ class SegmentMaker(ContextAwareMaker):
             piano_lifeline_strategy=piano_lifeline_strategy,
             piano_rh_brush=piano_rh_brush,
             saxophone_brush=saxophone_brush,
+            segment_id=segment_id,
             segment_name=segment_name,
             segment_target_duration=segment_target_duration,
             segment_tempo=segment_tempo,
@@ -611,7 +621,13 @@ class SegmentMaker(ContextAwareMaker):
     def configure_score(self):
         print '\tconfiguring score'
         override(self.score).horizontal_bracket.color = 'red'
-        rehearsal_mark = indicatortools.LilyPondCommand(r'mark \default')
+        rehearsal_mark_text = 'mark \\markup {{ ' \
+            "\\override #'(box-padding . 0.5) " \
+            '\\box {} }}'
+        rehearsal_mark_text = rehearsal_mark_text.format(
+            self.segment_id.upper(),
+            )
+        rehearsal_mark = indicatortools.LilyPondCommand(rehearsal_mark_text)
         attach(rehearsal_mark, self.score['TimeSignatureContext'][0],
             scope=scoretools.Context)
         attach(self.segment_tempo, self.score['TimeSignatureContext'][0])
