@@ -11,25 +11,25 @@ measure_segmentation_talea = (1,)
 permitted_time_signatures = materials.mixed_time_signatures
 segment_name = 'Segment {} ({}:{})'.format(
     index,
-    materials.proportions[index - 1],
-    sum(materials.proportions),
+    2,
+    106,
     )
 segment_tempo = materials.tempo_inventory[0]
 segment_target_duration = makers.SegmentMaker.get_segment_target_duration(
-    denominator=sum(materials.proportions),
-    numerator=materials.proportions[index - 1],
+    denominator=106,
+    numerator=2,
     tempo=segment_tempo,
     total_duration_in_seconds=480,
     )
 
 ### CONTEXT MAP ###
 
-score = score_templates.PlagueWaterScoreTemplate()()
-context_map = datastructuretools.ContextMap(score)
-context_map[score]['playing_durations'] = [1, 1]
-context_map[score]['playing_groupings'] = [1, 1]
-context_map[score]['leading_rest_durations'] = [1, 1]
-context_map[score]['tailing_rest_durations'] = None
+score_template = score_templates.PlagueWaterScoreTemplate()
+context_map = datastructuretools.ContextMap(score_template)
+context_map['Plague Water Score']['playing_durations'] = [1, 1]
+context_map['Plague Water Score']['playing_groupings'] = [1, 1]
+context_map['Plague Water Score']['leading_rest_durations'] = [1, 1]
+context_map['Plague Water Score']['tailing_rest_durations'] = None
 
 ### BRUSHES ###
 

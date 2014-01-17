@@ -24,12 +24,12 @@ segment_target_duration = makers.SegmentMaker.get_segment_target_duration(
 
 ### CONTEXT MAP ###
 
-score = score_templates.PlagueWaterScoreTemplate()()
-context_map = datastructuretools.ContextMap(score)
-context_map[score]['playing_durations'] = [1, 1]
-context_map[score]['playing_groupings'] = [1, 1]
-context_map[score]['leading_rest_durations'] = [1, 1]
-context_map[score]['tailing_rest_durations'] = None
+score_template = score_templates.PlagueWaterScoreTemplate()
+context_map = datastructuretools.ContextMap(score_template)
+context_map['Plague Water Score']['playing_durations'] = [1, 1]
+context_map['Plague Water Score']['playing_groupings'] = [1, 1]
+context_map['Plague Water Score']['leading_rest_durations'] = [1, 1]
+context_map['Plague Water Score']['tailing_rest_durations'] = None
 
 ### BRUSHES ###
 
