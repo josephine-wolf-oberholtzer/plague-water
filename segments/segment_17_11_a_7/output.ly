@@ -460,18 +460,7 @@
 						}
 						{
 							R1 * 3/4
-								_ \markup {
-									\italic
-										\right-column
-											{
-												" "
-												" "
-												" "
-												"Jamaica Plain"
-												"December 2013 - February 2014"
-											}
-									}
-							\bar "|."
+							\bar "||"
 						}
 					}
 				}

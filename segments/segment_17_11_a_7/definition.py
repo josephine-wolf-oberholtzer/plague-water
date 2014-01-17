@@ -43,7 +43,7 @@ context_map['Plague Water Score']['tailing_rest_durations'] = None
 
 segment_maker = makers.SegmentMaker(
     context_map=context_map,
-    is_final_segment=True,
+    is_final_segment=False,
     measure_segmentation_talea=measure_segmentation_talea,
     permitted_time_signatures=permitted_time_signatures,
     segment_name=segment_name,
