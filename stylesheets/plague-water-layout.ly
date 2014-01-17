@@ -136,6 +136,9 @@
         \name TimeSignatureContext
         \consists Time_signature_engraver
         \consists Axis_group_engraver
+        \consists Metronome_mark_engraver
+        \consists Rehearsal_mark_engraver
+        \consists Bar_number_engraver
         \override TimeSignature.X-extent = #'(0 . 0)
         \override TimeSignature.X-offset = #ly:self-alignment-interface::x-aligned-on-self
         \override TimeSignature.Y-extent = #'(0 . 0)
@@ -159,6 +162,9 @@
         \accepts PianoStaffGroup
         \accepts SaxophoneStaffGroup
         \accepts TimeSignatureContext
+        \remove Metronome_mark_engraver
+        \remove Rehearsal_mark_engraver
+        \remove Bar_number_engraver
         \override BarLine.hair-thickness = #0.5
         \override BarNumber.extra-offset = #'(-8 . -2)
         \override BarNumber.font-name = "Didot Italic"
@@ -175,7 +181,7 @@
         \override NoteColumn.ignore-collision = ##t
         \override PhrasingSlur.dash-definition = #'((0 1 0.1 0.75))
         \override RehearsalMark.extra-offset = #'(-1.5 . 0)
-        \override RehearsalMark.outside-staff-padding = #6
+        \override RehearsalMark.outside-staff-padding = #2
         \override RehearsalMark.X-extent = #'(0 . 0)
         \override RehearsalMark.X-offset = #ly:self-alignment-interface::x-aligned-on-self
         \override RehearsalMark.break-align-symbol = ##f
