@@ -608,11 +608,17 @@ class SegmentMaker(ContextAwareMaker):
     def configure_lilypond_file(self):
         print '\tconfiguring lilypond file'
         lilypond_file = lilypondfiletools.LilyPondFile()
+        lilypond_file.use_relative_includes = True
         score_block = lilypondfiletools.Block(name='score')
         score_block.items.append(self.score)
         lilypond_file.items.append(score_block)
         for file_path in plague_water_configuration.stylesheets_file_paths:
-            lilypond_file.file_initial_user_includes.append(file_path)
+            file_name = os.path.split(file_path)[-1]
+            relative_file_path = os.path.join(
+                '..', '..', 'stylesheets',
+                file_name,
+                )
+            lilypond_file.file_initial_user_includes.append(relative_file_path)
         lilypond_file.default_paper_size = '11x17', 'landscape'
         lilypond_file.global_staff_size = 14
         lilypond_file.file_initial_system_comments[:] = []
