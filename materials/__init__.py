@@ -1,9 +1,10 @@
 # -*- encoding: utf-8 -*-
 
-from context_hierarchies import *
+from brushes import *
+from context_maps import *
 from duration_servers import *
 from euler_numbers import *
-from octave_transposition_mappings import *
+from registrations import *
 from pitch_classes import *
 from proportions import *
 from rhythm_makers import *
