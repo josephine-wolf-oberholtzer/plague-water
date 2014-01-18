@@ -1,9 +1,11 @@
 \version "2.19.0"
 \language "english"
 
-\include "/Users/josiah/Documents/Scores/plague_water/stylesheets/plague-water-header.ly"
-\include "/Users/josiah/Documents/Scores/plague_water/stylesheets/plague-water-layout.ly"
-\include "/Users/josiah/Documents/Scores/plague_water/stylesheets/plague-water-paper.ly"
+#(ly:set-option 'relative-includes #t)
+
+\include "../../stylesheets/plague-water-header.ly"
+\include "../../stylesheets/plague-water-paper.ly"
+\include "../../stylesheets/plague-water-layout.ly"
 
 #(set-default-paper-size "11x17" 'landscape)
 #(set-global-staff-size 14)
@@ -16,47 +18,6 @@
 			{
 				\mark \markup { \override #'(box-padding . 0.5) \box 10C }
 				\tempo 4=72
-				\time 3/4
-				s1 * 3/4
-			}
-			{
-				\time 5/8
-				s1 * 5/8
-			}
-			{
-				s1 * 5/8
-			}
-			{
-				\time 5/16
-				s1 * 5/16
-			}
-			{
-				\time 2/4
-				s1 * 1/2
-			}
-			{
-				\time 5/16
-				s1 * 5/16
-			}
-			{
-				\time 2/4
-				s1 * 1/2
-			}
-			{
-				\time 5/16
-				s1 * 5/16
-			}
-			{
-				s1 * 5/16
-			}
-			{
-				s1 * 5/16
-			}
-			{
-				\time 5/8
-				s1 * 5/8
-			}
-			{
 				\time 2/4
 				s1 * 1/2
 			}
@@ -68,6 +29,46 @@
 				\time 5/16
 				s1 * 5/16
 			}
+			{
+				\time 3/4
+				s1 * 3/4
+			}
+			{
+				\time 2/4
+				s1 * 1/2
+			}
+			{
+				\time 3/4
+				s1 * 3/4
+			}
+			{
+				\time 5/16
+				s1 * 5/16
+			}
+			{
+				\time 3/4
+				s1 * 3/4
+			}
+			{
+				\time 5/16
+				s1 * 5/16
+			}
+			{
+				\time 2/4
+				s1 * 1/2
+			}
+			{
+				\time 7/16
+				s1 * 7/16
+			}
+			{
+				\time 5/16
+				s1 * 5/16
+			}
+			{
+				\time 7/16
+				s1 * 7/16
+			}
 		}
 		\context SaxophoneStaffGroup = "Saxophone Staff Group" <<
 			\context SaxophoneStaff = "Saxophone Staff" {
@@ -75,37 +76,57 @@
 				\context Voice = "Saxophone Voice" {
 					{
 						{
-							r8.
+							r4
+							r16
 						}
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
-							c'16 ~
-							c'4 ~
-							c'16 [
-						}
-						{
-							c'8. ]
-							\revert Stem.stemlet-length
+							{
+								\override Stem.stemlet-length = 0.75
+								c'32 [
+								c'32 ]
+								\revert Stem.stemlet-length
+							}
 						}
 					}
 					{
 						{
-							R1 * 5/8
+							r8
+						}
+						{
+							r8
 						}
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
-							c'4.
+							{
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r4
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16
+							}
 						}
 						{
-							c'4
-						}
-						{
-							c'8.
-							\revert Stem.stemlet-length
+							{
+								c'32
+								c'32 ]
+								\revert Stem.stemlet-length
+							}
 						}
 					}
 					{
@@ -115,9 +136,28 @@
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
-							c'8.
-							\revert Stem.stemlet-length
+							{
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r4
+							r16
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
 						}
 					}
 					{
@@ -126,85 +166,150 @@
 							r4
 						}
 						{
-							R1 * 5/16
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'4 ~
-							c'8
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'8.
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'8. [ ~
-							c'8 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							R1 * 5/16
-						}
-						{
-							r4.
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'4
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
 							r16
 						}
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
-							c'8. [ ~
-							c'16
-						}
-						{
-							c'8.
-						}
-						{
-							c'8.
-						}
-						{
-							c'8. ]
-							\revert Stem.stemlet-length
+							{
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
 						}
 					}
 					{
 						{
-							r4.
+							r8.
+						}
+						{
+							r4
+						}
+					}
+					{
+						{
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 3/4 {
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r16
+							r4
+						}
+						{
+							r8
+						}
+					}
+					{
+						{
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 3/4 {
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r4
+							r8
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'32 [
+								c'32 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r16
+							r4
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'32 [
+								c'32 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8
+							r8
+						}
+						{
+							r8
+						}
+					}
+					{
+						{
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 3/4 {
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8.
+						}
+						{
+							r8.
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8
 						}
 						{
 							R1 * 5/16
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r16
+							r4
 						}
 					}
 				}
@@ -221,94 +326,49 @@
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
-							c'4 ~
-							c'8.
-							\revert Stem.stemlet-length
+							{
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
 						}
 					}
 					{
 						{
+							r8
+						}
+						{
+							r4
 							r16
 						}
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
-							c'4.
-						}
-						{
-							c'8.
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r16
-						}
-						{
-							R1 * 5/8
+							{
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
 						}
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
-							c'8. [ ~
-							c'8
+							r8.
 						}
 						{
-							c'8.
-						}
-						{
-							c'16 ] ~
-							c'4
-						}
-						{
-							c'8. [ ~
-							c'8 ]
-							\revert Stem.stemlet-length
+							r8
 						}
 					}
 					{
 						{
-							R1 * 1/2
-						}
-						{
-							R1 * 5/16
-						}
-						{
-							R1 * 5/16
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'8. [ ~
-							c'8 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							R1 * 5/8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'4
-						}
-						{
-							c'4
-						}
-						{
-							c'4. ~
-							c'16 [
-						}
-						{
-							c'16 ~
-							c'8. ]
-							\revert Stem.stemlet-length
+							{
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
 						}
 					}
 					{
@@ -316,7 +376,206 @@
 							r16
 						}
 						{
-							R1 * 5/16
+							r8.
+						}
+					}
+					{
+						{
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 3/4 {
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8
+							r4
+						}
+						{
+							r16
+						}
+					}
+					{
+						{
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 3/4 {
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r4
+						}
+						{
+							r16
+						}
+					}
+					{
+						{
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 3/4 {
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8.
+						}
+					}
+					{
+						{
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 3/4 {
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8
+						}
+						{
+							r8
+						}
+					}
+					{
+						{
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 3/4 {
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8.
+						}
+					}
+					{
+						{
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 5/8 {
+								\override Stem.stemlet-length = 0.75
+								c'4
+								c'4
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8.
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'32 [
+								c'32
+							}
+						}
+						{
+							{
+								c'32
+								c'32 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8
+							r8
+						}
+					}
+					{
+						{
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 5/8 {
+								\override Stem.stemlet-length = 0.75
+								c'4
+								c'4
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r16
+							r16
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'32 [
+								c'32
+							}
+						}
+						{
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 3/4 {
+								c'8
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r4
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r16
+							r8
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r16
+							r8
 						}
 					}
 				}
@@ -324,37 +583,16 @@
 			\context Dynamics = "Guitar Pedals" {
 				{
 					{
+						R1 * 1/2
+					}
+					{
 						R1 * 3/4
 					}
 					{
-						R1 * 5/8
-					}
-					{
-						R1 * 5/8
-					}
-					{
 						R1 * 5/16
 					}
 					{
-						R1 * 1/2
-					}
-					{
-						R1 * 5/16
-					}
-					{
-						R1 * 1/2
-					}
-					{
-						R1 * 5/16
-					}
-					{
-						R1 * 5/16
-					}
-					{
-						R1 * 5/16
-					}
-					{
-						R1 * 5/8
+						R1 * 3/4
 					}
 					{
 						R1 * 1/2
@@ -364,6 +602,24 @@
 					}
 					{
 						R1 * 5/16
+					}
+					{
+						R1 * 3/4
+					}
+					{
+						R1 * 5/16
+					}
+					{
+						R1 * 1/2
+					}
+					{
+						R1 * 7/16
+					}
+					{
+						R1 * 5/16
+					}
+					{
+						R1 * 7/16
 					}
 				}
 			}
@@ -374,122 +630,289 @@
 				\context Voice = "Piano RH Voice" {
 					{
 						{
-							r4
+							r16
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r16
 							r8.
 						}
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
-							c'16 ~
-							c'4
-						}
-						{
-							c'8. [
-						}
-						{
-							c'8. ] ~
-							c'4
-							\revert Stem.stemlet-length
+							{
+								\override Stem.stemlet-length = 0.75
+								c'32 [
+								c'32 ]
+								\revert Stem.stemlet-length
+							}
 						}
 					}
 					{
 						{
-							R1 * 5/8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'8. [ ~
-							c'8
-						}
-						{
-							c'8. ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r16
-							r4
-						}
-						{
-							R1 * 5/16
-						}
-						{
-							r4
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'4
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r16
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'8 [ ~
-							c'8
-						}
-						{
-							c'8. ~
-							c'8 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r16
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'8 [ ~
-							c'8 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							R1 * 5/8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'4 ~
-							c'16
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8.
-						}
-						{
-							r4.
 							r8
 						}
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
-							c'4
+							{
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8
+							r4 ~
+							r16
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'32 [
+								c'32
+							}
 						}
 						{
-							c'8. [ ~
-							c'8 ]
-							\revert Stem.stemlet-length
-							\bar "||"
+							{
+								c'32
+								c'32 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8
+							r8
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r4
+							r16
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r16
+						}
+						{
+							r4
+							r8
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'32 [
+								c'32 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r16
+						}
+						{
+							r4
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8
+							r16
+						}
+					}
+					{
+						{
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 3/4 {
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r16
+						}
+						{
+							r4
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8.
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'32 [
+								c'32
+							}
+						}
+						{
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 3/4 {
+								c'8
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8.
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'32 [
+								c'32
+							}
+						}
+						{
+							{
+								c'8
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r16
+							r8
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r16
+							r8
+						}
+						{
+							r8.
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'32 [
+								c'32 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r16
+							r8
 						}
 					}
 				}
@@ -501,74 +924,68 @@
 				\context Voice = "Piano LH Voice" {
 					{
 						{
+							r16
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'32 [
+								c'32 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8
+							r16
+						}
+					}
+					{
+						{
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 3/4 {
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
 							r4
+						}
+					}
+					{
+						{
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 3/4 {
+								\override Stem.stemlet-length = 0.75
+								c'4
+								c'4
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8
+						}
+						{
 							r8.
 						}
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
-							c'16 ~
-							c'4
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							R1 * 5/8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'8. [
-						}
-						{
-							c'8. ~
-							c'8 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'8.
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8
-						}
-						{
-							R1 * 1/2
-						}
-						{
-							R1 * 5/16
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'4 ~
-							c'16 [
-						}
-						{
-							c'8.
-						}
-						{
-							c'8. ~
-							c'8
-						}
-						{
-							c'8. ~
-							c'16 ]
-							\revert Stem.stemlet-length
+							{
+								\override Stem.stemlet-length = 0.75
+								c'32 [
+								c'32 ]
+								\revert Stem.stemlet-length
+							}
 						}
 					}
 					{
@@ -576,43 +993,178 @@
 							r16
 						}
 						{
-							R1 * 5/16
+							r8
 						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8
+							r8.
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'32 [
+								c'32 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
 						{
 							r4
-							r16
+							r8
 						}
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
-							c'16 [ ~
-							c'8. ]
-							\revert Stem.stemlet-length
+							{
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
 						}
 					}
 					{
 						{
-							r16
+							r4
 						}
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
-							c'4 ~
-							c'16 [
-						}
-						{
-							c'8. ]
-							\revert Stem.stemlet-length
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 5/8 {
+								\override Stem.stemlet-length = 0.75
+								c'4
+								c'4
+								\revert Stem.stemlet-length
+							}
 						}
 					}
 					{
 						{
-							R1 * 3/4
+							r8.
 						}
 						{
 							R1 * 5/16
+						}
+					}
+					{
+						{
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 3/4 {
+								\override Stem.stemlet-length = 0.75
+								c'4
+								c'4
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'32 [
+								c'32 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8.
+						}
+						{
+							R1 * 5/16
+						}
+					}
+					{
+						{
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 3/4 {
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r16
+							r8
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8. ~
+							r8
+							r16
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'32 [
+								c'32
+							}
+						}
+						{
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 3/4 {
+								c'8
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8
+						}
+						{
+							r8. ~
+							r8
+							r16
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'32 [
+								c'32 ]
+								\revert Stem.stemlet-length
+							}
 						}
 					}
 				}
@@ -620,37 +1172,16 @@
 			\context Dynamics = "Piano Pedals" {
 				{
 					{
+						R1 * 1/2
+					}
+					{
 						R1 * 3/4
 					}
 					{
-						R1 * 5/8
-					}
-					{
-						R1 * 5/8
-					}
-					{
 						R1 * 5/16
 					}
 					{
-						R1 * 1/2
-					}
-					{
-						R1 * 5/16
-					}
-					{
-						R1 * 1/2
-					}
-					{
-						R1 * 5/16
-					}
-					{
-						R1 * 5/16
-					}
-					{
-						R1 * 5/16
-					}
-					{
-						R1 * 5/8
+						R1 * 3/4
 					}
 					{
 						R1 * 1/2
@@ -660,6 +1191,24 @@
 					}
 					{
 						R1 * 5/16
+					}
+					{
+						R1 * 3/4
+					}
+					{
+						R1 * 5/16
+					}
+					{
+						R1 * 1/2
+					}
+					{
+						R1 * 7/16
+					}
+					{
+						R1 * 5/16
+					}
+					{
+						R1 * 7/16
 					}
 				}
 			}
@@ -670,131 +1219,257 @@
 				\context Voice = "Percussion RH Voice" {
 					{
 						{
+							r4
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8
+						}
+						{
+							r4
+							r16
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r16
+							r4
+						}
+						{
+							r8.
+							r16
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'32 [
+								c'32
+							}
+						}
+						{
+							{
+								c'16
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8
 							r8.
 						}
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
-							c'16 ~
-							c'4 ~
-							c'8
-							\revert Stem.stemlet-length
+							{
+								\override Stem.stemlet-length = 0.75
+								c'32 [
+								c'32 ]
+								\revert Stem.stemlet-length
+							}
 						}
 					}
 					{
 						{
-							r8
-						}
-						{
-							R1 * 5/8
+							r8.
 						}
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
-							c'4
-						}
-						{
-							c'8 [ ~
-							c'8. ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r16
-						}
-						{
-							r8
+							{
+								\override Stem.stemlet-length = 0.75
+								c'32 [
+								c'32 ]
+								\revert Stem.stemlet-length
+							}
 						}
 					}
 					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'16 [ ~
-							c'8 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'8 [ ~
-							c'8. ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r16
-						}
-						{
-							R1 * 5/16
-						}
 						{
 							R1 * 1/2
 						}
-					}
-					{
 						{
-							\override Stem.stemlet-length = 0.75
-							c'8. [ ~
-							c'8 ]
-							\revert Stem.stemlet-length
+							r8.
 						}
 					}
 					{
 						{
-							R1 * 5/16
-						}
-						{
-							R1 * 5/16
+							{
+								\override Stem.stemlet-length = 0.75
+								c'32 [
+								c'32 ]
+								\revert Stem.stemlet-length
+							}
 						}
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
-							c'4
+							r4
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'32 [
+								c'32 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8.
 						}
 						{
-							c'8 [ ~
-							c'16
+							r8.
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16
+							}
 						}
 						{
-							c'8. ]
+							{
+								c'16
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8
+							r16
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'32 [
+								c'32 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8
+							r16
+						}
+					}
+					{
+						{
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 3/4 {
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8
+							}
 						}
 						{
-							c'4
+							{
+								c'16
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r16
+							r8
 						}
 						{
-							c'4
-							\revert Stem.stemlet-length
+							r8.
+						}
+					}
+					{
+						{
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 3/4 {
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
 						}
 					}
 					{
 						{
 							r8
 						}
-					}
-					{
 						{
-							\override Stem.stemlet-length = 0.75
-							c'4
-							\revert Stem.stemlet-length
+							r16
 						}
 					}
 					{
 						{
-							r4.
+							{
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8
 						}
 						{
-							R1 * 5/16
+							r8.
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16
+							}
+						}
+						{
+							{
+								c'8
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r16
+							r8
 						}
 					}
 				}
@@ -804,16 +1479,84 @@
 				\context Voice = "Percussion LH Voice" {
 					{
 						{
+							r8
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r4
+						}
+						{
+							r8
+						}
+					}
+					{
+						{
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 5/8 {
+								\override Stem.stemlet-length = 0.75
+								c'4
+								c'4
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r16
+							r4
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'32 [
+								c'32 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8
+							r8
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
 							r4
 							r16
 						}
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
-							c'8. [ ~
-							c'8 ]
-							\revert Stem.stemlet-length
+							{
+								\override Stem.stemlet-length = 0.75
+								c'32 [
+								c'32 ]
+								\revert Stem.stemlet-length
+							}
 						}
 					}
 					{
@@ -821,129 +1564,92 @@
 							r8
 						}
 						{
-							r8
+							R1 * 1/2
 						}
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
-							c'4 ~
-							c'8
-							\revert Stem.stemlet-length
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 3/4 {
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
 						}
 					}
 					{
 						{
-							r8
-						}
-						{
-							R1 * 5/8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'8.
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'4
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
+							r16
 							r4
+							r8.
 						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'32 [
+								c'32 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
 						{
 							R1 * 5/16
 						}
+					}
+					{
 						{
-							r8
+							{
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
 						}
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
-							c'8 [ ~
-							c'8 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'8. [ ~
-							c'16 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
+							r4
 							r16
 						}
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
-							c'8. [ ~
-							c'16 ]
-							\revert Stem.stemlet-length
+							{
+								\override Stem.stemlet-length = 0.75
+								c'32 [
+								c'32 ]
+								\revert Stem.stemlet-length
+							}
 						}
 					}
 					{
-						{
-							r16
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'8. [ ~
-							c'8 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							R1 * 5/8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'4 ~
-							c'8.
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r16
-						}
 						{
 							r8
 						}
+						{
+							r8.
+							r16
+						}
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
-							c'4 ~
-							c'8.
-							\revert Stem.stemlet-length
+							{
+								\override Stem.stemlet-length = 0.75
+								c'32 [
+								c'32 ]
+							}
+						}
+						{
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 5/8 {
+								c'4
+								c'4
+								\revert Stem.stemlet-length
+							}
 						}
 					}
 					{
@@ -951,7 +1657,41 @@
 							r8.
 						}
 						{
-							R1 * 5/16
+							r8.
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r16
+						}
+						{
+							R1 * 7/16
+							\bar "||"
 						}
 					}
 				}

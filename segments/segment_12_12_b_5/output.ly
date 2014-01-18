@@ -1,9 +1,11 @@
 \version "2.19.0"
 \language "english"
 
-\include "/Users/josiah/Documents/Scores/plague_water/stylesheets/plague-water-header.ly"
-\include "/Users/josiah/Documents/Scores/plague_water/stylesheets/plague-water-layout.ly"
-\include "/Users/josiah/Documents/Scores/plague_water/stylesheets/plague-water-paper.ly"
+#(ly:set-option 'relative-includes #t)
+
+\include "../../stylesheets/plague-water-header.ly"
+\include "../../stylesheets/plague-water-paper.ly"
+\include "../../stylesheets/plague-water-layout.ly"
 
 #(set-default-paper-size "11x17" 'landscape)
 #(set-global-staff-size 14)
