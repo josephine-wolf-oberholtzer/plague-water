@@ -139,7 +139,7 @@ class SegmentMaker(ContextAwareMaker):
 
         ### APPLY LAYOUT ###
         self.configure_score()
-        assert inspect(self.score).is_well_formed()
+        assert inspect_(self.score).is_well_formed()
         self.configure_lilypond_file()
         return self.lilypond_file
 
@@ -410,10 +410,10 @@ class SegmentMaker(ContextAwareMaker):
         music_maker_seeds = collections.Counter()
         with systemtools.ProgressIndicator(message) as progress_indicator:
             for leaf in iterate(self.score).by_timeline(Note):
-                logical_tie = inspect(leaf).get_logical_tie()
+                logical_tie = inspect_(leaf).get_logical_tie()
                 if leaf is not logical_tie.head:
                     continue
-                music_maker = inspect(leaf).get_effective(makers.MusicMaker)
+                music_maker = inspect_(leaf).get_effective(makers.MusicMaker)
                 seed = music_maker_seeds[music_maker]
                 music_maker.apply_pitch_classes(
                     logical_tie,
@@ -797,7 +797,7 @@ class SegmentMaker(ContextAwareMaker):
         for voice in iterate(self.score).by_class(Voice):
             for container in voice:
                 music_maker = \
-                    inspect(container).get_effective(makers.MusicMaker)
+                    inspect_(container).get_effective(makers.MusicMaker)
                 yield container, music_maker
 
     def populate_time_signature_context(self):

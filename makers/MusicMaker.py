@@ -69,7 +69,7 @@ class MusicMaker(ContextAwareMaker):
                 seed=seed,
                 segment_actual_duration=segment_actual_duration,
                 )
-        assert inspect(music).is_well_formed()
+        assert inspect_(music).is_well_formed()
 
     def apply_chords(
         self,
@@ -83,7 +83,7 @@ class MusicMaker(ContextAwareMaker):
                 seed=seed,
                 segment_actual_duration=segment_actual_duration,
                 )
-        assert inspect(music).is_well_formed()
+        assert inspect_(music).is_well_formed()
 
     def apply_dynamics(
         self,
@@ -97,7 +97,7 @@ class MusicMaker(ContextAwareMaker):
                 seed=seed,
                 segment_actual_duration=segment_actual_duration,
                 )
-        assert inspect(music).is_well_formed()
+        assert inspect_(music).is_well_formed()
 
     def apply_pitch_classes(
         self,
@@ -119,7 +119,7 @@ class MusicMaker(ContextAwareMaker):
                 seed=seed,
                 segment_actual_duration=segment_actual_duration,
                 )
-        assert inspect(music).is_well_formed()
+        assert inspect_(music).is_well_formed()
 
     def apply_spanners(
         self,
@@ -133,7 +133,7 @@ class MusicMaker(ContextAwareMaker):
                 seed=seed,
                 segment_actual_duration=segment_actual_duration,
                 )
-        assert inspect(music).is_well_formed()
+        assert inspect_(music).is_well_formed()
 
     def create_rhythms(
         self,
@@ -175,7 +175,7 @@ class MusicMaker(ContextAwareMaker):
                 use_stemlets=True,
                 )
             attach(beam, music)
-        assert inspect(music).is_well_formed()
+        assert inspect_(music).is_well_formed()
         return music
 
     ### PRIVATE PROPERTIES ###
@@ -194,7 +194,7 @@ class MusicMaker(ContextAwareMaker):
             x.implied_time_signature.duration for x in meters))
         for container in music[:]:
             container_start_offset = \
-                inspect(container).get_timespan().start_offset + initial_offset
+                inspect_(container).get_timespan().start_offset + initial_offset
             while 2 < len(current_meter_offsets) and \
                 current_meter_offsets[1] <= container_start_offset:
                 current_meter_offsets.pop(0)
@@ -237,7 +237,7 @@ class MusicMaker(ContextAwareMaker):
             else:
                 current_meter_duration = \
                     current_meter.implied_time_signature.duration
-                if inspect(container).get_duration() == \
+                if inspect_(container).get_duration() == \
                     current_meter_duration and \
                     current_initial_offset == 0 and \
                     all(isinstance(x, Rest) for x in container):
