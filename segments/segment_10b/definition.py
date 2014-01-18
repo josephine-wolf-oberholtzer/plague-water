@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 from abjad import *
 from plague_water import makers
-from plague_water.segments.segment_10_25_base import definition as base
+from plague_water.segments.base_10 import definition as base
 
 ### SEGMENT PARAMETERS ###
 

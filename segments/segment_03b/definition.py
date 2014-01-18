@@ -2,7 +2,7 @@
 from abjad import *
 from plague_water import makers
 from plague_water import materials
-from plague_water.segments.segment_03_12_base import definition as base
+from plague_water.segments.base_03 import definition as base
 
 ### SEGMENT PARAMETERS ###
 
