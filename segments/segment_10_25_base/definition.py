@@ -12,11 +12,15 @@ segment_tempo = materials.tempo_inventory[0]
 ### CONTEXT MAP ###
 
 score_template = score_templates.PlagueWaterScoreTemplate()
+score = score_template()
 context_map = datastructuretools.ContextMap(score_template)
-context_map['Plague Water Score']['playing_durations'] = [1, 1]
-context_map['Plague Water Score']['playing_groupings'] = [1, 1]
-context_map['Plague Water Score']['leading_rest_durations'] = [1, 1]
-context_map['Plague Water Score']['tailing_rest_durations'] = None
+context_map[score]['music_maker'] = makers.MusicMaker()
+context_map[score]['rhythm_maker'] = rhythmmakertools.NoteRhythmMaker()
+context_map[score]['playing_durations'] = materials.medium_duration_server()
+context_map[score]['playing_groupings'] = materials.medium_grouping_server()
+context_map[score]['leading_rest_durations'] = \
+    materials.medium_duration_server()
+context_map[score]['tailing_rest_durations'] = None
 
 ### BRUSHES ###
 

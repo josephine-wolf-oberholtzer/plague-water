@@ -139,15 +139,17 @@
         \consists Metronome_mark_engraver
         \consists Mark_engraver
         \consists Bar_number_engraver
+        \override BarNumber.X-extent = #'(0 . 0)
+        \override BarNumber.Y-extent = #'(0 . 0)
         \override BarNumber.extra-offset = #'(-8 . -2)
         \override BarNumber.font-name = "Didot Italic"
         \override BarNumber.font-size = #1
-        \override BarNumber.X-extent = #'(0 . 0)
-        \override BarNumber.Y-extent = #'(0 . 0)
         \override BarNumber.stencil = #(make-stencil-circler 0.1 0.7 ly:text-interface::print)
+        \override MetronomeMark.X-extent = #'(0 . 0)
         \override MetronomeMark.X-offset = #ly:self-alignment-interface::x-aligned-on-self
         \override MetronomeMark.break-align-symbols = #'(time-signature)
-        \override MetronomeMark.extra-offset = #'(3 . -5.5)
+        \override MetronomeMark.font-size = #3
+        \override RehearsalMark.X-extent = #'(0 . 0)
         \override RehearsalMark.break-align-symbols = #'(time-signature)
         \override RehearsalMark.break-visibility = #end-of-line-invisible
         \override RehearsalMark.extra-offset = #'(-1 . 0)
@@ -157,8 +159,9 @@
         \override TimeSignature.X-extent = #'(0 . 0)
         \override TimeSignature.break-align-symbols = #'(staff-bar)
         \override TimeSignature.break-visibility = #end-of-line-invisible
-        \override TimeSignature.extra-offset = #'(-2 . 0)
         \override TimeSignature.font-size = #3
+        \override MetronomeMark.extra-offset = #'(3 . -5.5)
+        \override TimeSignature.extra-offset = #'(-2 . 0)
         \override VerticalAxisGroup.default-staff-staff-spacing = #'(
             (basic-distance . 0)
             (minimum-distance . 10)
@@ -182,8 +185,6 @@
         \override Beam.breakable = ##t
         \override DynamicLineSpanner.Y-extent = #'(-1.5 . 1.5)
         \override Glissando.breakable = ##t
-        \override MetronomeMark.extra-offset = #'(0 . -3)
-        \override MetronomeMark.font-size = #3
         \override NoteCollision.merge-differently-dotted = ##t
         \override NoteColumn.ignore-collision = ##t
         \override PhrasingSlur.dash-definition = #'((0 1 0.1 0.75))
@@ -208,7 +209,6 @@
         \override TupletNumber.font-size = #1
         \override TupletNumber.text = #tuplet-number::calc-fraction-text
         autoBeaming = ##f
-        %markFormatter = #format-mark-box-alphabet
         proportionalNotationDuration = #(ly:make-moment 1 48)
         tupletFullLength = ##t
     }
