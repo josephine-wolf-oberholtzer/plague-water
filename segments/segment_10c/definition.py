@@ -1,7 +1,11 @@
 # -*- encoding: utf-8 -*-
 from abjad import *
 from plague_water import makers
-from plague_water.segments.base_10 import definition as base
+from plague_water.segments import palette_f
+
+### BASE SEGMENT MAKER ###
+
+base_segment_maker = palette_f.segment_maker
 
 ### SEGMENT PARAMETERS ###
 
@@ -20,18 +24,15 @@ segment_name = 'Segment {} ({}:{}) ({}:{})'.format(
 segment_target_duration = makers.SegmentMaker.get_segment_target_duration(
     denominator=denominator,
     numerator=numerator,
-    tempo=base.segment_maker.segment_tempo,
+    tempo=base_segment_maker.segment_tempo,
     total_duration_in_seconds=480,
     )
-
-### CONTEXT MAP ###
-
-### BRUSHES ###
 
 ### SEGMENT DEFINITION ###
 
 segment_maker = new(
-    base.segment_maker,
+    base_segment_maker,
+    is_final_segment=False,
     segment_id=segment_id,
     segment_name=segment_name,
     segment_target_duration=segment_target_duration,
