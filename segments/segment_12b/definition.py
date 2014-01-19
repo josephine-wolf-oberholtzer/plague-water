@@ -7,7 +7,7 @@ from plague_water.segments.base_12 import definition as base
 
 segment_id = '12b'
 denominator = 106
-numerator = 5
+numerator = 7
 outer_numerator = 12
 segment_name = 'Segment {} ({}:{}) ({}:{})'.format(
     segment_id,
