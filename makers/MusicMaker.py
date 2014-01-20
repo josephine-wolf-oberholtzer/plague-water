@@ -157,10 +157,7 @@ class MusicMaker(ContextAwareMaker):
         seed = int(seed)
         music = rhythm_maker(durations, seeds=seed)
         for i, x in enumerate(music):
-            if isinstance(x, Tuplet) and x.is_trivial:
-                music[i] = Container()
-                music[i].extend(x)
-            elif isinstance(x, selectiontools.Selection):
+            if isinstance(x, selectiontools.Selection):
                 music[i] = Container(x)
         music = Container(music)
         if rewrite_meter:
