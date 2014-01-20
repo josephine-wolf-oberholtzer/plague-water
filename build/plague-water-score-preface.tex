@@ -2,20 +2,20 @@
 
 \usepackage[T1]{fontenc}
 \usepackage[papersize={17in, 11in}]{geometry}
-\usepackage{textcomp}
 \usepackage{tikz}
-\usepackage{xltxtra,fontspec,xunicode}
 \usetikzlibrary{calc}
 \usepackage{multicol}
 
+\usepackage[object=vectorian]{pgfornament}
+\usepackage{xltxtra,fontspec,xunicode}
 \defaultfontfeatures{Scale=MatchLowercase}
 \setromanfont[Numbers=Uppercase]{Didot}
-\newlength{\drop}
+
 \parindent=0pt
 
-\makeatletter
-\newcommand*\nobreaklist{\@beginparpenalty=\@M}
-\makeatother
+\def\columnseprulecolor{%
+\rotatebox{90}{\makebox[\textheight][c]{\pgfornament[color = magenta,width=.5\textheight]{88}}}
+    }%
 
 \begin{document}
     \begin{titlepage}
@@ -27,6 +27,7 @@
 
             {
                 \emph{A water against the plague\ldots}
+                \vfill
             }
 
             \columnbreak
