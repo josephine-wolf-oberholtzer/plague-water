@@ -173,6 +173,7 @@ class MusicMaker(ContextAwareMaker):
         if beam_music and \
             self.rhythm_maker != rhythmmakertools.RestRhythmMaker():
             beam = spannertools.GeneralizedBeam(
+                durations=durations,
                 include_long_duration_notes=False,
                 include_long_duration_rests=False,
                 isolated_nib_direction=None,
