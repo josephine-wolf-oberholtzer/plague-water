@@ -4,8 +4,8 @@
 #(ly:set-option 'relative-includes #t)
 
 \include "../../stylesheets/plague-water-header.ly"
-\include "../../stylesheets/plague-water-paper.ly"
 \include "../../stylesheets/plague-water-layout.ly"
+\include "../../stylesheets/plague-water-paper.ly"
 
 #(set-default-paper-size "11x17" 'landscape)
 #(set-global-staff-size 14)
@@ -22,12 +22,24 @@
 				s1 * 3/4
 			}
 			{
+				\time 5/16
+				s1 * 5/16
+			}
+			{
 				\time 2/4
 				s1 * 1/2
 			}
 			{
-				\time 6/8
-				s1 * 3/4
+				\time 7/16
+				s1 * 7/16
+			}
+			{
+				\time 2/4
+				s1 * 1/2
+			}
+			{
+				\time 5/16
+				s1 * 5/16
 			}
 		}
 		\context SaxophoneStaffGroup = "Saxophone Staff Group" <<
@@ -36,13 +48,88 @@
 				\context Voice = "Saxophone Voice" {
 					{
 						{
-							R1 * 3/4
+							r8
+						}
+					}
+					{
+						{
+							\times 2/3 {
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r2
+						}
+					}
+					{
+						{
+							\times 2/3 {
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r16
+							r8
+						}
+					}
+					{
+						{
+							\times 2/3 {
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16
+								c'16
+							}
+						}
+						{
+							\times 2/3 {
+								c'16
+								c'16
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r4
+						}
+						{
+							r8.
+						}
+					}
+					{
+						{
+							\times 2/3 {
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8
 						}
 						{
 							R1 * 1/2
 						}
 						{
-							R1 * 3/4
+							R1 * 5/16
 						}
 					}
 				}
@@ -54,13 +141,67 @@
 				\context Voice = "Guitar Voice" {
 					{
 						{
-							R1 * 3/4
+							r8.
 						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8.
+						}
+						{
+							r8.
+						}
+					}
+					{
+						{
+							\times 2/3 {
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
 						{
 							R1 * 1/2
 						}
 						{
-							R1 * 3/4
+							R1 * 7/16
+						}
+						{
+							r8
+						}
+					}
+					{
+						{
+							\times 2/3 {
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8
+						}
+						{
+							R1 * 5/16
 						}
 					}
 				}
@@ -71,10 +212,19 @@
 						R1 * 3/4
 					}
 					{
+						R1 * 5/16
+					}
+					{
 						R1 * 1/2
 					}
 					{
-						R1 * 3/4
+						R1 * 7/16
+					}
+					{
+						R1 * 1/2
+					}
+					{
+						R1 * 5/16
 					}
 				}
 			}
@@ -85,13 +235,88 @@
 				\context Voice = "Piano RH Voice" {
 					{
 						{
-							R1 * 3/4
+							r16
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16
+								c'16
+							}
+						}
+						{
+							\times 2/3 {
+								c'16
+								c'16
+								c'16
+							}
+						}
+						{
+							\times 2/3 {
+								c'16
+								c'16
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8
+						}
+					}
+					{
+						{
+							\times 2/3 {
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							R1 * 5/16
+						}
+						{
+							r8
+						}
+					}
+					{
+						{
+							\times 2/3 {
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16
+								c'16
+							}
+						}
+						{
+							\times 2/3 {
+								c'16
+								c'16
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8
+						}
+						{
+							R1 * 7/16
 						}
 						{
 							R1 * 1/2
 						}
 						{
-							R1 * 3/4
+							R1 * 5/16
 						}
 					}
 				}
@@ -103,13 +328,70 @@
 				\context Voice = "Piano LH Voice" {
 					{
 						{
-							R1 * 3/4
+							r2
+						}
+					}
+					{
+						{
+							\times 2/3 {
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8
 						}
 						{
-							R1 * 1/2
+							R1 * 5/16
 						}
 						{
-							R1 * 3/4
+							r16
+						}
+					}
+					{
+						{
+							\times 2/3 {
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8.
+						}
+						{
+							R1 * 7/16
+						}
+						{
+							r4
+						}
+					}
+					{
+						{
+							\times 2/3 {
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8
+						}
+						{
+							R1 * 5/16
 						}
 					}
 				}
@@ -120,10 +402,19 @@
 						R1 * 3/4
 					}
 					{
+						R1 * 5/16
+					}
+					{
 						R1 * 1/2
 					}
 					{
-						R1 * 3/4
+						R1 * 7/16
+					}
+					{
+						R1 * 1/2
+					}
+					{
+						R1 * 5/16
 					}
 				}
 			}
@@ -134,13 +425,100 @@
 				\context Voice = "Percussion RH Voice" {
 					{
 						{
-							R1 * 3/4
+							r16
 						}
+					}
+					{
+						{
+							\times 2/3 {
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16
+								c'16
+							}
+						}
+						{
+							\times 2/3 {
+								c'8
+								c'8
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r16
+							r4
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16
+								c'16
+							}
+						}
+						{
+							\times 2/3 {
+								c'16
+								c'16
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
 						{
 							R1 * 1/2
 						}
+					}
+					{
 						{
-							R1 * 3/4
+							\times 2/3 {
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8
+								c'8
+							}
+						}
+						{
+							\times 2/3 {
+								c'16
+								c'16
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r16
+						}
+					}
+					{
+						{
+							\times 2/3 {
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8
+								c'8
+							}
+						}
+						{
+							\times 2/3 {
+								c'8
+								c'8
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							R1 * 5/16
 						}
 					}
 				}
@@ -150,13 +528,83 @@
 				\context Voice = "Percussion LH Voice" {
 					{
 						{
-							R1 * 3/4
+							r8
+						}
+					}
+					{
+						{
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 5/6 {
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r16
+							r4
 						}
 						{
-							R1 * 1/2
+							r16
+						}
+					}
+					{
+						{
+							{
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r16
+						}
+					}
+					{
+						{
+							\times 2/3 {
+								\override Stem.stemlet-length = 0.75
+								c'8 [
+								c'8
+								c'8 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r4
 						}
 						{
-							R1 * 3/4
+							R1 * 7/16
+						}
+					}
+					{
+						{
+							\times 2/3 {
+								\override Stem.stemlet-length = 0.75
+								c'16 [
+								c'16
+								c'16 ]
+								\revert Stem.stemlet-length
+							}
+						}
+					}
+					{
+						{
+							r8
+							r4
+						}
+						{
+							R1 * 5/16
 							\bar "||"
 						}
 					}

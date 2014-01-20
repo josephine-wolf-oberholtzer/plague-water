@@ -4,8 +4,8 @@
 #(ly:set-option 'relative-includes #t)
 
 \include "../../stylesheets/plague-water-header.ly"
-\include "../../stylesheets/plague-water-paper.ly"
 \include "../../stylesheets/plague-water-layout.ly"
+\include "../../stylesheets/plague-water-paper.ly"
 
 #(set-default-paper-size "11x17" 'landscape)
 #(set-global-staff-size 14)

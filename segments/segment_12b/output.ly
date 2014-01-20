@@ -4,8 +4,8 @@
 #(ly:set-option 'relative-includes #t)
 
 \include "../../stylesheets/plague-water-header.ly"
-\include "../../stylesheets/plague-water-paper.ly"
 \include "../../stylesheets/plague-water-layout.ly"
+\include "../../stylesheets/plague-water-paper.ly"
 
 #(set-default-paper-size "11x17" 'landscape)
 #(set-global-staff-size 14)
@@ -52,6 +52,24 @@
 				\time 5/16
 				s1 * 5/16
 			}
+			{
+				\time 3/4
+				s1 * 3/4
+			}
+			{
+				s1 * 3/4
+			}
+			{
+				\time 5/16
+				s1 * 5/16
+			}
+			{
+				s1 * 5/16
+			}
+			{
+				\time 6/8
+				s1 * 3/4
+			}
 		}
 		\context SaxophoneStaffGroup = "Saxophone Staff Group" <<
 			\context SaxophoneStaff = "Saxophone Staff" {
@@ -84,6 +102,21 @@
 						}
 						{
 							R1 * 5/16
+						}
+						{
+							R1 * 3/4
+						}
+						{
+							R1 * 3/4
+						}
+						{
+							R1 * 5/16
+						}
+						{
+							R1 * 5/16
+						}
+						{
+							R1 * 3/4
 						}
 					}
 				}
@@ -121,6 +154,21 @@
 						{
 							R1 * 5/16
 						}
+						{
+							R1 * 3/4
+						}
+						{
+							R1 * 3/4
+						}
+						{
+							R1 * 5/16
+						}
+						{
+							R1 * 5/16
+						}
+						{
+							R1 * 3/4
+						}
 					}
 				}
 			}
@@ -152,6 +200,21 @@
 					}
 					{
 						R1 * 5/16
+					}
+					{
+						R1 * 3/4
+					}
+					{
+						R1 * 3/4
+					}
+					{
+						R1 * 5/16
+					}
+					{
+						R1 * 5/16
+					}
+					{
+						R1 * 3/4
 					}
 				}
 			}
@@ -187,6 +250,21 @@
 						}
 						{
 							R1 * 5/16
+						}
+						{
+							R1 * 3/4
+						}
+						{
+							R1 * 3/4
+						}
+						{
+							R1 * 5/16
+						}
+						{
+							R1 * 5/16
+						}
+						{
+							R1 * 3/4
 						}
 					}
 				}
@@ -224,6 +302,21 @@
 						{
 							R1 * 5/16
 						}
+						{
+							R1 * 3/4
+						}
+						{
+							R1 * 3/4
+						}
+						{
+							R1 * 5/16
+						}
+						{
+							R1 * 5/16
+						}
+						{
+							R1 * 3/4
+						}
 					}
 				}
 			}
@@ -255,6 +348,21 @@
 					}
 					{
 						R1 * 5/16
+					}
+					{
+						R1 * 3/4
+					}
+					{
+						R1 * 3/4
+					}
+					{
+						R1 * 5/16
+					}
+					{
+						R1 * 5/16
+					}
+					{
+						R1 * 3/4
 					}
 				}
 			}
@@ -291,6 +399,21 @@
 						{
 							R1 * 5/16
 						}
+						{
+							R1 * 3/4
+						}
+						{
+							R1 * 3/4
+						}
+						{
+							R1 * 5/16
+						}
+						{
+							R1 * 5/16
+						}
+						{
+							R1 * 3/4
+						}
 					}
 				}
 			}
@@ -324,6 +447,21 @@
 						}
 						{
 							R1 * 5/16
+						}
+						{
+							R1 * 3/4
+						}
+						{
+							R1 * 3/4
+						}
+						{
+							R1 * 5/16
+						}
+						{
+							R1 * 5/16
+						}
+						{
+							R1 * 3/4
 							\bar "||"
 						}
 					}

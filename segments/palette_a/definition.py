@@ -28,7 +28,6 @@ context_map[score]['tailing_rest_durations'] = short_duration_cursor
 segment_maker = makers.SegmentMaker(
     context_map=context_map,
     is_final_segment=False,
-    minimum_timespan_duration=Duration(2, 16),
     permitted_time_signatures=permitted_time_signatures,
     segment_tempo=segment_tempo,
     )

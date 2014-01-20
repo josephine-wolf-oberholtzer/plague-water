@@ -27,7 +27,8 @@ segment_target_duration = makers.SegmentMaker.get_segment_target_duration(
 
 ### SEGMENT DEFINITION ###
 
-segment_maker = makers.SegmentMaker(
+segment_maker = new(
+    base_segment_maker,
     is_final_segment=False,
     segment_id=segment_id,
     segment_name=segment_name,
