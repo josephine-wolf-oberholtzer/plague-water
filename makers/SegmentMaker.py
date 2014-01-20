@@ -25,7 +25,6 @@ class SegmentMaker(ContextAwareMaker):
         'lilypond_file',
         'measure_segmentation_talea',
         'meters',
-        'minimum_timespan_duration',
         'percussion_lh_brush',
         'percussion_lh_timespans',
         'percussion_rh_brush',
@@ -57,7 +56,6 @@ class SegmentMaker(ContextAwareMaker):
         guitar_lifeline_strategy=None,
         is_final_segment=None,
         measure_segmentation_talea=None,
-        minimum_timespan_duration=None,
         percussion_lh_brush=None,
         percussion_rh_brush=None,
         permitted_time_signatures=None,
@@ -76,7 +74,6 @@ class SegmentMaker(ContextAwareMaker):
             guitar_lifeline_strategy=guitar_lifeline_strategy,
             is_final_segment=is_final_segment,
             measure_segmentation_talea=measure_segmentation_talea,
-            minimum_timespan_duration=minimum_timespan_duration,
             percussion_lh_brush=percussion_lh_brush,
             percussion_rh_brush=percussion_rh_brush,
             permitted_time_signatures=permitted_time_signatures,
@@ -100,7 +97,6 @@ class SegmentMaker(ContextAwareMaker):
             guitar_lifeline_strategy=self.guitar_lifeline_strategy,
             is_final_segment=self.is_final_segment,
             measure_segmentation_talea=self.measure_segmentation_talea,
-            minimum_timespan_duration=self.minimum_timespan_duration,
             percussion_lh_brush=self.percussion_lh_brush,
             percussion_rh_brush=self.percussion_rh_brush,
             permitted_time_signatures=self.permitted_time_signatures,
@@ -168,7 +164,6 @@ class SegmentMaker(ContextAwareMaker):
         guitar_lifeline_strategy=None,
         is_final_segment=True,
         measure_segmentation_talea=None,
-        minimum_timespan_duration=None,
         percussion_lh_brush=None,
         percussion_rh_brush=None,
         permitted_time_signatures=None,
@@ -186,7 +181,6 @@ class SegmentMaker(ContextAwareMaker):
         self.guitar_lifeline_strategy = guitar_lifeline_strategy
         self.is_final_segment = is_final_segment
         self.measure_segmentation_talea = measure_segmentation_talea
-        self.minimum_timespan_duration = minimum_timespan_duration
         self.percussion_lh_brush = percussion_lh_brush
         self.percussion_rh_brush = percussion_rh_brush
         self.permitted_time_signatures = permitted_time_signatures
@@ -223,7 +217,6 @@ class SegmentMaker(ContextAwareMaker):
         guitar_lifeline_strategy=None,
         is_final_segment=True,
         measure_segmentation_talea=None,
-        minimum_timespan_duration=None,
         percussion_lh_brush=None,
         percussion_rh_brush=None,
         permitted_time_signatures=None,
@@ -248,9 +241,6 @@ class SegmentMaker(ContextAwareMaker):
         assert len(measure_segmentation_talea)
         assert sequencetools.all_are_positive_integers(
             measure_segmentation_talea)
-        if minimum_timespan_duration is None:
-            minimum_timespan_duration = Duration(3, 16)
-        assert 0 < minimum_timespan_duration
         prototype = (makers.Brush, type(None))
         assert isinstance(percussion_lh_brush, prototype)
         prototype = (makers.Brush, type(None))
@@ -278,7 +268,6 @@ class SegmentMaker(ContextAwareMaker):
             guitar_lifeline_strategy=guitar_lifeline_strategy,
             is_final_segment=is_final_segment,
             measure_segmentation_talea=measure_segmentation_talea,
-            minimum_timespan_duration=minimum_timespan_duration,
             percussion_lh_brush=percussion_lh_brush,
             percussion_rh_brush=percussion_rh_brush,
             permitted_time_signatures=permitted_time_signatures,
@@ -299,7 +288,6 @@ class SegmentMaker(ContextAwareMaker):
         guitar_lifeline_strategy=None,
         is_final_segment=True,
         measure_segmentation_talea=None,
-        minimum_timespan_duration=None,
         percussion_lh_brush=None,
         percussion_rh_brush=None,
         permitted_time_signatures=None,
@@ -343,7 +331,6 @@ class SegmentMaker(ContextAwareMaker):
             guitar_lifeline_strategy=guitar_lifeline_strategy,
             is_final_segment=is_final_segment,
             measure_segmentation_talea=measure_segmentation_talea,
-            minimum_timespan_duration=minimum_timespan_duration,
             percussion_lh_brush=percussion_lh_brush,
             percussion_rh_brush=percussion_rh_brush,
             permitted_time_signatures=permitted_time_signatures,
@@ -602,8 +589,13 @@ class SegmentMaker(ContextAwareMaker):
         for timespan_inventory in timespan_inventories:
             if timespan_inventory is None:
                 continue
-            timespan_inventory[:] = [x for x in timespan_inventory
-                if self.minimum_timespan_duration <= x.duration]
+            valid_timespans = []
+            for timespan in timespan_inventory:
+                music_maker = timespan.music_maker
+                if music_maker.timespan_has_minimum_length(timespan):
+                    valid_timespans.append(timespan)
+            timespan_inventory[:] = valid_timespans
+            timespan_inventory.sort()
 
     def configure_lilypond_file(self):
         print '\tconfiguring lilypond file'

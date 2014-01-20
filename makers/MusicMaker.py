@@ -11,6 +11,7 @@ class MusicMaker(ContextAwareMaker):
         '_articulation_maker',
         '_chord_maker',
         '_dynamic_maker',
+        '_minimum_timespan_duration',
         '_pitch_class_maker',
         '_registration_maker',
         '_rhythm_maker',
@@ -26,6 +27,7 @@ class MusicMaker(ContextAwareMaker):
         articulation_maker=None,
         chord_maker=None,
         dynamic_maker=None,
+        minimum_timespan_duration=None,
         pitch_class_maker=None,
         registration_maker=None,
         rhythm_maker=None,
@@ -39,6 +41,7 @@ class MusicMaker(ContextAwareMaker):
             (makers.ChordMaker, type(None)))
         assert isinstance(dynamic_maker,
             (makers.DynamicMaker, type(None)))
+        assert isinstance(minimum_timespan_duration, (Duration, type(None)))
         assert isinstance(pitch_class_maker,
             (makers.PitchClassMaker, type(None)))
         assert isinstance(registration_maker,
@@ -50,6 +53,7 @@ class MusicMaker(ContextAwareMaker):
         self._articulation_maker = articulation_maker
         self._chord_maker = chord_maker
         self._dynamic_maker = dynamic_maker
+        self._minimum_timespan_duration = minimum_timespan_duration
         self._pitch_class_maker = pitch_class_maker
         self._registration_maker = registration_maker
         self._rhythm_maker = rhythm_maker
@@ -178,6 +182,14 @@ class MusicMaker(ContextAwareMaker):
         assert inspect_(music).is_well_formed()
         return music
 
+    def timespan_has_minimum_length(self, timespan):
+        assert isinstance(timespan, timespantools.Timespan)
+        if self.minimum_timespan_duration is None:
+            return True
+        elif self.minimum_timespan_duration <= timespan.duration:
+            return True
+        return False
+
     ### PRIVATE PROPERTIES ###
 
     def _iterate_music_and_meters(
@@ -266,6 +278,10 @@ class MusicMaker(ContextAwareMaker):
     @property
     def dynamic_maker(self):
         return self._dynamic_maker
+
+    @property
+    def minimum_timespan_duration(self):
+        return self._minimum_timespan_duration
 
     @property
     def pitch_class_maker(self):
