@@ -68,7 +68,8 @@ class SegmentMaker(ContextAwareMaker):
         segment_target_duration=None,
         segment_tempo=None,
         ):
-        self._validate_init_state(
+        self._prepare(
+            allow_none_as_sentinel=True,
             context_map=context_map,
             guitar_brush=guitar_brush,
             guitar_lifeline_strategy=guitar_lifeline_strategy,
@@ -91,7 +92,8 @@ class SegmentMaker(ContextAwareMaker):
 
     def __call__(self, current_file_path=None):
         ### VALIDATE AND SETUP ###
-        self._validate_call_state(
+        self._prepare(
+            allow_none_as_sentinel=False,
             context_map=self.context_map,
             guitar_brush=self.guitar_brush,
             guitar_lifeline_strategy=self.guitar_lifeline_strategy,
@@ -157,8 +159,9 @@ class SegmentMaker(ContextAwareMaker):
 
     ### PRIVATE METHODS ###
 
-    def _setup(
+    def _prepare(
         self,
+        allow_none_as_sentinel=False,
         context_map=None,
         guitar_brush=None,
         guitar_lifeline_strategy=None,
@@ -176,6 +179,32 @@ class SegmentMaker(ContextAwareMaker):
         segment_target_duration=None,
         segment_tempo=None,
         ):
+        from plague_water import makers
+        ### BRUSHES ###
+        brush_prototype = (makers.Brush, type(None))
+        lifeline_prototype = (makers.LifelineStrategy, type(None))
+        assert isinstance(guitar_brush, brush_prototype)
+        assert isinstance(guitar_lifeline_strategy, lifeline_prototype)
+        assert isinstance(percussion_lh_brush, brush_prototype)
+        assert isinstance(percussion_rh_brush, brush_prototype)
+        assert isinstance(piano_lh_brush, brush_prototype)
+        assert isinstance(piano_lifeline_strategy, lifeline_prototype)
+        assert isinstance(piano_rh_brush, brush_prototype)
+        assert isinstance(saxophone_brush, brush_prototype)
+        ### OTHER ###
+        assert isinstance(context_map, datastructuretools.ContextMap)
+        permitted_time_signatures = indicatortools.TimeSignatureInventory(
+            permitted_time_signatures)
+        assert len(permitted_time_signatures)
+        segment_tempo = Tempo(segment_tempo)
+        measure_segmentation_talea = measure_segmentation_talea or (1,)
+        assert len(measure_segmentation_talea)
+        assert sequencetools.all_are_positive_integers(
+            measure_segmentation_talea)
+        if segment_target_duration is not None:
+            segment_target_duration = Duration(segment_target_duration)
+            assert 0 < segment_target_duration
+        ### APPLY ###
         self.context_map = context_map
         self.guitar_brush = guitar_brush
         self.guitar_lifeline_strategy = guitar_lifeline_strategy
@@ -192,7 +221,6 @@ class SegmentMaker(ContextAwareMaker):
         self.segment_name = segment_name
         self.segment_target_duration = segment_target_duration
         self.segment_tempo = segment_tempo
-        # set place holders
         self.cached_makers = {}
         self.cached_meters = {}
         self.lilypond_file = None
@@ -200,7 +228,6 @@ class SegmentMaker(ContextAwareMaker):
         self.score = None
         self.segment_actual_duration = None
         self.time_signatures = None
-        # set timespan inventories
         self.guitar_pedal_timespans = timespantools.TimespanInventory()
         self.guitar_timespans = timespantools.TimespanInventory()
         self.percussion_lh_timespans = timespantools.TimespanInventory()
@@ -209,140 +236,6 @@ class SegmentMaker(ContextAwareMaker):
         self.piano_pedal_timespans = timespantools.TimespanInventory()
         self.piano_rh_timespans = timespantools.TimespanInventory()
         self.saxophone_timespans = timespantools.TimespanInventory()
-
-    def _validate_call_state(
-        self,
-        context_map=None,
-        guitar_brush=None,
-        guitar_lifeline_strategy=None,
-        is_final_segment=True,
-        measure_segmentation_talea=None,
-        percussion_lh_brush=None,
-        percussion_rh_brush=None,
-        permitted_time_signatures=None,
-        piano_lh_brush=None,
-        piano_lifeline_strategy=None,
-        piano_rh_brush=None,
-        saxophone_brush=None,
-        segment_id=None,
-        segment_name=None,
-        segment_target_duration=None,
-        segment_tempo=None,
-        ):
-        from plague_water import makers
-        prototype = (datastructuretools.ContextMap,)
-        assert isinstance(context_map, prototype)
-        prototype = (makers.Brush, type(None))
-        assert isinstance(guitar_brush, prototype)
-        prototype = (makers.LifelineStrategy, type(None))
-        assert isinstance(guitar_lifeline_strategy, prototype)
-        if measure_segmentation_talea is None:
-            measure_segmentation_talea = (1,)
-        assert len(measure_segmentation_talea)
-        assert sequencetools.all_are_positive_integers(
-            measure_segmentation_talea)
-        prototype = (makers.Brush, type(None))
-        assert isinstance(percussion_lh_brush, prototype)
-        prototype = (makers.Brush, type(None))
-        assert isinstance(percussion_rh_brush, prototype)
-        prototype = (indicatortools.TimeSignatureInventory,)
-        assert isinstance(permitted_time_signatures, prototype)
-        assert len(permitted_time_signatures)
-        prototype = (makers.Brush, type(None))
-        assert isinstance(piano_lh_brush, prototype)
-        prototype = (makers.LifelineStrategy, type(None))
-        assert isinstance(piano_lifeline_strategy, prototype)
-        prototype = (makers.Brush, type(None))
-        assert isinstance(piano_rh_brush, prototype)
-        prototype = (makers.Brush, type(None))
-        assert isinstance(saxophone_brush, prototype)
-        if segment_target_duration is None:
-            segment_target_duration = Duration(segment_target_duration)
-        assert 0 < segment_target_duration
-        if segment_tempo is None:
-            segment_tempo = Tempo(segment_tempo)
-        assert isinstance(segment_tempo, Tempo)
-        self._setup(
-            context_map=context_map,
-            guitar_brush=guitar_brush,
-            guitar_lifeline_strategy=guitar_lifeline_strategy,
-            is_final_segment=is_final_segment,
-            measure_segmentation_talea=measure_segmentation_talea,
-            percussion_lh_brush=percussion_lh_brush,
-            percussion_rh_brush=percussion_rh_brush,
-            permitted_time_signatures=permitted_time_signatures,
-            piano_lh_brush=piano_lh_brush,
-            piano_lifeline_strategy=piano_lifeline_strategy,
-            piano_rh_brush=piano_rh_brush,
-            saxophone_brush=saxophone_brush,
-            segment_id=segment_id,
-            segment_name=segment_name,
-            segment_target_duration=segment_target_duration,
-            segment_tempo=segment_tempo,
-            )
-
-    def _validate_init_state(
-        self,
-        context_map=None,
-        guitar_brush=None,
-        guitar_lifeline_strategy=None,
-        is_final_segment=True,
-        measure_segmentation_talea=None,
-        percussion_lh_brush=None,
-        percussion_rh_brush=None,
-        permitted_time_signatures=None,
-        piano_lh_brush=None,
-        piano_lifeline_strategy=None,
-        piano_rh_brush=None,
-        saxophone_brush=None,
-        segment_id=None,
-        segment_name=None,
-        segment_target_duration=None,
-        segment_tempo=None,
-        ):
-        from plague_water import makers
-        prototype = (datastructuretools.ContextMap, type(None))
-        assert isinstance(context_map, prototype)
-        prototype = (makers.Brush, type(None))
-        assert isinstance(guitar_brush, prototype)
-        prototype = (makers.LifelineStrategy, type(None))
-        assert isinstance(guitar_lifeline_strategy, prototype)
-        prototype = (makers.Brush, type(None))
-        assert isinstance(percussion_lh_brush, prototype)
-        prototype = (makers.Brush, type(None))
-        assert isinstance(percussion_rh_brush, prototype)
-        prototype = (indicatortools.TimeSignatureInventory, type(None))
-        assert isinstance(permitted_time_signatures, prototype)
-        prototype = (makers.Brush, type(None))
-        assert isinstance(piano_lh_brush, prototype)
-        prototype = (makers.LifelineStrategy, type(None))
-        assert isinstance(piano_lifeline_strategy, prototype)
-        prototype = (makers.Brush, type(None))
-        assert isinstance(piano_rh_brush, prototype)
-        prototype = (makers.Brush, type(None))
-        assert isinstance(saxophone_brush, prototype)
-        prototype = (Duration, type(None))
-        assert isinstance(segment_target_duration, prototype)
-        prototype = (Tempo, type(None))
-        assert isinstance(segment_tempo, prototype)
-        self._setup(
-            context_map=context_map,
-            guitar_brush=guitar_brush,
-            guitar_lifeline_strategy=guitar_lifeline_strategy,
-            is_final_segment=is_final_segment,
-            measure_segmentation_talea=measure_segmentation_talea,
-            percussion_lh_brush=percussion_lh_brush,
-            percussion_rh_brush=percussion_rh_brush,
-            permitted_time_signatures=permitted_time_signatures,
-            piano_lh_brush=piano_lh_brush,
-            piano_lifeline_strategy=piano_lifeline_strategy,
-            piano_rh_brush=piano_rh_brush,
-            saxophone_brush=saxophone_brush,
-            segment_id=segment_id,
-            segment_name=segment_name,
-            segment_target_duration=segment_target_duration,
-            segment_tempo=segment_tempo,
-            )
 
     ### PUBLIC METHODS ###
 
