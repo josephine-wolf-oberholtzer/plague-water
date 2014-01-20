@@ -1,0 +1,60 @@
+\documentclass[11pt]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage{eurosym}
+\usepackage[papersize={17in, 11in}]{geometry}
+\usepackage{tikz}
+\usepackage{xltxtra,fontspec,xunicode}
+\usetikzlibrary{calc}
+
+\defaultfontfeatures{Scale=MatchLowercase}
+\setromanfont[Numbers=Uppercase]{Didot}
+
+%\usepackage[absolute]{textpos}
+%\TPGrid[0.5in, 0.25in]{23}{24}
+%\usepackage{palatino}
+%\parindent=0pt
+%\usepackage{nopageno}
+
+\begin{document}
+    \begin{titlepage}
+
+
+        \begin{tikzpicture}[remember picture, overlay]
+            \draw[line width = 1.6pt]
+                ($(current page.north west) + (1in,-1in)$)
+                rectangle
+                ($(current page.south east) + (-1in,1in)$);
+            \draw[line width = 0.4pt]
+                ($(current page.north west) + (1in,-1in) + (2.8pt,-2.8pt)$)
+                rectangle
+                ($(current page.south east) + (-1in,1in) + (-2.8pt,2.8pt)$);
+        \end{tikzpicture}
+
+        %\begin{textblock}{23}(0, 23.5)
+        %AWN-010 2013-09-19 \hfill
+        %\textit{Scores available from the composer at www.trevorbaca.com} \hfill
+        %\euro 22 / \$28
+        %\end{textblock}
+
+        \vfill
+
+        \begin{center}
+
+        2014-02-14\\
+        \vspace{1em}
+        {
+            \itshape
+            Scores available from the composer at\\
+        }
+        {
+            www.josiahwolfoberholtzer.com\\
+        }
+        \vspace{1em}
+        \euro 25 / \$35
+
+        \end{center}
+
+    \end{titlepage}
+\end{document}
+
