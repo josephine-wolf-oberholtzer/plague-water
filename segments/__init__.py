@@ -1,8 +1,5 @@
 # -*- encoding: utf-8 -*-
-import base_03
-import base_10
-import base_12
-import base_17
+
 import palette_a
 import palette_b
 import palette_c
