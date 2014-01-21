@@ -13,7 +13,6 @@ class ArticulationMaker(ContextAwareMaker):
         '_first_leaf',
         '_inner_leaves',
         '_last_leaf',
-        '_treat_each_cell',
         )
 
     ### INITIALIZER ###
@@ -24,81 +23,82 @@ class ArticulationMaker(ContextAwareMaker):
         first_leaf=None,
         inner_leaves=None,
         last_leaf=None,
-        treat_each_cell=None,
         ):
-        self._all_leaves = self._coerce_arguments(all_leaves)
-        self._first_leaf = self._coerce_arguments(first_leaf)
-        self._inner_leaves = self._coerce_arguments(inner_leaves)
-        self._last_leaf = self._coerce_arguments(last_leaf)
-        if treat_each_cell is not None:
-            treat_each_cell = bool(treat_each_cell)
-        self._treat_each_cell = treat_each_cell
+        assert isinstance(all_leaves, (tuple, type(None)))
+        assert isinstance(first_leaf, (tuple, type(None)))
+        assert isinstance(inner_leaves, (tuple, type(None)))
+        assert isinstance(last_leaf, (tuple, type(None)))
+        self._all_leaves = all_leaves
+        self._first_leaf = first_leaf
+        self._inner_leaves = inner_leaves
+        self._last_leaf = last_leaf
 
     ### SPECIAL METHODS ###
 
     def __call__(
         self,
         music,
-        context_map=None,
-        context_name=None,
         seed=None,
+        segment_actual_duration=None,
         ):
-        assert isinstance(seed, (int, type(None)))
-        if self.treat_each_cell:
-            for cell in music:
-                ties = tuple(iterate(cell).by_logical_tie(pitched=True))
-                self._treat_ties(ties, parameter_map)
-        else:
-            ties = tuple(iterate(music).by_logical_tie(pitched=True))
-            self._treat_ties(ties, parameter_map)
+        if seed is None:
+            seed = 0
+        assert isinstance(seed, int)
 
-    ### PRIVATE METHODS ###
+        all_leaves = datastructuretools.CyclicTuple(
+            sequencetools.rotate_sequence(
+                self.all_leaves or (),
+                seed,
+                )
+            )
+        first_leaf = datastructuretools.CyclicTuple(
+            sequencetools.rotate_sequence(
+                self.first_leaf or (),
+                seed,
+                )
+            )
+        inner_leaves = datastructuretools.CyclicTuple(
+            sequencetools.rotate_sequence(
+                self.inner_leaves or (),
+                seed,
+                )
+            )
+        last_leaf = datastructuretools.CyclicTuple(
+            sequencetools.rotate_sequence(
+                self.last_leaf or (),
+                seed,
+                )
+            )
 
-    def _coerce_cursor_output(self, cursor_output):
-        result = []
-        for x in cursor_output:
-            if x is None:
-                continue
-            elif isinstance(x, str):
-                result.append(indicatortools.Articulation(x))
-            else:
-                result.append(copy.copy(x))
-        return result
-
-    def _treat_ties(self, ties, parameter_map):
-        if 1 < len(ties):
-            if parameter_map['first_leaf'] is not None:
-                attachments = parameter_map['all_leaves']()
-                for attachment in attachments:
-                    attach(attachment, ties[0][0])
-            if parameter_map['inner_leaves'] is not None:
-                attachments = parameter_map['all_leaves']()
-                for tie in ties[1:-1]:
-                    for attachment in attachments:
-                        attach(attachment, tie[0])
-            if parameter_map['last_leaf'] is not None:
-                attachments = parameter_map['all_leaves']()
-                for attachment in attachments:
-                    attach(attachment, ties[-1][0])
-            if parameter_map['all_leaves'] is not None:
-                attachments = parameter_map['all_leaves']()
-                for tie in ties:
-                    for attachment in attachments:
-                        attach(attachment, tie[0])
-        elif 1 == len(ties):
-            if parameter_map['first_leaf'] is not None:
-                attachments = parameter_map['all_leaves']()
-                for attachment in attachments:
-                    attach(attachment, ties[0][0])
-            elif parameter_map['last_leaf'] is not None:
-                attachments = parameter_map['all_leaves']()
-                for attachment in attachments:
-                    attach(attachment, ties[-1][0])
-            if parameter_map['all_leaves'] is not None:
-                attachments = parameter_map['all_leaves']()
-                for tie in ties:
-                    for attachment in attachments:
-                        attach(attachment, tie[0])
+        for cell in music:
+            logical_ties = tuple(iterate(cell).by_logical_tie(pitched=True))
+            if 1 == len(logical_ties):
+                if first_leaf:
+                    articulation = Articulation(first_leaf[0])
+                elif last_leaf:
+                    articulation = Articulation(last_leaf[0])
+                attach(articulation, logical_ties[0][0])
+            elif 1 < len(logical_ties):
+                if first_leaf:
+                    articulation = Articulation(first_leaf[0])
+                    attach(articulation, logical_ties[0][0])
+                if last_leaf:
+                    articulation = Articulation(last_leaf[0])
+                    attach(articulation, logical_ties[-1][0])
+            if inner_leaves:
+                start = None
+                if first_leaf:
+                    start = 1
+                stop = None
+                if last_leaf:
+                    stop = -1
+                for i, logical_tie in enumerate(logical_ties[start:stop]):
+                    articulation = Articulation(inner_leaves[i])
+                    attach(articulation, logical_tie[0])
+            if all_leaves:
+                for i, logical_tie in enumerate(logical_ties):
+                    articulation = Articulation(all_leaves[i])
+                    attach(articulation, logical_tie[0])
 
     ### PUBLIC PROPERTIES ###
 
@@ -117,7 +117,3 @@ class ArticulationMaker(ContextAwareMaker):
     @property
     def last_leaf(self):
         return self._last_leaf
-
-    @property
-    def treat_each_cell(self):
-        return self._treat_each_cell
