@@ -23,7 +23,7 @@ class Brush(abctools.AbjadObject):
         from plague_water import materials
         assert music_makers is not None
         assert len(music_makers)
-        assert all(isinstance(x, makers.music_maker)
+        assert all(isinstance(x, makers.MusicMaker)
             for x in music_makers)
         self._music_makers = tuple(music_makers)
         weights = [x.weight for x in self._music_makers]

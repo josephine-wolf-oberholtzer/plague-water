@@ -130,10 +130,10 @@ winding_music_maker = makers.MusicMaker(
 
 
 __all__ = (
-    'clanging_pigment',
-    'droning_pigment',
-    'flowing_pigment',
-    'staggering_pigment',
-    'stuttering_pigment',
-    'winding_pigment',
+    'clanging_music_maker',
+    'droning_music_maker',
+    'flowing_music_maker',
+    'staggering_music_maker',
+    'stuttering_music_maker',
+    'winding_music_maker',
     )
