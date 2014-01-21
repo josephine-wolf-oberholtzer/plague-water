@@ -2,7 +2,7 @@
 
 from duration_servers import *
 from euler_numbers import *
-from pigments import *
+from music_makers import *
 from pitch_classes import *
 from proportions import *
 from registrations import *
