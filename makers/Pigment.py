@@ -9,7 +9,6 @@ class Pigment(ContextAwareMaker):
 
     __slots__ = (
         '_music_maker',
-        '_weight',
         )
 
     ### INITIALIZER ###
@@ -17,14 +16,10 @@ class Pigment(ContextAwareMaker):
     def __init__(
         self,
         music_maker=None,
-        weight=1,
         ):
         from plague_water import makers
         assert isinstance(music_maker, (makers.MusicMaker, type(None)))
         self._music_maker = music_maker
-        weight = int(weight)
-        assert 0 < weight
-        self._weight = int(weight)
 
     ### SPECIAL METHODS ###
 
@@ -43,7 +38,3 @@ class Pigment(ContextAwareMaker):
     @property
     def music_maker(self):
         return self._music_maker
-
-    @property
-    def weight(self):
-        return self._weight

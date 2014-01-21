@@ -7,8 +7,8 @@ class Brush(abctools.AbjadObject):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_pigments',
-        '_pigment_pairs',
+        '_music_makers',
+        '_music_maker_pairs',
         '_talea',
         )
 
@@ -16,24 +16,24 @@ class Brush(abctools.AbjadObject):
 
     def __init__(
         self,
-        pigments=None,
+        music_makers=None,
         talea=None,
         ):
         from plague_water import makers
         from plague_water import materials
-        assert pigments is not None
-        assert len(pigments)
-        assert all(isinstance(x, makers.Pigment)
-            for x in pigments)
-        self._pigments = tuple(pigments)
-        weights = [x.weight for x in self._pigments]
+        assert music_makers is not None
+        assert len(music_makers)
+        assert all(isinstance(x, makers.music_maker)
+            for x in music_makers)
+        self._music_makers = tuple(music_makers)
+        weights = [x.weight for x in self._music_makers]
         pairs = mathtools.cumulative_sums_pairwise(
             mathtools.partition_integer_by_ratio(
                 10,
                 weights,
                 )
             )
-        self._pigment_pairs = tuple(zip(pairs, self._pigments))
+        self._music_maker_pairs = tuple(zip(pairs, self._music_makers))
         if talea is None:
             talea = materials.euler_numbers
         if isinstance(talea, int):
@@ -53,7 +53,7 @@ class Brush(abctools.AbjadObject):
         context_map=None,
         context_name=None,
         ):
-        pigment_pairs = self._build_pigment_pairs(
+        music_maker_pairs = self._build_music_maker_pairs(
             context_map=context_map,
             context_name=context_name,
             )
@@ -62,79 +62,68 @@ class Brush(abctools.AbjadObject):
         message = '\t\t{}'.format(context_name)
         with systemtools.ProgressIndicator(message) as progress_indicator:
             while current_offset < segment_target_duration:
-                pigment = self._choose_pigment(
-                    pigment_pairs)
-                pigment_timespan_inventory, current_offset = \
-                    pigment(
+                music_maker = self._choose_music_maker(
+                    music_maker_pairs)
+                music_maker_timespan_inventory, current_offset = \
+                    music_maker.create_timespans(
                         current_offset,
                         segment_target_duration,
                         )
-                timespan_inventory.extend(pigment_timespan_inventory)
+                timespan_inventory.extend(music_maker_timespan_inventory)
                 progress_indicator.advance()
         return timespan_inventory
 
     ### PRIVATE METHODS ###
 
-    def _build_pigment_pairs(
+    def _build_music_maker_pairs(
         self,
         context_map=None,
         context_name=None,
         ):
-        contexted_pigments = []
-        for pigment in self.pigments:
-            pigment_parameter_map = pigment._build_parameter_map(
+        contexted_music_makers = []
+        for music_maker in self.music_makers:
+            music_maker_parameter_map = music_maker._build_parameter_map(
                 context_map=context_map,
                 context_name=context_name,
                 )
-            if pigment.music_maker is not None:
-                music_maker_parameter_map = \
-                    pigment.music_maker._build_parameter_map(
-                        context_map=context_map,
-                        context_name=context_name,
-                        )
-                music_maker = new(
-                    pigment.music_maker,
-                    **music_maker_parameter_map
-                    )
-                pigment_parameter_map['music_maker'] = music_maker
-            contexted_pigment = new(pigment, **pigment_parameter_map)
-            contexted_pigments.append(contexted_pigment)
-        if not contexted_pigments:
-            pigment = makers.Pigment(
+            contexted_music_maker = new(music_maker, **music_maker_parameter_map)
+            contexted_music_makers.append(contexted_music_maker)
+        if not contexted_music_makers:
+            music_maker = makers.music_maker(
                 music_maker=makers.MusicMaker(
                     rhythm_maker=rhythmmakertools.RestRhythmMaker(),
                     ),
                 )
-            contexted_pigments.append(pigment)
-        weights = [x.weight for x in contexted_pigments]
+            contexted_music_makers.append(music_maker)
+        weights = [x.weight for x in contexted_music_makers]
         pairs = mathtools.cumulative_sums_pairwise(
             mathtools.partition_integer_by_ratio(
                 10,
                 weights,
                 )
             )
-        pigment_pairs = tuple(zip(pairs, contexted_pigments))
-        return pigment_pairs
+        music_maker_pairs = tuple(zip(pairs, contexted_music_makers))
+        return music_maker_pairs
 
-    def _choose_pigment(self, pigment_pairs):
+    def _choose_music_maker(self, music_maker_pairs):
         seed = self.talea()[0]
-        selected_pigment = None
-        for pair, pigment in pigment_pairs:
+        selected_music_maker = None
+        for pair, music_maker in music_maker_pairs:
             low, high = pair
             if low <= seed < high:
-                selected_pigment = pigment
+                selected_music_maker = music_maker
                 break
-        return selected_pigment
+        return selected_music_maker
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def pigments(self):
-        return self._pigments
+    def music_makers(self):
+        return self._music_makers
 
     @property
-    def pigment_pairs(self):
-        return self._pigment_pairs
+    def music_maker_pairs(self):
+        return self._music_maker_pairs
 
     @property
     def talea(self):
