@@ -26,10 +26,11 @@ flowing_rhythm_maker = rhythmmakertools.RatioTaleaRhythmMaker(
     )
 
 
-klaxon_rhythm_maker = rhythmmakertools.TaleaRhythmMaker(
+clanging_rhythm_maker = rhythmmakertools.TaleaRhythmMaker(
     talea=(4, 4, 4, 3, 4, 5, 4, 4, 3,),
     talea_denominator=16,
     )
+
 
 staggering_rhythm_maker = rhythmmakertools.IncisedRhythmMaker(
     #body_ratio=(1, 1),
@@ -80,6 +81,7 @@ winding_rhythm_maker = rhythmmakertools.TaleaRhythmMaker(
 
 
 __all__ = (
+    'clanging_rhythm_maker',
     'flowing_rhythm_maker',
     'staggering_rhythm_maker',
     'stuttering_rhythm_maker',
