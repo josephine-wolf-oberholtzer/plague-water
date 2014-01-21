@@ -82,11 +82,22 @@ class Brush(abctools.AbjadObject):
         ):
         contexted_pigments = []
         for pigment in self.pigments:
-            parameter_map = pigment._build_parameter_map(
+            pigment_parameter_map = pigment._build_parameter_map(
                 context_map=context_map,
                 context_name=context_name,
                 )
-            contexted_pigment = new(pigment, **parameter_map)
+            if pigment.music_maker is not None:
+                music_maker_parameter_map = \
+                    pigment.music_maker._build_parameter_map(
+                        context_map=context_map,
+                        context_name=context_name,
+                        )
+                music_maker = new(
+                    pigment.music_maker,
+                    **music_maker_parameter_map
+                    )
+                pigment_parameter_map['music_maker'] = music_maker
+            contexted_pigment = new(pigment, **pigment_parameter_map)
             contexted_pigments.append(contexted_pigment)
         if not contexted_pigments:
             pigment = makers.Pigment(

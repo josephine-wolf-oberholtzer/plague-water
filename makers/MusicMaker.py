@@ -11,11 +11,15 @@ class MusicMaker(ContextAwareMaker):
         '_articulation_maker',
         '_chord_maker',
         '_dynamic_maker',
+        '_leading_rest_durations',
         '_minimum_timespan_duration',
         '_pitch_class_maker',
+        '_playing_durations',
+        '_playing_groupings',
         '_registration_maker',
         '_rhythm_maker',
         '_spanner_maker',
+        '_tailing_rest_durations',
         )
 
     _default_rhythm_maker = rhythmmakertools.NoteRhythmMaker()
@@ -27,14 +31,17 @@ class MusicMaker(ContextAwareMaker):
         articulation_maker=None,
         chord_maker=None,
         dynamic_maker=None,
+        leading_rest_durations=None,
         minimum_timespan_duration=None,
         pitch_class_maker=None,
+        playing_durations=None,
+        playing_groupings=None,
         registration_maker=None,
         rhythm_maker=None,
         spanner_maker=None,
+        tailing_rest_durations=None,
         ):
         from plague_water import makers
-        # prototype
         assert isinstance(articulation_maker,
             (makers.ArticulationMaker, type(None)))
         assert isinstance(chord_maker,
@@ -53,11 +60,19 @@ class MusicMaker(ContextAwareMaker):
         self._articulation_maker = articulation_maker
         self._chord_maker = chord_maker
         self._dynamic_maker = dynamic_maker
+        self._leading_rest_durations = self._setup_duration_cursor(
+            leading_rest_durations)
         self._minimum_timespan_duration = minimum_timespan_duration
         self._pitch_class_maker = pitch_class_maker
+        self._playing_durations = self._setup_duration_cursor(
+            playing_durations)
+        self._playing_groupings = self._setup_grouping_cursor(
+            playing_groupings)
         self._registration_maker = registration_maker
         self._rhythm_maker = rhythm_maker
         self._spanner_maker = spanner_maker
+        self._tailing_rest_durations = self._setup_duration_cursor(
+            tailing_rest_durations)
 
     ### PUBLIC METHODS ###
 
@@ -95,12 +110,13 @@ class MusicMaker(ContextAwareMaker):
         seed=0,
         segment_actual_duration=None,
         ):
-        if self.dynamic_maker is not None:
-            self.dynamic_maker(
-                music,
-                seed=seed,
-                segment_actual_duration=segment_actual_duration,
-                )
+        if self.dynamic_maker is None:
+            return
+        self.dynamic_maker(
+            music,
+            seed=seed,
+            segment_actual_duration=segment_actual_duration,
+            )
         assert inspect_(music).is_well_formed()
 
     def apply_pitch_classes(
@@ -117,12 +133,13 @@ class MusicMaker(ContextAwareMaker):
         seed=0,
         segment_actual_duration=None,
         ):
-        if self.registration_maker is not None:
-            self.registration_maker(
-                music,
-                seed=seed,
-                segment_actual_duration=segment_actual_duration,
-                )
+        if self.registration_maker is None:
+            return
+        self.registration_maker(
+            music,
+            seed=seed,
+            segment_actual_duration=segment_actual_duration,
+            )
         assert inspect_(music).is_well_formed()
 
     def apply_spanners(
@@ -131,12 +148,13 @@ class MusicMaker(ContextAwareMaker):
         seed=0,
         segment_actual_duration=None,
         ):
-        if self.spanner_maker is not None:
-            self.spanner_maker(
-                music,
-                seed=seed,
-                segment_actual_duration=segment_actual_duration,
-                )
+        if self.spanner_maker is None:
+            return
+        self.spanner_maker(
+            music,
+            seed=seed,
+            segment_actual_duration=segment_actual_duration,
+            )
         assert inspect_(music).is_well_formed()
 
     def create_rhythms(
@@ -171,14 +189,58 @@ class MusicMaker(ContextAwareMaker):
             self.rhythm_maker != rhythmmakertools.RestRhythmMaker():
             beam = spannertools.GeneralizedBeam(
                 durations=durations,
-                include_long_duration_notes=False,
-                include_long_duration_rests=False,
+                include_long_duration_notes=True,
+                include_long_duration_rests=True,
                 isolated_nib_direction=None,
                 use_stemlets=True,
                 )
             attach(beam, music)
         assert inspect_(music).is_well_formed()
         return music
+
+    def create_timespans(
+        self,
+        initial_offset,
+        maximum_offset,
+        ):
+        from plague_water import makers
+        assert isinstance(self.leading_rest_durations,
+            (datastructuretools.StatalServerCursor, type(None)))
+        assert isinstance(self.playing_durations,
+            datastructuretools.StatalServerCursor)
+        assert isinstance(self.playing_groupings,
+            datastructuretools.StatalServerCursor)
+        assert isinstance(self.tailing_rest_durations,
+            (datastructuretools.StatalServerCursor, type(None)))
+        assert isinstance(initial_offset, Duration), initial_offset
+        assert isinstance(maximum_offset, Duration), maximum_offset
+        timespan_inventory = timespantools.TimespanInventory()
+        leading_rest_duration = Duration(0)
+        if self.leading_rest_durations is not None:
+            leading_rest_duration = self.leading_rest_durations()[0]
+        playing_grouping = self.playing_groupings()[0]
+        playing_durations = self.playing_durations(playing_grouping)
+        tailing_rest_duration = Duration(0)
+        if self.tailing_rest_durations is not None:
+            tailing_rest_duration = self.tailing_rest_durations()[0]
+        start_offset = initial_offset + leading_rest_duration
+        if maximum_offset <= start_offset:
+            return timespan_inventory, maximum_offset
+        for playing_duration in playing_durations:
+            stop_offset = start_offset + playing_duration
+            if maximum_offset <= stop_offset:
+                return timespan_inventory, maximum_offset
+            timespan = makers.PayloadedTimespan(
+                music_maker=self,
+                start_offset=start_offset,
+                stop_offset=stop_offset,
+                )
+            timespan_inventory.append(timespan)
+            start_offset = stop_offset
+        stop_offset = timespan_inventory.stop_offset + tailing_rest_duration
+        if maximum_offset < stop_offset:
+            stop_offset = maximum_offset
+        return timespan_inventory, stop_offset
 
     def timespan_has_minimum_length(self, timespan):
         assert isinstance(timespan, timespantools.Timespan)
@@ -263,6 +325,28 @@ class MusicMaker(ContextAwareMaker):
                         maximum_dot_count=2,
                         )
 
+    def _setup_duration_cursor(self, expr):
+        if expr is not None:
+            if isinstance(expr, Duration):
+                expr = [expr]
+            if isinstance(expr, (list, tuple)):
+                expr = datastructuretools.StatalServer(expr)
+            if isinstance(expr, datastructuretools.StatalServer):
+                expr = expr()
+            assert isinstance(expr, datastructuretools.StatalServerCursor)
+        return expr
+
+    def _setup_grouping_cursor(self, expr):
+        if expr is not None:
+            if isinstance(expr, int):
+                expr = [expr]
+            if isinstance(expr, (list, tuple)):
+                expr = datastructuretools.StatalServer(expr)
+            if isinstance(expr, datastructuretools.StatalServer):
+                expr = expr()
+            assert isinstance(expr, datastructuretools.StatalServerCursor)
+        return expr
+
     ### PUBLIC PROPERTIES ###
 
     @property
@@ -278,12 +362,24 @@ class MusicMaker(ContextAwareMaker):
         return self._dynamic_maker
 
     @property
+    def leading_rest_durations(self):
+        return self._leading_rest_durations
+
+    @property
     def minimum_timespan_duration(self):
         return self._minimum_timespan_duration
 
     @property
     def pitch_class_maker(self):
         return self._pitch_class_maker
+
+    @property
+    def playing_durations(self):
+        return self._playing_durations
+
+    @property
+    def playing_groupings(self):
+        return self._playing_groupings
 
     @property
     def registration_maker(self):
@@ -296,3 +392,8 @@ class MusicMaker(ContextAwareMaker):
     @property
     def spanner_maker(self):
         return self._spanner_maker
+
+    @property
+    def tailing_rest_durations(self):
+        return self._leading_rest_durations
+

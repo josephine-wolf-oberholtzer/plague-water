@@ -127,7 +127,7 @@ class SegmentMaker(ContextAwareMaker):
 
         ### CREATE NOTATION ###
         self.populate_time_signature_context()
-        self.create_rhythms(rewrite_meter=True)
+        self.create_rhythms(rewrite_meter=False)
         self.apply_pitch_classes()
         self.apply_registrations()
         self.apply_chords()
@@ -191,6 +191,16 @@ class SegmentMaker(ContextAwareMaker):
         assert isinstance(piano_lifeline_strategy, lifeline_prototype)
         assert isinstance(piano_rh_brush, brush_prototype)
         assert isinstance(saxophone_brush, brush_prototype)
+        if not allow_none_as_sentinel:
+            brushes = (
+                guitar_brush,
+                percussion_lh_brush,
+                percussion_rh_brush,
+                piano_lh_brush,
+                piano_rh_brush,
+                saxophone_brush,
+                )
+            assert any(brushes)
         ### OTHER ###
         assert isinstance(context_map, datastructuretools.ContextMap)
         permitted_time_signatures = indicatortools.TimeSignatureInventory(
@@ -376,15 +386,12 @@ class SegmentMaker(ContextAwareMaker):
                 )
 
     def build_semantic_voice_timespan_inventories(self):
-        from plague_water import makers
         print '\tbuilding semantic voice timespan inventories'
         for context_name in self.semantic_context_bundles:
             pair = self.semantic_context_bundles[context_name]
             brush, timespan_inventory = pair
             if brush is None:
-                brush = makers.Brush([
-                    makers.Pigment(),
-                    ])
+                continue
             result = brush(
                 context_map=self.context_map,
                 context_name=context_name,
@@ -403,15 +410,11 @@ class SegmentMaker(ContextAwareMaker):
             brush, timespan_inventory = pair
             silence_timespan_inventory = timespantools.TimespanInventory()
             previous_stop_offset = Offset(0)
-            silence_music_maker = makers.MusicMaker(
-                rhythm_maker=rhythmmakertools.RestRhythmMaker(),
-                )
             with systemtools.ProgressIndicator(message) as progress_indicator:
                 for timespan in timespan_inventory:
                     current_start_offset = timespan.start_offset
                     if previous_stop_offset < current_start_offset:
-                        silence_timespan = makers.PayloadedTimespan(
-                            music_maker=silence_music_maker,
+                        silence_timespan = timespantools.Timespan(
                             start_offset=previous_stop_offset,
                             stop_offset=current_start_offset,
                             )
@@ -419,31 +422,24 @@ class SegmentMaker(ContextAwareMaker):
                     previous_stop_offset = timespan.stop_offset
                     progress_indicator.advance()
                 if previous_stop_offset < self.segment_actual_duration:
-                    silence_timespan = makers.PayloadedTimespan(
-                        music_maker=silence_music_maker,
+                    silence_timespan = timespantools.Timespan(
                         start_offset=previous_stop_offset,
                         stop_offset=self.segment_actual_duration,
                         )
                     silence_timespan_inventory.append(silence_timespan)
                     progress_indicator.advance()
-            timespan_inventory.extend(silence_timespan_inventory)
-            all_silence_timespans = timespantools.TimespanInventory([
-                x for x in timespan_inventory
-                if x.music_maker == silence_music_maker
-                ])
-            all_silence_timespans.sort()
             fused_silence_timespans = timespantools.TimespanInventory()
-            for group in all_silence_timespans.partition(
+            for group in silence_timespan_inventory.partition(
                 include_tangent_timespans=True,
                 ):
                 fused_silence_timespan = makers.PayloadedTimespan(
-                    music_maker=silence_music_maker,
+                    music_maker=makers.MusicMaker(
+                        rhythm_maker=rhythmmakertools.RestRhythmMaker(),
+                        ),
                     start_offset=group.start_offset,
                     stop_offset=group.stop_offset,
                     )
                 fused_silence_timespans.append(fused_silence_timespan)
-            timespan_inventory[:] = [x for x in timespan_inventory
-                if x.music_maker != silence_music_maker]
             for shard in fused_silence_timespans.split_at_offsets(offsets):
                 timespan_inventory.extend(shard)
             timespan_inventory.sort()
