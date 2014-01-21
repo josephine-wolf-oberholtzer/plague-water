@@ -200,7 +200,7 @@ class MusicMaker(ContextAwareMaker):
                 use_stemlets=True,
                 )
             attach(beam, music)
-        assert inspect_(music).is_well_formed()
+        #assert inspect_(music).is_well_formed()
         return music
 
     def create_timespans(
