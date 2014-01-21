@@ -7,8 +7,8 @@ class Brush(abctools.AbjadObject):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_brush_components',
-        '_brush_component_pairs',
+        '_pigments',
+        '_pigment_pairs',
         '_talea',
         )
 
@@ -16,24 +16,24 @@ class Brush(abctools.AbjadObject):
 
     def __init__(
         self,
-        brush_components=None,
+        pigments=None,
         talea=None,
         ):
         from plague_water import makers
         from plague_water import materials
-        assert brush_components is not None
-        assert len(brush_components)
-        assert all(isinstance(x, makers.BrushComponent)
-            for x in brush_components)
-        self._brush_components = tuple(brush_components)
-        weights = [x.weight for x in self._brush_components]
+        assert pigments is not None
+        assert len(pigments)
+        assert all(isinstance(x, makers.Pigment)
+            for x in pigments)
+        self._pigments = tuple(pigments)
+        weights = [x.weight for x in self._pigments]
         pairs = mathtools.cumulative_sums_pairwise(
             mathtools.partition_integer_by_ratio(
                 10,
                 weights,
                 )
             )
-        self._brush_component_pairs = tuple(zip(pairs, self._brush_components))
+        self._pigment_pairs = tuple(zip(pairs, self._pigments))
         if talea is None:
             talea = materials.euler_numbers
         if isinstance(talea, int):
@@ -53,7 +53,7 @@ class Brush(abctools.AbjadObject):
         context_map=None,
         context_name=None,
         ):
-        brush_component_pairs = self._build_brush_component_pairs(
+        pigment_pairs = self._build_pigment_pairs(
             context_map=context_map,
             context_name=context_name,
             )
@@ -62,68 +62,68 @@ class Brush(abctools.AbjadObject):
         message = '\t\t{}'.format(context_name)
         with systemtools.ProgressIndicator(message) as progress_indicator:
             while current_offset < segment_target_duration:
-                brush_component = self._choose_brush_component(
-                    brush_component_pairs)
-                brush_component_timespan_inventory, current_offset = \
-                    brush_component(
+                pigment = self._choose_pigment(
+                    pigment_pairs)
+                pigment_timespan_inventory, current_offset = \
+                    pigment(
                         current_offset,
                         segment_target_duration,
                         )
-                timespan_inventory.extend(brush_component_timespan_inventory)
+                timespan_inventory.extend(pigment_timespan_inventory)
                 progress_indicator.advance()
         return timespan_inventory
 
     ### PRIVATE METHODS ###
 
-    def _build_brush_component_pairs(
+    def _build_pigment_pairs(
         self,
         context_map=None,
         context_name=None,
         ):
-        contexted_brush_components = []
-        for brush_component in self.brush_components:
-            parameter_map = brush_component._build_parameter_map(
+        contexted_pigments = []
+        for pigment in self.pigments:
+            parameter_map = pigment._build_parameter_map(
                 context_map=context_map,
                 context_name=context_name,
                 )
-            contexted_brush_component = new(brush_component, **parameter_map)
-            contexted_brush_components.append(contexted_brush_component)
-        if not contexted_brush_components:
-            brush_component = makers.BrushComponent(
+            contexted_pigment = new(pigment, **parameter_map)
+            contexted_pigments.append(contexted_pigment)
+        if not contexted_pigments:
+            pigment = makers.Pigment(
                 music_maker=makers.MusicMaker(
                     rhythm_maker=rhythmmakertools.RestRhythmMaker(),
                     ),
                 )
-            contexted_brush_components.append(brush_component)
-        weights = [x.weight for x in contexted_brush_components]
+            contexted_pigments.append(pigment)
+        weights = [x.weight for x in contexted_pigments]
         pairs = mathtools.cumulative_sums_pairwise(
             mathtools.partition_integer_by_ratio(
                 10,
                 weights,
                 )
             )
-        brush_component_pairs = tuple(zip(pairs, contexted_brush_components))
-        return brush_component_pairs
+        pigment_pairs = tuple(zip(pairs, contexted_pigments))
+        return pigment_pairs
 
-    def _choose_brush_component(self, brush_component_pairs):
+    def _choose_pigment(self, pigment_pairs):
         seed = self.talea()[0]
-        selected_brush_component = None
-        for pair, brush_component in brush_component_pairs:
+        selected_pigment = None
+        for pair, pigment in pigment_pairs:
             low, high = pair
             if low <= seed < high:
-                selected_brush_component = brush_component
+                selected_pigment = pigment
                 break
-        return selected_brush_component
+        return selected_pigment
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def brush_components(self):
-        return self._brush_components
+    def pigments(self):
+        return self._pigments
 
     @property
-    def brush_component_pairs(self):
-        return self._brush_component_pairs
+    def pigment_pairs(self):
+        return self._pigment_pairs
 
     @property
     def talea(self):

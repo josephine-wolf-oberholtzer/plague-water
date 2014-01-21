@@ -383,7 +383,7 @@ class SegmentMaker(ContextAwareMaker):
             brush, timespan_inventory = pair
             if brush is None:
                 brush = makers.Brush([
-                    makers.BrushComponent(),
+                    makers.Pigment(),
                     ])
             result = brush(
                 context_map=self.context_map,

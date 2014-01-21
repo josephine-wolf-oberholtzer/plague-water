@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 
-from brush_components import *
 from duration_servers import *
 from euler_numbers import *
+from pigments import *
 from pitch_classes import *
 from proportions import *
 from registrations import *

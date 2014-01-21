@@ -3,7 +3,7 @@ from abjad import *
 from plague_water.makers.ContextAwareMaker import ContextAwareMaker
 
 
-class BrushComponent(ContextAwareMaker):
+class Pigment(ContextAwareMaker):
 
     ### CLASS VARIABLES ###
 

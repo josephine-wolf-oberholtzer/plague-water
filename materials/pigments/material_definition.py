@@ -4,12 +4,12 @@ from plague_water import makers
 #from plague_water.materials import duration_servers
 
 
-clanging_brush_component = makers.BrushComponent(
+clanging_pigment = makers.Pigment(
     playing_durations=None,
     playing_groupings=None,
     leading_rest_durations=None,
-    minimum_timespan_duration=None,
     music_maker=makers.MusicMaker(
+        minimum_timespan_duration=None,
         rhythm_maker=rhythmmakertools.TaleaRhythmMaker(
             talea=(4, 4, 4, 3, 4, 5, 4, 4, 3,),
             talea_denominator=16,
@@ -19,12 +19,12 @@ clanging_brush_component = makers.BrushComponent(
     )
 
 
-flowing_brush_component = makers.BrushComponent(
+flowing_pigment = makers.Pigment(
     playing_durations=None,
     playing_groupings=None,
     leading_rest_durations=None,
-    minimum_timespan_duration=None,
     music_maker=makers.MusicMaker(
+        minimum_timespan_duration=None,
         rhythm_maker=rhythmmakertools.RatioTaleaRhythmMaker(
             ratio_talea=(
                 (2, 1),
@@ -52,12 +52,12 @@ flowing_brush_component = makers.BrushComponent(
     )
 
 
-staggering_brush_component = makers.BrushComponent(
+staggering_pigment = makers.Pigment(
     playing_durations=None,
     playing_groupings=None,
     leading_rest_durations=None,
-    minimum_timespan_duration=None,
     music_maker=makers.MusicMaker(
+        minimum_timespan_duration=None,
         rhythm_maker=rhythmmakertools.IncisedRhythmMaker(
             #body_ratio=(1, 1),
             fill_with_notes=True,
@@ -75,12 +75,12 @@ staggering_brush_component = makers.BrushComponent(
     )
 
 
-stuttering_brush_component = makers.BrushComponent(
+stuttering_pigment = makers.Pigment(
     playing_durations=None,
     playing_groupings=None,
     leading_rest_durations=None,
-    minimum_timespan_duration=None,
     music_maker=makers.MusicMaker(
+        minimum_timespan_duration=None,
         rhythm_maker=rhythmmakertools.RatioTaleaRhythmMaker(
             ratio_talea=(
                 (1, 1, -2),
@@ -101,12 +101,12 @@ stuttering_brush_component = makers.BrushComponent(
     )
 
 
-winding_brush_component = makers.BrushComponent(
+winding_pigment = makers.Pigment(
     playing_durations=None,
     playing_groupings=None,
     leading_rest_durations=None,
-    minimum_timespan_duration=None,
     music_maker=makers.MusicMaker(
+        minimum_timespan_duration=None,
         rhythm_maker=rhythmmakertools.TaleaRhythmMaker(
             burnish_output=True,
             burnish_specifier=rhythmmakertools.BurnishSpecifier(
@@ -126,9 +126,9 @@ winding_brush_component = makers.BrushComponent(
 
 
 __all__ = (
-    'clanging_brush_component',
-    'flowing_brush_component',
-    'staggering_brush_component',
-    'stuttering_brush_component',
-    'winding_brush_component',
+    'clanging_pigment',
+    'flowing_pigment',
+    'staggering_pigment',
+    'stuttering_pigment',
+    'winding_pigment',
     )
