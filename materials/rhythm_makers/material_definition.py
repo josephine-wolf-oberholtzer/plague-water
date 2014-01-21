@@ -6,14 +6,21 @@ flowing_rhythm_maker = rhythmmakertools.RatioTaleaRhythmMaker(
     ratio_talea=(
         (2, 1),
         (1, 1),
-        (1, 2),
-        (3, 1),
-        (1, 1, 1),
-        (1, 1),
+        (1,),
+        (1, 2, 1),
+        (4, 1),
+        (1, 3, 1),
+        (3, 4),
+        (4, 1),
+        (2, 3),
+        (1, 2, 1),
+        (1, 2, 1),
         (2, 1),
-        (1, 1),
-        (1, 1, 1),
+        (4, 1),
+        (2, 3),
+        (1, 2, 1),
         (1, 3),
+        (1,),
         ),
     tie_across_divisions=True,
     )
@@ -22,24 +29,29 @@ flowing_rhythm_maker = rhythmmakertools.RatioTaleaRhythmMaker(
 stuttering_rhythm_maker = rhythmmakertools.RatioTaleaRhythmMaker(
     ratio_talea=(
         (1, 1, -2),
-        (2, 1, -2),
+        (-2, 2, 1, -2),
+        (1, 2, 3, 1, -4),
         (1, 1, -3),
-        (1, 1, -2),
-        (2, 1, -3),
-        (1, 1, -4),
-        (1, 1, -1),
+        (-1, 1, 1, 1, -2),
+        (1, 2, 1, -3),
+        (-1, 1, 1, -4),
+        (-2, 1, 1, 1, -3),
+        (-1, 1, 3, 1, -2),
+        (1, 2, 2, -2),
         ),
     tie_across_divisions=False,
     )
 
 
 staggering_rhythm_maker = rhythmmakertools.IncisedRhythmMaker(
-    body_ratio=(1, -2),
+    #body_ratio=(1, 1),
     fill_with_notes=True,
     incise_divisions=True,
     incise_specifier=rhythmmakertools.InciseSpecifier(
         prefix_talea=(1, 1, 1, 1, 1, 1, 2, 1, 1),
         prefix_lengths=(2, 2, 1, 3, 2, 2, 3, 3, 4, 2, 3),
+        suffix_talea=None,
+        suffix_lengths=(0,),
         talea_denominator=32,
         ),
     )
