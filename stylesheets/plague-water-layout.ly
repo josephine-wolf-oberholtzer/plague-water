@@ -196,7 +196,8 @@
             (basic-distance . 10.5)
             (minimum-distance . 10)
             (padding . 1)
-            (stretchability . 9))
+            (stretchability . 0)
+            )
         \override Stem.direction = #down
         \override StemTremolo.beam-width = 1.5
         \override StemTremolo.flag-count = 4.0
