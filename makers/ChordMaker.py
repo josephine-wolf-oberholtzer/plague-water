@@ -53,15 +53,25 @@ class ChordMaker(ContextAwareMaker):
             count = counts_talea[i]
             if not count:
                 continue
-            center_pitch = logical_tie.written_pitch
+            center_pitch = logical_tie[0].written_pitch
             chord_pitches = set([center_pitch])
             for interval_number in intervals_cursor(count):
                 chord_pitch = center_pitch.transpose(interval_number)
-                chord_pitches.append(chord_pitch)
+                chord_pitches.add(chord_pitch)
             if 1 == len(chord_pitches):
                 continue
             for leaf in logical_tie:
                 new_chord = Chord(leaf)
-                new_chord.written_pitches = chord_pitches
+                new_chord.written_pitches = tuple(chord_pitches)
                 mutate(leaf).replace(new_chord)
         assert inspect_(music).is_well_formed()
+
+    ### PUBLIC PROPERTIES ###
+    
+    @property
+    def counts_talea(self):
+        return self._counts_talea
+
+    @property
+    def intervals_talea(self):
+        return self._intervals_talea
