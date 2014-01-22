@@ -127,7 +127,7 @@ class SegmentMaker(ContextAwareMaker):
 
         ### CREATE NOTATION ###
         self.populate_time_signature_context()
-        self.create_rhythms(rewrite_meter=False)
+        self.create_rhythms(rewrite_meter=True)
         self.apply_pitch_classes()
         self.apply_registrations()
         self.apply_chords()
