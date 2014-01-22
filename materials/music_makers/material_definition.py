@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 from abjad import *
 from plague_water import makers
-#from plague_water.materials import duration_servers
+from plague_water.materials import duration_servers
 
 
 clanging_music_maker = makers.MusicMaker(
@@ -64,22 +64,23 @@ staggering_music_maker = makers.MusicMaker(
         inner_leaves=('.',),
         ),
     leading_rest_durations=None,
-    minimum_timespan_duration=Duration(3, 16),
-    playing_durations=None,
-    playing_groupings=None,
-    rhythm_maker=rhythmmakertools.IncisedRhythmMaker(
-        #body_ratio=(1, 1),
-        fill_with_notes=False,
-        incise_divisions=True,
-        incise_specifier=rhythmmakertools.InciseSpecifier(
-            prefix_talea=(1, 1, 1, 1, 1, 1, 2, 1, 1),
-            prefix_lengths=(2, 2, 1, 3, 2, 2, 3, 3, 4, 2, 3),
-            suffix_talea=None,
-            suffix_lengths=(0,),
-            talea_denominator=32,
+    minimum_timespan_duration=Duration(2, 16),
+    playing_durations=duration_servers.very_short_duration_server(),
+    playing_groupings=duration_servers.short_grouping_server(),
+    rhythm_maker=rhythmmakertools.RatioTaleaRhythmMaker(
+        ratio_talea=(
+            (1, 1),
+            (1, 2, 2),
+            (-1, 1, 2, 1),
+            (1, 2, 1),
+            (1, 1, 1),
+            (1, -1, 1, 1),
+            (-1, 1, 1),
+            (1, 2, 2),
+            (-1, 1, 2, 1),
             ),
         ),
-    tailing_rest_durations=None,
+    tailing_rest_durations=duration_servers.short_duration_server(),
     )
 
 

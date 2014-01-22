@@ -32,7 +32,7 @@ short_grouping_server = datastructuretools.StatalServer(
         [
             ((0, 33), (1, 1)),
             ((34, 66), (1, 2)),
-            ((67, 99), (1, 5)),
+            ((67, 99), (1, 3)),
             ],
         )
     )
@@ -70,6 +70,18 @@ short_duration_server = datastructuretools.StatalServer((
         )
     ))
 
+very_short_duration_server = datastructuretools.StatalServer((
+    durationtools.Duration(x, denominator) for x in
+    sequencetools.remap_sequence_by_range_pairs(
+        euler_numbers.euler_hundreds,
+        [
+            ((0, 33), (1, 1)),
+            ((34, 66), (1, 2)),
+            ((67, 99), (1, 4)),
+            ],
+        )
+    ))
+
 __all__ = (
     'long_duration_server',
     'long_grouping_server',
@@ -77,4 +89,5 @@ __all__ = (
     'medium_grouping_server',
     'short_duration_server',
     'short_grouping_server',
+    'very_short_duration_server',
     )

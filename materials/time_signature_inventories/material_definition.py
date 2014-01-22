@@ -26,8 +26,7 @@ prime_time_signatures = indicatortools.TimeSignatureInventory(
 
 quick_time_signatures = indicatortools.TimeSignatureInventory(
     [
-        (1, 16),
-        (1, 8),
+        (3, 16),
         (2, 8),
         (1, 4),
         (5, 16),
