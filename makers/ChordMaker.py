@@ -19,7 +19,7 @@ class ChordMaker(ContextAwareMaker):
         counts_talea=None,
         intervals_talea=None,
         ):
-        prototype = (tuple, list, type(None))
+        prototype = (tuple, type(None))
         assert isinstance(counts_talea, prototype), counts_talea
         assert isinstance(intervals_talea, prototype), intervals_talea
         if counts_talea and intervals_talea:
