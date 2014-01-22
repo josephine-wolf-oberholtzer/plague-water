@@ -89,14 +89,7 @@ class ArticulationMaker(ContextAwareMaker):
                 for i, logical_tie in enumerate(logical_ties):
                     articulation = Articulation(each_leaf_articulations[i])
                     attach(articulation, logical_tie[0])
-
-    ### PRIVATE METHODS ###
-
-    def _expr_to_cyclic_tuple(self, expr, seed):
-        expr = expr or ()
-        rotated_expr = sequencetools.rotate_sequence(expr, seed)
-        cyclic_tuple = datastructuretools.CyclicTuple(rotated_expr)
-        return cyclic_tuple
+        assert inspect_(music).is_well_formed()
 
     ### PUBLIC PROPERTIES ###
 

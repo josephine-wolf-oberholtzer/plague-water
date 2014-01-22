@@ -85,3 +85,10 @@ class ContextAwareMaker(abctools.AbjadObject):
         assert isinstance(argument,
             (datastructuretools.StatalServerCursor, type(None)))
         return argument
+
+    def _expr_to_cyclic_tuple(self, expr, seed):
+        expr = expr or ()
+        rotated_expr = sequencetools.rotate_sequence(expr, seed)
+        cyclic_tuple = datastructuretools.CyclicTuple(rotated_expr)
+        return cyclic_tuple
+
