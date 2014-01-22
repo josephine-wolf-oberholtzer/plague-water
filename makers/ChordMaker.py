@@ -8,18 +8,60 @@ class ChordMaker(ContextAwareMaker):
     ### CLASS VARIABLES ###
 
     __slots__ = (
+        '_counts_talea',
+        '_intervals_talea',
         )
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        counts_talea=None,
+        intervals_talea=None,
+        ):
+        assert isinstance(counts_talea, (tuple, type(None)))
+        assert isinstance(intervals_talea, (tuple, type(None)))
+        if counts_talea and intervals_talea:
+            assert sequencetools.all_are_nonnegative_integers(counts_talea) 
+            assert all(x != 0 for x in intervals_talea)
+        self._counts_talea = counts_talea
+        self._intervals_talea = intervals_talea
 
     ### SPECIAL METHODS ###
 
     def __call__(
         self,
         music,
-        context_map=None,
-        context_name=None,
         seed=None,
+        segment_actual_duration=None,
         ):
-        assert isinstance(seed, (int, type(None)))
-        parameter_map = self._build_parameter_map(
-            context_map, context_name)
-        pass
+        if seed is None:
+            seed = 0
+        assert isinstance(seed, int)
+        counts_talea = self._expr_to_cyclic_tuple(
+            self.counts_talea,
+            seed,
+            )
+        intervals_talea = self._expr_to_cyclic_tuple(
+            self.intervals_talea,
+            seed,
+            )
+        intervals_cursor = datastructuretools.StatalServer(
+            intervals_talea)()
+        iterator = iterate(music).by_logical_tie(pitched=True)
+        for i, logical_tie in enumerate(iterator):
+            count = counts_talea[i]
+            if not count:
+                continue
+            center_pitch = logical_tie.written_pitch
+            chord_pitches = set([center_pitch])
+            for interval_number in intervals_cursor(count):
+                chord_pitch = center_pitch.transpose(interval_number)
+                chord_pitches.append(chord_pitch)
+            if 1 == len(chord_pitches):
+                continue
+            for leaf in logical_tie:
+                new_chord = Chord(leaf)
+                new_chord.written_pitches = chord_pitches
+                mutate(leaf).replace(new_chord)
+        assert inspect_(music).is_well_formed()
