@@ -1,5 +1,5 @@
 \layout {
-    \accidentalStyle forget
+    \accidentalStyle neo-modern-cautionary
     indent = 0
     ragged-bottom = ##t
     ragged-last = ##t
