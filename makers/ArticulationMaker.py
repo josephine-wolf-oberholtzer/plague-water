@@ -9,29 +9,29 @@ class ArticulationMaker(ContextAwareMaker):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_all_leaves',
-        '_first_leaf',
-        '_inner_leaves',
-        '_last_leaf',
+        '_each_leaf_articulations',
+        '_first_leaf_articulations',
+        '_inner_leaf_articulations',
+        '_last_leaf_articulations',
         )
 
     ### INITIALIZER ###
 
     def __init__(
         self,
-        all_leaves=None,
-        first_leaf=None,
-        inner_leaves=None,
-        last_leaf=None,
+        each_leaf_articulations=None,
+        first_leaf_articulations=None,
+        inner_leaf_articulations=None,
+        last_leaf_articulations=None,
         ):
-        assert isinstance(all_leaves, (tuple, type(None)))
-        assert isinstance(first_leaf, (tuple, type(None)))
-        assert isinstance(inner_leaves, (tuple, type(None)))
-        assert isinstance(last_leaf, (tuple, type(None)))
-        self._all_leaves = all_leaves
-        self._first_leaf = first_leaf
-        self._inner_leaves = inner_leaves
-        self._last_leaf = last_leaf
+        assert isinstance(each_leaf_articulations, (tuple, type(None)))
+        assert isinstance(first_leaf_articulations, (tuple, type(None)))
+        assert isinstance(inner_leaf_articulations, (tuple, type(None)))
+        assert isinstance(last_leaf_articulations, (tuple, type(None)))
+        self._each_leaf_articulations = each_leaf_articulations
+        self._first_leaf_articulations = first_leaf_articulations
+        self._inner_leaf_articulations = inner_leaf_articulations
+        self._last_leaf_articulations = last_leaf_articulations
 
     ### SPECIAL METHODS ###
 
@@ -44,76 +44,74 @@ class ArticulationMaker(ContextAwareMaker):
         if seed is None:
             seed = 0
         assert isinstance(seed, int)
-
-        all_leaves = datastructuretools.CyclicTuple(
-            sequencetools.rotate_sequence(
-                self.all_leaves or (),
-                seed,
-                )
+        each_leaf_articulations = self._expr_to_cyclic_tuple(
+            self.each_leaf_articulations,
+            seed,
             )
-        first_leaf = datastructuretools.CyclicTuple(
-            sequencetools.rotate_sequence(
-                self.first_leaf or (),
-                seed,
-                )
+        first_leaf_articulations = self._expr_to_cyclic_tuple(
+            self.first_leaf_articulations,
+            seed,
             )
-        inner_leaves = datastructuretools.CyclicTuple(
-            sequencetools.rotate_sequence(
-                self.inner_leaves or (),
-                seed,
-                )
+        inner_leaf_articulations = self._expr_to_cyclic_tuple(
+            self.inner_leaf_articulations,
+            seed,
             )
-        last_leaf = datastructuretools.CyclicTuple(
-            sequencetools.rotate_sequence(
-                self.last_leaf or (),
-                seed,
-                )
+        last_leaf_articulations = self._expr_to_cyclic_tuple(
+            self.last_leaf_articulations,
+            seed,
             )
-
         for cell in music:
             logical_ties = tuple(iterate(cell).by_logical_tie(pitched=True))
             if 1 == len(logical_ties):
-                if first_leaf:
-                    articulation = Articulation(first_leaf[0])
-                elif last_leaf:
-                    articulation = Articulation(last_leaf[0])
+                if first_leaf_articulations:
+                    articulation = Articulation(first_leaf_articulations[0])
+                elif last_leaf_articulations:
+                    articulation = Articulation(last_leaf_articulations[0])
                 attach(articulation, logical_ties[0][0])
             elif 1 < len(logical_ties):
-                if first_leaf:
-                    articulation = Articulation(first_leaf[0])
+                if first_leaf_articulations:
+                    articulation = Articulation(first_leaf_articulations[0])
                     attach(articulation, logical_ties[0][0])
-                if last_leaf:
-                    articulation = Articulation(last_leaf[0])
+                if last_leaf_articulations:
+                    articulation = Articulation(last_leaf_articulations[0])
                     attach(articulation, logical_ties[-1][0])
-            if inner_leaves:
+            if inner_leaf_articulations:
                 start = None
-                if first_leaf:
+                if first_leaf_articulations:
                     start = 1
                 stop = None
-                if last_leaf:
+                if last_leaf_articulations:
                     stop = -1
                 for i, logical_tie in enumerate(logical_ties[start:stop]):
-                    articulation = Articulation(inner_leaves[i])
+                    articulation = Articulation(inner_leaf_articulations[i])
                     attach(articulation, logical_tie[0])
-            if all_leaves:
+            if each_leaf_articulations:
                 for i, logical_tie in enumerate(logical_ties):
-                    articulation = Articulation(all_leaves[i])
+                    articulation = Articulation(each_leaf_articulations[i])
                     attach(articulation, logical_tie[0])
+
+    ### PRIVATE METHODS ###
+
+    def _expr_to_cyclic_tuple(self, expr, seed):
+        expr = expr or ()
+        rotated_expr = sequencetools.rotate_sequence(expr, seed)
+        cyclic_tuple = datastructuretools.CyclicTuple(rotated_expr)
+        return cyclic_tuple
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def all_leaves(self):
-        return self._all_leaves
+    def each_leaf_articulations(self):
+        return self._each_leaf_articulations
 
     @property
-    def first_leaf(self):
-        return self._first_leaf
+    def first_leaf_articulations(self):
+        return self._first_leaf_articulations
 
     @property
-    def inner_leaves(self):
-        return self._inner_leaves
+    def inner_leaf_articulations(self):
+        return self._inner_leaf_articulations
 
     @property
-    def last_leaf(self):
-        return self._last_leaf
+    def last_leaf_articulations(self):
+        return self._last_leaf_articulations

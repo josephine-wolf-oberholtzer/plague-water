@@ -60,8 +60,8 @@ flowing_music_maker = makers.MusicMaker(
 
 staggering_music_maker = makers.MusicMaker(
     articulation_maker=makers.ArticulationMaker(
-        first_leaf=('>',),
-        inner_leaves=('.',),
+        first_leaf_articulations=('>',),
+        inner_leaf_articulations=('.',),
         ),
     leading_rest_durations=None,
     minimum_timespan_duration=Duration(2, 16),
