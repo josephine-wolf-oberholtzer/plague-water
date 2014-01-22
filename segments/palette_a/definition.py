@@ -21,8 +21,35 @@ context_map[score]['playing_groupings'] = materials.short_grouping_server()
 
 ### BRUSHES ###
 
-piano_lh_brush = piano_rh_brush = makers.Brush([
-    materials.staggering_music_maker,
+counts_talea = sequencetools.remap_sequence_by_range_pairs(
+    materials.euler_hundreds,
+    [
+        ((0, 99), (0, 4)),
+        ],
+    )
+intervals_talea = sequencetools.remap_sequence_by_range_pairs(
+    materials.euler_hundreds,
+    [
+        ((0, 49), (-6, -1)),
+        ((50, 99), (1, 6)),
+        ],
+    )
+
+piano_rh_brush = makers.Brush([
+    new(materials.staggering_music_maker,
+        chord_maker=makers.ChordMaker(
+            counts_talea=tuple(counts_talea),
+            intervals_talea=tuple(intervals_talea),
+            ),
+        )
+    ])
+piano_lh_brush = makers.Brush([
+    new(materials.staggering_music_maker,
+        chord_maker=makers.ChordMaker(
+            counts_talea=tuple(counts_talea),
+            intervals_talea=tuple(intervals_talea),
+            ),
+        )
     ])
 
 ### SEGMENT DEFINITION ###
