@@ -3,6 +3,48 @@ from abjad import *
 
 
 class KeyClusterExpression(abctools.AbjadObject):
+    r'''A key cluster expression.
+
+        >>> from plague_water import makers
+        >>> key_cluster_expression = makers.KeyClusterExpression(
+        ...     arpeggio_direction=Up,
+        ...     include_black_keys=False,
+        ...     )
+        >>> print format(key_cluster_expression)
+        makers.KeyClusterExpression(
+            arpeggio_direction=Up,
+            include_black_keys=False,
+            include_white_keys=True,
+            staff_space_width=5,
+            )
+
+    ::
+
+        >>> staff = Staff("c'4 d'4 ~ d'4 e'4")
+        >>> logical_tie = inspect_(staff[1]).get_logical_tie()
+        >>> key_cluster_expression(logical_tie)
+        >>> f(staff)
+        \new Staff {
+            c'4
+            \arpeggioArrowUp
+            \once \override NoteHead.stencil = #ly:text-interface::print
+            \once \override NoteHead.text = \markup {
+                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+            }
+            <b d' f'>4 \arpeggio ~
+                ^ \markup {
+                    \center-align
+                        \natural
+                    }
+            \once \override NoteHead.stencil = #ly:text-interface::print
+            \once \override NoteHead.text = \markup {
+                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+            }
+            <b d' f'>4
+            e'4
+        }
+
+    '''
 
     ### CLASS VARIABLES ###
 
@@ -10,7 +52,7 @@ class KeyClusterExpression(abctools.AbjadObject):
         '_arpeggio_direction',
         '_include_black_keys',
         '_include_white_keys',
-        '_width',
+        '_staff_space_width',
         )
 
     ### INITIALIZER ###
@@ -20,15 +62,15 @@ class KeyClusterExpression(abctools.AbjadObject):
         arpeggio_direction=None,
         include_black_keys=True,
         include_white_keys=True,
-        width=5,
+        staff_space_width=5,
         ):
-        assert 2 < width and (int(width) % 2)
+        assert 2 < staff_space_width and (int(staff_space_width) % 2)
         assert include_black_keys or include_white_keys
         assert arpeggio_direction in (Up, Down, None)
         self._arpeggio_direction = arpeggio_direction
         self._include_black_keys = bool(include_black_keys)
         self._include_white_keys = bool(include_white_keys)
-        self._width = int(width)
+        self._staff_space_width = int(staff_space_width)
 
     ### SPECIAL METHODS ###
 
@@ -36,9 +78,9 @@ class KeyClusterExpression(abctools.AbjadObject):
         assert isinstance(logical_tie, selectiontools.LogicalTie), logical_tie
         center_pitch = logical_tie[0].written_pitch
         starting_diatonic_number = \
-            center_pitch.diatonic_pitch_number - (self.width / 2)
+            center_pitch.diatonic_pitch_number - (self.staff_space_width / 2)
         diatonic_numbers = [starting_diatonic_number]
-        for i in range(1, (self.width / 2) + 1):
+        for i in range(1, (self.staff_space_width / 2) + 1):
             step = 2 * i
             diatonic_number = starting_diatonic_number + step
             diatonic_numbers.append(diatonic_number)
@@ -50,20 +92,28 @@ class KeyClusterExpression(abctools.AbjadObject):
             ]
         chord_pitches = [pitchtools.NamedPitch(x)
             for x in chromatic_numbers]
-        key_cluster = indicatortools.KeyCluster(
-            include_black_keys=self.include_black_keys,
-            include_white_keys=self.include_white_keys,
-            )
         for i, leaf in enumerate(logical_tie):
             chord = Chord(leaf)
             chord.written_pitches = chord_pitches
             mutate(leaf).replace(chord)
-            attach(key_cluster, chord)
-            if i == 0 and self.arpeggio_direction is not None:
-                arpeggio = indicatortools.Arpeggio(
-                    direction=self.arpeggio_direction,
+            if i:
+                key_cluster = indicatortools.KeyCluster(
+                    include_black_keys=self.include_black_keys,
+                    include_white_keys=self.include_white_keys,
+                    suppress_markup=True,
                     )
-                attach(arpeggio, chord)
+                attach(key_cluster, chord)
+            else:
+                key_cluster = indicatortools.KeyCluster(
+                    include_black_keys=self.include_black_keys,
+                    include_white_keys=self.include_white_keys,
+                    )
+                attach(key_cluster, chord)
+                if self.arpeggio_direction is not None:
+                    arpeggio = indicatortools.Arpeggio(
+                        direction=self.arpeggio_direction,
+                        )
+                    attach(arpeggio, chord)
 
     ### PUBLIC PROPERTIES ###
 
@@ -80,5 +130,5 @@ class KeyClusterExpression(abctools.AbjadObject):
         return self._include_white_keys
 
     @property
-    def width(self):
-        return self._width
+    def staff_space_width(self):
+        return self._staff_space_width
