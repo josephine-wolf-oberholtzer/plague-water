@@ -436,7 +436,7 @@ class SegmentMaker(Maker):
             for group in silence_timespan_inventory.partition(
                 include_tangent_timespans=True,
                 ):
-                fused_silence_timespan = makers.PayloadedTimespan(
+                fused_silence_timespan = makers.AnnotatedTimespan(
                     music_maker=makers.MusicMaker(
                         rhythm_maker=rhythmmakertools.RestRhythmMaker(),
                         ),

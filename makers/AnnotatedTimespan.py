@@ -2,7 +2,7 @@
 from abjad import timespantools
 
 
-class PayloadedTimespan(timespantools.Timespan):
+class AnnotatedTimespan(timespantools.Timespan):
 
     ### CLASS VARIABLES ###
 
