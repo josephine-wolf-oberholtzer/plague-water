@@ -81,4 +81,5 @@ lilypond_file = illustrate(all_rotated_sequences)
 
 
 __all__ = (
+    'all_rotated_sequences',
     )
