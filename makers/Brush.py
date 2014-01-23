@@ -1,8 +1,9 @@
 # -*- encoding: utf-8 -*-
 from abjad import *
+from plague_water.makers.Maker import Maker
 
 
-class Brush(abctools.AbjadObject):
+class Brush(Maker):
 
     ### CLASS VARIABLES ###
 

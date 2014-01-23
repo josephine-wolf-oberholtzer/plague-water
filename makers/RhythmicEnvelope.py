@@ -1,8 +1,9 @@
 # -*- encoding: utf-8 -*-
 from abjad import *
+from plague_water.makers.Maker import Maker
 
 
-class RhythmicEnvelope(abctools.AbjadObject):
+class RhythmicEnvelope(Maker):
 
     ### CLASS VARIABLES ###
 

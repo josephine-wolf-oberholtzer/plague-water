@@ -1,8 +1,9 @@
 # -*- encoding: utf-8 -*-
 from abjad import *
+from plague_water.makers.Maker import Maker
 
 
-class ChordExpression(abctools.AbjadObject):
+class ChordExpression(Maker):
     r'''A chord expression.
 
     ::
@@ -71,13 +72,6 @@ class ChordExpression(abctools.AbjadObject):
             if not i and self.arpeggio_direction is not None:
                 arpeggio = indicatortools.Arpeggio(self.arpeggio_direction)
                 attach(arpeggio, chord)
-
-    def __eq__(self, expr):
-        return systemtools.StorageFormatManager.compare(self, expr)
-
-    def __hash__(self):
-        hash_values = systemtools.StorageFormatManager.get_hash_values(self)
-        return hash(hash_values)
 
     ### PUBLIC PROPERTIES ###
 

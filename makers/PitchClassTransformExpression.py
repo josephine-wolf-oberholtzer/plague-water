@@ -1,8 +1,9 @@
 # -*- encoding: utf-8 -*-
 from abjad import *
+from plague_water.makers.Maker import Maker
 
 
-class PitchClassTransformExpression(abctools.AbjadObject):
+class PitchClassTransformExpression(Maker):
     r'''A pitch-class transform expression.
 
     ::
@@ -68,13 +69,6 @@ class PitchClassTransformExpression(abctools.AbjadObject):
         if self.retrogression:
             pitch_classes = pitch_classes.retrograde()
         return pitch_classes
-
-    def __eq__(self, expr):
-        return systemtools.StorageFormatManager.compare(self, expr)
-
-    def __hash__(self):
-        hash_values = systemtools.StorageFormatManager.get_hash_values(self)
-        return hash(hash_values)
 
     ### PUBLIC PROPERTIES ###
 
