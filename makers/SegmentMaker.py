@@ -39,10 +39,10 @@ class SegmentMaker(ContextAwareMaker):
         'saxophone_brush',
         'saxophone_timespans',
         'score',
-        'segment_actual_duration',
+        'segment_duration',
         'segment_name',
         'segment_id',
-        'segment_target_duration',
+        'target_segment_duration',
         'segment_tempo',
         'time_signatures',
         )
@@ -65,7 +65,7 @@ class SegmentMaker(ContextAwareMaker):
         saxophone_brush=None,
         segment_id=None,
         segment_name=None,
-        segment_target_duration=None,
+        target_segment_duration=None,
         segment_tempo=None,
         ):
         self._prepare(
@@ -84,7 +84,7 @@ class SegmentMaker(ContextAwareMaker):
             saxophone_brush=saxophone_brush,
             segment_id=segment_id,
             segment_name=segment_name,
-            segment_target_duration=segment_target_duration,
+            target_segment_duration=target_segment_duration,
             segment_tempo=segment_tempo,
             )
 
@@ -108,7 +108,7 @@ class SegmentMaker(ContextAwareMaker):
             saxophone_brush=self.saxophone_brush,
             segment_id=self.segment_id,
             segment_name=self.segment_name,
-            segment_target_duration=self.segment_target_duration,
+            target_segment_duration=self.target_segment_duration,
             segment_tempo=self.segment_tempo,
             )
         template = score_templates.PlagueWaterScoreTemplate()
@@ -119,7 +119,7 @@ class SegmentMaker(ContextAwareMaker):
         self.meters = self.find_meters()
         self.time_signatures = tuple(meter.implied_time_signature
             for meter in self.meters)
-        self.segment_actual_duration = sum(time_signature.duration
+        self.segment_duration = sum(time_signature.duration
             for time_signature in self.time_signatures)
         self.cleanup_semantic_voice_timespan_inventories()
         self.build_lifeline_timespan_inventories()
@@ -177,7 +177,7 @@ class SegmentMaker(ContextAwareMaker):
         saxophone_brush=None,
         segment_id=None,
         segment_name=None,
-        segment_target_duration=None,
+        target_segment_duration=None,
         segment_tempo=None,
         ):
         from plague_water import makers
@@ -212,9 +212,9 @@ class SegmentMaker(ContextAwareMaker):
         assert len(measure_segmentation_talea)
         assert sequencetools.all_are_positive_integers(
             measure_segmentation_talea)
-        if segment_target_duration is not None:
-            segment_target_duration = Duration(segment_target_duration)
-            assert 0 < segment_target_duration
+        if target_segment_duration is not None:
+            target_segment_duration = Duration(target_segment_duration)
+            assert 0 < target_segment_duration
         ### APPLY ###
         self.context_map = context_map
         self.guitar_brush = guitar_brush
@@ -230,14 +230,14 @@ class SegmentMaker(ContextAwareMaker):
         self.saxophone_brush = saxophone_brush
         self.segment_id = str(segment_id)
         self.segment_name = segment_name
-        self.segment_target_duration = segment_target_duration
+        self.target_segment_duration = target_segment_duration
         self.segment_tempo = segment_tempo
         self.cached_makers = {}
         self.cached_meters = {}
         self.lilypond_file = None
         self.meters = None
         self.score = None
-        self.segment_actual_duration = None
+        self.segment_duration = None
         self.time_signatures = None
         self.guitar_pedal_timespans = timespantools.TimespanInventory()
         self.guitar_timespans = timespantools.TimespanInventory()
@@ -260,7 +260,7 @@ class SegmentMaker(ContextAwareMaker):
                 music_maker.apply_articulations(
                     music,
                     seed=seed,
-                    segment_actual_duration=self.segment_actual_duration,
+                    segment_duration=self.segment_duration,
                     )
                 music_maker_seeds[music_maker] += 1
                 progress_indicator.advance()
@@ -275,7 +275,7 @@ class SegmentMaker(ContextAwareMaker):
                 music_maker.apply_chords(
                     music,
                     seed=seed,
-                    segment_actual_duration=self.segment_actual_duration,
+                    segment_duration=self.segment_duration,
                     )
                 music_maker_seeds[music_maker] += 1
                 progress_indicator.advance()
@@ -290,7 +290,7 @@ class SegmentMaker(ContextAwareMaker):
                 music_maker.apply_dynamics(
                     music,
                     seed=seed,
-                    segment_actual_duration=self.segment_actual_duration,
+                    segment_duration=self.segment_duration,
                     )
                 music_maker_seeds[music_maker] += 1
                 progress_indicator.advance()
@@ -309,7 +309,7 @@ class SegmentMaker(ContextAwareMaker):
                 music_maker.apply_pitch_classes(
                     logical_tie,
                     seed=seed,
-                    segment_actual_duration=self.segment_actual_duration,
+                    segment_duration=self.segment_duration,
                     )
                 music_maker_seeds[music_maker] += 1
                 progress_indicator.advance()
@@ -324,7 +324,7 @@ class SegmentMaker(ContextAwareMaker):
                 music_maker.apply_registrations(
                     music,
                     seed=seed,
-                    segment_actual_duration=self.segment_actual_duration,
+                    segment_duration=self.segment_duration,
                     )
                 music_maker_seeds[music_maker] += 1
                 progress_indicator.advance()
@@ -339,7 +339,7 @@ class SegmentMaker(ContextAwareMaker):
                 music_maker.apply_spanners(
                     music,
                     seed=seed,
-                    segment_actual_duration=self.segment_actual_duration,
+                    segment_duration=self.segment_duration,
                     )
                 music_maker_seeds[music_maker] += 1
                 progress_indicator.advance()
@@ -378,7 +378,7 @@ class SegmentMaker(ContextAwareMaker):
         if self.guitar_lifeline_strategy is not None:
             self.guitar_pedal_timespans = self.guitar_lifeline_strategy(
                 self.guitar_timespans,
-                self.segment_target_duration,
+                self.target_segment_duration,
                 )
         if self.piano_lifeline_strategy is not None:
             piano_timespans = timespantools.TimespanInventory()
@@ -386,7 +386,7 @@ class SegmentMaker(ContextAwareMaker):
             piano_timespans.extend(self.piano_rh_timespans)
             self.piano_pedal_timespans = self.piano_lifeline_strategy(
                 piano_timespans,
-                self.segment_target_duration,
+                self.target_segment_duration,
                 )
 
     def build_semantic_voice_timespan_inventories(self):
@@ -399,7 +399,7 @@ class SegmentMaker(ContextAwareMaker):
             result = brush(
                 context_map=self.context_map,
                 context_name=context_name,
-                segment_target_duration=self.segment_target_duration,
+                target_segment_duration=self.target_segment_duration,
                 )
             timespan_inventory[:] = result
 
@@ -425,10 +425,10 @@ class SegmentMaker(ContextAwareMaker):
                         silence_timespan_inventory.append(silence_timespan)
                     previous_stop_offset = timespan.stop_offset
                     progress_indicator.advance()
-                if previous_stop_offset < self.segment_actual_duration:
+                if previous_stop_offset < self.segment_duration:
                     silence_timespan = timespantools.Timespan(
                         start_offset=previous_stop_offset,
-                        stop_offset=self.segment_actual_duration,
+                        stop_offset=self.segment_duration,
                         )
                     silence_timespan_inventory.append(silence_timespan)
                     progress_indicator.advance()
@@ -626,7 +626,7 @@ class SegmentMaker(ContextAwareMaker):
                 offset_counter[timespan.start_offset] += 1
                 offset_counter[timespan.stop_offset] += 1
         if not offset_counter:
-            offset_counter[self.segment_target_duration] += 1
+            offset_counter[self.target_segment_duration] += 1
         meters = metertools.Meter.fit_meters_to_expr(
             offset_counter,
             self.permitted_time_signatures,
@@ -659,11 +659,11 @@ class SegmentMaker(ContextAwareMaker):
             tempo.duration_to_milliseconds(tempo.duration),
             1000,
             )
-        segment_target_duration = Duration((
+        target_segment_duration = Duration((
             segment_target_duration_in_seconds / tempo_duration_in_seconds
             ).limit_denominator(16))
-        segment_target_duration *= tempo.duration
-        return segment_target_duration
+        target_segment_duration *= tempo.duration
+        return target_segment_duration
 
     def iterate_containers_and_music_makers(self):
         from plague_water import makers
@@ -698,7 +698,7 @@ class SegmentMaker(ContextAwareMaker):
             time_signatures.pop()
         self.meters = tuple(meters)
         self.time_signatures = tuple(time_signatures)
-        self.segment_actual_duration = sum(
+        self.segment_duration = sum(
             time_signature.duration
             for time_signature in self.time_signatures
             )

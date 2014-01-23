@@ -21,7 +21,7 @@ segment_name = 'Segment {} ({}:{}) ({}:{})'.format(
     outer_numerator,
     )
 
-segment_target_duration = makers.SegmentMaker.get_segment_target_duration(
+target_segment_duration = makers.SegmentMaker.get_segment_target_duration(
     denominator=denominator,
     numerator=numerator,
     tempo=base_segment_maker.segment_tempo,
@@ -35,7 +35,7 @@ segment_maker = new(
     is_final_segment=True,
     segment_id=segment_id,
     segment_name=segment_name,
-    segment_target_duration=segment_target_duration,
+    target_segment_duration=target_segment_duration,
     )
 
 ### MAIN ###

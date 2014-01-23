@@ -10,14 +10,24 @@ class PitchClassMaker(ContextAwareMaker):
     __slots__ = (
         )
 
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        ratio=None,
+        talea=None,
+        transform_ratio=None,
+        transform_talea=None,
+        ):
+        pass
+
     ### SPECIAL METHODS ###
 
     def __call__(
         self,
         music,
-        context_map=None,
-        context_name=None,
         seed=None,
+        segment_duration=None,
         ):
         assert isinstance(seed, (int, type(None)))
         parameter_map = self._build_parameter_map(
@@ -32,3 +42,6 @@ class PitchClassMaker(ContextAwareMaker):
                     mutate(leaf).replace(chord)
                 else:
                     leaf.written_pitch = pitch_classes[0]
+
+    ### PUBLIC PROPERTIES ###
+

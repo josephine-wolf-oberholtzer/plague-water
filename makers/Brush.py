@@ -49,7 +49,7 @@ class Brush(abctools.AbjadObject):
 
     def __call__(
         self,
-        segment_target_duration,
+        target_segment_duration,
         context_map=None,
         context_name=None,
         ):
@@ -61,13 +61,13 @@ class Brush(abctools.AbjadObject):
         timespan_inventory = timespantools.TimespanInventory()
         message = '\t\t{}'.format(context_name)
         with systemtools.ProgressIndicator(message) as progress_indicator:
-            while current_offset < segment_target_duration:
+            while current_offset < target_segment_duration:
                 music_maker = self._choose_music_maker(
                     music_maker_pairs)
                 music_maker_timespan_inventory, current_offset = \
                     music_maker.create_timespans(
                         current_offset,
-                        segment_target_duration,
+                        target_segment_duration,
                         )
                 timespan_inventory.extend(music_maker_timespan_inventory)
                 progress_indicator.advance()

@@ -39,7 +39,7 @@ class ArticulationMaker(ContextAwareMaker):
         self,
         music,
         seed=None,
-        segment_actual_duration=None,
+        segment_duration=None,
         ):
         if seed is None:
             seed = 0

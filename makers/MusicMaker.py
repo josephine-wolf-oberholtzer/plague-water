@@ -85,13 +85,13 @@ class MusicMaker(ContextAwareMaker):
         self,
         music=None,
         seed=0,
-        segment_actual_duration=None,
+        segment_duration=None,
         ):
         if self.articulation_maker is not None:
             self.articulation_maker(
                 music,
                 seed=seed,
-                segment_actual_duration=segment_actual_duration,
+                segment_duration=segment_duration,
                 )
         assert inspect_(music).is_well_formed()
 
@@ -99,13 +99,13 @@ class MusicMaker(ContextAwareMaker):
         self,
         music=None,
         seed=0,
-        segment_actual_duration=None,
+        segment_duration=None,
         ):
         if self.chord_maker is not None:
             self.chord_maker(
                 music,
                 seed=seed,
-                segment_actual_duration=segment_actual_duration,
+                segment_duration=segment_duration,
                 )
         assert inspect_(music).is_well_formed()
 
@@ -113,14 +113,14 @@ class MusicMaker(ContextAwareMaker):
         self,
         music=None,
         seed=0,
-        segment_actual_duration=None,
+        segment_duration=None,
         ):
         if self.dynamic_maker is None:
             return
         self.dynamic_maker(
             music,
             seed=seed,
-            segment_actual_duration=segment_actual_duration,
+            segment_duration=segment_duration,
             )
         assert inspect_(music).is_well_formed()
 
@@ -128,7 +128,7 @@ class MusicMaker(ContextAwareMaker):
         self,
         music=None,
         seed=0,
-        segment_actual_duration=None,
+        segment_duration=None,
         ):
         pass
 
@@ -136,14 +136,14 @@ class MusicMaker(ContextAwareMaker):
         self,
         music=None,
         seed=0,
-        segment_actual_duration=None,
+        segment_duration=None,
         ):
         if self.registration_maker is None:
             return
         self.registration_maker(
             music,
             seed=seed,
-            segment_actual_duration=segment_actual_duration,
+            segment_duration=segment_duration,
             )
         assert inspect_(music).is_well_formed()
 
@@ -151,14 +151,14 @@ class MusicMaker(ContextAwareMaker):
         self,
         music=None,
         seed=0,
-        segment_actual_duration=None,
+        segment_duration=None,
         ):
         if self.spanner_maker is None:
             return
         self.spanner_maker(
             music,
             seed=seed,
-            segment_actual_duration=segment_actual_duration,
+            segment_duration=segment_duration,
             )
         assert inspect_(music).is_well_formed()
 

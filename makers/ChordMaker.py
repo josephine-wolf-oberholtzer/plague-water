@@ -26,7 +26,7 @@ class ChordMaker(ContextAwareMaker):
         self,
         music,
         seed=None,
-        segment_actual_duration=None,
+        segment_duration=None,
         ):
         from plague_water import makers
         expression_prototype = (
