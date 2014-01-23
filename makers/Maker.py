@@ -20,10 +20,11 @@ class Maker(abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __eq__(self, expr):
-        if isinstance(expr, type(self)):
-            if format(expr, 'storage') == format(self, 'storage'):
-                return True
-        return False
+        return systemtools.StorageFormatManager.compare(self, expr)
+
+    def __hash__(self):
+        hash_values = systemtools.StorageFormatManager.get_hash_values(self)
+        return hash(hash_values)
 
     def __makenew__(self, **kwargs):
         from abjad.tools import systemtools
@@ -92,4 +93,25 @@ class Maker(abctools.AbjadObject):
         rotated_expr = sequencetools.rotate_sequence(expr, seed)
         cyclic_tuple = datastructuretools.CyclicTuple(rotated_expr)
         return cyclic_tuple
+
+    ### PUBLIC METHODS ###
+    
+    def _build_parameter_map(
+        self,
+        context_map,
+        context_name,
+        ):
+        assert isinstance(context_map,
+            (datastructuretools.ContextMap, type(None)))
+        assert isinstance(context_name, (str, type(None)))
+        manager = systemtools.StorageFormatManager
+        parameters = manager.get_keyword_argument_dictionary(self)
+        if context_map is not None and context_name is not None:
+            for key, value in parameters.items():
+                if value is not None:
+                    continue
+                if key in context_map[context_name]:
+                    value = context_map[context_name][key]
+                    parameters[key] = value
+        return parameters
 
