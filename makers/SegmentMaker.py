@@ -123,6 +123,7 @@ class SegmentMaker(ContextAwareMaker):
             for time_signature in self.time_signatures)
         self.cleanup_semantic_voice_timespan_inventories()
         self.build_lifeline_timespan_inventories()
+        self.remove_empty_trailing_measures()
         self.build_silence_timespans()
 
         ### CREATE NOTATION ###
@@ -345,29 +346,32 @@ class SegmentMaker(ContextAwareMaker):
 
     def build_and_persist(self, current_file_path):
         print 'Building {}'.format(self.segment_name)
-        current_directory_path = os.path.dirname(os.path.abspath(
-            os.path.expanduser(current_file_path)))
-        pdf_file_path = os.path.join(
-            current_directory_path,
-            'output.pdf',
-            )
-        ly_file_path = os.path.join(
-            current_directory_path,
-            'output.ly',
-            )
-        lilypond_file = self()
-        should_persist = True
-        if os.path.exists(ly_file_path):
-            new_lilypond_string = format(lilypond_file)
-            with open(ly_file_path, 'r') as f:
-                old_lilypond_string = f.read()
-            if old_lilypond_string == new_lilypond_string:
-                should_persist = False
-        if should_persist:
-            persist(lilypond_file).as_pdf(
-                pdf_file_path=pdf_file_path,
-                remove_ly=False,
+        with systemtools.Timer() as timer:
+            current_directory_path = os.path.dirname(os.path.abspath(
+                os.path.expanduser(current_file_path)))
+            pdf_file_path = os.path.join(
+                current_directory_path,
+                'output.pdf',
                 )
+            ly_file_path = os.path.join(
+                current_directory_path,
+                'output.ly',
+                )
+            lilypond_file = self()
+            should_persist = True
+            if os.path.exists(ly_file_path):
+                new_lilypond_string = format(lilypond_file)
+                with open(ly_file_path, 'r') as f:
+                    old_lilypond_string = f.read()
+                if old_lilypond_string == new_lilypond_string:
+                    should_persist = False
+            if should_persist:
+                persist(lilypond_file).as_pdf(
+                    pdf_file_path=pdf_file_path,
+                    remove_ly=False,
+                    )
+            print '\tfinished in {} seconds'.format(
+                timer.elapsed_time)
 
     def build_lifeline_timespan_inventories(self):
         print '\tbuilding lifeline timespan inventories'
@@ -563,61 +567,43 @@ class SegmentMaker(ContextAwareMaker):
         seed=0,
         timespan_inventory=None,
         ):
-        from plague_water import makers
         result = []
         message = '\t\t{}'.format(context_name)
         with systemtools.ProgressIndicator(message) as progress_indicator:
-            silence_music_maker = makers.MusicMaker(
-                rhythm_maker=rhythmmakertools.RestRhythmMaker(),
-                )
-            if timespan_inventory is None:
-                durations = [x.duration for x in self.time_signatures]
-                music = silence_music_maker.create_rhythms(
+            pairs = []
+            music_maker = timespan_inventory[0].music_maker
+            timespans = [timespan_inventory[0]]
+            for timespan in timespan_inventory[1:]:
+                if timespan.music_maker == music_maker:
+                    timespans.append(timespan)
+                else:
+                    pair = (music_maker, tuple(timespans))
+                    pairs.append(pair)
+                    timespans = [timespan]
+                    music_maker = timespan.music_maker
+            if timespans:
+                pair = (music_maker, tuple(timespans))
+                pairs.append(pair)
+            for music_maker, timespans in pairs:
+                contexted_music_maker = self.get_cached_maker(
+                    music_maker,
+                    context_map=context_map,
+                    context_name=context_name,
+                    )
+                durations = [x.duration for x in timespans]
+                start_offset = timespans[0].start_offset
+                music = contexted_music_maker.create_rhythms(
                     durations,
-                    beam_music=False,
-                    initial_offset=0,
+                    initial_offset=start_offset,
                     meter_cache=self.cached_meters,
                     meters=self.meters,
                     rewrite_meter=rewrite_meter,
+                    seed=seed,
                     )
-                attach(silence_music_maker, music, scope=Voice)
+                attach(music_maker, music, scope=Voice)
+                seed += 1
                 result.append(music)
                 progress_indicator.advance()
-            else:
-                for music_maker, group in itertools.groupby(
-                    timespan_inventory,
-                    lambda x: x.music_maker,
-                    ):
-                    group = timespantools.TimespanInventory(group)
-                    durations = [x.duration for x in group]
-                    if music_maker is not None:
-                        contexted_music_maker = self.get_cached_maker(
-                            music_maker,
-                            context_map=context_map,
-                            context_name=context_name,
-                            )
-                        music = contexted_music_maker.create_rhythms(
-                            durations,
-                            initial_offset=group.start_offset,
-                            meter_cache=self.cached_meters,
-                            meters=self.meters,
-                            rewrite_meter=rewrite_meter,
-                            seed=seed,
-                            )
-                        seed += 1
-                        attach(music_maker, music, scope=Voice)
-                    else:
-                        music = silence_music_maker.create_rhythms(
-                            durations,
-                            beam_music=False,
-                            initial_offset=group.start_offset,
-                            meter_cache=self.cached_meters,
-                            meters=self.meters,
-                            rewrite_meter=rewrite_meter,
-                            )
-                        attach(silence_music_maker, music, scope=Voice)
-                    result.append(music)
-                    progress_indicator.advance()
         return result, seed
 
     def find_meters(self):
@@ -693,6 +679,30 @@ class SegmentMaker(ContextAwareMaker):
             self.time_signatures)
         self.score['TimeSignatureContext'].extend(measures)
 
+    def remove_empty_trailing_measures(self):
+        print '\tremoving empty trailing measures'
+        measure_start_offsets = mathtools.cumulative_sums(
+            time_signature.duration
+            for time_signature in self.time_signatures
+            )[:-1]
+        meters = list(self.meters)
+        time_signatures = list(self.time_signatures)
+        maximum_performed_offset = max(
+            timespan_inventory.stop_offset
+            for timespan_inventory in self.all_timespan_inventories
+            if len(timespan_inventory)
+            )
+        while maximum_performed_offset <= measure_start_offsets[-1]:
+            measure_start_offsets.pop()
+            meters.pop()
+            time_signatures.pop()
+        self.meters = tuple(meters)
+        self.time_signatures = tuple(time_signatures)
+        self.segment_actual_duration = sum(
+            time_signature.duration
+            for time_signature in self.time_signatures
+            )
+
     ### PUBLIC PROPERTIES ###
 
     @property
@@ -700,6 +710,13 @@ class SegmentMaker(ContextAwareMaker):
         bundles = self.parametric_context_bundles
         bundles.update(self.semantic_context_bundles)
         return bundles
+
+    @property
+    def all_timespan_inventories(self):
+        result = []
+        for context_name, pair in self.all_context_bundles.iteritems():
+            result.append(pair[1])
+        return result
 
     @property
     def parametric_context_bundles(self):
