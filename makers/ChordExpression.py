@@ -72,6 +72,13 @@ class ChordExpression(abctools.AbjadObject):
                 arpeggio = indicatortools.Arpeggio(self.arpeggio_direction)
                 attach(arpeggio, chord)
 
+    def __eq__(self, expr):
+        return systemtools.StorageFormatManager.compare(self, expr)
+
+    def __hash__(self):
+        hash_values = systemtools.StorageFormatManager.get_hash_values(self)
+        return hash(hash_values)
+
     ### PUBLIC PROPERTIES ###
 
     @property

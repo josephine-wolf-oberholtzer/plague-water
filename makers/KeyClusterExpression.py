@@ -115,6 +115,13 @@ class KeyClusterExpression(abctools.AbjadObject):
                         )
                     attach(arpeggio, chord)
 
+    def __eq__(self, expr):
+        return systemtools.StorageFormatManager.compare(self, expr)
+
+    def __hash__(self):
+        hash_values = systemtools.StorageFormatManager.get_hash_values(self)
+        return hash(hash_values)
+
     ### PUBLIC PROPERTIES ###
 
     @property
