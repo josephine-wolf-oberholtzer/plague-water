@@ -48,25 +48,6 @@ class Maker(abctools.AbjadObject):
 
     ### PRIVATE METHODS ###
 
-    def _build_parameter_map(
-        self,
-        context_map,
-        context_name,
-        ):
-        assert isinstance(context_map,
-            (datastructuretools.ContextMap, type(None)))
-        assert isinstance(context_name, (str, type(None)))
-        manager = systemtools.StorageFormatManager
-        parameters = manager.get_keyword_argument_dictionary(self)
-        if context_map is not None and context_name is not None:
-            for key, value in parameters.items():
-                if value is not None:
-                    continue
-                if key in context_map[context_name]:
-                    value = context_map[context_name][key]
-                    parameters[key] = value
-        return parameters
-
     def _coerce_cursor_argument(self, argument):
         if argument is not None:
             assert isinstance(argument, (
@@ -89,8 +70,8 @@ class Maker(abctools.AbjadObject):
         return cyclic_tuple
 
     ### PUBLIC METHODS ###
-    
-    def _build_parameter_map(
+
+    def from_context_map(
         self,
         context_map,
         context_name,
@@ -107,5 +88,4 @@ class Maker(abctools.AbjadObject):
                 if key in context_map[context_name]:
                     value = context_map[context_name][key]
                     parameters[key] = value
-        return parameters
-
+        return self.__makenew__(**parameters)

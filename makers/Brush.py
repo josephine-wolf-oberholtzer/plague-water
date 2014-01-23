@@ -82,11 +82,10 @@ class Brush(abctools.AbjadObject):
         ):
         contexted_music_makers = []
         for music_maker in self.music_makers:
-            music_maker_parameter_map = music_maker._build_parameter_map(
+            contexted_music_maker = music_maker.from_context_map(
                 context_map=context_map,
                 context_name=context_name,
                 )
-            contexted_music_maker = new(music_maker, **music_maker_parameter_map)
             contexted_music_makers.append(contexted_music_maker)
         if not contexted_music_makers:
             music_maker = makers.music_maker(

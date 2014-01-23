@@ -636,11 +636,10 @@ class SegmentMaker(Maker):
     def get_cached_maker(self, maker, context_map, context_name):
         key = (maker, context_map, context_name)
         if key not in self.cached_makers:
-            parameter_map = maker._build_parameter_map(
+            contexted_maker = maker.from_context_map(
                 context_map=context_map,
                 context_name=context_name,
                 )
-            contexted_maker = new(maker, **parameter_map)
             self.cached_makers[key] = contexted_maker
         return self.cached_makers[key]
 

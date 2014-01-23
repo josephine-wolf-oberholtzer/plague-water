@@ -30,8 +30,6 @@ class PitchClassMaker(Maker):
         segment_duration=None,
         ):
         assert isinstance(seed, (int, type(None)))
-        parameter_map = self._build_parameter_map(
-            context_map, context_name)
         for logical_tie in iterate(music).by_logical_tie(pitched=True):
             pitch_count = self.choose_pitch_count(parameter_map)
             pitch_classes = self.choose_pitches(pitch_count, parameter_map)

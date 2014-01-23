@@ -15,11 +15,7 @@ class DynamicMaker(Maker):
     def __call__(
         self,
         music,
-        context_map=None,
-        context_name=None,
         seed=None,
+        segment_duration=None,
         ):
         assert isinstance(seed, (int, type(None)))
-        parameter_map = self._build_parameter_map(
-            context_map, context_name)
-        pass
