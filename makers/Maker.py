@@ -11,12 +11,6 @@ class Maker(abctools.AbjadObject):
     __slots__ = (
         )
 
-    ### INITIALIZER ###
-
-    @abc.abstractmethod
-    def __init__(self):
-        raise NotImplemented
-
     ### SPECIAL METHODS ###
 
     def __eq__(self, expr):
