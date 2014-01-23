@@ -235,8 +235,8 @@ class MusicMaker(Maker):
             stop_offset = start_offset + playing_duration
             if maximum_offset <= stop_offset:
                 return timespan_inventory, maximum_offset
-            timespan = makers.AnnotatedTimespan(
-                music_maker=self,
+            timespan = timespantools.AnnotatedTimespan(
+                annotation=self,
                 start_offset=start_offset,
                 stop_offset=stop_offset,
                 )

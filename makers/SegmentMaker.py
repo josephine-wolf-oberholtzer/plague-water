@@ -436,8 +436,8 @@ class SegmentMaker(Maker):
             for group in silence_timespan_inventory.partition(
                 include_tangent_timespans=True,
                 ):
-                fused_silence_timespan = makers.AnnotatedTimespan(
-                    music_maker=makers.MusicMaker(
+                fused_silence_timespan = timespantools.AnnotatedTimespan(
+                    annotation=makers.MusicMaker(
                         rhythm_maker=rhythmmakertools.RestRhythmMaker(),
                         ),
                     start_offset=group.start_offset,
@@ -484,7 +484,7 @@ class SegmentMaker(Maker):
                 continue
             valid_timespans = []
             for timespan in timespan_inventory:
-                music_maker = timespan.music_maker
+                music_maker = timespan.annotation
                 if music_maker.timespan_has_minimum_length(timespan):
                     valid_timespans.append(timespan)
             timespan_inventory[:] = valid_timespans
@@ -571,16 +571,16 @@ class SegmentMaker(Maker):
         message = '\t\t{}'.format(context_name)
         with systemtools.ProgressIndicator(message) as progress_indicator:
             pairs = []
-            music_maker = timespan_inventory[0].music_maker
+            music_maker = timespan_inventory[0].annotation
             timespans = [timespan_inventory[0]]
             for timespan in timespan_inventory[1:]:
-                if timespan.music_maker == music_maker:
+                if timespan.annotation == music_maker:
                     timespans.append(timespan)
                 else:
                     pair = (music_maker, tuple(timespans))
                     pairs.append(pair)
                     timespans = [timespan]
-                    music_maker = timespan.music_maker
+                    music_maker = timespan.annotation
             if timespans:
                 pair = (music_maker, tuple(timespans))
                 pairs.append(pair)
