@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
 from abjad import *
-from plague_water.makers.ContextAwareMaker import ContextAwareMaker
+from plague_water.makers.Maker import Maker
 
 
-class SpannerMaker(ContextAwareMaker):
+class SpannerMaker(Maker):
 
     ### CLASS VARIABLES ###
 

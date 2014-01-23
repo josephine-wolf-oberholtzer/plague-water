@@ -1,10 +1,10 @@
 # -*- encoding: utf-8 -*-
 import collections
 from abjad import *
-from plague_water.makers.ContextAwareMaker import ContextAwareMaker
+from plague_water.makers.Maker import Maker
 
 
-class ArticulationMaker(ContextAwareMaker):
+class ArticulationMaker(Maker):
 
     ### CLASS VARIABLES ###
 

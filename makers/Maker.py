@@ -4,7 +4,7 @@ import collections
 from abjad import *
 
 
-class ContextAwareMaker(abctools.AbjadObject):
+class Maker(abctools.AbjadObject):
 
     ### CLASS VARIABLES ###
 

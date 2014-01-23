@@ -6,10 +6,10 @@ import sys
 from abjad import *
 from plague_water import plague_water_configuration
 from plague_water import score_templates
-from plague_water.makers.ContextAwareMaker import ContextAwareMaker
+from plague_water.makers.Maker import Maker
 
 
-class SegmentMaker(ContextAwareMaker):
+class SegmentMaker(Maker):
 
     ### SLOTS ###
 
