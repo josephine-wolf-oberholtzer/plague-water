@@ -82,7 +82,7 @@
         \name PianoUpperStaff
         \type Engraver_group
         \alias Staff
-        \override StaffSymbol.line-count = 1
+        \override StaffSymbol.line-count = 5
     }
 
     \context {
@@ -90,7 +90,7 @@
         \name PianoLowerStaff
         \type Engraver_group
         \alias Staff
-        \override StaffSymbol.line-count = 1
+        \override StaffSymbol.line-count = 5
     }
 
     \context {
@@ -201,6 +201,7 @@
             (stretchability . 0)
             )
         \override Stem.direction = #down
+        \override Stem #'(details beamed-lengths) = #'(6)
         \override StemTremolo.beam-width = 1.5
         \override StemTremolo.flag-count = 4.0
         \override StemTremolo.slope = 0.5
