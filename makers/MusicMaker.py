@@ -87,27 +87,26 @@ class MusicMaker(Maker):
         seed=0,
         segment_duration=None,
         ):
-        if self.articulation_maker is not None:
-            self.articulation_maker(
-                music,
-                seed=seed,
-                segment_duration=segment_duration,
-                )
+        if self.articulation_maker is None:
+            return
+        self.articulation_maker(
+            music,
+            seed=seed,
+            segment_duration=segment_duration,
+            )
         assert inspect_(music).is_well_formed()
 
     def apply_chords(
         self,
-        music=None,
-        seed=0,
+        logical_tie=None,
         segment_duration=None,
         ):
-        if self.chord_maker is not None:
-            self.chord_maker(
-                music,
-                seed=seed,
-                segment_duration=segment_duration,
-                )
-        assert inspect_(music).is_well_formed()
+        if self.chord_maker is None:
+            return
+        self.chord_maker(
+            logical_tie,
+            segment_duration=segment_duration,
+            )
 
     def apply_dynamics(
         self,
@@ -126,11 +125,15 @@ class MusicMaker(Maker):
 
     def apply_pitch_classes(
         self,
-        music=None,
-        seed=0,
+        logical_tie=None,
         segment_duration=None,
         ):
-        pass
+        if self.pitch_class_maker is None:
+            return
+        self.pitch_class_maker(
+            logical_tie,
+            segment_duration=segment_duration,
+            )
 
     def apply_registrations(
         self,

@@ -60,9 +60,8 @@ class ChordMaker(Maker):
             )
         cursor = self._talea_cursors[index]
         expression = cursor()[0]
-        if expression is None:
-            continue
-        expression(logical_tie)
+        if expression is not None:
+            expression(logical_tie)
 
     ### PUBLIC PROPERTIES ###
 
