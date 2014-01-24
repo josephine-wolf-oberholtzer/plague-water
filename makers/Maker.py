@@ -48,6 +48,21 @@ class Maker(abctools.AbjadObject):
 
     ### PRIVATE METHODS ###
 
+    def _duration_and_ratio_to_offsets(
+        self,
+        duration=None,
+        ratio=None,
+        ):
+        ratio_sum = sum(self.ratio)
+        duration_parts = []
+        for ratio_part in self.ratio:
+            multiplier = Multiplier(ratio_part, ratio_sum)
+            duration_part = duration * multiplier
+            duration_parts.append(duration_part)
+        offsets = mathtools.cumulative_sums(duration_parts)
+        offsets = offsets[:-1]
+        return offsets
+
     def _expr_to_cyclic_tuple(self, expr, seed):
         expr = expr or ()
         rotated_expr = sequencetools.rotate_sequence(expr, seed)
@@ -68,6 +83,27 @@ class Maker(abctools.AbjadObject):
         assert isinstance(argument,
             (datastructuretools.StatalServerCursor, type(None)))
         return argument
+
+    def _offset_and_offsets_to_index(
+        self,
+        offset=None,
+        offsets=None,
+        ):
+        if offset in offsets:
+            return offsets.index(offset)
+        return bisect.bisect(offsets, offset) - 1
+
+    def _ratio_and_talea_to_cursors(
+        self,
+        ratio=None,
+        talea=None,
+        ):
+        talea_cursors = []
+        for i in range(ratio):
+            subsequence = talea[i]
+            cursor = self._expr_to_statal_server_cursor(subsequence)
+            talea_cursors.append(cursor)
+        return tuple(talea_cursors)
 
     ### PUBLIC METHODS ###
 
