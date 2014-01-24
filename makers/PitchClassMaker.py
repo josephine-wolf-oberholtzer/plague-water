@@ -92,19 +92,24 @@ class PitchClassMaker(Maker):
                 duration=segment_duration,
                 ratio=self.transform_ratio,
                 )
-            transform_index = self._offset_offsets_to_index(
+            transform_index = self._offset_and_offsets_to_index(
                 offset=start_offset,
                 offsets=transform_offsets,
                 )
             if transform_index != self._last_transform_index:
                 self._last_transform_index = transform_index
                 transform = self.transform_talea[transform_index]
+                pitch_class_sequence = self.pitch_class_talea[
+                    self._last_pitch_class_sequence_index]
                 if transform is not None:
-                    pitch_class_sequence = self.pitch_class_talea[
-                        self._last_pitch_class_sequence_index]
                     pitch_class_sequence = transform(pitch_class_sequence)
-                    self._current_cursor = self._expr_to_statal_server_cursor(
-                        pitch_class_sequence)
+                previous_position = self._current_cursor.position
+                self._current_cursor = self._expr_to_statal_server_cursor(
+                    pitch_class_sequence)
+                self._current_cursor = datastructuretools.StatalServerCursor(
+                    position=previous_position,
+                    statal_server=self._current_cursor.statal_server,
+                    )
         current_pitch_class = self._current_cursor(1)[0]
         #while current_pitch_class == self._last_pitch_class:
         #    current_pitch_class = self._current_cursor(1)[0]

@@ -58,8 +58,8 @@ class PitchClassTransformExpression(Maker):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, pitch_classes):
-        assert isinstance(pitch_classes, pitchtools.PitchClassSegment)
+    def __call__(self, expr):
+        pitch_classes = pitchtools.PitchClassSegment(expr)
         if self.rotation:
             pitch_classes = pitch_classes.rotate(self.rotation, transpose=True)
         if self.inversion:
@@ -68,7 +68,7 @@ class PitchClassTransformExpression(Maker):
             pitch_classes = pitch_classes.transpose(self.transposition)
         if self.retrogression:
             pitch_classes = pitch_classes.retrograde()
-        return pitch_classes
+        return type(expr)(pitch_classes)
 
     ### PUBLIC PROPERTIES ###
 
@@ -87,4 +87,3 @@ class PitchClassTransformExpression(Maker):
     @property
     def transposition(self):
         return self._transposition
-

@@ -63,7 +63,11 @@ class Maker(abctools.AbjadObject):
         offsets = offsets[:-1]
         return offsets
 
-    def _expr_to_cyclic_tuple(self, expr, seed):
+    def _expr_to_cyclic_tuple(
+        self,
+        expr=None,
+        seed=0,
+        ):
         expr = expr or ()
         rotated_expr = sequencetools.rotate_sequence(expr, seed)
         cyclic_tuple = datastructuretools.CyclicTuple(rotated_expr)
