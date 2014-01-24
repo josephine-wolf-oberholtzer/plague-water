@@ -10,8 +10,10 @@ clanging_music_maker = makers.MusicMaker(
     playing_durations=None,
     playing_groupings=None,
     rhythm_maker=rhythmmakertools.TaleaRhythmMaker(
-        beam_each_cell=False,
-        beam_cells_together=False,
+        beam_specifier=rhythmmakertools.BeamSpecifier(
+            beam_each_cell=False,
+            beam_cells_together=False,
+            ),
         talea=(4, 4, 4, 3, 4, 5, 4, 4, 3,),
         talea_denominator=16,
         ),
@@ -137,8 +139,10 @@ winding_music_maker = makers.MusicMaker(
     playing_durations=None,
     playing_groupings=None,
     rhythm_maker=rhythmmakertools.TaleaRhythmMaker(
-        beam_each_cell=False,
-        beam_cells_together=False,
+        beam_specifier=rhythmmakertools.BeamSpecifier(
+            beam_each_cell=False,
+            beam_cells_together=False,
+            ),
         burnish_output=True,
         burnish_specifier=rhythmmakertools.BurnishSpecifier(
             lefts=(-1,),
