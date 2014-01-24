@@ -302,13 +302,10 @@ class MusicMaker(Maker):
         for container, current_meter, current_initial_offset in iterator:
             if isinstance(container, scoretools.Tuplet):
                 contents_duration = container._contents_duration
-                if meter_cache is not None:
-                    if contents_duration not in meter_cache:
-                        meter = metertools.Meter(contents_duration)
-                        meter_cache[contents_duration] = meter
-                    meter = meter_cache[contents_duration]
-                else:
+                if contents_duration not in meter_cache:
                     meter = metertools.Meter(contents_duration)
+                    meter_cache[contents_duration] = meter
+                meter = meter_cache[contents_duration]
                 mutate(container[:]).rewrite_meter(
                     meter,
                     boundary_depth=1,
