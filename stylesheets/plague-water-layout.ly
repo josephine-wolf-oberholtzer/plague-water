@@ -184,6 +184,8 @@
         \remove Bar_number_engraver
         \override BarLine.hair-thickness = 0.5
         \override Beam.breakable = ##t
+        \override Beam.beam-thickness = 0.75
+        \override Beam.length-fraction = 1.5
         \override DynamicLineSpanner.Y-extent = #'(-1.5 . 1.5)
         \override Glissando.breakable = ##t
         \override NoteCollision.merge-differently-dotted = ##t
