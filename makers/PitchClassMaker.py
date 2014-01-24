@@ -28,10 +28,14 @@ class PitchClassMaker(Maker):
         transform_talea=None,
         ):
         from plague_water import makers
-        pitch_class_ratio = mathtools.Ratio([abs(x) for x in ratio])
+        pitch_class_ratio = mathtools.Ratio([
+            abs(x) for x in pitch_class_ratio
+            ])
         assert len(pitch_class_ratio)
         if transform_ratio is not None:
-            transform_ratio = mathtools.Ratio([abs(x) for x in ratio])
+            transform_ratio = mathtools.Ratio([
+                abs(x) for x in transform_ratio
+                ])
             assert len(transform_ratio)
         self._pitch_class_ratio = pitch_class_ratio
         self._transform_ratio = transform_ratio
@@ -50,8 +54,9 @@ class PitchClassMaker(Maker):
                 )
             assert all(isinstance(x, transform_prototype)
                 for x in transform_talea)
-            self._transform_talea = self._expr_to_cyclic_tuple(transform_talea)
-        self._current_pitch_class_cursor = self._expr_to_statal_server_cursor(
+            transform_talea = self._expr_to_cyclic_tuple(transform_talea)
+        self._transform_talea = transform_talea
+        self._current_cursor = self._expr_to_statal_server_cursor(
             self._pitch_class_talea[0])
         self._last_pitch_class = None
         self._last_pitch_class_sequence_index = None
@@ -64,7 +69,7 @@ class PitchClassMaker(Maker):
         logical_tie,
         segment_duration=None,
         ):
-        assert isinstance(logical_tie, selections.LogicalTie)
+        assert isinstance(logical_tie, selectiontools.LogicalTie)
         assert logical_tie
         assert segment_duration
         start_offset = logical_tie.get_timespan().start_offset
@@ -111,15 +116,15 @@ class PitchClassMaker(Maker):
 
     @property
     def pitch_class_ratio(self):
-        return self._transform_talea
+        return self._pitch_class_ratio
 
     @property
     def pitch_class_talea(self):
-        return self._transform_talea
+        return self._pitch_class_talea
 
     @property
     def transform_ratio(self):
-        return self._transform_talea
+        return self._transform_ratio
 
     @property
     def transform_talea(self):

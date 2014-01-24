@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-import abc
+import bisect
 import collections
 from abjad import *
 
@@ -53,9 +53,9 @@ class Maker(abctools.AbjadObject):
         duration=None,
         ratio=None,
         ):
-        ratio_sum = sum(self.ratio)
+        ratio_sum = sum(ratio)
         duration_parts = []
-        for ratio_part in self.ratio:
+        for ratio_part in ratio:
             multiplier = Multiplier(ratio_part, ratio_sum)
             duration_part = duration * multiplier
             duration_parts.append(duration_part)
