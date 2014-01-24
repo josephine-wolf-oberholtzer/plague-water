@@ -21,6 +21,7 @@ class ChordMaker(Maker):
         ratio=None,
         talea=None,
         ):
+        from plague_water import makers
         ratio = mathtools.Ratio([abs(x) for x in ratio])
         assert len(ratio)
         talea = self._expr_to_cyclic_tuple(talea)
@@ -46,7 +47,7 @@ class ChordMaker(Maker):
         logical_tie,
         segment_duration=None,
         ):
-        assert isinstance(logical_tie, selections.LogicalTie)
+        assert isinstance(logical_tie, selectiontools.LogicalTie)
         assert logical_tie
         assert segment_duration
         offsets = self._duration_and_ratio_to_offsets(

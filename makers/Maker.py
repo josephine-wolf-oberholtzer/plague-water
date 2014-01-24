@@ -103,7 +103,7 @@ class Maker(abctools.AbjadObject):
         talea=None,
         ):
         talea_cursors = []
-        for i in range(ratio):
+        for i in range(len(ratio)):
             subsequence = talea[i]
             cursor = self._expr_to_statal_server_cursor(subsequence)
             talea_cursors.append(cursor)
