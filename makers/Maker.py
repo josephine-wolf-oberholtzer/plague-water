@@ -48,7 +48,13 @@ class Maker(abctools.AbjadObject):
 
     ### PRIVATE METHODS ###
 
-    def _coerce_cursor_argument(self, argument):
+    def _expr_to_cyclic_tuple(self, expr, seed):
+        expr = expr or ()
+        rotated_expr = sequencetools.rotate_sequence(expr, seed)
+        cyclic_tuple = datastructuretools.CyclicTuple(rotated_expr)
+        return cyclic_tuple
+
+    def _expr_to_statal_server_cursor(self, argument):
         if argument is not None:
             assert isinstance(argument, (
                 collections.Sequence,
@@ -62,12 +68,6 @@ class Maker(abctools.AbjadObject):
         assert isinstance(argument,
             (datastructuretools.StatalServerCursor, type(None)))
         return argument
-
-    def _expr_to_cyclic_tuple(self, expr, seed):
-        expr = expr or ()
-        rotated_expr = sequencetools.rotate_sequence(expr, seed)
-        cyclic_tuple = datastructuretools.CyclicTuple(rotated_expr)
-        return cyclic_tuple
 
     ### PUBLIC METHODS ###
 
