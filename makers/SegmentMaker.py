@@ -266,18 +266,18 @@ class SegmentMaker(Maker):
                 progress_indicator.advance()
 
     def apply_chords(self):
+        from plague_water import makers
         message = '\tapplying chords'
-        music_maker_seeds = collections.Counter()
         with systemtools.ProgressIndicator(message) as progress_indicator:
-            for music, music_maker in \
-                self.iterate_containers_and_music_makers():
-                seed = music_maker_seeds[music_maker]
+            for leaf in iterate(self.score).by_timeline(Note):
+                logical_tie = inspect_(leaf).get_logical_tie()
+                if leaf is not logical_tie.head:
+                    continue
+                music_maker = inspect_(leaf).get_effective(makers.MusicMaker)
                 music_maker.apply_chords(
-                    music,
-                    seed=seed,
+                    logical_tie,
                     segment_duration=self.segment_duration,
                     )
-                music_maker_seeds[music_maker] += 1
                 progress_indicator.advance()
 
     def apply_dynamics(self):
@@ -298,20 +298,16 @@ class SegmentMaker(Maker):
     def apply_pitch_classes(self):
         from plague_water import makers
         message = '\tapplying pitch classes'
-        music_maker_seeds = collections.Counter()
         with systemtools.ProgressIndicator(message) as progress_indicator:
             for leaf in iterate(self.score).by_timeline(Note):
                 logical_tie = inspect_(leaf).get_logical_tie()
                 if leaf is not logical_tie.head:
                     continue
                 music_maker = inspect_(leaf).get_effective(makers.MusicMaker)
-                seed = music_maker_seeds[music_maker]
                 music_maker.apply_pitch_classes(
                     logical_tie,
-                    seed=seed,
                     segment_duration=self.segment_duration,
                     )
-                music_maker_seeds[music_maker] += 1
                 progress_indicator.advance()
 
     def apply_registrations(self):
