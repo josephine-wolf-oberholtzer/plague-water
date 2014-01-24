@@ -16,8 +16,15 @@ score_template = score_templates.PlagueWaterScoreTemplate()
 score = score_template()
 context_map = datastructuretools.ContextMap(score_template)
 short_duration_cursor = materials.short_duration_server()
-context_map[score]['playing_durations'] = materials.medium_duration_server()
-context_map[score]['playing_groupings'] = materials.short_grouping_server()
+context_map[score]['pitch_class_maker'] = makers.PitchClassMaker(
+    pitch_class_ratio=(1, 1, 1),
+    pitch_class_talea=(
+        pitchtools.PitchClassSegment([0, 2, 4]),
+        pitchtools.PitchClassSegment([5, 6]),
+        pitchtools.PitchClassSegment([7, 8, 9, 10, 11]),
+        )
+    )
+    
 
 ### BRUSHES ###
 
