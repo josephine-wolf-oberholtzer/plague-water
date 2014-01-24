@@ -17,14 +17,38 @@ score = score_template()
 context_map = datastructuretools.ContextMap(score_template)
 short_duration_cursor = materials.short_duration_server()
 context_map[score]['pitch_class_maker'] = makers.PitchClassMaker(
-    pitch_class_ratio=(1, 1, 1),
+    pitch_class_ratio=(2, 1, 2),
     pitch_class_talea=(
-        pitchtools.PitchClassSegment([0, 2, 4]),
-        pitchtools.PitchClassSegment([5, 6]),
-        pitchtools.PitchClassSegment([7, 8, 9, 10, 11]),
-        )
+        pitchtools.PitchClassSegment([0, 0]),
+        pitchtools.PitchClassSegment([2, 2]),
+        pitchtools.PitchClassSegment([4, 4]),
+        ),
+    transform_ratio=(1, 6),
+    transform_talea=(
+        makers.PitchClassTransformExpression(transposition=-1),
+        None,
+        ),
     )
-    
+context_map[score]['chord_maker'] = makers.ChordMaker(
+    ratio=(1, 1),
+    talea=(
+        (
+            None,
+            None,
+            ),
+        (
+            None,
+            makers.KeyClusterExpression(
+                arpeggio_direction=Down,
+                include_black_keys=False,
+                staff_space_width=7,
+                ),
+            makers.KeyClusterExpression(),
+            makers.ChordExpression(interval_numbers=(-1, 3)),
+            makers.ChordExpression(interval_numbers=(2,)),
+            ),
+        ),
+    )
 
 ### BRUSHES ###
 
