@@ -56,18 +56,19 @@ class RegistrationMaker(Maker):
         global_registration = self.global_registration
         if isinstance(global_registration, prototype):
             x = music_start_offset / segment_duration
-            global_registration = int(global_registration.get_y_at_x(x))
+            global_registration = int(global_registration(x))
             global_registration = pitchtools.NamedPitch(global_registration)
-        inflection = 0
+        inflection = NamedPitch("c'") - NamedPitch("c'")
         for logical_tie in iterate(division).by_logical_tie(pitched=True):
             tie_start_offset = logical_tie.get_timespan().start_offset
             if self.inflections:
                 inflection = self.inflections(1)[0]
                 if isinstance(inflection, prototype):
                     x = tie_start_offset / music_duration
-                    inflection = int(inflection.get_y_at_x(x))
+                    inflection = int(inflection(x))
                     inflection = pitchtools.NamedPitch(inflection)
-            local_registration = global_registration + inflection
+                inflection = NamedPitch("c'") - inflection
+            local_registration = global_registration.transpose(inflection)
             octavation = pitchtools.Octave(self.octavations(1)[0])
             octave_transposition_mapping = \
                 pitchtools.OctaveTranspositionMapping([
