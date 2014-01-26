@@ -200,7 +200,6 @@
             (padding . 1)
             (stretchability . 0)
             )
-        \override Stem.direction = #down
         \override Stem #'(details beamed-lengths) = #'(6)
         \override StemTremolo.beam-width = 1.5
         \override StemTremolo.flag-count = 4.0
@@ -208,7 +207,6 @@
         \override StemTremolo.Y-offset = -4.0
         \override TextScript.Y-extent = #'(-1.5 . 1.5)
         \override TupletBracket.breakable = ##t
-        \override TupletBracket.direction = #down
         \override TupletBracket.full-length-to-extent = ##f
         \override TupletBracket.padding = 2.0
         \override TupletNumber.font-size = 1
