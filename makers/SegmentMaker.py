@@ -267,6 +267,7 @@ class SegmentMaker(Maker):
 
     def apply_chords(self):
         from plague_water import makers
+        self.score._is_forbidden_to_update = True
         message = '\tapplying chords'
         with systemtools.ProgressIndicator(message) as progress_indicator:
             for leaf in iterate(self.score).by_timeline(Note):
@@ -279,6 +280,7 @@ class SegmentMaker(Maker):
                     segment_duration=self.segment_duration,
                     )
                 progress_indicator.advance()
+        self.score._is_forbidden_to_update = False
 
     def apply_dynamics(self):
         message = '\tapplying dynamics'

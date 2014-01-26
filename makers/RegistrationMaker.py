@@ -60,17 +60,19 @@ class RegistrationMaker(Maker):
         assert isinstance(music, Container)
         octavation_cursor = self._get_octavation_cursor()
         music_start_offset = inspect_(music).get_timespan().start_offset
-        music_duration = inspect_(music).get_duration()
         global_inflection_curve = self._get_inflection_curve(
             self.global_inflection)
         phrase_inflection_curve = self._get_inflection_curve_from_cursor(
             self.phrase_inflections)
+        iterator = iterate(music).by_logical_tie(pitched=True)
+        all_logical_ties = [x for x in iterator]
+        music_duration = all_logical_ties[-1].get_timespan().start_offset - \
+            music_start_offset
         for division in music:
             division_inflection_curve = self._get_inflection_curve_from_cursor(
                 self.division_inflections)
-            iterator = iterate(division).by_logical_tie(pitched=True)
-            logical_ties = [x for x in iterator
-                if division in inspect_(x.head).get_parentage()]
+            logical_ties = [logical_tie for logical_tie in all_logical_ties
+                if division in inspect_(logical_tie.head).get_parentage()]
             for i, logical_tie in enumerate(logical_ties):
                 tie_start_offset = logical_tie.get_timespan().start_offset
                 division_position = Offset(i, len(logical_ties))
