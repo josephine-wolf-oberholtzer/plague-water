@@ -11,8 +11,8 @@ clanging_music_maker = makers.MusicMaker(
     playing_groupings=None,
     rhythm_maker=rhythmmakertools.TaleaRhythmMaker(
         beam_specifier=rhythmmakertools.BeamSpecifier(
-            beam_each_cell=False,
-            beam_cells_together=False,
+            beam_each_division=False,
+            beam_divisions_together=False,
             ),
         talea=(4, 4, 4, 3, 4, 5, 4, 4, 3,),
         talea_denominator=16,
@@ -28,8 +28,8 @@ droning_music_maker = makers.MusicMaker(
     playing_groupings=None,
     rhythm_maker=rhythmmakertools.NoteRhythmMaker(
         beam_specifier=rhythmmakertools.BeamSpecifier(
-            beam_each_cell=False,
-            beam_cells_together=False,
+            beam_each_division=False,
+            beam_divisions_together=False,
             ),
         ),
     tailing_rest_durations=None,
@@ -43,8 +43,8 @@ flowing_music_maker = makers.MusicMaker(
     playing_groupings=None,
     rhythm_maker=rhythmmakertools.RatioTaleaRhythmMaker(
         beam_specifier=rhythmmakertools.BeamSpecifier(
-            beam_each_cell=False,
-            beam_cells_together=False,
+            beam_each_division=False,
+            beam_divisions_together=False,
             ),
         ratio_talea=(
             (2, 1),
@@ -82,8 +82,8 @@ staggering_music_maker = makers.MusicMaker(
     playing_groupings=duration_servers.short_grouping_server(),
     rhythm_maker=rhythmmakertools.RatioTaleaRhythmMaker(
         beam_specifier=rhythmmakertools.BeamSpecifier(
-            beam_each_cell=False,
-            beam_cells_together=False,
+            beam_each_division=False,
+            beam_divisions_together=False,
             ),
         ratio_talea=(
             (1, 1),
@@ -112,8 +112,8 @@ stuttering_music_maker = makers.MusicMaker(
     playing_groupings=None,
     rhythm_maker=rhythmmakertools.RatioTaleaRhythmMaker(
         beam_specifier=rhythmmakertools.BeamSpecifier(
-            beam_each_cell=False,
-            beam_cells_together=False,
+            beam_each_division=False,
+            beam_divisions_together=False,
             ),
         ratio_talea=(
             (1, 1, -2),
@@ -140,8 +140,8 @@ winding_music_maker = makers.MusicMaker(
     playing_groupings=None,
     rhythm_maker=rhythmmakertools.TaleaRhythmMaker(
         beam_specifier=rhythmmakertools.BeamSpecifier(
-            beam_each_cell=False,
-            beam_cells_together=False,
+            beam_each_division=False,
+            beam_divisions_together=False,
             ),
         burnish_output=True,
         burnish_specifier=rhythmmakertools.BurnishSpecifier(
