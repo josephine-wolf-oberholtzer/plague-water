@@ -6,7 +6,7 @@ from abjad.tools import pitchtools
 from plague_water.makers.Maker import Maker
 
 
-class RegistralRatio(Maker):
+class RegisterCurve(Maker):
 
     ### CLASS VARIABLES ###
 

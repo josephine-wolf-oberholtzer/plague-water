@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+import collections
 from abjad import *
 from plague_water.makers.Maker import Maker
 
@@ -21,8 +22,9 @@ class RegistrationMaker(Maker):
         octavations=None,
         registration=None,
         ):
+        from plague_water import makers
         if registration is not None:
-            prototype = interpolationtools.BreakPointFunction
+            prototype = makers.RegisterCurve
             if not isinstance(registration, prototype):
                 registration = pitchtools.NamedPitch(registration)
         self._registration = registration
@@ -30,7 +32,7 @@ class RegistrationMaker(Maker):
             result = []
             assert isinstance(inflections, collections.Sequence)
             for x in inflections:
-                if not isinstance(x, interpolationtools.BreakPointFunction):
+                if not isinstance(x, makers.RegisterCurve):
                     x = pitchtools.NamedPitch(x)
                 result.append(x)
             inflections = self._expr_to_statal_server_cursor(result)
@@ -44,10 +46,11 @@ class RegistrationMaker(Maker):
         music,
         segment_duration=None,
         ):
+        from plague_water import makers
         assert isinstance(music, Container)
         assert self.registration is not None
         assert self.octavations is not None
-        prototype = interpolationtools.BreakPointFunction
+        prototype = makers.RegisterCurve
         music_start_offset = inspect_(music).get_timespan().start_offset()
         music_duration = inspect_(music).get_duration()
         global_registration = self.global_registration
