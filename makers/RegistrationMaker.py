@@ -58,8 +58,7 @@ class RegistrationMaker(Maker):
         segment_duration,
         ):
         assert isinstance(music, Container)
-        assert self.octavations is not None
-        music_start_offset = inspect_(music).get_timespan().start_offset()
+        music_start_offset = inspect_(music).get_timespan().start_offset
         music_duration = inspect_(music).get_duration()
         global_inflection_curve = self._get_inflection_curve(
             self.global_inflection)
@@ -94,20 +93,21 @@ class RegistrationMaker(Maker):
                     global_inflection_interval
                 local_inflection_pitch = \
                     NamedPitch("c'") + local_inflection_interval
-                octavation = pitchtools.Octave(self.octavations(1)[0])
-                self._apply_inflection_to_tie_chain(
+                octavation_cursor = self._get_octavation_cursor()
+                octavation = pitchtools.Octave(octavation_cursor(1)[0])
+                self._apply_inflection_to_logical_tie(
                     inflection_pitch=local_inflection_pitch,
                     octavation=octavation,
-                    tie_chain=tie_chain,
+                    logical_tie=logical_tie,
                     )
 
     ### PRIVATE METHODS ###
 
-    def _apply_inflection_to_tie_chain(
+    def _apply_inflection_to_logical_tie(
         self,
         inflection_pitch=None,
         octavation=None,
-        tie_chain=None,
+        logical_tie=None,
         ):
         octave_transposition_mapping = \
             pitchtools.OctaveTranspositionMapping([
@@ -116,13 +116,14 @@ class RegistrationMaker(Maker):
                 ])
         pitch = logical_tie[0].written_pitch
         pitch = NamedPitch(pitch.named_pitch_class, octavation)
-        pitch = octave_transposition_mapping(pitch)
+        pitch = octave_transposition_mapping([pitch])
         for note in logical_tie:
-            note.written_pitch = new_pitch
+            note.written_pitch = pitch
 
-    def _get_inflection_curve(self, inflection):
+    def _get_inflection_curve(self, inflection_curve):
+        from plague_water import makers
         if inflection_curve is None:
-            inflection_curve = makers.RegisterCurse(
+            inflection_curve = makers.RegisterCurve(
                 ratio=(1,),
                 registers=(0, 0),
                 )
@@ -142,6 +143,20 @@ class RegistrationMaker(Maker):
         else:
             inflection_curve = inflection_cursor(1)[0]
         return self._get_inflection_curve(inflection_curve)
+
+    def _get_octavation_cursor(self):
+        from plague_water import materials
+        if self._octavations is None:
+            sequence = sequencetools.remap_sequence_by_range_pairs(
+                materials.euler_hundreds,
+                [
+                    ((0, 99), (0, 7)),
+                    ],
+                )
+            octavations_server = datastructuretools.StatalServer(sequence)
+            octavations_cursor = octavations_server()
+            return octavations_cursor
+        return self._octavations
 
     ### PUBLIC PROPERTIES ###
 

@@ -258,7 +258,7 @@ class SegmentMaker(Maker):
                 self.iterate_containers_and_music_makers():
                 seed = music_maker_seeds[music_maker]
                 music_maker.apply_articulations(
-                    music,
+                    music=music,
                     seed=seed,
                     segment_duration=self.segment_duration,
                     )
@@ -275,7 +275,7 @@ class SegmentMaker(Maker):
                     continue
                 music_maker = inspect_(leaf).get_effective(makers.MusicMaker)
                 music_maker.apply_chords(
-                    logical_tie,
+                    logical_tie=logical_tie,
                     segment_duration=self.segment_duration,
                     )
                 progress_indicator.advance()
@@ -288,7 +288,7 @@ class SegmentMaker(Maker):
                 self.iterate_containers_and_music_makers():
                 seed = music_maker_seeds[music_maker]
                 music_maker.apply_dynamics(
-                    music,
+                    music=music,
                     seed=seed,
                     segment_duration=self.segment_duration,
                     )
@@ -305,24 +305,20 @@ class SegmentMaker(Maker):
                     continue
                 music_maker = inspect_(leaf).get_effective(makers.MusicMaker)
                 music_maker.apply_pitch_classes(
-                    logical_tie,
+                    logical_tie=logical_tie,
                     segment_duration=self.segment_duration,
                     )
                 progress_indicator.advance()
 
     def apply_registrations(self):
         message = '\tapplying registrations'
-        music_maker_seeds = collections.Counter()
         with systemtools.ProgressIndicator(message) as progress_indicator:
             for music, music_maker in \
                 self.iterate_containers_and_music_makers():
-                seed = music_maker_seeds[music_maker]
                 music_maker.apply_registrations(
-                    music,
-                    seed=seed,
+                    music=music,
                     segment_duration=self.segment_duration,
                     )
-                music_maker_seeds[music_maker] += 1
                 progress_indicator.advance()
 
     def apply_spanners(self):
@@ -333,7 +329,7 @@ class SegmentMaker(Maker):
                 self.iterate_containers_and_music_makers():
                 seed = music_maker_seeds[music_maker]
                 music_maker.apply_spanners(
-                    music,
+                    music=music,
                     seed=seed,
                     segment_duration=self.segment_duration,
                     )

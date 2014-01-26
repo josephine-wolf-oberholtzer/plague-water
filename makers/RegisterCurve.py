@@ -44,7 +44,6 @@ class RegisterCurve(Maker):
         positions = [durationtools.Offset(x) / ratio_sum
             for x in mathtools.cumulative_sums(self.ratio)]
         index = bisect.bisect(positions, position)
-        print position, positions, index
         position = float(position)
         x0 = float(positions[index - 1])
         x1 = float(positions[index])

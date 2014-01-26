@@ -145,7 +145,6 @@ class MusicMaker(Maker):
             return
         self.registration_maker(
             music,
-            seed=seed,
             segment_duration=segment_duration,
             )
         assert inspect_(music).is_well_formed()
