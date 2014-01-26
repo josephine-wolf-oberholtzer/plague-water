@@ -53,11 +53,17 @@ context_map[score]['chord_maker'] = makers.ChordMaker(
 ### BRUSHES ###
 
 piano_rh_brush = makers.Brush([
-    new(materials.staggering_music_maker,
+    materials.staggering_music_maker.__makenew__(
+        registration_maker=makers.RegistrationMaker(
+            global_inflection=12,
+            ),
         )
     ])
 piano_lh_brush = makers.Brush([
-    new(materials.staggering_music_maker,
+    materials.staggering_music_maker.__makenew__(
+        registration_maker=makers.RegistrationMaker(
+            global_inflection=-12,
+            ),
         )
     ])
 
