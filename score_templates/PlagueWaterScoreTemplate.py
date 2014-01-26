@@ -129,6 +129,9 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
             name='Plague Water Score',
             )
 
+        score['Piano Upper Staff'].is_simultaneous = True
+        score['Piano Lower Staff'].is_simultaneous = True
+
         treble_clef = indicatortools.Clef('treble')
         bass_clef = indicatortools.Clef('bass')
         percussion_clef = indicatortools.Clef('percussion')
