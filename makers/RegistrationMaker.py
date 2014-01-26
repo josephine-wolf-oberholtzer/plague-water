@@ -58,14 +58,15 @@ class RegistrationMaker(Maker):
         segment_duration,
         ):
         assert isinstance(music, Container)
+        octavation_cursor = self._get_octavation_cursor()
         music_start_offset = inspect_(music).get_timespan().start_offset
         music_duration = inspect_(music).get_duration()
         global_inflection_curve = self._get_inflection_curve(
             self.global_inflection)
-        phrase_inflection_curve = self._get_inflection_curve(
+        phrase_inflection_curve = self._get_inflection_curve_from_cursor(
             self.phrase_inflections)
         for division in music:
-            division_inflection_curve = self._get_inflection_curve(
+            division_inflection_curve = self._get_inflection_curve_from_cursor(
                 self.division_inflections)
             iterator = iterate(division).by_logical_tie(pitched=True)
             logical_ties = [x for x in iterator
@@ -88,12 +89,13 @@ class RegistrationMaker(Maker):
                     global_inflection_curve(global_position)
                 global_inflection_interval = \
                     NamedPitch("c'") - global_inflection_pitch
-                local_inflection_interval = division_inflection_interval + \
-                    phrase_inflection_interval + \
-                    global_inflection_interval
+                local_inflection_interval = (
+                    float(division_inflection_interval) +
+                    float(phrase_inflection_interval) +
+                    float(global_inflection_interval)
+                    )
                 local_inflection_pitch = \
-                    NamedPitch("c'") + local_inflection_interval
-                octavation_cursor = self._get_octavation_cursor()
+                    NamedPitch("c'").transpose(local_inflection_interval)
                 octavation = pitchtools.Octave(octavation_cursor(1)[0])
                 self._apply_inflection_to_logical_tie(
                     inflection_pitch=local_inflection_pitch,
@@ -114,11 +116,15 @@ class RegistrationMaker(Maker):
                 ('[C0, C4)', inflection_pitch),
                 ('[C4, C8)', inflection_pitch + 6),
                 ])
-        pitch = logical_tie[0].written_pitch
-        pitch = NamedPitch(pitch.named_pitch_class, octavation)
-        pitch = octave_transposition_mapping([pitch])
+        original_pitch = logical_tie[0].written_pitch
+        octavated_pitch = NamedPitch(
+            original_pitch.named_pitch_class,
+            octavation,
+            )
+        registrated_pitch = octave_transposition_mapping([octavated_pitch])
         for note in logical_tie:
-            note.written_pitch = pitch
+            note.written_pitch = registrated_pitch
+        #print original_pitch, octavation, octavated_pitch, registrated_pitch
 
     def _get_inflection_curve(self, inflection_curve):
         from plague_water import makers
