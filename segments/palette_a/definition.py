@@ -20,21 +20,24 @@ context_map[score]['pitch_class_maker'] = makers.PitchClassMaker(
     pitch_class_ratio=(2, 1, 2),
     pitch_class_talea=(
         pitchtools.PitchClassSegment([0, 0]),
-        pitchtools.PitchClassSegment([2, 2]),
-        pitchtools.PitchClassSegment([4, 4]),
+        pitchtools.PitchClassSegment([0, 0]),
+        pitchtools.PitchClassSegment([0, 0]),
         ),
-    transform_ratio=(1, 6),
-    transform_talea=(
-        makers.PitchClassTransformExpression(transposition=-1),
-        None,
-        ),
+    #transform_ratio=(1, 1),
+    #transform_talea=(
+    #    makers.PitchClassTransformExpression(transposition=-1),
+    #    None,
+    #    ),
     )
 context_map[score]['chord_maker'] = makers.ChordMaker(
     ratio=(1, 1),
     talea=(
         (
             None,
+            makers.ChordExpression(interval_numbers=(-1, 3)),
+            makers.ChordExpression(interval_numbers=(2,)),
             None,
+            makers.ChordExpression(interval_numbers=(5,)),
             ),
         (
             None,
@@ -55,14 +58,40 @@ context_map[score]['chord_maker'] = makers.ChordMaker(
 piano_rh_brush = makers.Brush([
     materials.staggering_music_maker.__makenew__(
         registration_maker=makers.RegistrationMaker(
-            global_inflection=12,
+            global_inflection=makers.RegisterCurve(
+                ratio=(1,),
+                registers=(0, 24),
+                ),
+            phrase_inflections=(
+                makers.RegisterCurve(
+                    ratio=(1,),
+                    registers=(-6, 6),
+                    ),
+                makers.RegisterCurve(
+                    ratio=(1,),
+                    registers=(-6, 6),
+                    ),
+                ),
             ),
         )
     ])
 piano_lh_brush = makers.Brush([
     materials.staggering_music_maker.__makenew__(
         registration_maker=makers.RegistrationMaker(
-            global_inflection=-12,
+            global_inflection=makers.RegisterCurve(
+                ratio=(1,),
+                registers=(-6, -24),
+                ),
+            phrase_inflections=(
+                makers.RegisterCurve(
+                    ratio=(1,),
+                    registers=(-6, 6),
+                    ),
+                makers.RegisterCurve(
+                    ratio=(1,),
+                    registers=(-6, 6),
+                    ),
+                ),
             ),
         )
     ])
