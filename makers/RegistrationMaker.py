@@ -9,34 +9,45 @@ class RegistrationMaker(Maker):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_inflections',
+        '_division_inflections',
+        '_global_inflection',
         '_octavations',
-        '_registration',
+        '_phrase_inflections',
         )
 
     ### INITIALIZER ###
 
     def __init__(
         self,
-        inflections=None,
+        division_inflections=None,
+        global_inflection=None,
         octavations=None,
-        registration=None,
+        phrase_inflections=None,
         ):
         from plague_water import makers
-        if registration is not None:
+        if global_inflection is not None:
             prototype = makers.RegisterCurve
-            if not isinstance(registration, prototype):
-                registration = pitchtools.NamedPitch(registration)
-        self._registration = registration
-        if inflections is not None:
+            if not isinstance(global_inflection, prototype):
+                global_inflection = pitchtools.NamedPitch(global_inflection)
+        if phrase_inflections is not None:
             result = []
-            assert isinstance(inflections, collections.Sequence)
-            for x in inflections:
+            assert isinstance(phrase_inflections, collections.Sequence)
+            for x in phrase_inflections:
                 if not isinstance(x, makers.RegisterCurve):
                     x = pitchtools.NamedPitch(x)
                 result.append(x)
-            inflections = self._expr_to_statal_server_cursor(result)
-        self._inflections = inflections
+            phrase_inflections = self._expr_to_statal_server_cursor(result)
+        if division_inflections is not None:
+            result = []
+            assert isinstance(division_inflections, collections.Sequence)
+            for x in division_inflections:
+                if not isinstance(x, makers.RegisterCurve):
+                    x = pitchtools.NamedPitch(x)
+                result.append(x)
+            division_inflections = self._expr_to_statal_server_cursor(result)
+        self._global_inflection = global_inflection
+        self._division_inflections = division_inflections
+        self._phrase_inflections = phrase_inflections
         self._octavations = self._expr_to_statal_server_cursor(octavations)
 
     ### SPECIAL METHODS ###
@@ -44,53 +55,108 @@ class RegistrationMaker(Maker):
     def __call__(
         self,
         music,
-        segment_duration=None,
+        segment_duration,
         ):
-        from plague_water import makers
         assert isinstance(music, Container)
-        assert self.registration is not None
         assert self.octavations is not None
-        prototype = makers.RegisterCurve
         music_start_offset = inspect_(music).get_timespan().start_offset()
         music_duration = inspect_(music).get_duration()
-        global_registration = self.global_registration
-        if isinstance(global_registration, prototype):
-            x = music_start_offset / segment_duration
-            global_registration = int(global_registration(x))
-            global_registration = pitchtools.NamedPitch(global_registration)
-        inflection = NamedPitch("c'") - NamedPitch("c'")
-        for logical_tie in iterate(division).by_logical_tie(pitched=True):
-            tie_start_offset = logical_tie.get_timespan().start_offset
-            if self.inflections:
-                inflection = self.inflections(1)[0]
-                if isinstance(inflection, prototype):
-                    x = tie_start_offset / music_duration
-                    inflection = int(inflection(x))
-                    inflection = pitchtools.NamedPitch(inflection)
-                inflection = NamedPitch("c'") - inflection
-            local_registration = global_registration.transpose(inflection)
-            octavation = pitchtools.Octave(self.octavations(1)[0])
-            octave_transposition_mapping = \
-                pitchtools.OctaveTranspositionMapping([
-                    ('[C0, C4)', local_registration),
-                    ('[C4, C8)', local_registration + 6),
-                    ])
-            pitch = logical_tie[0].written_pitch
-            pitch = NamedPitch(pitch.named_pitch_class, octavation)
-            pitch = octave_transposition_mapping(pitch)
-            for note in logical_tie:
-                note.written_pitch = new_pitch
+        global_inflection_curve = self._get_inflection_curve(
+            self.global_inflection)
+        phrase_inflection_curve = self._get_inflection_curve(
+            self.phrase_inflections)
+        for division in music:
+            division_inflection_curve = self._get_inflection_curve(
+                self.division_inflections)
+            iterator = iterate(division).by_logical_tie(pitched=True)
+            logical_ties = [x for x in iterator
+                if division in inspect_(x.head).get_parentage()]
+            for i, logical_tie in enumerate(logical_ties):
+                tie_start_offset = logical_tie.get_timespan().start_offset
+                division_position = Offset(i, len(logical_ties))
+                division_inflection_pitch = division_inflection_curve(
+                    division_position)
+                division_inflection_interval = \
+                    NamedPitch("c'") - division_inflection_pitch
+                phrase_position = \
+                    (tie_start_offset - music_start_offset) / music_duration
+                phrase_inflection_pitch = \
+                    phrase_inflection_curve(phrase_position)
+                phrase_inflection_interval = \
+                    NamedPitch("c'") - phrase_inflection_pitch
+                global_position = tie_start_offset / segment_duration
+                global_inflection_pitch = \
+                    global_inflection_curve(global_position)
+                global_inflection_interval = \
+                    NamedPitch("c'") - global_inflection_pitch
+                local_inflection_interval = division_inflection_interval + \
+                    phrase_inflection_interval + \
+                    global_inflection_interval
+                local_inflection_pitch = \
+                    NamedPitch("c'") + local_inflection_interval
+                octavation = pitchtools.Octave(self.octavations(1)[0])
+                self._apply_inflection_to_tie_chain(
+                    inflection_pitch=local_inflection_pitch,
+                    octavation=octavation,
+                    tie_chain=tie_chain,
+                    )
+
+    ### PRIVATE METHODS ###
+
+    def _apply_inflection_to_tie_chain(
+        self,
+        inflection_pitch=None,
+        octavation=None,
+        tie_chain=None,
+        ):
+        octave_transposition_mapping = \
+            pitchtools.OctaveTranspositionMapping([
+                ('[C0, C4)', inflection_pitch),
+                ('[C4, C8)', inflection_pitch + 6),
+                ])
+        pitch = logical_tie[0].written_pitch
+        pitch = NamedPitch(pitch.named_pitch_class, octavation)
+        pitch = octave_transposition_mapping(pitch)
+        for note in logical_tie:
+            note.written_pitch = new_pitch
+
+    def _get_inflection_curve(self, inflection):
+        if inflection_curve is None:
+            inflection_curve = makers.RegisterCurse(
+                ratio=(1,),
+                registers=(0, 0),
+                )
+        elif not isinstance(inflection_curve, makers.RegisterCurve):
+            inflection_curve = makers.RegisterCurve(
+                ratio=(1,),
+                registers=(
+                    inflection_curve,
+                    inflection_curve,
+                    ),
+                )
+        return inflection_curve
+
+    def _get_inflection_curve_from_cursor(self, inflection_cursor):
+        if inflection_cursor is None:
+            inflection_curve = None
+        else:
+            inflection_curve = inflection_cursor(1)[0]
+        return self._get_inflection_curve(inflection_curve)
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def inflections(self):
-        return self._inflections
+    def division_inflections(self):
+        return self._division_inflections
 
     @property
     def octavations(self):
         return self._octavations
 
     @property
-    def registration(self):
-        return self._registration
+    def phrase_inflections(self):
+        return self._phrase_inflections
+
+    @property
+    def global_inflection(self):
+        return self._global_inflection
