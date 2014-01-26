@@ -132,6 +132,8 @@ class SegmentMaker(Maker):
         self.apply_pitch_classes()
         self.apply_registrations()
         self.apply_chords()
+        # self.apply_piano_staff_changes()
+        self.color_piano_conflicts()
         self.apply_articulations()
         self.apply_dynamics()
         self.apply_spanners()
@@ -338,6 +340,54 @@ class SegmentMaker(Maker):
                 music_maker_seeds[music_maker] += 1
                 progress_indicator.advance()
 
+    def apply_piano_staff_changes(self):
+        message = '\tapplying piano staff changes'
+        with systemtools.ProgressIndicator(message) as progress_indicator:
+            piano_rh_voice = self.score['Piano RH Voice']
+            piano_lh_voice = self.score['Piano LH Voice']
+            piano_upper_staff = self.score['Piano Upper Staff']
+            piano_lower_staff = self.score['Piano Lower Staff']
+            old_piano_rh_staff = None
+            rh_iterator = iterate(piano_rh_voice).by_logical_tie(pitched=True)
+            for logical_tie in rh_iterator:
+                if isinstance(logical_tie[0], scoretools.Note):
+                    written_pitches = [logical_tie[0].written_pitch]
+                else:
+                    written_pitches = logical_tie[0].written_pitches
+                pitch_numbers = [float(x) for x in written_pitches]
+                pitch_center = sum(pitch_numbers) / len(pitch_numbers)
+                if 0 < pitch_center:
+                    new_piano_rh_staff = piano_upper_staff
+                else:
+                    new_piano_rh_staff = piano_lower_staff
+                if new_piano_rh_staff != old_piano_rh_staff:
+                    staff_change = indicatortools.StaffChange(
+                        staff=new_piano_rh_staff,
+                        )
+                    attach(staff_change, logical_tie[0], scope=Voice)
+                    old_piano_rh_staff = new_piano_rh_staff
+                    progress_indicator.advance()
+            old_piano_lh_staff = None
+            lh_iterator = iterate(piano_lh_voice).by_logical_tie(pitched=True)
+            for logical_tie in lh_iterator:
+                if isinstance(logical_tie[0], scoretools.Note):
+                    written_pitches = [logical_tie[0].written_pitch]
+                else:
+                    written_pitches = logical_tie[0].written_pitches
+                pitch_numbers = [float(x) for x in written_pitches]
+                pitch_center = sum(pitch_numbers) / len(pitch_numbers)
+                if 0 < pitch_center:
+                    new_piano_lh_staff = piano_upper_staff
+                else:
+                    new_piano_lh_staff = piano_lower_staff
+                if new_piano_lh_staff != old_piano_lh_staff:
+                    staff_change = indicatortools.StaffChange(
+                        staff=new_piano_lh_staff,
+                        )
+                    attach(staff_change, logical_tie[0], scope=Voice)
+                    old_piano_lh_staff = new_piano_lh_staff
+                    progress_indicator.advance()
+
     def build_and_persist(self, current_file_path):
         print 'Building {}'.format(self.segment_name)
         with systemtools.Timer() as timer:
@@ -483,6 +533,44 @@ class SegmentMaker(Maker):
                     valid_timespans.append(timespan)
             timespan_inventory[:] = valid_timespans
             timespan_inventory.sort()
+
+    def color_piano_conflicts(self):
+        message = '\tcoloring piano conflicts'
+        with systemtools.ProgressIndicator(message) as progress_indicator:
+            component = self.score['Piano Staff Group']
+            for vertical_moment in iterate(component).by_vertical_moment():
+                pitch_numbers = collections.Counter()
+                notes_and_chords = vertical_moment.notes_and_chords
+                for note_or_chord in notes_and_chords:
+                    if isinstance(note_or_chord, scoretools.Note):
+                        pitch_number = note_or_chord.written_pitch.pitch_number
+                        pitch_number = float(pitch_number)
+                        pitch_numbers[pitch_number] += 1
+                    else:
+                        for pitch in note_or_chord.written_pitches:
+                            pitch_number = pitch.pitch_number
+                            pitch_number = float(pitch_number)
+                            pitch_numbers[pitch_number] += 1
+                conflict_pitch_numbers = set()
+                for pitch_number, count in pitch_numbers.iteritems():
+                    if 1 < count:
+                        conflict_pitch_numbers.add(pitch_number)
+                if not conflict_pitch_numbers:
+                    continue
+                for note_or_chord in notes_and_chords:
+                    if isinstance(note_or_chord, scoretools.Note):
+                        pitch_number = note_or_chord.written_pitch.pitch_number
+                        pitch_number = float(pitch_number)
+                        if pitch_number in conflict_pitch_numbers:
+                            note_or_chord.note_head.tweak.color = 'red'
+                            progress_indicator.advance()
+                    else:
+                        for note_head in note_or_chord.note_heads:
+                            pitch_number = note_head.written_pitch.pitch_number
+                            pitch_number = float(pitch_number)
+                            if pitch_number in conflict_pitch_numbers:
+                                note_head.tweak.color = 'red'
+                                progress_indicator.advance()
 
     def configure_lilypond_file(self):
         print '\tconfiguring lilypond file'
