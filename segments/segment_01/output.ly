@@ -40,9 +40,6 @@
 				\time 2/8
 				s1 * 1/4
 			}
-			{
-				s1 * 1/4
-			}
 		}
 		\context SaxophoneStaffGroup = "Saxophone Staff Group" <<
 			\context SaxophoneStaff = "Saxophone Staff" {
@@ -50,25 +47,22 @@
 				\context Voice = "Saxophone Voice" {
 					{
 						{
-							r2
+							R1 * 1/2
 						}
 						{
-							r4
+							R1 * 1/4
 						}
 						{
-							r4
+							R1 * 1/4
 						}
 						{
-							r2
+							R1 * 1/2
 						}
 						{
-							r2
+							R1 * 1/2
 						}
 						{
-							r4
-						}
-						{
-							r4
+							R1 * 1/4
 						}
 					}
 				}
@@ -80,25 +74,22 @@
 				\context Voice = "Guitar Voice" {
 					{
 						{
-							r2
+							R1 * 1/2
 						}
 						{
-							r4
+							R1 * 1/4
 						}
 						{
-							r4
+							R1 * 1/4
 						}
 						{
-							r2
+							R1 * 1/2
 						}
 						{
-							r2
+							R1 * 1/2
 						}
 						{
-							r4
-						}
-						{
-							r4
+							R1 * 1/4
 						}
 					}
 				}
@@ -106,32 +97,29 @@
 			\context Dynamics = "Guitar Pedals" {
 				{
 					{
-						r2
+						R1 * 1/2
 					}
 					{
-						r4
+						R1 * 1/4
 					}
 					{
-						r4
+						R1 * 1/4
 					}
 					{
-						r2
+						R1 * 1/2
 					}
 					{
-						r2
+						R1 * 1/2
 					}
 					{
-						r4
-					}
-					{
-						r4
+						R1 * 1/4
 					}
 				}
 			}
 		>>
 		\context PianoStaffGroup = "Piano Staff Group" <<
-			\context PianoUpperStaff = "Piano Upper Staff" {
-				\clef "percussion"
+			\context PianoUpperStaff = "Piano Upper Staff" <<
+				\clef "treble"
 				\context Voice = "Piano RH Voice" {
 					{
 						{
@@ -139,31 +127,44 @@
 						}
 					}
 					{
-						{
+						\times 4/5 {
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = #0
 							\set stemRightBeamCount = #2
-							c'16 -\accent [
-							\set stemLeftBeamCount = #2
-							\set stemRightBeamCount = #2
-							r16
-							\set stemLeftBeamCount = #2
-							\set stemRightBeamCount = #2
-							c'16 -\staccato
+							r16 [
+							\change Staff = "Piano Lower Staff"
 							\set stemLeftBeamCount = #2
 							\set stemRightBeamCount = #1
-							c'16 -\staccato
-						}
-						\times 2/3 {
-							\set stemLeftBeamCount = #1
-							\set stemRightBeamCount = #2
-							r16
-							\set stemLeftBeamCount = #2
-							\set stemRightBeamCount = #2
 							c'16 -\accent
+							\change Staff = "Piano Upper Staff"
+							\set stemLeftBeamCount = #1
+							\set stemRightBeamCount = #1
+							<
+								\tweak #'color #red
+								c''
+								d''
+							>8 -\staccato
 							\set stemLeftBeamCount = #2
+							\set stemRightBeamCount = #1
+							<
+								\tweak #'color #red
+								c''
+								f''
+							>16 -\staccato
+						}
+						{
+							\set stemLeftBeamCount = #1
+							\set stemRightBeamCount = #3
+							c''32 -\accent
+							\set stemLeftBeamCount = #3
+							\set stemRightBeamCount = #3
+							r32
+							\set stemLeftBeamCount = #3
+							\set stemRightBeamCount = #3
+							<c''' d'''>32 -\staccato
+							\set stemLeftBeamCount = #3
 							\set stemRightBeamCount = #0
-							c'16 -\staccato ]
+							c''32 -\staccato ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -177,19 +178,24 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = #0
 							\set stemRightBeamCount = #3
-							c'32 -\accent [
+							<
+								b
+								\tweak #'color #red
+								c'
+								ef'
+							>32 -\accent [
 							\set stemLeftBeamCount = #2
 							\set stemRightBeamCount = #2
-							c'16 -\staccato
+							c''16 -\staccato
 							\set stemLeftBeamCount = #3
 							\set stemRightBeamCount = #0
-							c'32 -\staccato ]
+							<c'' f''>32 -\staccato ]
 							\revert Stem.stemlet-length
 						}
 					}
 					{
 						{
-							r4
+							R1 * 1/4
 						}
 						{
 							r16
@@ -200,13 +206,24 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = #0
 							\set stemRightBeamCount = #3
-							c'32 -\accent [
+							c''32 -\accent [
 							\set stemLeftBeamCount = #2
 							\set stemRightBeamCount = #2
-							c'16 -\staccato
+							c''16 -\staccato
+							\arpeggioArrowDown
+							\once \override Accidental.stencil = ##f
+							\once \override Arpeggio.X-offset = #-2
+							\once \override NoteHead.stencil = #ly:text-interface::print
+							\once \override NoteHead.text = \markup {
+								\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+							}
 							\set stemLeftBeamCount = #2
 							\set stemRightBeamCount = #1
-							c'16 -\staccato
+							<g' b' d'' f''>16 -\staccato \arpeggio
+								^ \markup {
+									\center-align
+										\natural
+									}
 						}
 						\tweak #'text #tuplet-number::calc-fraction-text
 						\times 3/5 {
@@ -215,24 +232,49 @@
 							r16
 							\set stemLeftBeamCount = #2
 							\set stemRightBeamCount = #1
-							c'16 -\accent
+							<c'' d''>16 -\accent
 							\set stemLeftBeamCount = #1
 							\set stemRightBeamCount = #1
-							c'8 -\staccato
+							c'''8 -\staccato
+							\once \override Accidental.stencil = ##f
+							\once \override Arpeggio.X-offset = #-2
+							\once \override NoteHead.stencil = #ly:text-interface::print
+							\once \override NoteHead.text = \markup {
+								\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+							}
 							\set stemLeftBeamCount = #2
 							\set stemRightBeamCount = #1
-							c'16 -\staccato
+							<a' c'' e''>16 -\staccato
+								^ \markup {
+									\center-align
+										\concat
+											{
+												\natural
+												\flat
+											}
+									}
 						}
 						{
 							\set stemLeftBeamCount = #1
 							\set stemRightBeamCount = #3
-							c'32 -\accent
+							c'''32 -\accent
+							\arpeggioArrowDown
+							\once \override Accidental.stencil = ##f
+							\once \override Arpeggio.X-offset = #-2
+							\once \override NoteHead.stencil = #ly:text-interface::print
+							\once \override NoteHead.text = \markup {
+								\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+							}
 							\set stemLeftBeamCount = #2
 							\set stemRightBeamCount = #2
-							c'16 -\staccato
+							<g'' b'' d''' f'''>16 -\staccato \arpeggio
+								^ \markup {
+									\center-align
+										\natural
+									}
 							\set stemLeftBeamCount = #3
 							\set stemRightBeamCount = #0
-							c'32 -\staccato ]
+							<b'' c''' ef'''>32 -\staccato ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -242,28 +284,53 @@
 						}
 					}
 					{
-						\times 4/5 {
+						{
+							\arpeggioArrowDown
+							\once \override Accidental.stencil = ##f
+							\once \override Arpeggio.X-offset = #-2
+							\once \override NoteHead.stencil = #ly:text-interface::print
+							\once \override NoteHead.text = \markup {
+								\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+							}
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = #0
 							\set stemRightBeamCount = #3
-							r32 [
+							<g' b' d'' f''>32 -\accent \arpeggio [
+								^ \markup {
+									\center-align
+										\natural
+									}
 							\set stemLeftBeamCount = #3
-							\set stemRightBeamCount = #2
-							c'32 -\accent
-							\set stemLeftBeamCount = #2
-							\set stemRightBeamCount = #2
-							c'16 -\staccato
+							\set stemRightBeamCount = #3
+							<b'' c''' ef'''>32 -\staccato
+							\set stemLeftBeamCount = #3
+							\set stemRightBeamCount = #3
+							r32
 							\set stemLeftBeamCount = #3
 							\set stemRightBeamCount = #1
-							c'32 -\staccato
+							<c''' d'''>32 -\staccato
 						}
 						{
 							\set stemLeftBeamCount = #1
 							\set stemRightBeamCount = #2
-							c'16 -\accent
+							c'''16 -\accent
+							\once \override Accidental.stencil = ##f
+							\once \override Arpeggio.X-offset = #-2
+							\once \override NoteHead.stencil = #ly:text-interface::print
+							\once \override NoteHead.text = \markup {
+								\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+							}
 							\set stemLeftBeamCount = #2
 							\set stemRightBeamCount = #0
-							c'16 -\staccato ]
+							<a'' c''' e'''>16 -\staccato ]
+								^ \markup {
+									\center-align
+										\concat
+											{
+												\natural
+												\flat
+											}
+									}
 							\revert Stem.stemlet-length
 						}
 					}
@@ -276,31 +343,47 @@
 						}
 					}
 					{
-						{
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 3/5 {
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = #0
 							\set stemRightBeamCount = #2
-							r16 [
+							c''16 -\accent [
+							\once \override Accidental.stencil = ##f
+							\once \override Arpeggio.X-offset = #-2
+							\once \override NoteHead.stencil = #ly:text-interface::print
+							\once \override NoteHead.text = \markup {
+								\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+							}
 							\set stemLeftBeamCount = #2
 							\set stemRightBeamCount = #2
-							c'16 -\accent
+							<a'' c''' e'''>16 -\staccato
+								^ \markup {
+									\center-align
+										\concat
+											{
+												\natural
+												\flat
+											}
+									}
+							\set stemLeftBeamCount = #2
+							\set stemRightBeamCount = #2
+							r16
+							\set stemLeftBeamCount = #2
+							\set stemRightBeamCount = #2
+							c'''16 -\staccato
 							\set stemLeftBeamCount = #2
 							\set stemRightBeamCount = #0
-							c'16 -\staccato ]
+							r16 ]
 							\revert Stem.stemlet-length
 						}
 					}
-					{
-						{
-							r4
-						}
-					}
 				}
-			}
+			>>
 			\context Dynamics = "Piano Dynamics" {
 			}
-			\context PianoLowerStaff = "Piano Lower Staff" {
-				\clef "percussion"
+			\context PianoLowerStaff = "Piano Lower Staff" <<
+				\clef "bass"
 				\context Voice = "Piano LH Voice" {
 					{
 						{
@@ -308,20 +391,75 @@
 						}
 					}
 					{
+						{
+							\change Staff = "Piano Upper Staff"
+							\override Stem.stemlet-length = 0.75
+							\set stemLeftBeamCount = #0
+							\set stemRightBeamCount = #2
+							<
+								b
+								\tweak #'color #red
+								c'
+								ef'
+							>16 -\accent [
+							\set stemLeftBeamCount = #2
+							\set stemRightBeamCount = #2
+							r16
+							\set stemLeftBeamCount = #2
+							\set stemRightBeamCount = #2
+							c''16 -\staccato
+							\set stemLeftBeamCount = #2
+							\set stemRightBeamCount = #0
+							<b c' ef'>16 -\staccato ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r16
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							\set stemLeftBeamCount = #0
+							\set stemRightBeamCount = #2
+							<c' f'>16 -\accent [
+							\set stemLeftBeamCount = #2
+							\set stemRightBeamCount = #2
+							c''16 -\staccato
+							\set stemLeftBeamCount = #2
+							\set stemRightBeamCount = #0
+							<
+								\tweak #'color #red
+								c'
+								d'
+							>16 -\staccato ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r16
+						}
+					}
+					{
 						\times 4/5 {
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = #0
 							\set stemRightBeamCount = #2
 							r16 [
+							\change Staff = "Piano Lower Staff"
 							\set stemLeftBeamCount = #2
 							\set stemRightBeamCount = #1
 							c'16 -\accent
+							\change Staff = "Piano Upper Staff"
 							\set stemLeftBeamCount = #1
 							\set stemRightBeamCount = #1
-							c'8 -\staccato
+							<b c' ef'>8 -\staccato
 							\set stemLeftBeamCount = #2
 							\set stemRightBeamCount = #0
-							c'16 -\staccato ]
+							<c' d'>16 -\staccato ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -331,80 +469,80 @@
 						}
 					}
 					{
-						\tweak #'text #tuplet-number::calc-fraction-text
-						\times 3/4 {
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = #0
-							\set stemRightBeamCount = #1
-							c'8 -\accent [
-							\set stemLeftBeamCount = #1
-							\set stemRightBeamCount = #0
-							c'8 -\staccato ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
 						{
-							r16
-						}
-					}
-					{
-						\times 4/5 {
+							\change Staff = "Piano Lower Staff"
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = #0
 							\set stemRightBeamCount = #2
-							c'16 -\accent [
-							\set stemLeftBeamCount = #1
+							<c f>16 -\accent [
+							\set stemLeftBeamCount = #2
 							\set stemRightBeamCount = #1
-							c'8 -\staccato
+							c'16 -\staccato
+						}
+						\times 4/5 {
+							\once \override Accidental.stencil = ##f
+							\once \override Arpeggio.X-offset = #-2
+							\once \override NoteHead.stencil = #ly:text-interface::print
+							\once \override NoteHead.text = \markup {
+								\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+							}
+							\change Staff = "Piano Upper Staff"
 							\set stemLeftBeamCount = #1
-							\set stemRightBeamCount = #0
-							c'8 -\staccato ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r16
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = #0
 							\set stemRightBeamCount = #3
-							c'32 -\accent [
-							\set stemLeftBeamCount = #3
+							<a c' e'>32 -\accent
+								^ \markup {
+									\center-align
+										\concat
+											{
+												\natural
+												\flat
+											}
+									}
+							\set stemLeftBeamCount = #2
+							\set stemRightBeamCount = #2
+							<b c' ef'>16 -\staccato
+							\arpeggioArrowDown
+							\once \override Accidental.stencil = ##f
+							\once \override Arpeggio.X-offset = #-2
+							\once \override NoteHead.stencil = #ly:text-interface::print
+							\once \override NoteHead.text = \markup {
+								\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+							}
+							\set stemLeftBeamCount = #2
+							\set stemRightBeamCount = #1
+							<g b d' f'>16 -\staccato \arpeggio
+								^ \markup {
+									\center-align
+										\natural
+									}
+						}
+						\times 4/5 {
+							\set stemLeftBeamCount = #1
 							\set stemRightBeamCount = #3
 							r32
 							\set stemLeftBeamCount = #3
-							\set stemRightBeamCount = #3
-							c'32 -\staccato
+							\set stemRightBeamCount = #2
+							<b c' ef'>32 -\accent
+							\set stemLeftBeamCount = #2
+							\set stemRightBeamCount = #2
+							<c' d'>16 -\staccato
+							\once \override Accidental.stencil = ##f
+							\once \override Arpeggio.X-offset = #-2
+							\once \override NoteHead.stencil = #ly:text-interface::print
+							\once \override NoteHead.text = \markup {
+								\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+							}
 							\set stemLeftBeamCount = #3
-							\set stemRightBeamCount = #1
-							c'32 -\staccato
-						}
-						\times 2/3 {
-							\set stemLeftBeamCount = #1
-							\set stemRightBeamCount = #2
-							r16
-							\set stemLeftBeamCount = #2
-							\set stemRightBeamCount = #2
-							c'16 -\accent
-							\set stemLeftBeamCount = #2
-							\set stemRightBeamCount = #1
-							c'16 -\staccato
-						}
-						\times 4/5 {
-							\set stemLeftBeamCount = #1
-							\set stemRightBeamCount = #3
-							c'32 -\accent
-							\set stemLeftBeamCount = #2
-							\set stemRightBeamCount = #2
-							c'16 -\staccato
-							\set stemLeftBeamCount = #2
 							\set stemRightBeamCount = #0
-							c'16 -\staccato ]
+							<a c' e'>32 -\staccato ]
+								^ \markup {
+									\center-align
+										\concat
+											{
+												\natural
+												\flat
+											}
+									}
 							\revert Stem.stemlet-length
 						}
 					}
@@ -415,17 +553,39 @@
 					}
 					{
 						\tweak #'text #tuplet-number::calc-fraction-text
-						\times 3/4 {
+						\times 3/5 {
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = #0
 							\set stemRightBeamCount = #2
-							c'16 -\accent [
-							\set stemLeftBeamCount = #1
-							\set stemRightBeamCount = #1
-							c'8 -\staccato
+							r16 [
+							\change Staff = "Piano Lower Staff"
+							\set stemLeftBeamCount = #2
+							\set stemRightBeamCount = #2
+							<c d>16 -\accent
+							\set stemLeftBeamCount = #2
+							\set stemRightBeamCount = #2
+							c'16 -\staccato
+							\set stemLeftBeamCount = #2
+							\set stemRightBeamCount = #2
+							r16
+							\once \override Accidental.stencil = ##f
+							\once \override Arpeggio.X-offset = #-2
+							\once \override NoteHead.stencil = #ly:text-interface::print
+							\once \override NoteHead.text = \markup {
+								\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+							}
+							\change Staff = "Piano Upper Staff"
 							\set stemLeftBeamCount = #2
 							\set stemRightBeamCount = #0
-							c'16 -\staccato ]
+							<a c' e'>16 -\staccato ]
+								^ \markup {
+									\center-align
+										\concat
+											{
+												\natural
+												\flat
+											}
+									}
 							\revert Stem.stemlet-length
 						}
 					}
@@ -435,17 +595,28 @@
 						}
 					}
 					{
-						\times 4/5 {
+						\times 2/3 {
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = #0
-							\set stemRightBeamCount = #3
-							c'32 -\accent [
+							\set stemRightBeamCount = #2
+							r16 [
+							\arpeggioArrowDown
+							\once \override Accidental.stencil = ##f
+							\once \override Arpeggio.X-offset = #-2
+							\once \override NoteHead.stencil = #ly:text-interface::print
+							\once \override NoteHead.text = \markup {
+								\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+							}
 							\set stemLeftBeamCount = #2
 							\set stemRightBeamCount = #2
-							c'16 -\staccato
+							<g b d' f'>16 -\accent \arpeggio
+								^ \markup {
+									\center-align
+										\natural
+									}
 							\set stemLeftBeamCount = #2
 							\set stemRightBeamCount = #0
-							c'16 -\staccato ]
+							<b c' ef'>16 -\staccato ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -455,60 +626,75 @@
 						}
 					}
 					{
-						\times 4/5 {
+						{
+							\change Staff = "Piano Lower Staff"
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = #0
-							\set stemRightBeamCount = #3
-							r32 [
-							\set stemLeftBeamCount = #3
 							\set stemRightBeamCount = #2
-							c'32 -\accent
+							<c d>16 -\accent [
+							\arpeggioArrowDown
+							\once \override Accidental.stencil = ##f
+							\once \override Arpeggio.X-offset = #-2
+							\once \override NoteHead.stencil = #ly:text-interface::print
+							\once \override NoteHead.text = \markup {
+								\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+							}
+							\change Staff = "Piano Upper Staff"
+							\set stemLeftBeamCount = #2
+							\set stemRightBeamCount = #1
+							<g b d' f'>16 -\staccato \arpeggio
+								^ \markup {
+									\center-align
+										\natural
+									}
+						}
+						\times 4/5 {
+							\change Staff = "Piano Lower Staff"
+							\set stemLeftBeamCount = #1
+							\set stemRightBeamCount = #3
+							<b, c ef>32 -\accent
+							\change Staff = "Piano Upper Staff"
 							\set stemLeftBeamCount = #2
 							\set stemRightBeamCount = #2
-							c'16 -\staccato
-							\set stemLeftBeamCount = #3
-							\set stemRightBeamCount = #1
-							c'32 -\staccato
-						}
-						{
-							\set stemLeftBeamCount = #1
-							\set stemRightBeamCount = #2
-							c'16 -\accent
+							<c' d'>16 -\staccato
+							\arpeggioArrowDown
+							\once \override Accidental.stencil = ##f
+							\once \override Arpeggio.X-offset = #-2
+							\once \override NoteHead.stencil = #ly:text-interface::print
+							\once \override NoteHead.text = \markup {
+								\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+							}
 							\set stemLeftBeamCount = #2
 							\set stemRightBeamCount = #0
-							c'16 -\staccato ]
+							<g b d' f'>16 -\staccato \arpeggio ]
+								^ \markup {
+									\center-align
+										\natural
+									}
 							\revert Stem.stemlet-length
 						}
 					}
-					{
-						{
-							r4
-						}
-					}
 				}
-			}
+			>>
 			\context Dynamics = "Piano Pedals" {
 				{
 					{
-						r2
+						R1 * 1/2
 					}
 					{
-						r4
+						R1 * 1/4
 					}
 					{
-						r4
+						R1 * 1/4
 					}
 					{
-						r2
+						R1 * 1/2
 					}
 					{
-						r2
+						R1 * 1/2
 					}
 					{
-						r4
-					}
-					{
-						r4
+						R1 * 1/4
 					}
 				}
 			}
@@ -519,25 +705,22 @@
 				\context Voice = "Percussion RH Voice" {
 					{
 						{
-							r2
+							R1 * 1/2
 						}
 						{
-							r4
+							R1 * 1/4
 						}
 						{
-							r4
+							R1 * 1/4
 						}
 						{
-							r2
+							R1 * 1/2
 						}
 						{
-							r2
+							R1 * 1/2
 						}
 						{
-							r4
-						}
-						{
-							r4
+							R1 * 1/4
 						}
 					}
 				}
@@ -547,25 +730,22 @@
 				\context Voice = "Percussion LH Voice" {
 					{
 						{
-							r2
+							R1 * 1/2
 						}
 						{
-							r4
+							R1 * 1/4
 						}
 						{
-							r4
+							R1 * 1/4
 						}
 						{
-							r2
+							R1 * 1/2
 						}
 						{
-							r2
+							R1 * 1/2
 						}
 						{
-							r4
-						}
-						{
-							r4
+							R1 * 1/4
 							\bar "||"
 						}
 					}

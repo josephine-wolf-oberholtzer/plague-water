@@ -131,7 +131,7 @@
 		>>
 		\context PianoStaffGroup = "Piano Staff Group" <<
 			\context PianoUpperStaff = "Piano Upper Staff" {
-				\clef "percussion"
+				\clef "treble"
 				\context Voice = "Piano RH Voice" {
 					{
 						{
@@ -223,14 +223,11 @@
 							\set stemRightBeamCount = #3
 							r32 [
 							\set stemLeftBeamCount = #3
-							\set stemRightBeamCount = #3
+							\set stemRightBeamCount = #2
 							c'32 -\accent
-							\set stemLeftBeamCount = #3
-							\set stemRightBeamCount = #3
-							c'32 -\staccato ~
-							\set stemLeftBeamCount = #3
-							\set stemRightBeamCount = #3
-							c'32
+							\set stemLeftBeamCount = #2
+							\set stemRightBeamCount = #2
+							c'16 -\staccato
 							\set stemLeftBeamCount = #3
 							\set stemRightBeamCount = #0
 							c'32 -\staccato ]
@@ -248,12 +245,9 @@
 							\set stemLeftBeamCount = #0
 							\set stemRightBeamCount = #3
 							c'32 -\accent [
-							\set stemLeftBeamCount = #3
-							\set stemRightBeamCount = #3
-							c'32 -\staccato ~
-							\set stemLeftBeamCount = #3
-							\set stemRightBeamCount = #3
-							c'32
+							\set stemLeftBeamCount = #2
+							\set stemRightBeamCount = #2
+							c'16 -\staccato
 							\set stemLeftBeamCount = #3
 							\set stemRightBeamCount = #1
 							c'32 -\staccato
@@ -274,14 +268,11 @@
 							\set stemRightBeamCount = #3
 							r32
 							\set stemLeftBeamCount = #3
-							\set stemRightBeamCount = #3
+							\set stemRightBeamCount = #2
 							c'32 -\accent
-							\set stemLeftBeamCount = #3
-							\set stemRightBeamCount = #3
-							c'32 -\staccato ~
-							\set stemLeftBeamCount = #3
-							\set stemRightBeamCount = #3
-							c'32
+							\set stemLeftBeamCount = #2
+							\set stemRightBeamCount = #2
+							c'16 -\staccato
 							\set stemLeftBeamCount = #3
 							\set stemRightBeamCount = #0
 							c'32 -\staccato ]
@@ -315,14 +306,11 @@
 							\set stemRightBeamCount = #3
 							r32
 							\set stemLeftBeamCount = #3
-							\set stemRightBeamCount = #3
+							\set stemRightBeamCount = #2
 							c'32 -\accent
-							\set stemLeftBeamCount = #3
-							\set stemRightBeamCount = #3
-							c'32 -\staccato ~
-							\set stemLeftBeamCount = #3
-							\set stemRightBeamCount = #3
-							c'32
+							\set stemLeftBeamCount = #2
+							\set stemRightBeamCount = #2
+							c'16 -\staccato
 							\set stemLeftBeamCount = #3
 							\set stemRightBeamCount = #0
 							c'32 -\staccato ]
@@ -478,7 +466,7 @@
 			\context Dynamics = "Piano Dynamics" {
 			}
 			\context PianoLowerStaff = "Piano Lower Staff" {
-				\clef "percussion"
+				\clef "bass"
 				\context Voice = "Piano LH Voice" {
 					{
 						{
@@ -535,14 +523,11 @@
 							\set stemRightBeamCount = #2
 							r16 [
 							\set stemLeftBeamCount = #2
-							\set stemRightBeamCount = #2
+							\set stemRightBeamCount = #1
 							c'16 -\accent
-							\set stemLeftBeamCount = #2
-							\set stemRightBeamCount = #2
-							c'16 -\staccato ~
-							\set stemLeftBeamCount = #2
-							\set stemRightBeamCount = #2
-							c'16
+							\set stemLeftBeamCount = #1
+							\set stemRightBeamCount = #1
+							c'8 -\staccato
 							\set stemLeftBeamCount = #2
 							\set stemRightBeamCount = #0
 							c'16 -\staccato ]
@@ -580,14 +565,11 @@
 							\set stemRightBeamCount = #3
 							r32
 							\set stemLeftBeamCount = #3
-							\set stemRightBeamCount = #3
+							\set stemRightBeamCount = #2
 							c'32 -\accent
-							\set stemLeftBeamCount = #3
-							\set stemRightBeamCount = #3
-							c'32 -\staccato ~
-							\set stemLeftBeamCount = #3
-							\set stemRightBeamCount = #3
-							c'32
+							\set stemLeftBeamCount = #2
+							\set stemRightBeamCount = #2
+							c'16 -\staccato
 							\set stemLeftBeamCount = #3
 							\set stemRightBeamCount = #1
 							c'32 -\staccato
@@ -714,14 +696,11 @@
 							\set stemRightBeamCount = #3
 							r32 [
 							\set stemLeftBeamCount = #3
-							\set stemRightBeamCount = #3
+							\set stemRightBeamCount = #2
 							c'32 -\accent
-							\set stemLeftBeamCount = #3
-							\set stemRightBeamCount = #3
-							c'32 -\staccato ~
-							\set stemLeftBeamCount = #3
-							\set stemRightBeamCount = #3
-							c'32
+							\set stemLeftBeamCount = #2
+							\set stemRightBeamCount = #2
+							c'16 -\staccato
 							\set stemLeftBeamCount = #3
 							\set stemRightBeamCount = #0
 							c'32 -\staccato ]
@@ -742,12 +721,9 @@
 							\set stemLeftBeamCount = #0
 							\set stemRightBeamCount = #3
 							c'32 -\accent [
-							\set stemLeftBeamCount = #3
-							\set stemRightBeamCount = #3
-							c'32 -\staccato ~
-							\set stemLeftBeamCount = #3
-							\set stemRightBeamCount = #3
-							c'32
+							\set stemLeftBeamCount = #2
+							\set stemRightBeamCount = #2
+							c'16 -\staccato
 							\set stemLeftBeamCount = #3
 							\set stemRightBeamCount = #1
 							c'32 -\staccato
