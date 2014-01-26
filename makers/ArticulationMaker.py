@@ -60,8 +60,9 @@ class ArticulationMaker(Maker):
             self.last_leaf_articulations,
             seed,
             )
-        for cell in music:
-            logical_ties = tuple(iterate(cell).by_logical_tie(pitched=True))
+        for division in music:
+            iterator = iterate(division).by_logical_tie(pitched=True)
+            logical_ties = tuple(iterator)
             if 1 == len(logical_ties):
                 if first_leaf_articulations:
                     articulation = Articulation(first_leaf_articulations[0])
