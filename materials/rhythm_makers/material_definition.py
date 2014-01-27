@@ -2,8 +2,8 @@
 from abjad import *
 
 
-flowing_rhythm_maker = rhythmmakertools.RatioTaleaRhythmMaker(
-    ratio_talea=(
+flowing_rhythm_maker = rhythmmakertools.TupletRhythmMaker(
+    tuplet_ratios=(
         (2, 1),
         (1, 1),
         (1,),
@@ -22,7 +22,6 @@ flowing_rhythm_maker = rhythmmakertools.RatioTaleaRhythmMaker(
         (1, 3),
         (1,),
         ),
-    tie_across_divisions=True,
     )
 
 
@@ -46,8 +45,8 @@ staggering_rhythm_maker = rhythmmakertools.IncisedRhythmMaker(
     )
 
 
-stuttering_rhythm_maker = rhythmmakertools.RatioTaleaRhythmMaker(
-    ratio_talea=(
+stuttering_rhythm_maker = rhythmmakertools.TupletRhythmMaker(
+    tuplet_ratios=(
         (1, 1, -2),
         (-2, 2, 1, -2),
         (1, 2, 3, 1, -4),
@@ -59,7 +58,6 @@ stuttering_rhythm_maker = rhythmmakertools.RatioTaleaRhythmMaker(
         (-1, 1, 3, 1, -2),
         (1, 2, 2, -2),
         ),
-    tie_across_divisions=False,
     )
 
 

@@ -132,11 +132,9 @@
 							\set stemLeftBeamCount = #0
 							\set stemRightBeamCount = #2
 							r16 [
-							\change Staff = "Piano Lower Staff"
 							\set stemLeftBeamCount = #2
 							\set stemRightBeamCount = #1
 							c'16 -\accent
-							\change Staff = "Piano Upper Staff"
 							\set stemLeftBeamCount = #1
 							\set stemRightBeamCount = #1
 							<
@@ -392,7 +390,6 @@
 					}
 					{
 						{
-							\change Staff = "Piano Upper Staff"
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = #0
 							\set stemRightBeamCount = #2
@@ -449,11 +446,9 @@
 							\set stemLeftBeamCount = #0
 							\set stemRightBeamCount = #2
 							r16 [
-							\change Staff = "Piano Lower Staff"
 							\set stemLeftBeamCount = #2
 							\set stemRightBeamCount = #1
 							c'16 -\accent
-							\change Staff = "Piano Upper Staff"
 							\set stemLeftBeamCount = #1
 							\set stemRightBeamCount = #1
 							<b c' ef'>8 -\staccato
@@ -470,7 +465,6 @@
 					}
 					{
 						{
-							\change Staff = "Piano Lower Staff"
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = #0
 							\set stemRightBeamCount = #2
@@ -486,7 +480,6 @@
 							\once \override NoteHead.text = \markup {
 								\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
 							}
-							\change Staff = "Piano Upper Staff"
 							\set stemLeftBeamCount = #1
 							\set stemRightBeamCount = #3
 							<a c' e'>32 -\accent
@@ -558,7 +551,6 @@
 							\set stemLeftBeamCount = #0
 							\set stemRightBeamCount = #2
 							r16 [
-							\change Staff = "Piano Lower Staff"
 							\set stemLeftBeamCount = #2
 							\set stemRightBeamCount = #2
 							<c d>16 -\accent
@@ -574,7 +566,6 @@
 							\once \override NoteHead.text = \markup {
 								\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
 							}
-							\change Staff = "Piano Upper Staff"
 							\set stemLeftBeamCount = #2
 							\set stemRightBeamCount = #0
 							<a c' e'>16 -\staccato ]
@@ -627,7 +618,6 @@
 					}
 					{
 						{
-							\change Staff = "Piano Lower Staff"
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = #0
 							\set stemRightBeamCount = #2
@@ -639,7 +629,6 @@
 							\once \override NoteHead.text = \markup {
 								\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
 							}
-							\change Staff = "Piano Upper Staff"
 							\set stemLeftBeamCount = #2
 							\set stemRightBeamCount = #1
 							<g b d' f'>16 -\staccato \arpeggio
@@ -649,11 +638,9 @@
 									}
 						}
 						\times 4/5 {
-							\change Staff = "Piano Lower Staff"
 							\set stemLeftBeamCount = #1
 							\set stemRightBeamCount = #3
 							<b, c ef>32 -\accent
-							\change Staff = "Piano Upper Staff"
 							\set stemLeftBeamCount = #2
 							\set stemRightBeamCount = #2
 							<c' d'>16 -\staccato

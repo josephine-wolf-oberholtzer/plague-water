@@ -41,12 +41,12 @@ flowing_music_maker = makers.MusicMaker(
     minimum_timespan_duration=Duration(3, 16),
     playing_durations=None,
     playing_groupings=None,
-    rhythm_maker=rhythmmakertools.RatioTaleaRhythmMaker(
+    rhythm_maker=rhythmmakertools.TupletRhythmMaker(
         beam_specifier=rhythmmakertools.BeamSpecifier(
             beam_each_division=False,
             beam_divisions_together=False,
             ),
-        ratio_talea=(
+        tuplet_ratios=(
             (2, 1),
             (1, 1),
             (1,),
@@ -65,7 +65,9 @@ flowing_music_maker = makers.MusicMaker(
             (1, 3),
             (1,),
             ),
-        tie_across_divisions=True,
+        tie_specifier=rhythmmakertools.TieSpecifier(
+            tie_across_divisions=True,
+            ),
         ),
     tailing_rest_durations=None,
     )
@@ -80,12 +82,12 @@ staggering_music_maker = makers.MusicMaker(
     minimum_timespan_duration=Duration(2, 16),
     playing_durations=duration_servers.very_short_duration_server(),
     playing_groupings=duration_servers.short_grouping_server(),
-    rhythm_maker=rhythmmakertools.RatioTaleaRhythmMaker(
+    rhythm_maker=rhythmmakertools.TupletRhythmMaker(
         beam_specifier=rhythmmakertools.BeamSpecifier(
             beam_each_division=False,
             beam_divisions_together=False,
             ),
-        ratio_talea=(
+        tuplet_ratios=(
             (1, 1),
             (1, 2, 2),
             (-1, 1, 2, 1),
@@ -110,12 +112,12 @@ stuttering_music_maker = makers.MusicMaker(
     minimum_timespan_duration=None,
     playing_durations=None,
     playing_groupings=None,
-    rhythm_maker=rhythmmakertools.RatioTaleaRhythmMaker(
+    rhythm_maker=rhythmmakertools.TupletRhythmMaker(
         beam_specifier=rhythmmakertools.BeamSpecifier(
             beam_each_division=False,
             beam_divisions_together=False,
             ),
-        ratio_talea=(
+        tuplet_ratios=(
             (1, 1, -2),
             (-2, 2, 1, -2),
             (1, 2, 3, 1, -4),
@@ -127,7 +129,9 @@ stuttering_music_maker = makers.MusicMaker(
             (-1, 1, 3, 1, -2),
             (1, 2, 2, -2),
             ),
-        tie_across_divisions=False,
+        tie_specifier=rhythmmakertools.TieSpecifier(
+            tie_across_divisions=True,
+            ),
         ),
     tailing_rest_durations=None,
     )

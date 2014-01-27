@@ -183,13 +183,13 @@
         \remove Mark_engraver
         \remove Bar_number_engraver
         \override BarLine.hair-thickness = 0.5
-        \override Beam.breakable = ##t
         \override Beam.beam-thickness = 0.75
+        \override Beam.breakable = ##t
         \override Beam.length-fraction = 1.5
         \override DynamicLineSpanner.Y-extent = #'(-1.5 . 1.5)
         \override Glissando.breakable = ##t
         \override NoteCollision.merge-differently-dotted = ##t
-        % \override NoteColumn.ignore-collision = ##t
+        \override NoteColumn.ignore-collision = ##t
         \override PhrasingSlur.dash-definition = #'((0 1 0.1 0.75))
         \override SpacingSpanner.strict-grace-spacing = ##t
         \override SpacingSpanner.strict-note-spacing = ##t
@@ -200,6 +200,7 @@
             (padding . 1)
             (stretchability . 0)
             )
+        %\override Stem.french-beaming = ##t
         \override Stem #'(details beamed-lengths) = #'(6)
         \override StemTremolo.beam-width = 1.5
         \override StemTremolo.flag-count = 4.0
