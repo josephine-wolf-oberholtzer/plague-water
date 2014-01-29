@@ -27,7 +27,7 @@ class Brush(Maker):
         assert isinstance(initial_music_maker, (makers.MusicMaker, type(None)))
         self._initial_music_maker = initial_music_maker
         if music_makers is not None:
-            assert len(music_makers)
+            assert initial_music_maker or len(music_makers)
             assert all(isinstance(x, makers.MusicMaker)
                 for x in music_makers)
             music_makers = datastructuretools.CyclicTuple(music_makers)
