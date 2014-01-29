@@ -21,16 +21,31 @@ class Maker(abctools.AbjadObject):
         return hash(hash_values)
 
     def __makenew__(self, **kwargs):
+        from plague_water import makers
         from abjad.tools import systemtools
         manager = systemtools.StorageFormatManager
         keyword_argument_dictionary = \
             manager.get_keyword_argument_dictionary(self)
         positional_argument_dictionary = \
             manager.get_positional_argument_dictionary(self)
-        for key, value in kwargs.iteritems():
+        for key, new_value in kwargs.iteritems():
             if key in positional_argument_dictionary:
+                old_value = positional_argument_dictionary[key]
+                if isinstance(new_value, makers.CursorChange):
+                    if isinstance(old_value,
+                        datastructuretools.StatalServerCursor):
+                        value = new_value(old_value)
+                else:
+                    value = new_value
                 positional_argument_dictionary[key] = value
             elif key in keyword_argument_dictionary:
+                old_value = keywordal_argument_dictionary[key]
+                if isinstance(new_value, makers.CursorChange):
+                    if isinstance(old_value,
+                        datastructuretools.StatalServerCursor):
+                        value = new_value(old_value)
+                else:
+                    value = new_value
                 keyword_argument_dictionary[key] = value
             else:
                 raise KeyError(key)
