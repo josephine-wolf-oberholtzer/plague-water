@@ -21,9 +21,18 @@ context_map[score]['playing_groupings'] = materials.short_grouping_server()
 
 ### BRUSHES ###
 
-piano_lh_brush = piano_rh_brush = makers.Brush([
-    materials.staggering_music_maker,
-    ])
+piano_rh_brush = makers.Brush(
+    initial_music_maker=None,
+    music_makers=[
+        materials.staggering_music_maker
+        ]
+    )
+piano_lh_brush = makers.Brush(
+    initial_music_maker=None,
+    music_makers=[
+        materials.staggering_music_maker
+        ]
+    )
 
 ### SEGMENT DEFINITION ###
 

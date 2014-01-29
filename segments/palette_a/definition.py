@@ -55,46 +55,52 @@ context_map[score]['chord_maker'] = makers.ChordMaker(
 
 ### BRUSHES ###
 
-piano_rh_brush = makers.Brush([
-    materials.staggering_music_maker.__makenew__(
-        registration_maker=makers.RegistrationMaker(
-            global_inflection=makers.RegisterCurve(
-                ratio=(1,),
-                registers=(0, 24),
-                ),
-            phrase_inflections=(
-                makers.RegisterCurve(
+piano_rh_brush = makers.Brush(
+    initial_music_maker=None,
+    music_makers=[
+        materials.staggering_music_maker.__makenew__(
+            registration_maker=makers.RegistrationMaker(
+                global_inflection=makers.RegisterCurve(
                     ratio=(1,),
-                    registers=(-6, 6),
+                    registers=(0, 24),
                     ),
-                makers.RegisterCurve(
-                    ratio=(1,),
-                    registers=(-6, 6),
-                    ),
-                ),
-            ),
-        )
-    ])
-piano_lh_brush = makers.Brush([
-    materials.staggering_music_maker.__makenew__(
-        registration_maker=makers.RegistrationMaker(
-            global_inflection=makers.RegisterCurve(
-                ratio=(1,),
-                registers=(-6, -24),
-                ),
-            phrase_inflections=(
-                makers.RegisterCurve(
-                    ratio=(1,),
-                    registers=(-6, 6),
-                    ),
-                makers.RegisterCurve(
-                    ratio=(1,),
-                    registers=(-6, 6),
+                phrase_inflections=(
+                    makers.RegisterCurve(
+                        ratio=(1,),
+                        registers=(-6, 6),
+                        ),
+                    makers.RegisterCurve(
+                        ratio=(1,),
+                        registers=(-6, 6),
+                        ),
                     ),
                 ),
-            ),
-        )
-    ])
+            )
+        ],
+    )
+piano_lh_brush = makers.Brush(
+    initial_music_maker=None,
+    music_makers=[
+        materials.staggering_music_maker.__makenew__(
+            registration_maker=makers.RegistrationMaker(
+                global_inflection=makers.RegisterCurve(
+                    ratio=(1,),
+                    registers=(-12, -36),
+                    ),
+                phrase_inflections=(
+                    makers.RegisterCurve(
+                        ratio=(1,),
+                        registers=(-6, 6),
+                        ),
+                    makers.RegisterCurve(
+                        ratio=(1,),
+                        registers=(-6, 6),
+                        ),
+                    ),
+                ),
+            )
+        ],
+    )
 
 ### SEGMENT DEFINITION ###
 
