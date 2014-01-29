@@ -39,7 +39,7 @@ class Maker(abctools.AbjadObject):
                     value = new_value
                 positional_argument_dictionary[key] = value
             elif key in keyword_argument_dictionary:
-                old_value = keywordal_argument_dictionary[key]
+                old_value = keyword_argument_dictionary[key]
                 if isinstance(new_value, makers.CursorChange):
                     if isinstance(old_value,
                         datastructuretools.StatalServerCursor):

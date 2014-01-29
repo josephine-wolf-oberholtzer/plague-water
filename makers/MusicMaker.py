@@ -20,7 +20,6 @@ class MusicMaker(Maker):
         '_rhythm_maker',
         '_spanner_maker',
         '_tailing_rest_durations',
-        '_weight',
         )
 
     _default_rhythm_maker = rhythmmakertools.NoteRhythmMaker()
@@ -41,7 +40,6 @@ class MusicMaker(Maker):
         rhythm_maker=None,
         spanner_maker=None,
         tailing_rest_durations=None,
-        weight=1,
         ):
         from plague_water import makers
         assert isinstance(articulation_maker,
@@ -75,9 +73,6 @@ class MusicMaker(Maker):
         self._spanner_maker = spanner_maker
         self._tailing_rest_durations = self._setup_duration_cursor(
             tailing_rest_durations)
-        weight = int(weight)
-        assert 0 < weight
-        self._weight = int(weight)
 
     ### PUBLIC METHODS ###
 
@@ -400,7 +395,3 @@ class MusicMaker(Maker):
     @property
     def tailing_rest_durations(self):
         return self._leading_rest_durations
-
-    @property
-    def weight(self):
-        return self._weight
