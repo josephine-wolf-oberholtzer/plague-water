@@ -6,6 +6,5 @@ from music_makers import *
 from pitch_classes import *
 from proportions import *
 from registrations import *
-from rhythm_makers import *
 from tempo_inventory import *
 from time_signature_inventories import *
