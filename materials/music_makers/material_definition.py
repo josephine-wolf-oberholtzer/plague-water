@@ -14,8 +14,10 @@ clanging_music_maker = makers.MusicMaker(
             beam_each_division=False,
             beam_divisions_together=False,
             ),
-        talea=(4, 4, 4, 3, 4, 5, 4, 4, 3,),
-        talea_denominator=16,
+        talea=rhythmmakertools.Talea(
+            counts=(4, 4, 4, 3, 4, 5, 4, 4, 3,),
+            denominator=16,
+            ),
         ),
     tailing_rest_durations=None,
     )
@@ -156,8 +158,10 @@ winding_music_maker = makers.MusicMaker(
             right_lengths=(1, 0, 0, 1, 0,),
             ),
         extra_counts_per_division=(0, 1, 0, 0, 1, 2, 0, 1, 0, 0),
-        talea=(1, 2, 1, 1, 1, 1, 3, 2, 1, 2, 1, 3, 1, 1, 1, 2, 1,),
-        talea_denominator=16,
+        talea=rhythmmakertools.Talea(
+            counts=(1, 2, 1, 1, 1, 1, 3, 2, 1, 2, 1, 3, 1, 1, 1, 2, 1,),
+            denominator=16,
+            ),
         ),
     tailing_rest_durations=None,
     )
