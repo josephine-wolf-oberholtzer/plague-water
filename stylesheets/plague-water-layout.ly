@@ -160,6 +160,7 @@
         \override TimeSignature.break-align-symbols = #'(staff-bar)
         \override TimeSignature.break-visibility = #end-of-line-invisible
         \override TimeSignature.font-size = 3
+        \override TimeSignature.style = #'numbered
         \override MetronomeMark.extra-offset = #'(3 . -5.5)
         \override TimeSignature.extra-offset = #'(-2 . 0)
         \override VerticalAxisGroup.default-staff-staff-spacing = #'(
