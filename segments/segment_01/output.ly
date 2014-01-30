@@ -74,10 +74,20 @@
 							r16
 						}
 						{
+							\stopStaff
+							\once \override Staff.StaffSymbol #'line-count = #1
+							\startStaff
 							R1 * 3/16
+							\stopStaff
+							\startStaff
 						}
 						{
+							\stopStaff
+							\once \override Staff.StaffSymbol #'line-count = #1
+							\startStaff
 							R1 * 3/16
+							\stopStaff
+							\startStaff
 						}
 						{
 							r8
@@ -120,7 +130,12 @@
 							r8.
 						}
 						{
+							\stopStaff
+							\once \override Staff.StaffSymbol #'line-count = #1
+							\startStaff
 							R1 * 3/16
+							\stopStaff
+							\startStaff
 						}
 					}
 				}
@@ -132,7 +147,12 @@
 				\context Voice = "Guitar Voice" {
 					{
 						{
+							\stopStaff
+							\once \override Staff.StaffSymbol #'line-count = #1
+							\startStaff
 							R1 * 5/8
+							\stopStaff
+							\startStaff
 						}
 					}
 					{
@@ -154,7 +174,12 @@
 							r16
 						}
 						{
+							\stopStaff
+							\once \override Staff.StaffSymbol #'line-count = #1
+							\startStaff
 							R1 * 1/4
+							\stopStaff
+							\startStaff
 						}
 						{
 							r8.
@@ -193,7 +218,12 @@
 							r16
 						}
 						{
+							\stopStaff
+							\once \override Staff.StaffSymbol #'line-count = #1
+							\startStaff
 							R1 * 3/16
+							\stopStaff
+							\startStaff
 						}
 					}
 				}
@@ -225,7 +255,7 @@
 			}
 		>>
 		\context PianoStaffGroup = "Piano Staff Group" <<
-			\context PianoUpperStaff = "Piano Upper Staff" <<
+			\context PianoUpperStaff = "Piano Upper Staff" {
 				\clef "treble"
 				\context Voice = "Piano RH Voice" {
 					{
@@ -264,10 +294,20 @@
 					}
 					{
 						{
+							\stopStaff
+							\once \override Staff.StaffSymbol #'line-count = #1
+							\startStaff
 							R1 * 3/16
+							\stopStaff
+							\startStaff
 						}
 						{
+							\stopStaff
+							\once \override Staff.StaffSymbol #'line-count = #1
+							\startStaff
 							R1 * 1/4
+							\stopStaff
+							\startStaff
 						}
 						{
 							r16
@@ -312,24 +352,44 @@
 						}
 					}
 				}
-			>>
+			}
 			\context Dynamics = "Piano Dynamics" {
 			}
-			\context PianoLowerStaff = "Piano Lower Staff" <<
+			\context PianoLowerStaff = "Piano Lower Staff" {
 				\clef "bass"
 				\context Voice = "Piano LH Voice" {
 					{
 						{
+							\stopStaff
+							\once \override Staff.StaffSymbol #'line-count = #1
+							\startStaff
 							R1 * 5/8
+							\stopStaff
+							\startStaff
 						}
 						{
+							\stopStaff
+							\once \override Staff.StaffSymbol #'line-count = #1
+							\startStaff
 							R1 * 3/16
+							\stopStaff
+							\startStaff
 						}
 						{
+							\stopStaff
+							\once \override Staff.StaffSymbol #'line-count = #1
+							\startStaff
 							R1 * 3/16
+							\stopStaff
+							\startStaff
 						}
 						{
+							\stopStaff
+							\once \override Staff.StaffSymbol #'line-count = #1
+							\startStaff
 							R1 * 1/4
+							\stopStaff
+							\startStaff
 						}
 						{
 							r4
@@ -345,14 +405,24 @@
 					}
 					{
 						{
+							\stopStaff
+							\once \override Staff.StaffSymbol #'line-count = #1
+							\startStaff
 							R1 * 1/2
+							\stopStaff
+							\startStaff
 						}
 						{
+							\stopStaff
+							\once \override Staff.StaffSymbol #'line-count = #1
+							\startStaff
 							R1 * 3/16
+							\stopStaff
+							\startStaff
 						}
 					}
 				}
-			>>
+			}
 			\context Dynamics = "Piano Pedals" {
 				{
 					{
@@ -419,7 +489,12 @@
 							r16
 						}
 						{
+							\stopStaff
+							\once \override Staff.StaffSymbol #'line-count = #1
+							\startStaff
 							R1 * 1/4
+							\stopStaff
+							\startStaff
 						}
 						{
 							r16
@@ -466,7 +541,12 @@
 							r8
 						}
 						{
+							\stopStaff
+							\once \override Staff.StaffSymbol #'line-count = #1
+							\startStaff
 							R1 * 3/16
+							\stopStaff
+							\startStaff
 						}
 					}
 				}
@@ -510,7 +590,12 @@
 							r16
 						}
 						{
+							\stopStaff
+							\once \override Staff.StaffSymbol #'line-count = #1
+							\startStaff
 							R1 * 1/4
+							\stopStaff
+							\startStaff
 						}
 						{
 							r16
@@ -533,7 +618,12 @@
 							r8.
 						}
 						{
+							\stopStaff
+							\once \override Staff.StaffSymbol #'line-count = #1
+							\startStaff
 							R1 * 1/2
+							\stopStaff
+							\startStaff
 						}
 					}
 					{

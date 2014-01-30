@@ -163,6 +163,7 @@ class MusicMaker(Maker):
         self,
         durations,
         beam_music=True,
+        change_staff_lines=False,
         initial_offset=None,
         meter_cache=None,
         meters=None,
@@ -183,6 +184,7 @@ class MusicMaker(Maker):
         if rewrite_meter:
             self._rewrite_meters(
                 music,
+                change_staff_lines=change_staff_lines,
                 initial_offset=initial_offset,
                 meter_cache=meter_cache,
                 meters=meters,
@@ -197,7 +199,6 @@ class MusicMaker(Maker):
                 use_stemlets=True,
                 )
             attach(beam, music)
-        #assert inspect_(music).is_well_formed()
         return music
 
     def create_timespans(
@@ -282,6 +283,7 @@ class MusicMaker(Maker):
     def _rewrite_meters(
         self,
         music,
+        change_staff_lines=False,
         initial_offset=None,
         meter_cache=None,
         meters=None,
@@ -316,6 +318,11 @@ class MusicMaker(Maker):
                     multiplier = Multiplier(current_meter_duration)
                     attach(multiplier, multi_measure_rest)
                     container[:] = [multi_measure_rest]
+                    if change_staff_lines:
+                        staff_lines_spanner = spannertools.StaffLinesSpanner(
+                            lines=1,
+                            )
+                        attach(staff_lines_spanner, container)
                 else:
                     mutate(container[:]).rewrite_meter(
                         current_meter,

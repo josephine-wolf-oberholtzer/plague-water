@@ -652,21 +652,14 @@ class SegmentMaker(Maker):
         result = []
         message = '\t\t{}'.format(context_name)
         with systemtools.ProgressIndicator(message) as progress_indicator:
-            pairs = []
-            music_maker = timespan_inventory[0].annotation
-            timespans = [timespan_inventory[0]]
-            for timespan in timespan_inventory[1:]:
-                if timespan.annotation == music_maker:
-                    timespans.append(timespan)
-                else:
-                    pair = (music_maker, tuple(timespans))
-                    pairs.append(pair)
-                    timespans = [timespan]
-                    music_maker = timespan.annotation
-            if timespans:
-                pair = (music_maker, tuple(timespans))
-                pairs.append(pair)
-            for music_maker, timespans in pairs:
+            change_staff_lines = True
+            if context_name in self.parametric_context_bundles:
+                change_staff_lines = False
+            for music_maker, timespans in itertools.groupby(
+                timespan_inventory,
+                lambda x: x.annotation,
+                ):
+                timespans = timespantools.TimespanInventory(timespans)
                 contexted_music_maker = self.get_cached_maker(
                     music_maker,
                     context_map=context_map,
@@ -676,6 +669,7 @@ class SegmentMaker(Maker):
                 start_offset = timespans[0].start_offset
                 music = contexted_music_maker.create_rhythms(
                     durations,
+                    change_staff_lines=change_staff_lines,
                     initial_offset=start_offset,
                     meter_cache=self.cached_meters,
                     meters=self.meters,
