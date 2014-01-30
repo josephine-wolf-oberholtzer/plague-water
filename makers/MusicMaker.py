@@ -253,6 +253,16 @@ class MusicMaker(Maker):
             return True
         return False
 
+    def transform_cursors(self, cursor_transform):
+        assert isinstance(cursor_transform, (makers.CursorTransform, type(None)))
+        return new(
+            self,
+            leading_rest_durations=cursor_transform,
+            playing_durations=cursor_transform,
+            playing_groupings=cursor_transform,
+            tailing_rest_durations=cursor_transform,
+            )
+
     ### PRIVATE PROPERTIES ###
 
     def _iterate_music_and_meters(

@@ -31,7 +31,7 @@ class Maker(abctools.AbjadObject):
         for key, new_value in kwargs.iteritems():
             if key in positional_argument_dictionary:
                 old_value = positional_argument_dictionary[key]
-                if isinstance(new_value, makers.CursorChange):
+                if isinstance(new_value, makers.CursorTransform):
                     if isinstance(old_value,
                         datastructuretools.StatalServerCursor):
                         value = new_value(old_value)
@@ -40,7 +40,7 @@ class Maker(abctools.AbjadObject):
                 positional_argument_dictionary[key] = value
             elif key in keyword_argument_dictionary:
                 old_value = keyword_argument_dictionary[key]
-                if isinstance(new_value, makers.CursorChange):
+                if isinstance(new_value, makers.CursorTransform):
                     if isinstance(old_value,
                         datastructuretools.StatalServerCursor):
                         value = new_value(old_value)

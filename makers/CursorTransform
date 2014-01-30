@@ -3,7 +3,7 @@ from abjad.tools import abctools
 from abjad.tools import datastructuretools
 
 
-class CursorChange(abctools.AbjadObject):
+class CursorTransform(abctools.AbjadObject):
     r'''A cursor change.
 
     ::
@@ -30,7 +30,7 @@ class CursorChange(abctools.AbjadObject):
     ::
 
         >>> from plague_water import makers
-        >>> cursor_change = makers.CursorChange(increment=3, reverse=True)
+        >>> cursor_change = makers.CursorTransform(increment=3, reverse=True)
         >>> new_cursor = cursor_change(cursor)
         >>> print format(new_cursor)
         datastructuretools.StatalServerCursor(
