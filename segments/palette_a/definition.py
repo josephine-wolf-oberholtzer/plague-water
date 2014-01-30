@@ -40,9 +40,9 @@ guitar_brush = makers.Brush(
     music_maker_indices=(),
     music_makers=[
         new(base_music_maker,
-            leading_rest_durations=makers.CursorChange(increment=15),
-            playing_durations=makers.CursorChange(increment=13),
-            playing_groupings=makers.CursorChange(increment=12),
+            leading_rest_durations=makers.CursorTransform(increment=15),
+            playing_durations=makers.CursorTransform(increment=13),
+            playing_groupings=makers.CursorTransform(increment=12),
             ),
         ],
     )
@@ -52,9 +52,9 @@ saxophone_brush = makers.Brush(
     music_maker_indices=(),
     music_makers=[
         new(base_music_maker,
-            leading_rest_durations=makers.CursorChange(increment=15),
-            playing_durations=makers.CursorChange(increment=13),
-            playing_groupings=makers.CursorChange(increment=12),
+            leading_rest_durations=makers.CursorTransform(increment=15),
+            playing_durations=makers.CursorTransform(increment=13),
+            playing_groupings=makers.CursorTransform(increment=12),
             ),
         ],
     )

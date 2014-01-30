@@ -27,9 +27,9 @@ base_initial_music_maker = makers.MusicMaker(
     )
 
 base_music_maker = makers.MusicMaker(
-    leading_rest_durations=materials.short_duration_server(),
+    leading_rest_durations=materials.long_duration_server(),
     minimum_timespan_duration=durationtools.Duration(1, 8),
-    playing_durations=materials.short_duration_server(),
+    playing_durations=materials.long_duration_server(),
     playing_groupings=materials.short_grouping_server(),
     )
 
@@ -40,15 +40,23 @@ guitar_brush = makers.Brush(
     music_maker_indices=(),
     music_makers=[
         new(base_music_maker,
+            playing_durations=materials.short_duration_server(),
+            tailing_rest_durations=materials.medium_duration_server((1,)),
             ),
         ],
     )
 
 saxophone_brush = makers.Brush(
-    initial_music_maker=None,
+    initial_music_maker=new(
+        base_initial_music_maker,
+        playing_durations=materials.long_duration_server(),
+        ),
     music_maker_indices=(),
     music_makers=[
         new(base_music_maker,
+            leading_rest_durations=materials.short_duration_server((5,)),
+            playing_durations=materials.long_duration_server(),
+            playing_groupings=materials.medium_grouping_server(),
             ),
         ],
     )
@@ -58,6 +66,8 @@ piano_rh_brush = makers.Brush(
     music_maker_indices=(),
     music_makers=[
         new(base_music_maker,
+            playing_durations=materials.short_duration_server(reverse=True),
+            tailing_rest_durations=materials.medium_duration_server((2,)),
             ),
         ],
     )
@@ -67,6 +77,8 @@ piano_lh_brush = makers.Brush(
     music_maker_indices=(),
     music_makers=[
         new(base_music_maker,
+            playing_durations=materials.short_duration_server((10,)),
+            tailing_rest_durations=materials.medium_duration_server((3,)),
             ),
         ],
     )
@@ -76,15 +88,19 @@ percussion_rh_brush = makers.Brush(
     music_maker_indices=(),
     music_makers=[
         new(base_music_maker,
+            playing_durations=materials.short_duration_server((20,)),
+            tailing_rest_durations=materials.medium_duration_server((10,)),
             ),
         ],
     )
 
 percussion_lh_brush = makers.Brush(
-    initial_music_maker=None,
+    initial_music_maker=base_initial_music_maker,
     music_maker_indices=(),
     music_makers=[
         new(base_music_maker,
+            leading_rest_durations=materials.short_duration_server((8,)),
+            playing_groupings=materials.medium_grouping_server(),
             ),
         ],
     )
