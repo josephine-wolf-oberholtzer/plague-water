@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+from abjad import new
 from abjad.tools import datastructuretools
 from abjad.tools import durationtools
 from abjad.tools import systemtools
@@ -79,6 +80,27 @@ class Brush(Maker):
                     counter += 1
                     progress_indicator.advance()
         return timespan_inventory
+
+    ### PUBLIC METHODS ###
+
+    def transform_cursors(self, cursor_transform):
+        from plague_water import makers
+        prototype = (makers.CursorTransform, type(None))
+        assert isinstance(cursor_transform, prototype)
+        initial_music_maker = self.initial_music_maker
+        if initial_music_maker is not None:
+            initial_music_maker = initial_music_maker.transform_cursors(
+                cursor_transform)
+        music_makers = self.music_makers
+        if music_makers is not None:
+            music_makers = [
+                music_maker.transform_cursors(cursor_transform)
+                for music_maker in music_makers
+                ]
+        return new(self,
+            initial_music_maker=initial_music_maker,
+            music_makers=music_makers,
+            )
 
     ### PUBLIC PROPERTIES ###
 

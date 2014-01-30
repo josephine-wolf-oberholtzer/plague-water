@@ -254,7 +254,9 @@ class MusicMaker(Maker):
         return False
 
     def transform_cursors(self, cursor_transform):
-        assert isinstance(cursor_transform, (makers.CursorTransform, type(None)))
+        from plague_water import makers
+        prototype = (makers.CursorTransform, type(None))
+        assert isinstance(cursor_transform, prototype)
         return new(
             self,
             leading_rest_durations=cursor_transform,
