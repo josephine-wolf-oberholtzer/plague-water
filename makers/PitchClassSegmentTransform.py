@@ -3,18 +3,18 @@ from abjad import *
 from plague_water.makers.Maker import Maker
 
 
-class PitchClassTransformExpression(Maker):
+class PitchClassSegmentTransform(Maker):
     r'''A pitch-class transform expression.
 
     ::
 
         >>> from plague_water import makers
-        >>> pitch_class_transform= makers.PitchClassTransformExpression(
+        >>> pitch_class_transform= makers.PitchClassSegmentTransform(
         ...     inversion=True,
         ...     transposition=3,
         ...     )
         >>> print format(pitch_class_transform)
-        makers.PitchClassTransformExpression(
+        makers.PitchClassSegmentTransform(
             inversion=True,
             transposition=3,
             )

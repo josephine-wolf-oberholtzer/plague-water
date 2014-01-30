@@ -49,7 +49,7 @@ class PitchClassMaker(Maker):
             ])
         if transform_talea is not None:
             transform_prototype = (
-                makers.PitchClassTransformExpression,
+                makers.PitchClassSegmentTransform,
                 type(None),
                 )
             assert all(isinstance(x, transform_prototype)
