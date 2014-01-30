@@ -21,10 +21,11 @@ segment_name = 'Segment {} ({}:{}) ({}:{})'.format(
     outer_numerator,
     )
 
+segment_tempo = indicatortools.Tempo(durationtools.Duration(1, 4), 60)
 target_segment_duration = makers.SegmentMaker.get_segment_target_duration(
     denominator=denominator,
     numerator=numerator,
-    tempo=base_segment_maker.segment_tempo,
+    tempo=segment_tempo,
     total_duration_in_seconds=480,
     )
 
@@ -38,6 +39,7 @@ segment_maker = new(
     base_segment_maker,
     segment_id=segment_id,
     segment_name=segment_name,
+    segment_tempo=segment_tempo,
     target_segment_duration=target_segment_duration,
     )
 
