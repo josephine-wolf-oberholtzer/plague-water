@@ -12,6 +12,7 @@ class Brush(Maker):
 
     __slots__ = (
         '_initial_music_maker',
+        '_music_maker_indices',
         '_music_makers',
         )
 
@@ -20,17 +21,20 @@ class Brush(Maker):
     def __init__(
         self,
         initial_music_maker=None,
+        music_maker_indices=None,
         music_makers=None,
-        talea=None,
         ):
         from plague_water import makers
         assert isinstance(initial_music_maker, (makers.MusicMaker, type(None)))
         self._initial_music_maker = initial_music_maker
+        if music_maker_indices is not None:
+            music_maker_indices = tuple(int(x) for x in music_maker_indices)
+        self._music_maker_indices = music_maker_indices
         if music_makers is not None:
             assert initial_music_maker or len(music_makers)
             assert all(isinstance(x, makers.MusicMaker)
                 for x in music_makers)
-            music_makers = datastructuretools.CyclicTuple(music_makers)
+            music_makers = tuple(music_makers)
         self._music_makers = music_makers
 
     ### SPECIAL METHODS ###
@@ -54,9 +58,18 @@ class Brush(Maker):
                 timespan_inventory.extend(music_maker_timespan_inventory)
                 progress_indicator.advance()
             if self.music_makers:
+                music_makers = datastructuretools.CyclicTuple(
+                    self.music_makers)
+                if not self.music_maker_indices:
+                    music_maker_indices = datastructuretools.CyclicTuple(
+                        range(len(self.music_makers)))
+                else:
+                    music_maker_indices = datastructuretools.CyclicTuple(
+                        self.music_maker_indices)
                 counter = 0
                 while current_offset < target_segment_duration:
-                    music_maker = self._music_makers[counter]
+                    music_maker_index = music_maker_indices[counter]
+                    music_maker = music_makers[music_maker_index]
                     music_maker_timespan_inventory, current_offset = \
                         music_maker.create_timespans(
                             current_offset,
@@ -72,6 +85,10 @@ class Brush(Maker):
     @property
     def initial_music_maker(self):
         return self._initial_music_maker
+
+    @property
+    def music_maker_indices(self):
+        return self._music_maker_indices
 
     @property
     def music_makers(self):

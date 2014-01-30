@@ -712,6 +712,7 @@ class SegmentMaker(Maker):
         meters = metertools.Meter.fit_meters_to_expr(
             offset_counter,
             self.permitted_time_signatures,
+            maximum_repetitions=2,
             )
         return meters
 

@@ -24,58 +24,70 @@ base_initial_music_maker = makers.MusicMaker(
     minimum_timespan_duration=durationtools.Duration(1, 8),
     playing_durations=materials.short_duration_server(),
     playing_groupings=materials.short_grouping_server(),
-    tailing_rest_durations=materials.very_short_duration_server(),
     )
 
-base_music_maker = new(
-    base_initial_music_maker,
-    leading_rest_durations=materials.very_short_duration_server(),
+base_music_maker = makers.MusicMaker(
+    leading_rest_durations=materials.short_duration_server(),
+    minimum_timespan_duration=durationtools.Duration(1, 8),
+    playing_durations=materials.short_duration_server(),
+    playing_groupings=materials.short_grouping_server(),
     )
 
 ### BRUSHES ###
 
 guitar_brush = makers.Brush(
     initial_music_maker=None,
+    music_maker_indices=(),
     music_makers=[
-        base_music_maker,
+        new(base_music_maker,
+            ),
         ],
     )
 
 saxophone_brush = makers.Brush(
     initial_music_maker=None,
+    music_maker_indices=(),
     music_makers=[
-        base_music_maker,
+        new(base_music_maker,
+            ),
         ],
     )
 
 piano_rh_brush = makers.Brush(
     initial_music_maker=None,
+    music_maker_indices=(),
     music_makers=[
-        base_music_maker,
+        new(base_music_maker,
+            ),
         ],
     )
 
 piano_lh_brush = makers.Brush(
-    initial_music_maker=base_initial_music_maker,
+    initial_music_maker=None,
+    music_maker_indices=(),
     music_makers=[
-        base_music_maker,
+        new(base_music_maker,
+            ),
         ],
     )
 
 percussion_rh_brush = makers.Brush(
     initial_music_maker=None,
+    music_maker_indices=(),
     music_makers=[
-        base_music_maker,
+        new(base_music_maker,
+            ),
         ],
     )
 
 percussion_lh_brush = makers.Brush(
-    initial_music_maker=base_initial_music_maker,
+    initial_music_maker=None,
+    music_maker_indices=(),
     music_makers=[
-        base_music_maker,
+        new(base_music_maker,
+            ),
         ],
     )
-
 
 ### SEGMENT DEFINITION ###
 
