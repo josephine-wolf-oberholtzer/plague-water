@@ -36,19 +36,33 @@ base_music_maker = makers.MusicMaker(
 ### BRUSHES ###
 
 guitar_brush = makers.Brush(
-    initial_music_maker=None,
+    initial_music_maker=new(
+        base_initial_music_maker,
+        playing_durations=materials.medium_duration_server(),
+        playing_groupings=materials.short_grouping_server(),
+        ),
     music_maker_indices=(),
     music_makers=[
         new(base_music_maker,
+            leading_rest_durations=materials.very_short_duration_server(),
+            playing_durations=materials.medium_duration_server(),
+            playing_groupings=materials.medium_grouping_server(),
             ),
         ],
     )
 
 saxophone_brush = makers.Brush(
-    initial_music_maker=None,
+    initial_music_maker=new(
+        base_initial_music_maker,
+        playing_durations=materials.medium_duration_server(),
+        playing_groupings=materials.short_grouping_server(),
+        ),
     music_maker_indices=(),
     music_makers=[
         new(base_music_maker,
+            leading_rest_durations=materials.very_short_duration_server(),
+            playing_durations=materials.medium_duration_server(),
+            playing_groupings=materials.medium_grouping_server(),
             ),
         ],
     )
