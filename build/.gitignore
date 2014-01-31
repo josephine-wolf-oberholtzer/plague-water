@@ -1,3 +1,8 @@
-*segment-*
+*segment-[A-F]*
 *.aux
 *.log
+plague-water-score-segments-A.pdf
+plague-water-score-segments-B.pdf
+plague-water-score-segments-C.pdf
+plague-water-score-segments-D.pdf
+plague-water-score-segments-F.pdf
