@@ -82,8 +82,8 @@ staggering_music_maker = makers.MusicMaker(
         ),
     leading_rest_durations=None,
     minimum_timespan_duration=Duration(2, 16),
-    playing_durations=duration_servers.very_short_duration_server(),
-    playing_groupings=duration_servers.short_grouping_server(),
+    playing_durations=duration_servers.very_short_durations(),
+    playing_groupings=duration_servers.short_groupings(),
     rhythm_maker=rhythmmakertools.TupletRhythmMaker(
         beam_specifier=rhythmmakertools.BeamSpecifier(
             beam_each_division=False,
@@ -105,7 +105,7 @@ staggering_music_maker = makers.MusicMaker(
             (1, 1, -1, 1),
             ),
         ),
-    tailing_rest_durations=duration_servers.short_duration_server(),
+    tailing_rest_durations=duration_servers.short_durations(),
     )
 
 

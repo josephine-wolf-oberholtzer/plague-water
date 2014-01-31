@@ -22,15 +22,15 @@ context_map = datastructuretools.ContextMap(score_template)
 
 base_initial_music_maker = makers.MusicMaker(
     minimum_timespan_duration=durationtools.Duration(1, 8),
-    playing_durations=materials.short_duration_server(),
-    playing_groupings=materials.short_grouping_server(),
+    playing_durations=materials.short_durations(),
+    playing_groupings=materials.short_groupings(),
     )
 
 base_music_maker = makers.MusicMaker(
-    leading_rest_durations=materials.short_duration_server(),
+    leading_rest_durations=materials.short_durations(),
     minimum_timespan_duration=durationtools.Duration(1, 8),
-    playing_durations=materials.short_duration_server(),
-    playing_groupings=materials.short_grouping_server(),
+    playing_durations=materials.short_durations(),
+    playing_groupings=materials.short_groupings(),
     )
 
 ### BRUSHES ###

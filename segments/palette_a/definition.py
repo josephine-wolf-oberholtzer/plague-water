@@ -16,83 +16,80 @@ segment_tempo = indicatortools.Tempo(durationtools.Duration(1, 4), 64)
 ### CONTEXT MAP ###
 
 score_template = score_templates.PlagueWaterScoreTemplate()
+score = score_template()
 context_map = datastructuretools.ContextMap(score_template)
-
-### MUSIC MAKERS ###
-
-base_initial_music_maker = makers.MusicMaker(
-    minimum_timespan_duration=durationtools.Duration(1, 8),
-    playing_durations=materials.short_duration_server(),
-    playing_groupings=materials.short_grouping_server(),
-    )
-
-base_music_maker = makers.MusicMaker(
-    leading_rest_durations=materials.short_duration_server(),
-    minimum_timespan_duration=durationtools.Duration(1, 8),
-    playing_durations=materials.short_duration_server(),
-    playing_groupings=materials.short_grouping_server(),
-    )
+context_map[score]['minimum_timespan_duration'] = durationtools.Duration(1, 8)
 
 ### BRUSHES ###
 
 guitar_brush = makers.Brush(
-    initial_music_maker=None,
-    music_maker_indices=(),
     music_makers=[
-        new(base_music_maker,
-            leading_rest_durations=makers.CursorTransform(increment=15),
-            playing_durations=makers.CursorTransform(increment=13),
-            playing_groupings=makers.CursorTransform(increment=12),
+        makers.MusicMaker(
+            leading_rest_durations=materials.short_durations(15),
+            playing_durations=materials.short_durations(13),
+            playing_groupings=materials.short_durations(12),
             ),
         ],
     )
 
 saxophone_brush = makers.Brush(
-    initial_music_maker=None,
-    music_maker_indices=(),
     music_makers=[
-        new(base_music_maker,
-            leading_rest_durations=makers.CursorTransform(increment=15),
-            playing_durations=makers.CursorTransform(increment=13),
-            playing_groupings=makers.CursorTransform(increment=12),
+        makers.MusicMaker(
+            leading_rest_durations=materials.short_durations(15),
+            playing_durations=materials.short_durations(13),
+            playing_groupings=materials.short_durations(12),
             ),
         ],
     )
 
 piano_rh_brush = makers.Brush(
-    initial_music_maker=base_initial_music_maker,
-    music_maker_indices=(),
+    initial_music_maker=makers.MusicMaker(
+        playing_durations=materials.short_durations(),
+        playing_groupings=materials.short_groupings(),
+        ),
     music_makers=[
-        new(base_music_maker,
+        makers.MusicMaker(
+            leading_rest_durations=materials.short_durations(),
+            playing_durations=materials.short_durations(),
+            playing_groupings=materials.short_groupings(),
             ),
         ],
     )
 
 piano_lh_brush = makers.Brush(
-    initial_music_maker=base_initial_music_maker,
-    music_maker_indices=(),
+    initial_music_maker=makers.MusicMaker(
+        playing_durations=materials.short_durations(),
+        playing_groupings=materials.short_groupings(),
+        ),
     music_makers=[
-        new(base_music_maker,
-            leading_rest_durations=materials.medium_duration_server((1,)),
+        makers.MusicMaker(
+            leading_rest_durations=materials.medium_durations((1,)),
+            playing_durations=materials.short_durations(),
+            playing_groupings=materials.short_groupings(),
             ),
         ],
     )
 
 percussion_rh_brush = makers.Brush(
-    initial_music_maker=None,
-    music_maker_indices=(),
     music_makers=[
-        new(base_music_maker,
+        makers.MusicMaker(
+            leading_rest_durations=materials.short_durations(),
+            playing_durations=materials.short_durations(),
+            playing_groupings=materials.short_groupings(),
             ),
         ],
     )
 
 percussion_lh_brush = makers.Brush(
-    initial_music_maker=base_initial_music_maker,
-    music_maker_indices=(),
+    initial_music_maker=makers.MusicMaker(
+        playing_durations=materials.short_durations(),
+        playing_groupings=materials.short_groupings(),
+        ),
     music_makers=[
-        new(base_music_maker,
-            leading_rest_durations=materials.medium_duration_server((2,)),
+        makers.MusicMaker(
+            leading_rest_durations=materials.medium_durations((2,)),
+            playing_durations=materials.short_durations(),
+            playing_groupings=materials.short_durations(),
             ),
         ],
     )

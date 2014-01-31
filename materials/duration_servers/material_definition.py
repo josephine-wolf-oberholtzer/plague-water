@@ -6,7 +6,7 @@ from plague_water.materials import euler_numbers
 
 denominator = 16
 
-long_grouping_server = datastructuretools.StatalServer(
+long_groupings = datastructuretools.StatalServer(
     sequencetools.remap_sequence_by_range_pairs(
         euler_numbers.euler_hundreds,
         [
@@ -17,7 +17,7 @@ long_grouping_server = datastructuretools.StatalServer(
         )
     )
 
-medium_grouping_server = datastructuretools.StatalServer(
+medium_groupings = datastructuretools.StatalServer(
     sequencetools.remap_sequence_by_range_pairs(
         euler_numbers.euler_hundreds,
         [
@@ -26,7 +26,7 @@ medium_grouping_server = datastructuretools.StatalServer(
         )
     )
 
-short_grouping_server = datastructuretools.StatalServer(
+short_groupings = datastructuretools.StatalServer(
     sequencetools.remap_sequence_by_range_pairs(
         euler_numbers.euler_hundreds,
         [
@@ -37,7 +37,7 @@ short_grouping_server = datastructuretools.StatalServer(
         )
     )
 
-long_duration_server = datastructuretools.StatalServer((
+long_durations = datastructuretools.StatalServer((
     durationtools.Duration(x, denominator) for x in
     sequencetools.remap_sequence_by_range_pairs(
         euler_numbers.euler_hundreds,
@@ -48,7 +48,7 @@ long_duration_server = datastructuretools.StatalServer((
         )
     ))
 
-medium_duration_server = datastructuretools.StatalServer((
+medium_durations = datastructuretools.StatalServer((
     durationtools.Duration(x, denominator) for x in
     sequencetools.remap_sequence_by_range_pairs(
         euler_numbers.euler_hundreds,
@@ -58,7 +58,7 @@ medium_duration_server = datastructuretools.StatalServer((
         )
     ))
 
-short_duration_server = datastructuretools.StatalServer((
+short_durations = datastructuretools.StatalServer((
     durationtools.Duration(x, denominator) for x in
     sequencetools.remap_sequence_by_range_pairs(
         euler_numbers.euler_hundreds,
@@ -70,7 +70,7 @@ short_duration_server = datastructuretools.StatalServer((
         )
     ))
 
-very_short_duration_server = datastructuretools.StatalServer((
+very_short_durations = datastructuretools.StatalServer((
     durationtools.Duration(x, denominator) for x in
     sequencetools.remap_sequence_by_range_pairs(
         euler_numbers.euler_hundreds,
@@ -83,11 +83,11 @@ very_short_duration_server = datastructuretools.StatalServer((
     ))
 
 __all__ = (
-    'long_duration_server',
-    'long_grouping_server',
-    'medium_duration_server',
-    'medium_grouping_server',
-    'short_duration_server',
-    'short_grouping_server',
-    'very_short_duration_server',
+    'long_durations',
+    'long_groupings',
+    'medium_durations',
+    'medium_groupings',
+    'short_durations',
+    'short_groupings',
+    'very_short_durations',
     )
