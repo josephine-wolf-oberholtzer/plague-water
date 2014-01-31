@@ -222,6 +222,7 @@ class MusicMaker(Maker):
         if self.leading_rest_durations is not None:
             leading_rest_duration = self.leading_rest_durations()[0]
         playing_grouping = self.playing_groupings()[0]
+        assert isinstance(playing_grouping, int), playing_grouping
         playing_durations = self.playing_durations(playing_grouping)
         tailing_rest_duration = Duration(0)
         if self.tailing_rest_durations is not None:
