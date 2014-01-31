@@ -32,18 +32,28 @@ class Maker(abctools.AbjadObject):
             if key in positional_argument_dictionary:
                 old_value = positional_argument_dictionary[key]
                 if isinstance(new_value, makers.CursorTransform):
-                    if isinstance(old_value,
-                        datastructuretools.StatalServerCursor):
+                    prototype = (
+                        datastructuretools.StatalServerCursor,
+                        type(None),
+                        )
+                    if isinstance(old_value, prototype):
                         value = new_value(old_value)
+                elif new_value is None:
+                    value = old_value
                 else:
                     value = new_value
                 positional_argument_dictionary[key] = value
             elif key in keyword_argument_dictionary:
                 old_value = keyword_argument_dictionary[key]
                 if isinstance(new_value, makers.CursorTransform):
-                    if isinstance(old_value,
-                        datastructuretools.StatalServerCursor):
+                    prototype = (
+                        datastructuretools.StatalServerCursor,
+                        type(None),
+                        )
+                    if isinstance(old_value, prototype):
                         value = new_value(old_value)
+                elif new_value is None:
+                    value = old_value
                 else:
                     value = new_value
                 keyword_argument_dictionary[key] = value

@@ -206,15 +206,18 @@ class MusicMaker(Maker):
         initial_offset,
         maximum_offset,
         ):
-        from plague_water import makers
         assert isinstance(self.leading_rest_durations,
-            (datastructuretools.StatalServerCursor, type(None)))
+            (datastructuretools.StatalServerCursor, type(None))),\
+            self.leading_rest_durations
         assert isinstance(self.playing_durations,
-            datastructuretools.StatalServerCursor)
+            datastructuretools.StatalServerCursor),\
+            self.playing_durations
         assert isinstance(self.playing_groupings,
-            datastructuretools.StatalServerCursor)
+            datastructuretools.StatalServerCursor),\
+            self.playing_groupings
         assert isinstance(self.tailing_rest_durations,
-            (datastructuretools.StatalServerCursor, type(None)))
+            (datastructuretools.StatalServerCursor, type(None))),\
+            self.tailing_rest_durations
         assert isinstance(initial_offset, Duration), initial_offset
         assert isinstance(maximum_offset, Duration), maximum_offset
         timespan_inventory = timespantools.TimespanInventory()
