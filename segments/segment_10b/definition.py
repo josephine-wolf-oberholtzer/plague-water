@@ -30,28 +30,30 @@ target_segment_duration = makers.SegmentMaker.get_segment_target_duration(
 
 ### BRUSHES ###
 
+cursor_transform = None
+
 guitar_brush = new(
-    base_segment_maker.guitar_brush,
+    base_segment_maker.guitar_brush.transform_cursors(cursor_transform),
     )
 
 saxophone_brush = new(
-    base_segment_maker.saxophone_brush,
+    base_segment_maker.saxophone_brush.transform_cursors(cursor_transform),
     )
 
 piano_rh_brush = new(
-    base_segment_maker.piano_rh_brush,
+    base_segment_maker.piano_rh_brush.transform_cursors(cursor_transform),
     )
 
 piano_lh_brush = new(
-    base_segment_maker.piano_lh_brush,
+    base_segment_maker.piano_lh_brush.transform_cursors(cursor_transform),
     )
 
 percussion_rh_brush = new(
-    base_segment_maker.percussion_rh_brush,
+    base_segment_maker.percussion_rh_brush.transform_cursors(cursor_transform),
     )
 
 percussion_lh_brush = new(
-    base_segment_maker.percussion_lh_brush,
+    base_segment_maker.percussion_lh_brush.transform_cursors(cursor_transform),
     )
 
 ### SEGMENT DEFINITION ###
