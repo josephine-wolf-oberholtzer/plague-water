@@ -25,7 +25,7 @@
         \name GuitarStaff
         \type Engraver_group
         \alias Staff
-        \override StaffSymbol.line-count = 1
+        \override StaffSymbol.line-count = 5
         instrumentName = \markup { 
             \column { \hcenter-in #10 \italic { e-guitar } } }
         shortInstrumentName = \markup { 
@@ -47,7 +47,7 @@
         \name PercussionShakerStaff
         \type Engraver_group
         \alias Staff
-        \override StaffSymbol.line-count = 1
+        \override StaffSymbol.line-count = 3
         instrumentName = \markup { 
             \column { \hcenter-in #10 \italic { shakers } } }
         shortInstrumentName = \markup { 
@@ -59,7 +59,7 @@
         \name PercussionDrumStaff
         \type Engraver_group
         \alias Staff
-        \override StaffSymbol.line-count = 1
+        \override StaffSymbol.line-count = 3
         instrumentName = \markup { 
             \column { \hcenter-in #10 \italic { drums } } }
         shortInstrumentName = \markup { 
@@ -114,7 +114,7 @@
         \name SaxophoneStaff
         \type Engraver_group
         \alias Staff
-        \override StaffSymbol.line-count = 1
+        \override StaffSymbol.line-count = 5
         instrumentName = \markup { 
             \column { \hcenter-in #10 \italic { saxophone } } }
         shortInstrumentName = \markup { 
