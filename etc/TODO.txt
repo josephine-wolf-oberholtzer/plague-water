@@ -1,0 +1,57 @@
+PALETTE A
+=========
+
+Segment 01: CT(0:+)
+
+Segment 09: CT(0:+)
+
+Segment 11: CT(0:+)
+
+Segment 16: CT(0:+)
+
+PALETTE B
+=========
+
+Segment 02: 
+
+Segment 05:
+
+Segment 08:
+
+Segment 13:
+
+PALETTE C
+=========
+
+Segment 03a:
+Segment 03b:
+
+Segment 12a:
+Segment 12b:
+
+PALETTE D
+=========
+
+Segment 04:
+
+Segment 14:
+
+Segment 17a:
+Segment 17b:
+
+PALETTE E
+=========
+
+Segment 06:
+
+PALETTE F
+=========
+
+Segment 07:
+
+Segment 10a:
+Segment 10b:
+Segment 10c:
+Segment 10d:
+
+Segment 15:
