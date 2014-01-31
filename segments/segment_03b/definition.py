@@ -29,14 +29,42 @@ target_segment_duration = makers.SegmentMaker.get_segment_target_duration(
     total_duration_in_seconds=480,
     )
 
-### CONTEXT MAP ###
-
 ### BRUSHES ###
+
+guitar_brush = new(
+    base_segment_maker.guitar_brush,
+    )
+
+saxophone_brush = new(
+    base_segment_maker.saxophone_brush,
+    )
+
+piano_rh_brush = new(
+    base_segment_maker.piano_rh_brush,
+    )
+
+piano_lh_brush = new(
+    base_segment_maker.piano_lh_brush,
+    )
+
+percussion_rh_brush = new(
+    base_segment_maker.percussion_rh_brush,
+    )
+
+percussion_lh_brush = new(
+    base_segment_maker.percussion_lh_brush,
+    )
 
 ### SEGMENT DEFINITION ###
 
 segment_maker = new(
     base_segment_maker,
+    guitar_brush=guitar_brush,
+    percussion_lh_brush=percussion_lh_brush,
+    percussion_rh_brush=percussion_rh_brush,
+    piano_lh_brush=piano_lh_brush,
+    piano_rh_brush=piano_rh_brush,
+    saxophone_brush=saxophone_brush,
     segment_id=segment_id,
     segment_name=segment_name,
     segment_tempo=segment_tempo,

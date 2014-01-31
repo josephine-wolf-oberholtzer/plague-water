@@ -168,7 +168,7 @@ class SegmentMaker(Maker):
         context_map=None,
         guitar_brush=None,
         guitar_lifeline_strategy=None,
-        is_final_segment=True,
+        is_final_segment=False,
         measure_segmentation_talea=None,
         percussion_lh_brush=None,
         percussion_rh_brush=None,
