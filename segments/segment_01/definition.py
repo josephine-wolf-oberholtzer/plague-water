@@ -61,6 +61,7 @@ percussion_lh_brush = new(
 
 segment_maker = new(
     base_segment_maker,
+    context_map=context_map,
     guitar_brush=guitar_brush,
     saxophone_brush=saxophone_brush,
     piano_lh_brush=piano_lh_brush,
