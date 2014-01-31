@@ -28,6 +28,10 @@ target_segment_duration = makers.SegmentMaker.get_segment_target_duration(
     total_duration_in_seconds=480,
     )
 
+### CONTEXT MAP ###
+
+context_map = base_segment_maker.context_map.copy()
+
 ### BRUSHES ###
 
 cursor_transform = makers.CursorTransform(
