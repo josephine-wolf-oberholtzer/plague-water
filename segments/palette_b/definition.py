@@ -20,87 +20,78 @@ score = score_template()
 context_map = datastructuretools.ContextMap(score_template)
 context_map[score]['minimum_timespan_duration'] = durationtools.Duration(1, 8)
 
-### MUSIC MAKERS ###
-
-base_initial_music_maker = makers.MusicMaker(
-    minimum_timespan_duration=durationtools.Duration(1, 8),
-    playing_durations=materials.short_durations(),
-    playing_groupings=materials.short_groupings(),
-    )
-
-base_music_maker = makers.MusicMaker(
-    leading_rest_durations=materials.short_durations(),
-    minimum_timespan_duration=durationtools.Duration(1, 8),
-    playing_durations=materials.short_durations(),
-    playing_groupings=materials.short_groupings(),
-    )
-
 ### BRUSHES ###
 
 guitar_brush = makers.Brush(
-    initial_music_maker=new(
-        base_initial_music_maker,
-        playing_durations=materials.medium_durations(),
+    initial_music_maker=makers.MusicMaker(
+        leading_rest_durations=materials.short_durations(),
+        playing_durations=materials.short_durations(),
         playing_groupings=materials.short_groupings(),
         ),
-    music_maker_indices=(),
     music_makers=[
-        new(base_music_maker,
-            leading_rest_durations=materials.very_short_durations(),
-            playing_durations=materials.medium_durations(),
-            playing_groupings=materials.medium_groupings(),
+        makers.MusicMaker(
+            leading_rest_durations=materials.short_durations(),
+            playing_durations=materials.short_durations(),
+            playing_groupings=materials.short_groupings(),
             ),
         ],
     )
 
 saxophone_brush = makers.Brush(
-    initial_music_maker=new(
-        base_initial_music_maker,
-        playing_durations=materials.medium_durations(),
+    initial_music_maker=makers.MusicMaker(
+        leading_rest_durations=materials.short_durations(),
+        playing_durations=materials.short_durations(),
         playing_groupings=materials.short_groupings(),
         ),
-    music_maker_indices=(),
     music_makers=[
-        new(base_music_maker,
-            leading_rest_durations=materials.very_short_durations(),
-            playing_durations=materials.medium_durations(),
-            playing_groupings=materials.medium_groupings(),
+        makers.MusicMaker(
+            leading_rest_durations=materials.short_durations(),
+            playing_durations=materials.short_durations(),
+            playing_groupings=materials.short_groupings(),
             ),
         ],
     )
 
 piano_rh_brush = makers.Brush(
     initial_music_maker=None,
-    music_maker_indices=(),
     music_makers=[
-        new(base_music_maker,
+        makers.MusicMaker(
+            leading_rest_durations=materials.short_durations(),
+            playing_durations=materials.short_durations(),
+            playing_groupings=materials.short_groupings(),
             ),
         ],
     )
 
 piano_lh_brush = makers.Brush(
     initial_music_maker=None,
-    music_maker_indices=(),
     music_makers=[
-        new(base_music_maker,
+        makers.MusicMaker(
+            leading_rest_durations=materials.short_durations(),
+            playing_durations=materials.short_durations(),
+            playing_groupings=materials.short_groupings(),
             ),
         ],
     )
 
 percussion_rh_brush = makers.Brush(
     initial_music_maker=None,
-    music_maker_indices=(),
     music_makers=[
-        new(base_music_maker,
+        makers.MusicMaker(
+            leading_rest_durations=materials.short_durations(),
+            playing_durations=materials.short_durations(),
+            playing_groupings=materials.short_groupings(),
             ),
         ],
     )
 
 percussion_lh_brush = makers.Brush(
     initial_music_maker=None,
-    music_maker_indices=(),
     music_makers=[
-        new(base_music_maker,
+        makers.MusicMaker(
+            leading_rest_durations=materials.short_durations(),
+            playing_durations=materials.short_durations(),
+            playing_groupings=materials.short_groupings(),
             ),
         ],
     )

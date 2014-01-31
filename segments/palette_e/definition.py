@@ -16,52 +16,60 @@ segment_tempo = indicatortools.Tempo(durationtools.Duration(1, 4), 48)
 ### CONTEXT MAP ###
 
 score_template = score_templates.PlagueWaterScoreTemplate()
+score = score_template()
 context_map = datastructuretools.ContextMap(score_template)
-
-### MUSIC MAKERS ###
-
-base_initial_music_maker = makers.MusicMaker(
-    minimum_timespan_duration=durationtools.Duration(1, 8),
-    playing_durations=materials.short_durations(),
-    playing_groupings=materials.short_groupings(),
-    )
-
-base_music_maker = makers.MusicMaker(
-    leading_rest_durations=materials.short_durations(),
-    minimum_timespan_duration=durationtools.Duration(1, 8),
-    playing_durations=materials.short_durations(),
-    playing_groupings=materials.short_groupings(),
-    )
+context_map[score]['minimum_timespan_duration'] = durationtools.Duration(1, 8)
 
 ### BRUSHES ###
 
 guitar_brush = makers.Brush(
-    initial_music_maker=None,
-    music_maker_indices=(),
     music_makers=[
-        new(base_music_maker,
+        makers.MusicMaker(
+            leading_rest_durations=materials.short_durations(),
+            playing_durations=materials.short_durations(),
+            playing_groupings=materials.short_groupings(),
             ),
         ],
     )
 
 saxophone_brush = makers.Brush(
-    initial_music_maker=None,
+    initial_music_maker=makers.MusicMaker(
+        leading_rest_durations=materials.short_durations(),
+        playing_durations=materials.short_durations(),
+        playing_groupings=materials.short_groupings(),
+        ),
     )
 
 piano_rh_brush = makers.Brush(
-    initial_music_maker=None,
+    initial_music_maker=makers.MusicMaker(
+        leading_rest_durations=materials.short_durations(),
+        playing_durations=materials.short_durations(),
+        playing_groupings=materials.short_groupings(),
+        ),
     )
 
 piano_lh_brush = makers.Brush(
-    initial_music_maker=None,
+    initial_music_maker=makers.MusicMaker(
+        leading_rest_durations=materials.short_durations(),
+        playing_durations=materials.short_durations(),
+        playing_groupings=materials.short_groupings(),
+        ),
     )
 
 percussion_rh_brush = makers.Brush(
-    initial_music_maker=None,
+    initial_music_maker=makers.MusicMaker(
+        leading_rest_durations=materials.short_durations(),
+        playing_durations=materials.short_durations(),
+        playing_groupings=materials.short_groupings(),
+        ),
     )
 
 percussion_lh_brush = makers.Brush(
-    initial_music_maker=None,
+    initial_music_maker=makers.MusicMaker(
+        leading_rest_durations=materials.short_durations(),
+        playing_durations=materials.short_durations(),
+        playing_groupings=materials.short_groupings(),
+        ),
     )
 
 ### SEGMENT DEFINITION ###

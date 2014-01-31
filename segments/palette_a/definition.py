@@ -27,7 +27,7 @@ guitar_brush = makers.Brush(
         makers.MusicMaker(
             leading_rest_durations=materials.short_durations(15),
             playing_durations=materials.short_durations(13),
-            playing_groupings=materials.short_durations(12),
+            playing_groupings=materials.short_groupings(12),
             ),
         ],
     )
@@ -37,7 +37,7 @@ saxophone_brush = makers.Brush(
         makers.MusicMaker(
             leading_rest_durations=materials.short_durations(15),
             playing_durations=materials.short_durations(13),
-            playing_groupings=materials.short_durations(12),
+            playing_groupings=materials.short_groupings(12),
             ),
         ],
     )
@@ -63,7 +63,7 @@ piano_lh_brush = makers.Brush(
         ),
     music_makers=[
         makers.MusicMaker(
-            leading_rest_durations=materials.medium_durations((1,)),
+            leading_rest_durations=materials.medium_durations(1),
             playing_durations=materials.short_durations(),
             playing_groupings=materials.short_groupings(),
             ),
@@ -87,9 +87,9 @@ percussion_lh_brush = makers.Brush(
         ),
     music_makers=[
         makers.MusicMaker(
-            leading_rest_durations=materials.medium_durations((2,)),
+            leading_rest_durations=materials.medium_durations(2),
             playing_durations=materials.short_durations(),
-            playing_groupings=materials.short_durations(),
+            playing_groupings=materials.short_groupings(),
             ),
         ],
     )
