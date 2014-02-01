@@ -661,14 +661,15 @@ class SegmentMaker(Maker):
                 lambda x: x.annotation,
                 ):
                 timespans = timespantools.TimespanInventory(timespans)
-                contexted_music_maker = self.get_cached_maker(
-                    music_maker,
-                    context_map=context_map,
-                    context_name=context_name,
-                    )
+                #contexted_music_maker = self.get_cached_maker(
+                #    music_maker,
+                #    context_map=context_map,
+                #    context_name=context_name,
+                #    )
                 durations = [x.duration for x in timespans]
                 start_offset = timespans[0].start_offset
-                music = contexted_music_maker.create_rhythms(
+                #music = contexted_music_maker.create_rhythms(
+                music = music_maker.create_rhythms(
                     durations,
                     change_staff_lines=change_staff_lines,
                     initial_offset=start_offset,

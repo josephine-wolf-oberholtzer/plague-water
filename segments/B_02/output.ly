@@ -18,6 +18,21 @@
 			{
 				\mark \markup { \override #'(box-padding . 0.5) \box 2 }
 				\tempo 4=72
+				\time 3/4
+				s1 * 3/4
+			}
+			{
+				\time 3/8
+				s1 * 3/8
+			}
+			{
+				s1 * 3/8
+			}
+			{
+				\time 3/4
+				s1 * 3/4
+			}
+			{
 				\time 3/8
 				s1 * 3/8
 			}
@@ -29,17 +44,6 @@
 				\time 9/16
 				s1 * 9/16
 			}
-			{
-				\time 3/8
-				s1 * 3/8
-			}
-			{
-				s1 * 3/8
-			}
-			{
-				\time 9/8
-				s1 * 9/8
-			}
 		}
 		\context SaxophoneStaffGroup = "Saxophone Staff Group" <<
 			\context SaxophoneStaff = "Saxophone Staff" {
@@ -48,99 +52,31 @@
 					{
 						{
 							\override Stem.stemlet-length = 0.75
-							c'8
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'8
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r4.
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'4 ~
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 1
-							c'16 [
-						}
-						{
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							c'16 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8.
-							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							c'16 [ ~
+							c'2 ~
 							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 0
-							c'8. ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r4
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'16
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r16
-						}
-						{
-							r4
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
 							c'8 [
 						}
 						{
-							\set stemLeftBeamCount = 2
+							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							c'16 ]
+							c'8 ]
+						}
+						{
+							c'4.
+						}
+						{
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 0
+							c'8
 							\revert Stem.stemlet-length
 						}
 					}
 					{
 						{
-							r16 ~
 							r4
-							r4
+						}
+						{
 							r16
 						}
 					}
@@ -148,16 +84,44 @@
 						{
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							c'16
+							\set stemRightBeamCount = 1
+							c'8. ~
+							c'2
+						}
+						{
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 0
+							c'8
 						}
 						{
 							c'4
 						}
 						{
+							c'4 ~
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
 							c'16
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r16
+							r4
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 1
+							c'8
+						}
+						{
+							c'4. ~
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 0
+							c'8
 							\revert Stem.stemlet-length
 						}
 					}
@@ -176,46 +140,224 @@
 					{
 						{
 							\override Stem.stemlet-length = 0.75
+							c'2 ~
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							c'8 [
+						}
+						{
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 0
+							c'8 ]
+						}
+						{
+							c'4.
+						}
+						{
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 0
 							c'8
 							\revert Stem.stemlet-length
 						}
 					}
 					{
 						{
-							r8
+							r4
+						}
+						{
+							r16
 						}
 					}
 					{
 						{
 							\override Stem.stemlet-length = 0.75
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 1
+							c'8. ~
+							c'2
+						}
+						{
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 0
 							c'8
-							\revert Stem.stemlet-length
 						}
-					}
-					{
 						{
-							r4.
+							c'4
 						}
-					}
-					{
 						{
-							\override Stem.stemlet-length = 0.75
 							c'4 ~
 							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 1
-							c'16 [
-						}
-						{
-							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
-							c'16 ]
+							c'16
 							\revert Stem.stemlet-length
 						}
 					}
 					{
 						{
-							r8.
+							r16
+							r4
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 1
+							c'8
+						}
+						{
+							c'4. ~
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 0
+							c'8
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r16
+						}
+					}
+				}
+			}
+			\context Dynamics = "Guitar Pedals" {
+				{
+					{
+						R1 * 3/4
+					}
+					{
+						R1 * 3/8
+					}
+					{
+						R1 * 3/8
+					}
+					{
+						R1 * 3/4
+					}
+					{
+						R1 * 3/8
+					}
+					{
+						R1 * 3/4
+					}
+					{
+						R1 * 9/16
+					}
+				}
+			}
+		>>
+		\context PianoStaffGroup = "Piano Staff Group" <<
+			\context PianoUpperStaff = "Piano Upper Staff" <<
+				\clef "treble"
+				\context Voice = "Piano RH Voice" {
+					{
+						{
+							\stopStaff
+							\once \override Staff.StaffSymbol.line-count = 1
+							\startStaff
+							R1 * 3/4
+							\stopStaff
+							\startStaff
+						}
+						{
+							r16
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 2
+							c'16 ~
+							c'4
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							\stopStaff
+							\once \override Staff.StaffSymbol.line-count = 1
+							\startStaff
+							R1 * 3/8
+							\stopStaff
+							\startStaff
+						}
+						{
+							\stopStaff
+							\once \override Staff.StaffSymbol.line-count = 1
+							\startStaff
+							R1 * 3/4
+							\stopStaff
+							\startStaff
+						}
+						{
 							r8
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							c'4
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							\stopStaff
+							\once \override Staff.StaffSymbol.line-count = 1
+							\startStaff
+							R1 * 3/4
+							\stopStaff
+							\startStaff
+						}
+						{
+							\stopStaff
+							\once \override Staff.StaffSymbol.line-count = 1
+							\startStaff
+							R1 * 9/16
+							\stopStaff
+							\startStaff
+						}
+					}
+				}
+			>>
+			\context Dynamics = "Piano Dynamics" {
+			}
+			\context PianoLowerStaff = "Piano Lower Staff" <<
+				\clef "bass"
+				\context Voice = "Piano LH Voice" {
+					{
+						{
+							r2
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							c'4
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							\stopStaff
+							\once \override Staff.StaffSymbol.line-count = 1
+							\startStaff
+							R1 * 3/8
+							\stopStaff
+							\startStaff
+						}
+						{
+							\stopStaff
+							\once \override Staff.StaffSymbol.line-count = 1
+							\startStaff
+							R1 * 3/8
+							\stopStaff
+							\startStaff
+						}
+						{
+							r4
+							r8.
 						}
 					}
 					{
@@ -232,360 +374,31 @@
 					}
 					{
 						{
-							r4
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'16
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
 							r16
 						}
 						{
-							r4
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 1
-							c'8 [
+							\stopStaff
+							\once \override Staff.StaffSymbol.line-count = 1
+							\startStaff
+							R1 * 3/8
+							\stopStaff
+							\startStaff
 						}
 						{
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							c'16 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r16 ~
-							r4
-							r4
-							r16
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							c'16
+							\stopStaff
+							\once \override Staff.StaffSymbol.line-count = 1
+							\startStaff
+							R1 * 3/4
+							\stopStaff
+							\startStaff
 						}
 						{
-							c'4
-						}
-						{
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							c'16
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r16
-						}
-					}
-				}
-			}
-			\context Dynamics = "Guitar Pedals" {
-				{
-					{
-						R1 * 3/8
-					}
-					{
-						R1 * 3/4
-					}
-					{
-						R1 * 9/16
-					}
-					{
-						R1 * 3/8
-					}
-					{
-						R1 * 3/8
-					}
-					{
-						R1 * 9/8
-					}
-				}
-			}
-		>>
-		\context PianoStaffGroup = "Piano Staff Group" <<
-			\context PianoUpperStaff = "Piano Upper Staff" <<
-				\clef "treble"
-				\context Voice = "Piano RH Voice" {
-					{
-						{
-							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'8
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8
-						}
-						{
-							r4
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 1
-							c'8 [ ~
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							c'8.
-						}
-						{
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							c'16 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8
-						}
-						{
-							r8.
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 1
-							c'8. [ ~
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							c'16 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8
-						}
-						{
-							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'16
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r16
-							r8
-						}
-						{
-							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 1
-							c'8 [ ~
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							c'16 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r16
-						}
-						{
-							r4.
-							r8.
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							c'16 [
-						}
-						{
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							c'8 ~
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							c'8
-						}
-						{
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							c'16 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8.
-						}
-					}
-				}
-			>>
-			\context Dynamics = "Piano Dynamics" {
-			}
-			\context PianoLowerStaff = "Piano Lower Staff" <<
-				\clef "bass"
-				\context Voice = "Piano LH Voice" {
-					{
-						{
-							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'8
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8
-						}
-						{
-							r4
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 1
-							c'8 [ ~
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							c'8.
-						}
-						{
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							c'16 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8
-						}
-						{
-							r8.
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 1
-							c'8. [ ~
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							c'16 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8
-						}
-						{
-							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'16
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r16
-							r8
-						}
-						{
-							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 1
-							c'8 [ ~
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							c'16 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r16
-						}
-						{
-							r4.
-							r8.
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							c'16 [
-						}
-						{
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							c'8 ~
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							c'8
-						}
-						{
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							c'16 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8.
+							\stopStaff
+							\once \override Staff.StaffSymbol.line-count = 1
+							\startStaff
+							R1 * 9/16
+							\stopStaff
+							\startStaff
 						}
 					}
 				}
@@ -593,6 +406,18 @@
 			\context Dynamics = "Piano Pedals" {
 				{
 					{
+						R1 * 3/4
+					}
+					{
+						R1 * 3/8
+					}
+					{
+						R1 * 3/8
+					}
+					{
+						R1 * 3/4
+					}
+					{
 						R1 * 3/8
 					}
 					{
@@ -600,15 +425,6 @@
 					}
 					{
 						R1 * 9/16
-					}
-					{
-						R1 * 3/8
-					}
-					{
-						R1 * 3/8
-					}
-					{
-						R1 * 9/8
 					}
 				}
 			}
@@ -619,82 +435,7 @@
 				\context Voice = "Percussion RH Voice" {
 					{
 						{
-							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'8
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8
-						}
-						{
-							r4
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 1
-							c'8 [ ~
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							c'8.
-						}
-						{
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							c'16 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8
-						}
-						{
-							r8.
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 1
-							c'8. [ ~
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							c'16 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8
-						}
-						{
-							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'16
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r16
-							r8
-						}
-						{
+							r2
 							r8
 						}
 					}
@@ -703,38 +444,12 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							c'8 [ ~
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							c'16 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r16
-						}
-						{
-							r4.
-							r8.
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							c'16 [
+							c'8 [
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
 							c'8 ~
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							c'8
-						}
-						{
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
 							c'16 ]
@@ -743,7 +458,53 @@
 					}
 					{
 						{
-							r8.
+							r16
+							r8
+						}
+						{
+							\stopStaff
+							\once \override Staff.StaffSymbol.line-count = 1
+							\startStaff
+							R1 * 3/8
+							\stopStaff
+							\startStaff
+						}
+						{
+							r2
+							r16
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							c'8.
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							\stopStaff
+							\once \override Staff.StaffSymbol.line-count = 1
+							\startStaff
+							R1 * 3/8
+							\stopStaff
+							\startStaff
+						}
+						{
+							\stopStaff
+							\once \override Staff.StaffSymbol.line-count = 1
+							\startStaff
+							R1 * 3/4
+							\stopStaff
+							\startStaff
+						}
+						{
+							\stopStaff
+							\once \override Staff.StaffSymbol.line-count = 1
+							\startStaff
+							R1 * 9/16
+							\stopStaff
+							\startStaff
 						}
 					}
 				}
@@ -753,131 +514,68 @@
 				\context Voice = "Percussion LH Voice" {
 					{
 						{
-							r8
+							r2
 						}
 					}
 					{
 						{
 							\override Stem.stemlet-length = 0.75
-							c'8
+							c'4
 							\revert Stem.stemlet-length
 						}
 					}
 					{
 						{
-							r8
+							\stopStaff
+							\once \override Staff.StaffSymbol.line-count = 1
+							\startStaff
+							R1 * 3/8
+							\stopStaff
+							\startStaff
 						}
 						{
-							r4
+							\stopStaff
+							\once \override Staff.StaffSymbol.line-count = 1
+							\startStaff
+							R1 * 3/8
+							\stopStaff
+							\startStaff
+						}
+						{
+							r2
 						}
 					}
 					{
 						{
 							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 1
-							c'8 [ ~
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							c'8.
-						}
-						{
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							c'16 ]
+							c'4
 							\revert Stem.stemlet-length
 						}
 					}
 					{
 						{
-							r8
+							\stopStaff
+							\once \override Staff.StaffSymbol.line-count = 1
+							\startStaff
+							R1 * 3/8
+							\stopStaff
+							\startStaff
 						}
 						{
-							r8.
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 1
-							c'8. [ ~
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							c'16 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8
+							\stopStaff
+							\once \override Staff.StaffSymbol.line-count = 1
+							\startStaff
+							R1 * 3/4
+							\stopStaff
+							\startStaff
 						}
 						{
-							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'16
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r16
-							r8
-						}
-						{
-							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 1
-							c'8 [ ~
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							c'16 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r16
-						}
-						{
-							r4.
-							r8.
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							c'16 [
-						}
-						{
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							c'8 ~
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							c'8
-						}
-						{
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							c'16 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8.
+							\stopStaff
+							\once \override Staff.StaffSymbol.line-count = 1
+							\startStaff
+							R1 * 9/16
+							\stopStaff
+							\startStaff
 							\bar "||"
 						}
 					}

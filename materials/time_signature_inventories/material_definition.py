@@ -43,7 +43,6 @@ round_time_signatures = indicatortools.TimeSignatureInventory(
         (3, 8),
         (6, 8),
         (9, 16),
-        (9, 8),
         ],
     )
 
