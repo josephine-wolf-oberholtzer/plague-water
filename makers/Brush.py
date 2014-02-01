@@ -43,6 +43,7 @@ class Brush(Maker):
     def __call__(
         self,
         target_segment_duration,
+        segment_maker=None,  # TODO: decouple
         context_map=None,
         context_name=None,
         ):
@@ -51,8 +52,13 @@ class Brush(Maker):
         message = '\t\t{}'.format(context_name)
         with systemtools.ProgressIndicator(message) as progress_indicator:
             if self.initial_music_maker is not None:
+                music_maker = segment_maker.get_cached_maker(
+                    self.initial_music_maker,
+                    context_map=context_map,
+                    context_name=context_name,
+                    )
                 music_maker_timespan_inventory, current_offset = \
-                    self.initial_music_maker.create_timespans(
+                    music_maker.create_timespans(
                         current_offset,
                         target_segment_duration,
                         )
@@ -71,6 +77,11 @@ class Brush(Maker):
                 while current_offset < target_segment_duration:
                     music_maker_index = music_maker_indices[counter]
                     music_maker = music_makers[music_maker_index]
+                    music_maker = segment_maker.get_cached_maker(
+                        music_maker,
+                        context_map=context_map,
+                        context_name=context_name,
+                        )
                     music_maker_timespan_inventory, current_offset = \
                         music_maker.create_timespans(
                             current_offset,

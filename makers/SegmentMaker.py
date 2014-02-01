@@ -441,6 +441,7 @@ class SegmentMaker(Maker):
             if brush is None:
                 continue
             result = brush(
+                segment_maker=self,  # TODO: Decouple!
                 context_map=self.context_map,
                 context_name=context_name,
                 target_segment_duration=self.target_segment_duration,
