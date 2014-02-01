@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 import bisect
+from abjad import new
 from abjad.tools import durationtools
 from abjad.tools import mathtools
 from abjad.tools import pitchtools
@@ -25,7 +26,10 @@ class RegisterCurve(Maker):
         ratio = mathtools.Ratio([abs(x) for x in ratio])
         self._ratio = ratio
         assert len(registers) == len(ratio) + 1
-        registers = tuple(pitchtools.NamedPitch(x) for x in registers)
+        registers = pitchtools.PitchSegment(
+            registers,
+            item_class=pitchtools.NamedPitch,
+            )
         self._registers = registers
 
     ### SPECIAL METHODS ###
@@ -56,6 +60,14 @@ class RegisterCurve(Maker):
         result = (position * m) + b
         result = pitchtools.NamedPitch(int(result))
         return result
+
+    ### PUBLIC METHODS ###
+
+    def transpose(self, expr):
+        return new(
+            self,
+            registers=self.registers.transpose(expr),
+            )
 
     ### PUBLIC PROPERTIES ###
 
