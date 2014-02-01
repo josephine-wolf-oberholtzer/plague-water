@@ -31,7 +31,7 @@ context_map = base_segment_maker.context_map.copy()
 
 ### BRUSHES ###
 
-cursor_transform = None
+cursor_transform = makers.CursorTransform()
 
 guitar_brush = new(
     base_segment_maker.guitar_brush.transform_cursors(cursor_transform),

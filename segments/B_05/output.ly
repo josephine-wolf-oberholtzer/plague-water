@@ -44,6 +44,9 @@
 				\time 6/16
 				s1 * 3/8
 			}
+			{
+				s1 * 3/8
+			}
 		}
 		\context SaxophoneStaffGroup = "Saxophone Staff Group" <<
 			\context SaxophoneStaff = "Saxophone Staff" {
@@ -59,13 +62,16 @@
 					}
 					{
 						{
-							r8
+							r16
 						}
 					}
 					{
 						{
 							\override Stem.stemlet-length = 0.75
-							c'2
+							d'4. ~
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 0
+							d'8.
 							\revert Stem.stemlet-length
 						}
 					}
@@ -82,13 +88,13 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							c'8 ~
-							c'4.
+							d'8 ~
+							d'4.
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							c'8
+							bf'8
 							\revert Stem.stemlet-length
 						}
 					}
@@ -100,10 +106,10 @@
 					{
 						{
 							\override Stem.stemlet-length = 0.75
-							c'4. ~
+							bf'4. ~
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							c'8.
+							bf'8.
 							\revert Stem.stemlet-length
 						}
 					}
@@ -118,14 +124,20 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							c'16 [ ~
+							cs'16 [ ~
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = -1
-							c'8. ]
+							cs'8. ]
 						}
 						{
-							c'4.
+							cs'4..
 							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8
+							r8.
 						}
 					}
 				}
@@ -138,20 +150,23 @@
 					{
 						{
 							\override Stem.stemlet-length = 0.75
-							c'4. ~
-							c'4
+							ef'4. ~
+							ef'4
 							\revert Stem.stemlet-length
 						}
 					}
 					{
 						{
-							r8
+							r16
 						}
 					}
 					{
 						{
 							\override Stem.stemlet-length = 0.75
-							c'2
+							f'4. ~
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 0
+							f'8.
 							\revert Stem.stemlet-length
 						}
 					}
@@ -168,13 +183,13 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							c'8 ~
-							c'4.
+							af'8 ~
+							af'4.
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							c'8
+							b'8
 							\revert Stem.stemlet-length
 						}
 					}
@@ -186,10 +201,10 @@
 					{
 						{
 							\override Stem.stemlet-length = 0.75
-							c'4. ~
+							b'4. ~
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							c'8.
+							b'8.
 							\revert Stem.stemlet-length
 						}
 					}
@@ -204,14 +219,20 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							c'16 [ ~
+							e'16 [ ~
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = -1
-							c'8. ]
+							e'8. ]
 						}
 						{
-							c'4.
+							e'4..
 							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8
+							r8.
 						}
 					}
 				}
@@ -235,6 +256,9 @@
 					}
 					{
 						R1 * 9/16
+					}
+					{
+						R1 * 3/8
 					}
 					{
 						R1 * 3/8
@@ -273,10 +297,10 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							c'16 [ ~
+							b'16 [ ~
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							c'8. ]
+							b'8. ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -302,6 +326,14 @@
 							\once \override Staff.StaffSymbol.line-count = 1
 							\startStaff
 							R1 * 9/16
+							\stopStaff
+							\startStaff
+						}
+						{
+							\stopStaff
+							\once \override Staff.StaffSymbol.line-count = 1
+							\startStaff
+							R1 * 3/8
 							\stopStaff
 							\startStaff
 						}
@@ -348,12 +380,12 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							c'8 [
+							d'8 [
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							c'8 ]
+							d'8 ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -374,6 +406,14 @@
 							\once \override Staff.StaffSymbol.line-count = 1
 							\startStaff
 							R1 * 9/16
+							\stopStaff
+							\startStaff
+						}
+						{
+							\stopStaff
+							\once \override Staff.StaffSymbol.line-count = 1
+							\startStaff
+							R1 * 3/8
 							\stopStaff
 							\startStaff
 						}
@@ -407,6 +447,9 @@
 					}
 					{
 						R1 * 9/16
+					}
+					{
+						R1 * 3/8
 					}
 					{
 						R1 * 3/8
@@ -445,12 +488,12 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							c'8 [
+							af'8 [
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							c'8 ]
+							af'8 ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -471,6 +514,14 @@
 							\once \override Staff.StaffSymbol.line-count = 1
 							\startStaff
 							R1 * 9/16
+							\stopStaff
+							\startStaff
+						}
+						{
+							\stopStaff
+							\once \override Staff.StaffSymbol.line-count = 1
+							\startStaff
+							R1 * 3/8
 							\stopStaff
 							\startStaff
 						}
@@ -514,10 +565,10 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							c'16 [ ~
+							bf'16 [ ~
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							c'8. ]
+							bf'8. ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -546,6 +597,14 @@
 							\once \override Staff.StaffSymbol.line-count = 1
 							\startStaff
 							R1 * 9/16
+							\stopStaff
+							\startStaff
+						}
+						{
+							\stopStaff
+							\once \override Staff.StaffSymbol.line-count = 1
+							\startStaff
+							R1 * 3/8
 							\stopStaff
 							\startStaff
 						}

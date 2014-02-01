@@ -19,6 +19,16 @@ score_template = score_templates.PlagueWaterScoreTemplate()
 score = score_template()
 context_map = datastructuretools.ContextMap(score_template)
 context_map[score]['minimum_timespan_duration'] = durationtools.Duration(1, 8)
+context_map[score]['pitch_class_maker'] = makers.PitchClassMaker(
+    pitch_class_ratio=(1, 1, 1),
+    pitch_class_talea=(
+        [0, 3, 2, 5, 11, 1],
+        [2, 8, 10, 11],
+        [1, 4],
+        ),
+    transform_ratio=None,
+    transform_talea=None,
+    )
 
 ### MUSIC MAKERS ###
 
@@ -27,9 +37,9 @@ context_map[score]['minimum_timespan_duration'] = durationtools.Duration(1, 8)
 guitar_brush = makers.Brush(
     music_makers=[
         makers.MusicMaker(
-            leading_rest_durations=materials.short_durations(),
-            playing_durations=materials.short_durations(),
-            playing_groupings=materials.short_groupings(),
+            leading_rest_durations=materials.short_durations(1),
+            playing_durations=materials.very_short_durations(2),
+            playing_groupings=materials.short_groupings(3),
             ),
         ]
     )
@@ -37,9 +47,9 @@ guitar_brush = makers.Brush(
 saxophone_brush = makers.Brush(
     music_makers=[
         makers.MusicMaker(
-            leading_rest_durations=materials.short_durations(),
-            playing_durations=materials.short_durations(),
-            playing_groupings=materials.short_groupings(),
+            leading_rest_durations=materials.short_durations(4),
+            playing_durations=materials.short_durations(5),
+            playing_groupings=materials.short_groupings(6),
             ),
         ],
     )
@@ -47,9 +57,9 @@ saxophone_brush = makers.Brush(
 piano_rh_brush = makers.Brush(
     music_makers=[
         makers.MusicMaker(
-            leading_rest_durations=materials.short_durations(),
-            playing_durations=materials.short_durations(),
-            playing_groupings=materials.short_groupings(),
+            leading_rest_durations=materials.medium_durations(7),
+            playing_durations=materials.medium_durations(8),
+            playing_groupings=materials.short_groupings(9),
             ),
         ],
     )
@@ -57,9 +67,9 @@ piano_rh_brush = makers.Brush(
 piano_lh_brush = makers.Brush(
     music_makers=[
         makers.MusicMaker(
-            leading_rest_durations=materials.short_durations(),
-            playing_durations=materials.short_durations(),
-            playing_groupings=materials.short_groupings(),
+            leading_rest_durations=materials.medium_durations(10),
+            playing_durations=materials.medium_durations(11),
+            playing_groupings=materials.short_groupings(12),
             ),
         ],
     )
@@ -67,9 +77,9 @@ piano_lh_brush = makers.Brush(
 percussion_rh_brush = makers.Brush(
     music_makers=[
         makers.MusicMaker(
-            leading_rest_durations=materials.short_durations(),
-            playing_durations=materials.short_durations(),
-            playing_groupings=materials.short_groupings(),
+            leading_rest_durations=materials.medium_durations(13),
+            playing_durations=materials.short_durations(14),
+            playing_groupings=[1],
             ),
         ],
     )
@@ -77,9 +87,9 @@ percussion_rh_brush = makers.Brush(
 percussion_lh_brush = makers.Brush(
     music_makers=[
         makers.MusicMaker(
-            leading_rest_durations=materials.short_durations(),
-            playing_durations=materials.short_durations(),
-            playing_groupings=materials.short_groupings(),
+            leading_rest_durations=materials.medium_durations(15),
+            playing_durations=materials.short_durations(16),
+            playing_groupings=[1],
             ),
         ],
     )

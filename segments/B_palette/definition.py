@@ -9,7 +9,7 @@ from plague_water import score_templates
 
 ### SEGMENT PARAMETERS ###
 
-measure_segmentation_talea = (1,)
+measure_segmentation_talea = (3,)
 permitted_time_signatures = materials.round_time_signatures
 segment_tempo = indicatortools.Tempo(durationtools.Duration(1, 4), 72)
 
@@ -19,6 +19,16 @@ score_template = score_templates.PlagueWaterScoreTemplate()
 score = score_template()
 context_map = datastructuretools.ContextMap(score_template)
 context_map[score]['minimum_timespan_duration'] = durationtools.Duration(1, 8)
+context_map[score]['pitch_class_maker'] = makers.PitchClassMaker(
+    pitch_class_ratio=(1, 1, 1),
+    pitch_class_talea=(
+        [0, 3, 2, 5, 11, 1],
+        [2, 8, 10, 11],
+        [1, 4],
+        ),
+    transform_ratio=None,
+    transform_talea=None,
+    )
 
 ### BRUSHES ###
 

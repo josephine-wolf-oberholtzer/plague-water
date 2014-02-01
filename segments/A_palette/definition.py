@@ -19,6 +19,16 @@ score_template = score_templates.PlagueWaterScoreTemplate()
 score = score_template()
 context_map = datastructuretools.ContextMap(score_template)
 context_map[score]['minimum_timespan_duration'] = durationtools.Duration(1, 8)
+context_map[score]['pitch_class_maker'] = makers.PitchClassMaker(
+    pitch_class_ratio=(1, 1, 1),
+    pitch_class_talea=(
+        [0, 3, 2, 5, 11, 1],
+        [2, 8, 10, 11],
+        [1, 4],
+        ),
+    transform_ratio=None,
+    transform_talea=None,
+    )
 
 ### BRUSHES ###
 
@@ -26,7 +36,8 @@ guitar_brush = makers.Brush(
     music_makers=[
         makers.MusicMaker(
             leading_rest_durations=materials.short_durations(15),
-            playing_durations=materials.short_durations(13),
+            minimum_timespan_duration=durationtools.Duration(1, 16),
+            playing_durations=materials.very_short_durations(13),
             playing_groupings=materials.short_groupings(12),
             ),
         ],
@@ -36,7 +47,8 @@ saxophone_brush = makers.Brush(
     music_makers=[
         makers.MusicMaker(
             leading_rest_durations=materials.short_durations(15),
-            playing_durations=materials.short_durations(13),
+            minimum_timespan_duration=durationtools.Duration(1, 16),
+            playing_durations=materials.very_short_durations(13),
             playing_groupings=materials.short_groupings(12),
             ),
         ],

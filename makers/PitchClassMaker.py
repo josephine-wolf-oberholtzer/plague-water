@@ -39,12 +39,13 @@ class PitchClassMaker(Maker):
             assert len(transform_ratio)
         self._pitch_class_ratio = pitch_class_ratio
         self._transform_ratio = transform_ratio
-        pitch_class_prototype = (pitchtools.NumberedPitchClass,)
-        for sequence in pitch_class_talea:
-            assert all(isinstance(x, pitch_class_prototype)
-                for x in sequence)
         self._pitch_class_talea = datastructuretools.CyclicTuple([
-            datastructuretools.CyclicTuple(sequence)
+            datastructuretools.CyclicTuple(
+                pitchtools.PitchClassSegment(
+                    sequence,
+                    item_class=pitchtools.NumberedPitchClass,
+                    )
+                )
             for sequence in pitch_class_talea
             ])
         if transform_talea is not None:

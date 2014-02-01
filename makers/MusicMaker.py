@@ -311,8 +311,14 @@ class MusicMaker(Maker):
             meters=meters,
             music=music,
             )
-        for container, current_meter, current_initial_offset in iterator:
-            if isinstance(container, scoretools.Tuplet):
+        for container, current_meter, container_start_offset in iterator:
+            current_meter_duration = \
+                current_meter.implied_time_signature.duration
+            container_stop_offset = inspect_(container).get_duration() + \
+                container_start_offset
+            # if container is a tuplet, or crosses a meter boundary:
+            if isinstance(container, scoretools.Tuplet) or \
+                current_meter_duration < container_stop_offset:
                 contents_duration = container._contents_duration
                 if contents_duration not in meter_cache:
                     meter = metertools.Meter(contents_duration)
@@ -324,11 +330,9 @@ class MusicMaker(Maker):
                     maximum_dot_count=2,
                     )
             else:
-                current_meter_duration = \
-                    current_meter.implied_time_signature.duration
                 if inspect_(container).get_duration() == \
                     current_meter_duration and \
-                    current_initial_offset == 0 and \
+                    container_start_offset == 0 and \
                     all(isinstance(x, Rest) for x in container):
                     multi_measure_rest = scoretools.MultimeasureRest(1)
                     multiplier = Multiplier(current_meter_duration)
@@ -343,7 +347,7 @@ class MusicMaker(Maker):
                     mutate(container[:]).rewrite_meter(
                         current_meter,
                         boundary_depth=1,
-                        initial_offset=current_initial_offset,
+                        initial_offset=container_start_offset,
                         maximum_dot_count=2,
                         )
 

@@ -34,7 +34,7 @@
 					{
 						{
 							\override Stem.stemlet-length = 0.75
-							c'8
+							d'8
 							\revert Stem.stemlet-length
 						}
 					}
@@ -58,7 +58,7 @@
 					{
 						{
 							\override Stem.stemlet-length = 0.75
-							c'8
+							af'8
 							\revert Stem.stemlet-length
 						}
 					}
@@ -89,7 +89,7 @@
 					{
 						{
 							\override Stem.stemlet-length = 0.75
-							c'8
+							bf'8
 							\revert Stem.stemlet-length
 						}
 					}
@@ -113,7 +113,7 @@
 					{
 						{
 							\override Stem.stemlet-length = 0.75
-							c'8
+							b'8
 							\revert Stem.stemlet-length
 						}
 					}
@@ -144,7 +144,7 @@
 					{
 						{
 							\override Stem.stemlet-length = 0.75
-							c'8
+							d'8
 							\revert Stem.stemlet-length
 						}
 					}
@@ -166,7 +166,7 @@
 					{
 						{
 							\override Stem.stemlet-length = 0.75
-							c'8
+							af'8
 							\revert Stem.stemlet-length
 						}
 					}
