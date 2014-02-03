@@ -230,6 +230,7 @@ class MusicMaker(Maker):
         tailing_rest_duration = Duration(0)
         if self.tailing_rest_durations is not None:
             tailing_rest_duration = self.tailing_rest_durations()[0]
+        print tailing_rest_duration
         start_offset = initial_offset + leading_rest_duration
         if maximum_offset <= start_offset:
             return timespan_inventory, maximum_offset
@@ -421,4 +422,4 @@ class MusicMaker(Maker):
 
     @property
     def tailing_rest_durations(self):
-        return self._leading_rest_durations
+        return self._tailing_rest_durations

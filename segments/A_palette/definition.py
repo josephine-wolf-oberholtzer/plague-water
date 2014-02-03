@@ -36,11 +36,15 @@ guitar_timespan_maker = makers.TimespanMaker(
     context_name='Guitar Voice',
     music_makers=[
         makers.MusicMaker(
-            leading_rest_durations=materials.short_durations(11),
+            articulation_maker=makers.ArticulationMaker(
+                first_leaf_articulations=('accent',),
+                inner_leaf_articulations=('staccato',),
+                ),
+            leading_rest_durations=materials.medium_durations(11),
             minimum_timespan_duration=durationtools.Duration(1, 16),
             playing_durations=materials.very_short_durations(13),
             playing_groupings=materials.short_groupings(12),
-            rhythm_maker=materials.staggering_rhythm_maker,
+            rhythm_maker=materials.fanfare_rhythm_maker,
             ),
         ],
     )
@@ -49,11 +53,15 @@ saxophone_timespan_maker = makers.TimespanMaker(
     context_name='Saxophone Voice',
     music_makers=[
         makers.MusicMaker(
-            leading_rest_durations=materials.short_durations(11),
+            articulation_maker=makers.ArticulationMaker(
+                first_leaf_articulations=('accent',),
+                inner_leaf_articulations=('staccato',),
+                ),
+            leading_rest_durations=materials.medium_durations(11),
             minimum_timespan_duration=durationtools.Duration(1, 16),
             playing_durations=materials.very_short_durations(13),
             playing_groupings=materials.short_groupings(12),
-            rhythm_maker=materials.staggering_rhythm_maker,
+            rhythm_maker=materials.fanfare_rhythm_maker,
             ),
         ],
     )
@@ -70,7 +78,7 @@ piano_rh_timespan_maker = makers.TimespanMaker(
             playing_durations=materials.short_durations(6),
             playing_groupings=materials.short_groupings(5),
             rhythm_maker=materials.stuttering_rhythm_maker,
-            tailing_rest_durations=materials.medium_durations(5),
+            tailing_rest_durations=materials.short_durations(2),
             ),
         ],
     )
@@ -87,7 +95,7 @@ piano_lh_timespan_maker = makers.TimespanMaker(
             playing_durations=materials.short_durations(3),
             playing_groupings=materials.short_groupings(4),
             rhythm_maker=materials.stuttering_rhythm_maker,
-            tailing_rest_durations=materials.medium_durations(1),
+            tailing_rest_durations=materials.short_durations(3),
             ),
         ],
     )
@@ -108,8 +116,8 @@ percussion_lh_timespan_maker = makers.TimespanMaker(
     music_makers=[
         makers.MusicMaker(
             playing_durations=materials.short_durations(2),
-            playing_groupings=materials.short_groupings(4),
-            tailing_rest_durations=materials.medium_durations(2),
+            playing_groupings=materials.short_groupings(15),
+            tailing_rest_durations=materials.short_durations(10),
             ),
         ],
     )

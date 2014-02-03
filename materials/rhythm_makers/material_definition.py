@@ -48,6 +48,21 @@ flowing_rhythm_maker = rhythmmakertools.TupletRhythmMaker(
     )
 
 
+fanfare_rhythm_maker = rhythmmakertools.IncisedRhythmMaker(
+    beam_specifier=rhythmmakertools.BeamSpecifier(
+        beam_each_division=False,
+        beam_divisions_together=False,
+        ),
+    incise_specifier=rhythmmakertools.InciseSpecifier(
+        incise_divisions=True,
+        prefix_talea=(1,),
+        prefix_lengths=(2, 2, 2, 3, 2),
+        talea_denominator=32,
+        ),
+    extra_counts_per_division=(1, 0, 0, 0, 1,),
+    )
+
+
 staggering_rhythm_maker = rhythmmakertools.TaleaRhythmMaker(
     beam_specifier=rhythmmakertools.BeamSpecifier(
         beam_each_division=False,
@@ -73,13 +88,16 @@ stuttering_rhythm_maker = rhythmmakertools.TupletRhythmMaker(
         (1, 1, -2),
         (1, 2, 2),
         (-1, 1, 2, -1),
+        (-2, 1, 1, 1),
+        (1, 1, -2),
         (1, 2, -2),
-        (1, 1, 1, -1),
+        (1, 1, 1, -2),
         (-1, 1, 1, 1, -1),
         (1, 2, 1, -1),
         (-1, 1, 1, -2),
+        (1, 1, -2),
         (-1, 1, 1, 1, -1),
-        (1, 2, -1),
+        (-2, 1, 2),
         ),
     tuplet_spelling_specifier=rhythmmakertools.TupletSpellingSpecifier(
         avoid_dots=True,
@@ -111,6 +129,7 @@ winding_rhythm_maker = rhythmmakertools.TaleaRhythmMaker(
 __all__ = (
     'clanging_rhythm_maker',
     'droning_rhythm_maker',
+    'fanfare_rhythm_maker',
     'flowing_rhythm_maker',
     'staggering_rhythm_maker',
     'stuttering_rhythm_maker',
