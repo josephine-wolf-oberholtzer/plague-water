@@ -355,52 +355,6 @@ class SegmentMaker(Maker):
             print '\tfinished in {} seconds'.format(
                 timer.elapsed_time)
 
-    def cleanup_performed_timespans(self):
-        print '\tcleaning up performed timespans'
-        measure_segmentation_talea = self.measure_segmentation_talea
-        if not self.measure_segmentation_talea:
-            measure_segmentation_talea = (1,)
-        groups = sequencetools.partition_sequence_by_counts(
-            self.time_signatures,
-            measure_segmentation_talea,
-            cyclic=True,
-            overhang=True,
-            )
-        split_offsets = []
-        current_offset = Offset(0)
-        for group in groups:
-            current_offset += sum(x.duration for x in group)
-            split_offsets.append(current_offset)
-        for timespan_maker in self.timespan_makers:
-            timespan_maker.cleanup_performed_timespans(
-                split_offsets=split_offsets,
-                )
-
-    def create_performed_timespans(self):
-        print '\tcreating performed timespans'
-        from plague_water import makers
-        ordered_timespan_makers = makers.TimespanMaker.order_by_dependencies(
-            self.timespan_makers)
-        for timespan_maker in ordered_timespan_makers:
-            dependencies = None
-            if timespan_maker.context_dependencies:
-                dependencies = [x for x in self.timespan_makers
-                    if x.context_name in timespan_maker.context_dependencies
-                    ]
-            timespan_maker.create_performed_timespans(
-                self.target_segment_duration,
-                context_map=self.context_map,
-                dependencies=dependencies,
-                )
-
-    def create_silent_timespans(self):
-        print '\tcreating silent timespans'
-        for timespan_maker in self.timespan_makers:
-            timespan_maker.create_silent_timespans(
-                segment_duration=self.segment_duration,
-                time_signatures=self.time_signatures,
-                )
-
     def color_piano_conflicts(self):
         message = '\tcoloring piano conflicts'
         with systemtools.ProgressIndicator(message) as progress_indicator:
@@ -491,7 +445,100 @@ class SegmentMaker(Maker):
         else:
             self.score.add_final_bar_line('||')
 
-    def create_rhythms(
+    def cleanup_performed_timespans(self):
+        print '\tcleaning up performed timespans'
+        measure_segmentation_talea = self.measure_segmentation_talea
+        if not self.measure_segmentation_talea:
+            measure_segmentation_talea = (1,)
+        groups = sequencetools.partition_sequence_by_counts(
+            self.time_signatures,
+            measure_segmentation_talea,
+            cyclic=True,
+            overhang=True,
+            )
+        split_offsets = []
+        current_offset = Offset(0)
+        for group in groups:
+            current_offset += sum(x.duration for x in group)
+            split_offsets.append(current_offset)
+        for timespan_maker in self.timespan_makers:
+            timespan_maker.cleanup_performed_timespans(
+                split_offsets=split_offsets,
+                )
+
+    def create_performed_timespans(self):
+        print '\tcreating performed timespans'
+        from plague_water import makers
+        ordered_timespan_makers = makers.TimespanMaker.order_by_dependencies(
+            self.timespan_makers)
+        for timespan_maker in ordered_timespan_makers:
+            dependencies = None
+            if timespan_maker.context_dependencies:
+                dependencies = [x for x in self.timespan_makers
+                    if x.context_name in timespan_maker.context_dependencies
+                    ]
+            timespan_maker.create_performed_timespans(
+                self.target_segment_duration,
+                context_map=self.context_map,
+                dependencies=dependencies,
+                )
+
+    def create_silent_timespans(self):
+        print '\tcreating silent timespans'
+        for timespan_maker in self.timespan_makers:
+            timespan_maker.create_silent_timespans(
+                segment_duration=self.segment_duration,
+                time_signatures=self.time_signatures,
+                )
+
+    def find_meters(self):
+        print '\tfinding meters'
+        offset_counter = datastructuretools.TypedCounter(
+            item_class=Offset,
+            )
+        for timespan_maker in self.timespan_makers:
+            for timespan in timespan_maker.timespan_inventory:
+                offset_counter[timespan.start_offset] += 1
+                offset_counter[timespan.stop_offset] += 1
+        if not offset_counter:
+            offset_counter[self.target_segment_duration] += 1
+        meters = metertools.Meter.fit_meters_to_expr(
+            offset_counter,
+            self.permitted_time_signatures,
+            maximum_repetitions=2,
+            )
+        return meters
+
+    @staticmethod
+    def get_segment_target_duration(
+        denominator=None,
+        numerator=None,
+        tempo=None,
+        total_duration_in_seconds=None,
+        ):
+        segment_target_duration_in_seconds = Duration(
+            total_duration_in_seconds * numerator,
+            denominator,
+            )
+        tempo_duration_in_seconds = Duration(
+            tempo.duration_to_milliseconds(tempo.duration),
+            1000,
+            )
+        target_segment_duration = Duration((
+            segment_target_duration_in_seconds / tempo_duration_in_seconds
+            ).limit_denominator(16))
+        target_segment_duration *= tempo.duration
+        return target_segment_duration
+
+    def iterate_containers_and_music_makers(self):
+        from plague_water import makers
+        for voice in iterate(self.score).by_class(Voice):
+            for container in voice:
+                music_maker = \
+                    inspect_(container).get_effective(makers.MusicMaker)
+                yield container, music_maker
+
+    def populate_rhythms(
         self,
         rewrite_meter=True,
         ):
@@ -509,7 +556,7 @@ class SegmentMaker(Maker):
                 )
             self.score[context_name].extend(realization)
 
-    def create_rhythms_for_one_voice(
+    def populate_rhythms_for_one_voice(
         self,
         context_map=None,
         context_name=None,
@@ -542,63 +589,6 @@ class SegmentMaker(Maker):
                 result.append(music)
                 progress_indicator.advance()
         return result, seed
-
-    def find_meters(self):
-        print '\tfinding meters'
-        offset_counter = datastructuretools.TypedCounter(
-            item_class=Offset,
-            )
-        for timespan_maker in self.timespan_makers:
-            for timespan in timespan_maker.timespan_inventory:
-                offset_counter[timespan.start_offset] += 1
-                offset_counter[timespan.stop_offset] += 1
-        if not offset_counter:
-            offset_counter[self.target_segment_duration] += 1
-        meters = metertools.Meter.fit_meters_to_expr(
-            offset_counter,
-            self.permitted_time_signatures,
-            maximum_repetitions=2,
-            )
-        return meters
-
-    def get_cached_maker(self, maker, context_map, context_name):
-        key = (maker, context_map, context_name)
-        if key not in self.cached_makers:
-            contexted_maker = maker.from_context_map(
-                context_map=context_map,
-                context_name=context_name,
-                )
-            self.cached_makers[key] = contexted_maker
-        return self.cached_makers[key]
-
-    @staticmethod
-    def get_segment_target_duration(
-        denominator=None,
-        numerator=None,
-        tempo=None,
-        total_duration_in_seconds=None,
-        ):
-        segment_target_duration_in_seconds = Duration(
-            total_duration_in_seconds * numerator,
-            denominator,
-            )
-        tempo_duration_in_seconds = Duration(
-            tempo.duration_to_milliseconds(tempo.duration),
-            1000,
-            )
-        target_segment_duration = Duration((
-            segment_target_duration_in_seconds / tempo_duration_in_seconds
-            ).limit_denominator(16))
-        target_segment_duration *= tempo.duration
-        return target_segment_duration
-
-    def iterate_containers_and_music_makers(self):
-        from plague_water import makers
-        for voice in iterate(self.score).by_class(Voice):
-            for container in voice:
-                music_maker = \
-                    inspect_(container).get_effective(makers.MusicMaker)
-                yield container, music_maker
 
     def populate_time_signature_context(self):
         print '\tpopulating time signature context'
