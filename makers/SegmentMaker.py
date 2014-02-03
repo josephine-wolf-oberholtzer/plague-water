@@ -164,10 +164,10 @@ class SegmentMaker(Maker):
             permitted_time_signatures)
         assert len(permitted_time_signatures)
         segment_tempo = Tempo(segment_tempo)
-        measure_segmentation_talea = measure_segmentation_talea or (1,)
-        assert len(measure_segmentation_talea)
-        assert sequencetools.all_are_positive_integers(
-            measure_segmentation_talea)
+        if measure_segmentation_talea is not None:
+            assert len(measure_segmentation_talea)
+            assert sequencetools.all_are_positive_integers(
+                measure_segmentation_talea)
         if target_segment_duration is not None:
             target_segment_duration = Duration(target_segment_duration)
             assert 0 < target_segment_duration
@@ -447,20 +447,18 @@ class SegmentMaker(Maker):
 
     def cleanup_performed_timespans(self):
         print '\tcleaning up performed timespans'
-        measure_segmentation_talea = self.measure_segmentation_talea
-        if not self.measure_segmentation_talea:
-            measure_segmentation_talea = (1,)
-        groups = sequencetools.partition_sequence_by_counts(
-            self.time_signatures,
-            measure_segmentation_talea,
-            cyclic=True,
-            overhang=True,
-            )
         split_offsets = []
-        current_offset = Offset(0)
-        for group in groups:
-            current_offset += sum(x.duration for x in group)
-            split_offsets.append(current_offset)
+        if self.measure_segmentation_talea:
+            groups = sequencetools.partition_sequence_by_counts(
+                self.time_signatures,
+                self.measure_segmentation_talea,
+                cyclic=True,
+                overhang=True,
+                )
+            current_offset = Offset(0)
+            for group in groups:
+                current_offset += sum(x.duration for x in group)
+                split_offsets.append(current_offset)
         for timespan_maker in self.timespan_makers:
             timespan_maker.cleanup_performed_timespans(
                 split_offsets=split_offsets,
