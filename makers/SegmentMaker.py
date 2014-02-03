@@ -92,7 +92,7 @@ class SegmentMaker(Maker):
 
         ### CREATE NOTATION ###
         self.populate_time_signature_context()
-        self.create_rhythms(rewrite_meter=True)
+        self.populate_rhythms(rewrite_meter=True)
         self.apply_pitch_classes()
         self.apply_registrations()
         self.apply_chords()
@@ -547,7 +547,7 @@ class SegmentMaker(Maker):
         for timespan_maker in self.timespan_makers:
             context_name = timespan_maker.context_name
             timespan_inventory = timespan_maker.timespan_inventory
-            realization, seed = self.create_rhythms_for_one_voice(
+            realization, seed = self.populate_rhythms_for_one_voice(
                 context_map=self.context_map,
                 context_name=context_name,
                 rewrite_meter=rewrite_meter,

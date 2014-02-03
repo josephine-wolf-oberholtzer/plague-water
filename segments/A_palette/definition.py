@@ -58,30 +58,26 @@ saxophone_timespan_maker = makers.TimespanMaker(
 
 piano_rh_timespan_maker = makers.TimespanMaker(
     context_name='Piano RH Voice',
-    initial_music_maker=makers.MusicMaker(
-        playing_durations=materials.short_durations(),
-        playing_groupings=materials.short_groupings(),
-        ),
     music_makers=[
         makers.MusicMaker(
-            leading_rest_durations=materials.short_durations(),
-            playing_durations=materials.short_durations(),
-            playing_groupings=materials.short_groupings(),
+            minimum_timespan_duration=durationtools.Duration(3, 16),
+            playing_durations=materials.short_durations(4),
+            playing_groupings=materials.short_groupings(5),
+            rhythm_maker=materials.stuttering_rhythm_maker,
+            tailing_rest_durations=materials.short_durations(3),
             ),
         ],
     )
 
 piano_lh_timespan_maker = makers.TimespanMaker(
     context_name='Piano LH Voice',
-    initial_music_maker=makers.MusicMaker(
-        playing_durations=materials.short_durations(),
-        playing_groupings=materials.short_groupings(),
-        ),
     music_makers=[
         makers.MusicMaker(
-            leading_rest_durations=materials.medium_durations(1),
-            playing_durations=materials.short_durations(),
-            playing_groupings=materials.short_groupings(),
+            minimum_timespan_duration=durationtools.Duration(3, 16),
+            playing_durations=materials.short_durations(3),
+            playing_groupings=materials.short_groupings(4),
+            rhythm_maker=materials.stuttering_rhythm_maker,
+            tailing_rest_durations=materials.medium_durations(1),
             ),
         ],
     )
