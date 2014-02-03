@@ -53,7 +53,7 @@ medium_durations = datastructuretools.StatalServer((
     sequencetools.remap_sequence_by_range_pairs(
         euler_numbers.euler_hundreds,
         [
-            ((0, 99), (3, 7)),
+            ((0, 99), (4, 8)),
             ],
         )
     ))
@@ -63,9 +63,9 @@ short_durations = datastructuretools.StatalServer((
     sequencetools.remap_sequence_by_range_pairs(
         euler_numbers.euler_hundreds,
         [
-            ((0, 33), (1, 2)),
-            ((34, 66), (1, 4)),
-            ((67, 99), (1, 6)),
+            ((0, 33), (2, 2)),
+            ((34, 66), (2, 4)),
+            ((67, 99), (2, 5)),
             ],
         )
     ))
