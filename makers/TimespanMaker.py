@@ -2,17 +2,18 @@
 from abjad import new
 from abjad.tools import datastructuretools
 from abjad.tools import durationtools
+from abjad.tools import mathtools
 from abjad.tools import systemtools
+from abjad.tools import rhythmmakertools
 from abjad.tools import timespantools
 from plague_water.makers.Maker import Maker
 
 
-class Brush(Maker):
+class TimespanMaker(Maker):
 
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_contexted_music_makers',
         '_context_name',
         '_context_dependencies',
         '_initial_music_maker',
@@ -32,9 +33,8 @@ class Brush(Maker):
         music_makers=None,
         ):
         from plague_water import makers
-        self._contexted_music_makers = set()
-        if context_name is not None:
-            context_name = str(context_name)
+        assert context_name
+        context_name = str(context_name)
         self._context_name = context_name
         if context_dependencies is not None:
             context_dependencies = tuple(str(x) for x in context_dependencies)
@@ -52,27 +52,37 @@ class Brush(Maker):
         self._music_makers = music_makers
         self._timespan_inventory = timespantools.TimespanInventory()
 
-    ### SPECIAL METHODS ###
+    ### PUBLIC METHODS ###
 
-    def __call__(
+    def cleanup_performed_timespans(
+        self,
+        split_offsets=None,
+        ):
+        if not split_offsets:
+            return
+        new_timespan_inventory = timespantools.TimespanInventory()
+        for shard in self.timespan_inventory.split_at_offsets(split_offsets):
+            for timespan in shard:
+                music_maker = timespan.annotation
+                if music_maker.timespan_has_minimum_length(timespan):
+                    new_timespan_inventory.append(timespan)
+        self.timespan_inventory[:] = new_timespan_inventory
+        self.timespan_inventory.sort()
+
+    def create_performed_timespans(
         self,
         target_segment_duration,
         context_map=None,
-        context_name=None,
         dependencies=None,
         ):
-
-        self._contexted_music_makers = set()
-        self._timespan_inventory = timespantools.TimespanInventory()
-
         current_offset = durationtools.Offset(0)
         timespan_inventory = timespantools.TimespanInventory()
-        message = '\t\t{}'.format(context_name)
+        message = '\t\t{}'.format(self.context_name)
         with systemtools.ProgressIndicator(message) as progress_indicator:
             if self.initial_music_maker is not None:
                 music_maker = self.initial_music_maker.from_context_map(
                     context_map=context_map,
-                    context_name=context_name,
+                    context_name=self.context_name,
                     )
                 music_maker_timespan_inventory, current_offset = \
                     music_maker.create_timespans(
@@ -96,7 +106,7 @@ class Brush(Maker):
                     music_maker = music_makers[music_maker_index]
                     music_maker = music_maker.from_context_map(
                         context_map=context_map,
-                        context_name=context_name,
+                        context_name=self.context_name,
                         )
                     music_maker_timespan_inventory, current_offset = \
                         music_maker.create_timespans(
@@ -106,10 +116,67 @@ class Brush(Maker):
                     timespan_inventory.extend(music_maker_timespan_inventory)
                     counter += 1
                     progress_indicator.advance()
+        self.timespan_inventory[:] = timespan_inventory
 
-        return timespan_inventory
+    def create_silent_timespans(
+        self,
+        segment_duration=None,
+        time_signatures=None,
+        ):
+        print '\tbuilding silence timespans'
+        from plague_water import makers
+        offsets = mathtools.cumulative_sums(
+            x.duration for x in time_signatures)
+        silence_timespan_inventory = timespantools.TimespanInventory()
+        previous_stop_offset = durationtools.Offset(0)
+        for timespan in self.timespan_inventory:
+            current_start_offset = timespan.start_offset
+            if previous_stop_offset < current_start_offset:
+                silence_timespan = timespantools.Timespan(
+                    start_offset=previous_stop_offset,
+                    stop_offset=current_start_offset,
+                    )
+                silence_timespan_inventory.append(silence_timespan)
+            previous_stop_offset = timespan.stop_offset
+        if previous_stop_offset < segment_duration:
+            silence_timespan = timespantools.Timespan(
+                start_offset=previous_stop_offset,
+                stop_offset=segment_duration,
+                )
+            silence_timespan_inventory.append(silence_timespan)
+        fused_silence_timespans = timespantools.TimespanInventory()
+        for group in silence_timespan_inventory.partition(
+            include_tangent_timespans=True,
+            ):
+            fused_silence_timespan = timespantools.AnnotatedTimespan(
+                annotation=makers.MusicMaker(
+                    rhythm_maker=rhythmmakertools.RestRhythmMaker(),
+                    ),
+                start_offset=group.start_offset,
+                stop_offset=group.stop_offset,
+                )
+            fused_silence_timespans.append(fused_silence_timespan)
+        for shard in fused_silence_timespans.split_at_offsets(offsets):
+            self.timespan_inventory.extend(shard)
+        self.timespan_inventory.sort()
 
-    ### PUBLIC METHODS ###
+    @staticmethod
+    def order_by_dependencies(timespan_makers):
+        timespan_makers = list(timespan_makers)
+        result = []
+        context_names = set()
+        while timespan_makers:
+            made_progress = False
+            for timespan_maker in reversed(timespan_makers):
+                if timespan_maker.context_dependencies is None or \
+                    all(x in context_names
+                        for x in timespan_maker.context_dependencies):
+                    timespan_makers.remove(timespan_maker)
+                    result.append(timespan_maker)
+                    context_names.add(timespan_maker.context_name)
+                    made_progress = True
+            assert made_progress
+        return result
 
     def transform_cursors(self, cursor_transform):
         from plague_water import makers
@@ -151,3 +218,7 @@ class Brush(Maker):
     @property
     def music_makers(self):
         return self._music_makers
+
+    @property
+    def timespan_inventory(self):
+        return self._timespan_inventory

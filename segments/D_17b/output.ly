@@ -1,4 +1,4 @@
-\version "2.19.0"
+\version "2.19.1"
 \language "english"
 
 #(ly:set-option 'relative-includes #t)
@@ -514,59 +514,6 @@
 				}
 			}
 			\context Dynamics = "Guitar Pedals" {
-				{
-					{
-						R1 * 11/16
-					}
-					{
-						R1 * 7/16
-					}
-					{
-						R1 * 3/16
-					}
-					{
-						R1 * 3/16
-					}
-					{
-						R1 * 5/8
-					}
-					{
-						R1 * 3/16
-					}
-					{
-						R1 * 7/8
-					}
-					{
-						R1 * 3/16
-					}
-					{
-						R1 * 11/16
-					}
-					{
-						R1 * 3/16
-					}
-					{
-						R1 * 7/16
-					}
-					{
-						R1 * 7/8
-					}
-					{
-						R1 * 3/16
-					}
-					{
-						R1 * 5/16
-					}
-					{
-						R1 * 5/16
-					}
-					{
-						R1 * 5/8
-					}
-					{
-						R1 * 3/16
-					}
-				}
 			}
 		>>
 		\context PianoStaffGroup = "Piano Staff Group" <<
@@ -999,59 +946,6 @@
 				}
 			>>
 			\context Dynamics = "Piano Pedals" {
-				{
-					{
-						R1 * 11/16
-					}
-					{
-						R1 * 7/16
-					}
-					{
-						R1 * 3/16
-					}
-					{
-						R1 * 3/16
-					}
-					{
-						R1 * 5/8
-					}
-					{
-						R1 * 3/16
-					}
-					{
-						R1 * 7/8
-					}
-					{
-						R1 * 3/16
-					}
-					{
-						R1 * 11/16
-					}
-					{
-						R1 * 3/16
-					}
-					{
-						R1 * 7/16
-					}
-					{
-						R1 * 7/8
-					}
-					{
-						R1 * 3/16
-					}
-					{
-						R1 * 5/16
-					}
-					{
-						R1 * 5/16
-					}
-					{
-						R1 * 5/8
-					}
-					{
-						R1 * 3/16
-					}
-				}
 			}
 		>>
 		\context PercussionStaffGroup = "Percussion Staff Group" <<

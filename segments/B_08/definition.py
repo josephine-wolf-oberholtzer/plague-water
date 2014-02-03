@@ -35,28 +35,28 @@ cursor_transform = makers.CursorTransform(
     increment=2,
     )
 
-guitar_brush = new(
-    base_segment_maker.guitar_brush.transform_cursors(cursor_transform),
+guitar_timespan_maker = new(
+    base_segment_maker['Guitar Voice'].transform_cursors(cursor_transform),
     )
 
-saxophone_brush = new(
-    base_segment_maker.saxophone_brush.transform_cursors(cursor_transform),
+saxophone_timespan_maker = new(
+    base_segment_maker['Saxophone Voice'].transform_cursors(cursor_transform),
     )
 
-piano_rh_brush = new(
-    base_segment_maker.piano_rh_brush.transform_cursors(cursor_transform),
+piano_rh_timespan_maker = new(
+    base_segment_maker['Piano RH Voice'].transform_cursors(cursor_transform),
     )
 
-piano_lh_brush = new(
-    base_segment_maker.piano_lh_brush.transform_cursors(cursor_transform),
+piano_lh_timespan_maker = new(
+    base_segment_maker['Piano LH Voice'].transform_cursors(cursor_transform),
     )
 
-percussion_rh_brush = new(
-    base_segment_maker.percussion_rh_brush.transform_cursors(cursor_transform),
+percussion_rh_timespan_maker = new(
+    base_segment_maker['Percussion RH Voice'].transform_cursors(cursor_transform),
     )
 
-percussion_lh_brush = new(
-    base_segment_maker.percussion_lh_brush.transform_cursors(cursor_transform),
+percussion_lh_timespan_maker = new(
+    base_segment_maker['Percussion LH Voice'].transform_cursors(cursor_transform),
     )
 
 ### SEGMENT DEFINITION ###
@@ -64,15 +64,17 @@ percussion_lh_brush = new(
 segment_maker = new(
     base_segment_maker,
     context_map=context_map,
-    guitar_brush=guitar_brush,
-    percussion_lh_brush=percussion_lh_brush,
-    percussion_rh_brush=percussion_rh_brush,
-    piano_lh_brush=piano_lh_brush,
-    piano_rh_brush=piano_rh_brush,
-    saxophone_brush=saxophone_brush,
     segment_id=segment_id,
     segment_name=segment_name,
     target_segment_duration=target_segment_duration,
+    timespan_makers=(
+        guitar_timespan_maker,
+        percussion_lh_timespan_maker,
+        percussion_rh_timespan_maker,
+        piano_lh_timespan_maker,
+        piano_rh_timespan_maker,
+        saxophone_timespan_maker,
+        )
     )
 
 ### MAIN ###

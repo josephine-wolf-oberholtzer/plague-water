@@ -30,9 +30,10 @@ context_map[score]['pitch_class_maker'] = makers.PitchClassMaker(
     transform_talea=None,
     )
 
-### BRUSHES ###
+### timespan_makerES ###
 
-guitar_brush = makers.Brush(
+guitar_timespan_maker = makers.TimespanMaker(
+    context_name='Guitar Voice',
     music_makers=[
         makers.MusicMaker(
             leading_rest_durations=materials.short_durations(15),
@@ -43,7 +44,8 @@ guitar_brush = makers.Brush(
         ],
     )
 
-saxophone_brush = makers.Brush(
+saxophone_timespan_maker = makers.TimespanMaker(
+    context_name='Saxophone Voice',
     music_makers=[
         makers.MusicMaker(
             leading_rest_durations=materials.short_durations(15),
@@ -54,7 +56,8 @@ saxophone_brush = makers.Brush(
         ],
     )
 
-piano_rh_brush = makers.Brush(
+piano_rh_timespan_maker = makers.TimespanMaker(
+    context_name='Piano RH Voice',
     initial_music_maker=makers.MusicMaker(
         playing_durations=materials.short_durations(),
         playing_groupings=materials.short_groupings(),
@@ -68,7 +71,8 @@ piano_rh_brush = makers.Brush(
         ],
     )
 
-piano_lh_brush = makers.Brush(
+piano_lh_timespan_maker = makers.TimespanMaker(
+    context_name='Piano LH Voice',
     initial_music_maker=makers.MusicMaker(
         playing_durations=materials.short_durations(),
         playing_groupings=materials.short_groupings(),
@@ -82,7 +86,8 @@ piano_lh_brush = makers.Brush(
         ],
     )
 
-percussion_rh_brush = makers.Brush(
+percussion_rh_timespan_maker = makers.TimespanMaker(
+    context_name='Percussion RH Voice',
     music_makers=[
         makers.MusicMaker(
             leading_rest_durations=materials.short_durations(),
@@ -92,7 +97,8 @@ percussion_rh_brush = makers.Brush(
         ],
     )
 
-percussion_lh_brush = makers.Brush(
+percussion_lh_timespan_maker = makers.TimespanMaker(
+    context_name='Percussion LH Voice',
     initial_music_maker=makers.MusicMaker(
         playing_durations=materials.short_durations(),
         playing_groupings=materials.short_groupings(),
@@ -110,14 +116,16 @@ percussion_lh_brush = makers.Brush(
 
 segment_maker = makers.SegmentMaker(
     context_map=context_map,
-    guitar_brush=guitar_brush,
     is_final_segment=False,
     measure_segmentation_talea=measure_segmentation_talea,
-    percussion_rh_brush=percussion_rh_brush,
-    percussion_lh_brush=percussion_lh_brush,
     permitted_time_signatures=permitted_time_signatures,
-    piano_lh_brush=piano_lh_brush,
-    piano_rh_brush=piano_rh_brush,
-    saxophone_brush=saxophone_brush,
     segment_tempo=segment_tempo,
+    timespan_makers=(
+        guitar_timespan_maker,
+        percussion_lh_timespan_maker,
+        percussion_rh_timespan_maker,
+        piano_lh_timespan_maker,
+        piano_rh_timespan_maker,
+        saxophone_timespan_maker,
+        )
     )
