@@ -189,6 +189,7 @@
         \override Beam.length-fraction = 1.5
         \override DynamicLineSpanner.Y-extent = #'(-1.5 . 1.5)
         \override Glissando.breakable = ##t
+        \override Glissando.thickness = 3
         \override NoteCollision.merge-differently-dotted = ##t
         \override NoteColumn.ignore-collision = ##t
         \override PhrasingSlur.dash-definition = #'((0 1 0.1 0.75))

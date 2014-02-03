@@ -9,6 +9,7 @@ class MusicMaker(Maker):
 
     __slots__ = (
         '_articulation_maker',
+        '_can_be_split',
         '_chord_maker',
         '_dynamic_maker',
         '_leading_rest_durations',
@@ -17,6 +18,7 @@ class MusicMaker(Maker):
         '_playing_durations',
         '_playing_groupings',
         '_registration_maker',
+        '_rewrite_meter',
         '_rhythm_maker',
         '_spanner_maker',
         '_tailing_rest_durations',
@@ -29,6 +31,7 @@ class MusicMaker(Maker):
     def __init__(
         self,
         articulation_maker=None,
+        can_be_split=None,
         chord_maker=None,
         dynamic_maker=None,
         leading_rest_durations=None,
@@ -37,6 +40,7 @@ class MusicMaker(Maker):
         playing_durations=None,
         playing_groupings=None,
         registration_maker=None,
+        rewrite_meter=None,
         rhythm_maker=None,
         spanner_maker=None,
         tailing_rest_durations=None,
@@ -58,6 +62,9 @@ class MusicMaker(Maker):
         assert isinstance(spanner_maker,
             (makers.SpannerMaker, type(None)))
         self._articulation_maker = articulation_maker
+        if can_be_split is not None:
+            can_be_split = bool(can_be_split)
+        self._can_be_split = can_be_split
         self._chord_maker = chord_maker
         self._dynamic_maker = dynamic_maker
         self._leading_rest_durations = self._setup_duration_cursor(
@@ -69,6 +76,9 @@ class MusicMaker(Maker):
         self._playing_groupings = self._setup_grouping_cursor(
             playing_groupings)
         self._registration_maker = registration_maker
+        if rewrite_meter is not None:
+            rewrite_meter = bool(rewrite_meter)
+        self._rewrite_meter = rewrite_meter
         self._rhythm_maker = rhythm_maker
         self._spanner_maker = spanner_maker
         self._tailing_rest_durations = self._setup_duration_cursor(
@@ -181,7 +191,7 @@ class MusicMaker(Maker):
             if isinstance(x, selectiontools.Selection):
                 music[i] = Container(x)
         music = Container(music)
-        if rewrite_meter:
+        if rewrite_meter and self.rewrite_meter is None or self.rewrite_meter:
             self._rewrite_meters(
                 music,
                 change_staff_lines=change_staff_lines,
@@ -380,6 +390,10 @@ class MusicMaker(Maker):
         return self._articulation_maker
 
     @property
+    def can_be_split(self):
+        return self._can_be_split
+
+    @property
     def chord_maker(self):
         return self._chord_maker
 
@@ -410,6 +424,10 @@ class MusicMaker(Maker):
     @property
     def registration_maker(self):
         return self._registration_maker
+
+    @property
+    def rewrite_meter(self):
+        return self._rewrite_meter
 
     @property
     def rhythm_maker(self):

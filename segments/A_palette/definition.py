@@ -37,8 +37,8 @@ guitar_timespan_maker = makers.TimespanMaker(
     music_makers=[
         makers.MusicMaker(
             articulation_maker=makers.ArticulationMaker(
-                first_leaf_articulations=('accent',),
-                inner_leaf_articulations=('staccato',),
+                first_leaf_indicators=('accent',),
+                inner_leaf_indicators=('staccato',),
                 ),
             leading_rest_durations=materials.medium_durations(11),
             minimum_timespan_duration=durationtools.Duration(1, 16),
@@ -54,8 +54,8 @@ saxophone_timespan_maker = makers.TimespanMaker(
     music_makers=[
         makers.MusicMaker(
             articulation_maker=makers.ArticulationMaker(
-                first_leaf_articulations=('accent',),
-                inner_leaf_articulations=('staccato',),
+                first_leaf_indicators=('accent',),
+                inner_leaf_indicators=('staccato',),
                 ),
             leading_rest_durations=materials.medium_durations(11),
             minimum_timespan_duration=durationtools.Duration(1, 16),
@@ -71,8 +71,8 @@ piano_rh_timespan_maker = makers.TimespanMaker(
     music_makers=[
         makers.MusicMaker(
             articulation_maker=makers.ArticulationMaker(
-                first_leaf_articulations=('accent',),
-                inner_leaf_articulations=('staccato',),
+                first_leaf_indicators=('accent',),
+                inner_leaf_indicators=('staccato',),
                 ),
             minimum_timespan_duration=durationtools.Duration(3, 16),
             playing_durations=materials.short_durations(6),
@@ -88,8 +88,8 @@ piano_lh_timespan_maker = makers.TimespanMaker(
     music_makers=[
         makers.MusicMaker(
             articulation_maker=makers.ArticulationMaker(
-                first_leaf_articulations=('accent',),
-                inner_leaf_articulations=('staccato',),
+                first_leaf_indicators=('accent',),
+                inner_leaf_indicators=('staccato',),
                 ),
             minimum_timespan_duration=durationtools.Duration(3, 16),
             playing_durations=materials.short_durations(3),

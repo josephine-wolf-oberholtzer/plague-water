@@ -1,9 +1,5 @@
 # -*- encoding: utf-8 -*-
-from abjad import new
-from abjad.tools import datastructuretools
-from abjad.tools import durationtools
-from abjad.tools import indicatortools
-from abjad.tools import rhythmmakertools
+from abjad import *
 from plague_water import makers
 from plague_water import materials
 from plague_water import score_templates
@@ -100,10 +96,41 @@ piano_rh_timespan_maker = makers.TimespanMaker(
     context_name='Piano RH Voice',
     music_makers=[
         makers.MusicMaker(
+            articulation_maker=makers.ArticulationMaker(
+                first_leaf_indicators=(
+                    markuptools.Markup(
+                        r'\center-align \natural',
+                        ),
+                    ),
+                ),
             leading_rest_durations=materials.medium_durations(7),
-            playing_durations=materials.short_durations(8),
+            pitch_class_maker=makers.PitchClassMaker(
+                pitch_class_ratio=(1,),
+                pitch_class_talea=([0, 7, 2, 9, 5, 3, 11],),
+                ),
+            playing_durations=(
+                durationtools.Duration(1, 8),
+                durationtools.Duration(3, 16),
+                durationtools.Duration(1, 4),
+                ),
             playing_groupings=[1],
+            registration_maker=makers.RegistrationMaker(
+                phrase_inflections=(
+                    makers.RegisterCurve(
+                        ratio=(1,),
+                        registers=(-6, 6),
+                        ),
+                    makers.RegisterCurve(
+                        ratio=(1,),
+                        registers=(6, -6),
+                        ),
+                    ),
+                ),
             rhythm_maker=materials.glissing_rhythm_maker,
+            rewrite_meter=False,
+            spanner_maker=makers.SpannerMaker(
+                output_spanners=materials.key_glissando_spanner,
+                ),
             ),
         ],
     )
@@ -151,9 +178,9 @@ segment_maker = makers.SegmentMaker(
     segment_tempo=segment_tempo,
     timespan_makers=(
         guitar_timespan_maker,
-        percussion_lh_timespan_maker
+        percussion_lh_timespan_maker,
         percussion_rh_timespan_maker,
-        piano_lh_timespan_maker
+        piano_lh_timespan_maker,
         piano_rh_timespan_maker,
         saxophone_timespan_maker,
         )
