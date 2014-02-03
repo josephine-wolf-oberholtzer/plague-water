@@ -4,14 +4,6 @@ from abjad.tools import rhythmmakertools
 from abjad.tools import sequencetools
 
 
-class Helper(abctools.AbjadObject):
-    def __init__(self):
-        pass
-    def __call__(self, talea, seeds):
-        talea = sequencetools.rotate_sequence(talea, seeds)
-        return talea
-
-
 clanging_rhythm_maker = rhythmmakertools.TaleaRhythmMaker(
     beam_specifier=rhythmmakertools.BeamSpecifier(
         beam_each_division=False,
@@ -61,19 +53,11 @@ staggering_rhythm_maker = rhythmmakertools.TaleaRhythmMaker(
         beam_each_division=False,
         beam_divisions_together=False,
         ),
-    extra_counts_per_division=(0, 1, 0, 1, 1),
+    extra_counts_per_division=(0, 1, 0, 2, 0, 1, 1, 2),
     talea=rhythmmakertools.Talea(
-        counts=(1, 2, 1, 1, 1, 1, 3, 2, 1, 2, 1, 3, 1, 1, 1, 2, 1,),
+        counts=(1, 2, 4, 1, 1, 1, 3, 2, 1, 2, 1, 3, 1, 1, 1, 2, 1,),
         denominator=16,
         ),
-    helper_functions={
-        'talea': Helper(),
-        'extra_counts_per_division': Helper(),
-        'lefts': Helper(),
-        'left_lengths': Helper(),
-        'rights': Helper(),
-        'right_lengths': Helper(),
-        }
     )
 
 

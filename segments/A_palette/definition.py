@@ -36,7 +36,7 @@ guitar_timespan_maker = makers.TimespanMaker(
     context_name='Guitar Voice',
     music_makers=[
         makers.MusicMaker(
-            leading_rest_durations=materials.short_durations(15),
+            leading_rest_durations=materials.short_durations(11),
             minimum_timespan_duration=durationtools.Duration(1, 16),
             playing_durations=materials.very_short_durations(13),
             playing_groupings=materials.short_groupings(12),
@@ -49,7 +49,7 @@ saxophone_timespan_maker = makers.TimespanMaker(
     context_name='Saxophone Voice',
     music_makers=[
         makers.MusicMaker(
-            leading_rest_durations=materials.short_durations(15),
+            leading_rest_durations=materials.short_durations(11),
             minimum_timespan_duration=durationtools.Duration(1, 16),
             playing_durations=materials.very_short_durations(13),
             playing_groupings=materials.short_groupings(12),
@@ -67,7 +67,7 @@ piano_rh_timespan_maker = makers.TimespanMaker(
                 inner_leaf_articulations=('staccato',),
                 ),
             minimum_timespan_duration=durationtools.Duration(3, 16),
-            playing_durations=materials.short_durations(5),
+            playing_durations=materials.short_durations(6),
             playing_groupings=materials.short_groupings(5),
             rhythm_maker=materials.stuttering_rhythm_maker,
             tailing_rest_durations=materials.medium_durations(5),
