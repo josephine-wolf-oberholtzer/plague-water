@@ -1,9 +1,10 @@
 # -*- encoding: utf-8 -*-
 
-from duration_servers import *
+from durations import *
 from euler_numbers import *
+from spanners import *
 from rhythm_makers import *
 from pitch_classes import *
 from registrations import *
-from tempo_inventory import *
-from time_signature_inventories import *
+from tempi import *
+from time_signatures import *
