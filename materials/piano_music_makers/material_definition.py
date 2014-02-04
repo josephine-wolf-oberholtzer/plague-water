@@ -7,6 +7,19 @@ from plague_water.materials import rhythm_makers
 from plague_water.materials import spanners
 
 
+piano_fanfare_music_maker = makers.MusicMaker(
+    articulation_maker=makers.ArticulationMaker(
+        first_leaf_indicators=('accent',),
+        inner_leaf_indicators=('staccato',),
+        ),
+    minimum_timespan_duration=durationtools.Duration(3, 16),
+    playing_durations=durations.short_durations(6),
+    playing_groupings=durations.short_groupings(5),
+    rhythm_maker=rhythm_makers.stuttering_rhythm_maker,
+    tailing_rest_durations=durations.short_durations(2),
+    )
+
+
 piano_key_gliss_music_maker = makers.MusicMaker(
     articulation_maker=makers.ArticulationMaker(
         apply_to_output=True,
@@ -47,5 +60,6 @@ piano_key_gliss_music_maker = makers.MusicMaker(
 
 
 __all__ = (
+    'piano_fanfare_music_maker',
     'piano_key_gliss_music_maker',
     )
