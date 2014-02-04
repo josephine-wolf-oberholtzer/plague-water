@@ -4,7 +4,7 @@ from abjad import *
 from plague_water.makers.Maker import Maker
 
 
-class ChordMaker(Maker):
+class ChordHandler(Maker):
 
     ### CLASS VARIABLES ###
 

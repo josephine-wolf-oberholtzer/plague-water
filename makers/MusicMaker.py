@@ -32,7 +32,7 @@ class MusicMaker(Maker):
         self,
         articulation_handler=None,
         can_be_split=None,
-        chord_maker=None,
+        chord_handler=None,
         dynamic_maker=None,
         leading_rest_durations=None,
         minimum_timespan_duration=None,
@@ -48,8 +48,8 @@ class MusicMaker(Maker):
         from plague_water import makers
         assert isinstance(articulation_handler,
             (makers.ArticulationHandler, type(None)))
-        assert isinstance(chord_maker,
-            (makers.ChordMaker, type(None)))
+        assert isinstance(chord_handler,
+            (makers.ChordHandler, type(None)))
         assert isinstance(dynamic_maker,
             (makers.DynamicMaker, type(None)))
         assert isinstance(minimum_timespan_duration, (Duration, type(None)))
@@ -65,7 +65,7 @@ class MusicMaker(Maker):
         if can_be_split is not None:
             can_be_split = bool(can_be_split)
         self._can_be_split = can_be_split
-        self._chord_maker = chord_maker
+        self._chord_maker = chord_handler
         self._dynamic_maker = dynamic_maker
         self._leading_rest_durations = self._setup_duration_cursor(
             leading_rest_durations)
@@ -106,9 +106,9 @@ class MusicMaker(Maker):
         logical_tie=None,
         segment_duration=None,
         ):
-        if self.chord_maker is None:
+        if self.chord_handler is None:
             return
-        self.chord_maker(
+        self.chord_handler(
             logical_tie,
             segment_duration=segment_duration,
             )
@@ -399,7 +399,7 @@ class MusicMaker(Maker):
         return self._can_be_split
 
     @property
-    def chord_maker(self):
+    def chord_handler(self):
         return self._chord_maker
 
     @property
