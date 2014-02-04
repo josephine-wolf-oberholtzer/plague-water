@@ -5,7 +5,7 @@ from abjad import *
 from plague_water.makers.Maker import Maker
 
 
-class ArticulationMaker(Maker):
+class ArticulationHandler(Maker):
 
     ### CLASS VARIABLES ###
 

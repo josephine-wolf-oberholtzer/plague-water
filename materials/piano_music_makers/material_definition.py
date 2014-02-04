@@ -10,7 +10,7 @@ from plague_water.materials import spanners
 
 
 piano_fanfare_music_maker = makers.MusicMaker(
-    articulation_maker=makers.ArticulationMaker(
+    articulation_handler=makers.ArticulationHandler(
         first_leaf_indicators=('accent',),
         inner_leaf_indicators=('staccato',),
         ),
@@ -23,7 +23,7 @@ piano_fanfare_music_maker = makers.MusicMaker(
 
 
 piano_gliss_music_maker = makers.MusicMaker(
-    articulation_maker=makers.ArticulationMaker(
+    articulation_handler=makers.ArticulationHandler(
         apply_to_output=True,
         first_leaf_indicators=(
             markuptools.Markup(

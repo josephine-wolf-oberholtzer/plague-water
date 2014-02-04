@@ -6,7 +6,7 @@ from plague_water.materials import rhythm_makers
 
 
 guitar_fanfare_music_maker = makers.MusicMaker(
-    articulation_maker=makers.ArticulationMaker(
+    articulation_handler=makers.ArticulationHandler(
         first_leaf_indicators=('accent',),
         inner_leaf_indicators=('staccato',),
         ),
