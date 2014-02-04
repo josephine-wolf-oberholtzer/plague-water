@@ -3,7 +3,7 @@ from abjad import *
 from plague_water.makers.Maker import Maker
 
 
-class DynamicMaker(Maker):
+class DynamicHandler(Maker):
 
     ### CLASS VARIABLES ###
 

@@ -33,7 +33,7 @@ class MusicMaker(Maker):
         articulation_handler=None,
         can_be_split=None,
         chord_handler=None,
-        dynamic_maker=None,
+        dynamic_handler=None,
         leading_rest_durations=None,
         minimum_timespan_duration=None,
         pitch_class_maker=None,
@@ -50,8 +50,8 @@ class MusicMaker(Maker):
             (makers.ArticulationHandler, type(None)))
         assert isinstance(chord_handler,
             (makers.ChordHandler, type(None)))
-        assert isinstance(dynamic_maker,
-            (makers.DynamicMaker, type(None)))
+        assert isinstance(dynamic_handler,
+            (makers.DynamicHandler, type(None)))
         assert isinstance(minimum_timespan_duration, (Duration, type(None)))
         assert isinstance(pitch_class_maker,
             (makers.PitchClassMaker, type(None)))
@@ -66,7 +66,7 @@ class MusicMaker(Maker):
             can_be_split = bool(can_be_split)
         self._can_be_split = can_be_split
         self._chord_maker = chord_handler
-        self._dynamic_maker = dynamic_maker
+        self._dynamic_maker = dynamic_handler
         self._leading_rest_durations = self._setup_duration_cursor(
             leading_rest_durations)
         self._minimum_timespan_duration = minimum_timespan_duration
@@ -119,9 +119,9 @@ class MusicMaker(Maker):
         seed=0,
         segment_duration=None,
         ):
-        if self.dynamic_maker is None:
+        if self.dynamic_handler is None:
             return
-        self.dynamic_maker(
+        self.dynamic_handler(
             music,
             seed=seed,
             segment_duration=segment_duration,
@@ -403,7 +403,7 @@ class MusicMaker(Maker):
         return self._chord_maker
 
     @property
-    def dynamic_maker(self):
+    def dynamic_handler(self):
         return self._dynamic_maker
 
     @property
