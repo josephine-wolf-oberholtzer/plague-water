@@ -10,6 +10,7 @@ from tempi import *
 from time_signatures import *
 
 from guitar_music_makers import *
+from misc_music_makers import *
 from percussion_music_makers import *
 from piano_music_makers import *
 from saxophone_music_makers import *

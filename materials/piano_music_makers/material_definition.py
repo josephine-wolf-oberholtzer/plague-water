@@ -1,6 +1,8 @@
 # -*- encoding: utf-8 -*-
+from abjad import new
 from abjad.tools import durationtools
 from abjad.tools import markuptools
+from abjad.tools import spannertools
 from plague_water import makers
 from plague_water.materials import durations
 from plague_water.materials import rhythm_makers
@@ -20,7 +22,7 @@ piano_fanfare_music_maker = makers.MusicMaker(
     )
 
 
-piano_key_gliss_music_maker = makers.MusicMaker(
+piano_gliss_music_maker = makers.MusicMaker(
     articulation_maker=makers.ArticulationMaker(
         apply_to_output=True,
         first_leaf_indicators=(
@@ -54,9 +56,17 @@ piano_key_gliss_music_maker = makers.MusicMaker(
     rhythm_maker=rhythm_makers.glissing_rhythm_maker,
     rewrite_meter=False,
     spanner_maker=makers.SpannerMaker(
-        output_spanners=spanners.key_glissando_spanner,
-        ),
+        output_spanners=spannertools.Glissando,
+        )
     )
+
+
+piano_key_gliss_music_maker = new(piano_gliss_music_maker,
+    spanner_maker__output_spanners=spanners.key_glissando_spanner,
+    )
+
+
+piano_peg_gliss_music_maker = new(piano_gliss_music_maker)
 
 
 __all__ = (

@@ -35,66 +35,30 @@ context_map[score]['pitch_class_maker'] = makers.PitchClassMaker(
 guitar_timespan_maker = makers.TimespanMaker(
     context_name='Guitar Voice',
     music_makers=[
-        makers.MusicMaker(
-            articulation_maker=makers.ArticulationMaker(
-                first_leaf_indicators=('accent',),
-                inner_leaf_indicators=('staccato',),
-                ),
-            leading_rest_durations=materials.medium_durations(11),
-            minimum_timespan_duration=durationtools.Duration(1, 16),
-            playing_durations=materials.very_short_durations(13),
-            playing_groupings=materials.short_groupings(12),
-            rhythm_maker=materials.fanfare_rhythm_maker,
-            ),
+        materials.guitar_fanfare_music_maker,
         ],
     )
 
 saxophone_timespan_maker = makers.TimespanMaker(
     context_name='Saxophone Voice',
     music_makers=[
-        makers.MusicMaker(
-            articulation_maker=makers.ArticulationMaker(
-                first_leaf_indicators=('accent',),
-                inner_leaf_indicators=('staccato',),
-                ),
-            leading_rest_durations=materials.medium_durations(11),
-            minimum_timespan_duration=durationtools.Duration(1, 16),
-            playing_durations=materials.very_short_durations(13),
-            playing_groupings=materials.short_groupings(12),
-            rhythm_maker=materials.fanfare_rhythm_maker,
-            ),
+        materials.saxophone_fanfare_music_maker,
         ],
     )
 
 piano_rh_timespan_maker = makers.TimespanMaker(
     context_name='Piano RH Voice',
     music_makers=[
-        makers.MusicMaker(
-            articulation_maker=makers.ArticulationMaker(
-                first_leaf_indicators=('accent',),
-                inner_leaf_indicators=('staccato',),
-                ),
-            minimum_timespan_duration=durationtools.Duration(3, 16),
-            playing_durations=materials.short_durations(6),
-            playing_groupings=materials.short_groupings(5),
-            rhythm_maker=materials.stuttering_rhythm_maker,
-            tailing_rest_durations=materials.short_durations(2),
-            ),
+        materials.piano_fanfare_music_maker,
         ],
     )
 
 piano_lh_timespan_maker = makers.TimespanMaker(
     context_name='Piano LH Voice',
     music_makers=[
-        makers.MusicMaker(
-            articulation_maker=makers.ArticulationMaker(
-                first_leaf_indicators=('accent',),
-                inner_leaf_indicators=('staccato',),
-                ),
-            minimum_timespan_duration=durationtools.Duration(3, 16),
+        new(materials.piano_fanfare_music_maker,
             playing_durations=materials.short_durations(3),
             playing_groupings=materials.short_groupings(4),
-            rhythm_maker=materials.stuttering_rhythm_maker,
             tailing_rest_durations=materials.short_durations(3),
             ),
         ],
