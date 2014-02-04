@@ -166,7 +166,7 @@ class SegmentMaker(Maker):
         segment_tempo = Tempo(segment_tempo)
         if measure_segmentation_talea is not None:
             assert len(measure_segmentation_talea)
-            assert sequencetools.all_are_positive_integers(
+            assert mathtools.all_are_positive_integers(
                 measure_segmentation_talea)
         if target_segment_duration is not None:
             target_segment_duration = Duration(target_segment_duration)

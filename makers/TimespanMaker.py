@@ -123,7 +123,6 @@ class TimespanMaker(Maker):
         segment_duration=None,
         time_signatures=None,
         ):
-        print '\tbuilding silence timespans'
         from plague_water import makers
         offsets = mathtools.cumulative_sums(
             x.duration for x in time_signatures)
