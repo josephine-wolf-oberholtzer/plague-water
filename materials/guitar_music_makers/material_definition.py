@@ -18,6 +18,22 @@ guitar_fanfare_music_maker = makers.MusicMaker(
     )
 
 
+guitar_trills_music_maker = makers.MusicMaker(
+    rhythm_maker=rhythm_makers.flowing_rhythm_maker,
+    spanner_maker=makers.SpannerMaker(
+        cyclical_logical_tie_spanners=(
+            spannertools.ComplexTrillSpanner(
+                interval='+P4',
+                ),
+            spannertools.ComplexTrillSpanner(
+                interval='+m3',
+                ),
+            ),
+        minimum_logical_tie_duration=durationtools.Duration(1, 8),
+        ),
+    )
+
+
 __all__ = (
     'guitar_fanfare_music_maker',
     )
