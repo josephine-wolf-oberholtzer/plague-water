@@ -10,6 +10,7 @@ class ArticulationMaker(Maker):
     ### CLASS VARIABLES ###
 
     __slots__ = (
+        '_apply_to_output',
         '_each_leaf_indicators',
         '_first_leaf_indicators',
         '_inner_leaf_indicators',
@@ -20,15 +21,18 @@ class ArticulationMaker(Maker):
 
     def __init__(
         self,
+        apply_to_output=None,
         each_leaf_indicators=None,
         first_leaf_indicators=None,
         inner_leaf_indicators=None,
         last_leaf_indicators=None,
         ):
+        assert isinstance(apply_to_output, (bool, type(None)))
         assert isinstance(each_leaf_indicators, (tuple, type(None)))
         assert isinstance(first_leaf_indicators, (tuple, type(None)))
         assert isinstance(inner_leaf_indicators, (tuple, type(None)))
         assert isinstance(last_leaf_indicators, (tuple, type(None)))
+        self._apply_to_output = apply_to_output
         self._each_leaf_indicators = each_leaf_indicators
         self._first_leaf_indicators = first_leaf_indicators
         self._inner_leaf_indicators = inner_leaf_indicators
@@ -61,7 +65,11 @@ class ArticulationMaker(Maker):
             self.last_leaf_indicators,
             seed,
             )
-        for division in music:
+        if self.apply_to_output:
+            to_iterate = [music]
+        else:
+            to_iterate = music
+        for division in to_iterate:
             iterator = iterate(division).by_logical_tie(pitched=True)
             logical_ties = tuple(iterator)
             if 1 == len(logical_ties):
@@ -111,6 +119,10 @@ class ArticulationMaker(Maker):
         return result
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def apply_to_output(self):
+        return self._apply_to_output
 
     @property
     def each_leaf_indicators(self):

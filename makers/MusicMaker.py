@@ -269,14 +269,19 @@ class MusicMaker(Maker):
 
     def transform_cursors(self, cursor_transform):
         from plague_water import makers
-        prototype = (makers.CursorTransform, type(None))
-        assert isinstance(cursor_transform, prototype)
+        if cursor_transform is None:
+            return new(self)
+        assert isinstance(cursor_transform, makers.CursorTransform)
+        leading_rest_durations = cursor_transform(self.leading_rest_durations)
+        playing_durations = cursor_transform(self.playing_durations)
+        playing_groupings = cursor_transform(self.playing_groupings)
+        tailing_rest_durations = cursor_transform(self.tailing_rest_durations)
         return new(
             self,
-            leading_rest_durations=cursor_transform,
-            playing_durations=cursor_transform,
-            playing_groupings=cursor_transform,
-            tailing_rest_durations=cursor_transform,
+            leading_rest_durations=leading_rest_durations,
+            playing_durations=playing_durations,
+            playing_groupings=playing_groupings,
+            tailing_rest_durations=tailing_rest_durations,
             )
 
     ### PRIVATE PROPERTIES ###
