@@ -3,6 +3,7 @@ from abjad import new
 from abjad.tools import datastructuretools
 from abjad.tools import durationtools
 from abjad.tools import indicatortools
+from abjad.tools import rhythmmakertools
 from plague_water import makers
 from plague_water import materials
 from plague_water import score_templates
@@ -72,6 +73,36 @@ piano_pedals_context_maker = makers.ContextMaker(
     context_name='Piano Pedals',
     music_makers=[
         makers.MusicMaker(
+            indicator_agent=makers.IndicatorAgent(
+                apply_to_output=True,
+                first_leaf_indicators=(
+                    indicatortools.LilyPondCommand(
+                        'sustainOn',
+                        'right',
+                        ),
+                    ),
+                inner_leaf_indicators=(
+                    (
+                        indicatortools.LilyPondCommand(
+                            'sustainOff',
+                            'right',
+                            ),
+                        indicatortools.LilyPondCommand(
+                            'sustainOn',
+                            'right',
+                            ),
+                        ),
+                    ),
+                last_leaf_indicators=(
+                    indicatortools.LilyPondCommand(
+                        'sustainOff',
+                        'right',
+                        ),
+                    ),
+                treat_each_leaf=True,
+                ),
+            rewrite_meter=False,
+            rhythm_maker=rhythmmakertools.SkipRhythmMaker(),
             timespan_agent=makers.DependentTimespanAgent(),
             ),
         ],
