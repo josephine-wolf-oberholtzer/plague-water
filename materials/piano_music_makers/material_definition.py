@@ -17,7 +17,7 @@ piano_fanfare_music_maker = makers.MusicMaker(
     minimum_timespan_duration=durationtools.Duration(3, 16),
     playing_durations=durations.short_durations(6),
     playing_groupings=durations.short_groupings(5),
-    rhythm_maker=rhythm_makers.stuttering_rhythm_maker,
+    rhythm_maker=rhythm_makers.piano_fanfare_rhythm_maker,
     tailing_rest_durations=durations.short_durations(2),
     )
 
@@ -73,13 +73,28 @@ piano_glissed_pegs_music_maker = new(piano_glissed_music_maker,
     )
 
 
-piano_pointillist_music_maker = makers.MusicMaker()
+piano_pointillist_music_maker = makers.MusicMaker(
+    rhythm_maker=rhythm_makers.pointillist_rhythm_maker,
+    )
 
 
 piano_rolled_chords_music_maker = makers.MusicMaker()
 
 
-piano_trilling_music_maker = makers.MusicMaker()
+piano_trilling_music_maker = makers.MusicMaker(
+    rhythm_maker=rhythm_makers.flowing_rhythm_maker,
+    spanner_handler=makers.SpannerHandler(
+        cyclical_logical_tie_spanners=(
+            spannertools.ComplexTrillSpanner(interval='+m3'),
+            spannertools.ComplexTrillSpanner(interval='+P4'),
+            spannertools.ComplexTrillSpanner(interval='+m3'),
+            spannertools.ComplexTrillSpanner(interval='+P4'),
+            spannertools.ComplexTrillSpanner(interval='+m2'),
+            spannertools.ComplexTrillSpanner(interval='+m3'),
+            spannertools.ComplexTrillSpanner(interval='+P4'),
+            ),
+        ),
+    )
 
 
 __all__ = (

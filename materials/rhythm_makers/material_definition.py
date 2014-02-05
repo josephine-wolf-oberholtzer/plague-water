@@ -3,19 +3,7 @@ from abjad.tools import durationtools
 from abjad.tools import rhythmmakertools
 
 
-clanging_rhythm_maker = rhythmmakertools.TaleaRhythmMaker(
-    beam_specifier=rhythmmakertools.BeamSpecifier(
-        beam_each_division=False,
-        beam_divisions_together=False,
-        ),
-    talea=rhythmmakertools.Talea(
-        counts=(4,),
-        denominator=16,
-        ),
-    tie_specifier=rhythmmakertools.TieSpecifier(
-        tie_split_notes=False,
-        ),
-    )
+droning_rhythm_maker = rhythmmakertools.NoteRhythmMaker()
 
 
 flowing_rhythm_maker = rhythmmakertools.TupletRhythmMaker(
@@ -77,20 +65,7 @@ glissing_rhythm_maker = rhythmmakertools.IncisedRhythmMaker(
     )
 
 
-staggering_rhythm_maker = rhythmmakertools.TaleaRhythmMaker(
-    beam_specifier=rhythmmakertools.BeamSpecifier(
-        beam_each_division=False,
-        beam_divisions_together=False,
-        ),
-    extra_counts_per_division=(0, 1, 0, 2, 0, 1, 1, 2),
-    talea=rhythmmakertools.Talea(
-        counts=(1, 2, 4, 1, 1, 1, 3, 2, 1, 2, 1, 3, 1, 1, 1, 2, 1,),
-        denominator=16,
-        ),
-    )
-
-
-stuttering_rhythm_maker = rhythmmakertools.TupletRhythmMaker(
+piano_fanfare_rhythm_maker = rhythmmakertools.TupletRhythmMaker(
     beam_specifier=rhythmmakertools.BeamSpecifier(
         beam_each_division=False,
         beam_divisions_together=False,
@@ -119,6 +94,9 @@ stuttering_rhythm_maker = rhythmmakertools.TupletRhythmMaker(
     )
 
 
+pointillist_rhythm_maker = rhythmmakertools.TaleaRhythmMaker()
+
+
 winding_rhythm_maker = rhythmmakertools.TaleaRhythmMaker(
     beam_specifier=rhythmmakertools.BeamSpecifier(
         beam_each_division=False,
@@ -134,18 +112,18 @@ winding_rhythm_maker = rhythmmakertools.TaleaRhythmMaker(
         ),
     extra_counts_per_division=(0, 1, 0, 0, 1, 2, 0, 1, 0, 0),
     talea=rhythmmakertools.Talea(
-        counts=(1, 2, 1, 1, 1, 1, 3, 2, 1, 2, 1, 3, 1, 1, 1, 2, 1,),
+        counts=(1, 2, 1, 1, 3, 2, 2, 1, 1, 2, 1, 4, 3, 1, 1, 2, 1,),
         denominator=16,
         ),
     )
 
 
 __all__ = (
-    'clanging_rhythm_maker',
+    'droning_rhythm_maker',
     'fanfare_rhythm_maker',
     'flowing_rhythm_maker',
     'glissing_rhythm_maker',
-    'staggering_rhythm_maker',
-    'stuttering_rhythm_maker',
+    'piano_fanfare_rhythm_maker',
+    'pointillist_rhythm_maker',
     'winding_rhythm_maker',
     )
