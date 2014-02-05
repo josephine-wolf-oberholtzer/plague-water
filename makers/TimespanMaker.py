@@ -88,6 +88,7 @@ class TimespanMaker(PlagueWaterObject):
                     music_maker.create_timespans(
                         current_offset,
                         target_segment_duration,
+                        dependencies=dependencies,
                         )
                 timespan_inventory.extend(music_maker_timespan_inventory)
                 progress_indicator.advance()
@@ -112,6 +113,7 @@ class TimespanMaker(PlagueWaterObject):
                         music_maker.create_timespans(
                             current_offset,
                             target_segment_duration,
+                            dependencies=dependencies,
                             )
                     timespan_inventory.extend(music_maker_timespan_inventory)
                     counter += 1

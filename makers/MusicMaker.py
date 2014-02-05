@@ -9,19 +9,14 @@ class MusicMaker(PlagueWaterObject):
 
     __slots__ = (
         '_articulation_maker',
-        '_can_be_split',
         '_chord_maker',
         '_dynamic_maker',
-        '_leading_rest_durations',
-        '_minimum_timespan_duration',
         '_pitch_class_maker',
-        '_playing_durations',
-        '_playing_groupings',
         '_register_maker',
         '_rewrite_meter',
         '_rhythm_maker',
         '_spanner_maker',
-        '_tailing_rest_durations',
+        '_timespan_agent',
         )
 
     _default_rhythm_maker = rhythmmakertools.NoteRhythmMaker()
@@ -31,19 +26,14 @@ class MusicMaker(PlagueWaterObject):
     def __init__(
         self,
         indicator_agent=None,
-        can_be_split=None,
         chord_agent=None,
         dynamic_agent=None,
-        leading_rest_durations=None,
-        minimum_timespan_duration=None,
         pitch_class_maker=None,
-        playing_durations=None,
-        playing_groupings=None,
         register_agent=None,
         rewrite_meter=None,
         rhythm_maker=None,
         spanner_agent=None,
-        tailing_rest_durations=None,
+        timespan_agent=None,
         ):
         from plague_water import makers
         assert isinstance(indicator_agent,
@@ -61,28 +51,18 @@ class MusicMaker(PlagueWaterObject):
             (rhythmmakertools.RhythmMaker, type(None)))
         assert isinstance(spanner_agent,
             (makers.SpannerAgent, type(None)))
+        assert isinstance(timespan_agent, makers.TimespanAgent)
         self._articulation_maker = indicator_agent
-        if can_be_split is not None:
-            can_be_split = bool(can_be_split)
-        self._can_be_split = can_be_split
         self._chord_maker = chord_agent
         self._dynamic_maker = dynamic_agent
-        self._leading_rest_durations = self._setup_duration_cursor(
-            leading_rest_durations)
-        self._minimum_timespan_duration = minimum_timespan_duration
         self._pitch_class_maker = pitch_class_maker
-        self._playing_durations = self._setup_duration_cursor(
-            playing_durations)
-        self._playing_groupings = self._setup_grouping_cursor(
-            playing_groupings)
         self._register_maker = register_agent
         if rewrite_meter is not None:
             rewrite_meter = bool(rewrite_meter)
         self._rewrite_meter = rewrite_meter
         self._rhythm_maker = rhythm_maker
         self._spanner_maker = spanner_agent
-        self._tailing_rest_durations = self._setup_duration_cursor(
-            tailing_rest_durations)
+        self._timespan_agent = timespan_agent
 
     ### PUBLIC METHODS ###
 
@@ -213,75 +193,27 @@ class MusicMaker(PlagueWaterObject):
 
     def create_timespans(
         self,
-        initial_offset,
-        maximum_offset,
+        depenencies=None,
+        initial_offset=None,
+        maximum_offset=None,
         ):
-        assert isinstance(self.leading_rest_durations,
-            (datastructuretools.StatalServerCursor, type(None))),\
-            self.leading_rest_durations
-        assert isinstance(self.playing_durations,
-            datastructuretools.StatalServerCursor),\
-            self.playing_durations
-        assert isinstance(self.playing_groupings,
-            datastructuretools.StatalServerCursor),\
-            self.playing_groupings
-        assert isinstance(self.tailing_rest_durations,
-            (datastructuretools.StatalServerCursor, type(None))),\
-            self.tailing_rest_durations
-        assert isinstance(initial_offset, Duration), initial_offset
-        assert isinstance(maximum_offset, Duration), maximum_offset
-        timespan_inventory = timespantools.TimespanInventory()
-        leading_rest_duration = Duration(0)
-        if self.leading_rest_durations is not None:
-            leading_rest_duration = self.leading_rest_durations()[0]
-        playing_grouping = self.playing_groupings()[0]
-        assert isinstance(playing_grouping, int), playing_grouping
-        playing_durations = self.playing_durations(playing_grouping)
-        tailing_rest_duration = Duration(0)
-        if self.tailing_rest_durations is not None:
-            tailing_rest_duration = self.tailing_rest_durations()[0]
-        start_offset = initial_offset + leading_rest_duration
-        if maximum_offset <= start_offset:
-            return timespan_inventory, maximum_offset
-        for playing_duration in playing_durations:
-            stop_offset = start_offset + playing_duration
-            if maximum_offset <= stop_offset:
-                return timespan_inventory, maximum_offset
-            timespan = timespantools.AnnotatedTimespan(
-                annotation=self,
-                start_offset=start_offset,
-                stop_offset=stop_offset,
-                )
-            timespan_inventory.append(timespan)
-            start_offset = stop_offset
-        stop_offset = timespan_inventory.stop_offset + tailing_rest_duration
-        if maximum_offset < stop_offset:
-            stop_offset = maximum_offset
-        return timespan_inventory, stop_offset
+        result = self.timespan_agent(
+            depenencies=dependencies,
+            initial_offset=initial_offset,
+            maximum_offset=maximum_offset,
+            music_maker=self,
+            )
+        return result
 
     def timespan_has_minimum_length(self, timespan):
-        assert isinstance(timespan, timespantools.Timespan)
-        if self.minimum_timespan_duration is None:
-            return True
-        elif self.minimum_timespan_duration <= timespan.duration:
-            return True
-        return False
+        return self.timespan_agent.timespan_has_minimum_length(timespan)
 
     def transform_cursors(self, cursor_transform):
-        from plague_water import makers
-        if cursor_transform is None:
-            return new(self)
-        assert isinstance(cursor_transform, makers.CursorTransform)
-        leading_rest_durations = cursor_transform(self.leading_rest_durations)
-        playing_durations = cursor_transform(self.playing_durations)
-        playing_groupings = cursor_transform(self.playing_groupings)
-        tailing_rest_durations = cursor_transform(self.tailing_rest_durations)
+        timespan_agent = self.timespan_agent.transform_cursors(
+            cursor_tranform)
         return new(
             self,
-            leading_rest_durations=leading_rest_durations,
-            playing_durations=playing_durations,
-            playing_groupings=playing_groupings,
-            tailing_rest_durations=tailing_rest_durations,
+            timespan_agent=timespan_agent,
             )
 
     ### PRIVATE PROPERTIES ###
@@ -366,37 +298,7 @@ class MusicMaker(PlagueWaterObject):
                         maximum_dot_count=2,
                         )
 
-    def _setup_duration_cursor(self, expr):
-        if expr is not None:
-            if isinstance(expr, Duration):
-                expr = [expr]
-            if isinstance(expr, (list, tuple)):
-                expr = datastructuretools.StatalServer(expr)
-            if isinstance(expr, datastructuretools.StatalServer):
-                expr = expr()
-            assert isinstance(expr, datastructuretools.StatalServerCursor)
-        return expr
-
-    def _setup_grouping_cursor(self, expr):
-        if expr is not None:
-            if isinstance(expr, int):
-                expr = [expr]
-            if isinstance(expr, (list, tuple)):
-                expr = datastructuretools.StatalServer(expr)
-            if isinstance(expr, datastructuretools.StatalServer):
-                expr = expr()
-            assert isinstance(expr, datastructuretools.StatalServerCursor)
-        return expr
-
     ### PUBLIC PROPERTIES ###
-
-    @property
-    def indicator_agent(self):
-        return self._articulation_maker
-
-    @property
-    def can_be_split(self):
-        return self._can_be_split
 
     @property
     def chord_agent(self):
@@ -407,24 +309,12 @@ class MusicMaker(PlagueWaterObject):
         return self._dynamic_maker
 
     @property
-    def leading_rest_durations(self):
-        return self._leading_rest_durations
-
-    @property
-    def minimum_timespan_duration(self):
-        return self._minimum_timespan_duration
+    def indicator_agent(self):
+        return self._articulation_maker
 
     @property
     def pitch_class_maker(self):
         return self._pitch_class_maker
-
-    @property
-    def playing_durations(self):
-        return self._playing_durations
-
-    @property
-    def playing_groupings(self):
-        return self._playing_groupings
 
     @property
     def register_agent(self):
@@ -439,9 +329,5 @@ class MusicMaker(PlagueWaterObject):
         return self._rhythm_maker
 
     @property
-    def spanner_agent(self):
-        return self._spanner_maker
-
-    @property
-    def tailing_rest_durations(self):
-        return self._tailing_rest_durations
+    def timespan_agent(self):
+        return self._timespan_maker
