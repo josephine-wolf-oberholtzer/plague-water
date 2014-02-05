@@ -6,16 +6,22 @@ from plague_water.materials import rhythm_makers
 
 
 saxophone_droning_music_maker = makers.MusicMaker(
+    dynamic_agent=makers.DynamicAgent(),
     rhythm_maker=rhythm_makers.droning_rhythm_maker,
+    spanner_agent=makers.SpannerAgent(
+        output_spanners=(
+            spannertools.Slur,
+            ),
+        ),
     )
 
 
 saxophone_fanfare_music_maker = makers.MusicMaker(
+    dynamic_agent=makers.DynamicAgent(),
     indicator_agent=makers.IndicatorAgent(
         first_leaf_indicators=('accent',),
         inner_leaf_indicators=('staccato',),
         ),
-    minimum_timespan_duration=durationtools.Duration(1, 16),
     playing_durations=durations.very_short_durations,
     playing_groupings=durations.short_groupings,
     rhythm_maker=rhythm_makers.fanfare_rhythm_maker,
@@ -23,7 +29,16 @@ saxophone_fanfare_music_maker = makers.MusicMaker(
 
 
 saxophone_pointillist_music_maker = makers.MusicMaker(
-    indicator_agent=makers.IndicatorAgent(),
+    dynamic_agent=makers.DynamicAgent(),
+    indicator_agent=makers.IndicatorAgent(
+        each_leaf_indicators=(
+            'accent',
+            'staccato',
+            'staccato',
+            'accent',
+            'staccato',
+            ),
+        ),
     playing_durations=durations.short_durations,
     playing_groupings=durations.short_groupings,
     rhythm_maker=rhythm_makers.pointillist_rhythm_maker,
@@ -31,6 +46,7 @@ saxophone_pointillist_music_maker = makers.MusicMaker(
 
 
 saxophone_trilling_music_maker = makers.MusicMaker(
+    dynamic_agent=makers.DynamicAgent(),
     playing_durations=durations.medium_durations,
     playing_groupings=durations.short_groupings,
     rhythm_maker=rhythm_makers.flowing_rhythm_maker,
@@ -49,6 +65,7 @@ saxophone_trilling_music_maker = makers.MusicMaker(
 
 
 saxophone_winding_music_maker = makers.MusicMaker(
+    dynamic_agent=makers.DynamicAgent(),
     playing_durations=durations.medium_durations,
     playing_groupings=durations.short_groupings,
     rhythm_maker=rhythm_makers.winding_rhythm_maker,

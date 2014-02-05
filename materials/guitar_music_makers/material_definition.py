@@ -6,11 +6,11 @@ from plague_water.materials import rhythm_makers
 
 
 guitar_fanfare_music_maker = makers.MusicMaker(
+    dynamic_agent=makers.DynamicAgent(),
     indicator_agent=makers.IndicatorAgent(
         first_leaf_indicators=('accent',),
         inner_leaf_indicators=('staccato',),
         ),
-    minimum_timespan_duration=durationtools.Duration(1, 16),
     playing_durations=durations.very_short_durations,
     playing_groupings=durations.short_groupings,
     rhythm_maker=rhythm_makers.fanfare_rhythm_maker,
@@ -18,6 +18,16 @@ guitar_fanfare_music_maker = makers.MusicMaker(
 
 
 guitar_pointillist_music_maker = makers.MusicMaker(
+    dynamic_agent=makers.DynamicAgent(),
+    indicator_agent=makers.IndicatorAgent(
+        each_leaf_indicators=(
+            'accent',
+            'staccato',
+            'staccato',
+            'accent',
+            'staccato',
+            ),
+        ),
     playing_durations=durations.short_durations,
     playing_groupings=durations.short_groupings,
     rhythm_maker=rhythm_makers.pointillist_rhythm_maker,
@@ -25,6 +35,7 @@ guitar_pointillist_music_maker = makers.MusicMaker(
 
 
 guitar_trilling_music_maker = makers.MusicMaker(
+    dynamic_agent=makers.DynamicAgent(),
     playing_durations=durations.medium_durations,
     playing_groupings=durations.short_groupings,
     rhythm_maker=rhythm_makers.flowing_rhythm_maker,
@@ -43,6 +54,7 @@ guitar_trilling_music_maker = makers.MusicMaker(
 
 
 guitar_winding_music_maker = makers.MusicMaker(
+    dynamic_agent=makers.DynamicAgent(),
     playing_durations=durations.medium_durations,
     playing_groupings=durations.short_groupings,
     rhythm_maker=rhythm_makers.winding_rhythm_maker,

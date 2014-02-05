@@ -49,19 +49,19 @@ class IndicatorAgent(PlagueWaterObject):
         if seed is None:
             seed = 0
         assert isinstance(seed, int)
-        each_leaf_indicators = self._expr_to_cyclic_tuple(
+        each_leaf_indicators = self._prepare_input(
             self.each_leaf_indicators,
             seed,
             )
-        first_leaf_indicators = self._expr_to_cyclic_tuple(
+        first_leaf_indicators = self._prepare_input(
             self.first_leaf_indicators,
             seed,
             )
-        inner_leaf_indicators = self._expr_to_cyclic_tuple(
+        inner_leaf_indicators = self._prepare_input(
             self.inner_leaf_indicators,
             seed,
             )
-        last_leaf_indicators = self._expr_to_cyclic_tuple(
+        last_leaf_indicators = self._prepare_input(
             self.last_leaf_indicators,
             seed,
             )
@@ -73,21 +73,21 @@ class IndicatorAgent(PlagueWaterObject):
             iterator = iterate(division).by_logical_tie(pitched=True)
             logical_ties = tuple(iterator)
             if 1 == len(logical_ties):
+                logical_tie = logical_ties[0]
                 if first_leaf_indicators:
-                    indicator = first_leaf_indicators[0]
+                    expr = first_leaf_indicators[0]
                 elif last_leaf_indicators:
-                    indicator = last_leaf_indicators[0]
-                indicator = copy.copy(indicator)
-                attach(indicator, logical_ties[0][0])
+                    expr = last_leaf_indicators[0]
+                self._attach_indicators(expr, logical_tie.head)
             elif 1 < len(logical_ties):
+                first_logical_tie = logical_ties[0]
+                last_logical_tie = logical_ties[-1]
                 if first_leaf_indicators:
-                    indicator = first_leaf_indicators[0]
-                    indicator = copy.copy(indicator)
-                    attach(indicator, logical_ties[0][0])
+                    expr = first_leaf_indicators[0]
+                    self._attach_indicators(expr, first_logical_tie.head)
                 if last_leaf_indicators:
-                    indicator = last_leaf_indicators[0]
-                    indicator = copy.copy(indicator)
-                    attach(indicator, logical_ties[-1][0])
+                    expr = last_leaf_indicators[0]
+                    self._attach_indicators(expr, last_logical_tie.head)
             if inner_leaf_indicators:
                 start = None
                 if first_leaf_indicators:
@@ -96,25 +96,38 @@ class IndicatorAgent(PlagueWaterObject):
                 if last_leaf_indicators:
                     stop = -1
                 for i, logical_tie in enumerate(logical_ties[start:stop]):
-                    indicator = inner_leaf_indicators[i]
-                    indicator = copy.copy(indicator)
-                    attach(indicator, logical_tie[0])
+                    expr = inner_leaf_indicators[i]
+                    self._attach_indicators(expr, logical_tie.head)
             if each_leaf_indicators:
                 for i, logical_tie in enumerate(logical_ties):
-                    indicator = each_leaf_indicators[i]
-                    indicator = copy.copy(indicator)
-                    attach(indicator, logical_tie[0])
+                    expr = each_leaf_indicators[i]
+                    self._attach_indicators(expr, logical_tie.head)
         assert inspect_(music).is_well_formed()
 
     ### PRIVATE METHODS ###
 
-    def _prepare_input(self, expr):
+    def _attach_indicators(self, expr, leaf):
+        if not isinstance(expr, tuple):
+            expr = (expr,)
+        for indicator in expr:
+            indicator = copy.copy(indicator)
+            attach(indicator, leaf)
+
+    def _prepare_input(self, expr, seed):
         result = []
         if expr is not None:
             for x in expr:
                 if isinstance(x, str):
                     x = indicatortools.Articulation(x)
+                elif isinstance(x, tuple):
+                    subresult = []
+                    for y in x:
+                        if isinstance(y, str):
+                            y = indicatortools.Articulation(y)
+                        subresult.append(y)
+                    x = tuple(subresult)
                 result.append(x)
+        result = sequencetools.rotate_sequence(result, seed)
         result = datastructuretools.CyclicTuple(result)
         return result
 

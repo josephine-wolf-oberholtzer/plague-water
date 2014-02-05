@@ -67,7 +67,7 @@ piano_glissed_keys_music_maker = new(piano_glissed_music_maker,
 
 
 piano_glissed_pegs_music_maker = new(piano_glissed_music_maker,
-    articulation_agent__first_leaf_indicators=(
+    indicator_agent__first_leaf_indicators=(
         markuptools.Markup(r'\box \pad #1 PEGS'),
         ),
     )
