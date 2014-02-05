@@ -8,7 +8,30 @@ class DynamicAgent(PlagueWaterObject):
     ### CLASS VARIABLES ###
 
     __slots__ = (
+        '_cyclic_dynamic_expressions',
+        '_initial_dynamic_expressions',
         )
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        cyclic_dynamic_expressions=None,
+        initial_dynamic_expressions=None,
+        ):
+        prototype = (type(None), makers.DynamicExpression)
+        if cyclic_dynamic_expressions is not None:
+            assert all(isinstance(x, prototype)
+                for x in cyclic_dynamic_expressions)
+            assert len(cyclic_dynamic_expressions)
+            cyclic_dynamic_expressions = tuple(cyclic_dynamic_expressions)
+        self._cyclic_dynamic_expressions = cyclic_dynamic_expressions
+        if initial_dynamic_expressions is not None:
+            assert all(isinstance(x, prototype)
+                for x in initial_dynamic_expressions)
+            assert len(initial_dynamic_expressions)
+            initial_dynamic_expressions = tuple(initial_dynamic_expressions)
+        self._initial_dynamic_expressions = initial_dynamic_expressions
 
     ### SPECIAL METHODS ###
 
@@ -18,4 +41,39 @@ class DynamicAgent(PlagueWaterObject):
         seed=None,
         segment_duration=None,
         ):
-        assert isinstance(seed, (int, type(None)))
+        if seed is None:
+            seed = 0
+        assert isinstance(seed, int)
+        leaves = list(iterate(music).by_class(scoretools.Leaf))
+        groups = list(iterate(leaves).by_run(
+            (scoretools.Note, scoretools.Chord)))
+        cyclic_dynamic_expressions = self._none_to_cyclic_tuple(
+            self.cyclic_dynamic_expressions,
+            seed,
+            )
+        start_index = 0
+        if self.initial_dynamic_expressions:
+            start_index = 1
+            initial_dynamic_expressions = self._none_to_cyclic_tuple(
+                self.initial_dynamic_expressions,
+                seed,
+                )
+            initial_dynamic_expression = initial_dynamic_expressions[0]
+            if initial_dynamic_expression is not None:
+                dynamic_expression(groups[0])
+        if self.cyclic_dynamic_expressions:
+            iterator = enumerate(groups[start_index:], start_index)
+            for index, group in iterator:
+                dynamic_expression = cyclic_dynamic_expressions[index]
+                if dynamic_expression is not None:
+                    dynamic_expression(group)
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def cyclic_dynamic_expressions(self):
+        return self._cyclic_dynamic_expressions
+
+    @property
+    def initial_dynamic_expressions(self):
+        return self._initial_dynamic_expressions
