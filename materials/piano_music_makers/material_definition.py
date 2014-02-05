@@ -14,11 +14,13 @@ piano_fanfare_music_maker = makers.MusicMaker(
         first_leaf_indicators=('accent',),
         inner_leaf_indicators=('staccato',),
         ),
-    minimum_timespan_duration=durationtools.Duration(3, 16),
-    playing_durations=durations.short_durations(6),
-    playing_groupings=durations.short_groupings(5),
     rhythm_maker=rhythm_makers.piano_fanfare_rhythm_maker,
-    tailing_rest_durations=durations.short_durations(2),
+    timespan_agent=makers.SemanticTimespanAgent(
+        minimum_timespan_duration=durationtools.Duration(3, 16),
+        playing_durations=durations.short_durations(6),
+        playing_groupings=durations.short_groupings(5),
+        tailing_rest_durations=durations.short_durations(2),
+        ),
     )
 
 
@@ -32,15 +34,10 @@ piano_glissed_music_maker = makers.MusicMaker(
                 ),
             ),
         ),
-    leading_rest_durations=durations.medium_durations(7),
-    pitch_class_maker=makers.PitchClassMaker(
+    pitch_class_agent=makers.PitchClassAgent(
         pitch_class_ratio=(1,),
         pitch_class_talea=([0, 7, 2, 9, 5, 3, 11],),
         ),
-    playing_durations=(
-        durationtools.Duration(1, 8),
-        ),
-    playing_groupings=durations.short_groupings(10),
     register_agent=makers.RegisterAgent(
         phrase_inflections=(
             makers.RegisterCurve(
@@ -53,11 +50,17 @@ piano_glissed_music_maker = makers.MusicMaker(
                 ),
             ),
         ),
-    rhythm_maker=rhythm_makers.glissing_rhythm_maker,
     rewrite_meter=False,
+    rhythm_maker=rhythm_makers.glissing_rhythm_maker,
     spanner_agent=makers.SpannerAgent(
         output_spanners=spannertools.Glissando,
-        )
+        ),
+    timespan_agent=makers.SemanticTimespanAgent(
+        playing_durations=(
+            durationtools.Duration(1, 8),
+            ),
+        playing_groupings=durations.short_groupings(10),
+        ),
     )
 
 

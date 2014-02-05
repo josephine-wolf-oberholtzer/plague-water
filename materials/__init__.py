@@ -9,6 +9,7 @@ from registers import *
 from tempi import *
 from time_signatures import *
 
+from basic_music_makers import *
 from guitar_music_makers import *
 from misc_music_makers import *
 from percussion_music_makers import *

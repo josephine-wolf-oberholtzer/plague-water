@@ -8,14 +8,14 @@ class MusicMaker(PlagueWaterObject):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_articulation_maker',
-        '_chord_maker',
-        '_dynamic_maker',
-        '_pitch_class_maker',
-        '_register_maker',
+        '_chord_agent',
+        '_dynamic_agent',
+        '_indicator_agent',
+        '_pitch_class_agent',
+        '_register_agent',
         '_rewrite_meter',
         '_rhythm_maker',
-        '_spanner_maker',
+        '_spanner_agent',
         '_timespan_agent',
         )
 
@@ -28,7 +28,7 @@ class MusicMaker(PlagueWaterObject):
         indicator_agent=None,
         chord_agent=None,
         dynamic_agent=None,
-        pitch_class_maker=None,
+        pitch_class_agent=None,
         register_agent=None,
         rewrite_meter=None,
         rhythm_maker=None,
@@ -36,32 +36,24 @@ class MusicMaker(PlagueWaterObject):
         timespan_agent=None,
         ):
         from plague_water import makers
-        assert isinstance(indicator_agent,
-            (makers.IndicatorAgent, type(None)))
-        assert isinstance(chord_agent,
-            (makers.ChordAgent, type(None)))
-        assert isinstance(dynamic_agent,
-            (makers.DynamicAgent, type(None)))
-        assert isinstance(minimum_timespan_duration, (Duration, type(None)))
-        assert isinstance(pitch_class_maker,
-            (makers.PitchClassMaker, type(None)))
-        assert isinstance(register_agent,
-            (makers.RegisterAgent, type(None)))
-        assert isinstance(rhythm_maker,
-            (rhythmmakertools.RhythmMaker, type(None)))
-        assert isinstance(spanner_agent,
-            (makers.SpannerAgent, type(None)))
-        assert isinstance(timespan_agent, makers.TimespanAgent)
-        self._articulation_maker = indicator_agent
-        self._chord_maker = chord_agent
-        self._dynamic_maker = dynamic_agent
-        self._pitch_class_maker = pitch_class_maker
-        self._register_maker = register_agent
+        assert isinstance(indicator_agent, (makers.IndicatorAgent, type(None)))
+        assert isinstance(chord_agent, (makers.ChordAgent, type(None)))
+        assert isinstance(dynamic_agent, (makers.DynamicAgent, type(None)))
+        assert isinstance(pitch_class_agent, (makers.PitchClassAgent, type(None)))
+        assert isinstance(register_agent, (makers.RegisterAgent, type(None)))
+        assert isinstance(rhythm_maker, (rhythmmakertools.RhythmMaker, type(None)))
+        assert isinstance(spanner_agent, (makers.SpannerAgent, type(None)))
+        assert isinstance(timespan_agent, (makers.TimespanAgent, type(None)))
+        self._chord_agent = chord_agent
+        self._dynamic_agent = dynamic_agent
+        self._indicator_agent = indicator_agent
+        self._pitch_class_agent = pitch_class_agent
+        self._register_agent = register_agent
         if rewrite_meter is not None:
             rewrite_meter = bool(rewrite_meter)
         self._rewrite_meter = rewrite_meter
         self._rhythm_maker = rhythm_maker
-        self._spanner_maker = spanner_agent
+        self._spanner_agent = spanner_agent
         self._timespan_agent = timespan_agent
 
     ### PUBLIC METHODS ###
@@ -113,9 +105,9 @@ class MusicMaker(PlagueWaterObject):
         logical_tie=None,
         segment_duration=None,
         ):
-        if self.pitch_class_maker is None:
+        if self.pitch_class_agent is None:
             return
-        self.pitch_class_maker(
+        self.pitch_class_agent(
             logical_tie,
             segment_duration=segment_duration,
             )
@@ -193,7 +185,7 @@ class MusicMaker(PlagueWaterObject):
 
     def create_timespans(
         self,
-        depenencies=None,
+        dependencies=None,
         initial_offset=None,
         maximum_offset=None,
         ):
@@ -210,7 +202,7 @@ class MusicMaker(PlagueWaterObject):
 
     def transform_cursors(self, cursor_transform):
         timespan_agent = self.timespan_agent.transform_cursors(
-            cursor_tranform)
+            cursor_transform)
         return new(
             self,
             timespan_agent=timespan_agent,
@@ -302,23 +294,23 @@ class MusicMaker(PlagueWaterObject):
 
     @property
     def chord_agent(self):
-        return self._chord_maker
+        return self._chord_agent
 
     @property
     def dynamic_agent(self):
-        return self._dynamic_maker
+        return self._dynamic_agent
 
     @property
     def indicator_agent(self):
-        return self._articulation_maker
+        return self._indicator_agent
 
     @property
-    def pitch_class_maker(self):
-        return self._pitch_class_maker
+    def pitch_class_agent(self):
+        return self._pitch_class_agent
 
     @property
     def register_agent(self):
-        return self._register_maker
+        return self._register_agent
 
     @property
     def rewrite_meter(self):
@@ -329,5 +321,9 @@ class MusicMaker(PlagueWaterObject):
         return self._rhythm_maker
 
     @property
+    def spanner_agent(self):
+        return self._spanner_agent
+
+    @property
     def timespan_agent(self):
-        return self._context_maker
+        return self._timespan_agent

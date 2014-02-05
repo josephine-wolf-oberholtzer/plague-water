@@ -86,9 +86,9 @@ class ContextMaker(PlagueWaterObject):
                     )
                 music_maker_timespan_inventory, current_offset = \
                     music_maker.create_timespans(
-                        current_offset,
-                        target_segment_duration,
                         dependencies=dependencies,
+                        initial_offset=current_offset,
+                        maximum_offset=target_segment_duration,
                         )
                 timespan_inventory.extend(music_maker_timespan_inventory)
                 progress_indicator.advance()
@@ -111,9 +111,9 @@ class ContextMaker(PlagueWaterObject):
                         )
                     music_maker_timespan_inventory, current_offset = \
                         music_maker.create_timespans(
-                            current_offset,
-                            target_segment_duration,
                             dependencies=dependencies,
+                            initial_offset=current_offset,
+                            maximum_offset=target_segment_duration,
                             )
                     timespan_inventory.extend(music_maker_timespan_inventory)
                     counter += 1

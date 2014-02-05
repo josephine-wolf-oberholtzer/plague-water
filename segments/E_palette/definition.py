@@ -19,7 +19,7 @@ score_template = score_templates.PlagueWaterScoreTemplate()
 score = score_template()
 context_map = datastructuretools.ContextMap(score_template)
 context_map[score]['minimum_timespan_duration'] = durationtools.Duration(1, 8)
-context_map[score]['pitch_class_maker'] = makers.PitchClassMaker(
+context_map[score]['pitch_class_agent'] = makers.PitchClassAgent(
     pitch_class_ratio=(1, 1, 1),
     pitch_class_talea=(
         [0, 3, 2, 5, 11, 1],
@@ -35,57 +35,43 @@ context_map[score]['pitch_class_maker'] = makers.PitchClassMaker(
 guitar_context_maker = makers.ContextMaker(
     context_name='Guitar Voice',
     music_makers=[
-        makers.MusicMaker(
-            leading_rest_durations=materials.short_durations(),
-            playing_durations=materials.short_durations(),
-            playing_groupings=materials.short_groupings(),
-            ),
+        materials.basic_music_maker,
         ],
     )
 
 saxophone_context_maker = makers.ContextMaker(
     context_name='Saxophone Voice',
-    initial_music_maker=makers.MusicMaker(
-        leading_rest_durations=materials.short_durations(),
-        playing_durations=materials.short_durations(),
-        playing_groupings=materials.short_groupings(),
-        ),
+    music_makers=[
+        materials.basic_music_maker,
+        ],
     )
 
 piano_rh_context_maker = makers.ContextMaker(
     context_name='Piano RH Voice',
-    initial_music_maker=makers.MusicMaker(
-        leading_rest_durations=materials.short_durations(),
-        playing_durations=materials.short_durations(),
-        playing_groupings=materials.short_groupings(),
-        ),
+    music_makers=[
+        materials.basic_music_maker,
+        ],
     )
 
 piano_lh_context_maker = makers.ContextMaker(
     context_name='Piano LH Voice',
-    initial_music_maker=makers.MusicMaker(
-        leading_rest_durations=materials.short_durations(),
-        playing_durations=materials.short_durations(),
-        playing_groupings=materials.short_groupings(),
-        ),
+    music_makers=[
+        materials.basic_music_maker,
+        ],
     )
 
 percussion_rh_context_maker = makers.ContextMaker(
     context_name='Percussion RH Voice',
-    initial_music_maker=makers.MusicMaker(
-        leading_rest_durations=materials.short_durations(),
-        playing_durations=materials.short_durations(),
-        playing_groupings=materials.short_groupings(),
-        ),
+    music_makers=[
+        materials.basic_music_maker,
+        ],
     )
 
 percussion_lh_context_maker = makers.ContextMaker(
     context_name='Percussion LH Voice',
-    initial_music_maker=makers.MusicMaker(
-        leading_rest_durations=materials.short_durations(),
-        playing_durations=materials.short_durations(),
-        playing_groupings=materials.short_groupings(),
-        ),
+    music_makers=[
+        materials.basic_music_maker,
+        ],
     )
 
 ### SEGMENT DEFINITION ###

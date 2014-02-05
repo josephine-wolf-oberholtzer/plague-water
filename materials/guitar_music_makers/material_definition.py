@@ -11,9 +11,11 @@ guitar_fanfare_music_maker = makers.MusicMaker(
         first_leaf_indicators=('accent',),
         inner_leaf_indicators=('staccato',),
         ),
-    playing_durations=durations.very_short_durations,
-    playing_groupings=durations.short_groupings,
     rhythm_maker=rhythm_makers.fanfare_rhythm_maker,
+    timespan_agent=makers.SemanticTimespanAgent(
+        playing_durations=durations.very_short_durations,
+        playing_groupings=durations.short_groupings,
+        ),
     )
 
 
@@ -28,16 +30,16 @@ guitar_pointillist_music_maker = makers.MusicMaker(
             'staccato',
             ),
         ),
-    playing_durations=durations.short_durations,
-    playing_groupings=durations.short_groupings,
     rhythm_maker=rhythm_makers.pointillist_rhythm_maker,
+    timespan_agent=makers.SemanticTimespanAgent(
+        playing_durations=durations.short_durations,
+        playing_groupings=durations.short_groupings,
+        ),
     )
 
 
 guitar_trilling_music_maker = makers.MusicMaker(
     dynamic_agent=makers.DynamicAgent(),
-    playing_durations=durations.medium_durations,
-    playing_groupings=durations.short_groupings,
     rhythm_maker=rhythm_makers.flowing_rhythm_maker,
     spanner_agent=makers.SpannerAgent(
         cyclical_logical_tie_spanners=(
@@ -50,18 +52,24 @@ guitar_trilling_music_maker = makers.MusicMaker(
             spannertools.ComplexTrillSpanner(interval='+m3'),
             ),
         ),
+    timespan_agent=makers.SemanticTimespanAgent(
+        playing_durations=durations.medium_durations,
+        playing_groupings=durations.short_groupings,
+        ),
     )
 
 
 guitar_winding_music_maker = makers.MusicMaker(
     dynamic_agent=makers.DynamicAgent(),
-    playing_durations=durations.medium_durations,
-    playing_groupings=durations.short_groupings,
     rhythm_maker=rhythm_makers.winding_rhythm_maker,
     spanner_agent=makers.SpannerAgent(
         output_spanners=(
             spannertools.Slur,
             ),
+        ),
+    timespan_agent=makers.SemanticTimespanAgent(
+        playing_durations=durations.medium_durations,
+        playing_groupings=durations.short_groupings,
         ),
     )
 
