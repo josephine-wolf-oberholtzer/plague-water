@@ -19,6 +19,7 @@ class DynamicAgent(PlagueWaterObject):
         cyclic_dynamic_expressions=None,
         initial_dynamic_expressions=None,
         ):
+        from plague_water import makers
         prototype = (type(None), makers.DynamicExpression)
         if cyclic_dynamic_expressions is not None:
             assert all(isinstance(x, prototype)
@@ -47,21 +48,19 @@ class DynamicAgent(PlagueWaterObject):
         leaves = list(iterate(music).by_class(scoretools.Leaf))
         groups = list(iterate(leaves).by_run(
             (scoretools.Note, scoretools.Chord)))
-        cyclic_dynamic_expressions = self._none_to_cyclic_tuple(
-            self.cyclic_dynamic_expressions,
-            seed,
-            )
         start_index = 0
         if self.initial_dynamic_expressions:
             start_index = 1
-            initial_dynamic_expressions = self._none_to_cyclic_tuple(
-                self.initial_dynamic_expressions,
-                seed,
-                )
+            initial_dynamic_expressions = sequencetools.rotate_sequence(
+                self.initial_dynamic_expressions, seed)
             initial_dynamic_expression = initial_dynamic_expressions[0]
             if initial_dynamic_expression is not None:
                 dynamic_expression(groups[0])
         if self.cyclic_dynamic_expressions:
+            cyclic_dynamic_expressions = sequencetools.rotate_sequence(
+                self.cyclic_dynamic_expressions, seed)
+            cyclic_dynamic_expressions = datastructuretools.CyclicTuple(
+                cyclic_dynamic_expressions)
             iterator = enumerate(groups[start_index:], start_index)
             for index, group in iterator:
                 dynamic_expression = cyclic_dynamic_expressions[index]
