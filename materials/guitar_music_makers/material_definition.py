@@ -43,6 +43,8 @@ guitar_trilling_music_maker = makers.MusicMaker(
 
 
 guitar_winding_music_maker = makers.MusicMaker(
+    playing_durations=durations.medium_durations,
+    playing_groupings=durations.short_groupings,
     rhythm_maker=rhythm_makers.winding_rhythm_maker,
     )
 

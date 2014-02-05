@@ -23,6 +23,7 @@ saxophone_fanfare_music_maker = makers.MusicMaker(
 
 
 saxophone_pointillist_music_maker = makers.MusicMaker(
+    articulation_handler=makers.ArticulationHandler(),
     playing_durations=durations.short_durations,
     playing_groupings=durations.short_groupings,
     rhythm_maker=rhythm_makers.pointillist_rhythm_maker,
@@ -48,6 +49,8 @@ saxophone_trilling_music_maker = makers.MusicMaker(
 
 
 saxophone_winding_music_maker = makers.MusicMaker(
+    playing_durations=durations.medium_durations,
+    playing_groupings=durations.short_groupings,
     rhythm_maker=rhythm_makers.winding_rhythm_maker,
     )
 
