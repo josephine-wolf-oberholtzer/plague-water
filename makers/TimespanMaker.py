@@ -6,10 +6,10 @@ from abjad.tools import mathtools
 from abjad.tools import systemtools
 from abjad.tools import rhythmmakertools
 from abjad.tools import timespantools
-from plague_water.makers.Maker import Maker
+from plague_water.makers.PlagueWaterObject import PlagueWaterObject
 
 
-class TimespanMaker(Maker):
+class TimespanMaker(PlagueWaterObject):
 
     ### CLASS VARIABLES ###
 

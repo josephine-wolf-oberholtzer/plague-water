@@ -4,7 +4,7 @@ import collections
 from abjad import *
 
 
-class Maker(abctools.AbjadObject):
+class PlagueWaterObject(abctools.AbjadObject):
 
     ### CLASS VARIABLES ###
 
@@ -19,57 +19,6 @@ class Maker(abctools.AbjadObject):
     def __hash__(self):
         hash_values = systemtools.StorageFormatManager.get_hash_values(self)
         return hash(hash_values)
-
-    def __makenew__(self, **kwargs):
-        from plague_water import makers
-        from abjad.tools import systemtools
-        manager = systemtools.StorageFormatManager
-        keyword_argument_dictionary = \
-            manager.get_keyword_argument_dictionary(self)
-        positional_argument_dictionary = \
-            manager.get_positional_argument_dictionary(self)
-        for key, new_value in kwargs.iteritems():
-            if key in positional_argument_dictionary:
-                old_value = positional_argument_dictionary[key]
-                if isinstance(new_value, makers.CursorTransform):
-                    prototype = (
-                        datastructuretools.StatalServerCursor,
-                        type(None),
-                        )
-                    if isinstance(old_value, prototype):
-                        value = new_value(old_value)
-                elif new_value is None:
-                    value = old_value
-                else:
-                    value = new_value
-                positional_argument_dictionary[key] = value
-            elif key in keyword_argument_dictionary:
-                old_value = keyword_argument_dictionary[key]
-                if isinstance(new_value, makers.CursorTransform):
-                    prototype = (
-                        datastructuretools.StatalServerCursor,
-                        type(None),
-                        )
-                    if isinstance(old_value, prototype):
-                        value = new_value(old_value)
-                elif new_value is None:
-                    value = old_value
-                else:
-                    value = new_value
-                keyword_argument_dictionary[key] = value
-            else:
-                raise KeyError(key)
-        positional_argument_values = []
-        positional_argument_names = getattr(
-            self, '_positional_argument_names', None) or \
-            manager.get_positional_argument_names(self)
-        for positional_argument_name in positional_argument_names:
-            positional_argument_value = positional_argument_dictionary[
-                positional_argument_name]
-            positional_argument_values.append(positional_argument_value)
-        result = type(self)(
-            *positional_argument_values, **keyword_argument_dictionary)
-        return result
 
     ### PRIVATE METHODS ###
 

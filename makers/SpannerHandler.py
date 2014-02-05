@@ -6,10 +6,10 @@ from abjad.tools import datastructuretools
 from abjad.tools import durationtools
 from abjad.tools import sequencetools
 from abjad.tools import spannertools
-from plague_water.makers.Maker import Maker
+from plague_water.makers.PlagueWaterObject import PlagueWaterObject
 
 
-class SpannerHandler(Maker):
+class SpannerHandler(PlagueWaterObject):
 
     ### CLASS VARIABLES ###
 

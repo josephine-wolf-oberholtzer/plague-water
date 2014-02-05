@@ -1,10 +1,10 @@
 # -*- encoding: utf-8 -*-
 import bisect
 from abjad import *
-from plague_water.makers.Maker import Maker
+from plague_water.makers.PlagueWaterObject import PlagueWaterObject
 
 
-class ChordHandler(Maker):
+class ChordHandler(PlagueWaterObject):
 
     ### CLASS VARIABLES ###
 

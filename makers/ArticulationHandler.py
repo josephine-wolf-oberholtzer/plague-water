@@ -2,10 +2,10 @@
 import collections
 import copy
 from abjad import *
-from plague_water.makers.Maker import Maker
+from plague_water.makers.PlagueWaterObject import PlagueWaterObject
 
 
-class ArticulationHandler(Maker):
+class ArticulationHandler(PlagueWaterObject):
 
     ### CLASS VARIABLES ###
 

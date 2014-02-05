@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
 from abjad import *
-from plague_water.makers.Maker import Maker
+from plague_water.makers.PlagueWaterObject import PlagueWaterObject
 
 
-class MusicMaker(Maker):
+class MusicMaker(PlagueWaterObject):
 
     ### CLASS VARIABLES ###
 

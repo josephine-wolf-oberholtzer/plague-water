@@ -4,10 +4,10 @@ from abjad import new
 from abjad.tools import durationtools
 from abjad.tools import mathtools
 from abjad.tools import pitchtools
-from plague_water.makers.Maker import Maker
+from plague_water.makers.PlagueWaterObject import PlagueWaterObject
 
 
-class RegisterCurve(Maker):
+class RegisterCurve(PlagueWaterObject):
 
     ### CLASS VARIABLES ###
 

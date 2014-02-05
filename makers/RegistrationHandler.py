@@ -1,10 +1,10 @@
 # -*- encoding: utf-8 -*-
 import collections
 from abjad import *
-from plague_water.makers.Maker import Maker
+from plague_water.makers.PlagueWaterObject import PlagueWaterObject
 
 
-class RegistrationHandler(Maker):
+class RegistrationHandler(PlagueWaterObject):
 
     ### CLASS VARIABLES ###
 
