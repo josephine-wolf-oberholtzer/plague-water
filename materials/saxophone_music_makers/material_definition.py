@@ -52,6 +52,11 @@ saxophone_winding_music_maker = makers.MusicMaker(
     playing_durations=durations.medium_durations,
     playing_groupings=durations.short_groupings,
     rhythm_maker=rhythm_makers.winding_rhythm_maker,
+    spanner_handler=makers.SpannerHandler(
+        output_spanners=(
+            spannertools.Slur,
+            ),
+        ),
     )
 
 
