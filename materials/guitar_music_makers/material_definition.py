@@ -18,7 +18,7 @@ guitar_fanfare_music_maker = makers.MusicMaker(
     )
 
 
-guitar_trills_music_maker = makers.MusicMaker(
+guitar_trilling_music_maker = makers.MusicMaker(
     rhythm_maker=rhythm_makers.flowing_rhythm_maker,
     spanner_handler=makers.SpannerHandler(
         cyclical_logical_tie_spanners=(
@@ -36,4 +36,5 @@ guitar_trills_music_maker = makers.MusicMaker(
 
 __all__ = (
     'guitar_fanfare_music_maker',
+    'guitar_trilling_music_maker',
     )

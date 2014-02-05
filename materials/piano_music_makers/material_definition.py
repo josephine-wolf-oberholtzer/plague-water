@@ -22,7 +22,7 @@ piano_fanfare_music_maker = makers.MusicMaker(
     )
 
 
-piano_gliss_music_maker = makers.MusicMaker(
+piano_glissed_music_maker = makers.MusicMaker(
     articulation_handler=makers.ArticulationHandler(
         apply_to_output=True,
         first_leaf_indicators=(
@@ -61,15 +61,32 @@ piano_gliss_music_maker = makers.MusicMaker(
     )
 
 
-piano_key_gliss_music_maker = new(piano_gliss_music_maker,
-    spanner_maker__output_spanners=spanners.key_glissando_spanner,
+piano_glissed_keys_music_maker = new(piano_glissed_music_maker,
+    spanner_handler__output_spanners=spanners.key_glissando_spanner,
     )
 
 
-piano_peg_gliss_music_maker = new(piano_gliss_music_maker)
+piano_glissed_pegs_music_maker = new(piano_glissed_music_maker,
+    articulation_handler__first_leaf_indicators=(
+        markuptools.Markup(r'\box \pad #1 PEGS'),
+        ),
+    )
+
+
+piano_pointillist_music_maker = makers.MusicMaker()
+
+
+piano_rolled_chords_music_maker = makers.MusicMaker()
+
+
+piano_trilling_music_maker = makers.MusicMaker()
 
 
 __all__ = (
     'piano_fanfare_music_maker',
-    'piano_key_gliss_music_maker',
+    'piano_glissed_keys_music_maker',
+    'piano_glissed_pegs_music_maker',
+    'piano_pointillist_music_maker',
+    'piano_rolled_chords_music_maker',
+    'piano_trilling_music_maker',
     )

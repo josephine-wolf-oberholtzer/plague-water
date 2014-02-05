@@ -102,4 +102,7 @@ class PlagueWaterObject(abctools.AbjadObject):
                 if key in context_map[context_name]:
                     value = context_map[context_name][key]
                     parameters[key] = value
-        return self.__makenew__(**parameters)
+        return new(
+            self,
+            **parameters
+            )

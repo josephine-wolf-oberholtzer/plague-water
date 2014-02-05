@@ -103,10 +103,11 @@ class SpannerHandler(PlagueWaterObject):
 
     def _none_to_tuple(self, expr):
         if expr is not None:
-            if isinstance(expr, spannertools.Spanner):
-                return (expr,)
-            elif issubclass(expr, spannertools.Spanner):
-                return (expr,)
+            if not isinstance(expr, (list, tuple)):
+                if isinstance(expr, spannertools.Spanner):
+                    return (expr,)
+                elif issubclass(expr, spannertools.Spanner):
+                    return (expr,)
             for x in expr:
                 if isinstance(x, type):
                     assert issubclass(x, spannertools.Spanner)

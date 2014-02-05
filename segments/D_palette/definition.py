@@ -95,7 +95,7 @@ saxophone_timespan_maker = makers.TimespanMaker(
 piano_rh_timespan_maker = makers.TimespanMaker(
     context_name='Piano RH Voice',
     music_makers=[
-        materials.piano_key_gliss_music_maker,
+        materials.piano_glissed_keys_music_maker,
         ],
     )
 

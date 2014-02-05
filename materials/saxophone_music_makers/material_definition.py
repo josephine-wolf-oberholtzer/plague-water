@@ -5,6 +5,9 @@ from plague_water.materials import durations
 from plague_water.materials import rhythm_makers
 
 
+saxophone_droning_music_maker = makers.MusicMaker()
+
+
 saxophone_fanfare_music_maker = makers.MusicMaker(
     articulation_handler=makers.ArticulationHandler(
         first_leaf_indicators=('accent',),
@@ -18,6 +21,19 @@ saxophone_fanfare_music_maker = makers.MusicMaker(
     )
 
 
+saxophone_legato_music_maker = makers.MusicMaker()
+
+
+saxophone_pointillist_music_maker = makers.MusicMaker()
+
+
+saxophone_trilling_music_maker = makers.MusicMaker()
+
+
 __all__ = (
+    'saxophone_droning_music_maker',
     'saxophone_fanfare_music_maker',
+    'saxophone_legato_music_maker',
+    'saxophone_pointillist_music_maker',
+    'saxophone_trilling_music_maker',
     )
