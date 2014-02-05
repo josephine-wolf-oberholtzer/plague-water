@@ -39,7 +39,7 @@ class MusicMaker(Maker):
         pitch_class_maker=None,
         playing_durations=None,
         playing_groupings=None,
-        registration_maker=None,
+        registration_handler=None,
         rewrite_meter=None,
         rhythm_maker=None,
         spanner_maker=None,
@@ -55,8 +55,8 @@ class MusicMaker(Maker):
         assert isinstance(minimum_timespan_duration, (Duration, type(None)))
         assert isinstance(pitch_class_maker,
             (makers.PitchClassMaker, type(None)))
-        assert isinstance(registration_maker,
-            (makers.RegistrationMaker, type(None)))
+        assert isinstance(registration_handler,
+            (makers.RegistrationHandler, type(None)))
         assert isinstance(rhythm_maker,
             (rhythmmakertools.RhythmMaker, type(None)))
         assert isinstance(spanner_maker,
@@ -75,7 +75,7 @@ class MusicMaker(Maker):
             playing_durations)
         self._playing_groupings = self._setup_grouping_cursor(
             playing_groupings)
-        self._registration_maker = registration_maker
+        self._registration_maker = registration_handler
         if rewrite_meter is not None:
             rewrite_meter = bool(rewrite_meter)
         self._rewrite_meter = rewrite_meter
@@ -146,9 +146,9 @@ class MusicMaker(Maker):
         seed=0,
         segment_duration=None,
         ):
-        if self.registration_maker is None:
+        if self.registration_handler is None:
             return
-        self.registration_maker(
+        self.registration_handler(
             music,
             segment_duration=segment_duration,
             )
@@ -427,7 +427,7 @@ class MusicMaker(Maker):
         return self._playing_groupings
 
     @property
-    def registration_maker(self):
+    def registration_handler(self):
         return self._registration_maker
 
     @property

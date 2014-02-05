@@ -4,7 +4,7 @@ from abjad import *
 from plague_water.makers.Maker import Maker
 
 
-class RegistrationMaker(Maker):
+class RegistrationHandler(Maker):
 
     ### CLASS VARIABLES ###
 
