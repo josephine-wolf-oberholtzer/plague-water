@@ -28,7 +28,7 @@ class SegmentMaker(PlagueWaterObject):
         'target_segment_duration',
         'segment_tempo',
         'time_signatures',
-        'timespan_makers',
+        'context_makers',
         )
 
     ### INITIALIZER ###
@@ -43,7 +43,7 @@ class SegmentMaker(PlagueWaterObject):
         segment_name=None,
         target_segment_duration=None,
         segment_tempo=None,
-        timespan_makers=None,
+        context_makers=None,
         ):
         self._prepare(
             allow_none_as_sentinel=True,
@@ -55,7 +55,7 @@ class SegmentMaker(PlagueWaterObject):
             segment_name=segment_name,
             target_segment_duration=target_segment_duration,
             segment_tempo=segment_tempo,
-            timespan_makers=timespan_makers,
+            context_makers=context_makers,
             )
 
     ### SPECIAL METHODS ###
@@ -72,7 +72,7 @@ class SegmentMaker(PlagueWaterObject):
             segment_name=self.segment_name,
             segment_tempo=self.segment_tempo,
             target_segment_duration=self.target_segment_duration,
-            timespan_makers=self.timespan_makers,
+            context_makers=self.context_makers,
             )
 
         ### CREATE SCORE ###
@@ -110,9 +110,9 @@ class SegmentMaker(PlagueWaterObject):
 
     def __getitem__(self, item):
         item = str(item)
-        for timespan_maker in self.timespan_makers:
-            if timespan_maker.context_name == item:
-                return timespan_maker
+        for context_maker in self.context_makers:
+            if context_maker.context_name == item:
+                return context_maker
 
     def __illustrate__(self):
         return self()
@@ -143,21 +143,21 @@ class SegmentMaker(PlagueWaterObject):
         segment_name=None,
         segment_tempo=None,
         target_segment_duration=None,
-        timespan_makers=None,
+        context_makers=None,
         ):
         from plague_water import makers
         ### TIMESPAN MAKERS ###
         if not allow_none_as_sentinel:
-            prototype = (makers.TimespanMaker, type(None))
-            assert len(timespan_makers)
-            assert all(isinstance(x, prototype) for x in timespan_makers)
-            timespan_makers = sorted(
-                timespan_makers,
+            prototype = (makers.ContextMaker, type(None))
+            assert len(context_makers)
+            assert all(isinstance(x, prototype) for x in context_makers)
+            context_makers = sorted(
+                context_makers,
                 key=lambda x: x.context_name,
                 )
-            timespan_makers = tuple(timespan_makers)
-            context_names = set([x.context_name for x in timespan_makers])
-            assert len(context_names) == len(timespan_makers)
+            context_makers = tuple(context_makers)
+            context_names = set([x.context_name for x in context_makers])
+            assert len(context_names) == len(context_makers)
         ### OTHER ###
         assert isinstance(context_map, datastructuretools.ContextMap)
         permitted_time_signatures = indicatortools.TimeSignatureInventory(
@@ -186,7 +186,7 @@ class SegmentMaker(PlagueWaterObject):
         self.segment_tempo = segment_tempo
         self.target_segment_duration = target_segment_duration
         self.time_signatures = None
-        self.timespan_makers = timespan_makers
+        self.context_makers = context_makers
 
     ### PUBLIC METHODS ###
 
@@ -447,23 +447,23 @@ class SegmentMaker(PlagueWaterObject):
             for group in groups:
                 current_offset += sum(x.duration for x in group)
                 split_offsets.append(current_offset)
-        for timespan_maker in self.timespan_makers:
-            timespan_maker.cleanup_performed_timespans(
+        for context_maker in self.context_makers:
+            context_maker.cleanup_performed_timespans(
                 split_offsets=split_offsets,
                 )
 
     def create_performed_timespans(self):
         print '\tcreating performed timespans'
         from plague_water import makers
-        ordered_timespan_makers = makers.TimespanMaker.order_by_dependencies(
-            self.timespan_makers)
-        for timespan_maker in ordered_timespan_makers:
+        ordered_context_makers = makers.ContextMaker.order_by_dependencies(
+            self.context_makers)
+        for context_maker in ordered_context_makers:
             dependencies = None
-            if timespan_maker.context_dependencies:
-                dependencies = [x for x in self.timespan_makers
-                    if x.context_name in timespan_maker.context_dependencies
+            if context_maker.context_dependencies:
+                dependencies = [x for x in self.context_makers
+                    if x.context_name in context_maker.context_dependencies
                     ]
-            timespan_maker.create_performed_timespans(
+            context_maker.create_performed_timespans(
                 self.target_segment_duration,
                 context_map=self.context_map,
                 dependencies=dependencies,
@@ -471,8 +471,8 @@ class SegmentMaker(PlagueWaterObject):
 
     def create_silent_timespans(self):
         print '\tcreating silent timespans'
-        for timespan_maker in self.timespan_makers:
-            timespan_maker.create_silent_timespans(
+        for context_maker in self.context_makers:
+            context_maker.create_silent_timespans(
                 segment_duration=self.segment_duration,
                 time_signatures=self.time_signatures,
                 )
@@ -482,8 +482,8 @@ class SegmentMaker(PlagueWaterObject):
         offset_counter = datastructuretools.TypedCounter(
             item_class=Offset,
             )
-        for timespan_maker in self.timespan_makers:
-            for timespan in timespan_maker.timespan_inventory:
+        for context_maker in self.context_makers:
+            for timespan in context_maker.timespan_inventory:
                 offset_counter[timespan.start_offset] += 1
                 offset_counter[timespan.stop_offset] += 1
         if not offset_counter:
@@ -530,9 +530,9 @@ class SegmentMaker(PlagueWaterObject):
         ):
         print '\tcreating rhythms'
         seed = 0
-        for timespan_maker in self.timespan_makers:
-            context_name = timespan_maker.context_name
-            timespan_inventory = timespan_maker.timespan_inventory
+        for context_maker in self.context_makers:
+            context_name = context_maker.context_name
+            timespan_inventory = context_maker.timespan_inventory
             realization, seed = self.populate_rhythms_for_one_voice(
                 context_map=self.context_map,
                 context_name=context_name,
@@ -591,9 +591,9 @@ class SegmentMaker(PlagueWaterObject):
         meters = list(self.meters)
         time_signatures = list(self.time_signatures)
         timespan_inventories = [
-            timespan_maker.timespan_inventory
-            for timespan_maker in self.timespan_makers
-            if timespan_maker.timespan_inventory
+            context_maker.timespan_inventory
+            for context_maker in self.context_makers
+            if context_maker.timespan_inventory
             ]
         maximum_performed_offset = max(
             timespan_inventory.stop_offset

@@ -30,9 +30,9 @@ context_map[score]['pitch_class_maker'] = makers.PitchClassMaker(
     transform_talea=None,
     )
 
-### timespan_makerES ###
+### context_makerES ###
 
-guitar_timespan_maker = makers.TimespanMaker(
+guitar_context_maker = makers.ContextMaker(
     context_name='Guitar Voice',
     music_makers=[
         makers.MusicMaker(
@@ -43,7 +43,7 @@ guitar_timespan_maker = makers.TimespanMaker(
         ],
     )
 
-saxophone_timespan_maker = makers.TimespanMaker(
+saxophone_context_maker = makers.ContextMaker(
     context_name='Saxophone Voice',
     initial_music_maker=makers.MusicMaker(
         leading_rest_durations=materials.short_durations(),
@@ -52,7 +52,7 @@ saxophone_timespan_maker = makers.TimespanMaker(
         ),
     )
 
-piano_rh_timespan_maker = makers.TimespanMaker(
+piano_rh_context_maker = makers.ContextMaker(
     context_name='Piano RH Voice',
     initial_music_maker=makers.MusicMaker(
         leading_rest_durations=materials.short_durations(),
@@ -61,7 +61,7 @@ piano_rh_timespan_maker = makers.TimespanMaker(
         ),
     )
 
-piano_lh_timespan_maker = makers.TimespanMaker(
+piano_lh_context_maker = makers.ContextMaker(
     context_name='Piano LH Voice',
     initial_music_maker=makers.MusicMaker(
         leading_rest_durations=materials.short_durations(),
@@ -70,7 +70,7 @@ piano_lh_timespan_maker = makers.TimespanMaker(
         ),
     )
 
-percussion_rh_timespan_maker = makers.TimespanMaker(
+percussion_rh_context_maker = makers.ContextMaker(
     context_name='Percussion RH Voice',
     initial_music_maker=makers.MusicMaker(
         leading_rest_durations=materials.short_durations(),
@@ -79,7 +79,7 @@ percussion_rh_timespan_maker = makers.TimespanMaker(
         ),
     )
 
-percussion_lh_timespan_maker = makers.TimespanMaker(
+percussion_lh_context_maker = makers.ContextMaker(
     context_name='Percussion LH Voice',
     initial_music_maker=makers.MusicMaker(
         leading_rest_durations=materials.short_durations(),
@@ -96,12 +96,12 @@ segment_maker = makers.SegmentMaker(
     measure_segmentation_talea=measure_segmentation_talea,
     permitted_time_signatures=permitted_time_signatures,
     segment_tempo=segment_tempo,
-    timespan_makers=(
-        guitar_timespan_maker,
-        percussion_lh_timespan_maker,
-        percussion_rh_timespan_maker,
-        piano_lh_timespan_maker,
-        piano_rh_timespan_maker,
-        saxophone_timespan_maker,
+    context_makers=(
+        guitar_context_maker,
+        percussion_lh_context_maker,
+        percussion_rh_context_maker,
+        piano_lh_context_maker,
+        piano_rh_context_maker,
+        saxophone_context_maker,
         )
     )

@@ -9,7 +9,7 @@ from abjad.tools import timespantools
 from plague_water.makers.PlagueWaterObject import PlagueWaterObject
 
 
-class TimespanMaker(PlagueWaterObject):
+class ContextMaker(PlagueWaterObject):
 
     ### CLASS VARIABLES ###
 
@@ -162,19 +162,19 @@ class TimespanMaker(PlagueWaterObject):
         self.timespan_inventory.sort()
 
     @staticmethod
-    def order_by_dependencies(timespan_makers):
-        timespan_makers = list(timespan_makers)
+    def order_by_dependencies(context_makers):
+        context_makers = list(context_makers)
         result = []
         context_names = set()
-        while timespan_makers:
+        while context_makers:
             made_progress = False
-            for timespan_maker in reversed(timespan_makers):
-                if timespan_maker.context_dependencies is None or \
+            for context_maker in reversed(context_makers):
+                if context_maker.context_dependencies is None or \
                     all(x in context_names
-                        for x in timespan_maker.context_dependencies):
-                    timespan_makers.remove(timespan_maker)
-                    result.append(timespan_maker)
-                    context_names.add(timespan_maker.context_name)
+                        for x in context_maker.context_dependencies):
+                    context_makers.remove(context_maker)
+                    result.append(context_maker)
+                    context_names.add(context_maker.context_name)
                     made_progress = True
             assert made_progress
         return result

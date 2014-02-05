@@ -40,27 +40,27 @@ cursor_transform = makers.CursorTransform(
     reverse=True,
     )
 
-guitar_timespan_maker = new(
+guitar_context_maker = new(
     base_segment_maker['Guitar Voice'].transform_cursors(cursor_transform),
     )
 
-saxophone_timespan_maker = new(
+saxophone_context_maker = new(
     base_segment_maker['Saxophone Voice'].transform_cursors(cursor_transform),
     )
 
-piano_rh_timespan_maker = new(
+piano_rh_context_maker = new(
     base_segment_maker['Piano RH Voice'].transform_cursors(cursor_transform),
     )
 
-piano_lh_timespan_maker = new(
+piano_lh_context_maker = new(
     base_segment_maker['Piano LH Voice'].transform_cursors(cursor_transform),
     )
 
-percussion_rh_timespan_maker = new(
+percussion_rh_context_maker = new(
     base_segment_maker['Percussion RH Voice'].transform_cursors(cursor_transform),
     )
 
-percussion_lh_timespan_maker = new(
+percussion_lh_context_maker = new(
     base_segment_maker['Percussion LH Voice'].transform_cursors(cursor_transform),
     )
 
@@ -73,13 +73,13 @@ segment_maker = new(
     segment_name=segment_name,
     segment_tempo=segment_tempo,
     target_segment_duration=target_segment_duration,
-    timespan_makers=(
-        guitar_timespan_maker,
-        percussion_lh_timespan_maker,
-        percussion_rh_timespan_maker,
-        piano_lh_timespan_maker,
-        piano_rh_timespan_maker,
-        saxophone_timespan_maker,
+    context_makers=(
+        guitar_context_maker,
+        percussion_lh_context_maker,
+        percussion_rh_context_maker,
+        piano_lh_context_maker,
+        piano_rh_context_maker,
+        saxophone_context_maker,
         )
     )
 

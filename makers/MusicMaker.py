@@ -330,4 +330,4 @@ class MusicMaker(PlagueWaterObject):
 
     @property
     def timespan_agent(self):
-        return self._timespan_maker
+        return self._context_maker
