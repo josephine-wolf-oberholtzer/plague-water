@@ -30,7 +30,7 @@ class MusicMaker(PlagueWaterObject):
 
     def __init__(
         self,
-        articulation_handler=None,
+        indicator_handler=None,
         can_be_split=None,
         chord_handler=None,
         dynamic_handler=None,
@@ -46,8 +46,8 @@ class MusicMaker(PlagueWaterObject):
         tailing_rest_durations=None,
         ):
         from plague_water import makers
-        assert isinstance(articulation_handler,
-            (makers.ArticulationHandler, type(None)))
+        assert isinstance(indicator_handler,
+            (makers.IndicatorHandler, type(None)))
         assert isinstance(chord_handler,
             (makers.ChordHandler, type(None)))
         assert isinstance(dynamic_handler,
@@ -61,7 +61,7 @@ class MusicMaker(PlagueWaterObject):
             (rhythmmakertools.RhythmMaker, type(None)))
         assert isinstance(spanner_handler,
             (makers.SpannerHandler, type(None)))
-        self._articulation_maker = articulation_handler
+        self._articulation_maker = indicator_handler
         if can_be_split is not None:
             can_be_split = bool(can_be_split)
         self._can_be_split = can_be_split
@@ -92,9 +92,9 @@ class MusicMaker(PlagueWaterObject):
         seed=0,
         segment_duration=None,
         ):
-        if self.articulation_handler is None:
+        if self.indicator_handler is None:
             return
-        self.articulation_handler(
+        self.indicator_handler(
             music,
             seed=seed,
             segment_duration=segment_duration,
@@ -391,7 +391,7 @@ class MusicMaker(PlagueWaterObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def articulation_handler(self):
+    def indicator_handler(self):
         return self._articulation_maker
 
     @property

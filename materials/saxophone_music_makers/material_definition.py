@@ -11,7 +11,7 @@ saxophone_droning_music_maker = makers.MusicMaker(
 
 
 saxophone_fanfare_music_maker = makers.MusicMaker(
-    articulation_handler=makers.ArticulationHandler(
+    indicator_handler=makers.IndicatorHandler(
         first_leaf_indicators=('accent',),
         inner_leaf_indicators=('staccato',),
         ),
@@ -23,7 +23,7 @@ saxophone_fanfare_music_maker = makers.MusicMaker(
 
 
 saxophone_pointillist_music_maker = makers.MusicMaker(
-    articulation_handler=makers.ArticulationHandler(),
+    indicator_handler=makers.IndicatorHandler(),
     playing_durations=durations.short_durations,
     playing_groupings=durations.short_groupings,
     rhythm_maker=rhythm_makers.pointillist_rhythm_maker,
