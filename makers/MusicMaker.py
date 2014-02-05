@@ -42,7 +42,7 @@ class MusicMaker(Maker):
         registration_handler=None,
         rewrite_meter=None,
         rhythm_maker=None,
-        spanner_maker=None,
+        spanner_handler=None,
         tailing_rest_durations=None,
         ):
         from plague_water import makers
@@ -59,8 +59,8 @@ class MusicMaker(Maker):
             (makers.RegistrationHandler, type(None)))
         assert isinstance(rhythm_maker,
             (rhythmmakertools.RhythmMaker, type(None)))
-        assert isinstance(spanner_maker,
-            (makers.SpannerMaker, type(None)))
+        assert isinstance(spanner_handler,
+            (makers.SpannerHandler, type(None)))
         self._articulation_maker = articulation_handler
         if can_be_split is not None:
             can_be_split = bool(can_be_split)
@@ -80,7 +80,7 @@ class MusicMaker(Maker):
             rewrite_meter = bool(rewrite_meter)
         self._rewrite_meter = rewrite_meter
         self._rhythm_maker = rhythm_maker
-        self._spanner_maker = spanner_maker
+        self._spanner_maker = spanner_handler
         self._tailing_rest_durations = self._setup_duration_cursor(
             tailing_rest_durations)
 
@@ -160,9 +160,9 @@ class MusicMaker(Maker):
         seed=0,
         segment_duration=None,
         ):
-        if self.spanner_maker is None:
+        if self.spanner_handler is None:
             return
-        self.spanner_maker(
+        self.spanner_handler(
             music,
             seed=seed,
             segment_duration=segment_duration,
@@ -439,7 +439,7 @@ class MusicMaker(Maker):
         return self._rhythm_maker
 
     @property
-    def spanner_maker(self):
+    def spanner_handler(self):
         return self._spanner_maker
 
     @property

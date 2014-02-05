@@ -55,7 +55,7 @@ piano_gliss_music_maker = makers.MusicMaker(
         ),
     rhythm_maker=rhythm_makers.glissing_rhythm_maker,
     rewrite_meter=False,
-    spanner_maker=makers.SpannerMaker(
+    spanner_handler=makers.SpannerHandler(
         output_spanners=spannertools.Glissando,
         )
     )
