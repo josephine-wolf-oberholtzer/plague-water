@@ -47,7 +47,7 @@ euler_numbers = [
     ][:100]
 
 euler_hundreds = [int('{}{}'.format(_x, _y)) for _x, _y in
-    sequencetools.iterate_sequence_nwise_strict(euler_numbers, 2)]
+    sequencetools.iterate_sequence_nwise(euler_numbers, 2)]
 
 __all__ = (
     'euler_hundreds',
