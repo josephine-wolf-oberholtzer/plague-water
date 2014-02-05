@@ -10,7 +10,7 @@ from plague_water.materials import spanners
 
 
 piano_fanfare_music_maker = makers.MusicMaker(
-    indicator_handler=makers.IndicatorHandler(
+    indicator_agent=makers.IndicatorAgent(
         first_leaf_indicators=('accent',),
         inner_leaf_indicators=('staccato',),
         ),
@@ -23,7 +23,7 @@ piano_fanfare_music_maker = makers.MusicMaker(
 
 
 piano_glissed_music_maker = makers.MusicMaker(
-    indicator_handler=makers.IndicatorHandler(
+    indicator_agent=makers.IndicatorAgent(
         apply_to_output=True,
         first_leaf_indicators=(
             markuptools.Markup(
@@ -41,7 +41,7 @@ piano_glissed_music_maker = makers.MusicMaker(
         durationtools.Duration(1, 8),
         ),
     playing_groupings=durations.short_groupings(10),
-    registration_handler=makers.RegistrationHandler(
+    registration_agent=makers.RegistrationAgent(
         phrase_inflections=(
             makers.RegisterCurve(
                 ratio=(1,),
@@ -55,19 +55,19 @@ piano_glissed_music_maker = makers.MusicMaker(
         ),
     rhythm_maker=rhythm_makers.glissing_rhythm_maker,
     rewrite_meter=False,
-    spanner_handler=makers.SpannerHandler(
+    spanner_agent=makers.SpannerAgent(
         output_spanners=spannertools.Glissando,
         )
     )
 
 
 piano_glissed_keys_music_maker = new(piano_glissed_music_maker,
-    spanner_handler__output_spanners=spanners.key_glissando_spanner,
+    spanner_agent__output_spanners=spanners.key_glissando_spanner,
     )
 
 
 piano_glissed_pegs_music_maker = new(piano_glissed_music_maker,
-    articulation_handler__first_leaf_indicators=(
+    articulation_agent__first_leaf_indicators=(
         markuptools.Markup(r'\box \pad #1 PEGS'),
         ),
     )
@@ -83,7 +83,7 @@ piano_rolled_chords_music_maker = makers.MusicMaker()
 
 piano_trilling_music_maker = makers.MusicMaker(
     rhythm_maker=rhythm_makers.flowing_rhythm_maker,
-    spanner_handler=makers.SpannerHandler(
+    spanner_agent=makers.SpannerAgent(
         cyclical_logical_tie_spanners=(
             spannertools.ComplexTrillSpanner(interval='+m3'),
             spannertools.ComplexTrillSpanner(interval='+P4'),

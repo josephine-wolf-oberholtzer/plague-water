@@ -4,7 +4,7 @@ from abjad import *
 from plague_water.makers.PlagueWaterObject import PlagueWaterObject
 
 
-class RegistrationHandler(PlagueWaterObject):
+class RegistrationAgent(PlagueWaterObject):
 
     ### CLASS VARIABLES ###
 

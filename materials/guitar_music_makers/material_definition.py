@@ -6,7 +6,7 @@ from plague_water.materials import rhythm_makers
 
 
 guitar_fanfare_music_maker = makers.MusicMaker(
-    indicator_handler=makers.IndicatorHandler(
+    indicator_agent=makers.IndicatorAgent(
         first_leaf_indicators=('accent',),
         inner_leaf_indicators=('staccato',),
         ),
@@ -28,7 +28,7 @@ guitar_trilling_music_maker = makers.MusicMaker(
     playing_durations=durations.medium_durations,
     playing_groupings=durations.short_groupings,
     rhythm_maker=rhythm_makers.flowing_rhythm_maker,
-    spanner_handler=makers.SpannerHandler(
+    spanner_agent=makers.SpannerAgent(
         cyclical_logical_tie_spanners=(
             spannertools.ComplexTrillSpanner(interval='+P4'),
             spannertools.ComplexTrillSpanner(interval='+m2'),
@@ -46,7 +46,7 @@ guitar_winding_music_maker = makers.MusicMaker(
     playing_durations=durations.medium_durations,
     playing_groupings=durations.short_groupings,
     rhythm_maker=rhythm_makers.winding_rhythm_maker,
-    spanner_handler=makers.SpannerHandler(
+    spanner_agent=makers.SpannerAgent(
         output_spanners=(
             spannertools.Slur,
             ),

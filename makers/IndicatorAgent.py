@@ -5,7 +5,7 @@ from abjad import *
 from plague_water.makers.PlagueWaterObject import PlagueWaterObject
 
 
-class IndicatorHandler(PlagueWaterObject):
+class IndicatorAgent(PlagueWaterObject):
 
     ### CLASS VARIABLES ###
 

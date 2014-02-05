@@ -3,7 +3,7 @@ from abjad import *
 from plague_water.makers.PlagueWaterObject import PlagueWaterObject
 
 
-class DynamicHandler(PlagueWaterObject):
+class DynamicAgent(PlagueWaterObject):
 
     ### CLASS VARIABLES ###
 

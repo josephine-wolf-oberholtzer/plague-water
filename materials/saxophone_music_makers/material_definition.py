@@ -11,7 +11,7 @@ saxophone_droning_music_maker = makers.MusicMaker(
 
 
 saxophone_fanfare_music_maker = makers.MusicMaker(
-    indicator_handler=makers.IndicatorHandler(
+    indicator_agent=makers.IndicatorAgent(
         first_leaf_indicators=('accent',),
         inner_leaf_indicators=('staccato',),
         ),
@@ -23,7 +23,7 @@ saxophone_fanfare_music_maker = makers.MusicMaker(
 
 
 saxophone_pointillist_music_maker = makers.MusicMaker(
-    indicator_handler=makers.IndicatorHandler(),
+    indicator_agent=makers.IndicatorAgent(),
     playing_durations=durations.short_durations,
     playing_groupings=durations.short_groupings,
     rhythm_maker=rhythm_makers.pointillist_rhythm_maker,
@@ -34,7 +34,7 @@ saxophone_trilling_music_maker = makers.MusicMaker(
     playing_durations=durations.medium_durations,
     playing_groupings=durations.short_groupings,
     rhythm_maker=rhythm_makers.flowing_rhythm_maker,
-    spanner_handler=makers.SpannerHandler(
+    spanner_agent=makers.SpannerAgent(
         cyclical_logical_tie_spanners=(
             spannertools.ComplexTrillSpanner(interval='+m3'),
             spannertools.ComplexTrillSpanner(interval='+P4'),
@@ -52,7 +52,7 @@ saxophone_winding_music_maker = makers.MusicMaker(
     playing_durations=durations.medium_durations,
     playing_groupings=durations.short_groupings,
     rhythm_maker=rhythm_makers.winding_rhythm_maker,
-    spanner_handler=makers.SpannerHandler(
+    spanner_agent=makers.SpannerAgent(
         output_spanners=(
             spannertools.Slur,
             ),

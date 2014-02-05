@@ -30,43 +30,43 @@ class MusicMaker(PlagueWaterObject):
 
     def __init__(
         self,
-        indicator_handler=None,
+        indicator_agent=None,
         can_be_split=None,
-        chord_handler=None,
-        dynamic_handler=None,
+        chord_agent=None,
+        dynamic_agent=None,
         leading_rest_durations=None,
         minimum_timespan_duration=None,
         pitch_class_maker=None,
         playing_durations=None,
         playing_groupings=None,
-        registration_handler=None,
+        registration_agent=None,
         rewrite_meter=None,
         rhythm_maker=None,
-        spanner_handler=None,
+        spanner_agent=None,
         tailing_rest_durations=None,
         ):
         from plague_water import makers
-        assert isinstance(indicator_handler,
-            (makers.IndicatorHandler, type(None)))
-        assert isinstance(chord_handler,
-            (makers.ChordHandler, type(None)))
-        assert isinstance(dynamic_handler,
-            (makers.DynamicHandler, type(None)))
+        assert isinstance(indicator_agent,
+            (makers.IndicatorAgent, type(None)))
+        assert isinstance(chord_agent,
+            (makers.ChordAgent, type(None)))
+        assert isinstance(dynamic_agent,
+            (makers.DynamicAgent, type(None)))
         assert isinstance(minimum_timespan_duration, (Duration, type(None)))
         assert isinstance(pitch_class_maker,
             (makers.PitchClassMaker, type(None)))
-        assert isinstance(registration_handler,
-            (makers.RegistrationHandler, type(None)))
+        assert isinstance(registration_agent,
+            (makers.RegistrationAgent, type(None)))
         assert isinstance(rhythm_maker,
             (rhythmmakertools.RhythmMaker, type(None)))
-        assert isinstance(spanner_handler,
-            (makers.SpannerHandler, type(None)))
-        self._articulation_maker = indicator_handler
+        assert isinstance(spanner_agent,
+            (makers.SpannerAgent, type(None)))
+        self._articulation_maker = indicator_agent
         if can_be_split is not None:
             can_be_split = bool(can_be_split)
         self._can_be_split = can_be_split
-        self._chord_maker = chord_handler
-        self._dynamic_maker = dynamic_handler
+        self._chord_maker = chord_agent
+        self._dynamic_maker = dynamic_agent
         self._leading_rest_durations = self._setup_duration_cursor(
             leading_rest_durations)
         self._minimum_timespan_duration = minimum_timespan_duration
@@ -75,12 +75,12 @@ class MusicMaker(PlagueWaterObject):
             playing_durations)
         self._playing_groupings = self._setup_grouping_cursor(
             playing_groupings)
-        self._registration_maker = registration_handler
+        self._registration_maker = registration_agent
         if rewrite_meter is not None:
             rewrite_meter = bool(rewrite_meter)
         self._rewrite_meter = rewrite_meter
         self._rhythm_maker = rhythm_maker
-        self._spanner_maker = spanner_handler
+        self._spanner_maker = spanner_agent
         self._tailing_rest_durations = self._setup_duration_cursor(
             tailing_rest_durations)
 
@@ -92,9 +92,9 @@ class MusicMaker(PlagueWaterObject):
         seed=0,
         segment_duration=None,
         ):
-        if self.indicator_handler is None:
+        if self.indicator_agent is None:
             return
-        self.indicator_handler(
+        self.indicator_agent(
             music,
             seed=seed,
             segment_duration=segment_duration,
@@ -106,9 +106,9 @@ class MusicMaker(PlagueWaterObject):
         logical_tie=None,
         segment_duration=None,
         ):
-        if self.chord_handler is None:
+        if self.chord_agent is None:
             return
-        self.chord_handler(
+        self.chord_agent(
             logical_tie,
             segment_duration=segment_duration,
             )
@@ -119,9 +119,9 @@ class MusicMaker(PlagueWaterObject):
         seed=0,
         segment_duration=None,
         ):
-        if self.dynamic_handler is None:
+        if self.dynamic_agent is None:
             return
-        self.dynamic_handler(
+        self.dynamic_agent(
             music,
             seed=seed,
             segment_duration=segment_duration,
@@ -146,9 +146,9 @@ class MusicMaker(PlagueWaterObject):
         seed=0,
         segment_duration=None,
         ):
-        if self.registration_handler is None:
+        if self.registration_agent is None:
             return
-        self.registration_handler(
+        self.registration_agent(
             music,
             segment_duration=segment_duration,
             )
@@ -160,9 +160,9 @@ class MusicMaker(PlagueWaterObject):
         seed=0,
         segment_duration=None,
         ):
-        if self.spanner_handler is None:
+        if self.spanner_agent is None:
             return
-        self.spanner_handler(
+        self.spanner_agent(
             music,
             seed=seed,
             segment_duration=segment_duration,
@@ -391,7 +391,7 @@ class MusicMaker(PlagueWaterObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def indicator_handler(self):
+    def indicator_agent(self):
         return self._articulation_maker
 
     @property
@@ -399,11 +399,11 @@ class MusicMaker(PlagueWaterObject):
         return self._can_be_split
 
     @property
-    def chord_handler(self):
+    def chord_agent(self):
         return self._chord_maker
 
     @property
-    def dynamic_handler(self):
+    def dynamic_agent(self):
         return self._dynamic_maker
 
     @property
@@ -427,7 +427,7 @@ class MusicMaker(PlagueWaterObject):
         return self._playing_groupings
 
     @property
-    def registration_handler(self):
+    def registration_agent(self):
         return self._registration_maker
 
     @property
@@ -439,7 +439,7 @@ class MusicMaker(PlagueWaterObject):
         return self._rhythm_maker
 
     @property
-    def spanner_handler(self):
+    def spanner_agent(self):
         return self._spanner_maker
 
     @property

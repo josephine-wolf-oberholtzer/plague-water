@@ -9,7 +9,7 @@ from abjad.tools import spannertools
 from plague_water.makers.PlagueWaterObject import PlagueWaterObject
 
 
-class SpannerHandler(PlagueWaterObject):
+class SpannerAgent(PlagueWaterObject):
 
     ### CLASS VARIABLES ###
 
