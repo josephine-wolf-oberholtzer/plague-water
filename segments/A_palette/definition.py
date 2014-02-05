@@ -64,6 +64,19 @@ piano_lh_context_maker = makers.ContextMaker(
         ],
     )
 
+piano_pedals_context_maker = makers.ContextMaker(
+    context_dependencies=(
+        'Piano LH Voice',
+        'Piano RH Voice',
+        ),
+    context_name='Piano Pedals',
+    music_makers=[
+        makers.MusicMaker(
+            timespan_agent=makers.DependentTimespanAgent(),
+            ),
+        ],
+    )
+
 percussion_rh_context_maker = makers.ContextMaker(
     context_name='Percussion RH Voice',
     music_makers=[
@@ -92,6 +105,7 @@ segment_maker = makers.SegmentMaker(
         percussion_rh_context_maker,
         piano_lh_context_maker,
         piano_rh_context_maker,
+        piano_pedals_context_maker,
         saxophone_context_maker,
         )
     )

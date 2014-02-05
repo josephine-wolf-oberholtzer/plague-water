@@ -570,7 +570,7 @@ class SegmentMaker(PlagueWaterObject):
                     rewrite_meter=rewrite_meter,
                     seed=seed,
                     )
-                attach(music_maker, music, scope=Voice)
+                attach(music_maker, music, scope=scoretools.Context)
                 seed += 1
                 result.append(music)
                 progress_indicator.advance()

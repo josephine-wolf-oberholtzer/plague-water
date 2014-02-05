@@ -35,7 +35,7 @@ class TimespanAgent(PlagueWaterObject):
         initial_offset=None,
         maximum_offset=None,
         music_maker=None,
-        depenencies=None,
+        dependencies=None,
         ):
         pass
 

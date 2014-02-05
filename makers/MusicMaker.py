@@ -190,7 +190,7 @@ class MusicMaker(PlagueWaterObject):
         maximum_offset=None,
         ):
         result = self.timespan_agent(
-            depenencies=dependencies,
+            dependencies=dependencies,
             initial_offset=initial_offset,
             maximum_offset=maximum_offset,
             music_maker=self,
