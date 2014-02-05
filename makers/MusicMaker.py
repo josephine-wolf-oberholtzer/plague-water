@@ -17,7 +17,7 @@ class MusicMaker(PlagueWaterObject):
         '_pitch_class_maker',
         '_playing_durations',
         '_playing_groupings',
-        '_registration_maker',
+        '_register_maker',
         '_rewrite_meter',
         '_rhythm_maker',
         '_spanner_maker',
@@ -39,7 +39,7 @@ class MusicMaker(PlagueWaterObject):
         pitch_class_maker=None,
         playing_durations=None,
         playing_groupings=None,
-        registration_agent=None,
+        register_agent=None,
         rewrite_meter=None,
         rhythm_maker=None,
         spanner_agent=None,
@@ -55,8 +55,8 @@ class MusicMaker(PlagueWaterObject):
         assert isinstance(minimum_timespan_duration, (Duration, type(None)))
         assert isinstance(pitch_class_maker,
             (makers.PitchClassMaker, type(None)))
-        assert isinstance(registration_agent,
-            (makers.RegistrationAgent, type(None)))
+        assert isinstance(register_agent,
+            (makers.RegisterAgent, type(None)))
         assert isinstance(rhythm_maker,
             (rhythmmakertools.RhythmMaker, type(None)))
         assert isinstance(spanner_agent,
@@ -75,7 +75,7 @@ class MusicMaker(PlagueWaterObject):
             playing_durations)
         self._playing_groupings = self._setup_grouping_cursor(
             playing_groupings)
-        self._registration_maker = registration_agent
+        self._register_maker = register_agent
         if rewrite_meter is not None:
             rewrite_meter = bool(rewrite_meter)
         self._rewrite_meter = rewrite_meter
@@ -140,15 +140,15 @@ class MusicMaker(PlagueWaterObject):
             segment_duration=segment_duration,
             )
 
-    def apply_registrations(
+    def apply_registers(
         self,
         music=None,
         seed=0,
         segment_duration=None,
         ):
-        if self.registration_agent is None:
+        if self.register_agent is None:
             return
-        self.registration_agent(
+        self.register_agent(
             music,
             segment_duration=segment_duration,
             )
@@ -427,8 +427,8 @@ class MusicMaker(PlagueWaterObject):
         return self._playing_groupings
 
     @property
-    def registration_agent(self):
-        return self._registration_maker
+    def register_agent(self):
+        return self._register_maker
 
     @property
     def rewrite_meter(self):

@@ -94,7 +94,7 @@ class SegmentMaker(PlagueWaterObject):
         self.populate_time_signature_context()
         self.populate_rhythms(rewrite_meter=True)
         self.apply_pitch_classes()
-        self.apply_registrations()
+        self.apply_registers()
         self.apply_chords()
         # self.apply_piano_staff_changes()
         self.color_piano_conflicts()
@@ -252,12 +252,12 @@ class SegmentMaker(PlagueWaterObject):
                     )
                 progress_indicator.advance()
 
-    def apply_registrations(self):
-        message = '\tapplying registrations'
+    def apply_registers(self):
+        message = '\tapplying registers'
         with systemtools.ProgressIndicator(message) as progress_indicator:
             for music, music_maker in \
                 self.iterate_containers_and_music_makers():
-                music_maker.apply_registrations(
+                music_maker.apply_registers(
                     music=music,
                     segment_duration=self.segment_duration,
                     )

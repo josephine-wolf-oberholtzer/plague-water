@@ -41,7 +41,7 @@ piano_glissed_music_maker = makers.MusicMaker(
         durationtools.Duration(1, 8),
         ),
     playing_groupings=durations.short_groupings(10),
-    registration_agent=makers.RegistrationAgent(
+    register_agent=makers.RegisterAgent(
         phrase_inflections=(
             makers.RegisterCurve(
                 ratio=(1,),
