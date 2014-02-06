@@ -15,6 +15,7 @@ class SpannerAgent(PlagueWaterObject):
 
     __slots__ = (
         '_cyclical_logical_tie_spanners',
+        '_cyclical_output_spanners',
         '_debug',
         '_division_spanners',
         '_output_spanners',
@@ -27,6 +28,7 @@ class SpannerAgent(PlagueWaterObject):
     def __init__(
         self,
         cyclical_logical_tie_spanners=None,
+        cyclical_output_spanners=None,
         debug=False,
         division_spanners=None,
         logical_tie_spanners=None,
@@ -36,6 +38,8 @@ class SpannerAgent(PlagueWaterObject):
         self._debug = bool(debug)
         self._cyclical_logical_tie_spanners = self._none_to_tuple(
             cyclical_logical_tie_spanners)
+        self._cyclical_output_spanners = self._none_to_tuple(
+            cyclical_output_spanners)
         self._division_spanners = self._none_to_tuple(division_spanners)
         self._logical_tie_spanners = self._none_to_tuple(logical_tie_spanners)
         self._output_spanners = self._none_to_tuple(output_spanners)
@@ -55,27 +59,35 @@ class SpannerAgent(PlagueWaterObject):
         if seed is None:
             seed = 0
         assert isinstance(seed, int)
-        cyclical_logical_tie_spanners = self._prepare_spanners(
-            self.cyclical_logical_tie_spanners)
-        cyclical_logical_tie_spanners = sequencetools.rotate_sequence(
-            cyclical_logical_tie_spanners, seed)
         cyclical_logical_tie_spanners = datastructuretools.CyclicTuple(
-            cyclical_logical_tie_spanners)
+            sequencetools.rotate_sequence(
+                self._prepare_spanners(self.cyclical_logical_tie_spanners),
+                seed,
+                )
+            )
+        cyclical_output_spanners = sequencetools.rotate_sequence(
+            self._prepare_spanners(self.cyclical_output_spanners),
+            seed,
+            )
         division_spanners = self._prepare_spanners(
             self.division_spanners)
         logical_tie_spanners = self._prepare_spanners(
             self.logical_tie_spanners)
         output_spanners = self._prepare_spanners(
             self.output_spanners)
+        if cyclical_output_spanners:
+            spanner = cyclical_output_spanners[0]
+            spanner = copy.copy(spanner)
+            attach(spanner, music.select_leaves())
         if output_spanners:
             for spanner in output_spanners:
                 spanner = copy.copy(spanner)
-                attach(spanner, music)
+                attach(spanner, music.select_leaves())
         if division_spanners:
             for division in music:
                 for spanner in division_spanners:
                     spanner = copy.copy(spanner)
-                    attach(spanner, music)
+                    attach(spanner, music.select_leaves())
         if logical_tie_spanners or cyclical_logical_tie_spanners:
             count = 0
             for logical_tie in iterate(music).by_logical_tie(pitched=True):
@@ -124,6 +136,10 @@ class SpannerAgent(PlagueWaterObject):
     @property
     def cyclical_logical_tie_spanners(self):
         return self._cyclical_logical_tie_spanners
+
+    @property
+    def cyclical_output_spanners(self):
+        return self._cyclical_output_spanners
 
     @property
     def debug(self):

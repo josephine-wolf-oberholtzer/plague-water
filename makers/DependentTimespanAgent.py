@@ -44,7 +44,7 @@ class DependentTimespanAgent(TimespanAgent):
         dependency_timespans.sort()
         timespan_inventory = timespantools.TimespanInventory()
         for group in dependency_timespans.partition(
-            include_tangent_timespans=True):
+            include_tangent_timespans=False):
             offsets = set([group.start_offset, group.stop_offset])
             if self.use_attacks:
                 for timespan in group:

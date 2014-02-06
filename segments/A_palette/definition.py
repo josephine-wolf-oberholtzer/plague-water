@@ -65,6 +65,44 @@ piano_lh_context_maker = makers.ContextMaker(
         ],
     )
 
+piano_dynamics_context_maker = makers.ContextMaker(
+    context_dependencies=(
+        'Piano LH Voice',
+        'Piano RH Voice',
+        ),
+    context_name='Piano Dynamics',
+    music_makers=[
+        makers.MusicMaker(
+            dynamic_agent=makers.DynamicAgent(
+                cyclic_dynamic_expressions=(
+                    makers.DynamicExpression(
+                        hairpin_start_token='f',
+                        hairpin_stop_token='p',
+                        ),
+                    ),
+                ),
+            pitch_class_agent=makers.PitchClassAgent(
+                pitch_class_ratio=(1,),
+                pitch_class_talea=([0, 0],),
+                ),
+            rewrite_meter=False,
+            rhythm_maker=rhythmmakertools.IncisedRhythmMaker(
+                beam_specifier=rhythmmakertools.BeamSpecifier(
+                    beam_each_division=False,
+                    beam_divisions_together=False,
+                    ),
+                incise_specifier=rhythmmakertools.InciseSpecifier(
+                    incise_output=True,
+                    suffix_lengths=(1,),
+                    suffix_talea=(1,),
+                    talea_denominator=16,
+                    ),
+                ),
+            timespan_agent=makers.DependentTimespanAgent(),
+            ),
+        ],
+    )
+
 piano_pedals_context_maker = makers.ContextMaker(
     context_dependencies=(
         'Piano LH Voice',
@@ -74,10 +112,13 @@ piano_pedals_context_maker = makers.ContextMaker(
     music_makers=[
         makers.MusicMaker(
             spanner_agent=makers.SpannerAgent(
-                debug=True,
-                output_spanners=(
+                cyclical_output_spanners=(
                     makers.ComplexPianoPedalSpanner(
                         include_inner_leaves=True,
+                        ),
+                    makers.ComplexPianoPedalSpanner(
+                        include_inner_leaves=False,
+                        let_vibrate=True,
                         ),
                     ),
                 ),
@@ -117,6 +158,7 @@ segment_maker = makers.SegmentMaker(
         piano_lh_context_maker,
         piano_rh_context_maker,
         piano_pedals_context_maker,
+        piano_dynamics_context_maker,
         saxophone_context_maker,
         )
     )

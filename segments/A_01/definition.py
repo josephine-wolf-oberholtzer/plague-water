@@ -51,6 +51,8 @@ piano_lh_context_maker = new(
 
 piano_pedals_context_maker = new(base_segment_maker['Piano Pedals'])
 
+piano_dynamics_context_maker = new(base_segment_maker['Piano Dynamics'])
+
 percussion_rh_context_maker = new(
     base_segment_maker['Percussion RH Voice'].transform_cursors(cursor_transform),
     )
@@ -74,6 +76,7 @@ segment_maker = new(
         piano_lh_context_maker,
         piano_rh_context_maker,
         piano_pedals_context_maker,
+        piano_dynamics_context_maker,
         saxophone_context_maker,
         )
     )

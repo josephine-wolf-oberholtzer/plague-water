@@ -71,7 +71,7 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
                     context_name='PianoUpperStaff',
                     name='Piano Upper Staff',
                     ),
-                scoretools.Context(
+                scoretools.Voice(
                     context_name='Dynamics',
                     name='Piano Dynamics',
                     ),

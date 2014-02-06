@@ -1,3 +1,5 @@
+LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
+
 \layout {
     \accidentalStyle neo-modern-cautionary
     indent = 0
