@@ -94,6 +94,13 @@
     }
 
     \context {
+        \Dynamics
+        \override VerticalAxisGroup.nonstaff-relatedstaff-spacing = #'(
+            (padding . 3)
+            )
+    }
+
+    \context {
         \PianoStaff
         \name PianoStaffGroup
         \type Engraver_group
@@ -198,11 +205,10 @@
         \override SpacingSpanner.uniform-stretching = ##t
         \override StaffGrouper.staffgroup-staff-spacing = #'(
             (basic-distance . 10.5)
-            (minimum-distance . 10)
+            (minimum-distance . 12)
             (padding . 1)
             (stretchability . 0)
             )
-        %\override Stem.french-beaming = ##t
         \override Stem #'(details beamed-lengths) = #'(6)
         \override StemTremolo.beam-width = 1.5
         \override StemTremolo.flag-count = 4.0
@@ -215,7 +221,7 @@
         \override TupletNumber.font-size = 1
         \override TupletNumber.text = #tuplet-number::calc-fraction-text
         autoBeaming = ##f
-        pedalSustainStyle = #'bracket
+        pedalSustainStyle = #'mixed
         proportionalNotationDuration = #(ly:make-moment 1 48)
         tupletFullLength = ##t
     }
