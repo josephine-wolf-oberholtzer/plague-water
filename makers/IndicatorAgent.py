@@ -11,7 +11,6 @@ class IndicatorAgent(PlagueWaterObject):
 
     __slots__ = (
         '_apply_to_output',
-        '_debug',
         '_each_leaf_indicators',
         '_first_leaf_indicators',
         '_inner_leaf_indicators',
@@ -29,7 +28,6 @@ class IndicatorAgent(PlagueWaterObject):
         inner_leaf_indicators=None,
         last_leaf_indicators=None,
         treat_each_leaf=None,
-        debug=False,
         ):
         assert isinstance(apply_to_output, (bool, type(None)))
         assert isinstance(each_leaf_indicators, (tuple, type(None)))
@@ -43,7 +41,6 @@ class IndicatorAgent(PlagueWaterObject):
         self._inner_leaf_indicators = inner_leaf_indicators
         self._last_leaf_indicators = last_leaf_indicators
         self._treat_each_leaf = treat_each_leaf
-        self._debug = bool(debug)
 
     ### SPECIAL METHODS ###
 
@@ -147,10 +144,6 @@ class IndicatorAgent(PlagueWaterObject):
     @property
     def apply_to_output(self):
         return self._apply_to_output
-
-    @property
-    def debug(self):
-        returns self._debug
 
     @property
     def each_leaf_indicators(self):

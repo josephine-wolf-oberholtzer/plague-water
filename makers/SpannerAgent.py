@@ -15,6 +15,7 @@ class SpannerAgent(PlagueWaterObject):
 
     __slots__ = (
         '_cyclical_logical_tie_spanners',
+        '_debug',
         '_division_spanners',
         '_output_spanners',
         '_logical_tie_spanners',
@@ -26,11 +27,13 @@ class SpannerAgent(PlagueWaterObject):
     def __init__(
         self,
         cyclical_logical_tie_spanners=None,
+        debug=False,
         division_spanners=None,
         logical_tie_spanners=None,
         minimum_logical_tie_duration=None,
         output_spanners=None,
         ):
+        self._debug = bool(debug)
         self._cyclical_logical_tie_spanners = self._none_to_tuple(
             cyclical_logical_tie_spanners)
         self._division_spanners = self._none_to_tuple(division_spanners)
@@ -55,7 +58,7 @@ class SpannerAgent(PlagueWaterObject):
         cyclical_logical_tie_spanners = self._prepare_spanners(
             self.cyclical_logical_tie_spanners)
         cyclical_logical_tie_spanners = sequencetools.rotate_sequence(
-            cyclical_logical_tie_spanners)
+            cyclical_logical_tie_spanners, seed)
         cyclical_logical_tie_spanners = datastructuretools.CyclicTuple(
             cyclical_logical_tie_spanners)
         division_spanners = self._prepare_spanners(
@@ -121,6 +124,10 @@ class SpannerAgent(PlagueWaterObject):
     @property
     def cyclical_logical_tie_spanners(self):
         return self._cyclical_logical_tie_spanners
+
+    @property
+    def debug(self):
+        return self._debug
 
     @property
     def division_spanners(self):

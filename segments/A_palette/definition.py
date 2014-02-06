@@ -73,33 +73,13 @@ piano_pedals_context_maker = makers.ContextMaker(
     context_name='Piano Pedals',
     music_makers=[
         makers.MusicMaker(
-            indicator_agent=makers.IndicatorAgent(
-                apply_to_output=True,
-                first_leaf_indicators=(
-                    indicatortools.LilyPondCommand(
-                        'sustainOn',
-                        'right',
+            spanner_agent=makers.SpannerAgent(
+                debug=True,
+                output_spanners=(
+                    makers.ComplexPianoPedalSpanner(
+                        include_inner_leaves=True,
                         ),
                     ),
-                inner_leaf_indicators=(
-                    (
-                        indicatortools.LilyPondCommand(
-                            'sustainOff',
-                            'right',
-                            ),
-                        indicatortools.LilyPondCommand(
-                            'sustainOn',
-                            'right',
-                            ),
-                        ),
-                    ),
-                last_leaf_indicators=(
-                    indicatortools.LilyPondCommand(
-                        'sustainOff',
-                        'right',
-                        ),
-                    ),
-                treat_each_leaf=True,
                 ),
             rewrite_meter=False,
             rhythm_maker=rhythmmakertools.SkipRhythmMaker(),
