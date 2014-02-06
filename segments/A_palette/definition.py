@@ -79,6 +79,14 @@ piano_dynamics_context_maker = makers.ContextMaker(
                         hairpin_start_token='f',
                         hairpin_stop_token='p',
                         ),
+                    makers.DynamicExpression(
+                        hairpin_start_token='sfp',
+                        hairpin_stop_token='ff',
+                        ),
+                    makers.DynamicExpression(
+                        hairpin_start_token='ppp',
+                        hairpin_style='constante',
+                        ),
                     ),
                 ),
             pitch_class_agent=makers.PitchClassAgent(

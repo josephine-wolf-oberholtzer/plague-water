@@ -36,7 +36,7 @@ class ComplexPianoPedalSpanner(Spanner):
         result = []
         if self._is_my_first_leaf(leaf):
             result.append(r'\sustainOn')
-        elif self.include_inner_leaves and not self._is_my_last_leaf(leaf):
+        elif self.include_inner_leaves:  # and not self._is_my_last_leaf(leaf):
             result.append(r'\sustainOff \sustainOn')
         return result
 

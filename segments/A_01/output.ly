@@ -808,7 +808,8 @@
 						\override Stem.stemlet-length = 0.75
 						\set stemLeftBeamCount = 0
 						\set stemRightBeamCount = 2
-						c'16 [ \> \f
+						\override Hairpin #'stencil = #constante-hairpin
+						c'16 [ \< \ppp
 					}
 					{
 						\set stemLeftBeamCount = 1
@@ -826,8 +827,9 @@
 						c'16
 						\set stemLeftBeamCount = 2
 						\set stemRightBeamCount = 0
-						c'16 ] \p
+						c'16 ] \!
 						\revert Stem.stemlet-length
+						\revert Hairpin #'stencil
 					}
 				}
 				{
@@ -840,7 +842,7 @@
 						\override Stem.stemlet-length = 0.75
 						\set stemLeftBeamCount = 0
 						\set stemRightBeamCount = 1
-						c'8 [ \> \f
+						c'8 [ \< \sfp
 					}
 					{
 						\set stemLeftBeamCount = 1
@@ -876,7 +878,7 @@
 						c'8 [
 						\set stemLeftBeamCount = 2
 						\set stemRightBeamCount = 0
-						c'16 ] \p
+						c'16 ] \ff
 						\revert Stem.stemlet-length
 					}
 				}
@@ -1076,7 +1078,7 @@
 						s1 * 3/16 \sustainOff \sustainOn
 					}
 					{
-						s1 * 1/8
+						s1 * 1/8 \sustainOff \sustainOn
 						<> \sustainOff
 						\revert Stem.stemlet-length
 					}
@@ -1138,7 +1140,7 @@
 						s1 * 1/4 \sustainOff \sustainOn
 					}
 					{
-						s1 * 3/16
+						s1 * 3/16 \sustainOff \sustainOn
 						<> \sustainOff
 						\revert Stem.stemlet-length
 					}
