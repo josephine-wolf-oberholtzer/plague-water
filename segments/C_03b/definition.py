@@ -32,37 +32,75 @@ target_segment_duration = makers.SegmentMaker.get_segment_target_duration(
 ### CONTEXT MAP ###
 
 context_map = base_segment_maker.context_map.copy()
+context_map['Plague Water Score']['pitch_class_agent'] = new(
+    context_map['Plague Water Score']['pitch_class_agent'],
+    )
+context_map['Guitar Voice']['register_agent'] = makers.RegisterAgent(
+    instrument=instrumenttools.Guitar(),
+    global_inflections=NamedPitch('E2'),
+    )
+context_map['Piano LH Voice']['register_agent'] = makers.RegisterAgent(
+    instrument=instrumenttools.Piano(),
+    global_inflections=NamedPitch('C2'),
+    )
+context_map['Piano RH Voice']['register_agent'] = makers.RegisterAgent(
+    instrument=instrumenttools.Piano(),
+    global_inflections=NamedPitch('C5'),
+    )
+context_map['Saxophone Voice']['register_agent'] = makers.RegisterAgent(
+    instrument=instrumenttools.BaritoneSaxophone(),
+    global_inflections=NamedPitch('C2'),
+    )
 
-### BRUSHES ###
+### CURSOR TRANSFORM ###
 
 cursor_transform = makers.CursorTransform(
     increment=20,
     reverse=True,
     )
 
-guitar_context_maker = new(
-    base_segment_maker['Guitar Voice'].transform_cursors(cursor_transform),
-    )
+### GUITAR ###
 
-saxophone_context_maker = new(
-    base_segment_maker['Saxophone Voice'].transform_cursors(cursor_transform),
-    )
+guitar_context_maker = base_segment_maker['Guitar Voice']
+guitar_context_maker = guitar_context_maker.transform_cursors(
+    cursor_transform)
+guitar_context_maker = new(guitar_context_maker)
 
-piano_rh_context_maker = new(
-    base_segment_maker['Piano RH Voice'].transform_cursors(cursor_transform),
-    )
+### SAXOPHONE ###
 
-piano_lh_context_maker = new(
-    base_segment_maker['Piano LH Voice'].transform_cursors(cursor_transform),
-    )
+saxophone_context_maker = base_segment_maker['Saxophone Voice']
+saxophone_context_maker = saxophone_context_maker.transform_cursors(
+    cursor_transform)
+saxophone_context_maker = new(saxophone_context_maker)
 
-percussion_rh_context_maker = new(
-    base_segment_maker['Percussion RH Voice'].transform_cursors(cursor_transform),
-    )
+### PIANO ###
 
-percussion_lh_context_maker = new(
-    base_segment_maker['Percussion LH Voice'].transform_cursors(cursor_transform),
-    )
+piano_rh_context_maker = base_segment_maker['Piano RH Voice']
+piano_rh_context_maker = piano_rh_context_maker.transform_cursors(
+    cursor_transform)
+piano_rh_context_maker = new(piano_rh_context_maker)
+
+piano_dynamics_context_maker = base_segment_maker['Piano Dynamics']
+piano_dynamics_context_maker = new(piano_dynamics_context_maker)
+
+piano_lh_context_maker = base_segment_maker['Piano LH Voice']
+piano_lh_context_maker = piano_lh_context_maker.transform_cursors(
+    cursor_transform)
+
+piano_pedals_context_maker = base_segment_maker['Piano Pedals']
+piano_pedals_context_maker = new(piano_pedals_context_maker)
+
+### PERCUSSION ###
+
+percussion_rh_context_maker = base_segment_maker['Percussion RH Voice']
+percussion_rh_context_maker = percussion_rh_context_maker.transform_cursors(
+    cursor_transform)
+percussion_rh_context_maker = new(percussion_rh_context_maker)
+
+percussion_lh_context_maker = base_segment_maker['Percussion LH Voice']
+percussion_lh_context_maker = percussion_lh_context_maker.transform_cursors(
+    cursor_transform)
+percussion_lh_context_maker = new(percussion_lh_context_maker)
 
 ### SEGMENT DEFINITION ###
 
@@ -71,7 +109,6 @@ segment_maker = new(
     context_map=context_map,
     segment_id=segment_id,
     segment_name=segment_name,
-    segment_tempo=segment_tempo,
     target_segment_duration=target_segment_duration,
     context_makers=(
         guitar_context_maker,
@@ -79,6 +116,8 @@ segment_maker = new(
         percussion_rh_context_maker,
         piano_lh_context_maker,
         piano_rh_context_maker,
+        piano_pedals_context_maker,
+        piano_dynamics_context_maker,
         saxophone_context_maker,
         )
     )

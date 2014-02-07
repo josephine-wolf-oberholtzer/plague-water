@@ -10,7 +10,8 @@ class RegisterAgent(PlagueWaterObject):
 
     __slots__ = (
         '_division_inflections',
-        '_global_inflection',
+        '_global_inflections',
+        '_instrument',
         '_octavations',
         '_phrase_inflections',
         )
@@ -20,18 +21,25 @@ class RegisterAgent(PlagueWaterObject):
     def __init__(
         self,
         division_inflections=None,
-        global_inflection=None,
+        global_inflections=None,
         octavations=None,
         phrase_inflections=None,
+        instrument=None,
         ):
         from plague_water import makers
-        if global_inflection is not None:
-            prototype = makers.RegisterCurve
-            if not isinstance(global_inflection, prototype):
-                global_inflection = pitchtools.NamedPitch(global_inflection)
+        if global_inflections is not None:
+            result = []
+            if not isinstance(global_inflections, collections.Sequence):
+                global_inflections = (global_inflections,)
+            for x in global_inflections:
+                if not isinstance(x, makers.RegisterCurve):
+                    x = pitchtools.NamedPitch(x)
+                result.append(x)
+            global_inflections = self._expr_to_statal_server_cursor(result)
         if phrase_inflections is not None:
             result = []
-            assert isinstance(phrase_inflections, collections.Sequence)
+            if not isinstance(phrase_inflections, collections.Sequence):
+                phrase_inflections = (phrase_inflections,)
             for x in phrase_inflections:
                 if not isinstance(x, makers.RegisterCurve):
                     x = pitchtools.NamedPitch(x)
@@ -39,16 +47,20 @@ class RegisterAgent(PlagueWaterObject):
             phrase_inflections = self._expr_to_statal_server_cursor(result)
         if division_inflections is not None:
             result = []
-            assert isinstance(division_inflections, collections.Sequence)
+            if not isinstance(division_inflections, collections.Sequence):
+                division_inflections = (division_inflections,)
             for x in division_inflections:
                 if not isinstance(x, makers.RegisterCurve):
                     x = pitchtools.NamedPitch(x)
                 result.append(x)
             division_inflections = self._expr_to_statal_server_cursor(result)
-        self._global_inflection = global_inflection
+        if instrument is not None:
+            assert isinstance(instrument, instrumenttools.Instrument)
+        self._global_inflections = global_inflections
         self._division_inflections = division_inflections
         self._phrase_inflections = phrase_inflections
         self._octavations = self._expr_to_statal_server_cursor(octavations)
+        self._instrument = instrument
 
     ### SPECIAL METHODS ###
 
@@ -60,8 +72,8 @@ class RegisterAgent(PlagueWaterObject):
         assert isinstance(music, Container)
         octavation_cursor = self._get_octavation_cursor()
         music_start_offset = inspect_(music).get_timespan().start_offset
-        global_inflection_curve = self._get_inflection_curve(
-            self.global_inflection)
+        global_inflection_curve = self._get_inflection_curve_from_cursor(
+            self.global_inflections)
         phrase_inflection_curve = self._get_inflection_curve_from_cursor(
             self.phrase_inflections)
         iterator = iterate(music).by_logical_tie(pitched=True)
@@ -113,6 +125,11 @@ class RegisterAgent(PlagueWaterObject):
         octavation=None,
         logical_tie=None,
         ):
+        if self.instrument is not None:
+            assert inflection_pitch in self.instrument.pitch_range, \
+                (self, self.instrument, inflection_pitch)
+            assert inflection_pitch + 18 in self.instrument.pitch_range, \
+                (self, self.instrument, inflection_pitch)
         octave_transposition_mapping = \
             pitchtools.OctaveTranspositionMapping([
                 ('[C0, C4)', inflection_pitch),
@@ -174,13 +191,17 @@ class RegisterAgent(PlagueWaterObject):
         return self._division_inflections
 
     @property
-    def octavations(self):
-        return self._octavations
+    def global_inflections(self):
+        return self._global_inflections
+
+    @property
+    def instrument(self):
+        return self._instrument
 
     @property
     def phrase_inflections(self):
         return self._phrase_inflections
 
     @property
-    def global_inflection(self):
-        return self._global_inflection
+    def octavations(self):
+        return self._octavations

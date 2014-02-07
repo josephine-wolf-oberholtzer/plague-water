@@ -28,12 +28,33 @@ target_segment_duration = makers.SegmentMaker.get_segment_target_duration(
 ### CONTEXT MAP ###
 
 context_map = base_segment_maker.context_map.copy()
+context_map['Plague Water Score']['pitch_class_agent'] = new(
+    context_map['Plague Water Score']['pitch_class_agent'],
+    )
+context_map['Guitar Voice']['register_agent'] = makers.RegisterAgent(
+    instrument=instrumenttools.Guitar(),
+    global_inflections=NamedPitch('E2'),
+    )
+context_map['Piano LH Voice']['register_agent'] = makers.RegisterAgent(
+    instrument=instrumenttools.Piano(),
+    global_inflections=NamedPitch('C2'),
+    )
+context_map['Piano RH Voice']['register_agent'] = makers.RegisterAgent(
+    instrument=instrumenttools.Piano(),
+    global_inflections=NamedPitch('C5'),
+    )
+context_map['Saxophone Voice']['register_agent'] = makers.RegisterAgent(
+    instrument=instrumenttools.BaritoneSaxophone(),
+    global_inflections=NamedPitch('C2'),
+    )
 
-### BRUSHES ###
+### CURSOR TRANSFORM ###
 
 cursor_transform = makers.CursorTransform(
     increment=0,
     )
+
+### BRUSHES ###
 
 guitar_context_maker = new(
     base_segment_maker['Guitar Voice'].transform_cursors(cursor_transform),

@@ -112,7 +112,7 @@ winding_rhythm_maker = rhythmmakertools.TaleaRhythmMaker(
         ),
     extra_counts_per_division=(0, 1, 0, 0, 1, 2, 0, 1, 0, 0),
     talea=rhythmmakertools.Talea(
-        counts=(1, 2, 1, 1, 3, 2, 2, 1, 1, 2, 1, 4, 3, 1, 1, 2, 1,),
+        counts=(1, 2, 1, 1, 3, 1, 2, 1, 2, 1, 1, 2, 1, 4, 1, 3, 1, 1, 2, 1,),
         denominator=16,
         ),
     )
