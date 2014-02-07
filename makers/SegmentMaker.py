@@ -582,6 +582,22 @@ class SegmentMaker(PlagueWaterObject):
             self.time_signatures)
         self.score['TimeSignatureContext'].extend(measures)
 
+    @staticmethod
+    def remap_sequence(sequence, range_pairs):
+        result = []
+        for old_element in sequence:
+            new_element = old_element
+            for input_range, output_range in range_pairs:
+                input_low, input_high = input_range
+                if input_low <= old_element <= input_high:
+                    output_low, output_high = output_range
+                    output_difference = output_high - output_low
+                    new_element -= input_low
+                    new_element %= (output_difference + 1)
+                    new_element += output_low
+            result.append(new_element)
+        return type(sequence)(result)
+
     def remove_empty_trailing_measures(self):
         print '\tremoving empty trailing measures'
         measure_start_offsets = mathtools.cumulative_sums(

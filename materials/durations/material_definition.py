@@ -1,28 +1,14 @@
 # -*- encoding: utf-8 -*-
 from abjad.tools import datastructuretools
 from abjad.tools import durationtools
+from plague_water import makers
 from plague_water.materials import euler_numbers
 
-
-def remap_sequence_by_range_pairs(sequence, range_pairs):
-    result = []
-    for old_element in sequence:
-        new_element = old_element
-        for input_range, output_range in range_pairs:
-            input_low, input_high = input_range
-            if input_low <= old_element <= input_high:
-                output_low, output_high = output_range
-                output_difference = output_high - output_low
-                new_element -= input_low
-                new_element %= (output_difference + 1)
-                new_element += output_low
-        result.append(new_element)
-    return type(sequence)(result)
 
 denominator = 16
 
 long_groupings = datastructuretools.StatalServer(
-    remap_sequence_by_range_pairs(
+    makers.SegmentMaker.remap_sequence(
         euler_numbers.euler_hundreds,
         [
             ((0, 33), (1, 5)),
@@ -33,7 +19,7 @@ long_groupings = datastructuretools.StatalServer(
     )
 
 medium_groupings = datastructuretools.StatalServer(
-    remap_sequence_by_range_pairs(
+    makers.SegmentMaker.remap_sequence(
         euler_numbers.euler_hundreds,
         [
             ((0, 99), (1, 5)),
@@ -42,7 +28,7 @@ medium_groupings = datastructuretools.StatalServer(
     )
 
 short_groupings = datastructuretools.StatalServer(
-    remap_sequence_by_range_pairs(
+    makers.SegmentMaker.remap_sequence(
         euler_numbers.euler_hundreds,
         [
             ((0, 33), (1, 1)),
@@ -54,7 +40,7 @@ short_groupings = datastructuretools.StatalServer(
 
 long_durations = datastructuretools.StatalServer((
     durationtools.Duration(x, denominator) for x in
-    remap_sequence_by_range_pairs(
+    makers.SegmentMaker.remap_sequence(
         euler_numbers.euler_hundreds,
         [
             ((0, 49), (6, 12)),
@@ -65,7 +51,7 @@ long_durations = datastructuretools.StatalServer((
 
 medium_durations = datastructuretools.StatalServer((
     durationtools.Duration(x, denominator) for x in
-    remap_sequence_by_range_pairs(
+    makers.SegmentMaker.remap_sequence(
         euler_numbers.euler_hundreds,
         [
             ((0, 99), (4, 8)),
@@ -75,7 +61,7 @@ medium_durations = datastructuretools.StatalServer((
 
 short_durations = datastructuretools.StatalServer((
     durationtools.Duration(x, denominator) for x in
-    remap_sequence_by_range_pairs(
+    makers.SegmentMaker.remap_sequence(
         euler_numbers.euler_hundreds,
         [
             ((0, 33), (2, 2)),
@@ -87,7 +73,7 @@ short_durations = datastructuretools.StatalServer((
 
 very_short_durations = datastructuretools.StatalServer((
     durationtools.Duration(x, denominator) for x in
-    remap_sequence_by_range_pairs(
+    makers.SegmentMaker.remap_sequence(
         euler_numbers.euler_hundreds,
         [
             ((0, 33), (1, 1)),

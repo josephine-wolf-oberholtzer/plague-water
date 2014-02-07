@@ -153,9 +153,10 @@ class RegisterAgent(PlagueWaterObject):
         return self._get_inflection_curve(inflection_curve)
 
     def _get_octavation_cursor(self):
+        from plague_water import makers
         from plague_water import materials
         if self._octavations is None:
-            sequence = sequencetools.remap_sequence_by_range_pairs(
+            sequence = makers.SegmentMaker.remap_sequence(
                 materials.euler_hundreds,
                 [
                     ((0, 99), (0, 7)),
