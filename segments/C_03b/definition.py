@@ -47,7 +47,7 @@ context_map['Saxophone Voice']['register_agent'] = makers.RegisterAgent(
     )
 context_map['Guitar Voice']['register_agent'] = makers.RegisterAgent(
     instrument=instrumenttools.Guitar(),
-    global_inflections=NamedPitch('C4'),
+    global_inflections=NamedPitch('A3'),
     )
 context_map['Piano RH Voice']['register_agent'] = makers.RegisterAgent(
     instrument=instrumenttools.Piano(),
