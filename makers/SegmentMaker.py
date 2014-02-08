@@ -257,6 +257,7 @@ class SegmentMaker(PlagueWaterObject):
         with systemtools.ProgressIndicator(message) as progress_indicator:
             for music, music_maker in \
                 self.iterate_containers_and_music_makers():
+                assert inspect_(music).get_duration(), music
                 music_maker.apply_registers(
                     music=music,
                     segment_duration=self.segment_duration,

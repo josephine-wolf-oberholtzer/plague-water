@@ -72,42 +72,7 @@ piano_dynamics_context_maker = makers.ContextMaker(
         ),
     context_name='Piano Dynamics',
     music_makers=[
-        makers.MusicMaker(
-            dynamic_agent=makers.DynamicAgent(
-                cyclic_dynamic_expressions=(
-                    makers.DynamicExpression(
-                        hairpin_start_token='f',
-                        hairpin_stop_token='p',
-                        ),
-                    makers.DynamicExpression(
-                        hairpin_start_token='sfp',
-                        hairpin_stop_token='ff',
-                        ),
-                    makers.DynamicExpression(
-                        hairpin_start_token='ppp',
-                        hairpin_style='constante',
-                        ),
-                    ),
-                ),
-            pitch_class_agent=makers.PitchClassAgent(
-                pitch_class_ratio=(1,),
-                pitch_class_talea=([0, 0],),
-                ),
-            rewrite_meter=False,
-            rhythm_maker=rhythmmakertools.IncisedRhythmMaker(
-                beam_specifier=rhythmmakertools.BeamSpecifier(
-                    beam_each_division=False,
-                    beam_divisions_together=False,
-                    ),
-                incise_specifier=rhythmmakertools.InciseSpecifier(
-                    incise_output=True,
-                    suffix_lengths=(1,),
-                    suffix_talea=(1,),
-                    talea_denominator=16,
-                    ),
-                ),
-            timespan_agent=makers.DependentTimespanAgent(),
-            ),
+        materials.piano_dynamics_music_maker,
         ],
     )
 
@@ -118,22 +83,7 @@ piano_pedals_context_maker = makers.ContextMaker(
         ),
     context_name='Piano Pedals',
     music_makers=[
-        makers.MusicMaker(
-            spanner_agent=makers.SpannerAgent(
-                cyclical_output_spanners=(
-                    makers.ComplexPianoPedalSpanner(
-                        include_inner_leaves=True,
-                        ),
-                    makers.ComplexPianoPedalSpanner(
-                        include_inner_leaves=False,
-                        let_vibrate=True,
-                        ),
-                    ),
-                ),
-            rewrite_meter=False,
-            rhythm_maker=rhythmmakertools.SkipRhythmMaker(),
-            timespan_agent=makers.DependentTimespanAgent(),
-            ),
+        materials.piano_pedals_music_maker,
         ],
     )
 

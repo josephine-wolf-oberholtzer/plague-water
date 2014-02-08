@@ -92,8 +92,14 @@ class RegisterAgent(PlagueWaterObject):
                     division_position)
                 division_inflection_interval = \
                     NamedPitch("c'") - division_inflection_pitch
-                phrase_position = \
-                    (tie_start_offset - music_start_offset) / music_duration
+                if music_duration:
+                    phrase_position = (
+                        (tie_start_offset - music_start_offset) /
+                        music_duration
+                        )
+                # otherwise there is only one tie chain, so no difference
+                else:
+                    phrase_position = Offset(0)
                 phrase_inflection_pitch = \
                     phrase_inflection_curve(phrase_position)
                 phrase_inflection_interval = \
