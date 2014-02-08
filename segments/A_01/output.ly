@@ -7,9 +7,6 @@
 \include "../../stylesheets/plague-water-layout.ly"
 \include "../../stylesheets/plague-water-paper.ly"
 
-#(set-default-paper-size "11x17" 'landscape)
-#(set-global-staff-size 14)
-
 \score {
 	\context Score = "Plague Water Score" \with {
 		\override HorizontalBracket #'color = #red

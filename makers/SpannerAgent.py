@@ -4,6 +4,8 @@ from abjad import attach
 from abjad import iterate
 from abjad.tools import datastructuretools
 from abjad.tools import durationtools
+from abjad.tools import scoretools
+from abjad.tools import selectiontools
 from abjad.tools import sequencetools
 from abjad.tools import spannertools
 from plague_water.makers.PlagueWaterObject import PlagueWaterObject
@@ -80,14 +82,18 @@ class SpannerAgent(PlagueWaterObject):
             spanner = copy.copy(spanner)
             attach(spanner, music.select_leaves())
         if output_spanners:
+            leaves = music.select_leaves()
+            leaves = self._strip_outer_silences(leaves)
             for spanner in output_spanners:
                 spanner = copy.copy(spanner)
-                attach(spanner, music.select_leaves())
+                attach(spanner, leaves)
         if division_spanners:
             for division in music:
+                leaves = division.select_leaves()
+                leaves = self._strip_outer_silences(leaves)
                 for spanner in division_spanners:
                     spanner = copy.copy(spanner)
-                    attach(spanner, music.select_leaves())
+                    attach(spanner, leaves)
         if logical_tie_spanners or cyclical_logical_tie_spanners:
             count = 0
             for logical_tie in iterate(music).by_logical_tie(pitched=True):
@@ -105,17 +111,6 @@ class SpannerAgent(PlagueWaterObject):
 
     ### PRIVATE METHODS ###
 
-    def _prepare_spanners(self, expr):
-        result = []
-        if expr is not None:
-            for spanner in expr:
-                if isinstance(spanner, type):
-                    spanner = spanner()
-                else:
-                    spanner = copy.copy(spanner)
-                result.append(spanner)
-        return result
-
     def _none_to_tuple(self, expr):
         if expr is not None:
             if not isinstance(expr, (list, tuple)):
@@ -130,6 +125,33 @@ class SpannerAgent(PlagueWaterObject):
                     assert isinstance(x, spannertools.Spanner)
             expr = tuple(expr)
         return expr
+
+    def _prepare_spanners(self, expr):
+        result = []
+        if expr is not None:
+            for spanner in expr:
+                if isinstance(spanner, type):
+                    spanner = spanner()
+                else:
+                    spanner = copy.copy(spanner)
+                result.append(spanner)
+        return result
+
+    def _strip_outer_silences(self, leaves):
+        result = []
+        prototype = (
+            scoretools.Skip,
+            scoretools.Rest,
+            scoretools.MultimeasureRest,
+            )
+        for i, leaf in enumerate(leaves):
+            if not isinstance(leaf, prototype):
+                result.extend(leaves[i:])
+                break
+        while isinstance(result[-1], prototype):
+            result.pop()
+        result = selectiontools.ContiguousSelection(result)
+        return result
 
     ### PUBLIC PROPERTIES ###
 

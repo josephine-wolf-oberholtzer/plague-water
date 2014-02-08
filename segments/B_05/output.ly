@@ -7,9 +7,6 @@
 \include "../../stylesheets/plague-water-layout.ly"
 \include "../../stylesheets/plague-water-paper.ly"
 
-#(set-default-paper-size "11x17" 'landscape)
-#(set-global-staff-size 14)
-
 \score {
 	\context Score = "Plague Water Score" \with {
 		\override HorizontalBracket #'color = #red
@@ -59,10 +56,10 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							r16. [ (
+							r16. [
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 3
-							cs'32
+							cs'32 (
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 3
 							ef'32 ~
@@ -164,10 +161,10 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							r16 [ (
+							r16 [
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 3
-							bf,32
+							bf,32 (
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 2
 							b32
@@ -188,10 +185,10 @@
 							d32
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 2
-							af,32
+							af,32 )
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
-							r16 ] )
+							r16 ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -205,10 +202,10 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 3
-							r32 [ (
+							r32 [
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 2
-							bf,32
+							bf,32 (
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 2
 							d16
@@ -413,10 +410,10 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							r16. [ (
+							r16. [
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 3
-							af32
+							af32 (
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 2
 							bf32
@@ -437,10 +434,10 @@
 							b32
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 2
-							d32
+							d32 )
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
-							r16. ] )
+							r16. ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -473,10 +470,10 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							r16 [ (
+							r16 [
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 2
-							b,32
+							b,32 (
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 2
 							af16
