@@ -31,21 +31,33 @@ context_map = base_segment_maker.context_map.copy()
 context_map['Plague Water Score']['pitch_class_agent'] = new(
     context_map['Plague Water Score']['pitch_class_agent'],
     )
+context_map['Saxophone Voice']['register_agent'] = makers.RegisterAgent(
+    instrument=instrumenttools.BaritoneSaxophone(),
+    global_inflections=NamedPitch('C2'),
+    )
 context_map['Guitar Voice']['register_agent'] = makers.RegisterAgent(
     instrument=instrumenttools.Guitar(),
     global_inflections=NamedPitch('E2'),
     )
-context_map['Piano LH Voice']['register_agent'] = makers.RegisterAgent(
-    instrument=instrumenttools.Piano(),
-    global_inflections=NamedPitch('C2'),
-    )
 context_map['Piano RH Voice']['register_agent'] = makers.RegisterAgent(
     instrument=instrumenttools.Piano(),
-    global_inflections=NamedPitch('C5'),
+    global_inflections=makers.RegisterCurve(
+        ratio=(1,),
+        registers=(
+            NamedPitch('Eb3'),
+            NamedPitch('F#2'),
+            ),
+        ),
     )
-context_map['Saxophone Voice']['register_agent'] = makers.RegisterAgent(
-    instrument=instrumenttools.BaritoneSaxophone(),
-    global_inflections=NamedPitch('C2'),
+context_map['Piano LH Voice']['register_agent'] = makers.RegisterAgent(
+    instrument=instrumenttools.Piano(),
+    global_inflections=makers.RegisterCurve(
+        ratio=(1,),
+        registers=(
+            NamedPitch('A1'),
+            NamedPitch('C1'),
+            ),
+        ),
     )
 
 ### CURSOR TRANSFORM ###
