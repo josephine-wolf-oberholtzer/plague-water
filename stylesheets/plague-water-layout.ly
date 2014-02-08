@@ -58,6 +58,18 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
 
     \context {
         \Staff
+        \name PercussionWoodblockStaff
+        \type Engraver_group
+        \alias Staff
+        \override StaffSymbol.line-count = 4
+        instrumentName = \markup { 
+            \column { \hcenter-in #10 \italic { wood-blocks } } }
+        shortInstrumentName = \markup { 
+            \column { \hcenter-in #10 \italic { wood-blocks } } }
+    }
+
+    \context {
+        \Staff
         \name PercussionDrumStaff
         \type Engraver_group
         \alias Staff
@@ -74,6 +86,7 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         \type Engraver_group
         \alias StaffGroup
         \accepts PercussionShakerStaff
+        \accepts PercussionWoodblockStaff
         \accepts PercussionDrumStaff
     }
 

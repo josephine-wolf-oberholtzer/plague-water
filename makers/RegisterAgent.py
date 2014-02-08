@@ -104,9 +104,9 @@ class RegisterAgent(PlagueWaterObject):
                 global_inflection_interval = \
                     NamedPitch("c'") - global_inflection_pitch
                 local_inflection_interval = (
-                    float(division_inflection_interval) +
-                    float(phrase_inflection_interval) +
-                    float(global_inflection_interval)
+                    float(division_inflection_interval.semitones) +
+                    float(phrase_inflection_interval.semitones) +
+                    float(global_inflection_interval.semitones)
                     )
                 local_inflection_pitch = \
                     NamedPitch("c'").transpose(local_inflection_interval)
@@ -126,10 +126,18 @@ class RegisterAgent(PlagueWaterObject):
         logical_tie=None,
         ):
         if self.instrument is not None:
-            assert inflection_pitch in self.instrument.pitch_range, \
-                (self, self.instrument, inflection_pitch)
-            assert inflection_pitch + 18 in self.instrument.pitch_range, \
-                (self, self.instrument, inflection_pitch)
+            assert inflection_pitch in self.instrument.pitch_range, (
+                'LO',
+                inflection_pitch.pitch_class_octave_label,
+                self.instrument.pitch_range,
+                self.global_inflections,
+                )
+            assert inflection_pitch + 17 in self.instrument.pitch_range, (
+                'HI',
+                (inflection_pitch + 17).pitch_class_octave_label,
+                self.instrument.pitch_range,
+                self.global_inflections,
+                )
         octave_transposition_mapping = \
             pitchtools.OctaveTranspositionMapping([
                 ('[C0, C4)', inflection_pitch),
@@ -143,7 +151,6 @@ class RegisterAgent(PlagueWaterObject):
         registrated_pitch = octave_transposition_mapping([octavated_pitch])
         for note in logical_tie:
             note.written_pitch = registrated_pitch
-        #print original_pitch, octavation, octavated_pitch, registrated_pitch
 
     def _get_inflection_curve(self, inflection_curve):
         from plague_water import makers

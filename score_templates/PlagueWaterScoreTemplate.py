@@ -105,6 +105,10 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
                     name='Percussion Shaker Staff',
                     ),
                 scoretools.Staff(
+                    context_name='PercussionWoodblockStaff',
+                    name='Percussion Woodblock Staff',
+                    ),
+                scoretools.Staff(
                     [
                         scoretools.Voice(
                             name='Percussion LH Voice',
@@ -132,15 +136,19 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
         score['Piano Upper Staff'].is_simultaneous = True
         score['Piano Lower Staff'].is_simultaneous = True
 
-        treble_clef = indicatortools.Clef('treble')
-        bass_clef = indicatortools.Clef('bass')
-        percussion_clef = indicatortools.Clef('percussion')
-
-        attach(treble_clef, score['Guitar Staff'])
-        attach(treble_clef, score['Saxophone Staff'])
-        attach(treble_clef, score['Piano Upper Staff'])
-        attach(bass_clef, score['Piano Lower Staff'])
-        attach(percussion_clef, score['Percussion Drum Staff'])
-        attach(percussion_clef, score['Percussion Shaker Staff'])
+        attach(indicatortools.Clef('treble_8'),
+            score['Guitar Staff'])
+        attach(indicatortools.Clef('bass'),
+            score['Saxophone Staff'])
+        attach(indicatortools.Clef('treble'),
+            score['Piano Upper Staff'])
+        attach(indicatortools.Clef('bass'),
+            score['Piano Lower Staff'])
+        attach(indicatortools.Clef('percussion'),
+            score['Percussion Drum Staff'])
+        attach(indicatortools.Clef('percussion'),
+            score['Percussion Shaker Staff'])
+        attach(indicatortools.Clef('percussion'),
+            score['Percussion Woodblock Staff'])
 
         return score
