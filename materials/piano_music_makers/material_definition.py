@@ -48,7 +48,7 @@ piano_dynamics_music_maker = makers.MusicMaker(
     )
 
 
-piano_dynamics_pedal_maker = makers.MusicMaker(
+piano_pedals_music_maker = makers.MusicMaker(
     spanner_agent=makers.SpannerAgent(
         cyclical_output_spanners=(
             makers.ComplexPianoPedalSpanner(
