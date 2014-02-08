@@ -37,7 +37,7 @@ context_map['Plague Water Score']['pitch_class_agent'] = new(
 context_map['Saxophone Voice']['register_agent'] = makers.RegisterAgent(
     instrument=instrumenttools.BaritoneSaxophone(),
     global_inflections=makers.RegisterCurve(
-        talea=(1,),
+        ratio=(1,),
         registers=(
             NamedPitch('F#2'),
             NamedPitch('C3'),

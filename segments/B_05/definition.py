@@ -36,7 +36,7 @@ context_map['Saxophone Voice']['register_agent'] = makers.RegisterAgent(
     global_inflections=makers.RegisterCurve(
         ratio=(1,),
         registers=(
-            NamedPitch('Ef3'),
+            NamedPitch('Eb3'),
             NamedPitch('C2'),
             ),
         ),
