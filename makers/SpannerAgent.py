@@ -93,7 +93,7 @@ class SpannerAgent(PlagueWaterObject):
             for logical_tie in iterate(music).by_logical_tie(pitched=True):
                 if self.minimum_logical_tie_duration is not None:
                     tie_duration = logical_tie.get_duration()
-                    if tie_duration < self.minimum_tie_duration:
+                    if tie_duration < self.minimum_logical_tie_duration:
                         continue
                 for spanner in logical_tie_spanners:
                     spanner = copy.copy(spanner)

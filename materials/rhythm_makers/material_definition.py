@@ -42,6 +42,10 @@ fanfare_rhythm_maker = rhythmmakertools.IncisedRhythmMaker(
         talea_denominator=32,
         ),
     extra_counts_per_division=(1, 0, 0, 0, 1,),
+    tie_specifier=rhythmmakertools.TieSpecifier(
+        tie_across_divisions=False,
+        tie_split_notes=False,
+        ),
     )
 
 
@@ -94,7 +98,22 @@ piano_fanfare_rhythm_maker = rhythmmakertools.TupletRhythmMaker(
     )
 
 
-pointillist_rhythm_maker = rhythmmakertools.TaleaRhythmMaker()
+pointillist_rhythm_maker = rhythmmakertools.TupletRhythmMaker(
+    beam_specifier=rhythmmakertools.BeamSpecifier(
+        beam_each_division=False,
+        beam_divisions_together=False,
+        ),
+    tie_specifier=rhythmmakertools.TieSpecifier(
+        tie_across_divisions=False,
+        ),
+    tuplet_ratios=(
+        (1, 1),
+        (2, 1),
+        (1, 1),
+        (1, 1, 1),
+        (1, 2),
+        ),
+    )
 
 
 winding_rhythm_maker = rhythmmakertools.TaleaRhythmMaker(
@@ -112,8 +131,12 @@ winding_rhythm_maker = rhythmmakertools.TaleaRhythmMaker(
         ),
     extra_counts_per_division=(0, 1, 0, 0, 1, 2, 0, 1, 0, 0),
     talea=rhythmmakertools.Talea(
-        counts=(1, 2, 1, 1, 3, 1, 2, 1, 2, 1, 1, 2, 1, 4, 1, 3, 1, 1, 2, 1,),
-        denominator=16,
+        counts=(1, 2, 1, 1, 3, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 3, 1, 1, 2, 1,),
+        denominator=32,
+        ),
+    tie_specifier=rhythmmakertools.TieSpecifier(
+        tie_across_divisions=False,
+        tie_split_notes=False,
         ),
     )
 

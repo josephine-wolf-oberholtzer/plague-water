@@ -30,7 +30,7 @@ context_map[score]['pitch_class_agent'] = makers.PitchClassAgent(
     transform_talea=None,
     )
 
-### context_makerES ###
+### CONTEXT MAKERS ###
 
 guitar_context_maker = makers.ContextMaker(
     context_name='Guitar Voice',

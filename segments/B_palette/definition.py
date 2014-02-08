@@ -30,19 +30,31 @@ context_map[score]['pitch_class_agent'] = makers.PitchClassAgent(
     transform_talea=None,
     )
 
-### context_makerES ###
+### CONTEXT MAKERS ###
 
 guitar_context_maker = makers.ContextMaker(
     context_name='Guitar Voice',
+    music_maker_indices=(0, 0, 0, 1, 0),
     music_makers=[
-        materials.basic_music_maker,
+        new(materials.guitar_winding_music_maker,
+            timespan_agent__leading_rest_durations=materials.short_durations(1),
+            ),
+        new(materials.guitar_trilling_music_maker,
+            timespan_agent__leading_rest_durations=materials.short_durations(2),
+            ),
         ],
     )
 
 saxophone_context_maker = makers.ContextMaker(
     context_name='Saxophone Voice',
+    music_maker_indices=(0, 0, 1, 0, 0),
     music_makers=[
-        materials.basic_music_maker,
+        new(materials.saxophone_winding_music_maker,
+            timespan_agent__leading_rest_durations=materials.short_durations(3),
+            ),
+        new(materials.saxophone_trilling_music_maker,
+            timespan_agent__leading_rest_durations=materials.short_durations(4),
+            ),
         ],
     )
 
