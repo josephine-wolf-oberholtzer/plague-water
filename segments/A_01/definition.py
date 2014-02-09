@@ -97,15 +97,10 @@ piano_pedals_context_maker = new(piano_pedals_context_maker)
 
 ### PERCUSSION ###
 
-percussion_rh_context_maker = base_segment_maker['Percussion RH Voice']
-percussion_rh_context_maker = percussion_rh_context_maker.transform_cursors(
+percussion_context_maker = base_segment_maker['Percussion Voice']
+percussion_context_maker = percussion_context_maker.transform_cursors(
     cursor_transform)
-percussion_rh_context_maker = new(percussion_rh_context_maker)
-
-percussion_lh_context_maker = base_segment_maker['Percussion LH Voice']
-percussion_lh_context_maker = percussion_lh_context_maker.transform_cursors(
-    cursor_transform)
-percussion_lh_context_maker = new(percussion_lh_context_maker)
+percussion_context_maker = new(percussion_context_maker)
 
 ### SEGMENT DEFINITION ###
 
@@ -117,8 +112,7 @@ segment_maker = new(
     target_segment_duration=target_segment_duration,
     context_makers=(
         guitar_context_maker,
-        percussion_lh_context_maker,
-        percussion_rh_context_maker,
+        percussion_context_maker,
         piano_lh_context_maker,
         piano_rh_context_maker,
         piano_pedals_context_maker,

@@ -94,15 +94,8 @@ piano_pedals_context_maker = makers.ContextMaker(
         ],
     )
 
-percussion_rh_context_maker = makers.ContextMaker(
-    context_name='Percussion RH Voice',
-    music_makers=[
-        materials.basic_music_maker,
-        ],
-    )
-
-percussion_lh_context_maker = makers.ContextMaker(
-    context_name='Percussion LH Voice',
+percussion_context_maker = makers.ContextMaker(
+    context_name='Percussion Voice',
     music_makers=[
         materials.basic_music_maker,
         ],
@@ -118,8 +111,7 @@ segment_maker = makers.SegmentMaker(
     segment_tempo=segment_tempo,
     context_makers=(
         guitar_context_maker,
-        percussion_lh_context_maker,
-        percussion_rh_context_maker,
+        percussion_context_maker,
         piano_lh_context_maker,
         piano_rh_context_maker,
         piano_pedals_context_maker,
