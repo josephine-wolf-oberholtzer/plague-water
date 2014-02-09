@@ -18,7 +18,7 @@ class SemanticTimespanAgent(TimespanAgent):
 
     def __init__(
         self,
-        can_be_split=None,
+        can_be_split=True,
         leading_rest_durations=None,
         minimum_timespan_duration=None,
         playing_durations=None,
@@ -27,8 +27,8 @@ class SemanticTimespanAgent(TimespanAgent):
         ):
         TimespanAgent.__init__(
             self,
-            can_be_split=False,
-            minimum_timespan_duration=None,
+            can_be_split=can_be_split,
+            minimum_timespan_duration=minimum_timespan_duration,
             )
         self._leading_rest_durations = self._setup_duration_cursor(
             leading_rest_durations)

@@ -17,7 +17,7 @@ class TimespanAgent(PlagueWaterObject):
 
     def __init__(
         self,
-        can_be_split=None,
+        can_be_split=True,
         minimum_timespan_duration=None,
         ):
         if can_be_split is not None:
@@ -43,11 +43,11 @@ class TimespanAgent(PlagueWaterObject):
 
     def timespan_has_minimum_length(self, timespan):
         assert isinstance(timespan, timespantools.Timespan)
-        if self.minimum_timespan_duration is None:
-            return True
-        elif self.minimum_timespan_duration <= timespan.duration:
-            return True
-        return False
+        print timespan.duration, self.minimum_timespan_duration
+        if self.minimum_timespan_duration is not None:
+            if timespan.duration < self.minimum_timespan_duration:
+                return False
+        return True
 
     def transform_cursors(self, cursor_transform):
         pass
