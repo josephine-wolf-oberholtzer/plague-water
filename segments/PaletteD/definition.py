@@ -121,9 +121,8 @@ piano_lh_context_maker = makers.ContextMaker(
         ],
     )
 
-percussion_context_maker = makers.ContextMaker(
-    context_name='Percussion Voice',
-    music_maker_indices=(0, 0, 1),
+percussion_shaker_context_maker = makers.ContextMaker(
+    context_name='Percussion Shaker Voice',
     music_makers=[
         new(materials.basic_music_maker,
             timespan_agent=makers.SemanticTimespanAgent(
@@ -141,6 +140,20 @@ percussion_context_maker = makers.ContextMaker(
                 tailing_rest_durations=materials.medium_durations(20),
                 ),
             ),
+        ],
+    )
+
+percussion_woodblock_context_maker = makers.ContextMaker(
+    context_name='Percussion Woodblock Voice',
+    music_makers=[
+        materials.basic_music_maker,
+        ],
+    )
+
+percussion_drum_context_maker = makers.ContextMaker(
+    context_name='Percussion Drum Voice',
+    music_makers=[
+        materials.basic_music_maker,
         ],
     )
 
@@ -176,7 +189,9 @@ segment_maker = makers.SegmentMaker(
     segment_tempo=segment_tempo,
     context_makers=(
         guitar_context_maker,
-        percussion_context_maker,
+        percussion_drum_context_maker,
+        percussion_shaker_context_maker,
+        percussion_woodblock_context_maker,
         piano_dynamics_context_maker,
         piano_lh_context_maker,
         piano_pedals_context_maker,

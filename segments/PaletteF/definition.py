@@ -80,6 +80,27 @@ piano_lh_context_maker = makers.ContextMaker(
         ],
     )
 
+percussion_shaker_context_maker = makers.ContextMaker(
+    context_name='Percussion Shaker Voice',
+    music_makers=[
+        materials.basic_music_maker,
+        ],
+    )
+
+percussion_woodblock_context_maker = makers.ContextMaker(
+    context_name='Percussion Woodblock Voice',
+    music_makers=[
+        materials.basic_music_maker,
+        ],
+    )
+
+percussion_drum_context_maker = makers.ContextMaker(
+    context_name='Percussion Drum Voice',
+    music_makers=[
+        materials.basic_music_maker,
+        ],
+    )
+
 piano_dynamics_context_maker = makers.ContextMaker(
     context_dependencies=(
         'Piano LH Voice',
@@ -102,28 +123,23 @@ piano_pedals_context_maker = makers.ContextMaker(
         ],
     )
 
-percussion_context_maker = makers.ContextMaker(
-    context_name='Percussion Voice',
-    music_makers=[
-        materials.basic_music_maker,
-        ],
-    )
-
 ### SEGMENT DEFINITION ###
 
 segment_maker = makers.SegmentMaker(
-    context_map=context_map,
-    is_final_segment=False,
-    measure_segmentation_talea=measure_segmentation_talea,
-    permitted_time_signatures=permitted_time_signatures,
-    segment_tempo=segment_tempo,
     context_makers=(
         guitar_context_maker,
-        percussion_context_maker,
+        percussion_drum_context_maker,
+        percussion_shaker_context_maker,
+        percussion_woodblock_context_maker,
         piano_dynamics_context_maker,
         piano_lh_context_maker,
         piano_pedals_context_maker,
         piano_rh_context_maker,
         saxophone_context_maker,
-        )
+        ),
+    context_map=context_map,
+    is_final_segment=False,
+    measure_segmentation_talea=measure_segmentation_talea,
+    permitted_time_signatures=permitted_time_signatures,
+    segment_tempo=segment_tempo,
     )

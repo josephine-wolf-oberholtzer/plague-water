@@ -19,7 +19,15 @@ basic_music_maker = makers.MusicMaker(
         ),
     )
 
+silent_music_maker = makers.MusicMaker(
+    rhythm_maker=rhythmmakertools.RestRhythmMaker(),
+    timespan_agent=makers.SemanticTimespanAgent(
+        playing_durations=[Duration(1, 4), Duration(1, 4)],
+        playing_groupings=[1, 1],
+        ),
+    )
 
 __all__ = (
     'basic_music_maker',
+    'silent_music_maker',
     )

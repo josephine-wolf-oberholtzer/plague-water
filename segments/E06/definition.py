@@ -1,13 +1,14 @@
 # -*- encoding: utf-8 -*-
 from abjad import *
 from plague_water import makers
-from plague_water.segments import PaletteE
-
-### BASE SEGMENT MAKER ###
-
-base_segment_maker = PaletteE.segment_maker
+from plague_water import materials
+from plague_water import score_templates
 
 ### SEGMENT PARAMETERS ###
+
+measure_segmentation_talea = (1,)
+permitted_time_signatures = indicatortools.TimeSignatureInventory([(3, 8)])
+segment_tempo = indicatortools.Tempo(durationtools.Duration(1, 4), 112)
 
 segment_id = 6
 numerator = 1
@@ -21,13 +22,26 @@ segment_name = 'Segment {} ({}:{})'.format(
 target_segment_duration = makers.SegmentMaker.get_segment_target_duration(
     denominator=denominator,
     numerator=numerator,
-    tempo=base_segment_maker.segment_tempo,
+    tempo=segment_tempo,
     total_duration_in_seconds=480,
     )
 
 ### CONTEXT MAP ###
 
-context_map = base_segment_maker.context_map.copy()
+score_template = score_templates.PlagueWaterScoreTemplate()
+score = score_template()
+context_map = datastructuretools.ContextMap(score_template)
+context_map[score]['minimum_timespan_duration'] = durationtools.Duration(1, 8)
+context_map[score]['pitch_class_agent'] = makers.PitchClassAgent(
+    pitch_class_ratio=(1, 1, 1),
+    pitch_class_talea=(
+        [0, 3, 2, 5, 11, 1],
+        [2, 8, 10, 11],
+        [1, 4],
+        ),
+    transform_ratio=None,
+    transform_talea=None,
+    )
 context_map['Plague Water Score']['pitch_class_agent'] = new(
     context_map['Plague Water Score']['pitch_class_agent'],
     )
@@ -54,59 +68,104 @@ cursor_transform = None
 
 ### GUITAR ###
 
-guitar_context_maker = base_segment_maker['Guitar Voice']
-guitar_context_maker = guitar_context_maker.transform_cursors(
-    cursor_transform)
-guitar_context_maker = new(guitar_context_maker)
+guitar_context_maker = makers.ContextMaker(
+    context_name='Guitar Voice',
+    music_makers=[
+        materials.basic_music_maker,
+        ],
+    )
 
 ### SAXOPHONE ###
 
-saxophone_context_maker = base_segment_maker['Saxophone Voice']
-saxophone_context_maker = saxophone_context_maker.transform_cursors(
-    cursor_transform)
-saxophone_context_maker = new(saxophone_context_maker)
+saxophone_context_maker = makers.ContextMaker(
+    context_name='Saxophone Voice',
+    music_makers=[
+        materials.basic_music_maker,
+        ],
+    )
 
 ### PIANO ###
 
-piano_rh_context_maker = base_segment_maker['Piano RH Voice']
-piano_rh_context_maker = piano_rh_context_maker.transform_cursors(
-    cursor_transform)
-piano_rh_context_maker = new(piano_rh_context_maker)
+piano_rh_context_maker = makers.ContextMaker(
+    context_name='Piano RH Voice',
+    music_makers=[
+        materials.basic_music_maker,
+        ],
+    )
 
-piano_dynamics_context_maker = base_segment_maker['Piano Dynamics']
-piano_dynamics_context_maker = new(piano_dynamics_context_maker)
+piano_lh_context_maker = makers.ContextMaker(
+    context_name='Piano LH Voice',
+    music_makers=[
+        materials.basic_music_maker,
+        ],
+    )
 
-piano_lh_context_maker = base_segment_maker['Piano LH Voice']
-piano_lh_context_maker = piano_lh_context_maker.transform_cursors(
-    cursor_transform)
+piano_dynamics_context_maker = makers.ContextMaker(
+    context_dependencies=(
+        'Piano LH Voice',
+        'Piano RH Voice',
+        ),
+    context_name='Piano Dynamics',
+    music_makers=[
+        materials.piano_dynamics_music_maker,
+        ],
+    )
 
-piano_pedals_context_maker = base_segment_maker['Piano Pedals']
-piano_pedals_context_maker = new(piano_pedals_context_maker)
+piano_pedals_context_maker = makers.ContextMaker(
+    context_dependencies=(
+        'Piano LH Voice',
+        'Piano RH Voice',
+        ),
+    context_name='Piano Pedals',
+    music_makers=[
+        materials.piano_pedals_music_maker,
+        ],
+    )
 
 ### PERCUSSION ###
 
-percussion_context_maker = base_segment_maker['Percussion Voice']
-percussion_context_maker = percussion_context_maker.transform_cursors(
-    cursor_transform)
-percussion_context_maker = new(percussion_context_maker)
+percussion_shaker_context_maker = makers.ContextMaker(
+    context_name='Percussion Shaker Voice',
+    music_makers=[
+        materials.basic_music_maker,
+        ],
+    )
+
+percussion_woodblock_context_maker = makers.ContextMaker(
+    context_name='Percussion Woodblock Voice',
+    music_makers=[
+        materials.basic_music_maker,
+        ],
+    )
+
+percussion_drum_context_maker = makers.ContextMaker(
+    context_name='Percussion Drum Voice',
+    music_makers=[
+        materials.basic_music_maker,
+        ],
+    )
 
 ### SEGMENT DEFINITION ###
 
-segment_maker = new(
-    base_segment_maker,
-    context_map=context_map,
-    segment_id=segment_id,
-    segment_name=segment_name,
-    target_segment_duration=target_segment_duration,
+segment_maker = makers.SegmentMaker(
     context_makers=(
         guitar_context_maker,
-        percussion_context_maker,
+        percussion_drum_context_maker,
+        percussion_shaker_context_maker,
+        percussion_woodblock_context_maker,
         piano_lh_context_maker,
         piano_rh_context_maker,
         piano_pedals_context_maker,
         piano_dynamics_context_maker,
         saxophone_context_maker,
-        )
+        ),
+    context_map=context_map,
+    measure_segmentation_talea=measure_segmentation_talea,
+    permitted_time_signatures=permitted_time_signatures,
+    segment_id=segment_id,
+    segment_name=segment_name,
+    segment_tempo=segment_tempo,
+    target_segment_duration=target_segment_duration,
     )
 
 ### MAIN ###

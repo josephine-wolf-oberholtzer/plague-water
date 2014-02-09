@@ -27,5 +27,4 @@ import PaletteA
 import PaletteB
 import PaletteC
 import PaletteD
-import PaletteE
 import PaletteF

@@ -111,28 +111,42 @@ piano_pedals_context_maker = new(piano_pedals_context_maker)
 
 ### PERCUSSION ###
 
-percussion_context_maker = base_segment_maker['Percussion Voice']
-percussion_context_maker = percussion_context_maker.transform_cursors(
-    cursor_transform)
-percussion_context_maker = new(percussion_context_maker)
+percussion_shaker_context_maker = \
+    base_segment_maker['Percussion Shaker Voice']
+percussion_shaker_context_maker = \
+    percussion_shaker_context_maker.transform_cursors(cursor_transform)
+percussion_shaker_context_maker = new(percussion_shaker_context_maker)
+
+percussion_woodblock_context_maker = \
+    base_segment_maker['Percussion Woodblock Voice']
+percussion_woodblock_context_maker = \
+    percussion_woodblock_context_maker.transform_cursors(cursor_transform)
+percussion_woodblock_context_maker = new(percussion_woodblock_context_maker)
+
+percussion_drum_context_maker = base_segment_maker['Percussion Drum Voice']
+percussion_drum_context_maker = \
+    percussion_drum_context_maker.transform_cursors(cursor_transform)
+percussion_drum_context_maker = new(percussion_drum_context_maker)
 
 ### SEGMENT DEFINITION ###
 
 segment_maker = new(
     base_segment_maker,
-    context_map=context_map,
-    segment_id=segment_id,
-    segment_name=segment_name,
-    target_segment_duration=target_segment_duration,
     context_makers=(
         guitar_context_maker,
-        percussion_context_maker,
+        percussion_drum_context_maker,
+        percussion_shaker_context_maker,
+        percussion_woodblock_context_maker,
         piano_lh_context_maker,
         piano_rh_context_maker,
         piano_pedals_context_maker,
         piano_dynamics_context_maker,
         saxophone_context_maker,
-        )
+        ),
+    context_map=context_map,
+    segment_id=segment_id,
+    segment_name=segment_name,
+    target_segment_duration=target_segment_duration,
     )
 
 ### MAIN ###
