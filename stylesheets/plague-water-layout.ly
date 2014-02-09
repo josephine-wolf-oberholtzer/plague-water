@@ -165,7 +165,7 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         \override TimeSignature.extra-offset = #'(-2 . 0)
         \override VerticalAxisGroup.default-staff-staff-spacing = #'(
             (basic-distance . 0)
-            (minimum-distance . 10)
+            (minimum-distance . 12)
             (padding . 0)
             (stretchability . 0)
             )
@@ -197,8 +197,8 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         \override SpacingSpanner.strict-note-spacing = ##t
         \override SpacingSpanner.uniform-stretching = ##t
         \override StaffGrouper.staffgroup-staff-spacing = #'(
-            (basic-distance . 10.5)
-            (minimum-distance . 12)
+            (basic-distance . 12)
+            (minimum-distance . 15)
             (padding . 1)
             (stretchability . 0)
             )
