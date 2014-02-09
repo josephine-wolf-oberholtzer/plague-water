@@ -192,6 +192,7 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         \override Glissando.thickness = 3
         \override NoteCollision.merge-differently-dotted = ##t
         \override NoteColumn.ignore-collision = ##t
+        \override OttavaBracket.padding = 3
         \override PhrasingSlur.dash-definition = #'((0 1 0.1 0.75))
         \override SpacingSpanner.strict-grace-spacing = ##t
         \override SpacingSpanner.strict-note-spacing = ##t

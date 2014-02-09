@@ -97,6 +97,7 @@ class SegmentMaker(PlagueWaterObject):
         self.apply_pitch_classes()
         self.apply_registers()
         self.apply_chords()
+        self.apply_piano_clefs_and_octavations()
         # self.apply_piano_staff_changes()
         self.color_piano_conflicts()
         self.apply_articulations()
@@ -238,47 +239,40 @@ class SegmentMaker(PlagueWaterObject):
                 music_maker_seeds[music_maker] += 1
                 progress_indicator.advance()
 
-    def apply_pitch_classes(self):
-        from plague_water import makers
-        message = '\tapplying pitch classes'
-        with systemtools.ProgressIndicator(message) as progress_indicator:
-            for leaf in iterate(self.score).by_timeline(Note):
-                logical_tie = inspect_(leaf).get_logical_tie()
-                if leaf is not logical_tie.head:
-                    continue
-                music_maker = inspect_(leaf).get_effective(makers.MusicMaker)
-                music_maker.apply_pitch_classes(
-                    logical_tie=logical_tie,
-                    segment_duration=self.segment_duration,
-                    )
-                progress_indicator.advance()
+    def apply_piano_clefs_and_octavations(self):
+        def cleanup(staff):
+            leaves = list(iterate(staff).by_class(scoretools.Leaf))
+            groups = list(iterate(leaves).by_run(
+                (scoretools.Note, scoretools.Chord)))
+            for group in groups:
+                pitches = pitchtools.PitchSegment.from_selection(group)
+                average = int(sum(float(x) for x in pitches) / len(pitches))
+                average = pitchtools.NamedPitch(average)
+                octavation = None
+                if pitchtools.NamedPitch('C4') <= average:
+                    clef = Clef('treble')
+                    if NamedPitch('B5') < average:
+                        octavation = 1
+                else:
+                    clef = Clef('bass')
+                    if average < NamedPitch('D2'):
+                        octavation = -1
+                previous_clef = inspect_(group[0]).get_effective(Clef)
+                if previous_clef != clef:
+                    attach(clef, group[0])
+                if octavation is not None:
+                    octavation_spanner = spannertools.OctavationSpanner(
+                        start=octavation,
+                        )
+                    attach(octavation_spanner, group)
+                print average, previous_clef, clef, octavation
+        message = '\tapplying piano clefs and octavations'
+        print message
+        upper_staff = self.score['Piano Upper Staff']
+        lower_staff = self.score['Piano Lower Staff']
 
-    def apply_registers(self):
-        message = '\tapplying registers'
-        with systemtools.ProgressIndicator(message) as progress_indicator:
-            for music, music_maker in \
-                self.iterate_containers_and_music_makers():
-                assert inspect_(music).get_duration(), music
-                music_maker.apply_registers(
-                    music=music,
-                    segment_duration=self.segment_duration,
-                    )
-                progress_indicator.advance()
-
-    def apply_spanners(self):
-        message = '\tapplying spanners'
-        music_maker_seeds = collections.Counter()
-        with systemtools.ProgressIndicator(message) as progress_indicator:
-            for music, music_maker in \
-                self.iterate_containers_and_music_makers():
-                seed = music_maker_seeds[music_maker]
-                music_maker.apply_spanners(
-                    music=music,
-                    seed=seed,
-                    segment_duration=self.segment_duration,
-                    )
-                music_maker_seeds[music_maker] += 1
-                progress_indicator.advance()
+        cleanup(upper_staff)
+        cleanup(lower_staff)
 
     def apply_piano_staff_changes(self):
         message = '\tapplying piano staff changes'
@@ -327,6 +321,48 @@ class SegmentMaker(PlagueWaterObject):
                     attach(staff_change, logical_tie[0], scope=Voice)
                     old_piano_lh_staff = new_piano_lh_staff
                     progress_indicator.advance()
+
+    def apply_pitch_classes(self):
+        from plague_water import makers
+        message = '\tapplying pitch classes'
+        with systemtools.ProgressIndicator(message) as progress_indicator:
+            for leaf in iterate(self.score).by_timeline(Note):
+                logical_tie = inspect_(leaf).get_logical_tie()
+                if leaf is not logical_tie.head:
+                    continue
+                music_maker = inspect_(leaf).get_effective(makers.MusicMaker)
+                music_maker.apply_pitch_classes(
+                    logical_tie=logical_tie,
+                    segment_duration=self.segment_duration,
+                    )
+                progress_indicator.advance()
+
+    def apply_registers(self):
+        message = '\tapplying registers'
+        with systemtools.ProgressIndicator(message) as progress_indicator:
+            for music, music_maker in \
+                self.iterate_containers_and_music_makers():
+                assert inspect_(music).get_duration(), music
+                music_maker.apply_registers(
+                    music=music,
+                    segment_duration=self.segment_duration,
+                    )
+                progress_indicator.advance()
+
+    def apply_spanners(self):
+        message = '\tapplying spanners'
+        music_maker_seeds = collections.Counter()
+        with systemtools.ProgressIndicator(message) as progress_indicator:
+            for music, music_maker in \
+                self.iterate_containers_and_music_makers():
+                seed = music_maker_seeds[music_maker]
+                music_maker.apply_spanners(
+                    music=music,
+                    seed=seed,
+                    segment_duration=self.segment_duration,
+                    )
+                music_maker_seeds[music_maker] += 1
+                progress_indicator.advance()
 
     def build_and_persist(self, current_file_path):
         print 'Building {}'.format(self.segment_name)
