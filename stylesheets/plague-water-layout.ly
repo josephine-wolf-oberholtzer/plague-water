@@ -215,7 +215,7 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         \override TupletNumber.text = #tuplet-number::calc-fraction-text
         autoBeaming = ##f
         pedalSustainStyle = #'mixed
-        proportionalNotationDuration = #(ly:make-moment 1 48)
+        proportionalNotationDuration = #(ly:make-moment 1 64)
         tupletFullLength = ##t
     }
 }

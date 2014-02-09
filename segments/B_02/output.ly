@@ -186,13 +186,13 @@
 						{
 							\tweak #'text #tuplet-number::calc-fraction-text
 							\times 5/6 {
-								\pitchedTrill
 								\override Stem.stemlet-length = 0.75
+								\pitchedTrill
 								d4 \startTrillSpan f
 								<> \stopTrillSpan
-								\pitchedTrill
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = -1
+								\pitchedTrill
 								b8 ~ \startTrillSpan e'
 							}
 						}
@@ -736,7 +736,7 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							bf'16 [ ~ [
+							bf'16 ~ [ [
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
 							bf'8. ]
@@ -765,7 +765,7 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							d'16 [ ~ [
+							d'16 ~ [ [
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = -1
 							d'16 ] ]
@@ -899,7 +899,7 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							b,16 [ ~ [
+							b,16 ~ [ [
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
 							b,8. ]
@@ -928,7 +928,7 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							af,16 [ ~ [
+							af,16 ~ [ [
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = -1
 							af,16 ] ]
@@ -1064,7 +1064,7 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							d'16 [ ~ [
+							d'16 ~ [ [
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
 							d'8. ]
@@ -1093,7 +1093,7 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							bf'16 [ ~ [
+							bf'16 ~ [ [
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = -1
 							bf'16 ] ]

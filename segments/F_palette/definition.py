@@ -11,7 +11,7 @@ from plague_water import score_templates
 
 measure_segmentation_talea = (1,)
 permitted_time_signatures = materials.mixed_time_signatures
-segment_tempo = indicatortools.Tempo(durationtools.Duration(1, 8), 108)
+segment_tempo = indicatortools.Tempo(durationtools.Duration(1, 8), 48)
 
 ### CONTEXT MAP ###
 

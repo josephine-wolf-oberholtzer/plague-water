@@ -51,7 +51,7 @@ guitar_trilling_music_maker = makers.MusicMaker(
             spannertools.ComplexTrillSpanner(interval='+P4'),
             spannertools.ComplexTrillSpanner(interval='+m3'),
             ),
-        minimum_logical_tie_duration=Duration(3, 16),
+        minimum_logical_tie_duration=Duration(1, 8),
         ),
     timespan_agent=makers.SemanticTimespanAgent(
         playing_durations=durations.medium_durations,

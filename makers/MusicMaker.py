@@ -163,6 +163,7 @@ class MusicMaker(PlagueWaterObject):
             if isinstance(x, selectiontools.Selection):
                 music[i] = Container(x)
         music = Container(music)
+        assert inspect_(music).get_duration() == sum(durations)
         if rewrite_meter and self.rewrite_meter is None or self.rewrite_meter:
             self._rewrite_meters(
                 music,
