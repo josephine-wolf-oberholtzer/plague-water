@@ -35,28 +35,48 @@ context_map[score]['pitch_class_agent'] = makers.PitchClassAgent(
 guitar_context_maker = makers.ContextMaker(
     context_name='Guitar Voice',
     music_makers=[
-        materials.basic_music_maker,
+        new(materials.basic_music_maker,
+            ),
+        new(materials.basic_music_maker,
+            ),
+        new(materials.basic_music_maker,
+            ),
         ]
     )
 
 saxophone_context_maker = makers.ContextMaker(
     context_name='Saxophone Voice',
     music_makers=[
-        materials.basic_music_maker,
+        new(materials.basic_music_maker,
+            ),
+        new(materials.basic_music_maker,
+            ),
+        new(materials.basic_music_maker,
+            ),
         ],
     )
 
 piano_rh_context_maker = makers.ContextMaker(
     context_name='Piano RH Voice',
     music_makers=[
-        materials.basic_music_maker,
+        new(materials.basic_music_maker,
+            ),
+        new(materials.basic_music_maker,
+            ),
+        new(materials.basic_music_maker,
+            ),
         ],
     )
 
 piano_lh_context_maker = makers.ContextMaker(
     context_name='Piano LH Voice',
     music_makers=[
-        materials.basic_music_maker,
+        new(materials.basic_music_maker,
+            ),
+        new(materials.basic_music_maker,
+            ),
+        new(materials.basic_music_maker,
+            ),
         ],
     )
 

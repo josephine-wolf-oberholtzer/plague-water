@@ -65,17 +65,6 @@ medium_durations = datastructuretools.StatalServer((
     ))
 
 
-medium_durations = datastructuretools.StatalServer((
-    durationtools.Duration(x, denominator) for x in
-    makers.SegmentMaker.remap_sequence(
-        euler_numbers.euler_hundreds,
-        [
-            ((0, 99), (4, 8)),
-            ],
-        )
-    ))
-
-
 short_durations = datastructuretools.StatalServer((
     durationtools.Duration(x, denominator) for x in
     makers.SegmentMaker.remap_sequence(
