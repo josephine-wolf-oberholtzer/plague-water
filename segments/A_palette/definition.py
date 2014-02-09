@@ -3,7 +3,6 @@ from abjad import new
 from abjad.tools import datastructuretools
 from abjad.tools import durationtools
 from abjad.tools import indicatortools
-from abjad.tools import rhythmmakertools
 from plague_water import makers
 from plague_water import materials
 from plague_water import score_templates
@@ -36,21 +35,31 @@ context_map[score]['pitch_class_agent'] = makers.PitchClassAgent(
 guitar_context_maker = makers.ContextMaker(
     context_name='Guitar Voice',
     music_makers=[
-        materials.guitar_fanfare_music_maker,
+        new(materials.guitar_fanfare_music_maker,
+            timespan_agent__leading_rest_durations=materials.short_durations(4),
+            ),
         ],
     )
 
 saxophone_context_maker = makers.ContextMaker(
     context_name='Saxophone Voice',
     music_makers=[
-        materials.saxophone_fanfare_music_maker,
+        new(materials.saxophone_fanfare_music_maker,
+            timespan_agent__leading_rest_durations=materials.short_durations(4),
+            ),
         ],
     )
 
 piano_rh_context_maker = makers.ContextMaker(
     context_name='Piano RH Voice',
     music_makers=[
-        materials.piano_fanfare_music_maker,
+        new(materials.piano_fanfare_music_maker,
+            timespan_agent__minimum_timespan_duration=(3, 16),
+            timespan_agent__playing_durations=materials.make_durations(
+                3, 5)(1),
+            timespan_agent__playing_groupings=materials.short_groupings(1),
+            timespan_agent__tailing_rest_durations=materials.short_durations(2),
+            ),
         ],
     )
 
@@ -58,9 +67,11 @@ piano_lh_context_maker = makers.ContextMaker(
     context_name='Piano LH Voice',
     music_makers=[
         new(materials.piano_fanfare_music_maker,
-            timespan_agent__playing_durations=materials.short_durations(3),
-            timespan_agent__playing_groupings=materials.short_groupings(4),
-            timespan_agent__tailing_rest_durations=materials.short_durations(3),
+            timespan_agent__minimum_timespan_duration=(3, 16),
+            timespan_agent__playing_durations=materials.make_durations(
+                3, 5)(2),
+            timespan_agent__playing_groupings=materials.short_groupings(3),
+            timespan_agent__tailing_rest_durations=materials.short_durations(4),
             ),
         ],
     )

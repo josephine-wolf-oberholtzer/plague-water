@@ -148,26 +148,26 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         \override MetronomeMark.X-extent = #'(0 . 0)
         \override MetronomeMark.X-offset = #ly:self-alignment-interface::x-aligned-on-self
         \override MetronomeMark.break-align-symbols = #'(time-signature)
+        \override MetronomeMark.extra-offset = #'(3 . -9.5)
         \override MetronomeMark.font-size = 3
         \override RehearsalMark.X-extent = #'(0 . 0)
         \override RehearsalMark.break-align-symbols = #'(time-signature)
         \override RehearsalMark.break-visibility = #end-of-line-invisible
-        \override RehearsalMark.extra-offset = #'(-1 . 0)
+        \override RehearsalMark.extra-offset = #'(-1 . -5)
         \override RehearsalMark.font-name = "Didot"
         \override RehearsalMark.font-size = 10
         \override RehearsalMark.self-alignment-X = #CENTER
         \override TimeSignature.X-extent = #'(0 . 0)
         \override TimeSignature.break-align-symbols = #'(staff-bar)
         \override TimeSignature.break-visibility = #end-of-line-invisible
+        \override TimeSignature.extra-offset = #'(-2 . 0)
         \override TimeSignature.font-size = 3
         \override TimeSignature.style = #'numbered
-        \override MetronomeMark.extra-offset = #'(3 . -5.5)
-        \override TimeSignature.extra-offset = #'(-2 . 0)
         \override VerticalAxisGroup.default-staff-staff-spacing = #'(
             (basic-distance . 0)
-            (minimum-distance . 12)
-            (padding . 0)
-            (stretchability . 0)
+            (minimum-distance . 10)
+            (padding . 6)
+            (stretchability . 2)
             )
     }
 
@@ -207,6 +207,7 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         \override StemTremolo.flag-count = 4.0
         \override StemTremolo.slope = 0.5
         \override StemTremolo.Y-offset = -4.0
+        \override StaffSymbol.to-barline = ##t
         \override TextScript.Y-extent = #'(-1.5 . 1.5)
         \override TupletBracket.breakable = ##t
         \override TupletBracket.full-length-to-extent = ##f

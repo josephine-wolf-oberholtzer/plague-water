@@ -43,7 +43,6 @@ class TimespanAgent(PlagueWaterObject):
 
     def timespan_has_minimum_length(self, timespan):
         assert isinstance(timespan, timespantools.Timespan)
-        print timespan.duration, self.minimum_timespan_duration
         if self.minimum_timespan_duration is not None:
             if timespan.duration < self.minimum_timespan_duration:
                 return False

@@ -6,6 +6,12 @@ from plague_water.materials import rhythm_makers
 
 
 basic_music_maker = makers.MusicMaker(
+    rhythm_maker=rhythmmakertools.NoteRhythmMaker(
+        beam_specifier=rhythmmakertools.BeamSpecifier(
+            beam_divisions_together=False,
+            beam_each_division=False,
+            ),
+        ),
     timespan_agent=makers.SemanticTimespanAgent(
         playing_durations=durations.short_durations(3),
         playing_groupings=durations.short_groupings(4),
