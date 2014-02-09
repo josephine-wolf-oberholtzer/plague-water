@@ -1,16 +1,29 @@
 # -*- encoding: utf-8 -*-
 
-import durations
-import euler_numbers
-import spanners
-import rhythm_makers
-import pitch_classes
-import registers
-import time_signatures
+from basic_music_makers import *
+from durations import *
+from euler_numbers import *
+from guitar_music_makers import *
+from misc_music_makers import *
+from percussion_music_makers import *
+from piano_music_makers import *
+from pitch_classes import *
+from registers import *
+from rhythm_makers import *
+from saxophone_music_makers import *
+from spanners import *
+from time_signatures import *
 
-import basic_music_makers
-import guitar_music_makers
-import misc_music_makers
-import percussion_music_makers
-import piano_music_makers
-import saxophone_music_makers
+del basic_music_makers
+del durations
+del euler_numbers
+del guitar_music_makers
+del misc_music_makers
+del percussion_music_makers
+del piano_music_makers
+del pitch_classes
+del registers
+del rhythm_makers
+del saxophone_music_makers
+del spanners
+del time_signatures

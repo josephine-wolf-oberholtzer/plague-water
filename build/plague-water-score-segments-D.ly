@@ -10,18 +10,18 @@
 \include "../stylesheets/plague-water-header.ly"
 
 \score {
-    \include "plague-water-segment-D-04.ly"
+    \include "plague-water-segment-D04.ly"
 }
 
 \score {
-    \include "plague-water-segment-D-14.ly"
+    \include "plague-water-segment-D14.ly"
 }
 
 \score {
-    \include "plague-water-segment-D-17a.ly"
+    \include "plague-water-segment-D17a.ly"
 }
 
 \score {
-    \include "plague-water-segment-D-17b.ly"
+    \include "plague-water-segment-D17b.ly"
 }
 

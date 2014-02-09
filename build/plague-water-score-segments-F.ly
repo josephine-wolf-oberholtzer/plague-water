@@ -10,26 +10,26 @@
 \include "../stylesheets/plague-water-header.ly"
 
 \score {
-    \include "plague-water-segment-F-07.ly"
+    \include "plague-water-segment-F07.ly"
 }
 
 \score {
-    \include "plague-water-segment-F-10a.ly"
+    \include "plague-water-segment-F10a.ly"
 }
 
 \score {
-    \include "plague-water-segment-F-10b.ly"
+    \include "plague-water-segment-F10b.ly"
 }
 
 \score {
-    \include "plague-water-segment-F-10c.ly"
+    \include "plague-water-segment-F10c.ly"
 }
 
 \score {
-    \include "plague-water-segment-F-10d.ly"
+    \include "plague-water-segment-F10d.ly"
 }
 
 \score {
-    \include "plague-water-segment-F-15.ly"
+    \include "plague-water-segment-F15.ly"
 }
 
