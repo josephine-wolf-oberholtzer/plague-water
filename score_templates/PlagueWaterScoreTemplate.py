@@ -127,10 +127,6 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
             score['Guitar Staff'])
         attach(indicatortools.Clef('bass'),
             score['Saxophone Staff'])
-        attach(indicatortools.Clef('treble'),
-            score['Piano Upper Staff'])
-        attach(indicatortools.Clef('bass'),
-            score['Piano Lower Staff'])
         attach(indicatortools.Clef('percussion'),
             score['Percussion Staff'])
 

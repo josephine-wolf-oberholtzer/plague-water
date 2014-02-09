@@ -72,27 +72,43 @@ cursor_transform = makers.CursorTransform(
     increment=0,
     )
 
-### BRUSHES ###
+### GUITAR ###
 
-guitar_context_maker = new(
-    base_segment_maker['Guitar Voice'].transform_cursors(cursor_transform),
-    )
+guitar_context_maker = base_segment_maker['Guitar Voice']
+guitar_context_maker = guitar_context_maker.transform_cursors(
+    cursor_transform)
+guitar_context_maker = new(guitar_context_maker)
 
-saxophone_context_maker = new(
-    base_segment_maker['Saxophone Voice'].transform_cursors(cursor_transform),
-    )
+### SAXOPHONE ###
 
-piano_rh_context_maker = new(
-    base_segment_maker['Piano RH Voice'].transform_cursors(cursor_transform),
-    )
+saxophone_context_maker = base_segment_maker['Saxophone Voice']
+saxophone_context_maker = saxophone_context_maker.transform_cursors(
+    cursor_transform)
+saxophone_context_maker = new(saxophone_context_maker)
 
-piano_lh_context_maker = new(
-    base_segment_maker['Piano LH Voice'].transform_cursors(cursor_transform),
-    )
+### PIANO ###
 
-percussion_context_maker = new(
-    base_segment_maker['Percussion Voice'].transform_cursors(cursor_transform),
-    )
+piano_rh_context_maker = base_segment_maker['Piano RH Voice']
+piano_rh_context_maker = piano_rh_context_maker.transform_cursors(
+    cursor_transform)
+piano_rh_context_maker = new(piano_rh_context_maker)
+
+piano_dynamics_context_maker = base_segment_maker['Piano Dynamics']
+piano_dynamics_context_maker = new(piano_dynamics_context_maker)
+
+piano_lh_context_maker = base_segment_maker['Piano LH Voice']
+piano_lh_context_maker = piano_lh_context_maker.transform_cursors(
+    cursor_transform)
+
+piano_pedals_context_maker = base_segment_maker['Piano Pedals']
+piano_pedals_context_maker = new(piano_pedals_context_maker)
+
+### PERCUSSION ###
+
+percussion_context_maker = base_segment_maker['Percussion Voice']
+percussion_context_maker = percussion_context_maker.transform_cursors(
+    cursor_transform)
+percussion_context_maker = new(percussion_context_maker)
 
 ### SEGMENT DEFINITION ###
 
@@ -107,6 +123,8 @@ segment_maker = new(
         percussion_context_maker,
         piano_lh_context_maker,
         piano_rh_context_maker,
+        piano_pedals_context_maker,
+        piano_dynamics_context_maker,
         saxophone_context_maker,
         )
     )

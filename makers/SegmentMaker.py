@@ -259,18 +259,22 @@ class SegmentMaker(PlagueWaterObject):
                         octavation = -1
                 previous_clef = inspect_(group[0]).get_effective(Clef)
                 if previous_clef != clef:
-                    attach(clef, group[0])
+                    try:
+                        attach(clef, group[0])
+                    except ValueError:
+                        pass
                 if octavation is not None:
                     octavation_spanner = spannertools.OctavationSpanner(
                         start=octavation,
                         )
                     attach(octavation_spanner, group)
-                print average, previous_clef, clef, octavation
         message = '\tapplying piano clefs and octavations'
         print message
         upper_staff = self.score['Piano Upper Staff']
         lower_staff = self.score['Piano Lower Staff']
-
+        if self.segment_id == 1:
+            attach(Clef('treble'), upper_staff)
+            attach(Clef('bass'), lower_staff)
         cleanup(upper_staff)
         cleanup(lower_staff)
 
