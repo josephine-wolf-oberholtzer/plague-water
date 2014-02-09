@@ -24,90 +24,120 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
             context_name='TimeSignatureContext',
             )
 
+        ### SAXOPHONE ###
+
+        saxophone_voice = scoretools.Voice(
+            name='Saxophone Voice',
+            )
+        saxophone_staff = scoretools.Staff(
+            [saxophone_voice],
+            context_name='SaxophoneStaff',
+            name='Saxophone Staff',
+            )
         saxophone_staff_group = scoretools.StaffGroup(
-            [
-                scoretools.Staff(
-                    [
-                        scoretools.Voice(
-                            name='Saxophone Voice',
-                            ),
-                        ],
-                    context_name='SaxophoneStaff',
-                    name='Saxophone Staff',
-                    ),
-                ],
+            [saxophone_staff],
             context_name='SaxophoneStaffGroup',
             name='Saxophone Staff Group',
             )
 
+        attach(indicatortools.Clef('bass'), saxophone_staff)
+
+        ### GUITAR ###
+
+        guitar_voice = scoretools.Voice(
+            name='Guitar Voice',
+            )
+        guitar_staff = scoretools.Staff(
+            [guitar_voice],
+            context_name='GuitarStaff',
+            name='Guitar Staff',
+            )
         guitar_staff_group = scoretools.StaffGroup(
-            [
-                scoretools.Staff(
-                    [
-                        scoretools.Voice(
-                            name='Guitar Voice',
-                            ),
-                        ],
-                    context_name='GuitarStaff',
-                    name='Guitar Staff',
-                    ),
-                scoretools.Context(
-                    context_name='Dynamics',
-                    name='Guitar Pedals',
-                    ),
-                ],
+            [guitar_staff],
             context_name='GuitarStaffGroup',
             name='Guitar Staff Group',
             )
 
+        attach(indicatortools.Clef('treble_8'), guitar_staff)
+
+        ### PIANO ###
+
+        piano_rh_voice = scoretools.Voice(
+            name='Piano RH Voice',
+            )
+        piano_upper_staff = scoretools.Staff(
+            [piano_rh_voice],
+            context_name='PianoUpperStaff',
+            name='Piano Upper Staff',
+            )
+        piano_lh_voice = scoretools.Voice(
+            name='Piano LH Voice',
+            )
+        piano_lower_staff = scoretools.Staff(
+            [piano_lh_voice],
+            context_name='PianoLowerStaff',
+            name='Piano Lower Staff',
+            )
+        piano_dynamics = scoretools.Voice(
+            context_name='Dynamics',
+            name='Piano Dynamics',
+            )
+        piano_pedals = scoretools.Voice(
+            context_name='Dynamics',
+            name='Piano Pedals',
+            )
         piano_staff_group = scoretools.StaffGroup(
             [
-                scoretools.Staff(
-                    [
-                        scoretools.Voice(
-                            name='Piano RH Voice',
-                            ),
-                        ],
-                    context_name='PianoUpperStaff',
-                    name='Piano Upper Staff',
-                    ),
-                scoretools.Voice(
-                    context_name='Dynamics',
-                    name='Piano Dynamics',
-                    ),
-                scoretools.Staff(
-                    [
-                        scoretools.Voice(
-                            name='Piano LH Voice',
-                            ),
-                        ],
-                    context_name='PianoLowerStaff',
-                    name='Piano Lower Staff',
-                    ),
-                scoretools.Voice(
-                    context_name='Dynamics',
-                    name='Piano Pedals',
-                    ),
+                piano_upper_staff,
+                piano_dynamics,
+                piano_lower_staff,
+                piano_pedals,
                 ],
             context_name='PianoStaffGroup',
             name='Piano Staff Group',
             )
 
+        ### PERCUSSION ###
+
+        percussion_shaker_voice = scoretools.Voice(
+            name='Percussion Shaker Voice',
+            )
+        percussion_shaker_staff = scoretools.Staff(
+            [percussion_shaker_voice],
+            context_name='PercussionShakerStaff',
+            name='Percussion Shaker Staff',
+            )
+        percussion_woodblock_voice = scoretools.Voice(
+            name='Percussion Woodblock Voice',
+            )
+        percussion_woodblock_staff = scoretools.Staff(
+            [percussion_woodblock_voice],
+            context_name='PercussionWoodblockStaff',
+            name='Percussion Woodblock Staff',
+            )
+        percussion_drum_voice = scoretools.Voice(
+            name='Percussion Drum Voice',
+            )
+        percussion_drum_staff = scoretools.Staff(
+            [percussion_drum_voice],
+            context_name='PercussionDrumStaff',
+            name='Percussion Drum Staff',
+            )
         percussion_staff_group = scoretools.StaffGroup(
             [
-                scoretools.Staff(
-                    [
-                        scoretools.Voice(
-                            name='Percussion Voice',
-                            ),
-                        ],
-                    context_name='PercussionStaff',
-                    name='Percussion Staff',
-                    ),
+                percussion_shaker_staff,
+                percussion_woodblock_staff,
+                percussion_drum_staff,
                 ],
             context_name='PercussionStaffGroup',
             name='Percussion Staff Group',
             )
+
+        attach(indicatortools.Clef('percussion'), percussion_shaker_staff)
+        attach(indicatortools.Clef('percussion'), percussion_woodblock_staff)
+        attach(indicatortools.Clef('percussion'), percussion_drum_staff)
+
+        ### SCORE ###
 
         score = scoretools.Score(
             [
@@ -119,15 +149,5 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
                 ],
             name='Plague Water Score',
             )
-
-        score['Piano Upper Staff'].is_simultaneous = True
-        score['Piano Lower Staff'].is_simultaneous = True
-
-        attach(indicatortools.Clef('treble_8'),
-            score['Guitar Staff'])
-        attach(indicatortools.Clef('bass'),
-            score['Saxophone Staff'])
-        attach(indicatortools.Clef('percussion'),
-            score['Percussion Staff'])
 
         return score

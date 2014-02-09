@@ -20,7 +20,71 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         \remove Time_signature_engraver
     }
 
-    %%% E-GUITAR %%%
+    %%% TIME SIGNATURE CONTEXT %%%
+
+    \context {
+        \type Engraver_group
+        \name TimeSignatureContext
+        \consists Time_signature_engraver
+        \consists Axis_group_engraver
+        \consists Metronome_mark_engraver
+        \consists Mark_engraver
+        \consists Bar_number_engraver
+        \override BarNumber.X-extent = #'(0 . 0)
+        \override BarNumber.Y-extent = #'(0 . 0)
+        \override BarNumber.extra-offset = #'(-8 . -2)
+        \override BarNumber.font-name = "Didot Italic"
+        \override BarNumber.font-size = 1
+        \override BarNumber.stencil = #(make-stencil-circler 0.1 0.7 ly:text-interface::print)
+        \override MetronomeMark.X-extent = #'(0 . 0)
+        \override MetronomeMark.X-offset = #ly:self-alignment-interface::x-aligned-on-self
+        \override MetronomeMark.break-align-symbols = #'(time-signature)
+        \override MetronomeMark.extra-offset = #'(3 . -9.5)
+        \override MetronomeMark.font-size = 3
+        \override RehearsalMark.X-extent = #'(0 . 0)
+        \override RehearsalMark.break-align-symbols = #'(time-signature)
+        \override RehearsalMark.break-visibility = #end-of-line-invisible
+        \override RehearsalMark.extra-offset = #'(-1 . -5)
+        \override RehearsalMark.font-name = "Didot"
+        \override RehearsalMark.font-size = 10
+        \override RehearsalMark.self-alignment-X = #CENTER
+        \override TimeSignature.X-extent = #'(0 . 0)
+        \override TimeSignature.break-align-symbols = #'(staff-bar)
+        \override TimeSignature.break-visibility = #end-of-line-invisible
+        \override TimeSignature.extra-offset = #'(-2 . 0)
+        \override TimeSignature.font-size = 3
+        \override TimeSignature.style = #'numbered
+        \override VerticalAxisGroup.default-staff-staff-spacing = #'(
+            (basic-distance . 0)
+            (minimum-distance . 10)
+            (padding . 6)
+            (stretchability . 2)
+            )
+    }
+
+    %%% SAXOPHONE %%%
+
+    \context {
+        \Staff
+        \name SaxophoneStaff
+        \type Engraver_group
+        \alias Staff
+        \override StaffSymbol.line-count = 5
+        instrumentName = \markup { 
+            \column { \hcenter-in #10 \italic { saxophone } } }
+        shortInstrumentName = \markup { 
+            \column { \hcenter-in #10 \italic { saxophone } } }
+    }
+
+    \context {
+        \StaffGroup
+        \name SaxophoneStaffGroup
+        \type Engraver_group
+        \alias StaffGroup
+        \accepts SaxophoneStaff
+    }
+
+    %%% GUITAR %%%
 
     \context {
         \Staff
@@ -40,32 +104,6 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         \type Engraver_group
         \alias StaffGroup
         \accepts GuitarStaff
-    }
-
-    %%% PERCUSSION %%%
-
-    \context {
-        \Staff
-        \name PercussionStaff
-        \type Engraver_group
-        \alias Staff
-        \override StaffSymbol.line-positions = #'(
-            -13 -11 -9
-            -3 -1 1 3
-            9 11 13
-            )
-        instrumentName = \markup { 
-            \column { \hcenter-in #10 \italic { percussion } } }
-        shortInstrumentName = \markup { 
-            \column { \hcenter-in #10 \italic { percussion } } }
-    }
-
-    \context {
-        \StaffGroup
-        \name PercussionStaffGroup
-        \type Engraver_group
-        \alias StaffGroup
-        \accepts PercussionStaff
     }
 
     %%% PIANO %%%
@@ -107,68 +145,52 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
             \column { \hcenter-in #10 \italic { piano } } }
     }
 
-    %%% SAXOPHONE %%%
+    %%% PERCUSSION %%%
 
     \context {
         \Staff
-        \name SaxophoneStaff
+        \name PercussionShakerStaff
         \type Engraver_group
         \alias Staff
-        \override StaffSymbol.line-count = 5
+        \override StaffSymbol.line-count = #3
         instrumentName = \markup { 
-            \column { \hcenter-in #10 \italic { saxophone } } }
+            \column { \hcenter-in #10 \italic { shakers } } }
         shortInstrumentName = \markup { 
-            \column { \hcenter-in #10 \italic { saxophone } } }
+            \column { \hcenter-in #10 \italic { shakers } } }
+    }
+
+    \context {
+        \Staff
+        \name PercussionWoodblockStaff
+        \type Engraver_group
+        \alias Staff
+        \override StaffSymbol.line-count = #4
+        instrumentName = \markup { 
+            \column { \hcenter-in #10 \italic { woodblocks } } }
+        shortInstrumentName = \markup { 
+            \column { \hcenter-in #10 \italic { woodblocks } } }
+    }
+
+    \context {
+        \Staff
+        \name PercussionDrumStaff
+        \type Engraver_group
+        \alias Staff
+        \override StaffSymbol.line-count = #3
+        instrumentName = \markup { 
+            \column { \hcenter-in #10 \italic { drums } } }
+        shortInstrumentName = \markup { 
+            \column { \hcenter-in #10 \italic { drums } } }
     }
 
     \context {
         \StaffGroup
-        \name SaxophoneStaffGroup
+        \name PercussionStaffGroup
         \type Engraver_group
         \alias StaffGroup
-        \accepts SaxophoneStaff
-    }
-
-    %%% TIME SIGNATURE CONTEXT %%%
-
-    \context {
-        \type Engraver_group
-        \name TimeSignatureContext
-        \consists Time_signature_engraver
-        \consists Axis_group_engraver
-        \consists Metronome_mark_engraver
-        \consists Mark_engraver
-        \consists Bar_number_engraver
-        \override BarNumber.X-extent = #'(0 . 0)
-        \override BarNumber.Y-extent = #'(0 . 0)
-        \override BarNumber.extra-offset = #'(-8 . -2)
-        \override BarNumber.font-name = "Didot Italic"
-        \override BarNumber.font-size = 1
-        \override BarNumber.stencil = #(make-stencil-circler 0.1 0.7 ly:text-interface::print)
-        \override MetronomeMark.X-extent = #'(0 . 0)
-        \override MetronomeMark.X-offset = #ly:self-alignment-interface::x-aligned-on-self
-        \override MetronomeMark.break-align-symbols = #'(time-signature)
-        \override MetronomeMark.extra-offset = #'(3 . -9.5)
-        \override MetronomeMark.font-size = 3
-        \override RehearsalMark.X-extent = #'(0 . 0)
-        \override RehearsalMark.break-align-symbols = #'(time-signature)
-        \override RehearsalMark.break-visibility = #end-of-line-invisible
-        \override RehearsalMark.extra-offset = #'(-1 . -5)
-        \override RehearsalMark.font-name = "Didot"
-        \override RehearsalMark.font-size = 10
-        \override RehearsalMark.self-alignment-X = #CENTER
-        \override TimeSignature.X-extent = #'(0 . 0)
-        \override TimeSignature.break-align-symbols = #'(staff-bar)
-        \override TimeSignature.break-visibility = #end-of-line-invisible
-        \override TimeSignature.extra-offset = #'(-2 . 0)
-        \override TimeSignature.font-size = 3
-        \override TimeSignature.style = #'numbered
-        \override VerticalAxisGroup.default-staff-staff-spacing = #'(
-            (basic-distance . 0)
-            (minimum-distance . 10)
-            (padding . 6)
-            (stretchability . 2)
-            )
+        \accepts PercussionDrumStaff
+        \accepts PercussionShakerStaff
+        \accepts PercussionWoodblockStaff
     }
 
     %%% SCORE %%%
