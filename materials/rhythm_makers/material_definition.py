@@ -75,7 +75,7 @@ piano_fanfare_rhythm_maker = rhythmmakertools.TupletRhythmMaker(
         beam_divisions_together=False,
         ),
     tie_specifier=rhythmmakertools.TieSpecifier(
-        tie_across_divisions=True,
+        tie_across_divisions=False,
         ),
     tuplet_ratios=(
         (1, 1, -2),

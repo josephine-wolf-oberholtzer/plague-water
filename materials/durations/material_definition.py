@@ -7,6 +7,7 @@ from plague_water.materials import euler_numbers
 
 denominator = 16
 
+
 long_groupings = datastructuretools.StatalServer(
     makers.SegmentMaker.remap_sequence(
         euler_numbers.euler_hundreds,
@@ -18,6 +19,7 @@ long_groupings = datastructuretools.StatalServer(
         )
     )
 
+
 medium_groupings = datastructuretools.StatalServer(
     makers.SegmentMaker.remap_sequence(
         euler_numbers.euler_hundreds,
@@ -26,6 +28,7 @@ medium_groupings = datastructuretools.StatalServer(
             ],
         )
     )
+
 
 short_groupings = datastructuretools.StatalServer(
     makers.SegmentMaker.remap_sequence(
@@ -38,6 +41,7 @@ short_groupings = datastructuretools.StatalServer(
         )
     )
 
+
 long_durations = datastructuretools.StatalServer((
     durationtools.Duration(x, denominator) for x in
     makers.SegmentMaker.remap_sequence(
@@ -49,6 +53,7 @@ long_durations = datastructuretools.StatalServer((
         )
     ))
 
+
 medium_durations = datastructuretools.StatalServer((
     durationtools.Duration(x, denominator) for x in
     makers.SegmentMaker.remap_sequence(
@@ -58,6 +63,18 @@ medium_durations = datastructuretools.StatalServer((
             ],
         )
     ))
+
+
+medium_durations = datastructuretools.StatalServer((
+    durationtools.Duration(x, denominator) for x in
+    makers.SegmentMaker.remap_sequence(
+        euler_numbers.euler_hundreds,
+        [
+            ((0, 99), (4, 8)),
+            ],
+        )
+    ))
+
 
 short_durations = datastructuretools.StatalServer((
     durationtools.Duration(x, denominator) for x in
@@ -71,6 +88,7 @@ short_durations = datastructuretools.StatalServer((
         )
     ))
 
+
 very_short_durations = datastructuretools.StatalServer((
     durationtools.Duration(x, denominator) for x in
     makers.SegmentMaker.remap_sequence(
@@ -83,9 +101,26 @@ very_short_durations = datastructuretools.StatalServer((
         )
     ))
 
+
+def make_durations(low, high, denominator=16):
+    if high < low:
+        low, high = high, low
+    sequence = makers.SegmentMaker.remap_sequence(
+        euler_numbers.euler_hundreds,
+        [
+            ((0, 99), (low, high)),
+            ],
+        )
+    durations = [durationtools.Duration(x, denominator)
+        for x in sequence]
+    server = datastructuretools.StatalServer(durations)
+    return server
+
+
 __all__ = (
     'long_durations',
     'long_groupings',
+    'make_durations',
     'medium_durations',
     'medium_groupings',
     'short_durations',
