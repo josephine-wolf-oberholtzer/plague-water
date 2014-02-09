@@ -46,38 +46,18 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
 
     \context {
         \Staff
-        \name PercussionShakerStaff
+        \name PercussionStaff
         \type Engraver_group
         \alias Staff
-        \override StaffSymbol.line-count = 3
+        \override StaffSymbol.line-positions = #'(
+            -13 -11 -9
+            -3 -1 1 3
+            9 11 13
+            )
         instrumentName = \markup { 
-            \column { \hcenter-in #10 \italic { shakers } } }
+            \column { \hcenter-in #10 \italic { percussion } } }
         shortInstrumentName = \markup { 
-            \column { \hcenter-in #10 \italic { shakers } } }
-    }
-
-    \context {
-        \Staff
-        \name PercussionWoodblockStaff
-        \type Engraver_group
-        \alias Staff
-        \override StaffSymbol.line-count = 4
-        instrumentName = \markup { 
-            \column { \hcenter-in #10 \italic { wood-blocks } } }
-        shortInstrumentName = \markup { 
-            \column { \hcenter-in #10 \italic { wood-blocks } } }
-    }
-
-    \context {
-        \Staff
-        \name PercussionDrumStaff
-        \type Engraver_group
-        \alias Staff
-        \override StaffSymbol.line-count = 3
-        instrumentName = \markup { 
-            \column { \hcenter-in #10 \italic { drums } } }
-        shortInstrumentName = \markup { 
-            \column { \hcenter-in #10 \italic { drums } } }
+            \column { \hcenter-in #10 \italic { percussion } } }
     }
 
     \context {
@@ -85,9 +65,7 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         \name PercussionStaffGroup
         \type Engraver_group
         \alias StaffGroup
-        \accepts PercussionShakerStaff
-        \accepts PercussionWoodblockStaff
-        \accepts PercussionDrumStaff
+        \accepts PercussionStaff
     }
 
     %%% PIANO %%%

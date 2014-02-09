@@ -69,8 +69,8 @@ guitar_winding_music_maker = makers.MusicMaker(
             ),
         ),
     timespan_agent=makers.SemanticTimespanAgent(
-        playing_durations=durations.medium_durations,
-        playing_groupings=durations.short_groupings,
+        playing_durations=durations.short_durations,
+        playing_groupings=durations.medium_groupings,
         ),
     )
 

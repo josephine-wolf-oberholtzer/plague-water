@@ -98,24 +98,11 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
                 scoretools.Staff(
                     [
                         scoretools.Voice(
-                            name='Percussion RH Voice',
+                            name='Percussion Voice',
                             ),
                         ],
-                    context_name='PercussionShakerStaff',
-                    name='Percussion Shaker Staff',
-                    ),
-                scoretools.Staff(
-                    context_name='PercussionWoodblockStaff',
-                    name='Percussion Woodblock Staff',
-                    ),
-                scoretools.Staff(
-                    [
-                        scoretools.Voice(
-                            name='Percussion LH Voice',
-                            ),
-                        ],
-                    context_name='PercussionDrumStaff',
-                    name='Percussion Drum Staff',
+                    context_name='PercussionStaff',
+                    name='Percussion Staff',
                     ),
                 ],
             context_name='PercussionStaffGroup',
@@ -145,10 +132,6 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
         attach(indicatortools.Clef('bass'),
             score['Piano Lower Staff'])
         attach(indicatortools.Clef('percussion'),
-            score['Percussion Drum Staff'])
-        attach(indicatortools.Clef('percussion'),
-            score['Percussion Shaker Staff'])
-        attach(indicatortools.Clef('percussion'),
-            score['Percussion Woodblock Staff'])
+            score['Percussion Staff'])
 
         return score
