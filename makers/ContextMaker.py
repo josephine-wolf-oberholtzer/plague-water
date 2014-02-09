@@ -54,7 +54,7 @@ class ContextMaker(PlagueWaterObject):
 
     ### PUBLIC METHODS ###
 
-    def cleanup_performed_timespans(
+    def cleanup_timespans(
         self,
         split_offsets=None,
         ):
@@ -69,7 +69,7 @@ class ContextMaker(PlagueWaterObject):
         self.timespan_inventory[:] = new_timespan_inventory
         self.timespan_inventory.sort()
 
-    def create_performed_timespans(
+    def create_timespans(
         self,
         target_segment_duration,
         context_map=None,

@@ -80,13 +80,14 @@ class SegmentMaker(PlagueWaterObject):
         self.score = template()
 
         ### BUILD TIMESPAN STRUCTURES ###
-        self.create_performed_timespans()
+        self.create_semantic_timespans()
         self.meters = self.find_meters()
         self.time_signatures = tuple(meter.implied_time_signature
             for meter in self.meters)
         self.segment_duration = sum(time_signature.duration
             for time_signature in self.time_signatures)
-        self.cleanup_performed_timespans()
+        self.cleanup_semantic_timespans()
+        self.create_dependent_timespans()
         self.remove_empty_trailing_measures()
         self.create_silent_timespans()
 
@@ -432,8 +433,8 @@ class SegmentMaker(PlagueWaterObject):
         else:
             self.score.add_final_bar_line('||')
 
-    def cleanup_performed_timespans(self):
-        print '\tcleaning up performed timespans'
+    def cleanup_semantic_timespans(self):
+        print '\tcleaning up semantic timespans'
         split_offsets = []
         if self.measure_segmentation_talea:
             groups = sequencetools.partition_sequence_by_counts(
@@ -447,25 +448,39 @@ class SegmentMaker(PlagueWaterObject):
                 current_offset += sum(x.duration for x in group)
                 split_offsets.append(current_offset)
         for context_maker in self.context_makers:
-            context_maker.cleanup_performed_timespans(
+            if context_maker.context_dependencies:
+                continue
+            context_maker.cleanup_timespans(
                 split_offsets=split_offsets,
                 )
 
-    def create_performed_timespans(self):
-        print '\tcreating performed timespans'
+    def create_dependent_timespans(self):
+        print '\tcreating dependent timespans'
         from plague_water import makers
         ordered_context_makers = makers.ContextMaker.order_by_dependencies(
             self.context_makers)
         for context_maker in ordered_context_makers:
-            dependencies = None
             if context_maker.context_dependencies:
                 dependencies = [x for x in self.context_makers
                     if x.context_name in context_maker.context_dependencies
                     ]
-            context_maker.create_performed_timespans(
+                context_maker.create_timespans(
+                    self.target_segment_duration,
+                    context_map=self.context_map,
+                    dependencies=dependencies,
+                    )
+
+    def create_semantic_timespans(self):
+        print '\tcreating semantic timespans'
+        from plague_water import makers
+        ordered_context_makers = makers.ContextMaker.order_by_dependencies(
+            self.context_makers)
+        for context_maker in ordered_context_makers:
+            if context_maker.context_dependencies:
+                continue
+            context_maker.create_timespans(
                 self.target_segment_duration,
                 context_map=self.context_map,
-                dependencies=dependencies,
                 )
 
     def create_silent_timespans(self):
