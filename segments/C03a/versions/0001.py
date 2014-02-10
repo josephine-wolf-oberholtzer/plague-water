@@ -31,8 +31,8 @@ target_segment_duration = makers.SegmentMaker.get_segment_target_duration(
 ### CONTEXT MAP ###
 
 context_map = base_segment_maker.context_map.copy()
-context_map['Plague Water Score']['pitch_class_agent'] = new(
-    context_map['Plague Water Score']['pitch_class_agent'],
+context_map['Plague Water Score']['pitch_agent'] = new(
+    context_map['Plague Water Score']['pitch_agent'],
     )
 context_map['Saxophone Voice']['register_agent'] = makers.RegisterAgent(
     instrument=instrumenttools.BaritoneSaxophone(),

@@ -112,8 +112,9 @@ class PitchClassAgent(PlagueWaterObject):
                     statal_server=self._current_cursor.statal_server,
                     )
         current_pitch_class = self._current_cursor(1)[0]
-        #while current_pitch_class == self._last_pitch_class:
-        #    current_pitch_class = self._current_cursor(1)[0]
+        if 1 < len(set(self.pitch_class_talea[pitch_class_sequence_index])):
+            while current_pitch_class == self._last_pitch_class:
+                current_pitch_class = self._current_cursor()[0]
         self._last_pitch_class = current_pitch_class
         for note in logical_tie:
             note.written_pitch = current_pitch_class

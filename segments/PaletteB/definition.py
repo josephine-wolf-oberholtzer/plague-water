@@ -19,7 +19,7 @@ score_template = score_templates.PlagueWaterScoreTemplate()
 score = score_template()
 context_map = datastructuretools.ContextMap(score_template)
 context_map[score]['minimum_timespan_duration'] = durationtools.Duration(1, 8)
-context_map[score]['pitch_class_agent'] = makers.PitchClassAgent(
+context_map[score]['pitch_agent'] = makers.PitchClassAgent(
     pitch_class_ratio=(1, 1, 1),
     pitch_class_talea=(
         [0, 3, 2, 5, 11, 1],
@@ -30,7 +30,7 @@ context_map[score]['pitch_class_agent'] = makers.PitchClassAgent(
     transform_talea=None,
     )
 
-### CONTEXT MAKERS ###
+### SEMANTIC CONTEXT MAKERS ###
 
 guitar_context_maker = makers.ContextMaker(
     context_name='Guitar Voice',
@@ -75,23 +75,31 @@ piano_lh_context_maker = makers.ContextMaker(
 percussion_shaker_context_maker = makers.ContextMaker(
     context_name='Percussion Shaker Voice',
     music_makers=[
-        materials.basic_music_maker,
+        new(materials.basic_music_maker,
+            pitch_agent=materials.shaker_pitch_agent,
+            ),
         ],
     )
 
 percussion_woodblock_context_maker = makers.ContextMaker(
     context_name='Percussion Woodblock Voice',
     music_makers=[
-        materials.basic_music_maker,
+        new(materials.basic_music_maker,
+            pitch_agent=materials.woodblock_pitch_agent,
+            ),
         ],
     )
 
 percussion_drum_context_maker = makers.ContextMaker(
     context_name='Percussion Drum Voice',
     music_makers=[
-        materials.basic_music_maker,
+        new(materials.basic_music_maker,
+            pitch_agent=materials.drum_pitch_agent,
+            ),
         ],
     )
+
+### DEPENDENT CONTEXT MAKERS ###
 
 piano_dynamics_context_maker = makers.ContextMaker(
     context_dependencies=(

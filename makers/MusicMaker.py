@@ -12,7 +12,7 @@ class MusicMaker(PlagueWaterObject):
         '_chord_agent',
         '_dynamic_agent',
         '_indicator_agent',
-        '_pitch_class_agent',
+        '_pitch_agent',
         '_register_agent',
         '_rewrite_meter',
         '_rhythm_maker',
@@ -30,7 +30,7 @@ class MusicMaker(PlagueWaterObject):
         chord_agent=None,
         dynamic_agent=None,
         indicator_agent=None,
-        pitch_class_agent=None,
+        pitch_agent=None,
         register_agent=None,
         rewrite_meter=None,
         rhythm_maker=None,
@@ -41,9 +41,16 @@ class MusicMaker(PlagueWaterObject):
         assert isinstance(indicator_agent, (makers.IndicatorAgent, type(None)))
         assert isinstance(chord_agent, (makers.ChordAgent, type(None)))
         assert isinstance(dynamic_agent, (makers.DynamicAgent, type(None)))
-        assert isinstance(pitch_class_agent, (makers.PitchClassAgent, type(None)))
+        assert isinstance(pitch_agent, (
+            makers.PitchClassAgent,
+            makers.PercussionPitchAgent,
+            type(None),
+            ))
         assert isinstance(register_agent, (makers.RegisterAgent, type(None)))
-        assert isinstance(rhythm_maker, (rhythmmakertools.RhythmMaker, type(None)))
+        assert isinstance(rhythm_maker, (
+            rhythmmakertools.RhythmMaker,
+            type(None),
+            ))
         assert isinstance(spanner_agent, (makers.SpannerAgent, type(None)))
         assert isinstance(timespan_agent, (makers.TimespanAgent, type(None)))
         if apply_beam is not None:
@@ -52,7 +59,7 @@ class MusicMaker(PlagueWaterObject):
         self._chord_agent = chord_agent
         self._dynamic_agent = dynamic_agent
         self._indicator_agent = indicator_agent
-        self._pitch_class_agent = pitch_class_agent
+        self._pitch_agent = pitch_agent
         self._register_agent = register_agent
         if rewrite_meter is not None:
             rewrite_meter = bool(rewrite_meter)
@@ -110,9 +117,9 @@ class MusicMaker(PlagueWaterObject):
         logical_tie=None,
         segment_duration=None,
         ):
-        if self.pitch_class_agent is None:
+        if self.pitch_agent is None:
             return
-        self.pitch_class_agent(
+        self.pitch_agent(
             logical_tie,
             segment_duration=segment_duration,
             )
@@ -326,8 +333,8 @@ class MusicMaker(PlagueWaterObject):
         return self._indicator_agent
 
     @property
-    def pitch_class_agent(self):
-        return self._pitch_class_agent
+    def pitch_agent(self):
+        return self._pitch_agent
 
     @property
     def register_agent(self):

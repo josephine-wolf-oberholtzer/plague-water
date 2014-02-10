@@ -28,7 +28,7 @@ piano_dynamics_music_maker = makers.MusicMaker(
                 ),
             ),
         ),
-    pitch_class_agent=makers.PitchClassAgent(
+    pitch_agent=makers.PitchClassAgent(
         pitch_class_ratio=(1,),
         pitch_class_talea=([0, 0],),
         ),
@@ -94,7 +94,7 @@ piano_glissed_music_maker = makers.MusicMaker(
                 ),
             ),
         ),
-    pitch_class_agent=makers.PitchClassAgent(
+    pitch_agent=makers.PitchClassAgent(
         pitch_class_ratio=(1,),
         pitch_class_talea=([0, 7, 2, 9, 5, 3, 11],),
         ),

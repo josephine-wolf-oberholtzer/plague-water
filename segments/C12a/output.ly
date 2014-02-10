@@ -80,7 +80,7 @@
 					{
 						{
 							\override Stem.stemlet-length = 0.75
-							ef4
+							b,4
 						}
 						{
 							d4
@@ -97,7 +97,7 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							f8 [
+							c8 [
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -107,7 +107,7 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							cs8
+							d8
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -130,10 +130,10 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							ef16 ~ [
+							b,16 ~ [
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
-							ef16
+							b,16
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -161,20 +161,20 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							b16 ~
+							d'16 ~
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
-							b16
+							d'16
 						}
 						{
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
-							bf,16
+							d16
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							af8. ]
+							d8. ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -207,17 +207,17 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							b,8 [
+							d8 [
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							bf8
+							d'8
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							af8 ]
+							d8 ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -244,7 +244,7 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							b,16 [
+							d16 [
 						}
 						{
 							\set stemLeftBeamCount = 2
@@ -264,10 +264,10 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							e8 ~ [
+							cs8 ~ [
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
-							e16
+							cs16
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -280,10 +280,10 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							e16 ~
+							cs16 ~
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							e8. ]
+							cs8. ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -318,7 +318,7 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							e8 [
+							cs8 [
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -328,7 +328,7 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							e16
+							cs16
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -364,7 +364,7 @@
 					{
 						{
 							\override Stem.stemlet-length = 0.75
-							d'4
+							cs'4
 						}
 						{
 							f'4
@@ -381,7 +381,7 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							b8 [
+							ef'8 [
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -391,7 +391,7 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							c'8
+							f'8
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -414,10 +414,10 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							d'16 ~ [
+							cs'16 ~ [
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
-							d'16
+							cs'16
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -445,20 +445,20 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							d'16 ~
+							af'16 ~
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
-							d'16
+							af'16
 						}
 						{
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
-							b16
+							af16
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							bf8. ]
+							af8. ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -491,17 +491,17 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							d'8 [
+							af8 [
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							b'8
+							af'8
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							bf8 ]
+							af8 ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -528,7 +528,7 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							d'16 [
+							af16 [
 						}
 						{
 							\set stemLeftBeamCount = 2
@@ -548,10 +548,10 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							cs'8 ~ [
+							e'8 ~ [
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
-							cs'16
+							e'16
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -564,10 +564,10 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							cs'16 ~
+							e'16 ~
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							cs'8. ]
+							e'8. ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -602,7 +602,7 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							cs'8 [
+							e'8 [
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -612,7 +612,7 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							cs'16
+							e'16
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -650,7 +650,7 @@
 					{
 						{
 							\override Stem.stemlet-length = 0.75
-							f''4
+							c'''4
 						}
 						{
 							b''4
@@ -667,7 +667,8 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							cs'''8 [
+							\ottava #1
+							d'''8 [
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -677,7 +678,7 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							ef''8
+							b''8
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -686,6 +687,7 @@
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
 							d'''16 ]
+							\ottava #0
 							\revert Stem.stemlet-length
 						}
 					}
@@ -700,10 +702,10 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							f''16 ~ [
+							c'''16 ~ [
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
-							f''16
+							c'''16
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -723,7 +725,6 @@
 					{
 						{
 							\override Stem.stemlet-length = 0.75
-							\ottava #1
 							bf''4 ~
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
@@ -732,21 +733,20 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							af'''16 ~
+							bf''16 ~
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
-							af'''16
+							bf''16
 						}
 						{
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
-							d'''16
+							bf''16
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							b''8. ]
-							\ottava #0
+							bf''8. ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -779,17 +779,17 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							af''8 [
+							bf''8 [
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							d'''8
+							bf''8
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							b''8 ]
+							bf''8 ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -816,7 +816,7 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							af''16 [
+							bf''16 [
 						}
 						{
 							\set stemLeftBeamCount = 2
@@ -836,10 +836,11 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							e''8 ~ [
+							\ottava #1
+							cs'''8 ~ [
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
-							e''16
+							cs'''16
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -852,10 +853,11 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							e''16 ~
+							cs'''16 ~
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							e''8. ]
+							cs'''8. ]
+							\ottava #0
 							\revert Stem.stemlet-length
 						}
 					}
@@ -892,7 +894,8 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							e''8 [
+							\ottava #1
+							cs'''8 [
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -902,12 +905,13 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							e''16
+							cs'''16
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
 							cs'''8. ]
+							\ottava #0
 							\revert Stem.stemlet-length
 						}
 					}
@@ -1141,7 +1145,7 @@
 					{
 						{
 							\override Stem.stemlet-length = 0.75
-							b'4
+							ef'4
 						}
 						{
 							cs''4
@@ -1158,7 +1162,7 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							c''8 [
+							f'8 [
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -1168,7 +1172,7 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							d''8
+							cs''8
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -1191,10 +1195,10 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							b'16 ~ [
+							ef'16 ~ [
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
-							b'16
+							ef'16
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -1222,20 +1226,20 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							bf'16 ~
+							b'16 ~
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
-							bf'16
+							b'16
 						}
 						{
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
-							af'16
+							b'16
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							d''8. ]
+							b'8. ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -1268,17 +1272,17 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							bf'8 [
+							b'8 [
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							af''8
+							b'8
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							d''8 ]
+							b'8 ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -1305,7 +1309,7 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							bf'16 [
+							b'16 [
 						}
 						{
 							\set stemLeftBeamCount = 2
@@ -1325,10 +1329,10 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							cs''8 ~ [
+							e'8 ~ [
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
-							cs''16
+							e'16
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -1341,10 +1345,10 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							cs''16 ~
+							e'16 ~
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							cs''8. ]
+							e'8. ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -1379,7 +1383,7 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							cs''8 [
+							e'8 [
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -1389,7 +1393,7 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							cs''16
+							e'16
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -1626,7 +1630,7 @@
 					{
 						{
 							\override Stem.stemlet-length = 0.75
-							b'8
+							g8
 							\revert Stem.stemlet-length
 						}
 					}
@@ -1638,10 +1642,10 @@
 					{
 						{
 							\override Stem.stemlet-length = 0.75
-							cs'4
+							b4
 						}
 						{
-							c'4
+							d'4
 							\revert Stem.stemlet-length
 						}
 					}
@@ -1655,25 +1659,25 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							ef'8 [
+							f'8 [
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							d'8
+							g8
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							f'8
+							b8
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							b'8 ~
+							d'8 ~
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
-							b'16 ]
+							d'16 ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -1688,18 +1692,18 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							cs'16 ~ [
+							f'16 ~ [
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
-							cs'16
+							f'16
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							c'16 ~
+							g16 ~
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							c'8 ]
+							g8 ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -1711,28 +1715,28 @@
 					{
 						{
 							\override Stem.stemlet-length = 0.75
-							d'4 ~
+							b4 ~
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
-							d'16 [
+							b16 [
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							b'16 ~
+							d'16 ~
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
-							b'16
+							d'16
 						}
 						{
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
-							bf'16
+							f'16
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							af'8. ]
+							g8. ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -1747,10 +1751,10 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							d'16 ~ [
+							b16 ~ [
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							d'8. ]
+							b8. ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -1758,178 +1762,6 @@
 						{
 							r16
 							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 1
-							b'8 [
-						}
-						{
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							bf'8
-						}
-						{
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 0
-							af'8 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							d'8
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8
-							r16
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							b'16 [
-						}
-						{
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							cs'16 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8.
-							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 1
-							e'8 ~ [
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 1
-							e'16
-						}
-						{
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 2
-							cs'16 ~
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 1
-							cs'16
-						}
-						{
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 2
-							e'16 ~
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 0
-							e'8. ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r16
-						}
-						{
-							r16
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 1
-							cs'8. ~ [
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 0
-							cs'8 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8
-							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 1
-							e'8 [
-						}
-						{
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							cs'8.
-						}
-						{
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							e'16
-						}
-						{
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 0
-							cs'8. ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r16
-						}
-					}
-				}
-			}
-			\context PercussionWoodblockStaff = "Percussion Woodblock Staff" {
-				\clef "percussion"
-				\context Voice = "Percussion Woodblock Voice" {
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							cs'8
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							c'4
-						}
-						{
-							ef'4
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r4
 						}
 					}
 					{
@@ -1946,16 +1778,188 @@
 						}
 						{
 							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 0
+							g8 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							b8
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8
+							r16
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 2
+							d'16 [
+						}
+						{
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 0
+							f'16 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8.
+							r8
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							b'8
+							g8 ~ [
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 1
+							g16
+						}
+						{
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 2
+							b16 ~
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 1
+							b16
+						}
+						{
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 2
+							d'16 ~
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 0
+							d'8. ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r16
+						}
+						{
+							r16
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 1
+							f'8. ~ [
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 0
+							f'8 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8
+							r8
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 1
+							g8 [
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							cs'8 ~
+							b8.
+						}
+						{
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							d'16
+						}
+						{
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 0
+							f'8. ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r16
+						}
+					}
+				}
+			}
+			\context PercussionWoodblockStaff = "Percussion Woodblock Staff" {
+				\clef "percussion"
+				\context Voice = "Percussion Woodblock Voice" {
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							f8
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							a4
+						}
+						{
+							c'4
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r4
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 1
+							e'8 [
+						}
+						{
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							g'8
+						}
+						{
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							f8
+						}
+						{
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							a8 ~
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
-							cs'16 ]
+							a16 ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -1978,152 +1982,152 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							ef'16 ~
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 0
-							ef'8 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							af'4 ~
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 1
-							af'16 [
-						}
-						{
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 2
-							d'16 ~
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 1
-							d'16
-						}
-						{
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 1
-							b'16
-						}
-						{
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 0
-							bf'8. ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r16
-							r8.
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							af'16 ~ [
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 0
-							af'8. ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r16
-							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 1
-							d'8 [
-						}
-						{
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							b'8
-						}
-						{
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 0
-							bf'8 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							af'8
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8
-							r16
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							d'16 [
-						}
-						{
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							e'16 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8.
-							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 1
-							cs'8 ~ [
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 1
-							cs'16
-						}
-						{
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 2
 							e'16 ~
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 0
+							e'8 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							g'4 ~
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
-							e'16
+							g'16 [
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							cs'16 ~
+							f16 ~
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 1
+							f16
+						}
+						{
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 1
+							a16
+						}
+						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							cs'8. ]
+							c'8. ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r16
+							r8.
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 2
+							e'16 ~ [
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 0
+							e'8. ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r16
+							r8
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 1
+							g'8 [
+						}
+						{
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							f8
+						}
+						{
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 0
+							a8 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							c'8
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8
+							r16
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 2
+							e'16 [
+						}
+						{
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 0
+							g'16 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8.
+							r8
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 1
+							f8 ~ [
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 1
+							f16
+						}
+						{
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 2
+							a16 ~
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 1
+							a16
+						}
+						{
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 2
+							c'16 ~
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 0
+							c'8. ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -2158,22 +2162,22 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							cs'8 [
+							g'8 [
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							e'8.
+							f8.
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							cs'16
+							a16
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							e'8. ]
+							c'8. ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -2190,7 +2194,7 @@
 					{
 						{
 							\override Stem.stemlet-length = 0.75
-							c'8
+							a8
 							\revert Stem.stemlet-length
 						}
 					}
@@ -2202,10 +2206,10 @@
 					{
 						{
 							\override Stem.stemlet-length = 0.75
-							ef'4
+							c'4
 						}
 						{
-							d'4
+							e'4
 							\revert Stem.stemlet-length
 						}
 					}
@@ -2219,159 +2223,159 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							f'8 [
+							a8 [
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							b'8
+							c'8
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							cs'8
+							e'8
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							c'8 ~
+							a8 ~
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 0
+							a16 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8.
+							r16
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 2
+							c'16 ~ [
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 1
+							c'16
+						}
+						{
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 2
+							e'16 ~
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 0
+							e'8 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							a4 ~
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 1
+							a16 [
+						}
+						{
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 2
+							c'16 ~
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 1
+							c'16
+						}
+						{
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 1
+							e'16
+						}
+						{
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 0
+							a8. ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r16
+							r8.
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 2
+							c'16 ~ [
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 0
+							c'8. ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r16
+							r8
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 1
+							e'8 [
+						}
+						{
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							a8
+						}
+						{
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 0
+							c'8 ]
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							e'8
+							\revert Stem.stemlet-length
+						}
+					}
+					{
+						{
+							r8
+							r16
+						}
+					}
+					{
+						{
+							\override Stem.stemlet-length = 0.75
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 2
+							a16 [
+						}
+						{
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
 							c'16 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8.
-							r16
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							ef'16 ~ [
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 1
-							ef'16
-						}
-						{
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 2
-							d'16 ~
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 0
-							d'8 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							bf'4 ~
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 1
-							bf'16 [
-						}
-						{
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 2
-							af'16 ~
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 1
-							af'16
-						}
-						{
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 1
-							d'16
-						}
-						{
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 0
-							b'8. ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r16
-							r8.
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							bf'16 ~ [
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 0
-							bf'8. ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r16
-							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 1
-							af'8 [
-						}
-						{
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							d'8
-						}
-						{
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 0
-							b'8 ]
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							bf'8
-							\revert Stem.stemlet-length
-						}
-					}
-					{
-						{
-							r8
-							r16
-						}
-					}
-					{
-						{
-							\override Stem.stemlet-length = 0.75
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							af'16 [
-						}
-						{
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							cs'16 ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -2394,18 +2398,18 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							cs'16 ~
+							a16 ~
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
-							cs'16
+							a16
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							e'16 ~
+							c'16 ~
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							e'8. ]
+							c'8. ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -2422,10 +2426,10 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							cs'8. ~ [
+							e'8. ~ [
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							cs'8 ]
+							e'8 ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -2440,12 +2444,12 @@
 							\override Stem.stemlet-length = 0.75
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							e'8 [
+							a8 [
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							cs'8.
+							c'8.
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -2455,7 +2459,7 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							cs'8. ]
+							a8. ]
 							\revert Stem.stemlet-length
 						}
 					}
