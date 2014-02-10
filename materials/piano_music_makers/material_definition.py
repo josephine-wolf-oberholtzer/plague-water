@@ -11,6 +11,7 @@ from plague_water.materials import spanners
 
 
 piano_dynamics_music_maker = makers.MusicMaker(
+    apply_beam=False,
     dynamic_agent=makers.DynamicAgent(
         cyclic_dynamic_expressions=(
             makers.DynamicExpression(
@@ -39,6 +40,7 @@ piano_dynamics_music_maker = makers.MusicMaker(
             ),
         incise_specifier=rhythmmakertools.InciseSpecifier(
             incise_output=True,
+            prefix_lengths=(0,),
             suffix_lengths=(1,),
             suffix_talea=(1,),
             talea_denominator=32,
@@ -49,6 +51,7 @@ piano_dynamics_music_maker = makers.MusicMaker(
 
 
 piano_pedals_music_maker = makers.MusicMaker(
+    apply_beam=False,
     spanner_agent=makers.SpannerAgent(
         cyclical_output_spanners=(
             makers.ComplexPianoPedalSpanner(
@@ -95,18 +98,6 @@ piano_glissed_music_maker = makers.MusicMaker(
         pitch_class_ratio=(1,),
         pitch_class_talea=([0, 7, 2, 9, 5, 3, 11],),
         ),
-    register_agent=makers.RegisterAgent(
-        phrase_inflections=(
-            makers.RegisterCurve(
-                ratio=(1,),
-                registers=(-6, 6),
-                ),
-            makers.RegisterCurve(
-                ratio=(1,),
-                registers=(6, -6),
-                ),
-            ),
-        ),
     rewrite_meter=False,
     rhythm_maker=rhythm_makers.glissing_rhythm_maker,
     spanner_agent=makers.SpannerAgent(
@@ -122,14 +113,24 @@ piano_glissed_music_maker = makers.MusicMaker(
 
 
 piano_glissed_keys_music_maker = new(piano_glissed_music_maker,
+    indicator_agent__first_leaf_indicators=(
+        markuptools.Markup(
+            r'\pad-around #1 \box \pad-around #1 \small KEYS',
+            Up,
+            ),
+        ),
     spanner_agent__output_spanners=spanners.key_glissando_spanner,
     )
 
 
 piano_glissed_pegs_music_maker = new(piano_glissed_music_maker,
     indicator_agent__first_leaf_indicators=(
-        markuptools.Markup(r'\box \pad #1 PEGS'),
+        markuptools.Markup(
+            r'\pad-around #1 \box \pad-around #1 \small PEGS',
+            Up,
+            ),
         ),
+    spanner_agent__output_spanners=spanners.key_glissando_spanner,
     )
 
 

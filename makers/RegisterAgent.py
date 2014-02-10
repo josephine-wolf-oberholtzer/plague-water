@@ -78,6 +78,8 @@ class RegisterAgent(PlagueWaterObject):
             self.phrase_inflections)
         iterator = iterate(music).by_logical_tie(pitched=True)
         all_logical_ties = [x for x in iterator]
+        if not all_logical_ties:
+            return
         music_duration = all_logical_ties[-1].get_timespan().start_offset - \
             music_start_offset
         for division in music:

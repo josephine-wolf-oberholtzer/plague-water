@@ -32,19 +32,19 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         \consists Bar_number_engraver
         \override BarNumber.X-extent = #'(0 . 0)
         \override BarNumber.Y-extent = #'(0 . 0)
-        \override BarNumber.extra-offset = #'(-8 . -2)
+        \override BarNumber.extra-offset = #'(-8 . -4)
         \override BarNumber.font-name = "Didot Italic"
-        \override BarNumber.font-size = 1
+        \override BarNumber.font-size = 2
         \override BarNumber.stencil = #(make-stencil-circler 0.1 0.7 ly:text-interface::print)
         \override MetronomeMark.X-extent = #'(0 . 0)
         \override MetronomeMark.X-offset = #ly:self-alignment-interface::x-aligned-on-self
         \override MetronomeMark.break-align-symbols = #'(time-signature)
-        \override MetronomeMark.extra-offset = #'(3 . -9.5)
+        \override MetronomeMark.extra-offset = #'(3 . -5.5)
         \override MetronomeMark.font-size = 3
         \override RehearsalMark.X-extent = #'(0 . 0)
         \override RehearsalMark.break-align-symbols = #'(time-signature)
         \override RehearsalMark.break-visibility = #end-of-line-invisible
-        \override RehearsalMark.extra-offset = #'(-1 . -5)
+        \override RehearsalMark.extra-offset = #'(-1 . -3)
         \override RehearsalMark.font-name = "Didot"
         \override RehearsalMark.font-size = 10
         \override RehearsalMark.self-alignment-X = #CENTER
@@ -164,7 +164,7 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         \name PercussionWoodblockStaff
         \type Engraver_group
         \alias Staff
-        \override StaffSymbol.line-count = #4
+        \override StaffSymbol.line-count = #5
         instrumentName = \markup { 
             \column { \hcenter-in #10 \italic { woodblocks } } }
         shortInstrumentName = \markup { 
@@ -191,6 +191,8 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         \accepts PercussionDrumStaff
         \accepts PercussionShakerStaff
         \accepts PercussionWoodblockStaff
+        \override StaffGrouper.staff-staff-spacing.basic-distance = 1
+        \override StaffGrouper.staff-staff-spacing.padding = 2
     }
 
     %%% SCORE %%%
@@ -232,7 +234,6 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         \override StemTremolo.flag-count = 4.0
         \override StemTremolo.slope = 0.5
         \override StemTremolo.Y-offset = -4.0
-        \override StaffSymbol.to-barline = ##t
         \override TextScript.Y-extent = #'(-1.5 . 1.5)
         \override TupletBracket.breakable = ##t
         \override TupletBracket.full-length-to-extent = ##f

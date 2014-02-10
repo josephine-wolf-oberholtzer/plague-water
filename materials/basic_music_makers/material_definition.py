@@ -20,6 +20,7 @@ basic_music_maker = makers.MusicMaker(
     )
 
 silent_music_maker = makers.MusicMaker(
+    apply_beam=False,
     rhythm_maker=rhythmmakertools.RestRhythmMaker(),
     timespan_agent=makers.SemanticTimespanAgent(
         playing_durations=[Duration(1, 4), Duration(1, 4)],

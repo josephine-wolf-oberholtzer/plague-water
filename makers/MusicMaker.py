@@ -8,6 +8,7 @@ class MusicMaker(PlagueWaterObject):
     ### CLASS VARIABLES ###
 
     __slots__ = (
+        '_apply_beam',
         '_chord_agent',
         '_dynamic_agent',
         '_indicator_agent',
@@ -25,9 +26,10 @@ class MusicMaker(PlagueWaterObject):
 
     def __init__(
         self,
-        indicator_agent=None,
+        apply_beam=None,
         chord_agent=None,
         dynamic_agent=None,
+        indicator_agent=None,
         pitch_class_agent=None,
         register_agent=None,
         rewrite_meter=None,
@@ -44,6 +46,9 @@ class MusicMaker(PlagueWaterObject):
         assert isinstance(rhythm_maker, (rhythmmakertools.RhythmMaker, type(None)))
         assert isinstance(spanner_agent, (makers.SpannerAgent, type(None)))
         assert isinstance(timespan_agent, (makers.TimespanAgent, type(None)))
+        if apply_beam is not None:
+            apply_beam = bool(apply_beam)
+        self._apply_beam = apply_beam
         self._chord_agent = chord_agent
         self._dynamic_agent = dynamic_agent
         self._indicator_agent = indicator_agent
@@ -57,21 +62,6 @@ class MusicMaker(PlagueWaterObject):
         self._timespan_agent = timespan_agent
 
     ### PUBLIC METHODS ###
-
-    def apply_articulations(
-        self,
-        music=None,
-        seed=0,
-        segment_duration=None,
-        ):
-        if self.indicator_agent is None:
-            return
-        self.indicator_agent(
-            music,
-            seed=seed,
-            segment_duration=segment_duration,
-            )
-        assert inspect_(music).is_well_formed()
 
     def apply_chords(
         self,
@@ -94,6 +84,21 @@ class MusicMaker(PlagueWaterObject):
         if self.dynamic_agent is None:
             return
         self.dynamic_agent(
+            music,
+            seed=seed,
+            segment_duration=segment_duration,
+            )
+        assert inspect_(music).is_well_formed()
+
+    def apply_indicators(
+        self,
+        music=None,
+        seed=0,
+        segment_duration=None,
+        ):
+        if self.indicator_agent is None:
+            return
+        self.indicator_agent(
             music,
             seed=seed,
             segment_duration=segment_duration,
@@ -144,7 +149,6 @@ class MusicMaker(PlagueWaterObject):
     def create_rhythms(
         self,
         durations,
-        beam_music=True,
         change_staff_lines=False,
         initial_offset=None,
         meter_cache=None,
@@ -152,7 +156,6 @@ class MusicMaker(PlagueWaterObject):
         rewrite_meter=True,
         seed=0,
         ):
-        beam_music = bool(beam_music)
         durations = [Duration(x) for x in durations]
         assert len(durations)
         rhythm_maker = self.rhythm_maker or self._default_rhythm_maker
@@ -164,7 +167,8 @@ class MusicMaker(PlagueWaterObject):
                 music[i] = Container(x)
         music = Container(music)
         assert inspect_(music).get_duration() == sum(durations)
-        if rewrite_meter and self.rewrite_meter is None or self.rewrite_meter:
+        if (rewrite_meter and self.rewrite_meter is None) or \
+            self.rewrite_meter:
             self._rewrite_meters(
                 music,
                 change_staff_lines=change_staff_lines,
@@ -172,16 +176,19 @@ class MusicMaker(PlagueWaterObject):
                 meter_cache=meter_cache,
                 meters=meters,
                 )
-        if beam_music and \
-            self.rhythm_maker != rhythmmakertools.RestRhythmMaker():
-            beam = spannertools.GeneralizedBeam(
-                durations=durations,
-                include_long_duration_notes=True,
-                include_long_duration_rests=True,
-                isolated_nib_direction=None,
-                use_stemlets=True,
-                )
-            attach(beam, music)
+        if self.apply_beam or self.apply_beam is None:
+            if self.rhythm_maker != rhythmmakertools.RestRhythmMaker():
+                if self.rhythm_maker != rhythmmakertools.SkipRhythmMaker():
+                    leaves = list(iterate(music).by_class(scoretools.Leaf))
+                    if not all(isinstance(x, Rest) for x in leaves):
+                        beam = spannertools.GeneralizedBeam(
+                            durations=durations,
+                            include_long_duration_notes=True,
+                            include_long_duration_rests=True,
+                            isolated_nib_direction=None,
+                            use_stemlets=True,
+                            )
+                        attach(beam, music)
         return music
 
     def create_timespans(
@@ -279,10 +286,19 @@ class MusicMaker(PlagueWaterObject):
                     attach(multiplier, multi_measure_rest)
                     container[:] = [multi_measure_rest]
                     if change_staff_lines:
-                        staff_lines_spanner = spannertools.StaffLinesSpanner(
+                        new_spanner = spannertools.StaffLinesSpanner(
                             lines=1,
                             )
-                        attach(staff_lines_spanner, container)
+                        attach(new_spanner, container.select_leaves())
+                        previous_leaf = inspect_(multi_measure_rest
+                            ).get_leaf(-1)
+                        if isinstance(previous_leaf, type(multi_measure_rest)):
+                            old_spanner = inspect_(previous_leaf).get_spanner(
+                                type(new_spanner))
+                            components = old_spanner[:] + [multi_measure_rest]
+                            old_spanner._detach()
+                            new_spanner._detach()
+                            attach(old_spanner, components)
                 else:
                     mutate(container[:]).rewrite_meter(
                         current_meter,
@@ -292,6 +308,10 @@ class MusicMaker(PlagueWaterObject):
                         )
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def apply_beam(self):
+        return self._apply_beam
 
     @property
     def chord_agent(self):

@@ -15,7 +15,6 @@ segment_tempo = indicatortools.Tempo(durationtools.Duration(1, 4), 96)
 score_template = score_templates.PlagueWaterScoreTemplate()
 score = score_template()
 context_map = datastructuretools.ContextMap(score_template)
-context_map[score]['minimum_timespan_duration'] = durationtools.Duration(1, 8)
 context_map[score]['pitch_class_agent'] = makers.PitchClassAgent(
     pitch_class_ratio=(1, 1, 1),
     pitch_class_talea=(
@@ -27,27 +26,45 @@ context_map[score]['pitch_class_agent'] = makers.PitchClassAgent(
     transform_talea=None,
     )
 
-### TIMESPAN MAKERS ###
+### TIMESPAN AGENT ###
+
+short_timespan_agent = makers.SemanticTimespanAgent(
+    leading_rest_durations=materials.very_short_durations(1),
+    minimum_timespan_duration=Duration(1, 8),
+    playing_durations=materials.short_durations(2),
+    playing_groupings=[1, 1, 1, 2],
+    tailing_rest_durations=materials.short_durations(2),
+    )
+
+medium_timespan_agent = makers.SemanticTimespanAgent(
+    leading_rest_durations=materials.very_short_durations(2),
+    minimum_timespan_duration=Duration(1, 8),
+    playing_durations=materials.short_durations(8),
+    playing_groupings=[1, 2, 1, 1, 1],
+    tailing_rest_durations=materials.medium_durations(5),
+    )
+
+long_timespan_agent = makers.SemanticTimespanAgent(
+    leading_rest_durations=materials.long_durations(1),
+    minimum_timespan_duration=Duration(1, 8),
+    playing_durations=materials.medium_durations(9),
+    playing_groupings=[1, 2, 1, 1, 1, 2, 1, 2],
+    tailing_rest_durations=materials.long_durations(4),
+    )
+
+### SEMANTIC CONTEXT MAKERS ###
 
 guitar_context_maker = makers.ContextMaker(
     context_name='Guitar Voice',
     music_maker_indices=(0, 1, 0, 0, 1),
     music_makers=[
         new(materials.basic_music_maker,
-            timespan_agent=makers.SemanticTimespanAgent(
-                leading_rest_durations=materials.very_short_durations(1),
-                playing_durations=materials.very_short_durations(2),
-                playing_groupings=materials.short_groupings(4),
-                tailing_rest_durations=materials.short_durations(2),
-                ),
+            rhythm_maker=materials.pointillist_rhythm_maker,
+            timespan_agent=short_timespan_agent.transform_cursors(1),
             ),
         new(materials.basic_music_maker,
-            timespan_agent=makers.SemanticTimespanAgent(
-                leading_rest_durations=materials.very_short_durations(3),
-                playing_durations=materials.short_durations(2),
-                playing_groupings=materials.short_groupings(2),
-                tailing_rest_durations=materials.medium_durations(4),
-                ),
+            rhythm_maker=materials.pointillist_rhythm_maker,
+            timespan_agent=medium_timespan_agent.transform_cursors(2),
             ),
         ]
     )
@@ -57,20 +74,12 @@ saxophone_context_maker = makers.ContextMaker(
     music_maker_indices=(0, 0, 1, 0, 1),
     music_makers=[
         new(materials.basic_music_maker,
-            timespan_agent=makers.SemanticTimespanAgent(
-                leading_rest_durations=materials.very_short_durations(5),
-                playing_durations=materials.very_short_durations(3),
-                playing_groupings=materials.short_groupings(3),
-                tailing_rest_durations=materials.medium_durations(6),
-                ),
+            rhythm_maker=materials.pointillist_rhythm_maker,
+            timespan_agent=short_timespan_agent.transform_cursors(3),
             ),
         new(materials.basic_music_maker,
-            timespan_agent=makers.SemanticTimespanAgent(
-                leading_rest_durations=materials.very_short_durations(7),
-                playing_durations=materials.short_durations(4),
-                playing_groupings=materials.short_groupings(4),
-                tailing_rest_durations=materials.very_short_durations(8),
-                ),
+            rhythm_maker=materials.pointillist_rhythm_maker,
+            timespan_agent=medium_timespan_agent.transform_cursors(4),
             ),
         ]
     )
@@ -79,66 +88,43 @@ piano_rh_context_maker = makers.ContextMaker(
     context_name='Piano RH Voice',
     music_maker_indices=(1, 0, 0, 1, 0),
     music_makers=[
-        new(materials.basic_music_maker,
-            timespan_agent=makers.SemanticTimespanAgent(
-                leading_rest_durations=materials.medium_durations(9),
-                playing_durations=materials.very_short_durations(5),
-                playing_groupings=materials.short_groupings(5),
-                tailing_rest_durations=materials.very_short_durations(10),
-                ),
+        new(materials.piano_glissed_pegs_music_maker,
+            timespan_agent__leading_rest_durations=materials.long_durations,
             ),
-        new(materials.basic_music_maker,
-            timespan_agent=makers.SemanticTimespanAgent(
-                leading_rest_durations=materials.very_short_durations(11),
-                playing_durations=materials.short_durations(6),
-                playing_groupings=materials.short_groupings(6),
-                tailing_rest_durations=materials.short_durations(12),
-                ),
+        new(materials.piano_glissed_keys_music_maker,
+            timespan_agent__leading_rest_durations=materials.short_durations,
             ),
         ],
     )
 
 piano_lh_context_maker = makers.ContextMaker(
     context_name='Piano LH Voice',
-    music_maker_indices=(0, 0, 1, 0, 1),
+    music_maker_indices=(0, 0, 1, 2, 0, 1, 0, 2),
     music_makers=[
-        new(materials.basic_music_maker,
-            timespan_agent=makers.SemanticTimespanAgent(
-                leading_rest_durations=materials.very_short_durations(13),
-                playing_durations=materials.very_short_durations(7),
-                playing_groupings=materials.short_groupings(7),
-                tailing_rest_durations=materials.short_durations(14),
-                ),
+        new(materials.piano_glissed_pegs_music_maker,
+            timespan_agent__leading_rest_durations=materials.short_durations,
+            ),
+        new(materials.piano_glissed_keys_music_maker,
+            timespan_agent__leading_rest_durations=materials.long_durations,
             ),
         new(materials.basic_music_maker,
-            timespan_agent=makers.SemanticTimespanAgent(
-                leading_rest_durations=materials.very_short_durations(15),
-                playing_durations=materials.short_durations(8),
-                playing_groupings=materials.short_groupings(8),
-                tailing_rest_durations=materials.medium_durations(16),
-                ),
+            rhythm_maker=materials.pointillist_rhythm_maker,
+            timespan_agent=long_timespan_agent.transform_cursors(10),
             ),
         ],
     )
 
 percussion_shaker_context_maker = makers.ContextMaker(
     context_name='Percussion Shaker Voice',
+    music_maker_indices=(0, 0, 1, 0, 1),
     music_makers=[
         new(materials.basic_music_maker,
-            timespan_agent=makers.SemanticTimespanAgent(
-                leading_rest_durations=materials.very_short_durations(17),
-                playing_durations=materials.very_short_durations(9),
-                playing_groupings=materials.short_groupings(9),
-                tailing_rest_durations=materials.very_short_durations(18),
-                ),
+            rhythm_maker=materials.pointillist_rhythm_maker,
+            timespan_agent=medium_timespan_agent.transform_cursors(9),
             ),
         new(materials.basic_music_maker,
-            timespan_agent=makers.SemanticTimespanAgent(
-                leading_rest_durations=materials.very_short_durations(19),
-                playing_durations=materials.short_durations(0),
-                playing_groupings=materials.short_groupings(0),
-                tailing_rest_durations=materials.medium_durations(20),
-                ),
+            rhythm_maker=materials.pointillist_rhythm_maker,
+            timespan_agent=long_timespan_agent.transform_cursors(10),
             ),
         ],
     )
@@ -146,16 +132,29 @@ percussion_shaker_context_maker = makers.ContextMaker(
 percussion_woodblock_context_maker = makers.ContextMaker(
     context_name='Percussion Woodblock Voice',
     music_makers=[
-        materials.basic_music_maker,
+        new(materials.basic_music_maker,
+            rhythm_maker=materials.pointillist_rhythm_maker,
+            timespan_agent=long_timespan_agent.transform_cursors(11),
+            ),
         ],
     )
 
 percussion_drum_context_maker = makers.ContextMaker(
     context_name='Percussion Drum Voice',
+    music_maker_indices=(0, 0, 1, 0, 1),
     music_makers=[
-        materials.basic_music_maker,
+        new(materials.basic_music_maker,
+            rhythm_maker=materials.pointillist_rhythm_maker,
+            timespan_agent=medium_timespan_agent.transform_cursors(12),
+            ),
+        new(materials.basic_music_maker,
+            rhythm_maker=materials.pointillist_rhythm_maker,
+            timespan_agent=long_timespan_agent.transform_cursors((13, True)),
+            ),
         ],
     )
+
+### DEPENDENT CONTEXT MAKERS ###
 
 piano_dynamics_context_maker = makers.ContextMaker(
     context_dependencies=(
@@ -164,7 +163,24 @@ piano_dynamics_context_maker = makers.ContextMaker(
         ),
     context_name='Piano Dynamics',
     music_makers=[
-        materials.piano_dynamics_music_maker,
+        new(materials.piano_dynamics_music_maker,
+            dynamic_agent=makers.DynamicAgent(
+                cyclic_dynamic_expressions=(
+                    makers.DynamicExpression(
+                        hairpin_start_token='p',
+                        hairpin_style='constante',
+                        ),
+                    makers.DynamicExpression(
+                        hairpin_start_token='p',
+                        hairpin_stop_token='mp',
+                        ),
+                    makers.DynamicExpression(
+                        hairpin_start_token='mp',
+                        hairpin_stop_token='pp',
+                        ),
+                    ),
+                ),
+            ),
         ],
     )
 
@@ -175,7 +191,7 @@ piano_pedals_context_maker = makers.ContextMaker(
         ),
     context_name='Piano Pedals',
     music_makers=[
-        materials.piano_pedals_music_maker,
+        materials.silent_music_maker,
         ],
     )
 

@@ -105,13 +105,25 @@ pointillist_rhythm_maker = rhythmmakertools.TupletRhythmMaker(
         ),
     tie_specifier=rhythmmakertools.TieSpecifier(
         tie_across_divisions=False,
+        tie_split_notes=False,
         ),
     tuplet_ratios=(
         (1, 1),
-        (2, 1),
-        (1, 1),
+        (-1, 2, 1),
         (1, 1, 1),
+        (-1, 1, 1),
+        (2, 1),
+        (-1, 1, 1),
         (1, 2),
+        (1, 1),
+        (-1, 1, 1),
+        (-1, 2, 1),
+        (1, 1, -1),
+        (1, 1),
+        (2, 1, -1),
+        ),
+    tuplet_spelling_specifier=rhythmmakertools.TupletSpellingSpecifier(
+        avoid_dots=True,
         ),
     )
 

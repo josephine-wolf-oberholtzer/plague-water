@@ -11,14 +11,14 @@
         \column {
             \center-align {
                 \override #'(font-name . "Didot")
-                    \fontsize #14 {
+                    \fontsize #20 {
                         \line { PLAGUE }
                         " "
                         \line { WATER }
                         " "
                     }
                 \override #'(font-name . "Didot Italic")
-                    \fontsize #3 {
+                    \fontsize #6 {
                         \line { "for Ensemble Nikel" }
                         " "
                         " "

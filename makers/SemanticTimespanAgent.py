@@ -121,6 +121,10 @@ class SemanticTimespanAgent(TimespanAgent):
         from plague_water import makers
         if cursor_transform is None:
             return new(self)
+        elif not isinstance(cursor_transform, makers.CursorTransform):
+            if isinstance(cursor_transform, int):
+                cursor_transform = (cursor_transform,)
+            cursor_transform = makers.CursorTransform(*cursor_transform)
         assert isinstance(cursor_transform, makers.CursorTransform)
         leading_rest_durations = cursor_transform(self.leading_rest_durations)
         playing_durations = cursor_transform(self.playing_durations)

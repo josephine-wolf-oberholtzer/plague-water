@@ -100,7 +100,7 @@ class SegmentMaker(PlagueWaterObject):
         self.apply_piano_clefs_and_octavations()
         # self.apply_piano_staff_changes()
         self.color_piano_conflicts()
-        self.apply_articulations()
+        self.apply_indicators()
         self.apply_dynamics()
         self.apply_spanners()
 
@@ -192,21 +192,6 @@ class SegmentMaker(PlagueWaterObject):
 
     ### PUBLIC METHODS ###
 
-    def apply_articulations(self):
-        message = '\tapplying articulations'
-        music_maker_seeds = collections.Counter()
-        with systemtools.ProgressIndicator(message) as progress_indicator:
-            for music, music_maker in \
-                self.iterate_containers_and_music_makers():
-                seed = music_maker_seeds[music_maker]
-                music_maker.apply_articulations(
-                    music=music,
-                    seed=seed,
-                    segment_duration=self.segment_duration,
-                    )
-                music_maker_seeds[music_maker] += 1
-                progress_indicator.advance()
-
     def apply_chords(self):
         from plague_water import makers
         self.score._is_forbidden_to_update = True
@@ -232,6 +217,21 @@ class SegmentMaker(PlagueWaterObject):
                 self.iterate_containers_and_music_makers():
                 seed = music_maker_seeds[music_maker]
                 music_maker.apply_dynamics(
+                    music=music,
+                    seed=seed,
+                    segment_duration=self.segment_duration,
+                    )
+                music_maker_seeds[music_maker] += 1
+                progress_indicator.advance()
+
+    def apply_indicators(self):
+        message = '\tapplying indicators'
+        music_maker_seeds = collections.Counter()
+        with systemtools.ProgressIndicator(message) as progress_indicator:
+            for music, music_maker in \
+                self.iterate_containers_and_music_makers():
+                seed = music_maker_seeds[music_maker]
+                music_maker.apply_indicators(
                     music=music,
                     seed=seed,
                     segment_duration=self.segment_duration,

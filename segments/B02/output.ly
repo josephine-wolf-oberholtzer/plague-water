@@ -973,22 +973,14 @@
 			\context Dynamics = "Piano Dynamics" {
 				{
 					{
-						\override Stem.stemlet-length = 0.75
-						\set stemLeftBeamCount = 0
-						\set stemRightBeamCount = 1
 						c'8 \> \f
 					}
 					{
 						c'4
 					}
 					{
-						\set stemLeftBeamCount = -1
-						\set stemRightBeamCount = 2
-						c'16. [
-						\set stemLeftBeamCount = 3
-						\set stemRightBeamCount = 0
-						c'32 ] \p
-						\revert Stem.stemlet-length
+						c'16.
+						c'32 \p
 					}
 				}
 				{
@@ -999,16 +991,10 @@
 				{
 					{
 						\override Hairpin #'stencil = #constante-hairpin
-						\override Stem.stemlet-length = 0.75
 						c'4 ~ \< \ppp
-						\set stemLeftBeamCount = 0
-						\set stemRightBeamCount = 3
-						c'32 [
-						\set stemLeftBeamCount = 3
-						\set stemRightBeamCount = 0
-						c'32 ] \!
+						c'32
+						c'32 \!
 						\revert Hairpin #'stencil
-						\revert Stem.stemlet-length
 					}
 				}
 				{
@@ -1021,14 +1007,8 @@
 				}
 				{
 					{
-						\override Stem.stemlet-length = 0.75
-						\set stemLeftBeamCount = 0
-						\set stemRightBeamCount = 2
-						c'16. [ \< \sfp
-						\set stemLeftBeamCount = 3
-						\set stemRightBeamCount = 0
-						c'32 ] \ff
-						\revert Stem.stemlet-length
+						c'16. \< \sfp
+						c'32 \ff
 					}
 				}
 				{
@@ -1038,19 +1018,11 @@
 				}
 				{
 					{
-						\override Stem.stemlet-length = 0.75
-						\set stemLeftBeamCount = 0
-						\set stemRightBeamCount = 2
-						c'16 [ \> \f
+						c'16 \> \f
 					}
 					{
-						\set stemLeftBeamCount = 1
-						\set stemRightBeamCount = 2
 						c'16.
-						\set stemLeftBeamCount = 3
-						\set stemRightBeamCount = 0
-						c'32 ] \p
-						\revert Stem.stemlet-length
+						c'32 \p
 					}
 				}
 				{
@@ -1062,60 +1034,38 @@
 				{
 					{
 						\override Hairpin #'stencil = #constante-hairpin
-						\override Stem.stemlet-length = 0.75
 						c'4 \< \ppp
 					}
 					{
-						\set stemLeftBeamCount = 0
-						\set stemRightBeamCount = 1
-						c'16 [
-					}
-					{
-						\set stemLeftBeamCount = 1
-						\set stemRightBeamCount = 0
-						c'8 ]
-					}
-					{
-						c'4 ~
-						\set stemLeftBeamCount = 0
-						\set stemRightBeamCount = 3
-						c'32 [
-						\set stemLeftBeamCount = 3
-						\set stemRightBeamCount = 0
-						c'32 ] \!
-						\revert Hairpin #'stencil
-						\revert Stem.stemlet-length
-					}
-				}
-				{
-					{
-						r16
-						r16
-					}
-				}
-				{
-					{
-						\override Stem.stemlet-length = 0.75
-						\set stemLeftBeamCount = 0
-						\set stemRightBeamCount = 1
-						c'8 [ \< \sfp
-					}
-					{
-						\set stemLeftBeamCount = 1
-						\set stemRightBeamCount = 1
 						c'16
 					}
 					{
-						\set stemLeftBeamCount = 1
-						\set stemRightBeamCount = 1
-						c'8 ~
-						\set stemLeftBeamCount = 1
-						\set stemRightBeamCount = 3
+						c'8
+					}
+					{
+						c'4 ~
 						c'32
-						\set stemLeftBeamCount = 3
-						\set stemRightBeamCount = 0
-						c'32 ] \ff
-						\revert Stem.stemlet-length
+						c'32 \!
+						\revert Hairpin #'stencil
+					}
+				}
+				{
+					{
+						r16
+						r16
+					}
+				}
+				{
+					{
+						c'8 \< \sfp
+					}
+					{
+						c'16
+					}
+					{
+						c'8 ~
+						c'32
+						c'32 \ff
 					}
 				}
 				{
@@ -1125,19 +1075,11 @@
 				}
 				{
 					{
-						\override Stem.stemlet-length = 0.75
-						\set stemLeftBeamCount = 0
-						\set stemRightBeamCount = 1
-						c'8 [ \> \f
+						c'8 \> \f
 					}
 					{
-						\set stemLeftBeamCount = 1
-						\set stemRightBeamCount = 2
 						c'16.
-						\set stemLeftBeamCount = 3
-						\set stemRightBeamCount = 0
-						c'32 ] \p
-						\revert Stem.stemlet-length
+						c'32 \p
 					}
 				}
 				{
@@ -1149,30 +1091,18 @@
 				{
 					{
 						\override Hairpin #'stencil = #constante-hairpin
-						\override Stem.stemlet-length = 0.75
-						\set stemLeftBeamCount = 0
-						\set stemRightBeamCount = 2
-						c'16 [ \< \ppp
+						c'16 \< \ppp
 					}
 					{
-						\set stemLeftBeamCount = 1
-						\set stemRightBeamCount = 1
 						c'8
 					}
 					{
-						\set stemLeftBeamCount = 1
-						\set stemRightBeamCount = 1
 						c'8.
 					}
 					{
-						\set stemLeftBeamCount = 1
-						\set stemRightBeamCount = 1
 						c'8..
-						\set stemLeftBeamCount = 3
-						\set stemRightBeamCount = 0
-						c'32 ] \!
+						c'32 \!
 						\revert Hairpin #'stencil
-						\revert Stem.stemlet-length
 					}
 				}
 			}
@@ -1370,7 +1300,6 @@
 			\context Dynamics = "Piano Pedals" {
 				{
 					{
-						\override Stem.stemlet-length = 0.75
 						s1 * 1/8 \sustainOn
 					}
 					{
@@ -1379,7 +1308,6 @@
 					{
 						s1 * 1/8
 						<> \sustainOff
-						\revert Stem.stemlet-length
 					}
 				}
 				{
@@ -1389,13 +1317,11 @@
 				}
 				{
 					{
-						\override Stem.stemlet-length = 0.75
 						\once \override PianoPedalBracket.edge-height = #'(1 . 0)
 						\once \override PianoPedalBracket.shorten-pair = #'(0 . 2)
 						s1 * 5/16 \sustainOn
 						<> \sustainOff
 						\LV
-						\revert Stem.stemlet-length
 					}
 				}
 				{
@@ -1408,10 +1334,8 @@
 				}
 				{
 					{
-						\override Stem.stemlet-length = 0.75
 						s1 * 1/8 \sustainOn
 						<> \sustainOff
-						\revert Stem.stemlet-length
 					}
 				}
 				{
@@ -1421,7 +1345,6 @@
 				}
 				{
 					{
-						\override Stem.stemlet-length = 0.75
 						\once \override PianoPedalBracket.edge-height = #'(1 . 0)
 						\once \override PianoPedalBracket.shorten-pair = #'(0 . 2)
 						s1 * 1/16 \sustainOn
@@ -1430,7 +1353,6 @@
 						s1 * 1/8
 						<> \sustainOff
 						\LV
-						\revert Stem.stemlet-length
 					}
 				}
 				{
@@ -1441,7 +1363,6 @@
 				}
 				{
 					{
-						\override Stem.stemlet-length = 0.75
 						s1 * 1/4 \sustainOn
 					}
 					{
@@ -1453,7 +1374,6 @@
 					{
 						s1 * 5/16
 						<> \sustainOff
-						\revert Stem.stemlet-length
 					}
 				}
 				{
@@ -1464,7 +1384,6 @@
 				}
 				{
 					{
-						\override Stem.stemlet-length = 0.75
 						\once \override PianoPedalBracket.edge-height = #'(1 . 0)
 						\once \override PianoPedalBracket.shorten-pair = #'(0 . 2)
 						s1 * 1/8 \sustainOn
@@ -1478,7 +1397,6 @@
 						s1 * 3/16
 						<> \sustainOff
 						\LV
-						\revert Stem.stemlet-length
 					}
 				}
 				{
@@ -1488,13 +1406,11 @@
 				}
 				{
 					{
-						\override Stem.stemlet-length = 0.75
 						s1 * 1/8 \sustainOn
 					}
 					{
 						s1 * 1/8
 						<> \sustainOff
-						\revert Stem.stemlet-length
 					}
 				}
 				{
@@ -1505,7 +1421,6 @@
 				}
 				{
 					{
-						\override Stem.stemlet-length = 0.75
 						\once \override PianoPedalBracket.edge-height = #'(1 . 0)
 						\once \override PianoPedalBracket.shorten-pair = #'(0 . 2)
 						s1 * 1/16 \sustainOn
@@ -1522,7 +1437,6 @@
 						s1 * 1/4
 						\sustainOff
 						\LV
-						\revert Stem.stemlet-length
 					}
 				}
 			}
