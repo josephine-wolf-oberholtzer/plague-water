@@ -78,10 +78,10 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
             context_name='PianoLowerStaff',
             name='Piano Lower Staff',
             )
-        piano_dynamics = scoretools.Voice(
-            context_name='Dynamics',
-            name='Piano Dynamics',
-            )
+        #piano_dynamics = scoretools.Voice(
+        #    context_name='Dynamics',
+        #    name='Piano Dynamics',
+        #    )
         piano_pedals = scoretools.Voice(
             context_name='Dynamics',
             name='Piano Pedals',
@@ -89,7 +89,7 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
         piano_staff_group = scoretools.StaffGroup(
             [
                 piano_upper_staff,
-                piano_dynamics,
+                #piano_dynamics,
                 piano_lower_staff,
                 piano_pedals,
                 ],

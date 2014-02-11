@@ -131,17 +131,6 @@ percussion_drum_context_maker = makers.ContextMaker(
 
 ### DEPENDENT CONTEXT MAKERS ###
 
-piano_dynamics_context_maker = makers.ContextMaker(
-    context_dependencies=(
-        'Piano LH Voice',
-        'Piano RH Voice',
-        ),
-    context_name='Piano Dynamics',
-    music_makers=[
-        materials.piano_dynamics_music_maker,
-        ],
-    )
-
 piano_pedals_context_maker = makers.ContextMaker(
     context_dependencies=(
         'Piano LH Voice',
@@ -164,7 +153,6 @@ segment_maker = makers.SegmentMaker(
         piano_lh_context_maker,
         piano_rh_context_maker,
         piano_pedals_context_maker,
-        piano_dynamics_context_maker,
         saxophone_context_maker,
         ),
     context_map=context_map,

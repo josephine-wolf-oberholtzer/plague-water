@@ -185,34 +185,6 @@ percussion_drum_context_maker = makers.ContextMaker(
 
 ### DEPENDENT CONTEXT MAKERS ###
 
-piano_dynamics_context_maker = makers.ContextMaker(
-    context_dependencies=(
-        'Piano LH Voice',
-        'Piano RH Voice',
-        ),
-    context_name='Piano Dynamics',
-    music_makers=[
-        new(materials.piano_dynamics_music_maker,
-            dynamic_agent=makers.DynamicAgent(
-                cyclic_dynamic_expressions=(
-                    makers.DynamicExpression(
-                        hairpin_start_token='p',
-                        hairpin_style='constante',
-                        ),
-                    makers.DynamicExpression(
-                        hairpin_start_token='p',
-                        hairpin_stop_token='mp',
-                        ),
-                    makers.DynamicExpression(
-                        hairpin_start_token='mp',
-                        hairpin_stop_token='pp',
-                        ),
-                    ),
-                ),
-            ),
-        ],
-    )
-
 piano_pedals_context_maker = makers.ContextMaker(
     context_dependencies=(
         'Piano LH Voice',
@@ -237,7 +209,6 @@ segment_maker = makers.SegmentMaker(
         percussion_drum_context_maker,
         percussion_shaker_context_maker,
         percussion_woodblock_context_maker,
-        piano_dynamics_context_maker,
         piano_lh_context_maker,
         piano_pedals_context_maker,
         piano_rh_context_maker,

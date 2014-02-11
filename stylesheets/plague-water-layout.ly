@@ -265,9 +265,18 @@
         \override SustainPedal.self-alignment-X = #LEFT
         \override TextScript.Y-extent = #'(-1.5 . 1.5)
         \override TupletBracket.full-length-to-extent = ##t
-        \override TupletBracket.full-length-padding = 4
         \override TupletBracket.outside-staff-priority = 100
         \override TupletBracket.padding = 2
+        \override TupletBracket.positions =
+            #(lambda (grob)
+                (let* (
+                    (pos (ly:tuplet-bracket::calc-positions grob))
+                    (old-y-left (car pos))
+                    (old-y-right (cdr pos))
+                    (new-y-left (/ (+ old-y-left old-y-left old-y-right) 3))
+                    (new-y-right (/ (+ old-y-left old-y-right old-y-right) 3))
+                    )
+                (cons new-y-left new-y-right)))
         \override TupletNumber.font-size = 1
         \override TupletNumber.text = #tuplet-number::calc-fraction-text
         autoBeaming = ##f
@@ -278,5 +287,5 @@
 }
 
 afterGraceFraction = #(cons 31 32) 
-
 LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
+
