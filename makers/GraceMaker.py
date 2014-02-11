@@ -47,13 +47,15 @@ class GraceAgent(PlagueWaterObject):
         grace_length = self._cursor()[0]
         if not grace_length:
             return
-        start_offset = logical_tie.get_timespan().start_offset
-        if start_offset in measure_offsets:
-            kind = 'after'
-            leaf_to_attach_to = previous_leaf
-        else:
-            kind = 'grace'
-            leaf_to_attach_to = logical_tie.head
+#        start_offset = logical_tie.get_timespan().start_offset
+#        if start_offset in measure_offsets:
+#            kind = 'after'
+#            leaf_to_attach_to = previous_leaf
+#        else:
+#            kind = 'grace'
+#            leaf_to_attach_to = logical_tie.head
+        kind = 'after'
+        leaf_to_attach_to = previous_leaf
         grace_notes = scoretools.make_notes([0], [(1, 16)] * grace_length)
         if 1 < len(grace_notes):
             beam = Beam()

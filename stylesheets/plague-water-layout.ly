@@ -1,5 +1,3 @@
-LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
-
 \layout {
     \accidentalStyle neo-modern-cautionary
     indent = 0
@@ -234,7 +232,6 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
             )
         \override Beam.damping = 2.0
         \override Beam.length-fraction = 1.5
-        \override Beam.stemlet-length = 1.5
         \override DynamicLineSpanner.Y-extent = #'(-1.5 . 1.5)
         \override DynamicText.self-alignment-X = #LEFT
         \override DynamicText.whiteout = ##t
@@ -258,7 +255,9 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
             (padding . 1)
             (stretchability . 0)
             )
-        \override Stem #'(details beamed-lengths) = #'(6)
+        \override Stem.details.beamed-lengths = #'(6)
+        %\override Stem #'(details beamed-lengths) = #'(6)
+        \override Stem.stemlet-length = 1.5
         \override StemTremolo.beam-width = 1.5
         \override StemTremolo.flag-count = 4.0
         \override StemTremolo.slope = 0.5
@@ -279,3 +278,5 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
 }
 
 afterGraceFraction = #(cons 31 32) 
+
+LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
