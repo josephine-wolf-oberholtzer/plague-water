@@ -245,7 +245,6 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         \override OttavaBracket.padding = 1
         \override OttavaBracket.whiteout = ##t
         \override PhrasingSlur.dash-definition = #'((0 1 0.5 0.5))
-
         \override GraceSpacing.common-shortest-duration =
             #(ly:make-moment 1 16)
         \override SpacingSpanner.strict-grace-spacing = ##f
@@ -278,3 +277,5 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         tupletFullLength = ##t
     }
 }
+
+afterGraceFraction = #(cons 31 32) 
