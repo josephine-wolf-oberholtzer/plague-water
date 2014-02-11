@@ -234,6 +234,7 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
             )
         \override Beam.damping = 2.0
         \override Beam.length-fraction = 1.5
+        \override Beam.stemlet-length = 1.5
         \override DynamicLineSpanner.Y-extent = #'(-1.5 . 1.5)
         \override DynamicText.self-alignment-X = #LEFT
         \override DynamicText.whiteout = ##t
@@ -244,9 +245,14 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         \override OttavaBracket.padding = 1
         \override OttavaBracket.whiteout = ##t
         \override PhrasingSlur.dash-definition = #'((0 1 0.5 0.5))
-        \override SpacingSpanner.strict-grace-spacing = ##f  % False!
-        \override SpacingSpanner.strict-note-spacing = ##f  % False!
+
+        \override GraceSpacing.common-shortest-duration =
+            #(ly:make-moment 1 16)
+        \override SpacingSpanner.strict-grace-spacing = ##f
+        \override SpacingSpanner.strict-note-spacing = ##f
         \override SpacingSpanner.uniform-stretching = ##t
+        \override SpacingSpanner.base-shortest-duration = 
+            #(ly:make-moment 1 64)
         \override StaffGrouper.staffgroup-staff-spacing = #'(
             (basic-distance . 12)
             (minimum-distance . 15)

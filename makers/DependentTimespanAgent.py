@@ -8,6 +8,7 @@ class DependentTimespanAgent(TimespanAgent):
     ### CLASS VARIABLES ###
 
     __slots__ = (
+        '_labels',
         '_use_attacks',
         '_use_releases',
         )
@@ -16,6 +17,7 @@ class DependentTimespanAgent(TimespanAgent):
 
     def __init__(
         self,
+        labels=None,
         use_attacks=True,
         use_releases=False,
         ):
@@ -24,6 +26,11 @@ class DependentTimespanAgent(TimespanAgent):
             can_be_split=False,
             minimum_timespan_duration=None,
             )
+        if isinstance(labels, str):
+            labels = (labels,)
+        if labels is not None:
+            labels = tuple(labels)
+        self._labels = labels
         self._use_attacks = bool(use_attacks)
         self._use_releases = bool(use_releases)
 
@@ -41,6 +48,11 @@ class DependentTimespanAgent(TimespanAgent):
         dependency_timespans = timespantools.TimespanInventory()
         for dependency in dependencies:
             dependency_timespans.extend(dependency.timespan_inventory)
+        if self.labels is not None:
+            dependency_timespans[:] = [x for x in dependency_timespans if
+                x.music_maker.labels is not None and
+                any(label in x.music_maker.labels for label in self.labels)
+                ]
         dependency_timespans.sort()
         timespan_inventory = timespantools.TimespanInventory()
         for group in dependency_timespans.partition(
@@ -64,6 +76,10 @@ class DependentTimespanAgent(TimespanAgent):
         return timespan_inventory, maximum_offset
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def labels(self):
+        return self._labels
 
     @property
     def use_attacks(self):

@@ -13,6 +13,7 @@ class MusicMaker(PlagueWaterObject):
         '_dynamic_agent',
         '_grace_agent',
         '_indicator_agent',
+        '_labels',
         '_pitch_agent',
         '_register_agent',
         '_rewrite_meter',
@@ -32,6 +33,7 @@ class MusicMaker(PlagueWaterObject):
         dynamic_agent=None,
         grace_agent=None,
         indicator_agent=None,
+        labels=None,
         pitch_agent=None,
         register_agent=None,
         rewrite_meter=None,
@@ -63,6 +65,11 @@ class MusicMaker(PlagueWaterObject):
         self._dynamic_agent = dynamic_agent
         self._grace_agent = grace_agent
         self._indicator_agent = indicator_agent
+        if isinstance(labels, str):
+            labels = (labels,)
+        if labels is not None:
+            labels = tuple(labels)
+        self._labels = labels
         self._pitch_agent = pitch_agent
         self._register_agent = register_agent
         if rewrite_meter is not None:
@@ -256,6 +263,10 @@ class MusicMaker(PlagueWaterObject):
     @property
     def indicator_agent(self):
         return self._indicator_agent
+
+    @property
+    def labels(self):
+        return self._labels
 
     @property
     def pitch_agent(self):

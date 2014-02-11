@@ -63,6 +63,8 @@ class GraceAgent(PlagueWaterObject):
             kind=kind,
             )
         override(grace_container).stem.length = 8
+        override(grace_container).flag.stroke_style = \
+            schemetools.Scheme('grace', force_quotes=True)
         attach(grace_container, leaf_to_attach_to)
         leaves = list(grace_notes) + [logical_tie.head]
         leaves = selectiontools.SliceSelection(leaves)
