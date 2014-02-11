@@ -40,7 +40,7 @@
 				\context Voice = "Saxophone Voice" {
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
 							c,8
@@ -51,7 +51,7 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							d,8
+							f,8
 							\revert Stem.stemlet-length
 						}
 					}
@@ -62,10 +62,10 @@
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							c,8 [
+							ef,8 [
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -88,7 +88,7 @@
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							b,16 ~ [
@@ -106,7 +106,7 @@
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							b,16 [
@@ -140,7 +140,7 @@
 				\context Voice = "Guitar Voice" {
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
 							ef8 ~ [
@@ -151,10 +151,10 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							ef16 ~
+							d16 ~
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
-							ef16 ]
+							d16 ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -168,16 +168,16 @@
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							b,16 ~ [
+							cs16 ~ [
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							b,8 ~
+							cs8 ~
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
-							b,16 ]
+							cs16 ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -191,7 +191,7 @@
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							b,16 ~
@@ -211,7 +211,7 @@
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
 							e,8 ~ [
@@ -230,7 +230,7 @@
 						{
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
-							cs16 ]
+							e,16 ]
 							\revert Stem.stemlet-length
 						}
 					}
@@ -248,7 +248,7 @@
 				\context Voice = "Piano RH Voice" {
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
 							\clef "treble"
@@ -267,18 +267,18 @@
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							cs''16 ~ [
+							c''16 ~ [
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
-							cs''16
+							c''16
 						}
 						{
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 2
-							ef'''16
+							d'''16
 						}
 						{
 							\set stemLeftBeamCount = 2
@@ -296,7 +296,7 @@
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							d''16 [
@@ -419,7 +419,7 @@
 				\context Voice = "Piano LH Voice" {
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
 							\clef "bass"
@@ -439,8 +439,9 @@
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
-							f,8
+							\override Stem.stemlet-length = 1.5
+							\set stemRightBeamCount = 1
+							b,8
 							\revert Stem.stemlet-length
 						}
 					}
@@ -451,7 +452,7 @@
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
 							bf,4 ~
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
@@ -469,7 +470,7 @@
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							d,16 ~ [
@@ -491,7 +492,7 @@
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
 							e,8 [
@@ -499,7 +500,7 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							e8
+							cs8
 						}
 						{
 							\set stemLeftBeamCount = 2
@@ -537,7 +538,6 @@
 				{
 					{
 						\once \override PianoPedalBracket.edge-height = #'(1 . 0)
-						\once \override PianoPedalBracket.shorten-pair = #'(0 . 2)
 						s1 * 1/8 \sustainOn
 					}
 					{
@@ -572,7 +572,6 @@
 					}
 					{
 						\once \override PianoPedalBracket.edge-height = #'(1 . 0)
-						\once \override PianoPedalBracket.shorten-pair = #'(0 . 2)
 						s1 * 1/8
 					}
 					{
@@ -595,7 +594,7 @@
 				\context Voice = "Percussion Shaker Voice" {
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
 							g4
 						}
 						{
@@ -612,7 +611,7 @@
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
 							d'4
 						}
 						{
@@ -636,7 +635,7 @@
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
 							g8 [
@@ -661,7 +660,7 @@
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
 							f'8 [
@@ -689,7 +688,8 @@
 				\context Voice = "Percussion Woodblock Voice" {
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
+							\set stemRightBeamCount = 1
 							f8
 							\revert Stem.stemlet-length
 						}
@@ -702,7 +702,7 @@
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							a16 [
@@ -723,7 +723,7 @@
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							e'16 [
@@ -749,7 +749,7 @@
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							f16 ~ [
@@ -766,7 +766,7 @@
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
 							a8 [
@@ -800,7 +800,7 @@
 				\context Voice = "Percussion Drum Voice" {
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
 							a8
@@ -817,7 +817,7 @@
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
 							e'4
 							\revert Stem.stemlet-length
 						}
@@ -830,7 +830,7 @@
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							a16 ~ [
@@ -853,7 +853,7 @@
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							e'16 ~ [
@@ -873,7 +873,7 @@
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							a16 ~ [
@@ -894,7 +894,7 @@
 					}
 					{
 						{
-							\override Stem.stemlet-length = 0.75
+							\override Stem.stemlet-length = 1.5
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							c'16 ~ [

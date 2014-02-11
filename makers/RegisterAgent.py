@@ -151,14 +151,29 @@ class RegisterAgent(PlagueWaterObject):
                 ('[C0, C4)', inflection_pitch),
                 ('[C4, C8)', inflection_pitch + 6),
                 ])
-        original_pitch = logical_tie[0].written_pitch
-        octavated_pitch = NamedPitch(
-            original_pitch.named_pitch_class,
-            octavation,
-            )
-        registrated_pitch = octave_transposition_mapping([octavated_pitch])
-        for note in logical_tie:
-            note.written_pitch = registrated_pitch
+        logical_ties = []
+        previous_leaf = inspect_(logical_tie.head).get_leaf(-1)
+        if previous_leaf is not None:
+            kind = 'after'
+            graces = inspect_(previous_leaf).get_grace_containers(kind)
+            if graces:
+                iterator = iterate(graces[0]).by_logical_tie(pitched=True)
+                logical_ties.extend([x for x in iterator])
+        kind = 'grace'
+        graces = inspect_(logical_tie.head).get_grace_containers(kind)
+        if graces:
+            iterator = iterate(graces[0]).by_logical_tie(pitched=True)
+            logical_ties.extend([x for x in iterator])
+        logical_ties.append(logical_tie)
+        for logical_tie in logical_ties:
+            original_pitch = logical_tie[0].written_pitch
+            octavated_pitch = NamedPitch(
+                original_pitch.named_pitch_class,
+                octavation,
+                )
+            registrated_pitch = octave_transposition_mapping([octavated_pitch])
+            for note in logical_tie:
+                note.written_pitch = registrated_pitch
 
     def _get_inflection_curve(self, inflection_curve):
         from plague_water import makers

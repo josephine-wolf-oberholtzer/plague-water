@@ -39,6 +39,8 @@ class GraceAgent(PlagueWaterObject):
         previous_leaf = logical_tie.head._get_leaf(-1)
         if previous_leaf is None:
             return
+        elif isinstance(previous_leaf, scoretools.MultimeasureRest):
+            return
         previous_leaf_duration = inspect_(previous_leaf).get_duration()
         if previous_leaf_duration < self.minimum_preceding_duration:
             return
@@ -53,11 +55,20 @@ class GraceAgent(PlagueWaterObject):
             kind = 'grace'
             leaf_to_attach_to = logical_tie.head
         grace_notes = scoretools.make_notes([0], [(1, 16)] * grace_length)
+        if 1 < len(grace_notes):
+            beam = Beam()
+            attach(beam, grace_notes)
         grace_container = scoretools.GraceContainer(
             grace_notes,
             kind=kind,
             )
+        override(grace_container).stem.length = 8
         attach(grace_container, leaf_to_attach_to)
+        leaves = list(grace_notes) + [logical_tie.head]
+        leaves = selectiontools.SliceSelection(leaves)
+        phrasing_slur = spannertools.PhrasingSlur()
+        phrasing_slur._contiguity_constraint = None
+        attach(phrasing_slur, leaves)
 
     ### PUBLIC PROPERTIES ###
 

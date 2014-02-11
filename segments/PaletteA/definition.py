@@ -54,6 +54,9 @@ piano_rh_context_maker = makers.ContextMaker(
     context_name='Piano RH Voice',
     music_makers=[
         new(materials.piano_fanfare_music_maker,
+            grace_agent=makers.GraceAgent(
+                lengths=(1, 0, 1, 0, 0, 1, 2,),
+                ),
             timespan_agent__minimum_timespan_duration=(3, 16),
             timespan_agent__playing_durations=materials.make_durations(
                 3, 5)(1),
@@ -83,6 +86,9 @@ percussion_shaker_context_maker = makers.ContextMaker(
     context_name='Percussion Shaker Voice',
     music_makers=[
         new(materials.basic_music_maker,
+            grace_agent=makers.GraceAgent(
+                lengths=(1, 2, 1, 1, 1, 1,),
+                ),
             pitch_agent=materials.shaker_pitch_agent,
             ),
         ],

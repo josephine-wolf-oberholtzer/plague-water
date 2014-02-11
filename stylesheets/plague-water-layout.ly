@@ -239,15 +239,13 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         \override DynamicText.whiteout = ##t
         \override Glissando.breakable = ##t
         \override Glissando.thickness = 3
-        \override GraceSpacing.shortest-duration-space = 2.0
-        \override GraceSpacing.spacing-increment = 1.5
         \override NoteCollision.merge-differently-dotted = ##t
         \override NoteColumn.ignore-collision = ##t
-        \override OttavaBracket.padding = 3
+        \override OttavaBracket.padding = 1
         \override OttavaBracket.whiteout = ##t
-        \override PhrasingSlur.dash-definition = #'((0 1 0.1 0.75))
-        \override SpacingSpanner.strict-grace-spacing = ##t
-        \override SpacingSpanner.strict-note-spacing = ##t
+        \override PhrasingSlur.dash-definition = #'((0 1 0.5 0.5))
+        \override SpacingSpanner.strict-grace-spacing = ##f  % False!
+        \override SpacingSpanner.strict-note-spacing = ##f  % False!
         \override SpacingSpanner.uniform-stretching = ##t
         \override StaffGrouper.staffgroup-staff-spacing = #'(
             (basic-distance . 12)
@@ -255,7 +253,6 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
             (padding . 1)
             (stretchability . 0)
             )
-        \override Stem.direction = #DOWN
         \override Stem #'(details beamed-lengths) = #'(6)
         \override StemTremolo.beam-width = 1.5
         \override StemTremolo.flag-count = 4.0
@@ -263,26 +260,15 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         \override StemTremolo.Y-offset = -4.0
         \override SustainPedal.self-alignment-X = #LEFT
         \override TextScript.Y-extent = #'(-1.5 . 1.5)
-        \override TupletBracket.avoid-scripts = ##f
-        \override TupletBracket.breakable = ##t
-        \override TupletBracket.direction = #DOWN
         \override TupletBracket.full-length-to-extent = ##t
+        \override TupletBracket.full-length-padding = 4
         \override TupletBracket.outside-staff-priority = 100
         \override TupletBracket.padding = 2
-        \override TupletBracket.positions = 
-            #(lambda (grob)
-                (let* (
-                    (pos (ly:tuplet-bracket::calc-positions grob))
-                    (y (/ (+ (car pos) (cdr pos)) 2)))
-                    (cons y y)))
         \override TupletNumber.font-size = 1
         \override TupletNumber.text = #tuplet-number::calc-fraction-text
-
-
         autoBeaming = ##f
         pedalSustainStyle = #'mixed
         proportionalNotationDuration = #(ly:make-moment 1 64)
         tupletFullLength = ##t
-        tupletFullLengthNote = ##t
     }
 }
