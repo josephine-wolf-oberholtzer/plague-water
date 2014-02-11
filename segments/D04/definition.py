@@ -44,10 +44,30 @@ context_map['Guitar Voice']['register_agent'] = makers.RegisterAgent(
 context_map['Piano RH Voice']['register_agent'] = makers.RegisterAgent(
     instrument=instrumenttools.Piano(),
     global_inflections=NamedPitch('F#6'),
+    phrase_inflections=(
+        makers.RegisterCurve(
+            ratio=(1,),
+            registers=(0, -12),
+            ),
+        makers.RegisterCurve(
+            ratio=(1,),
+            registers=(0, -18),
+            ),
+        ),
     )
 context_map['Piano LH Voice']['register_agent'] = makers.RegisterAgent(
     instrument=instrumenttools.Piano(),
     global_inflections=NamedPitch('A0'),
+    phrase_inflections=(
+        makers.RegisterCurve(
+            ratio=(1,),
+            registers=(0, 12),
+            ),
+        makers.RegisterCurve(
+            ratio=(1,),
+            registers=(0, 18),
+            ),
+        ),
     )
 
 ### CURSOR TRANSFORM ###

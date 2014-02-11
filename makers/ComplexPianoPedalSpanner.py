@@ -56,22 +56,14 @@ class ComplexPianoPedalSpanner(Spanner):
                     value=schemetools.SchemePair(1, 0, quoting="'"),
                     )
                 result.append('\n'.join(override.override_format_pieces))
-                override = lilypondnametools.LilyPondGrobOverride(
-                    grob_name='PianoPedalBracket',
-                    is_once=True,
-                    property_path='shorten-pair',
-                    value=schemetools.SchemePair(0, 2, quoting="'"),
-                    )
-                result.append('\n'.join(override.override_format_pieces))
         return result
 
     def _format_after_leaf(self, leaf):
         result = []
         if self._is_my_last_leaf(leaf):
-            if leaf._get_leaf(1) is not None:
+            next_leaf = leaf._get_leaf(1)
+            if next_leaf is not None:
                 result.append(r'<> \sustainOff')
-            elif not self._is_my_only_leaf(leaf):
-                result.append(r'\sustainOff')
             if self.let_vibrate:
                 result.append(r'\LV')
         return result

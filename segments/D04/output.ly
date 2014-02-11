@@ -160,6 +160,7 @@
 						}
 						{
 							{
+                                \acciaccatura { c16 c16 c16 c16 c16 }
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
 								c,16
@@ -1270,10 +1271,10 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							a''''16. \glissando
+							a'''16. \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							f''''32 ]
+							f'''32 ]
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -1333,10 +1334,10 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							ef''''16. \glissando
+							ef'''16. \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							b'''32 ]
+							b''32 ]
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -1375,7 +1376,7 @@
 									}
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							g''''32 ]
+							g'''32 ]
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -1418,10 +1419,10 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							a''''16. \glissando
+							a'''16. \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							f''''32 ]
+							f''32 ]
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -1463,7 +1464,7 @@
 									}
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							d''''32 ]
+							d'''32 ]
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -1501,7 +1502,7 @@
 									}
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							f''''32 ]
+							f'''32 ]
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -1549,10 +1550,10 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							a''''16. \glissando
+							a'''16. \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							ef''''32 ]
+							ef'''32 ]
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -1595,10 +1596,10 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							g''''16. \glissando
+							g'''16. \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							d''''32 ]
+							d''32 ]
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -1637,7 +1638,7 @@
 									}
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							f''''32 ]
+							f'''32 ]
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -1681,10 +1682,10 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 3
-							c''''32 \glissando
+							c'''32 \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							d''''32 ]
+							d''32 ]
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -1722,7 +1723,7 @@
 									}
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							c''''32 ]
+							c'''32 ]
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -1764,7 +1765,7 @@
 									}
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							ef''''32 ]
+							ef'''32 ]
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -1821,10 +1822,10 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							b'''16. \glissando
+							b''16. \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							c''''32 ]
+							c'''32 ]
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -1864,10 +1865,10 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							d''''16. \glissando
+							d'''16. \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							a'''32 ]
+							a''32 ]
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -1911,7 +1912,7 @@
 							ef''''16. \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							b'''32 ]
+							b''32 ]
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -1951,15 +1952,15 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							g''''16 \glissando
+							g'''16 \glissando
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 3
-							d''''32 \glissando
+							d'''32 \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							a'''32 ]
+							a''32 ]
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -2001,7 +2002,7 @@
 									}
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							g''''32 ]
+							g'''32 ]
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -2052,7 +2053,7 @@
 							c''''16. \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							g'''32 ]
+							g''32 ]
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -2091,7 +2092,7 @@
 									}
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							a''''32 ]
+							a'''32 ]
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -2500,7 +2501,6 @@
 							\override Tie #'stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							\ottava #-1
 							\clef "bass"
 							g,,16. [ \glissando
 								^ \markup {
@@ -2514,8 +2514,7 @@
 									}
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							d,32 ]
-							\ottava #0
+							d32 ]
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
 							\revert NoteHead #'style
@@ -2540,7 +2539,6 @@
 							\override Tie #'stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							\ottava #-1
 							ef,,16 [ \glissando
 								^ \markup {
 									\pad-around
@@ -2555,11 +2553,10 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 3
-							b,,32 \glissando
+							b,32 \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							c,,32 ]
-							\ottava #0
+							c32 ]
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
 							\revert NoteHead #'style
@@ -2607,7 +2604,7 @@
 									}
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							f,,32 ]
+							f,32 ]
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -2633,12 +2630,10 @@
 								r16 [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								\ottava #-1
-								b,,,8
+								b,,8
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								c,16 ]
-								\ottava #0
+								c16 ]
 								\revert Stem.stemlet-length
 							}
 						}
@@ -2688,7 +2683,7 @@
 							b,,16. \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							c,,32 ]
+							c,32 ]
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -2717,7 +2712,6 @@
 							\override Tie #'stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							\ottava #-1
 							ef,,16 [ \glissando
 								^ \markup {
 									\pad-around
@@ -2732,11 +2726,10 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 3
-							b,,32 \glissando
+							b,32 \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							c,,32 ]
-							\ottava #0
+							c32 ]
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
 							\revert NoteHead #'style
@@ -2776,10 +2769,10 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							f,,16. \glissando
+							f,16. \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							b,,,32 ]
+							b,,32 ]
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -2804,12 +2797,10 @@
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
 								r8
-								\ottava #-1
-								bf,,,4
+								bf,,4
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
-								d,8
-								\ottava #0
+								d8
 								\revert Stem.stemlet-length
 							}
 						}
@@ -2853,15 +2844,15 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							a,,,16 \glissando
+							a,,16 \glissando
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 3
-							ef,,32 \glissando
+							ef,32 \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							b,,32 ]
+							b,32 ]
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -2889,7 +2880,6 @@
 							\override Tie #'stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							\ottava #-1
 							g,,8 [ \glissando
 								^ \markup {
 									\pad-around
@@ -2907,8 +2897,7 @@
 							d,16. \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							a,,,32 ]
-							\ottava #0
+							a,32 ]
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
 							\revert NoteHead #'style
@@ -2960,10 +2949,10 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							d,,16. \glissando
+							d,16. \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							a,,32 ]
+							a,32 ]
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -3001,7 +2990,7 @@
 								cs,,8
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								e,,8
+								e,8
 								\ottava #0
 							}
 						}
@@ -3012,12 +3001,10 @@
 								r8
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								\ottava #-1
-								cs,8
+								cs8
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
-								cs,,8 ]
-								\ottava #0
+								cs8 ]
 								\revert Stem.stemlet-length
 							}
 						}
@@ -3062,7 +3049,7 @@
 									}
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							ef,,32 ]
+							ef,32 ]
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -3108,7 +3095,7 @@
 							d,16. \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							a,,,32 ]
+							a,32 ]
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -3147,7 +3134,7 @@
 									}
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							ef,,32 ]
+							ef,32 ]
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -3170,21 +3157,19 @@
 								\override Stem.stemlet-length = 0.75
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
-								\ottava #-1
 								cs,,8 [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = -1
-								e,,8 ]
+								e,8 ]
 							}
 						}
 						{
 							\tweak #'text #tuplet-number::calc-fraction-text
 							\times 5/8 {
-								e,,4
+								e,4
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
-								cs,,8 [
-								\ottava #0
+								cs8 [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
 								r8 ]

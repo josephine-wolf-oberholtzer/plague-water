@@ -51,7 +51,7 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         \override TimeSignature.X-extent = #'(0 . 0)
         \override TimeSignature.break-align-symbols = #'(staff-bar)
         \override TimeSignature.break-visibility = #end-of-line-invisible
-        \override TimeSignature.extra-offset = #'(-2 . 0)
+        \override TimeSignature.extra-offset = #'(0 . 0)
         \override TimeSignature.font-size = 3
         \override TimeSignature.style = #'numbered
         \override VerticalAxisGroup.default-staff-staff-spacing = #'(
@@ -70,6 +70,7 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         \type Engraver_group
         \alias Staff
         \override StaffSymbol.line-count = 5
+        \override BarLine.bar-extent = #'(-2 . 2)
         instrumentName = \markup { 
             \column { \hcenter-in #10 \italic { saxophone } } }
         shortInstrumentName = \markup { 
@@ -92,6 +93,7 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         \type Engraver_group
         \alias Staff
         \override StaffSymbol.line-count = 5
+        \override BarLine.bar-extent = #'(-2 . 2)
         instrumentName = \markup { 
             \column { \hcenter-in #10 \italic { e-guitar } } }
         shortInstrumentName = \markup { 
@@ -113,7 +115,7 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         \name PianoUpperStaff
         \type Engraver_group
         \alias Staff
-        \override StaffSymbol.line-count = 5
+        \override BarLine.bar-extent = #'(-2 . 2)
     }
 
     \context {
@@ -121,7 +123,7 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         \name PianoLowerStaff
         \type Engraver_group
         \alias Staff
-        \override StaffSymbol.line-count = 5
+        \override BarLine.bar-extent = #'(-2 . 2)
     }
 
     \context {
@@ -208,13 +210,28 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         \remove Mark_engraver
         \remove Bar_number_engraver
         \override BarLine.hair-thickness = 0.5
+        \override BarLine.space-alist = #'(
+            (time-signature extra-space . 0.0)
+            (custos minimum-space . 0.0)
+            (clef minimum-space . 0.0)
+            (key-signature extra-space . 0.0)
+            (key-cancellation extra-space . 0.0)
+            (first-note fixed-space . 0.0) 
+            (next-note semi-fixed-space . 0.0)
+            (right-edge extra-space . 0.0)
+            )
         \override Beam.beam-thickness = 0.75
         \override Beam.breakable = ##t
         \override Beam.length-fraction = 1.5
         \override DynamicLineSpanner.Y-extent = #'(-1.5 . 1.5)
+        \override DynamicText.self-alignment-X = #LEFT
         \override DynamicText.whiteout = ##t
         \override Glissando.breakable = ##t
         \override Glissando.thickness = 3
+
+        \override GraceSpacing.shortest-duration-space = 0.8
+        \override GraceSpacing.spacing-increment = 1.6
+
         \override NoteCollision.merge-differently-dotted = ##t
         \override NoteColumn.ignore-collision = ##t
         \override OttavaBracket.padding = 3
@@ -234,15 +251,17 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         \override StemTremolo.flag-count = 4.0
         \override StemTremolo.slope = 0.5
         \override StemTremolo.Y-offset = -4.0
+        \override SustainPedal.self-alignment-X = #LEFT
         \override TextScript.Y-extent = #'(-1.5 . 1.5)
         \override TupletBracket.breakable = ##t
-        \override TupletBracket.full-length-to-extent = ##f
+        \override TupletBracket.full-length-to-extent = ##t
         \override TupletBracket.padding = 2.0
         \override TupletNumber.font-size = 1
         \override TupletNumber.text = #tuplet-number::calc-fraction-text
         autoBeaming = ##f
         pedalSustainStyle = #'mixed
         proportionalNotationDuration = #(ly:make-moment 1 64)
-        tupletFullLength = ##t
+        tupletFullLength = ##f
+        tupletFullLengthNote = ##f
     }
 }

@@ -860,12 +860,10 @@
 				{
 					{
 						\once \override PianoPedalBracket.edge-height = #'(1 . 0)
-						\once \override PianoPedalBracket.shorten-pair = #'(0 . 2)
 						s1 * 1/4 \sustainOn
 					}
 					{
 						\once \override PianoPedalBracket.edge-height = #'(1 . 0)
-						\once \override PianoPedalBracket.shorten-pair = #'(0 . 2)
 						s1 * 3/16
 					}
 					{
@@ -902,7 +900,6 @@
 				{
 					{
 						\once \override PianoPedalBracket.edge-height = #'(1 . 0)
-						\once \override PianoPedalBracket.shorten-pair = #'(0 . 2)
 						s1 * 3/16 \sustainOn
 						<> \sustainOff
 						\LV
@@ -924,7 +921,6 @@
 					}
 					{
 						s1 * 3/16
-						\sustainOff
 					}
 				}
 			}
