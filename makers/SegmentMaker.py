@@ -94,7 +94,8 @@ class SegmentMaker(PlagueWaterObject):
         ### CREATE NOTATION ###
         self.populate_time_signature_context()
         self.populate_rhythms(rewrite_meter=True)
-        self.apply_pitch_classes()
+        self.apply_graces()
+        self.apply_pitches()
         self.apply_registers()
         self.apply_chords()
         self.apply_piano_clefs_and_octavations()
@@ -202,7 +203,10 @@ class SegmentMaker(PlagueWaterObject):
                 if leaf is not logical_tie.head:
                     continue
                 music_maker = inspect_(leaf).get_effective(makers.MusicMaker)
-                music_maker.apply_chords(
+                chord_agent = music_maker.chord_agent
+                if chord_agent is None:
+                    continue
+                chord_agent(
                     logical_tie=logical_tie,
                     segment_duration=self.segment_duration,
                     )
@@ -216,12 +220,36 @@ class SegmentMaker(PlagueWaterObject):
             for music, music_maker in \
                 self.iterate_containers_and_music_makers():
                 seed = music_maker_seeds[music_maker]
-                music_maker.apply_dynamics(
+                dynamic_agent = music_maker.dynamic_agent
+                if dynamic_agent is None:
+                    continue
+                dynamic_agent(
                     music=music,
                     seed=seed,
                     segment_duration=self.segment_duration,
                     )
                 music_maker_seeds[music_maker] += 1
+                progress_indicator.advance()
+
+    def apply_graces(self):
+        from plague_water import makers
+        message = '\tapplying grace classes'
+        measure_durations = [x.duration for x in self.time_signatures]
+        measure_offsets = mathtools.cumulative_sums(measure_durations)
+        with systemtools.ProgressIndicator(message) as progress_indicator:
+            for leaf in iterate(self.score).by_timeline(Note):
+                logical_tie = inspect_(leaf).get_logical_tie()
+                if leaf is not logical_tie.head:
+                    continue
+                music_maker = inspect_(leaf).get_effective(makers.MusicMaker)
+                grace_agent = music_maker.grace_agent
+                if grace_agent is None:
+                    continue
+                grace_agent(
+                    logical_tie=logical_tie,
+                    measure_offsets=measure_offsets,
+                    segment_duration=self.segment_duration,
+                    )
                 progress_indicator.advance()
 
     def apply_indicators(self):
@@ -231,7 +259,10 @@ class SegmentMaker(PlagueWaterObject):
             for music, music_maker in \
                 self.iterate_containers_and_music_makers():
                 seed = music_maker_seeds[music_maker]
-                music_maker.apply_indicators(
+                indicator_agent = music_maker.indicator_agent
+                if indicator_agent is None:
+                    continue
+                indicator_agent(
                     music=music,
                     seed=seed,
                     segment_duration=self.segment_duration,
@@ -326,7 +357,7 @@ class SegmentMaker(PlagueWaterObject):
                     old_piano_lh_staff = new_piano_lh_staff
                     progress_indicator.advance()
 
-    def apply_pitch_classes(self):
+    def apply_pitches(self):
         from plague_water import makers
         message = '\tapplying pitch classes'
         with systemtools.ProgressIndicator(message) as progress_indicator:
@@ -335,10 +366,34 @@ class SegmentMaker(PlagueWaterObject):
                 if leaf is not logical_tie.head:
                     continue
                 music_maker = inspect_(leaf).get_effective(makers.MusicMaker)
-                music_maker.apply_pitch_classes(
-                    logical_tie=logical_tie,
-                    segment_duration=self.segment_duration,
-                    )
+                pitch_agent = music_maker.pitch_agent
+                if pitch_agent is None:
+                    continue
+                previous_pitch_set = None
+                previous_leaf = inspect_(logical_tie.head).get_leaf(-1)
+                if isinstance(previous_leaf, scoretools.Note):
+                    previous_pitch_set = pitchtools.PitchSet(
+                        [previous_leaf.written_pitch])
+                elif isinstance(previous_leaf, scoretools.Chord):
+                    previous_pitch_set = pitchtools.PitchSet(
+                        previous_leaf.written_pitches)
+                grace = ()
+                if previous_leaf is not None:
+                    inspector = inspect_(previous_leaf)
+                    grace = inspector.get_grace_containers('after')
+                inspector = inspect_(logical_tie.head)
+                grace = grace or inspector.get_grace_containers('grace')
+                logical_ties = []
+                if grace:
+                    iterator = iterate(grace[0]).by_logical_tie(pitched=True)
+                    logical_ties.extend([x for x in iterator])
+                logical_ties.append(logical_tie)
+                for logical_tie in logical_ties:
+                    previous_pitch_set = pitch_agent(
+                        logical_tie=logical_tie,
+                        previous_pitch_set=previous_pitch_set,
+                        segment_duration=self.segment_duration,
+                        )
                 progress_indicator.advance()
 
     def apply_registers(self):
@@ -347,7 +402,10 @@ class SegmentMaker(PlagueWaterObject):
             for music, music_maker in \
                 self.iterate_containers_and_music_makers():
                 assert inspect_(music).get_duration(), music
-                music_maker.apply_registers(
+                register_agent = music_maker.register_agent
+                if register_agent is None:
+                    continue
+                register_agent(
                     music=music,
                     segment_duration=self.segment_duration,
                     )
@@ -360,7 +418,10 @@ class SegmentMaker(PlagueWaterObject):
             for music, music_maker in \
                 self.iterate_containers_and_music_makers():
                 seed = music_maker_seeds[music_maker]
-                music_maker.apply_spanners(
+                spanner_agent = music_maker.spanner_agent
+                if spanner_agent is None:
+                    continue
+                spanner_agent(
                     music=music,
                     seed=seed,
                     segment_duration=self.segment_duration,

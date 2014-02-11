@@ -11,6 +11,7 @@ class MusicMaker(PlagueWaterObject):
         '_apply_beam',
         '_chord_agent',
         '_dynamic_agent',
+        '_grace_agent',
         '_indicator_agent',
         '_pitch_agent',
         '_register_agent',
@@ -29,6 +30,7 @@ class MusicMaker(PlagueWaterObject):
         apply_beam=None,
         chord_agent=None,
         dynamic_agent=None,
+        grace_agent=None,
         indicator_agent=None,
         pitch_agent=None,
         register_agent=None,
@@ -38,9 +40,10 @@ class MusicMaker(PlagueWaterObject):
         timespan_agent=None,
         ):
         from plague_water import makers
-        assert isinstance(indicator_agent, (makers.IndicatorAgent, type(None)))
         assert isinstance(chord_agent, (makers.ChordAgent, type(None)))
         assert isinstance(dynamic_agent, (makers.DynamicAgent, type(None)))
+        assert isinstance(grace_agent, (makers.GraceAgent, type(None)))
+        assert isinstance(indicator_agent, (makers.IndicatorAgent, type(None)))
         assert isinstance(pitch_agent, (
             makers.PitchClassAgent,
             makers.PercussionPitchAgent,
@@ -58,6 +61,7 @@ class MusicMaker(PlagueWaterObject):
         self._apply_beam = apply_beam
         self._chord_agent = chord_agent
         self._dynamic_agent = dynamic_agent
+        self._grace_agent = grace_agent
         self._indicator_agent = indicator_agent
         self._pitch_agent = pitch_agent
         self._register_agent = register_agent
@@ -69,89 +73,6 @@ class MusicMaker(PlagueWaterObject):
         self._timespan_agent = timespan_agent
 
     ### PUBLIC METHODS ###
-
-    def apply_chords(
-        self,
-        logical_tie=None,
-        segment_duration=None,
-        ):
-        if self.chord_agent is None:
-            return
-        self.chord_agent(
-            logical_tie,
-            segment_duration=segment_duration,
-            )
-
-    def apply_dynamics(
-        self,
-        music=None,
-        seed=0,
-        segment_duration=None,
-        ):
-        if self.dynamic_agent is None:
-            return
-        self.dynamic_agent(
-            music,
-            seed=seed,
-            segment_duration=segment_duration,
-            )
-        assert inspect_(music).is_well_formed()
-
-    def apply_indicators(
-        self,
-        music=None,
-        seed=0,
-        segment_duration=None,
-        ):
-        if self.indicator_agent is None:
-            return
-        self.indicator_agent(
-            music,
-            seed=seed,
-            segment_duration=segment_duration,
-            )
-        assert inspect_(music).is_well_formed()
-
-    def apply_pitch_classes(
-        self,
-        logical_tie=None,
-        segment_duration=None,
-        ):
-        if self.pitch_agent is None:
-            return
-        self.pitch_agent(
-            logical_tie,
-            segment_duration=segment_duration,
-            )
-
-    def apply_registers(
-        self,
-        music=None,
-        seed=0,
-        segment_duration=None,
-        ):
-        if self.register_agent is None:
-            return
-        self.register_agent(
-            music,
-            segment_duration=segment_duration,
-            )
-        assert inspect_(music).is_well_formed()
-
-    def apply_spanners(
-        self,
-        music=None,
-        seed=0,
-        segment_duration=None,
-        ):
-        if self.spanner_agent is None:
-            return
-        self.spanner_agent(
-            music,
-            seed=seed,
-            segment_duration=segment_duration,
-            )
-        assert inspect_(music).is_well_formed()
 
     def create_rhythms(
         self,
@@ -327,6 +248,10 @@ class MusicMaker(PlagueWaterObject):
     @property
     def dynamic_agent(self):
         return self._dynamic_agent
+
+    @property
+    def grace_agent(self):
+        return self._grace_agent
 
     @property
     def indicator_agent(self):

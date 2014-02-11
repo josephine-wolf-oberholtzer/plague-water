@@ -68,6 +68,7 @@ class PitchClassAgent(PlagueWaterObject):
     def __call__(
         self,
         logical_tie,
+        previous_pitch_set=None,
         segment_duration=None,
         ):
         assert isinstance(logical_tie, selectiontools.LogicalTie)
@@ -112,12 +113,19 @@ class PitchClassAgent(PlagueWaterObject):
                     statal_server=self._current_cursor.statal_server,
                     )
         current_pitch_class = self._current_cursor(1)[0]
+        if previous_pitch_set is not None:
+            previous_pitch_class = pitchtools.NumberedPitchClass(
+                list(previous_pitch_set)[0])
+        else:
+            previous_pitch_class = None
         if 1 < len(set(self.pitch_class_talea[pitch_class_sequence_index])):
-            while current_pitch_class == self._last_pitch_class:
+            while current_pitch_class == previous_pitch_class:
                 current_pitch_class = self._current_cursor()[0]
-        self._last_pitch_class = current_pitch_class
         for note in logical_tie:
             note.written_pitch = current_pitch_class
+        pitch = pitchtools.NamedPitch(current_pitch_class)
+        pitches = pitchtools.PitchSet([pitch])
+        return pitches
 
     ### PUBLIC PROPERTIES ###
 

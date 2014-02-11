@@ -67,6 +67,9 @@ piano_lh_context_maker = makers.ContextMaker(
     context_name='Piano LH Voice',
     music_makers=[
         new(materials.piano_fanfare_music_maker,
+            grace_agent=makers.GraceAgent(
+                lengths=(1, 2, 1, 1, 1, 1,),
+                ),
             timespan_agent__minimum_timespan_duration=(3, 16),
             timespan_agent__playing_durations=materials.make_durations(
                 3, 5)(2),

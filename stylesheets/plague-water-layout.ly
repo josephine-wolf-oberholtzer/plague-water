@@ -30,20 +30,17 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         \consists Metronome_mark_engraver
         \consists Mark_engraver
         \consists Bar_number_engraver
-
         \override BarNumber.X-extent = #'(0 . 0)
         \override BarNumber.Y-extent = #'(0 . 0)
         \override BarNumber.extra-offset = #'(-8 . -4)
         \override BarNumber.font-name = "Didot Italic"
         \override BarNumber.font-size = 2
         \override BarNumber.stencil = #(make-stencil-circler 0.1 0.7 ly:text-interface::print)
-
         \override MetronomeMark.X-extent = #'(0 . 0)
         \override MetronomeMark.X-offset = 5
         \override MetronomeMark.Y-offset = -2.5
         \override MetronomeMark.break-align-symbols = #'(time-signature)
         \override MetronomeMark.font-size = 3
-
         \override RehearsalMark.X-extent = #'(0 . 0)
         \override RehearsalMark.Y-offset = 8
         \override RehearsalMark.break-align-symbols = #'(time-signature)
@@ -51,7 +48,6 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         \override RehearsalMark.font-name = "Didot"
         \override RehearsalMark.font-size = 10
         \override RehearsalMark.self-alignment-X = #CENTER
-
         \override TimeSignature.X-extent = #'(0 . 0)
         \override TimeSignature.break-align-symbols = #'(staff-bar)
         \override TimeSignature.break-visibility = #end-of-line-invisible
@@ -225,16 +221,26 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
             )
         \override Beam.beam-thickness = 0.75
         \override Beam.breakable = ##t
+        \override Beam.collision-interfaces = #'(
+            beam-interface
+            clef-interface
+            flag-interface
+            inline-accidental-interface
+            key-signature-interface
+            note-head-interface
+            stem-interface
+            time-signature-interface
+            tuplet-bracket-anterface
+            )
+        \override Beam.damping = 2.0
         \override Beam.length-fraction = 1.5
         \override DynamicLineSpanner.Y-extent = #'(-1.5 . 1.5)
         \override DynamicText.self-alignment-X = #LEFT
         \override DynamicText.whiteout = ##t
         \override Glissando.breakable = ##t
         \override Glissando.thickness = 3
-
-        \override GraceSpacing.shortest-duration-space = 0.8
-        \override GraceSpacing.spacing-increment = 1.6
-
+        \override GraceSpacing.shortest-duration-space = 2.0
+        \override GraceSpacing.spacing-increment = 1.5
         \override NoteCollision.merge-differently-dotted = ##t
         \override NoteColumn.ignore-collision = ##t
         \override OttavaBracket.padding = 3
@@ -249,6 +255,7 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
             (padding . 1)
             (stretchability . 0)
             )
+        \override Stem.direction = #DOWN
         \override Stem #'(details beamed-lengths) = #'(6)
         \override StemTremolo.beam-width = 1.5
         \override StemTremolo.flag-count = 4.0
@@ -256,15 +263,26 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         \override StemTremolo.Y-offset = -4.0
         \override SustainPedal.self-alignment-X = #LEFT
         \override TextScript.Y-extent = #'(-1.5 . 1.5)
+        \override TupletBracket.avoid-scripts = ##f
         \override TupletBracket.breakable = ##t
+        \override TupletBracket.direction = #DOWN
         \override TupletBracket.full-length-to-extent = ##t
-        \override TupletBracket.padding = 2.0
+        \override TupletBracket.outside-staff-priority = 100
+        \override TupletBracket.padding = 2
+        \override TupletBracket.positions = 
+            #(lambda (grob)
+                (let* (
+                    (pos (ly:tuplet-bracket::calc-positions grob))
+                    (y (/ (+ (car pos) (cdr pos)) 2)))
+                    (cons y y)))
         \override TupletNumber.font-size = 1
         \override TupletNumber.text = #tuplet-number::calc-fraction-text
+
+
         autoBeaming = ##f
         pedalSustainStyle = #'mixed
         proportionalNotationDuration = #(ly:make-moment 1 64)
-        tupletFullLength = ##f
-        tupletFullLengthNote = ##f
+        tupletFullLength = ##t
+        tupletFullLengthNote = ##t
     }
 }

@@ -52,6 +52,7 @@ class PercussionPitchAgent(PlagueWaterObject):
     def __call__(
         self,
         logical_tie,
+        previous_pitch_set=None,
         segment_duration=None,
         ):
         length = self._lengths_cursor()[0]
@@ -66,6 +67,8 @@ class PercussionPitchAgent(PlagueWaterObject):
             chord = chord(note)
             chord.written_pitches = pitches
             mutate(note).replace(chord)
+        pitches = pitchtools.PitchSet(pitches)
+        return pitches
 
     ### PUBLIC PROPERTIES ###
 
