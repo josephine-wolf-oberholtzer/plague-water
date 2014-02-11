@@ -30,28 +30,31 @@ LV = #(make-dynamic-script (markup #:normal-text #:bold #:small "L.V."))
         \consists Metronome_mark_engraver
         \consists Mark_engraver
         \consists Bar_number_engraver
+
         \override BarNumber.X-extent = #'(0 . 0)
         \override BarNumber.Y-extent = #'(0 . 0)
         \override BarNumber.extra-offset = #'(-8 . -4)
         \override BarNumber.font-name = "Didot Italic"
         \override BarNumber.font-size = 2
         \override BarNumber.stencil = #(make-stencil-circler 0.1 0.7 ly:text-interface::print)
+
         \override MetronomeMark.X-extent = #'(0 . 0)
-        \override MetronomeMark.X-offset = #ly:self-alignment-interface::x-aligned-on-self
+        \override MetronomeMark.X-offset = 5
+        \override MetronomeMark.Y-offset = -2.5
         \override MetronomeMark.break-align-symbols = #'(time-signature)
-        \override MetronomeMark.extra-offset = #'(3 . -5.5)
         \override MetronomeMark.font-size = 3
+
         \override RehearsalMark.X-extent = #'(0 . 0)
+        \override RehearsalMark.Y-offset = 8
         \override RehearsalMark.break-align-symbols = #'(time-signature)
         \override RehearsalMark.break-visibility = #end-of-line-invisible
-        \override RehearsalMark.extra-offset = #'(-1 . -3)
         \override RehearsalMark.font-name = "Didot"
         \override RehearsalMark.font-size = 10
         \override RehearsalMark.self-alignment-X = #CENTER
+
         \override TimeSignature.X-extent = #'(0 . 0)
         \override TimeSignature.break-align-symbols = #'(staff-bar)
         \override TimeSignature.break-visibility = #end-of-line-invisible
-        \override TimeSignature.extra-offset = #'(0 . 0)
         \override TimeSignature.font-size = 3
         \override TimeSignature.style = #'numbered
         \override VerticalAxisGroup.default-staff-staff-spacing = #'(
