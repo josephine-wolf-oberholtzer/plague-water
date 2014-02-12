@@ -61,6 +61,16 @@ class GraceAgent(PlagueWaterObject):
             schemetools.Scheme('grace', force_quotes=True)
         attach(grace_container, leaf_to_attach_to)
 
+    ### PUBLIC METHODS ###
+
+    def rotate(self, n=1):
+        n = int(n)
+        lengths = sequencetools.rotate_sequence(self.lengths, n)
+        return new(
+            self,
+            lengths=lengths,
+            )
+
     ### PUBLIC PROPERTIES ###
 
     @property

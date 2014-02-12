@@ -70,6 +70,22 @@ class PercussionPitchAgent(PlagueWaterObject):
         pitches = pitchtools.PitchSet(pitches)
         return pitches
 
+    ### PUBLIC METHODS ###
+
+    def rotate(self, n=1):
+        n = int(n)
+        lengths = sequencetools.rotate_sequence(self.lengths, n)
+        pitches = sequencetools.rotate_sequence(self.pitches, n)
+        talea = self.talea
+        if talea != range(len(pitches)):
+            talea = sequencetools.rotate_sequence(talea, n)
+        return new(
+            self,
+            lengths=lengths,
+            pitches=pitches,
+            talea=talea,
+            )
+
     ### PUBLIC PROPERTIES ###
 
     @property

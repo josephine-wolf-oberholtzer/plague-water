@@ -265,6 +265,7 @@
         \override StemTremolo.Y-offset = -4.0
         \override SustainPedal.self-alignment-X = #CENTER
         \override TextScript.Y-extent = #'(-1.5 . 1.5)
+        \override TrillPitchAccidental.avoid-slur = #'ignore
         \override TupletBracket.direction = #UP
         \override TupletBracket.full-length-to-extent = ##t
         \override TupletBracket.outside-staff-priority = 100

@@ -1,5 +1,4 @@
 # -*- encoding: utf-8 -*-
-import bisect
 from abjad import *
 from plague_water.makers.PlagueWaterObject import PlagueWaterObject
 
@@ -64,6 +63,19 @@ class ChordAgent(PlagueWaterObject):
         expression = cursor()[0]
         if expression is not None:
             expression(logical_tie)
+
+    ### PUBLIC METHODS ###
+
+    def rotate(self, n=1):
+        n = int(n)
+        ratio = sequencetools.rotate_sequence(self.ratio, n)
+        talea = sequencetools.rotate_sequence(self.talea, n)
+        talea = tuple(sequencetools.rotate_sequence(x, n) for x in talea)
+        return new(
+            self,
+            ratio=ratio,
+            talea=talea,
+            )
 
     ### PUBLIC PROPERTIES ###
 

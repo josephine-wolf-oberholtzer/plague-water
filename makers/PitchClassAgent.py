@@ -127,6 +127,32 @@ class PitchClassAgent(PlagueWaterObject):
         pitches = pitchtools.PitchSet([pitch])
         return pitches
 
+    ### PUBLIC METHODS ###
+
+    def rotate(self, n=1):
+        n = int(n)
+        pitch_class_ratio = sequencetools.rotate_sequence(
+            self.pitch_class_ratio, n)
+        pitch_class_talea = sequencetools.rotate_sequence(
+            self.pitch_class_talea, n)
+        pitch_class_talea = tuple(
+            sequencetools.rotate_sequence(x, n)
+            for x in pitch_class_talea
+            )
+        transform_ratio = self.transform_ratio
+        if transform_ratio is not None:
+            transform_ratio = sequencetools.rotate_sequence(transform_ratio, n)
+        transform_talea = self.transform_talea
+        if transform_talea is not None:
+            transform_talea = sequencetools.rotate_sequence(transform_talea, n)
+        return new(
+            self,
+            pitch_class_ratio=pitch_class_ratio,
+            pitch_class_talea=pitch_class_talea,
+            transform_ratio=transform_ratio,
+            transform_talea=transform_talea,
+            )
+
     ### PUBLIC PROPERTIES ###
 
     @property

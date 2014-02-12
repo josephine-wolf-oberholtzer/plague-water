@@ -37,15 +37,16 @@
 					}
 					{
 						{
-							{
-								\override Stem.stemlet-length = 1.5
+							\times 2/3 {
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								f16 [
+								r16 [
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 2
+								cs'16
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								c'16 ]
-								\revert Stem.stemlet-length
+								ef'16 ]
 							}
 						}
 					}
@@ -64,18 +65,16 @@
 					}
 					{
 						{
-							\times 2/3 {
-								\override Stem.stemlet-length = 1.5
+							{
 								\set stemLeftBeamCount = 0
-								\set stemRightBeamCount = 1
-								r8 [
+								\set stemRightBeamCount = 2
+								r16 [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
 								e8
-								\set stemLeftBeamCount = 1
+								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								cs'8 ]
-								\revert Stem.stemlet-length
+								cs'16 ]
 							}
 						}
 					}
@@ -94,19 +93,20 @@
 					{
 						{
 							{
-								\override Stem.stemlet-length = 1.5
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
+								\afterGrace
 								c'16 [
-								\grace {
+								{
+									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
 									ef'16 \(
+									\revert Flag #'stroke-style
 									\revert Stem #'length
 								}
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
 								d'16 ] \)
-								\revert Stem.stemlet-length
 							}
 						}
 					}
@@ -117,25 +117,26 @@
 						}
 						{
 							r4
+							\afterGrace
 							r8
+							{
+								\override Flag #'stroke-style = #"grace"
+								\override Stem #'length = #8
+								c'16 \(
+								\revert Flag #'stroke-style
+								\revert Stem #'length
+							}
 						}
 					}
 					{
 						{
 							{
-								\grace {
-									\override Stem #'length = #8
-									c'16 \(
-									\revert Stem #'length
-								}
-								\override Stem.stemlet-length = 1.5
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
 								cs'16 \) [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
 								e'16 ]
-								\revert Stem.stemlet-length
 							}
 						}
 					}
@@ -160,7 +161,17 @@
 							\stopStaff
 							\once \override Staff.StaffSymbol.line-count = 1
 							\startStaff
+							\afterGrace
 							R1 * 1/2
+							{
+								\override Flag #'stroke-style = #"grace"
+								\override Stem #'length = #8
+								\ottava #1
+								\clef treble
+								d''''16 \(
+								\revert Flag #'stroke-style
+								\revert Stem #'length
+							}
 							\stopStaff
 							\startStaff
 						}
@@ -168,93 +179,89 @@
 					{
 						{
 							\times 2/3 {
-								\override Stem.stemlet-length = 1.5
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
-								\ottava #1
-								\clef "treble"
-								d''''8 [
-								\grace {
+								af'''8 \)
+								\afterGrace
+								bf''''4
+								{
+									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
 									c''''16 \(
+									\revert Flag #'stroke-style
 									\revert Stem #'length
 								}
-								\set stemLeftBeamCount = 1
-								\set stemRightBeamCount = 1
-								d''''8 \)
-								\ottava #0
-								\set stemLeftBeamCount = 1
-								\set stemRightBeamCount = 1
-								r8
 							}
 						}
 						{
 							{
-								\set stemLeftBeamCount = 1
+								\set stemLeftBeamCount = -1
 								\set stemRightBeamCount = 2
-								\ottava #1
+								d''''16 \) [
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 1
 								af'''16
-								\grace {
-									\override Stem #'length = #8
-									c''''16 \(
-									\revert Stem #'length
-								}
-								\set stemLeftBeamCount = 2
-								\set stemRightBeamCount = 1
-								d''''16 \)
+								\ottava #0
 							}
 						}
 						{
-							{
+							\times 2/3 {
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								e''''16
+								r16
 								\set stemLeftBeamCount = 2
-								\set stemRightBeamCount = 3
-								cs''''32
-								\ottava #0
-								\set stemLeftBeamCount = 3
-								\set stemRightBeamCount = 1
-								r32
-							}
-						}
-						{
-							{
-								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
 								\ottava #1
 								e''''16
-								\grace {
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 1
+								cs''''16
+								\ottava #0
+							}
+						}
+						{
+							{
+								\set stemLeftBeamCount = 1
+								\set stemRightBeamCount = 3
+								\afterGrace
+								r32
+								{
+									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
+									\ottava #1
 									c''''16 \(
+									\revert Flag #'stroke-style
 									\revert Stem #'length
 								}
 								\set stemLeftBeamCount = 2
-								\set stemRightBeamCount = 1
+								\set stemRightBeamCount = 2
+								\afterGrace
 								cs''''16 \)
-								\ottava #0
-							}
-						}
-						{
-							{
-								\set stemLeftBeamCount = 1
-								\set stemRightBeamCount = 3
-								r32
-								\set stemLeftBeamCount = 2
-								\set stemRightBeamCount = 2
-								\ottava #1
-								e''''16
-								\grace {
+								{
+									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
 									c''''16 [ \(
 									ef''''16 ]
+									\revert Flag #'stroke-style
 									\revert Stem #'length
 								}
 								\set stemLeftBeamCount = 3
-								\set stemRightBeamCount = 0
-								cs''''32 ] \)
+								\set stemRightBeamCount = 1
+								cs''''32 \)
+							}
+						}
+						{
+							\times 2/3 {
+								\set stemLeftBeamCount = 1
+								\set stemRightBeamCount = 2
+								e''''16
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 2
+								cs''''16
 								\ottava #0
-								\revert Stem.stemlet-length
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 0
+								r16 ]
 							}
 						}
 					}
@@ -265,75 +272,34 @@
 					}
 				}
 			}
-			\context Dynamics = "Piano Dynamics" {
-				{
-					{
-						r4
-					}
-				}
-				{
-					{
-						c'16. \> \f
-						c'32 \p
-					}
-				}
-				{
-					{
-						r8
-					}
-				}
-				{
-					{
-						\override Hairpin #'stencil = #constante-hairpin
-						c'4 \< \ppp
-					}
-					{
-						c'8
-					}
-					{
-						c'8
-					}
-					{
-						c'8
-					}
-					{
-						c'16.
-						c'32 \!
-						\revert Hairpin #'stencil
-					}
-				}
-				{
-					{
-						r16
-					}
-				}
-			}
 			\context PianoLowerStaff = "Piano Lower Staff" {
 				\context Voice = "Piano LH Voice" {
 					{
 						{
+							\afterGrace
 							r4
+							{
+								\override Flag #'stroke-style = #"grace"
+								\override Stem #'length = #8
+								\clef treble
+								f''16 \(
+								\revert Flag #'stroke-style
+								\revert Stem #'length
+							}
 						}
 					}
 					{
 						{
 							{
-								\grace {
-									\override Stem #'length = #8
-									b''16 \(
-									\revert Stem #'length
-								}
-								\override Stem.stemlet-length = 1.5
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								\ottava #1
-								\clef "treble"
-								cs'''16 \) [
+								b''16 \) [
 								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 3
+								c'''32
+								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 0
-								ef'''16 ]
-								\ottava #0
-								\revert Stem.stemlet-length
+								r32 ]
 							}
 						}
 					}
@@ -345,7 +311,15 @@
 							\stopStaff
 							\once \override Staff.StaffSymbol.line-count = 1
 							\startStaff
+							\afterGrace
 							R1 * 1/2
+							{
+								\override Flag #'stroke-style = #"grace"
+								\override Stem #'length = #8
+								c''16 \(
+								\revert Flag #'stroke-style
+								\revert Stem #'length
+							}
 							\stopStaff
 							\startStaff
 						}
@@ -353,22 +327,15 @@
 					{
 						{
 							\times 2/3 {
-								\override Stem.stemlet-length = 1.5
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
-								r8 [
-								\grace {
-									\override Stem #'length = #8
-									c''16 \(
-									\revert Stem #'length
-								}
+								cs''8 \) [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								cs''8 \)
+								e''8
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
-								e''8 ]
-								\revert Stem.stemlet-length
+								r8 ]
 							}
 						}
 					}
@@ -382,44 +349,18 @@
 			\context Dynamics = "Piano Pedals" {
 				{
 					{
-						r4
-					}
-				}
-				{
-					{
-						s1 * 1/8 \sustainOn
-						<> \sustainOff
-					}
-				}
-				{
-					{
-						r8
-					}
-				}
-				{
-					{
-						\once \override PianoPedalBracket.edge-height = #'(1 . 0)
-						s1 * 1/4 \sustainOn
+						\stopStaff
+						\once \override Staff.StaffSymbol.line-count = 1
+						\startStaff
+						R1 * 1/2
 					}
 					{
-						s1 * 1/8
+						R1 * 1/2
 					}
 					{
-						s1 * 1/8
-					}
-					{
-						\once \override PianoPedalBracket.edge-height = #'(1 . 0)
-						s1 * 1/8
-					}
-					{
-						s1 * 1/8
-						<> \sustainOff
-						\LV
-					}
-				}
-				{
-					{
-						r16
+						R1 * 5/16
+						\stopStaff
+						\startStaff
 					}
 				}
 			}
@@ -436,7 +377,6 @@
 					{
 						{
 							{
-								\override Stem.stemlet-length = 1.5
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
 								r16 [
@@ -446,7 +386,6 @@
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
 								b16 ]
-								\revert Stem.stemlet-length
 							}
 						}
 					}
@@ -481,33 +420,37 @@
 							\startStaff
 						}
 						{
+							\afterGrace
 							r8
+							{
+								\override Flag #'stroke-style = #"grace"
+								\override Stem #'length = #8
+								f16 \(
+								\revert Flag #'stroke-style
+								\revert Stem #'length
+							}
 						}
 					}
 					{
 						{
 							{
-								\grace {
-									\override Stem #'length = #8
-									f16 \(
-									\revert Stem #'length
-								}
-								\override Stem.stemlet-length = 1.5
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
 								a8 \) [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
+								\afterGrace
 								c'8
-								\grace {
+								{
+									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
 									e'16 \(
+									\revert Flag #'stroke-style
 									\revert Stem #'length
 								}
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
 								g'8 ] \)
-								\revert Stem.stemlet-length
 							}
 						}
 					}
@@ -535,7 +478,6 @@
 					{
 						{
 							\times 2/3 {
-								\override Stem.stemlet-length = 1.5
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
 								r16 [
@@ -545,7 +487,6 @@
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
 								c'16 ]
-								\revert Stem.stemlet-length
 							}
 						}
 					}
