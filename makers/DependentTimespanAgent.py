@@ -50,8 +50,8 @@ class DependentTimespanAgent(TimespanAgent):
             dependency_timespans.extend(dependency.timespan_inventory)
         if self.labels is not None:
             dependency_timespans[:] = [x for x in dependency_timespans if
-                x.music_maker.labels is not None and
-                any(label in x.music_maker.labels for label in self.labels)
+                x.annotation.labels is not None and
+                any(label in x.annotation.labels for label in self.labels)
                 ]
         dependency_timespans.sort()
         timespan_inventory = timespantools.TimespanInventory()

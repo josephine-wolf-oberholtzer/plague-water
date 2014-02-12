@@ -2,6 +2,7 @@
 
 from basic_music_makers import *
 from durations import *
+from dynamics import *
 from euler_numbers import *
 from guitar_music_makers import *
 from misc_music_makers import *
@@ -16,6 +17,7 @@ from time_signatures import *
 
 del basic_music_makers
 del durations
+del dynamics
 del euler_numbers
 del guitar_music_makers
 del misc_music_makers

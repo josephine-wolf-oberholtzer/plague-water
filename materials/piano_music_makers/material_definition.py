@@ -36,6 +36,7 @@ piano_fanfare_music_maker = makers.MusicMaker(
         first_leaf_indicators=('accent',),
         inner_leaf_indicators=('staccato',),
         ),
+    labels='pedaled',
     rhythm_maker=rhythm_makers.piano_fanfare_rhythm_maker,
     timespan_agent=makers.SemanticTimespanAgent(
         minimum_timespan_duration=durationtools.Duration(3, 16),

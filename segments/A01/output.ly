@@ -60,7 +60,7 @@
 							{
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 3
-								c'32 -\accent [
+								c'32 -\accent \sfz [
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 0
 								f'32 -\staccato ]
@@ -78,7 +78,7 @@
 							\times 2/3 {
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 3
-								b32 -\accent [
+								b32 -\accent \sfz [
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 3
 								c'32 -\staccato
@@ -91,7 +91,7 @@
 							{
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 3
-								d'32 -\accent
+								d'32 -\accent \f
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 0
 								f32 -\staccato ]
@@ -112,7 +112,7 @@
 							{
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 3
-								af32 -\accent [
+								af32 -\accent \sfz [
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 2
 								d'32 -\staccato
@@ -147,7 +147,7 @@
 							{
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 3
-								af32 -\accent [
+								af32 -\accent \sfz [
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 0
 								bf32 -\staccato ]
@@ -168,7 +168,7 @@
 							\times 6/7 {
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 3
-								b32 -\accent [
+								b32 -\accent \sfz [
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 3
 								af'32 -\staccato
@@ -196,7 +196,7 @@
 							{
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 3
-								e32 -\accent [
+								e32 -\accent \sfz [
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 2
 								cs'32 -\staccato
@@ -222,7 +222,7 @@
 							\times 4/5 {
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 3
-								cs'32 -\accent
+								cs'32 -\accent \sfz
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 2
 								e32 -\staccato
@@ -235,7 +235,7 @@
 							\times 2/3 {
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 3
-								cs'32 -\accent
+								cs'32 -\accent \f
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 3
 								e'32 -\staccato
@@ -267,7 +267,7 @@
 							\times 2/3 {
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 3
-								ef32 -\accent [
+								ef32 -\accent \sfz [
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 3
 								d'32 -\staccato
@@ -288,7 +288,7 @@
 							{
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 3
-								cs'32 -\accent [
+								cs'32 -\accent \sfz [
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 2
 								ef'32 -\staccato
@@ -319,7 +319,7 @@
 							\times 2/3 {
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 3
-								bf32 -\accent [
+								bf32 -\accent \sfz [
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 3
 								b32 -\staccato
@@ -332,7 +332,7 @@
 							{
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 3
-								bf32 -\accent
+								bf32 -\accent \sfz
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 1
 								b32 -\staccato
@@ -353,7 +353,7 @@
 							{
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 3
-								bf32 -\accent [
+								bf32 -\accent \sfz [
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 0
 								b32 -\staccato ]
@@ -373,7 +373,7 @@
 							{
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 3
-								d'32 -\accent [
+								d'32 -\accent \sfz [
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 1
 								bf32 -\staccato
@@ -398,7 +398,7 @@
 							\times 2/3 {
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 3
-								cs'32 -\accent [
+								cs'32 -\accent \sfz [
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 3
 								e'32 -\staccato
@@ -411,7 +411,7 @@
 							\times 4/5 {
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 3
-								cs'32 -\accent
+								cs'32 -\accent \sfz
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 2
 								e32 -\staccato
@@ -424,7 +424,7 @@
 							{
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 3
-								e'32 -\accent
+								e'32 -\accent \f
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 2
 								cs'32 -\staccato
@@ -437,7 +437,7 @@
 							{
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 3
-								e32 -\accent
+								e32 -\accent \ff
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 0
 								cs'32 -\staccato ]
@@ -465,7 +465,7 @@
 								r16 [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								ef'16 -\accent
+								ef'16 -\accent \sfz
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
 								b'16 -\staccato
@@ -497,7 +497,7 @@
 							\times 4/5 {
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								cs''16 -\accent \) [
+								cs''16 -\accent \sfz \) [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
 								c''8 -\staccato
@@ -526,7 +526,7 @@
 								r8 [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								bf'16 -\accent
+								bf'16 -\accent \sfz
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
 								b'16 -\staccato
@@ -567,7 +567,7 @@
 							\times 3/5 {
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								cs''16 -\accent \) [
+								cs''16 -\accent \sfz \) [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
 								e''8 -\staccato
@@ -595,7 +595,7 @@
 								r8 [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								e''16 -\accent
+								e''16 -\accent \sfz
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
 								cs'''8 -\staccato ]
@@ -613,7 +613,7 @@
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
 								\afterGrace
-								c16 -\accent [
+								c16 -\accent \sfz [
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
@@ -649,7 +649,7 @@
 							\times 4/5 {
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								d16 -\accent \) [
+								d16 -\accent \sfz \) [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
 								\afterGrace
@@ -677,7 +677,7 @@
 								r16
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								b,16 -\accent
+								b,16 -\accent \f
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
 								d'16 -\staccato
@@ -699,7 +699,7 @@
 							\times 3/4 {
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								d16 -\accent \)
+								d16 -\accent \ff \)
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
 								af16 -\staccato
@@ -729,7 +729,7 @@
 							\times 3/5 {
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								d16 -\accent \) [
+								d16 -\accent \sfz \) [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
 								af16 -\staccato
@@ -776,7 +776,7 @@
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
 								\clef "treble"
-								cs'16 -\accent \) [
+								cs'16 -\accent \sfz \) [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
 								e'16 -\staccato
@@ -877,7 +877,7 @@
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
 							\afterGrace
-							g8 [
+							g8 [ \< \mp
 							{
 								\override Flag #'stroke-style = #"grace"
 								\override Stem #'length = #8
@@ -892,7 +892,7 @@
 							d'8 ~ \)
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							d'8 ]
+							d'8 ] \f
 						}
 					}
 					{
@@ -916,7 +916,7 @@
 						{
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							b16 ~ \) [
+							b16 ~ \) [ \< \mp
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
 							\afterGrace
@@ -945,7 +945,7 @@
 						{
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
-							b16 ] \)
+							b16 ] \f \)
 						}
 					}
 					{
@@ -968,7 +968,7 @@
 						{
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							f'8 ~ \) [
+							f'8 ~ \) [ \< \mp
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
 							\afterGrace
@@ -995,7 +995,7 @@
 							}
 						}
 						{
-							f'4 \)
+							f'4 \f \)
 						}
 					}
 					{
@@ -1018,7 +1018,7 @@
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							\afterGrace
-							d'16 \) [
+							d'16 \) [ \< \mp
 							{
 								\override Flag #'stroke-style = #"grace"
 								\override Stem #'length = #8
@@ -1030,7 +1030,7 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							g8. ] \)
+							g8. ] \f \)
 						}
 					}
 					{
@@ -1052,7 +1052,7 @@
 						{
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							f8 [
+							f8 [ \< \mp
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -1065,7 +1065,7 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							c'8 ]
+							c'8 ] \f
 						}
 					}
 					{
@@ -1077,12 +1077,12 @@
 						{
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							e'8 [
+							e'8 [ \< \mp
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							g'8. ]
+							g'8. ] \f
 						}
 					}
 					{
@@ -1093,7 +1093,7 @@
 					{
 						{
 							\set stemRightBeamCount = 1
-							f8
+							f8 \mp
 						}
 					}
 					{
@@ -1105,7 +1105,7 @@
 						{
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							a8 ~ [
+							a8 \mp ~ [
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
 							a16 ]
@@ -1128,7 +1128,7 @@
 						{
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							c'8. [
+							c'8. [ \< \mp
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -1141,7 +1141,7 @@
 							g'16 ~
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							g'8 ]
+							g'8 ] \f
 						}
 					}
 				}
@@ -1153,12 +1153,12 @@
 						{
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							a8 [
+							a8 [ \< \mp
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							c'8 ]
+							c'8 ] \f
 						}
 					}
 					{
@@ -1169,7 +1169,7 @@
 					{
 						{
 							\set stemRightBeamCount = 1
-							e'8
+							e'8 \mp
 						}
 					}
 					{
@@ -1186,12 +1186,12 @@
 						{
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							a8. [
+							a8. [ \< \mp
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							c'8 ]
+							c'8 ] \f
 						}
 					}
 					{
@@ -1203,7 +1203,7 @@
 						{
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							e'8. [
+							e'8. [ \< \mp
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -1213,7 +1213,7 @@
 						{
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
-							c'16 ]
+							c'16 ] \f
 						}
 					}
 					{
@@ -1226,7 +1226,7 @@
 						{
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							e'16 [
+							e'16 [ \< \mp
 						}
 						{
 							\set stemLeftBeamCount = 2
@@ -1239,7 +1239,7 @@
 							c'16 ~
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							c'8 ]
+							c'8 ] \f
 						}
 					}
 					{
@@ -1255,7 +1255,7 @@
 					{
 						{
 							\set stemRightBeamCount = 1
-							e'8
+							e'8 \mp
 						}
 					}
 					{

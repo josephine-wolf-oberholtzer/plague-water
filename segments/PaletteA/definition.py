@@ -36,6 +36,7 @@ guitar_context_maker = makers.ContextMaker(
     context_name='Guitar Voice',
     music_makers=[
         new(materials.guitar_fanfare_music_maker,
+            dynamic_agent=materials.foreground_dynamic_agent,
             timespan_agent__leading_rest_durations=materials.short_durations(4),
             ),
         ],
@@ -45,6 +46,7 @@ saxophone_context_maker = makers.ContextMaker(
     context_name='Saxophone Voice',
     music_makers=[
         new(materials.saxophone_fanfare_music_maker,
+            dynamic_agent=materials.foreground_dynamic_agent,
             timespan_agent__leading_rest_durations=materials.short_durations(4),
             ),
         ],
@@ -54,14 +56,16 @@ piano_rh_context_maker = makers.ContextMaker(
     context_name='Piano RH Voice',
     music_makers=[
         new(materials.piano_fanfare_music_maker,
+            dynamic_agent=materials.foreground_dynamic_agent,
             grace_agent=makers.GraceAgent(
                 lengths=(1, 0, 1, 0, 0, 1, 2,),
                 ),
-            timespan_agent__minimum_timespan_duration=(3, 16),
-            timespan_agent__playing_durations=materials.make_durations(
-                3, 5)(1),
-            timespan_agent__playing_groupings=materials.short_groupings(1),
-            timespan_agent__tailing_rest_durations=materials.short_durations(2),
+            timespan_agent=makers.SemanticTimespanAgent(
+                minimum_timespan_duration=(3, 16),
+                playing_durations=materials.make_durations(3, 5)(1),
+                playing_groupings=materials.short_groupings(1),
+                tailing_rest_durations=materials.short_durations(2),
+                ),
             ),
         ],
     )
@@ -70,14 +74,16 @@ piano_lh_context_maker = makers.ContextMaker(
     context_name='Piano LH Voice',
     music_makers=[
         new(materials.piano_fanfare_music_maker,
+            dynamic_agent=materials.foreground_dynamic_agent,
             grace_agent=makers.GraceAgent(
                 lengths=(1, 2, 1, 1, 1, 1,),
                 ),
-            timespan_agent__minimum_timespan_duration=(3, 16),
-            timespan_agent__playing_durations=materials.make_durations(
-                3, 5)(2),
-            timespan_agent__playing_groupings=materials.short_groupings(3),
-            timespan_agent__tailing_rest_durations=materials.short_durations(4),
+            timespan_agent=makers.SemanticTimespanAgent(
+                minimum_timespan_duration=(3, 16),
+                playing_durations=materials.make_durations(3, 5)(2),
+                playing_groupings=materials.short_groupings(3),
+                tailing_rest_durations=materials.short_durations(4),
+                ),
             ),
         ],
     )
@@ -86,6 +92,7 @@ percussion_shaker_context_maker = makers.ContextMaker(
     context_name='Percussion Shaker Voice',
     music_makers=[
         new(materials.basic_music_maker,
+            dynamic_agent=materials.midground_dynamic_agent,
             grace_agent=makers.GraceAgent(
                 lengths=(1, 2, 1, 1, 1, 1,),
                 ),
@@ -98,6 +105,7 @@ percussion_woodblock_context_maker = makers.ContextMaker(
     context_name='Percussion Woodblock Voice',
     music_makers=[
         new(materials.basic_music_maker,
+            dynamic_agent=materials.midground_dynamic_agent,
             pitch_agent=materials.woodblock_pitch_agent,
             ),
         ],
@@ -107,6 +115,7 @@ percussion_drum_context_maker = makers.ContextMaker(
     context_name='Percussion Drum Voice',
     music_makers=[
         new(materials.basic_music_maker,
+            dynamic_agent=materials.midground_dynamic_agent,
             pitch_agent=materials.drum_pitch_agent,
             ),
         ],

@@ -55,7 +55,7 @@ class DynamicAgent(PlagueWaterObject):
                 self.initial_dynamic_expressions, seed)
             initial_dynamic_expression = initial_dynamic_expressions[0]
             if initial_dynamic_expression is not None:
-                dynamic_expression(groups[0])
+                initial_dynamic_expression(groups[0])
         if self.cyclic_dynamic_expressions:
             cyclic_dynamic_expressions = sequencetools.rotate_sequence(
                 self.cyclic_dynamic_expressions, seed)

@@ -233,7 +233,7 @@
         \override Beam.damping = 2.0
         \override Beam.length-fraction = 1.5
         \override DynamicLineSpanner.Y-extent = #'(-1.5 . 1.5)
-        \override DynamicText.self-alignment-X = #LEFT
+        \override DynamicText.self-alignment-X = #CENTER
         \override DynamicText.whiteout = ##t
         \override Glissando.breakable = ##t
         \override Glissando.thickness = 3
@@ -251,19 +251,20 @@
             #(ly:make-moment 1 64)
         \override StaffGrouper.staffgroup-staff-spacing = #'(
             (basic-distance . 12)
-            (minimum-distance . 15)
+            (minimum-distance . 20)
             (padding . 1)
             (stretchability . 0)
             )
         \override Stem.details.beamed-lengths = #'(6)
-        %\override Stem #'(details beamed-lengths) = #'(6)
+        \override Stem.direction = #UP
         \override Stem.stemlet-length = 1.5
         \override StemTremolo.beam-width = 1.5
         \override StemTremolo.flag-count = 4.0
         \override StemTremolo.slope = 0.5
         \override StemTremolo.Y-offset = -4.0
-        \override SustainPedal.self-alignment-X = #LEFT
+        \override SustainPedal.self-alignment-X = #CENTER
         \override TextScript.Y-extent = #'(-1.5 . 1.5)
+        \override TupletBracket.direction = #UP
         \override TupletBracket.full-length-to-extent = ##t
         \override TupletBracket.outside-staff-priority = 100
         \override TupletBracket.padding = 2

@@ -63,7 +63,6 @@ class DynamicExpression(PlagueWaterObject):
     __slots__ = (
         '_hairpin_start_token',
         '_hairpin_stop_token',
-        '_hairpin_style',
         '_minimum_duration',
         )
 
@@ -73,18 +72,19 @@ class DynamicExpression(PlagueWaterObject):
         self,
         hairpin_start_token='p',
         hairpin_stop_token=None,
-        hairpin_style=None,
-        minimum_duration=None,
+        minimum_duration=Duration(1, 4),
         ):
         lilypond_parser = lilypondparsertools.LilyPondParser
-        known_dynamics = lilypond_parser.list_known_dynamics()
+        known_dynamics = list(lilypond_parser.list_known_dynamics())
+        known_dynamics.append('o')
         assert hairpin_start_token in known_dynamics
         if hairpin_stop_token is not None:
             assert hairpin_stop_token in known_dynamics
-        assert hairpin_style in (None, 'constante', 'flared')
+        assert hairpin_start_token != 'o' or hairpin_stop_token != 'o'
+        if hairpin_start_token == 'o':
+            assert not hairpin_stop_token is None
         self._hairpin_start_token = hairpin_start_token
         self._hairpin_stop_token = hairpin_stop_token
-        self._hairpin_style = hairpin_style
         if minimum_duration is not None:
             minimum_duration = Duration(minimum_duration)
         self._minimum_duration = minimum_duration
@@ -94,52 +94,51 @@ class DynamicExpression(PlagueWaterObject):
     def __call__(self, group):
         if not isinstance(group, selectiontools.SliceSelection):
             group = selectiontools.SliceSelection(group)
+        start_token = self.hairpin_start_token
+        stop_token = self.hairpin_stop_token
         is_short_group = False
         if len(group) == 1:
             is_short_group = True
         elif self.minimum_duration is not None:
             if group.get_duration() < self.minimum_duration:
                 is_short_group = True
-        if is_short_group:
-            start_dynamic = self.hairpin_start_token
-            command = indicatortools.LilyPondCommand(start_dynamic, 'right')
+        if is_short_group or stop_token is None:
+            if start_token == 'o':
+                start_token = stop_token
+            command = indicatortools.LilyPondCommand(start_token, 'right')
             attach(command, group[0])
-        else:
-            hairpin_start_token = self.hairpin_start_token
-            hairpin_stop_token = '!'
-            hairpin_shape_token = None
-            hairpin_style = self.hairpin_style
-            if self.hairpin_stop_token not in (None, '!'):
-                start_ordinal = Dynamic.dynamic_name_to_dynamic_ordinal(
-                    self.hairpin_start_token)
-                stop_ordinal = Dynamic.dynamic_name_to_dynamic_ordinal(
-                    self.hairpin_stop_token)
-                if start_ordinal < stop_ordinal:
-                    hairpin_shape_token = '<'
-                    hairpin_stop_token = self.hairpin_stop_token
-                elif stop_ordinal < start_ordinal:
-                    hairpin_shape_token = '>'
-                    hairpin_stop_token = self.hairpin_stop_token
-            if hairpin_shape_token is None and hairpin_stop_token == '!':
-                hairpin_shape_token = '<'
-                hairpin_style = 'constante'
-            elif hairpin_style == 'constante':
-                hairpin_shape_token = '<'
-            hairpin_descriptor = '{} {} {}'.format(
-                hairpin_start_token,
-                hairpin_shape_token,
-                hairpin_stop_token,
-                )
-            hairpin = Hairpin(
-                descriptor=hairpin_descriptor,
-                include_rests=False,
-                )
-            if hairpin_style is not None:
-                hairpin_style_name = '{}-hairpin'.format(hairpin_style)
-                override(hairpin).hairpin.stencil = schemetools.Scheme(
-                    hairpin_style_name,
-                    )
-            attach(hairpin, group)
+            return
+        start_ordinal = NegativeInfinity
+        if start_token != 'o':
+            start_ordinal = Dynamic.dynamic_name_to_dynamic_ordinal(
+                start_token)
+        stop_ordinal = NegativeInfinity
+        if stop_token != 'o':
+            stop_ordinal = Dynamic.dynamic_name_to_dynamic_ordinal(stop_token)
+        tokens = []
+        is_circled = False
+        if start_ordinal < stop_ordinal:
+            if start_token != 'o':
+                tokens.append(start_token)
+            else:
+                is_circled = True
+            tokens.append('<')
+            tokens.append(stop_token)
+        elif stop_ordinal < start_ordinal:
+            tokens.append(start_token)
+            tokens.append('>')
+            if stop_token != 'o':
+                tokens.append(stop_token)
+            else:
+                is_circled = True
+        hairpin_descriptor = ' '.join(tokens)
+        hairpin = Hairpin(
+            descriptor=hairpin_descriptor,
+            include_rests=False,
+            )
+        if is_circled:
+            override(hairpin).hairpin.circled_tip = True
+        attach(hairpin, group)
 
     ### PUBLIC PROPERTIES ###
 
@@ -154,10 +153,6 @@ class DynamicExpression(PlagueWaterObject):
     @property
     def hairpin_shape(self):
         return None
-
-    @property
-    def hairpin_style(self):
-        return self._hairpin_style
 
     @property
     def minimum_duration(self):
