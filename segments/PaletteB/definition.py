@@ -37,13 +37,13 @@ guitar_context_maker = makers.ContextMaker(
     music_maker_indices=(0, 0, 0, 1, 0),
     music_makers=[
         new(materials.guitar_winding_music_maker,
-            grace_agent=makers.GraceAgent(
+            grace_maker=makers.GraceAgent(
                 lengths=(1, 0, 1, 0, 0, 1, 2,),
                 ),
             timespan_agent__leading_rest_durations=materials.short_durations(1),
             ),
         new(materials.guitar_trilling_music_maker,
-            grace_agent=makers.GraceAgent(
+            grace_maker=makers.GraceAgent(
                 lengths=(1, 0, 1, 0, 0, 1, 2,),
                 ),
             timespan_agent__leading_rest_durations=materials.short_durations(2),
@@ -56,13 +56,13 @@ saxophone_context_maker = makers.ContextMaker(
     music_maker_indices=(0, 0, 1, 0, 0),
     music_makers=[
         new(materials.saxophone_winding_music_maker,
-            grace_agent=makers.GraceAgent(
+            grace_maker=makers.GraceAgent(
                 lengths=(1, 0, 1, 0, 0, 1, 2,),
                 ),
             timespan_agent__leading_rest_durations=materials.short_durations(3),
             ),
         new(materials.saxophone_trilling_music_maker,
-            grace_agent=makers.GraceAgent(
+            grace_maker=makers.GraceAgent(
                 lengths=(1, 0, 1, 0, 0, 1, 2,),
                 ),
             timespan_agent__leading_rest_durations=materials.short_durations(4),
@@ -88,7 +88,7 @@ percussion_shaker_context_maker = makers.ContextMaker(
     context_name='Percussion Shaker Voice',
     music_makers=[
         new(materials.basic_music_maker,
-            grace_agent=makers.GraceAgent(
+            grace_maker=makers.GraceAgent(
                 lengths=(1, 0, 0, 0, 2, 1, 1, 1, 1,),
                 ),
             pitch_agent=materials.shaker_pitch_agent,
@@ -100,7 +100,7 @@ percussion_woodblock_context_maker = makers.ContextMaker(
     context_name='Percussion Woodblock Voice',
     music_makers=[
         new(materials.basic_music_maker,
-            grace_agent=makers.GraceAgent(
+            grace_maker=makers.GraceAgent(
                 lengths=(1, 0, 1, 0, 0, 1, 2,),
                 ),
             pitch_agent=materials.woodblock_pitch_agent,

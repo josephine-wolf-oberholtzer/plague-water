@@ -58,7 +58,7 @@ piano_rh_context_maker = makers.ContextMaker(
         new(materials.piano_fanfare_music_maker,
             chord_agent=materials.domi_chord_agent,
             dynamic_agent=materials.foreground_dynamic_agent,
-            grace_agent=makers.GraceAgent(
+            grace_maker=makers.GraceAgent(
                 lengths=(1, 0, 1, 0, 0, 1, 2,),
                 ),
             timespan_agent=makers.SemanticTimespanAgent(
@@ -77,7 +77,7 @@ piano_lh_context_maker = makers.ContextMaker(
         new(materials.piano_fanfare_music_maker,
             chord_agent=materials.domi_chord_agent,
             dynamic_agent=materials.foreground_dynamic_agent,
-            grace_agent=makers.GraceAgent(
+            grace_maker=makers.GraceAgent(
                 lengths=(1, 2, 1, 1, 1, 1,),
                 ),
             timespan_agent=makers.SemanticTimespanAgent(
@@ -93,12 +93,19 @@ piano_lh_context_maker = makers.ContextMaker(
 percussion_shaker_context_maker = makers.ContextMaker(
     context_name='Percussion Shaker Voice',
     music_makers=[
-        new(materials.basic_music_maker,
+        makers.MusicMaker(
             dynamic_agent=materials.midground_dynamic_agent,
-            grace_agent=makers.GraceAgent(
-                lengths=(1, 2, 1, 1, 1, 1,),
+            grace_maker=makers.GraceAgent(
+                lengths=(1, 1, 1, 1, 0, 1, 0, 0, 0),
                 ),
             pitch_agent=materials.shaker_pitch_agent,
+            rhythm_maker=materials.pointillist_rhythm_maker,
+            timespan_agent=makers.SemanticTimespanAgent(
+                leading_rest_durations=materials.short_durations(4),
+                minimum_timespan_duration=(3, 16),
+                playing_durations=materials.make_durations(3, 5)(1),
+                playing_groupings=materials.short_groupings(1),
+                ),
             ),
         ],
     )
@@ -106,19 +113,26 @@ percussion_shaker_context_maker = makers.ContextMaker(
 percussion_woodblock_context_maker = makers.ContextMaker(
     context_name='Percussion Woodblock Voice',
     music_makers=[
-        new(materials.basic_music_maker,
-            dynamic_agent=materials.midground_dynamic_agent,
-            pitch_agent=materials.woodblock_pitch_agent,
-            ),
+        materials.silent_music_maker,
         ],
     )
 
 percussion_drum_context_maker = makers.ContextMaker(
     context_name='Percussion Drum Voice',
     music_makers=[
-        new(materials.basic_music_maker,
+        makers.MusicMaker(
             dynamic_agent=materials.midground_dynamic_agent,
+            grace_maker=makers.GraceAgent(
+                lengths=(1, 0, 1, 1, 0, 1,),
+                ),
             pitch_agent=materials.drum_pitch_agent,
+            rhythm_maker=materials.pointillist_rhythm_maker,
+            timespan_agent=makers.SemanticTimespanAgent(
+                minimum_timespan_duration=(3, 16),
+                playing_durations=materials.make_durations(3, 5)(1),
+                playing_groupings=materials.short_groupings(1),
+                tailing_rest_durations=materials.short_durations(2),
+                ),
             ),
         ],
     )

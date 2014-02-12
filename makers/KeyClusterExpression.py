@@ -100,6 +100,11 @@ class KeyClusterExpression(PlagueWaterObject):
         for i, leaf in enumerate(logical_tie):
             chord = Chord(leaf)
             chord.written_pitches = chord_pitches
+            grace_containers = inspect_(leaf).get_grace_containers('after')
+            if grace_containers:
+                old_grace_container = grace_containers[0]
+                grace_notes = old_grace_container.select_leaves()
+                detach(scoretools.GraceContainer, leaf)
             mutate(leaf).replace(chord)
             if i:
                 key_cluster = indicatortools.KeyCluster(
@@ -112,6 +117,7 @@ class KeyClusterExpression(PlagueWaterObject):
                 key_cluster = indicatortools.KeyCluster(
                     include_black_keys=self.include_black_keys,
                     include_white_keys=self.include_white_keys,
+                    markup_direction=Down,
                     )
                 attach(key_cluster, chord)
                 if self.arpeggio_direction is not None:
@@ -119,6 +125,12 @@ class KeyClusterExpression(PlagueWaterObject):
                         direction=self.arpeggio_direction,
                         )
                     attach(arpeggio, chord)
+            if grace_containers:
+                new_grace_container = scoretools.GraceContainer(
+                    grace_notes,
+                    kind='after',
+                    )
+                attach(new_grace_container, chord)
 
     ### PUBLIC PROPERTIES ###
 

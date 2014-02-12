@@ -45,7 +45,7 @@ class ContextMaker(PlagueWaterObject):
             music_maker_indices = tuple(int(x) for x in music_maker_indices)
         self._music_maker_indices = music_maker_indices
         if music_makers is not None:
-            assert initial_music_maker or len(music_makers)
+            #assert initial_music_maker or len(music_makers)
             assert all(isinstance(x, makers.MusicMaker)
                 for x in music_makers)
             music_makers = tuple(music_makers)
@@ -65,7 +65,10 @@ class ContextMaker(PlagueWaterObject):
             for timespan in shard:
                 music_maker = timespan.annotation
                 if music_maker.timespan_has_minimum_length(timespan):
-                    new_timespan_inventory.append(timespan)
+                    if music_maker.rhythm_maker != \
+                        rhythmmakertools.RestRhythmMaker():
+                        new_timespan_inventory.append(timespan)
+
         self.timespan_inventory[:] = new_timespan_inventory
         self.timespan_inventory.sort()
 

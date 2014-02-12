@@ -61,7 +61,7 @@ long_timespan_agent = makers.SemanticTimespanAgent(
 guitar_context_maker = makers.ContextMaker(
     context_name='Guitar Voice',
     initial_music_maker=new(materials.basic_music_maker,
-        grace_agent=makers.GraceAgent(
+        grace_maker=makers.GraceAgent(
             lengths=(1, 0, 1, 0, 0, 1, 2,),
             ),
         rhythm_maker=materials.pointillist_rhythm_maker,
@@ -73,7 +73,7 @@ guitar_context_maker = makers.ContextMaker(
     music_maker_indices=(0, 1, 0, 0, 1),
     music_makers=[
         new(materials.basic_music_maker,
-            grace_agent=makers.GraceAgent(
+            grace_maker=makers.GraceAgent(
                 lengths=(1, 0, 1, 0, 0, 1, 2,),
                 ),
             rhythm_maker=materials.pointillist_rhythm_maker,
@@ -95,7 +95,7 @@ saxophone_context_maker = makers.ContextMaker(
             timespan_agent=short_timespan_agent.transform_cursors(3),
             ),
         new(materials.basic_music_maker,
-            grace_agent=makers.GraceAgent(
+            grace_maker=makers.GraceAgent(
                 lengths=(1, 0, 1, 0, 0, 1, 2,),
                 ),
             rhythm_maker=materials.pointillist_rhythm_maker,
@@ -112,14 +112,14 @@ piano_rh_context_maker = makers.ContextMaker(
     music_maker_indices=(1, 0, 0, 1, 0),
     music_makers=[
         new(materials.basic_music_maker,
-            grace_agent=makers.GraceAgent(
+            grace_maker=makers.GraceAgent(
                 lengths=(1, 0, 1, 0, 0, 1, 2,),
                 ),
             rhythm_maker=materials.pointillist_rhythm_maker,
             timespan_agent=short_timespan_agent.transform_cursors(3),
             ),
         new(materials.basic_music_maker,
-            grace_agent=makers.GraceAgent(
+            grace_maker=makers.GraceAgent(
                 lengths=(1, 0, 1, 0, 0, 1, 2,),
                 ),
             rhythm_maker=materials.pointillist_rhythm_maker,
@@ -136,14 +136,14 @@ piano_lh_context_maker = makers.ContextMaker(
     music_maker_indices=(0, 0, 1, 2, 0, 1, 0, 2),
     music_makers=[
         new(materials.basic_music_maker,
-            grace_agent=makers.GraceAgent(
+            grace_maker=makers.GraceAgent(
                 lengths=(1, 0, 1, 0, 0, 1, 2,),
                 ),
             rhythm_maker=materials.pointillist_rhythm_maker,
             timespan_agent=short_timespan_agent.transform_cursors(3),
             ),
         new(materials.basic_music_maker,
-            grace_agent=makers.GraceAgent(
+            grace_maker=makers.GraceAgent(
                 lengths=(1, 0, 1, 0, 0, 1, 2,),
                 ),
             rhythm_maker=materials.pointillist_rhythm_maker,
@@ -173,7 +173,7 @@ percussion_woodblock_context_maker = makers.ContextMaker(
     context_name='Percussion Woodblock Voice',
     music_makers=[
         new(materials.basic_music_maker,
-            grace_agent=makers.GraceAgent(
+            grace_maker=makers.GraceAgent(
                 lengths=(1, 0, 1, 0, 0, 1, 2,),
                 ),
             pitch_agent=materials.woodblock_pitch_agent,

@@ -33,13 +33,10 @@ class GraceAgent(PlagueWaterObject):
     def __call__(
         self,
         logical_tie,
-        measure_offsets=None,
         segment_duration=None,
         ):
         previous_leaf = logical_tie.head._get_leaf(-1)
         if previous_leaf is None:
-            return
-        elif isinstance(previous_leaf, scoretools.MultimeasureRest):
             return
         previous_leaf_duration = inspect_(previous_leaf).get_duration()
         if previous_leaf_duration < self.minimum_preceding_duration:
@@ -47,19 +44,13 @@ class GraceAgent(PlagueWaterObject):
         grace_length = self._cursor()[0]
         if not grace_length:
             return
-#        start_offset = logical_tie.get_timespan().start_offset
-#        if start_offset in measure_offsets:
-#            kind = 'after'
-#            leaf_to_attach_to = previous_leaf
-#        else:
-#            kind = 'grace'
-#            leaf_to_attach_to = logical_tie.head
         kind = 'after'
         leaf_to_attach_to = previous_leaf
         grace_notes = scoretools.make_notes([0], [(1, 16)] * grace_length)
         if 1 < len(grace_notes):
             beam = Beam()
             attach(beam, grace_notes)
+        assert len(grace_notes)
         grace_container = scoretools.GraceContainer(
             grace_notes,
             kind=kind,
@@ -68,11 +59,6 @@ class GraceAgent(PlagueWaterObject):
         override(grace_container).flag.stroke_style = \
             schemetools.Scheme('grace', force_quotes=True)
         attach(grace_container, leaf_to_attach_to)
-        leaves = list(grace_notes) + [logical_tie.head]
-        leaves = selectiontools.SliceSelection(leaves)
-        phrasing_slur = spannertools.PhrasingSlur()
-        phrasing_slur._contiguity_constraint = None
-        attach(phrasing_slur, leaves)
 
     ### PUBLIC PROPERTIES ###
 

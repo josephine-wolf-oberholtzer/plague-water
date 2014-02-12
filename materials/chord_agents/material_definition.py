@@ -59,11 +59,13 @@ domi_chord_agent = makers.ChordAgent(
         (
             None,
             makers.ChordExpression(interval_numbers=[3]),
-            makers.ChordExpression(interval_numbers=[3]),
+            makers.ChordExpression(interval_numbers=[2, 3, 8]),
             None,
             makers.KeyClusterExpression(),
             makers.ChordExpression(interval_numbers=[3, 5]),
-            makers.KeyClusterExpression(),
+            makers.KeyClusterExpression(
+                staff_space_width=7,
+                ),
             makers.ChordExpression(interval_numbers=[-1, 3]),
             makers.ChordExpression(interval_numbers=[-2, 3]),
             makers.ChordExpression(interval_numbers=[3]),

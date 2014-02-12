@@ -11,7 +11,7 @@ class MusicMaker(PlagueWaterObject):
         '_apply_beam',
         '_chord_agent',
         '_dynamic_agent',
-        '_grace_agent',
+        '_grace_maker',
         '_indicator_agent',
         '_labels',
         '_pitch_agent',
@@ -31,7 +31,7 @@ class MusicMaker(PlagueWaterObject):
         apply_beam=None,
         chord_agent=None,
         dynamic_agent=None,
-        grace_agent=None,
+        grace_maker=None,
         indicator_agent=None,
         labels=None,
         pitch_agent=None,
@@ -44,7 +44,7 @@ class MusicMaker(PlagueWaterObject):
         from plague_water import makers
         assert isinstance(chord_agent, (makers.ChordAgent, type(None)))
         assert isinstance(dynamic_agent, (makers.DynamicAgent, type(None)))
-        assert isinstance(grace_agent, (makers.GraceAgent, type(None)))
+        assert isinstance(grace_maker, (makers.GraceAgent, type(None)))
         assert isinstance(indicator_agent, (makers.IndicatorAgent, type(None)))
         assert isinstance(pitch_agent, (
             makers.PitchClassAgent,
@@ -63,7 +63,7 @@ class MusicMaker(PlagueWaterObject):
         self._apply_beam = apply_beam
         self._chord_agent = chord_agent
         self._dynamic_agent = dynamic_agent
-        self._grace_agent = grace_agent
+        self._grace_maker = grace_maker
         self._indicator_agent = indicator_agent
         if isinstance(labels, str):
             labels = (labels,)
@@ -257,8 +257,8 @@ class MusicMaker(PlagueWaterObject):
         return self._dynamic_agent
 
     @property
-    def grace_agent(self):
-        return self._grace_agent
+    def grace_maker(self):
+        return self._grace_maker
 
     @property
     def indicator_agent(self):

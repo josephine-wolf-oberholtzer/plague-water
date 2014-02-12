@@ -68,10 +68,21 @@ class ChordExpression(PlagueWaterObject):
         for i, leaf in enumerate(logical_tie):
             chord = Chord(leaf)
             chord.written_pitches = pitches
+            grace_containers = inspect_(leaf).get_grace_containers('after')
+            if grace_containers:
+                old_grace_container = grace_containers[0]
+                grace_notes = old_grace_container.select_leaves()
+                detach(scoretools.GraceContainer, leaf)
             mutate(leaf).replace(chord)
             if not i and self.arpeggio_direction is not None:
                 arpeggio = indicatortools.Arpeggio(self.arpeggio_direction)
                 attach(arpeggio, chord)
+            if grace_containers:
+                new_grace_container = scoretools.GraceContainer(
+                    grace_notes,
+                    kind='after',
+                    )
+                attach(new_grace_container, chord)
 
     ### PUBLIC PROPERTIES ###
 

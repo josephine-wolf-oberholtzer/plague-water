@@ -104,6 +104,7 @@ class SegmentMaker(PlagueWaterObject):
         self.apply_indicators()
         self.apply_dynamics()
         self.apply_spanners()
+        self.apply_grace_slurs()
 
         ### APPLY LAYOUT ###
         self.configure_score()
@@ -231,23 +232,39 @@ class SegmentMaker(PlagueWaterObject):
                 music_maker_seeds[music_maker] += 1
                 progress_indicator.advance()
 
+    def apply_grace_slurs(self):
+        message = '\tapplying grace slurs'
+        with systemtools.ProgressIndicator(message) as progress_indicator:
+            for leaf in iterate(self.score).by_class(scoretools.Leaf):
+                grace_containers = inspect_(leaf).get_grace_containers('after')
+                if not grace_containers:
+                    continue
+                assert len(grace_containers) == 1
+                grace_container = grace_containers[0]
+                next_leaf = inspect_(leaf).get_leaf(1)
+                assert next_leaf is not None
+                slur_notes = list(grace_container.select_leaves())
+                assert len(slur_notes), (slur_notes, grace_container)
+                slur_notes.append(next_leaf)
+                phrasing_slur = spannertools.PhrasingSlur()
+                phrasing_slur._contiguity_constraint = None
+                attach(phrasing_slur, slur_notes)
+                progress_indicator.advance()
+
     def apply_graces(self):
         from plague_water import makers
-        message = '\tapplying grace classes'
-        measure_durations = [x.duration for x in self.time_signatures]
-        measure_offsets = mathtools.cumulative_sums(measure_durations)
+        message = '\tmaking graces'
         with systemtools.ProgressIndicator(message) as progress_indicator:
             for leaf in iterate(self.score).by_timeline(Note):
                 logical_tie = inspect_(leaf).get_logical_tie()
                 if leaf is not logical_tie.head:
                     continue
                 music_maker = inspect_(leaf).get_effective(makers.MusicMaker)
-                grace_agent = music_maker.grace_agent
-                if grace_agent is None:
+                grace_maker = music_maker.grace_maker
+                if grace_maker is None:
                     continue
-                grace_agent(
+                grace_maker(
                     logical_tie=logical_tie,
-                    measure_offsets=measure_offsets,
                     segment_duration=self.segment_duration,
                     )
                 progress_indicator.advance()
