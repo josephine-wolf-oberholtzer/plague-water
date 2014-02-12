@@ -9,7 +9,6 @@ from percussion_music_makers import *
 from percussion_pitches import *
 from piano_music_makers import *
 from pitch_classes import *
-from registers import *
 from rhythm_makers import *
 from saxophone_music_makers import *
 from spanners import *
@@ -24,7 +23,6 @@ del percussion_music_makers
 del percussion_pitches
 del piano_music_makers
 del pitch_classes
-del registers
 del rhythm_makers
 del saxophone_music_makers
 del spanners

@@ -10,46 +10,6 @@ from plague_water.materials import rhythm_makers
 from plague_water.materials import spanners
 
 
-piano_dynamics_music_maker = makers.MusicMaker(
-    apply_beam=False,
-    dynamic_agent=makers.DynamicAgent(
-        cyclic_dynamic_expressions=(
-            makers.DynamicExpression(
-                hairpin_start_token='f',
-                hairpin_stop_token='p',
-                ),
-            makers.DynamicExpression(
-                hairpin_start_token='sfp',
-                hairpin_stop_token='ff',
-                ),
-            makers.DynamicExpression(
-                hairpin_start_token='ppp',
-                hairpin_style='constante',
-                ),
-            ),
-        ),
-    pitch_agent=makers.PitchClassAgent(
-        pitch_class_ratio=(1,),
-        pitch_class_talea=([0, 0],),
-        ),
-    rewrite_meter=False,
-    rhythm_maker=rhythmmakertools.IncisedRhythmMaker(
-        beam_specifier=rhythmmakertools.BeamSpecifier(
-            beam_each_division=False,
-            beam_divisions_together=False,
-            ),
-        incise_specifier=rhythmmakertools.InciseSpecifier(
-            incise_output=True,
-            prefix_lengths=(0,),
-            suffix_lengths=(1,),
-            suffix_talea=(1,),
-            talea_denominator=32,
-            ),
-        ),
-    timespan_agent=makers.DependentTimespanAgent(),
-    )
-
-
 piano_pedals_music_maker = makers.MusicMaker(
     apply_beam=False,
     spanner_agent=makers.SpannerAgent(
@@ -65,7 +25,9 @@ piano_pedals_music_maker = makers.MusicMaker(
         ),
     rewrite_meter=False,
     rhythm_maker=rhythmmakertools.SkipRhythmMaker(),
-    timespan_agent=makers.DependentTimespanAgent(),
+    timespan_agent=makers.DependentTimespanAgent(
+        labels='pedaled',
+        ),
     )
 
 
@@ -159,7 +121,6 @@ piano_trilling_music_maker = makers.MusicMaker(
 
 
 __all__ = (
-    'piano_dynamics_music_maker',
     'piano_fanfare_music_maker',
     'piano_glissed_keys_music_maker',
     'piano_glissed_pegs_music_maker',
