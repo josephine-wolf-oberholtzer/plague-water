@@ -59,7 +59,7 @@ piano_rh_context_maker = makers.ContextMaker(
             chord_agent=materials.domi_chord_agent,
             dynamic_agent=materials.foreground_dynamic_agent,
             grace_maker=makers.GraceAgent(
-                lengths=(1, 0, 1, 0, 0, 1, 2,),
+                lengths=(1, 1, 1, 0, 1, 1, 2,),
                 ),
             timespan_agent=makers.SemanticTimespanAgent(
                 minimum_timespan_duration=(3, 16),

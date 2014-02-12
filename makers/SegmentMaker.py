@@ -288,7 +288,7 @@ class SegmentMaker(PlagueWaterObject):
                 progress_indicator.advance()
 
     def apply_piano_clefs_and_octavations(self):
-        def cleanup(staff):
+        def cleanup(staff, current_clef=None):
             leaves = list(iterate(staff).by_class(scoretools.Leaf))
             groups = list(iterate(leaves).by_run(
                 (scoretools.Note, scoretools.Chord)))
@@ -305,17 +305,31 @@ class SegmentMaker(PlagueWaterObject):
                     clef = Clef('bass')
                     if average < NamedPitch('D2'):
                         octavation = -1
-                effective_clef = inspect_(group[0]).get_effective(Clef)
-                if effective_clef != clef:
+                head = group[0]
+                leaf_to_attach_to = head
+                previous_leaf = inspect_(head).get_leaf(-1)
+                inspector = inspect_(previous_leaf)
+                after_graces = inspector.get_grace_containers('after')
+                if after_graces:
+                    grace_leaves = after_graces[0].select_leaves()
+                    leaf_to_attach_to = grace_leaves[0]
+                if current_clef != clef:
                     try:
-                        attach(clef, group[0])
+                        command = indicatortools.LilyPondCommand(
+                            'clef {}'.format(clef.name))
+                        attach(command, leaf_to_attach_to)
                     except ValueError:
                         pass
+                    current_clef = clef
                 if octavation is not None:
+                    leaves = []
+                    if after_graces:
+                        leaves.extend(after_graces[0].select_leaves())
+                    leaves.extend(group)
                     octavation_spanner = spannertools.OctavationSpanner(
                         start=octavation,
                         )
-                    attach(octavation_spanner, group)
+                    attach(octavation_spanner, leaves)
         message = '\tapplying piano clefs and octavations'
         print message
         upper_staff = self.score['Piano Upper Staff']
@@ -323,8 +337,8 @@ class SegmentMaker(PlagueWaterObject):
         if self.segment_id == '1':
             attach(Clef('treble'), upper_staff)
             attach(Clef('bass'), lower_staff)
-        cleanup(upper_staff)
-        cleanup(lower_staff)
+        cleanup(upper_staff, current_clef=Clef('treble'))
+        cleanup(lower_staff, current_clef=Clef('bass'))
 
     def apply_piano_staff_changes(self):
         message = '\tapplying piano staff changes'

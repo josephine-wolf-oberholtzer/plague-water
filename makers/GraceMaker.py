@@ -40,7 +40,8 @@ class GraceAgent(PlagueWaterObject):
             return
         previous_leaf_duration = inspect_(previous_leaf).get_duration()
         if previous_leaf_duration < self.minimum_preceding_duration:
-            return
+            if isinstance(previous_leaf, (scoretools.Note, scoretools.Chord)):
+                return
         grace_length = self._cursor()[0]
         if not grace_length:
             return

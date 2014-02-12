@@ -48,6 +48,10 @@ context_map['Piano RH Voice']['register_agent'] = makers.RegisterAgent(
             NamedPitch('C5'),
             ),
         ),
+    phrase_inflections=makers.RegisterCurve(
+        ratio=(1,),
+        registers=(-12, 0),
+        ),
     )
 context_map['Piano LH Voice']['register_agent'] = makers.RegisterAgent(
     instrument=instrumenttools.Piano(),
@@ -57,6 +61,10 @@ context_map['Piano LH Voice']['register_agent'] = makers.RegisterAgent(
             NamedPitch('F#2'),
             NamedPitch('F#3'),
             ),
+        ),
+    phrase_inflections=makers.RegisterCurve(
+        ratio=(1,),
+        registers=(0, 12),
         ),
     )
 

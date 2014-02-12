@@ -69,9 +69,9 @@
         \override StaffSymbol.line-count = 5
         \override BarLine.bar-extent = #'(-2 . 2)
         instrumentName = \markup { 
-            \column { \hcenter-in #10 \italic { saxophone } } }
+            \column { \hcenter-in #10 \italic { baritone saxophone } } }
         shortInstrumentName = \markup { 
-            \column { \hcenter-in #10 \italic { saxophone } } }
+            \column { \hcenter-in #10 \italic { baritone saxophone } } }
     }
 
     \context {
@@ -92,9 +92,9 @@
         \override StaffSymbol.line-count = 5
         \override BarLine.bar-extent = #'(-2 . 2)
         instrumentName = \markup { 
-            \column { \hcenter-in #10 \italic { e-guitar } } }
+            \column { \hcenter-in #10 \italic { electric guitar } } }
         shortInstrumentName = \markup { 
-            \column { \hcenter-in #10 \italic { e-guitar } } }
+            \column { \hcenter-in #10 \italic { electric guitar } } }
     }
 
     \context {
@@ -153,9 +153,9 @@
         \alias Staff
         \override StaffSymbol.line-count = #3
         instrumentName = \markup { 
-            \column { \hcenter-in #10 \italic { shakers } } }
+            \column { \hcenter-in #10 \italic { "4 wood" shakers } } }
         shortInstrumentName = \markup { 
-            \column { \hcenter-in #10 \italic { shakers } } }
+            \column { \hcenter-in #10 \italic { wood shakers } } }
     }
 
     \context {
@@ -165,9 +165,9 @@
         \alias Staff
         \override StaffSymbol.line-count = #5
         instrumentName = \markup { 
-            \column { \hcenter-in #10 \italic { woodblocks } } }
+            \column { \hcenter-in #10 \italic { "5 wood" blocks } } }
         shortInstrumentName = \markup { 
-            \column { \hcenter-in #10 \italic { woodblocks } } }
+            \column { \hcenter-in #10 \italic { wood blocks } } }
     }
 
     \context {
@@ -177,9 +177,9 @@
         \alias Staff
         \override StaffSymbol.line-count = #3
         instrumentName = \markup { 
-            \column { \hcenter-in #10 \italic { drums } } }
+            \column { \hcenter-in #10 \italic { "3 bass" drums } } }
         shortInstrumentName = \markup { 
-            \column { \hcenter-in #10 \italic { drums } } }
+            \column { \hcenter-in #10 \italic { bass drums } } }
     }
 
     \context {
