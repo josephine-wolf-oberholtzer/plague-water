@@ -465,13 +465,13 @@
 								r16 [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								ef'16 -\accent \sfz
+								<ef' gf'>16 -\accent \sfz
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								b'16 -\staccato
+								<b' d'' e''>16 -\staccato
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								cs'16 -\staccato
+								<bs cs' e'>16 -\staccato
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
 								r16 ]
@@ -497,10 +497,10 @@
 							\times 4/5 {
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								cs''16 -\accent \sfz \) [
+								<cs'' e''>16 -\accent \sfz \) [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								c''8 -\staccato
+								<c'' ef''>8 -\staccato
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
 								r8 ]
@@ -526,13 +526,13 @@
 								r8 [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								bf'16 -\accent \sfz
+								<bf' df''>16 -\accent \sfz
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
 								b'16 -\staccato
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								d''16 -\staccato ]
+								<d'' f''>16 -\staccato ]
 							}
 						}
 					}
@@ -570,10 +570,10 @@
 								cs''16 -\accent \sfz \) [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								e''8 -\staccato
+								<e'' g''>8 -\staccato
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
-								cs''8 -\staccato ]
+								<cs'' e''>8 -\staccato ]
 							}
 						}
 					}
@@ -593,12 +593,40 @@
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
 								r8 [
+								\once \override Accidental.stencil = ##f
+								\once \override Arpeggio.X-offset = #-2
+								\once \override NoteHead.stencil = #ly:text-interface::print
+								\once \override NoteHead.text = \markup {
+									\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+								}
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								e''16 -\accent \sfz
+								<c'' e'' g''>16 -\accent \sfz
+									^ \markup {
+										\center-align
+											\concat
+												{
+													\natural
+													\flat
+												}
+										}
+								\once \override Accidental.stencil = ##f
+								\once \override Arpeggio.X-offset = #-2
+								\once \override NoteHead.stencil = #ly:text-interface::print
+								\once \override NoteHead.text = \markup {
+									\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+								}
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
-								cs'''8 -\staccato ]
+								<a'' c''' e'''>8 -\staccato ]
+									^ \markup {
+										\center-align
+											\concat
+												{
+													\natural
+													\flat
+												}
+										}
 							}
 						}
 					}
@@ -612,15 +640,7 @@
 							{
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								\afterGrace
-								c16 -\accent \sfz [
-								{
-									\override Flag #'stroke-style = #"grace"
-									\override Stem #'length = #8
-									d16 \(
-									\revert Flag #'stroke-style
-									\revert Stem #'length
-								}
+								<c ef>16 -\accent \sfz [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
 								f16 -\staccato \)
@@ -647,9 +667,23 @@
 					{
 						{
 							\times 4/5 {
+								\once \override Accidental.stencil = ##f
+								\once \override Arpeggio.X-offset = #-2
+								\once \override NoteHead.stencil = #ly:text-interface::print
+								\once \override NoteHead.text = \markup {
+									\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+								}
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								d16 -\accent \sfz \) [
+								<b, d f>16 -\accent \sfz \) [
+									^ \markup {
+										\center-align
+											\concat
+												{
+													\natural
+													\flat
+												}
+										}
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
 								\afterGrace
@@ -663,7 +697,7 @@
 								}
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								f16 -\staccato \)
+								<e f g>16 -\staccato \)
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
 								r16
@@ -680,7 +714,7 @@
 								b,16 -\accent \f
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
-								d'16 -\staccato
+								<d' f'>16 -\staccato
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
 								\afterGrace
@@ -702,7 +736,7 @@
 								d16 -\accent \ff \)
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
-								af16 -\staccato
+								<g af bf>16 -\staccato
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
 								r8 ]
@@ -727,12 +761,26 @@
 						{
 							\tweak #'text #tuplet-number::calc-fraction-text
 							\times 3/5 {
+								\once \override Accidental.stencil = ##f
+								\once \override Arpeggio.X-offset = #-2
+								\once \override NoteHead.stencil = #ly:text-interface::print
+								\once \override NoteHead.text = \markup {
+									\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+								}
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								d16 -\accent \sfz \) [
+								<b, d f>16 -\accent \sfz \) [
+									^ \markup {
+										\center-align
+											\concat
+												{
+													\natural
+													\flat
+												}
+										}
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								af16 -\staccato
+								<ef af cf'>16 -\staccato
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
 								bf16 -\staccato
@@ -779,7 +827,7 @@
 								cs'16 -\accent \sfz \) [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
-								e'16 -\staccato
+								<e' g' a'>16 -\staccato
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
 								r8 ]

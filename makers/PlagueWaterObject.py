@@ -18,7 +18,12 @@ class PlagueWaterObject(abctools.AbjadObject):
 
     def __hash__(self):
         hash_values = systemtools.StorageFormatManager.get_hash_values(self)
-        return hash(hash_values)
+        try:
+            result = hash(hash_values)
+        except TypeError as e:
+            print hash_values
+            raise e
+        return result
 
     ### PRIVATE METHODS ###
 

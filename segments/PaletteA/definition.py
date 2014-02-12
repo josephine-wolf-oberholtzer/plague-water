@@ -56,6 +56,7 @@ piano_rh_context_maker = makers.ContextMaker(
     context_name='Piano RH Voice',
     music_makers=[
         new(materials.piano_fanfare_music_maker,
+            chord_agent=materials.domi_chord_agent,
             dynamic_agent=materials.foreground_dynamic_agent,
             grace_agent=makers.GraceAgent(
                 lengths=(1, 0, 1, 0, 0, 1, 2,),
@@ -74,6 +75,7 @@ piano_lh_context_maker = makers.ContextMaker(
     context_name='Piano LH Voice',
     music_makers=[
         new(materials.piano_fanfare_music_maker,
+            chord_agent=materials.domi_chord_agent,
             dynamic_agent=materials.foreground_dynamic_agent,
             grace_agent=makers.GraceAgent(
                 lengths=(1, 2, 1, 1, 1, 1,),

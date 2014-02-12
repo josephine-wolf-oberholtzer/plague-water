@@ -233,6 +233,7 @@
         \override Beam.damping = 2.0
         \override Beam.length-fraction = 1.5
         \override DynamicLineSpanner.Y-extent = #'(-1.5 . 1.5)
+        \override DynamicLineSpanner.staff-padding = 4
         \override DynamicText.self-alignment-X = #CENTER
         \override DynamicText.whiteout = ##t
         \override Glissando.breakable = ##t

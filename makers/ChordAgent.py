@@ -34,6 +34,7 @@ class ChordAgent(PlagueWaterObject):
             )
         for sequence in talea:
             assert all(isinstance(x, expression_prototype) for x in sequence)
+        talea = tuple(tuple(sequence) for sequence in talea)
         self._talea_cursors = \
             self._ratio_and_talea_to_cursors(
                 ratio=ratio,
