@@ -308,11 +308,12 @@ class SegmentMaker(PlagueWaterObject):
                 head = group[0]
                 leaf_to_attach_to = head
                 previous_leaf = inspect_(head).get_leaf(-1)
-                inspector = inspect_(previous_leaf)
-                after_graces = inspector.get_grace_containers('after')
-                if after_graces:
-                    grace_leaves = after_graces[0].select_leaves()
-                    leaf_to_attach_to = grace_leaves[0]
+                if previous_leaf is not None:
+                    inspector = inspect_(previous_leaf)
+                    after_graces = inspector.get_grace_containers('after')
+                    if after_graces:
+                        grace_leaves = after_graces[0].select_leaves()
+                        leaf_to_attach_to = grace_leaves[0]
                 if current_clef != clef:
                     try:
                         command = indicatortools.LilyPondCommand(
@@ -323,12 +324,14 @@ class SegmentMaker(PlagueWaterObject):
                     current_clef = clef
                 if octavation is not None:
                     leaves = []
-                    if after_graces:
-                        leaves.extend(after_graces[0].select_leaves())
+                    if previous_leaf is not None:
+                        if after_graces:
+                            leaves.extend(after_graces[0].select_leaves())
                     leaves.extend(group)
                     octavation_spanner = spannertools.OctavationSpanner(
                         start=octavation,
                         )
+                    octavation_spanner._contiguity_constraint = None
                     attach(octavation_spanner, leaves)
         message = '\tapplying piano clefs and octavations'
         print message
@@ -337,8 +340,11 @@ class SegmentMaker(PlagueWaterObject):
         if self.segment_id == '1':
             attach(Clef('treble'), upper_staff)
             attach(Clef('bass'), lower_staff)
-        cleanup(upper_staff, current_clef=Clef('treble'))
-        cleanup(lower_staff, current_clef=Clef('bass'))
+            cleanup(upper_staff, current_clef=Clef('treble'))
+            cleanup(lower_staff, current_clef=Clef('bass'))
+        else:
+            cleanup(upper_staff)
+            cleanup(lower_staff)
 
     def apply_piano_staff_changes(self):
         message = '\tapplying piano staff changes'
