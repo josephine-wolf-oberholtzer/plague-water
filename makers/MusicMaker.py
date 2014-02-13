@@ -98,33 +98,54 @@ class MusicMaker(PlagueWaterObject):
         seed = int(seed)
         music = rhythm_maker(durations, seeds=seed)
         for i, x in enumerate(music):
-            if isinstance(x, selectiontools.Selection):
+            if len(x) == 1 and isinstance(x[0], Tuplet):
+                music[i] = x[0]
+            else:
                 music[i] = Container(x)
         music = Container(music)
         assert inspect_(music).get_duration() == sum(durations)
-        if (rewrite_meter and self.rewrite_meter is None) or \
-            self.rewrite_meter:
-            self._rewrite_meters(
-                music,
-                change_staff_lines=change_staff_lines,
-                initial_offset=initial_offset,
-                meter_cache=meter_cache,
-                meters=meters,
-                )
-        if self.apply_beam or self.apply_beam is None:
-            if self.rhythm_maker != rhythmmakertools.RestRhythmMaker():
-                if self.rhythm_maker != rhythmmakertools.SkipRhythmMaker():
-                    leaves = list(iterate(music).by_class(scoretools.Leaf))
-                    if not all(isinstance(x, Rest) for x in leaves):
-                        beam = spannertools.GeneralizedBeam(
-                            durations=durations,
-                            include_long_duration_notes=True,
-                            include_long_duration_rests=True,
-                            isolated_nib_direction=None,
-                            use_stemlets=True,
-                            )
-                        attach(beam, music)
-        return music
+        rest_prototype = (
+            scoretools.Rest,
+            scoretools.MultimeasureRest,
+            )
+        leading_silence, tailing_silence = Container(), Container()
+        for division in music[:]:
+            leaves = division.select_leaves()
+            if all(isinstance(leaf, rest_prototype) for leaf in leaves):
+                leading_silence.append(division)
+            else:
+                break
+        for division in reversed(music[:]):
+            leaves = division.select_leaves()
+            if all(isinstance(leaf, rest_prototype) for leaf in leaves):
+                tailing_silence.append(division)
+            else:
+                break
+        if music:
+            if (rewrite_meter and self.rewrite_meter is None) or \
+                self.rewrite_meter:
+                self._rewrite_meters(
+                    music,
+                    change_staff_lines=change_staff_lines,
+                    initial_offset=initial_offset,
+                    meter_cache=meter_cache,
+                    meters=meters,
+                    )
+            if (self.apply_beam or
+                self.apply_beam is None) and \
+                self.rhythm_maker != rhythmmakertools.RestRhythmMaker() and \
+                self.rhythm_maker != rhythmmakertools.SkipRhythmMaker():
+                leaves = list(iterate(music).by_class(scoretools.Leaf))
+                if not all(isinstance(x, rest_prototype) for x in leaves):
+                    beam = spannertools.GeneralizedBeam(
+                        durations=durations,
+                        include_long_duration_notes=True,
+                        include_long_duration_rests=True,
+                        isolated_nib_direction=None,
+                        use_stemlets=True,
+                        )
+                    attach(beam, music)
+        return leading_silence, music, tailing_silence
 
     def create_timespans(
         self,
@@ -215,7 +236,7 @@ class MusicMaker(PlagueWaterObject):
                 if inspect_(container).get_duration() == \
                     current_meter_duration and \
                     container_start_offset == 0 and \
-                    all(isinstance(x, Rest) for x in container):
+                    all(isinstance(x, Rest) for x in container.select_leaves()):
                     multi_measure_rest = scoretools.MultimeasureRest(1)
                     multiplier = Multiplier(current_meter_duration)
                     attach(multiplier, multi_measure_rest)

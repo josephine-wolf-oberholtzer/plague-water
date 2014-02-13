@@ -257,7 +257,7 @@
             (stretchability . 0)
             )
         \override Stem.details.beamed-lengths = #'(6)
-        \override Stem.direction = #UP
+        %\override Stem.direction = #UP
         \override Stem.stemlet-length = 1.5
         \override StemTremolo.beam-width = 1.5
         \override StemTremolo.flag-count = 4.0
@@ -266,7 +266,7 @@
         \override SustainPedal.self-alignment-X = #CENTER
         \override TextScript.Y-extent = #'(-1.5 . 1.5)
         \override TrillPitchAccidental.avoid-slur = #'ignore
-        \override TupletBracket.direction = #UP
+        %\override TupletBracket.direction = #UP
         \override TupletBracket.full-length-to-extent = ##t
         \override TupletBracket.outside-staff-priority = 100
         \override TupletBracket.padding = 2

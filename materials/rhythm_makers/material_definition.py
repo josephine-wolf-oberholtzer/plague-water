@@ -138,16 +138,16 @@ winding_rhythm_maker = rhythmmakertools.TaleaRhythmMaker(
         lefts=(-1,),
         middles=(0,),
         rights=(-1,),
-        left_lengths=(1, 1, 0, 2, 1, 1, 1, 0, 1, 0),
-        right_lengths=(1, 0, 0, 1, 0,),
+        left_lengths=(1, 0, 0, 0),
+        right_lengths=(1, 0, 1, 1, 0),
         ),
-    extra_counts_per_division=(0, 1, 0, 0, 1, 2, 0, 1, 0, 0),
+    extra_counts_per_division=(2, 1, 1, 0),
+    split_divisions_by_counts=(3, 5),
     talea=rhythmmakertools.Talea(
-        counts=(1, 2, 1, 1, 3, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 3, 1, 1, 2, 1,),
-        denominator=32,
+        counts=(4,),
+        denominator=16,
         ),
     tie_specifier=rhythmmakertools.TieSpecifier(
-        tie_across_divisions=False,
         tie_split_notes=False,
         ),
     )

@@ -2,7 +2,6 @@
 import collections
 import itertools
 import os
-import sys
 from abjad import *
 from plague_water import plague_water_configuration
 from plague_water import score_templates
@@ -94,6 +93,7 @@ class SegmentMaker(PlagueWaterObject):
         ### CREATE NOTATION ###
         self.populate_time_signature_context()
         self.populate_rhythms(rewrite_meter=True)
+        self.cleanup_silences()
         self.apply_graces()
         self.apply_pitches()
         self.apply_registers()
@@ -135,6 +135,130 @@ class SegmentMaker(PlagueWaterObject):
         return result
 
     ### PRIVATE METHODS ###
+
+    def _make_silent_division(
+        self,
+        duration,
+        division_offset=None,
+        initial_offset=None,
+        meter=None,
+        starts_at_bar_line=True,
+        stops_at_bar_line=True,
+        ):
+        division = Container()
+        multiplier = Multiplier(duration)
+        if starts_at_bar_line and stops_at_bar_line:
+            rest = scoretools.MultimeasureRest(1)
+            attach(multiplier, rest)
+            division.append(rest)
+        else:
+            rests = scoretools.make_rests(duration)
+            division.extend(rests)
+            mutate(division[:]).rewrite_meter(
+                meter,
+                boundary_depth=1,
+                initial_offset=initial_offset,
+                maximum_dot_count=2,
+                )
+        return division
+
+    def _make_silent_divisions(
+        self,
+        parts,
+        start_offset,
+        starts_at_bar_line=None,
+        stops_at_bar_line=None,
+        ):
+        result = []
+        if len(parts) == 1:
+            division_offset = start_offset
+            duration = sum(parts[0])
+            initial_offset, meter = \
+                self.get_initial_offset_and_meter_at_offset(
+                    division_offset)
+            division = self._make_silent_division(
+                duration,
+                division_offset=division_offset,
+                initial_offset=initial_offset,
+                meter=meter,
+                starts_at_bar_line=starts_at_bar_line,
+                stops_at_bar_line=stops_at_bar_line,
+                )
+            result.append(division)
+        else:
+            division_offset = start_offset
+            duration = sum(parts[0])
+            initial_offset, meter = \
+                self.get_initial_offset_and_meter_at_offset(
+                    division_offset)
+            division = self._make_silent_division(
+                duration,
+                division_offset=division_offset,
+                initial_offset=initial_offset,
+                meter=meter,
+                starts_at_bar_line=starts_at_bar_line,
+                stops_at_bar_line=True,
+                )
+            result.append(division)
+            division_offset += duration
+            for part in parts[1:-1]:
+                duration = sum(part)
+                division_offset += duration
+                initial_offset, meter = \
+                    self.get_initial_offset_and_meter_at_offset(
+                        division_offset)
+                division = self._make_silent_division(
+                    duration,
+                    division_offset=division_offset,
+                    initial_offset=initial_offset,
+                    meter=meter,
+                    )
+                result.append(division)
+            duration = sum(parts[-1])
+            initial_offset, meter = \
+                self.get_initial_offset_and_meter_at_offset(
+                    division_offset)
+            division = self._make_silent_division(
+                duration,
+                division_offset=division_offset,
+                initial_offset=initial_offset,
+                meter=meter,
+                starts_at_bar_line=True,
+                stops_at_bar_line=stops_at_bar_line,
+                )
+            result.append(division)
+        return result
+
+    def _partition_music_durations(
+        self,
+        music,
+        ):
+        timespan = inspect_(music).get_timespan()
+        measure_offsets = [offset
+            for offset in self.measure_offsets
+            if timespan.start_offset <= offset and
+            offset <= timespan.stop_offset
+            ]
+        weight_offsets = measure_offsets[:]
+        starts_at_bar_line = True
+        if not weight_offsets or \
+            weight_offsets[0] != timespan.start_offset:
+            weight_offsets.insert(0, timespan.start_offset)
+            starts_at_bar_line = False
+        stops_at_bar_line = True
+        if not weight_offsets or \
+            weight_offsets[-1] != timespan.stop_offset:
+            weight_offsets.append(timespan.stop_offset)
+            stops_at_bar_line = False
+        weights = mathtools.difference_series(weight_offsets)
+        sequence = [inspect_(division).get_duration()
+            for division in music]
+        try:
+            parts = sequencetools.partition_sequence_by_weights(
+                sequence, weights)
+        except PartitionError:
+            parts = [[weight] for weight in weights]
+        return parts, starts_at_bar_line, stops_at_bar_line
 
     def _prepare(
         self,
@@ -196,23 +320,23 @@ class SegmentMaker(PlagueWaterObject):
 
     def apply_chords(self):
         from plague_water import makers
-        self.score._is_forbidden_to_update = True
         message = '\tapplying chords'
-        with systemtools.ProgressIndicator(message) as progress_indicator:
-            for leaf in iterate(self.score).by_timeline(Note):
-                logical_tie = inspect_(leaf).get_logical_tie()
-                if leaf is not logical_tie.head:
-                    continue
-                music_maker = inspect_(leaf).get_effective(makers.MusicMaker)
-                chord_agent = music_maker.chord_agent
-                if chord_agent is None:
-                    continue
-                chord_agent(
-                    logical_tie=logical_tie,
-                    segment_duration=self.segment_duration,
-                    )
-                progress_indicator.advance()
-        self.score._is_forbidden_to_update = False
+        with systemtools.ForbidUpdating(self.score):
+            with systemtools.ProgressIndicator(message) as progress_indicator:
+                for leaf in iterate(self.score).by_timeline(Note):
+                    logical_tie = inspect_(leaf).get_logical_tie()
+                    if leaf is not logical_tie.head:
+                        continue
+                    inspector = inspect_(leaf)
+                    music_maker = inspector.get_effective(makers.MusicMaker)
+                    chord_agent = music_maker.chord_agent
+                    if chord_agent is None:
+                        continue
+                    chord_agent(
+                        logical_tie=logical_tie,
+                        segment_duration=self.segment_duration,
+                        )
+                    progress_indicator.advance()
 
     def apply_dynamics(self):
         message = '\tapplying dynamics'
@@ -483,6 +607,60 @@ class SegmentMaker(PlagueWaterObject):
             print '\tfinished in {} seconds'.format(
                 timer.elapsed_time)
 
+    def cleanup_semantic_timespans(self):
+        print '\tcleaning up semantic timespans'
+        split_offsets = []
+        if self.measure_segmentation_talea:
+            groups = sequencetools.partition_sequence_by_counts(
+                self.time_signatures,
+                self.measure_segmentation_talea,
+                cyclic=True,
+                overhang=True,
+                )
+            current_offset = Offset(0)
+            for group in groups:
+                current_offset += sum(x.duration for x in group)
+                split_offsets.append(current_offset)
+        for context_maker in self.context_makers:
+            if context_maker.context_dependencies:
+                continue
+            context_maker.cleanup_timespans(
+                split_offsets=split_offsets,
+                )
+
+    def cleanup_silences(self):
+        from plague_water import makers
+        from plague_water import materials
+        message = '\tcleaning up silences'
+        print message
+        with systemtools.ForbidUpdating(self.score):
+            for voice in iterate(self.score).by_class(Voice):
+                for music in voice:
+                    music_maker = \
+                        inspect_(music).get_indicator(makers.MusicMaker)
+                    if music_maker != materials.silent_music_maker:
+                        continue
+                    elif isinstance(music_maker.timespan_agent,
+                        makers.DependentTimespanAgent,
+                        ):
+                        continue
+                    parts, starts_at_bar_line, stops_at_bar_line = \
+                        self._partition_music_durations(music)
+                    music[:] = self._make_silent_divisions(
+                        parts,
+                        inspect_(music).get_timespan().start_offset,
+                        starts_at_bar_line=starts_at_bar_line,
+                        stops_at_bar_line=stops_at_bar_line,
+                        )
+                    leaves = list(music.select_leaves())
+                    prototype = (scoretools.MultimeasureRest,)
+                    if voice.name != 'Piano Pedals':
+                        for group in iterate(leaves).by_run(prototype):
+                            spanner = spannertools.StaffLinesSpanner(
+                                lines=1,
+                                )
+                            attach(spanner, group)
+
     def color_piano_conflicts(self):
         message = '\tcoloring piano conflicts'
         with systemtools.ProgressIndicator(message) as progress_indicator:
@@ -571,27 +749,6 @@ class SegmentMaker(PlagueWaterObject):
         else:
             self.score.add_final_bar_line('||')
 
-    def cleanup_semantic_timespans(self):
-        print '\tcleaning up semantic timespans'
-        split_offsets = []
-        if self.measure_segmentation_talea:
-            groups = sequencetools.partition_sequence_by_counts(
-                self.time_signatures,
-                self.measure_segmentation_talea,
-                cyclic=True,
-                overhang=True,
-                )
-            current_offset = Offset(0)
-            for group in groups:
-                current_offset += sum(x.duration for x in group)
-                split_offsets.append(current_offset)
-        for context_maker in self.context_makers:
-            if context_maker.context_dependencies:
-                continue
-            context_maker.cleanup_timespans(
-                split_offsets=split_offsets,
-                )
-
     def create_dependent_timespans(self):
         print '\tcreating dependent timespans'
         from plague_water import makers
@@ -647,6 +804,22 @@ class SegmentMaker(PlagueWaterObject):
             )
         return meters
 
+    def get_initial_offset_and_meter_at_offset(self, offset):
+        current_meters = list(self.meters)
+        current_meter_offsets = list(self.measure_offsets)
+        while 2 < len(current_meters) and \
+            current_meter_offsets[1] < offset:
+            current_meter_offsets.pop(0)
+            current_meters.pop(0)
+        if current_meter_offsets[1] <= offset:
+            current_meter_offsets.pop(0)
+            current_meters.pop(0)
+        meter = current_meters[0]
+        meter_offset = current_meter_offsets[0]
+        initial_offset = \
+            offset - meter_offset
+        return initial_offset, meter
+
     @staticmethod
     def get_segment_target_duration(
         denominator=None,
@@ -676,6 +849,31 @@ class SegmentMaker(PlagueWaterObject):
                     inspect_(container).get_effective(makers.MusicMaker)
                 yield container, music_maker
 
+    @staticmethod
+    def iterate_music_and_meters(
+        initial_offset=None,
+        meters=None,
+        music=None,
+        ):
+        assert isinstance(initial_offset, Offset) and 0 <= initial_offset
+        assert all(isinstance(x, metertools.Meter) for x in meters)
+        assert len(meters)
+        current_meters = list(meters)
+        current_meter_offsets = list(mathtools.cumulative_sums(
+            x.implied_time_signature.duration for x in meters))
+        for container in music[:]:
+            timespan = inspect_(container).get_timespan()
+            container_start_offset = timespan.start_offset + initial_offset
+            while 2 < len(current_meter_offsets) and \
+                current_meter_offsets[1] <= container_start_offset:
+                current_meter_offsets.pop(0)
+                current_meters.pop(0)
+            current_meter = current_meters[0]
+            current_meter_offset = current_meter_offsets[0]
+            current_initial_offset = \
+                container_start_offset - current_meter_offset
+            yield container, current_meter, current_initial_offset
+
     def populate_rhythms(
         self,
         rewrite_meter=True,
@@ -696,16 +894,19 @@ class SegmentMaker(PlagueWaterObject):
 
     def populate_rhythms_for_one_voice(
         self,
-        context_map=None,
         context_name=None,
+        context_map=None,
         rewrite_meter=True,
         seed=0,
         timespan_inventory=None,
         ):
+        from plague_water import materials
         result = []
         message = '\t\t{}'.format(context_name)
         with systemtools.ProgressIndicator(message) as progress_indicator:
             change_staff_lines = True
+            previous_silence = Container()
+            attach(materials.silent_music_maker, previous_silence)
             for music_maker, timespans in itertools.groupby(
                 timespan_inventory,
                 lambda x: x.annotation,
@@ -713,19 +914,31 @@ class SegmentMaker(PlagueWaterObject):
                 timespans = timespantools.TimespanInventory(timespans)
                 durations = [x.duration for x in timespans]
                 start_offset = timespans[0].start_offset
-                music = music_maker.create_rhythms(
-                    durations,
-                    change_staff_lines=change_staff_lines,
-                    initial_offset=start_offset,
-                    meter_cache=self.cached_meters,
-                    meters=self.meters,
-                    rewrite_meter=rewrite_meter,
-                    seed=seed,
-                    )
+                leading_silence, music, tailing_silence = \
+                    music_maker.create_rhythms(
+                        durations,
+                        change_staff_lines=change_staff_lines,
+                        initial_offset=start_offset,
+                        meter_cache=self.cached_meters,
+                        meters=self.meters,
+                        rewrite_meter=rewrite_meter,
+                        seed=seed,
+                        )
                 attach(music_maker, music, scope=scoretools.Context)
+                previous_silence.extend(leading_silence)
+                if not len(music.select_leaves()):
+                    previous_silence.extend(tailing_silence)
+                else:
+                    if len(previous_silence.select_leaves()):
+                        result.append(previous_silence)
+                    result.append(music)
+                    previous_silence = tailing_silence
+                    attach(materials.silent_music_maker, previous_silence)
                 seed += 1
-                result.append(music)
                 progress_indicator.advance()
+            if len(previous_silence.select_leaves()):
+                result.append(previous_silence)
+                attach(materials.silent_music_maker, previous_silence)
         return result, seed
 
     def populate_time_signature_context(self):
@@ -777,3 +990,11 @@ class SegmentMaker(PlagueWaterObject):
             time_signature.duration
             for time_signature in self.time_signatures
             )
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def measure_offsets(self):
+        measure_durations = [x.duration for x in self.time_signatures]
+        measure_offsets = mathtools.cumulative_sums(measure_durations)
+        return measure_offsets

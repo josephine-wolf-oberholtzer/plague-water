@@ -1610,9 +1610,6 @@
 			\context Dynamics = "Piano Pedals" {
 				{
 					{
-						\stopStaff
-						\once \override Staff.StaffSymbol.line-count = 1
-						\startStaff
 						R1 * 1/4
 					}
 					{
@@ -1665,8 +1662,6 @@
 					}
 					{
 						R1 * 1/4
-						\stopStaff
-						\startStaff
 					}
 				}
 			}

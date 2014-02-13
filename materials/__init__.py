@@ -15,6 +15,7 @@ from rhythm_makers import *
 from saxophone_music_makers import *
 from spanners import *
 from time_signatures import *
+from timespan_agents import *
 
 del basic_music_makers
 del chord_agents
@@ -31,3 +32,4 @@ del rhythm_makers
 del saxophone_music_makers
 del spanners
 del time_signatures
+del timespan_agents
