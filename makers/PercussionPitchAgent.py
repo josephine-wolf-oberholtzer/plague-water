@@ -64,9 +64,10 @@ class PercussionPitchAgent(PlagueWaterObject):
             for note in logical_tie:
                 note.written_pitch = pitches[0]
         else:
-            chord = chord(note)
-            chord.written_pitches = pitches
-            mutate(note).replace(chord)
+            for note in logical_tie:
+                chord = Chord(note)
+                chord.written_pitches = pitches
+                mutate(note).replace(chord)
         pitches = pitchtools.PitchSet(pitches)
         return pitches
 

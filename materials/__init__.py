@@ -13,6 +13,7 @@ from piano_music_makers import *
 from pitch_classes import *
 from rhythm_makers import *
 from saxophone_music_makers import *
+from spanner_agents import *
 from spanners import *
 from time_signatures import *
 from timespan_agents import *
@@ -30,6 +31,7 @@ del piano_music_makers
 del pitch_classes
 del rhythm_makers
 del saxophone_music_makers
+del spanner_agents
 del spanners
 del time_signatures
 del timespan_agents

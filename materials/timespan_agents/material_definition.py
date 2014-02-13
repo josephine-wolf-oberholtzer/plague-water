@@ -26,7 +26,7 @@ sustained_medium_timespan_agent = makers.SemanticTimespanAgent(
     leading_rest_durations=durations.very_short_durations(2),
     minimum_timespan_duration=Duration(1, 4),
     playing_durations=durations.medium_durations(8),
-    playing_groupings=durations.short_groupings,
+    playing_groupings=durations.medium_groupings,
     tailing_rest_durations=durations.medium_durations(5),
     )
 

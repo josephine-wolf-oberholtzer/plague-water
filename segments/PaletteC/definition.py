@@ -3,6 +3,7 @@ from abjad import new
 from abjad.tools import datastructuretools
 from abjad.tools import durationtools
 from abjad.tools import indicatortools
+from abjad.tools import spannertools
 from plague_water import makers
 from plague_water import materials
 from plague_water import score_templates
@@ -35,55 +36,133 @@ context_map[score]['pitch_agent'] = makers.PitchClassAgent(
 guitar_context_maker = makers.ContextMaker(
     context_name='Guitar Voice',
     music_makers=[
-        materials.basic_music_maker,
+        makers.MusicMaker(
+            dynamic_agent=materials.background_dynamic_agent,
+            grace_maker=makers.GraceAgent(
+                lengths=(0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1),
+                ),
+            indicator_agent=makers.IndicatorAgent(
+                last_leaf_indicators=(
+                    indicatortools.BendAfter(-4),
+                    indicatortools.BendAfter(4),
+                    ),
+                ),
+            rhythm_maker=materials.pointillist_rhythm_maker,
+            timespan_agent=new(
+                materials.pointillist_sparse_timespan_agent,
+                playing_durations=materials.short_durations,
+                ),
+            ).transform_cursors(5),
         ],
     )
 
 saxophone_context_maker = makers.ContextMaker(
     context_name='Saxophone Voice',
     music_makers=[
-        materials.basic_music_maker,
+        makers.MusicMaker(
+            dynamic_agent=materials.foreground_dynamic_agent,
+            grace_maker=makers.GraceAgent(
+                lengths=(0, 0, 2, 1, 3, 1, 1, 0, 2, 1),
+                ),
+            rhythm_maker=materials.flowing_rhythm_maker,
+            spanner_agent=materials.trilling_sparsely_spanner_agent,
+            timespan_agent=materials.sustained_long_timespan_agent,
+            ).transform_cursors(2),
         ],
     )
 
 piano_rh_context_maker = makers.ContextMaker(
     context_name='Piano RH Voice',
     music_makers=[
-        materials.basic_music_maker,
+        makers.MusicMaker(
+            dynamic_agent=materials.background_dynamic_agent,
+            labels='pedaled',
+            rhythm_maker=materials.pointillist_rhythm_maker,
+            spanner_agent=materials.trilling_constantly_spanner_agent,
+            timespan_agent=new(
+                materials.pointillist_sparse_timespan_agent,
+                playing_durations=materials.very_short_durations,
+                playing_groupings=[1],
+                ),
+            ).transform_cursors(6),
         ],
     )
 
 piano_lh_context_maker = makers.ContextMaker(
     context_name='Piano LH Voice',
     music_makers=[
-        materials.basic_music_maker,
+        makers.MusicMaker(
+            dynamic_agent=materials.background_dynamic_agent,
+            labels='pedaled',
+            rhythm_maker=materials.pointillist_rhythm_maker,
+            spanner_agent=materials.trilling_constantly_spanner_agent,
+            timespan_agent=new(
+                materials.pointillist_sparse_timespan_agent,
+                playing_durations=materials.very_short_durations,
+                playing_groupings=[1],
+                ),
+            ).transform_cursors(4),
         ],
     )
 
 percussion_shaker_context_maker = makers.ContextMaker(
     context_name='Percussion Shaker Voice',
     music_makers=[
-        new(materials.basic_music_maker,
-            pitch_agent=materials.shaker_pitch_agent,
-            ),
+        materials.silent_music_maker,
         ],
     )
 
 percussion_woodblock_context_maker = makers.ContextMaker(
     context_name='Percussion Woodblock Voice',
     music_makers=[
-        new(materials.basic_music_maker,
-            pitch_agent=materials.woodblock_pitch_agent,
-            ),
+        makers.MusicMaker(
+            dynamic_agent=materials.midground_dynamic_agent,
+            grace_maker=makers.GraceAgent(
+                lengths=(0, 0, 0, 1, 0, 1, 1, 0, 1, 1),
+                ),
+            indicator_agent=makers.IndicatorAgent(
+                first_leaf_indicators=('accent',),
+                inner_leaf_indicators=('staccato',),
+                ),
+            pitch_agent=new(
+                materials.woodblock_pitch_agent,
+                talea=(0, 2, 4, 2, 3, 0, 1, 2),
+                ),
+            rhythm_maker=materials.pointillist_rhythm_maker,
+            timespan_agent=new(
+                materials.pointillist_sparse_timespan_agent,
+                playing_durations=materials.short_durations,
+                ),
+            ).transform_cursors(5),
         ],
     )
 
 percussion_drum_context_maker = makers.ContextMaker(
     context_name='Percussion Drum Voice',
     music_makers=[
-        new(materials.basic_music_maker,
-            pitch_agent=materials.drum_pitch_agent,
-            ),
+        makers.MusicMaker(
+            dynamic_agent=materials.midground_dynamic_agent,
+            grace_maker=makers.GraceAgent(
+                lengths=(0, 0, 0, 1, 0, 1, 1, 0, 1, 1),
+                ),
+            indicator_agent=makers.IndicatorAgent(
+                first_leaf_indicators=('accent',),
+                ),
+            pitch_agent=new(
+                materials.drum_pitch_agent,
+                talea=(0, 2, 1, 2, 0, 1, 2),
+                ),
+            rhythm_maker=materials.flowing_rhythm_maker,
+            spanner_agent=makers.SpannerAgent(
+                cyclical_logical_tie_spanners=(
+                    makers.StemTremoloSpanner(),
+                    makers.StemTremoloSpanner(),
+                    None,
+                    ),
+                minimum_logical_tie_duration=durationtools.Duration(1, 8),
+                ),
+            timespan_agent=materials.sustained_long_timespan_agent,
+            ).transform_cursors(1),
         ],
     )
 
@@ -96,7 +175,16 @@ piano_pedals_context_maker = makers.ContextMaker(
         ),
     context_name='Piano Pedals',
     music_makers=[
-        materials.piano_pedals_music_maker,
+        new(materials.piano_pedals_music_maker,
+            spanner_agent=makers.SpannerAgent(
+                cyclical_output_spanners=(
+                    makers.ComplexPianoPedalSpanner(
+                        include_inner_leaves=False,
+                        let_vibrate=True,
+                        ),
+                    ),
+                ),
+            ),
         ],
     )
 

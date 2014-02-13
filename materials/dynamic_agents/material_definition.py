@@ -20,7 +20,7 @@ background_dynamic_agent = makers.DynamicAgent(
             hairpin_stop_token='mf',
             ),
         makers.DynamicExpression(
-            hairpin_start_token='p',
+            hairpin_start_token='pp',
             hairpin_stop_token='o',
             ),
         makers.DynamicExpression(

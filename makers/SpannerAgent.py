@@ -79,21 +79,24 @@ class SpannerAgent(PlagueWaterObject):
             self.output_spanners)
         if cyclical_output_spanners:
             spanner = cyclical_output_spanners[0]
-            spanner = copy.copy(spanner)
-            attach(spanner, music.select_leaves())
+            if spanner is not None:
+                spanner = copy.copy(spanner)
+                attach(spanner, music.select_leaves())
         if output_spanners:
             leaves = music.select_leaves()
             leaves = self._strip_outer_silences(leaves)
             for spanner in output_spanners:
-                spanner = copy.copy(spanner)
-                attach(spanner, leaves)
+                if spanner is not None:
+                    spanner = copy.copy(spanner)
+                    attach(spanner, leaves)
         if division_spanners:
             for division in music:
                 leaves = division.select_leaves()
                 leaves = self._strip_outer_silences(leaves)
                 for spanner in division_spanners:
-                    spanner = copy.copy(spanner)
-                    attach(spanner, leaves)
+                    if spanner is not None:
+                        spanner = copy.copy(spanner)
+                        attach(spanner, leaves)
         if logical_tie_spanners or cyclical_logical_tie_spanners:
             count = 0
             for logical_tie in iterate(music).by_logical_tie(pitched=True):
@@ -102,11 +105,14 @@ class SpannerAgent(PlagueWaterObject):
                     if tie_duration < self.minimum_logical_tie_duration:
                         continue
                 for spanner in logical_tie_spanners:
-                    spanner = copy.copy(spanner)
-                    attach(spanner, logical_tie)
+                    if spanner is not None:
+                        spanner = copy.copy(spanner)
+                        attach(spanner, logical_tie)
                 if cyclical_logical_tie_spanners:
-                    spanner = copy.copy(cyclical_logical_tie_spanners[count])
-                    attach(spanner, logical_tie)
+                    spanner = cyclical_logical_tie_spanners[count]
+                    if spanner is not None:
+                        spanner = copy.copy(spanner)
+                        attach(spanner, logical_tie)
                 count += 1
 
     ### PRIVATE METHODS ###
@@ -122,7 +128,7 @@ class SpannerAgent(PlagueWaterObject):
                 if isinstance(x, type):
                     assert issubclass(x, spannertools.Spanner)
                 else:
-                    assert isinstance(x, spannertools.Spanner)
+                    assert isinstance(x, (spannertools.Spanner, type(None)))
             expr = tuple(expr)
         return expr
 
@@ -132,7 +138,7 @@ class SpannerAgent(PlagueWaterObject):
             for spanner in expr:
                 if isinstance(spanner, type):
                     spanner = spanner()
-                else:
+                elif spanner is not None:
                     spanner = copy.copy(spanner)
                 result.append(spanner)
         return result

@@ -3,9 +3,9 @@
 
 #(ly:set-option 'relative-includes #t)
 
-\include "../../stylesheets/plague-water-header.ly"
-\include "../../stylesheets/plague-water-layout.ly"
-\include "../../stylesheets/plague-water-paper.ly"
+\include "../../stylesheets/plague-water-header.ily"
+\include "../../stylesheets/plague-water-layout.ily"
+\include "../../stylesheets/plague-water-paper.ily"
 
 \score {
 	\context Score = "Plague Water Score" \with {

@@ -23,12 +23,10 @@ class DynamicExpression(PlagueWaterObject):
             \new Staff {
                 c'8
                 d'8
-                \override Hairpin #'stencil = #constante-hairpin
                 e'8 \< \sfp
                 f'8
                 g'8
                 a'8 \!
-                \revert Hairpin #'stencil
                 b'8
                 c''8
             }
@@ -38,7 +36,7 @@ class DynamicExpression(PlagueWaterObject):
         ::
 
             >>> dynamic_expression = makers.DynamicExpression(
-            ...     'f', 'p', 'flared',
+            ...     'f', 'p',
             ...     )
             >>> staff = Staff("c'8 d'8 e'8 f'8 g'8 a'8 b'8 c''8")
             >>> dynamic_expression(staff[2:-2])
@@ -46,12 +44,10 @@ class DynamicExpression(PlagueWaterObject):
             \new Staff {
                 c'8
                 d'8
-                \override Hairpin #'stencil = #flared-hairpin
                 e'8 \> \f
                 f'8
                 g'8
                 a'8 \p
-                \revert Hairpin #'stencil
                 b'8
                 c''8
             }
@@ -97,7 +93,7 @@ class DynamicExpression(PlagueWaterObject):
         start_token = self.hairpin_start_token
         stop_token = self.hairpin_stop_token
         is_short_group = False
-        if len(group) == 1:
+        if len(group) < 3:
             is_short_group = True
         elif self.minimum_duration is not None:
             if group.get_duration() < self.minimum_duration:

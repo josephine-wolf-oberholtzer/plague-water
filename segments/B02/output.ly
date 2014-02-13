@@ -3,9 +3,9 @@
 
 #(ly:set-option 'relative-includes #t)
 
-\include "../../stylesheets/plague-water-header.ly"
-\include "../../stylesheets/plague-water-layout.ly"
-\include "../../stylesheets/plague-water-paper.ly"
+\include "../../stylesheets/plague-water-header.ily"
+\include "../../stylesheets/plague-water-layout.ily"
+\include "../../stylesheets/plague-water-paper.ily"
 
 \score {
 	\context Score = "Plague Water Score" \with {
@@ -30,14 +30,10 @@
 				s1 * 3/4
 			}
 			{
-				\time 3/8
-				s1 * 3/8
+				s1 * 3/4
 			}
 			{
-				s1 * 3/8
-			}
-			{
-				\time 3/4
+				\time 6/8
 				s1 * 3/4
 			}
 		}
@@ -47,87 +43,60 @@
 				\context Voice = "Saxophone Voice" {
 					{
 						{
-							r4
-						}
-					}
-					{
-						\tweak #'text #tuplet-number::calc-fraction-text
-						\times 3/5 {
 							\afterGrace
 							r4
 							{
 								\override Flag #'stroke-style = #"grace"
 								\override Stem #'length = #8
-								d16 \(
+								c16 \(
 								\revert Flag #'stroke-style
 								\revert Stem #'length
 							}
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							f16 \) [
 						}
+					}
+					{
 						\tweak #'text #tuplet-number::calc-fraction-text
 						\times 5/6 {
-							\set stemLeftBeamCount = 1
+							ef4 \) \< \mp
+							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							b8 ~
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 2
-							b16
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 1
-							d16 ~
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							d8
+							\afterGrace
+							b8 [
+							{
+								\override Flag #'stroke-style = #"grace"
+								\override Stem #'length = #8
+								c16 \(
+								\revert Flag #'stroke-style
+								\revert Stem #'length
+							}
 						}
 						\tweak #'text #tuplet-number::calc-fraction-text
 						\times 3/4 {
 							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 2
-							cs16
+							\set stemRightBeamCount = 1
+							ef8 \)
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							b,8
+						}
+						{
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							\pitchedTrill
+							d8 \f \startTrillSpan f
+							<> \stopTrillSpan
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							c'8. ]
+							r8 ]
 						}
 					}
 					{
 						{
-							r16
 							\afterGrace
 							r2
 							{
 								\override Flag #'stroke-style = #"grace"
 								\override Stem #'length = #8
-								f16 \(
-								\revert Flag #'stroke-style
-								\revert Stem #'length
-							}
-						}
-					}
-					{
-						\tweak #'text #tuplet-number::calc-fraction-text
-						\times 3/4 {
-							d4 \)
-						}
-						{
-							af4
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							r16
-						}
-					}
-					{
-						{
-							r4
-						}
-						{
-							r4
-							\afterGrace
-							r8
-							{
-								\override Flag #'stroke-style = #"grace"
-								\override Stem #'length = #8
 								c16 \(
 								\revert Flag #'stroke-style
 								\revert Stem #'length
@@ -135,31 +104,123 @@
 						}
 					}
 					{
-						\tweak #'text #tuplet-number::calc-fraction-text
-						\times 3/4 {
-							d4 \)
-							af4
-						}
-					}
-					{
 						{
 							\afterGrace
-							r8
+							\pitchedTrill
+							d4 \) \< \mp \startTrillSpan g
 							{
 								\override Flag #'stroke-style = #"grace"
 								\override Stem #'length = #8
-								c16 \(
+								c16 [ \(
+								ef16 ]
 								\revert Flag #'stroke-style
 								\revert Stem #'length
 							}
-						}
-					}
-					{
-						\times 2/3 {
+							<> \stopTrillSpan
 							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 2
+							\afterGrace
+							d16 \) [
+							{
+								\override Flag #'stroke-style = #"grace"
+								\override Stem #'length = #8
+								c16 \(
+								\revert Flag #'stroke-style
+								\revert Stem #'length
+							}
+						}
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 3/5 {
+							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							cs8 \)
-							e4
+							d8. \)
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							\afterGrace
+							af,8
+							{
+								\override Flag #'stroke-style = #"grace"
+								\override Stem #'length = #8
+								c16 \(
+								\revert Flag #'stroke-style
+								\revert Stem #'length
+							}
+						}
+						\times 4/5 {
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							d8 \)
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							bf,8.
+						}
+						{
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 2
+							\afterGrace
+							d16
+							{
+								\override Flag #'stroke-style = #"grace"
+								\override Stem #'length = #8
+								c16 \(
+								\revert Flag #'stroke-style
+								\revert Stem #'length
+							}
+						}
+						{
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							\afterGrace
+							\pitchedTrill
+							d8. \) \startTrillSpan f
+							{
+								\override Flag #'stroke-style = #"grace"
+								\override Stem #'length = #8
+								c16 [ \(
+								ef16 ]
+								\revert Flag #'stroke-style
+								\revert Stem #'length
+							}
+							<> \stopTrillSpan
+						}
+						\times 2/3 {
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 2
+							d16 \)
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 1
+							af16 ~
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							af8 ~
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 2
+							af16
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 1
+							b,16
+						}
+						{
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 2
+							\afterGrace
+							d16
+							{
+								\override Flag #'stroke-style = #"grace"
+								\override Stem #'length = #8
+								c16 \(
+								\revert Flag #'stroke-style
+								\revert Stem #'length
+							}
+						}
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 3/4 {
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							d8 \f \)
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 0
+							r8 ]
 						}
 					}
 					{
@@ -167,27 +228,45 @@
 							\stopStaff
 							\once \override Staff.StaffSymbol.line-count = 1
 							\startStaff
-							R1 * 3/8
+							\afterGrace
+							R1 * 3/4
+							{
+								\override Flag #'stroke-style = #"grace"
+								\override Stem #'length = #8
+								c16 \(
+								\revert Flag #'stroke-style
+								\revert Stem #'length
+							}
 							\stopStaff
 							\startStaff
-						}
-						{
-							r4
 						}
 					}
 					{
 						\tweak #'text #tuplet-number::calc-fraction-text
-						\times 3/5 {
-							r4
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							cs,16
+						\times 3/4 {
+							cs4 \) \< \mp
+							\pitchedTrill
+							e4 ~ \startTrillSpan g
+						}
+						\times 2/3 {
+							\set stemLeftBeamCount = -1
+							\set stemRightBeamCount = 1
+							\afterGrace
+							e8
+							{
+								\override Flag #'stroke-style = #"grace"
+								\override Stem #'length = #8
+								c16 \(
+								\revert Flag #'stroke-style
+								\revert Stem #'length
+							}
+							<> \stopTrillSpan
+							cs,4 \f \)
 						}
 					}
 					{
 						{
-							r16
-							r4
+							r8
 						}
 					}
 				}
@@ -204,7 +283,7 @@
 							{
 								\override Flag #'stroke-style = #"grace"
 								\override Stem #'length = #8
-								c16 \(
+								d16 \(
 								\revert Flag #'stroke-style
 								\revert Stem #'length
 							}
@@ -212,7 +291,7 @@
 					}
 					{
 						{
-							ef4 \)
+							f4 \) \< \mp
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							\afterGrace
@@ -220,7 +299,7 @@
 							{
 								\override Flag #'stroke-style = #"grace"
 								\override Stem #'length = #8
-								c16 \(
+								d16 \(
 								\revert Flag #'stroke-style
 								\revert Stem #'length
 							}
@@ -229,16 +308,16 @@
 						\times 3/5 {
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							ef8. \)
+							f8. \)
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							d8
+							c8
 						}
 						\times 4/5 {
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
 							\afterGrace
-							c'8
+							f8
 							{
 								\override Flag #'stroke-style = #"grace"
 								\override Stem #'length = #8
@@ -248,7 +327,9 @@
 							}
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							d8. ] \)
+							\pitchedTrill
+							d8. ] \f \) \startTrillSpan f
+							<> \stopTrillSpan
 						}
 					}
 					{
@@ -269,7 +350,8 @@
 						\tweak #'text #tuplet-number::calc-fraction-text
 						\times 5/6 {
 							\afterGrace
-							d4 \)
+							\pitchedTrill
+							d4 \) \< \mp \startTrillSpan g
 							{
 								\override Flag #'stroke-style = #"grace"
 								\override Stem #'length = #8
@@ -277,6 +359,7 @@
 								\revert Flag #'stroke-style
 								\revert Stem #'length
 							}
+							<> \stopTrillSpan
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
 							d'8 \) [
@@ -285,7 +368,92 @@
 						\times 3/4 {
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
+							\afterGrace
 							af8
+							{
+								\override Flag #'stroke-style = #"grace"
+								\override Stem #'length = #8
+								c16 \(
+								\revert Flag #'stroke-style
+								\revert Stem #'length
+							}
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							d8 \)
+						}
+						{
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							af8
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							\afterGrace
+							\pitchedTrill
+							b,8 \startTrillSpan d
+							{
+								\override Flag #'stroke-style = #"grace"
+								\override Stem #'length = #8
+								c16 \(
+								\revert Flag #'stroke-style
+								\revert Stem #'length
+							}
+							<> \stopTrillSpan
+						}
+						{
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 2
+							\afterGrace
+							d16 \)
+							{
+								\override Flag #'stroke-style = #"grace"
+								\override Stem #'length = #8
+								c16 [ \(
+								ef16 ]
+								\revert Flag #'stroke-style
+								\revert Stem #'length
+							}
+						}
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 3/4 {
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 1
+							d16 \)
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							\afterGrace
+							af8.
+							{
+								\override Flag #'stroke-style = #"grace"
+								\override Stem #'length = #8
+								c'16 \(
+								\revert Flag #'stroke-style
+								\revert Stem #'length
+							}
+						}
+						\times 4/5 {
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 2
+							d16 ] \)
+							bf4
+						}
+						{
+							\set stemLeftBeamCount = -1
+							\set stemRightBeamCount = 2
+							\afterGrace
+							af,16 [
+							{
+								\override Flag #'stroke-style = #"grace"
+								\override Stem #'length = #8
+								c16 \(
+								\revert Flag #'stroke-style
+								\revert Stem #'length
+							}
+						}
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 3/5 {
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							d8. \f \)
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
 							r8 ]
@@ -293,64 +461,23 @@
 					}
 					{
 						{
-							r4
-						}
-						{
 							\stopStaff
 							\once \override Staff.StaffSymbol.line-count = 1
 							\startStaff
 							R1 * 3/4
-						}
-						{
-							R1 * 3/8
 							\stopStaff
 							\startStaff
 						}
 						{
-							\afterGrace
-							r8
-							{
-								\override Flag #'stroke-style = #"grace"
-								\override Stem #'length = #8
-								c16 \(
-								\revert Flag #'stroke-style
-								\revert Stem #'length
-							}
+							r8.
 						}
 					}
 					{
 						{
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 1
-							cs8 \) [
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							e8 ~
-						}
-						\times 2/3 {
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							\afterGrace
-							e8 ]
-							{
-								\override Flag #'stroke-style = #"grace"
-								\override Stem #'length = #8
-								c16 \(
-								\revert Flag #'stroke-style
-								\revert Stem #'length
-							}
-							cs4 ~ \)
-						}
-						\times 2/3 {
-							\set stemLeftBeamCount = -1
-							\set stemRightBeamCount = 1
-							cs8 [
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							r8
-							\set stemLeftBeamCount = 1
+							cs4 \mp
+							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
-							e8 ]
+							e16
 						}
 					}
 					{
@@ -374,24 +501,27 @@
 						\times 2/3 {
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
+							r16 [
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 2
 							\clef treble
-							f'16 [
+							cs'16 \p
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 1
+							ef''16
+						}
+						\times 2/3 {
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							c''8
-						}
-						{
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 2
-							ef'16
+							b'8
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = -1
-							d'16 ]
+							c'16 ]
 						}
 						\times 2/3 {
 							r4
-							b'4
-							c'4
+							b'4 \p
+							cs'4
 						}
 					}
 					{
@@ -412,11 +542,19 @@
 						}
 					}
 					{
-						\times 2/3 {
-							af'4
-							\set stemLeftBeamCount = 1
+						{
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 2
+							r16 [
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 2
+							bf'16 \p ~
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 2
+							bf'16
+							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
-							bf'8
+							af'16 ]
 						}
 					}
 					{
@@ -427,10 +565,7 @@
 							\stopStaff
 							\once \override Staff.StaffSymbol.line-count = 1
 							\startStaff
-							R1 * 3/8
-						}
-						{
-							R1 * 3/8
+							R1 * 3/4
 							\stopStaff
 							\startStaff
 						}
@@ -439,10 +574,14 @@
 						}
 					}
 					{
-						\times 2/3 {
-							e'4
-							cs''4
-							e'4
+						{
+							e'4 \p
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 1
+							cs''8 [
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 0
+							r8 ]
 						}
 					}
 					{
@@ -456,43 +595,26 @@
 				\context Voice = "Piano LH Voice" {
 					{
 						{
-							r2
-							r8
+							\stopStaff
+							\once \override Staff.StaffSymbol.line-count = 1
+							\startStaff
+							R1 * 3/4
+							\stopStaff
+							\startStaff
 						}
 					}
 					{
-						{
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 3
-							r32 [
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 7/8 {
 							\clef bass
-							cs,16
-							\set stemLeftBeamCount = 3
-							\set stemRightBeamCount = 1
-							b,32
-						}
-						\times 2/3 {
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 2
-							d,16
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
-							f,16
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = -1
-							b,16 ]
-						}
-						\times 2/3 {
-							r4
-							cs,4
-							ef,4
+							cs,4 \p
+							f,4
 						}
 					}
 					{
 						{
-							r8
+							r16
+							r4
 						}
 						{
 							\stopStaff
@@ -502,53 +624,47 @@
 							\stopStaff
 							\startStaff
 						}
-						{
-							r4
-							r8.
-						}
 					}
 					{
-						{
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 3/4 {
 							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 1
-							bf,8 [
-							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							b,16
+							r16 [
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 2
+							af,16 \p ~
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 2
+							af,16
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
-							r16 ]
+							bf,16 ]
 						}
 					}
 					{
 						{
 							r16
+							r2
 						}
 						{
 							\stopStaff
 							\once \override Staff.StaffSymbol.line-count = 1
 							\startStaff
-							R1 * 3/8
-						}
-						{
-							R1 * 3/8
+							R1 * 3/4
 							\stopStaff
 							\startStaff
 						}
-						{
-							r8.
-						}
 					}
 					{
-						\times 2/3 {
+						{
+							e4 \p
 							cs4
-							e4
-							r4
 						}
 					}
 					{
 						{
-							r16
+							r4
 						}
 					}
 				}
@@ -568,10 +684,7 @@
 						R1 * 3/4
 					}
 					{
-						R1 * 3/8
-					}
-					{
-						R1 * 3/8
+						R1 * 3/4
 					}
 					{
 						R1 * 3/4
@@ -585,41 +698,25 @@
 				\context Voice = "Percussion Shaker Voice" {
 					{
 						{
-							r2
-							r8
+							\stopStaff
+							\once \override Staff.StaffSymbol.line-count = 1
+							\startStaff
+							R1 * 3/4
+							\stopStaff
+							\startStaff
 						}
 					}
 					{
-						\times 2/3 {
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							b'16 [
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
-							ef'16
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 1
-							f'16
-						}
-						\times 2/3 {
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 2
-							r16
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
-							b'16
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = -1
-							cs'16 ]
-						}
-						\times 2/3 {
-							f'2
-							d'4
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 7/12 {
+							g2 \p
+							f'4
 						}
 					}
 					{
 						{
-							r8
+							r16
+							r4
 						}
 						{
 							\stopStaff
@@ -629,49 +726,43 @@
 							\stopStaff
 							\startStaff
 						}
-						{
-							r4
-							r8.
-						}
 					}
 					{
 						{
 							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 1
-							b'8 [
-							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 2
+							b16 \p [
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 2
+							d'16
+							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
-							d'8 ]
+							f'16 ]
 						}
 					}
 					{
 						{
 							r16
+							r2
 						}
 						{
 							\stopStaff
 							\once \override Staff.StaffSymbol.line-count = 1
 							\startStaff
-							R1 * 3/8
-						}
-						{
-							R1 * 3/8
+							R1 * 3/4
 							\stopStaff
 							\startStaff
 						}
+					}
+					{
 						{
-							r8.
+							d'4 \p
+							g4
 						}
 					}
 					{
 						{
-							e'4
-							cs'4
-						}
-					}
-					{
-						{
-							r16
+							r4
 						}
 					}
 				}
@@ -681,12 +772,49 @@
 				\context Voice = "Percussion Woodblock Voice" {
 					{
 						{
-							r2
-							r8
+							\override Hairpin #'circled-tip = ##t
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 1
+							\afterGrace
+							f8 [ \> \p
+							{
+								\override Flag #'stroke-style = #"grace"
+								\override Stem #'length = #8
+								e'16 \(
+								\revert Flag #'stroke-style
+								\revert Stem #'length
+							}
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = -1
+							a8 ] \)
+						}
+						{
+							\afterGrace
+							g'4
+							{
+								\override Flag #'stroke-style = #"grace"
+								\override Stem #'length = #8
+								c'16 \(
+								\revert Flag #'stroke-style
+								\revert Stem #'length
+							}
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 1
+							e'8 \! \) [
+							\revert Hairpin #'circled-tip
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 0
+							r8 ]
 						}
 					}
 					{
-						\times 2/3 {
+						{
+							r4
+							r16
+						}
+					}
+					{
+						{
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							\afterGrace
@@ -694,25 +822,59 @@
 							{
 								\override Flag #'stroke-style = #"grace"
 								\override Stem #'length = #8
-								f16 \(
+								c'16 [ \(
+								f16 ]
 								\revert Flag #'stroke-style
 								\revert Stem #'length
 							}
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 2
-							a16 \)
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 1
-							c'16
-						}
-						{
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 3
-							r32
+							g'16 \p ~ \)
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 2
 							\afterGrace
-							e'16
+							g'16
+							{
+								\override Flag #'stroke-style = #"grace"
+								\override Stem #'length = #8
+								a16 \(
+								\revert Flag #'stroke-style
+								\revert Stem #'length
+							}
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 0
+							e'16 ] \)
+						}
+					}
+					{
+						{
+							r8.
+						}
+						{
+							r4
+						}
+					}
+					{
+						{
+							f4 \p
+							e'4
+						}
+					}
+					{
+						{
+							r4
+							r8
+						}
+					}
+					{
+						\times 2/3 {
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 1
+							r8 [
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							\afterGrace
+							a8 \p
 							{
 								\override Flag #'stroke-style = #"grace"
 								\override Stem #'length = #8
@@ -720,23 +882,9 @@
 								\revert Flag #'stroke-style
 								\revert Stem #'length
 							}
-							\set stemLeftBeamCount = 3
-							\set stemRightBeamCount = -1
-							f32 ] \)
-						}
-						\times 2/3 {
-							\afterGrace
-							a4
-							{
-								\override Flag #'stroke-style = #"grace"
-								\override Stem #'length = #8
-								c'16 [ \(
-								e'16 ]
-								\revert Flag #'stroke-style
-								\revert Stem #'length
-							}
-							g'4 \)
-							r4
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 0
+							c'8 ] \)
 						}
 					}
 					{
@@ -744,17 +892,59 @@
 							r8
 						}
 						{
-							\stopStaff
-							\once \override Staff.StaffSymbol.line-count = 1
-							\startStaff
-							R1 * 3/4
-							\stopStaff
-							\startStaff
-						}
-						{
 							r4
+							r16
+						}
+					}
+					{
+						{
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 1
+							r8 [
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
 							\afterGrace
-							r8.
+							e'8 \p
+							{
+								\override Flag #'stroke-style = #"grace"
+								\override Stem #'length = #8
+								c'16 \(
+								\revert Flag #'stroke-style
+								\revert Stem #'length
+							}
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 0
+							f8 ] \)
+						}
+					}
+					{
+						{
+							r16
+						}
+					}
+					{
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 3/4 {
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 1
+							\afterGrace
+							r8 [
+							{
+								\override Flag #'stroke-style = #"grace"
+								\override Stem #'length = #8
+								g'16 [ \(
+								a16 ]
+								\revert Flag #'stroke-style
+								\revert Stem #'length
+							}
+							\override Hairpin #'circled-tip = ##t
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							e'8 ~ \) \> \p
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							\afterGrace
+							e'8
 							{
 								\override Flag #'stroke-style = #"grace"
 								\override Stem #'length = #8
@@ -762,44 +952,15 @@
 								\revert Flag #'stroke-style
 								\revert Stem #'length
 							}
-						}
-					}
-					{
-						\times 2/3 {
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 1
-							a8 \)
-							c'4
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 0
+							e'8 ] \! \)
+							\revert Hairpin #'circled-tip
 						}
 					}
 					{
 						{
-							r16
-						}
-						{
-							\stopStaff
-							\once \override Staff.StaffSymbol.line-count = 1
-							\startStaff
-							R1 * 3/8
-						}
-						{
-							R1 * 3/8
-							\stopStaff
-							\startStaff
-						}
-						{
-							r8.
-						}
-					}
-					{
-						\times 2/3 {
-							e'2
-							g'4
-						}
-					}
-					{
-						{
-							r16
+							r4.
 						}
 					}
 				}
@@ -824,10 +985,7 @@
 							R1 * 3/4
 						}
 						{
-							R1 * 3/8
-						}
-						{
-							R1 * 3/8
+							R1 * 3/4
 						}
 						{
 							R1 * 3/4
