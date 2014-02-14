@@ -3,7 +3,7 @@ from abjad import *
 from plague_water.makers.PlagueWaterObject import PlagueWaterObject
 
 
-class GraceAgent(PlagueWaterObject):
+class GraceMaker(PlagueWaterObject):
 
     ### CLASS VARIABLES ###
 
@@ -42,6 +42,20 @@ class GraceAgent(PlagueWaterObject):
         if previous_leaf_duration < self.minimum_preceding_duration:
             if isinstance(previous_leaf, (scoretools.Note, scoretools.Chord)):
                 return
+        # LilyPond can't correctly typeset tuplets where the first leaf is a
+        # rest, with an after-grace attached because it incorrectly computes
+        # the slope for the tuplet bracket.
+        if isinstance(previous_leaf, scoretools.Rest):
+            parentage = inspect_(previous_leaf).get_parentage()
+            tuplet = None
+            for parent in parentage:
+                if isinstance(parent, scoretools.Tuplet):
+                    tuplet = parent
+                    break
+            if tuplet is not None:
+                leaves = list(tuplet.select_leaves())
+                if leaves.index(previous_leaf) == 0:
+                    return
         grace_length = self._cursor()[0]
         if not grace_length:
             return
