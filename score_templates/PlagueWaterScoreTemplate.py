@@ -45,11 +45,17 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
             context_name='SaxophoneStaffGroup',
             name='Saxophone Staff Group',
             )
+
+        pitch_range = pitchtools.PitchRange('[C2, Ab4]')
+        attach(pitch_range, saxophone_staff_group, scope=scoretools.StaffGroup)
+
         attach(indicatortools.Clef('treble'), saxophone_staff)
+
         transpose_string = "transpose ef, c''"
         transpose_command = indicatortools.LilyPondCommand(
             transpose_string, 'before')
         attach(transpose_command, saxophone_voice)
+
         tag_command = indicatortools.LilyPondCommand(
             'tag score.saxophone', 'before')
         attach(tag_command, saxophone_staff_group)
@@ -69,11 +75,17 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
             context_name='GuitarStaffGroup',
             name='Guitar Staff Group',
             )
+
+        pitch_range = pitchtools.PitchRange('[E2, D5]')
+        attach(pitch_range, guitar_staff_group, scope=scoretools.StaffGroup)
+
         attach(indicatortools.Clef('treble'), guitar_staff)
+
         transpose_string = "transpose c c'"
         transpose_command = indicatortools.LilyPondCommand(
             transpose_string, 'before')
         attach(transpose_command, guitar_voice)
+
         tag_command = indicatortools.LilyPondCommand(
             'tag score.guitar', 'before')
         attach(tag_command, guitar_staff_group)
@@ -109,6 +121,10 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
             context_name='PianoStaffGroup',
             name='Piano Staff Group',
             )
+
+        pitch_range = pitchtools.PitchRange('[A0, C8]')
+        attach(pitch_range, piano_staff_group, scope=scoretools.StaffGroup)
+
         tag_command = indicatortools.LilyPondCommand(
             'tag score.piano', 'before')
         attach(tag_command, piano_staff_group)
@@ -152,6 +168,7 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
         attach(indicatortools.Clef('percussion'), percussion_shaker_staff)
         attach(indicatortools.Clef('percussion'), percussion_woodblock_staff)
         attach(indicatortools.Clef('percussion'), percussion_drum_staff)
+
         tag_command = indicatortools.LilyPondCommand(
             'tag score.percussion', 'before')
         attach(tag_command, piano_staff_group)
