@@ -321,7 +321,7 @@ class SegmentMaker(PlagueWaterObject):
     def apply_chords(self):
         from plague_water import makers
         message = '\tapplying chords'
-        with systemtools.ForbidUpdating(self.score):
+        with systemtools.ForbidUpdate(self.score):
             with systemtools.ProgressIndicator(message) as progress_indicator:
                 for leaf in iterate(self.score).by_timeline(Note):
                     logical_tie = inspect_(leaf).get_logical_tie()
@@ -633,7 +633,7 @@ class SegmentMaker(PlagueWaterObject):
         from plague_water import materials
         message = '\tcleaning up silences'
         print message
-        with systemtools.ForbidUpdating(self.score):
+        with systemtools.ForbidUpdate(self.score):
             for voice in iterate(self.score).by_class(Voice):
                 for music in voice:
                     music_maker = \
