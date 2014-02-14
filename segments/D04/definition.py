@@ -32,17 +32,12 @@ context_map['Plague Water Score']['pitch_agent'] = new(
     context_map['Plague Water Score']['pitch_agent'].rotate(6),
     )
 context_map['Saxophone Voice']['register_agent'] = makers.RegisterAgent(
-    instrument=instrumenttools.BaritoneSaxophone(),
     global_inflections=NamedPitch('C2'),
     )
 context_map['Guitar Voice']['register_agent'] = makers.RegisterAgent(
-    instrument=instrumenttools.Guitar(
-        pitch_range=pitchtools.PitchRange('[E2, C6]'),
-        ),
     global_inflections=NamedPitch('F#4'),
     )
 context_map['Piano RH Voice']['register_agent'] = makers.RegisterAgent(
-    instrument=instrumenttools.Piano(),
     global_inflections=NamedPitch('F#6'),
     phrase_inflections=(
         makers.RegisterCurve(
@@ -56,7 +51,6 @@ context_map['Piano RH Voice']['register_agent'] = makers.RegisterAgent(
         ),
     )
 context_map['Piano LH Voice']['register_agent'] = makers.RegisterAgent(
-    instrument=instrumenttools.Piano(),
     global_inflections=NamedPitch('A0'),
     phrase_inflections=(
         makers.RegisterCurve(
