@@ -44,7 +44,7 @@ class MusicMaker(PlagueWaterObject):
         from plague_water import makers
         assert isinstance(chord_agent, (makers.ChordAgent, type(None)))
         assert isinstance(dynamic_agent, (makers.DynamicAgent, type(None)))
-        assert isinstance(grace_maker, (makers.GraceAgent, type(None)))
+        assert isinstance(grace_maker, (makers.GraceMaker, type(None)))
         assert isinstance(indicator_agent, (makers.IndicatorAgent, type(None)))
         assert isinstance(pitch_agent, (
             makers.PitchClassAgent,
