@@ -1,3 +1,19 @@
+afterGraceFraction = #(cons 31 32) 
+
+flat-brackets = #(lambda (grob)
+    (let* (
+        (pos (ly:tuplet-bracket::calc-positions grob))
+        (dir (ly:grob-property grob 'direction))
+        (y  (if (= UP dir)
+            (max (car pos) (cdr pos))
+            (min (car pos) (cdr pos)))))
+    (cons y y)))
+
+LV = \markup {
+    \whiteout \pad-markup #0.5 \normal-text \bold \small "L.V."
+    }
+LV = #(make-dynamic-script LV)
+
 \layout {
     \accidentalStyle neo-modern-cautionary
     indent = 0
@@ -53,8 +69,8 @@
         \override TimeSignature.style = #'numbered
         \override VerticalAxisGroup.default-staff-staff-spacing = #'(
             (basic-distance . 0)
-            (minimum-distance . 10)
-            (padding . 6)
+            (minimum-distance . 8)
+            (padding . 8)
             (stretchability . 2)
             )
     }
@@ -190,8 +206,6 @@
         \accepts PercussionDrumStaff
         \accepts PercussionShakerStaff
         \accepts PercussionWoodblockStaff
-        \override StaffGrouper.staff-staff-spacing.basic-distance = 1
-        \override StaffGrouper.staff-staff-spacing.padding = 2
     }
 
     %%% SCORE %%%
@@ -219,25 +233,10 @@
             )
         \override Beam.beam-thickness = 0.75
         \override Beam.breakable = ##t
-        \override Beam.collision-interfaces = #'(
-            beam-interface
-            clef-interface
-            flag-interface
-            inline-accidental-interface
-            key-signature-interface
-            note-head-interface
-            stem-interface
-            time-signature-interface
-            tuplet-bracket-anterface
-            )
-        \override Beam.damping = 2.0
         \override Beam.length-fraction = 1.5
         \override DynamicLineSpanner.Y-extent = #'(-1.5 . 1.5)
-        \override DynamicLineSpanner.padding = 2
-        \override DynamicLineSpanner.staff-padding = 5
-        \override DynamicLineSpanner.outside-staff-padding = 2
-        \override DynamicText.self-alignment-X = #CENTER
-        \override DynamicText.whiteout = ##t
+        \override DynamicLineSpanner.padding = 4
+        \override DynamicLineSpanner.staff-padding = 3
         \override Glissando.breakable = ##t
         \override Glissando.thickness = 3
         \override NoteCollision.merge-differently-dotted = ##t
@@ -253,14 +252,9 @@
         \override SpacingSpanner.uniform-stretching = ##t
         \override SpacingSpanner.base-shortest-duration = 
             #(ly:make-moment 1 64)
-        \override StaffGrouper.staffgroup-staff-spacing = #'(
-            (basic-distance . 12)
-            (minimum-distance . 18)
-            (padding . 1)
-            (stretchability . 0)
-            )
         \override Stem.details.beamed-lengths = #'(6)
         \override Stem.details.lengths = #'(6)
+        \override Stem.direction = #DOWN
         \override Stem.stemlet-length = 1.5
         \override StemTremolo.beam-thickness = 0.75
         \override StemTremolo.beam-width = 1.5
@@ -269,20 +263,13 @@
         \override StemTremolo.slope = 0.5
         \override SustainPedal.self-alignment-X = #LEFT
         \override TextScript.Y-extent = #'(-1.5 . 1.5)
-        \override TrillPitchAccidental.avoid-slur = #'ignore
+        \override TrillSpanner.outside-staff-padding = 2
+        \override TrillPitchAccidental.avoid-slur = #'inside
+        \override TupletBracket.direction = #DOWN
         \override TupletBracket.full-length-to-extent = ##t
-        \override TupletBracket.outside-staff-priority = 100
         \override TupletBracket.padding = 2
-        \override TupletBracket.positions =
-            #(lambda (grob)
-                (let* (
-                    (pos (ly:tuplet-bracket::calc-positions grob))
-                    (old-y-left (car pos))
-                    (old-y-right (cdr pos))
-                    (new-y-left (/ (+ old-y-left old-y-left old-y-right) 3))
-                    (new-y-right (/ (+ old-y-left old-y-right old-y-right) 3))
-                    )
-                (cons new-y-left new-y-right)))
+        \override TupletBracket.outside-staff-padding = 4
+        %\override TupletBracket.positions = #flat-brackets
         \override TupletNumber.font-size = 1
         \override TupletNumber.text = #tuplet-number::calc-fraction-text
         autoBeaming = ##f
@@ -291,10 +278,4 @@
         tupletFullLength = ##t
     }
 }
-
-afterGraceFraction = #(cons 31 32) 
-LV = \markup {
-    \whiteout \pad-markup #0.5 \normal-text \bold \small "L.V."
-    }
-LV = #(make-dynamic-script LV)
 
