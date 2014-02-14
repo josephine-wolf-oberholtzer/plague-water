@@ -25,7 +25,7 @@ saxophone_context_maker = makers.ContextMaker(
     music_makers=[
         makers.MusicMaker(
             dynamic_agent=materials.midground_dynamic_agent,
-            grace_maker=makers.GraceAgent(
+            grace_maker=makers.GraceMaker(
                 lengths=(1, 0, 1, 0, 0, 1, 2,),
                 ),
             rhythm_maker=materials.winding_rhythm_maker,
@@ -34,7 +34,7 @@ saxophone_context_maker = makers.ContextMaker(
             ),
         makers.MusicMaker(
             dynamic_agent=materials.midground_dynamic_agent,
-            grace_maker=makers.GraceAgent(
+            grace_maker=makers.GraceMaker(
                 lengths=(1, 0, 1, 0, 0, 1, 2,),
                 ),
             rhythm_maker=materials.flowing_rhythm_maker,
@@ -50,7 +50,7 @@ guitar_context_maker = makers.ContextMaker(
     music_makers=[
         makers.MusicMaker(
             dynamic_agent=materials.midground_dynamic_agent,
-            grace_maker=makers.GraceAgent(
+            grace_maker=makers.GraceMaker(
                 lengths=(1, 0, 1, 0, 0, 1, 2,),
                 ),
             rhythm_maker=materials.winding_rhythm_maker,
@@ -59,7 +59,7 @@ guitar_context_maker = makers.ContextMaker(
             ),
         makers.MusicMaker(
             dynamic_agent=materials.midground_dynamic_agent,
-            grace_maker=makers.GraceAgent(
+            grace_maker=makers.GraceMaker(
                 lengths=(1, 0, 1, 0, 0, 1, 2,),
                 ),
             rhythm_maker=materials.flowing_rhythm_maker,
@@ -110,7 +110,7 @@ percussion_woodblock_context_maker = makers.ContextMaker(
     music_makers=[
         makers.MusicMaker(
             dynamic_agent=materials.background_dynamic_agent,
-            grace_maker=makers.GraceAgent(
+            grace_maker=makers.GraceMaker(
                 lengths=(1, 0, 1, 2, 1, 0, 0, 0),
                 ),
             pitch_agent=new(materials.woodblock_pitch_agent,

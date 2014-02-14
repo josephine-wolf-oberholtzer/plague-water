@@ -49,7 +49,7 @@ piano_rh_context_maker = makers.ContextMaker(
         new(materials.piano_fanfare_music_maker,
             chord_agent=materials.domi_chord_agent,
             dynamic_agent=materials.foreground_dynamic_agent,
-            grace_maker=makers.GraceAgent(
+            grace_maker=makers.GraceMaker(
                 lengths=(1, 1, 1, 0, 1, 1, 2,),
                 ),
             timespan_agent=makers.SemanticTimespanAgent(
@@ -68,7 +68,7 @@ piano_lh_context_maker = makers.ContextMaker(
         new(materials.piano_fanfare_music_maker,
             chord_agent=materials.domi_chord_agent,
             dynamic_agent=materials.foreground_dynamic_agent,
-            grace_maker=makers.GraceAgent(
+            grace_maker=makers.GraceMaker(
                 lengths=(1, 2, 1, 1, 1, 1,),
                 ),
             timespan_agent=makers.SemanticTimespanAgent(
@@ -86,7 +86,7 @@ percussion_shaker_context_maker = makers.ContextMaker(
     music_makers=[
         makers.MusicMaker(
             dynamic_agent=materials.midground_dynamic_agent,
-            grace_maker=makers.GraceAgent(
+            grace_maker=makers.GraceMaker(
                 lengths=(1, 1, 1, 1, 0, 1, 0, 0, 0),
                 ),
             pitch_agent=materials.shaker_pitch_agent,
@@ -113,7 +113,7 @@ percussion_drum_context_maker = makers.ContextMaker(
     music_makers=[
         makers.MusicMaker(
             dynamic_agent=materials.midground_dynamic_agent,
-            grace_maker=makers.GraceAgent(
+            grace_maker=makers.GraceMaker(
                 lengths=(1, 0, 1, 1, 0, 1,),
                 ),
             pitch_agent=materials.drum_pitch_agent,
