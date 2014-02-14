@@ -171,7 +171,7 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
 
         tag_command = indicatortools.LilyPondCommand(
             'tag score.percussion', 'before')
-        attach(tag_command, piano_staff_group)
+        attach(tag_command, percussion_staff_group)
 
         ### SCORE ###
 
