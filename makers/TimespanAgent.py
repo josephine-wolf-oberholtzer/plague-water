@@ -39,6 +39,30 @@ class TimespanAgent(PlagueWaterObject):
         ):
         pass
 
+    ### PRIVATE METHODS ###
+
+    def _to_duration_cursor(self, expr):
+        if expr is not None:
+            if isinstance(expr, Duration):
+                expr = [expr]
+            if isinstance(expr, (list, tuple)):
+                expr = datastructuretools.StatalServer(expr)
+            if isinstance(expr, datastructuretools.StatalServer):
+                expr = expr()
+            assert isinstance(expr, datastructuretools.StatalServerCursor)
+        return expr
+
+    def _to_grouping_cursor(self, expr):
+        if expr is not None:
+            if isinstance(expr, int):
+                expr = [expr]
+            if isinstance(expr, (list, tuple)):
+                expr = datastructuretools.StatalServer(expr)
+            if isinstance(expr, datastructuretools.StatalServer):
+                expr = expr()
+            assert isinstance(expr, datastructuretools.StatalServerCursor)
+        return expr
+
     ### PUBLIC METHODS ###
 
     def timespan_has_minimum_length(self, timespan):
@@ -60,4 +84,3 @@ class TimespanAgent(PlagueWaterObject):
     @property
     def minimum_timespan_duration(self):
         return self._minimum_timespan_duration
-
