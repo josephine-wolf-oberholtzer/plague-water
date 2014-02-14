@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
-import os
 from abjad import *
+from plague_water import makers
 
 
 pitch_class_row = pitchtools.PitchClassSegment([0, 3, 2, 5, 11, 1])
@@ -45,41 +45,48 @@ for partitioned_sequence in partitioned_sequences:
     all_rotated_sequences.append(sequence_group)
 
 
-def illustrate(sequences):
-    voice = scoretools.Voice()
-    voice.consists_commands.append('Horizontal_bracket_engraver')
-    for sequence_group in sequences:
-        grouped_containers = []
-        for sequence in sequence_group:
-            containers = []
-            for subsequence in sequence:
-                notes = [scoretools.Note(x, (1, 32)) for x in subsequence]
-                container = scoretools.Container(notes)
-                bracket = spannertools.HorizontalBracketSpanner()
-                topleveltools.attach(bracket, container)
-                voice.append(container)
-                containers.append(container)
-            bracket = spannertools.HorizontalBracketSpanner()
-            topleveltools.attach(bracket, containers)
-            grouped_containers.extend(containers)
-        bracket = spannertools.HorizontalBracketSpanner()
-        topleveltools.attach(bracket, grouped_containers)
-    lilypond_file = lilypondfiletools.make_basic_lilypond_file(voice)
-    stylesheet_path = os.path.join(
-        abjad_configuration.abjad_stylesheets_directory_path,
-        'gallery-layout.ly',
-        )
-    lilypond_file.file_initial_user_includes.append(stylesheet_path)
-    stylesheet_path = os.path.join(
-        abjad_configuration.abjad_stylesheets_directory_path,
-        'pitch-class-layout.ly',
-        )
-    lilypond_file.file_initial_user_includes.append(stylesheet_path)
-    return lilypond_file
+sequence = sequencetools.flatten_sequence(all_rotated_sequences)
+sequences = sequencetools.partition_sequence_by_ratio_of_lengths(
+    sequence,
+    [1, 1, 1],
+    )
+pitch_class_segments = sequencetools.zip_sequences(
+    sequences,
+    truncate=False,
+    )
+pitch_class_segments = sequencetools.flatten_sequence(pitch_class_segments)
 
-lilypond_file = illustrate(all_rotated_sequences)
+
+primary_pitch_class_agent = makers.PitchClassAgent(
+    pitch_class_ratio=(2, 1, 3, 1),
+    pitch_class_talea=(
+        pitchtools.PitchClassSegment([0, 3, 2, 5, 11, 1]),
+        pitchtools.PitchClassSegment([11, 9]),
+        pitchtools.PitchClassSegment([2, 4, 5, 8]),
+        pitchtools.PitchClassSegment([0, 3, 5]),
+        ),
+    transform_ratio=(1, 3, 1, 1, 2, 1),
+    transform_talea=(
+        makers.PitchClassSegmentTransform(
+            transposition=3,
+            ),
+        None,
+        makers.PitchClassSegmentTransform(
+            transposition=1,
+            inversion=True,
+            ),
+        None,
+        makers.PitchClassSegmentTransform(
+            retrogression=True,
+            ),
+        makers.PitchClassSegmentTransform(
+            transposition=-2,
+            ),
+        ),
+    )
 
 
 __all__ = (
-    'all_rotated_sequences',
+    'pitch_class_segments',
+    'primary_pitch_class_agent',
     )

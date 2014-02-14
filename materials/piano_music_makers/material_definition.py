@@ -1,7 +1,5 @@
 # -*- encoding: utf-8 -*-
-from abjad import new
 from abjad.tools import durationtools
-from abjad.tools import markuptools
 from abjad.tools import rhythmmakertools
 from abjad.tools import spannertools
 from plague_water import makers
@@ -47,24 +45,22 @@ piano_fanfare_music_maker = makers.MusicMaker(
     )
 
 
-piano_glissed_music_maker = makers.MusicMaker(
-    indicator_agent=makers.IndicatorAgent(
-        apply_to_output=True,
-        first_leaf_indicators=(
-            markuptools.Markup(
-                r'\center-align \natural',
-                direction='up',
-                ),
-            ),
-        ),
+piano_glissed_keys_music_maker = makers.MusicMaker(
     pitch_agent=makers.PitchClassAgent(
         pitch_class_ratio=(1,),
-        pitch_class_talea=([0, 7, 2, 9, 5, 3, 11],),
+        pitch_class_talea=([0, 7, 2, 9, 5, 1, 11],),
         ),
     rewrite_meter=False,
     rhythm_maker=rhythm_makers.glissing_rhythm_maker,
     spanner_agent=makers.SpannerAgent(
-        output_spanners=spannertools.Glissando,
+        cyclical_output_spanners=(
+            spanners.key_glissando_b_spanner,
+            spanners.key_glissando_w_spanner,
+            spanners.key_glissando_w_spanner,
+            spanners.key_glissando_b_spanner,
+            spanners.key_glissando_w_spanner,
+            ),
+        output_spanners=spanners.key_glissando_spanner,
         ),
     timespan_agent=makers.SemanticTimespanAgent(
         playing_durations=(
@@ -75,34 +71,9 @@ piano_glissed_music_maker = makers.MusicMaker(
     )
 
 
-piano_glissed_keys_music_maker = new(piano_glissed_music_maker,
-    indicator_agent__first_leaf_indicators=(
-        markuptools.Markup(
-            r'\pad-around #1 \box \pad-around #1 \small KEYS',
-            Up,
-            ),
-        ),
-    spanner_agent__output_spanners=spanners.key_glissando_spanner,
-    )
-
-
-piano_glissed_pegs_music_maker = new(piano_glissed_music_maker,
-    indicator_agent__first_leaf_indicators=(
-        markuptools.Markup(
-            r'\pad-around #1 \box \pad-around #1 \small PEGS',
-            Up,
-            ),
-        ),
-    spanner_agent__output_spanners=spanners.key_glissando_spanner,
-    )
-
-
 piano_pointillist_music_maker = makers.MusicMaker(
     rhythm_maker=rhythm_makers.pointillist_rhythm_maker,
     )
-
-
-piano_rolled_chords_music_maker = makers.MusicMaker()
 
 
 piano_trilling_music_maker = makers.MusicMaker(
@@ -124,9 +95,7 @@ piano_trilling_music_maker = makers.MusicMaker(
 __all__ = (
     'piano_fanfare_music_maker',
     'piano_glissed_keys_music_maker',
-    'piano_glissed_pegs_music_maker',
     'piano_pedals_music_maker',
     'piano_pointillist_music_maker',
-    'piano_rolled_chords_music_maker',
     'piano_trilling_music_maker',
     )
