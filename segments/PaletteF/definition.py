@@ -19,16 +19,7 @@ score_template = score_templates.PlagueWaterScoreTemplate()
 score = score_template()
 context_map = datastructuretools.ContextMap(score_template)
 context_map[score]['minimum_timespan_duration'] = durationtools.Duration(1, 8)
-context_map[score]['pitch_agent'] = makers.PitchClassAgent(
-    pitch_class_ratio=(1, 1, 1),
-    pitch_class_talea=(
-        [0, 3, 2, 5, 11, 1],
-        [2, 8, 10, 11],
-        [1, 4],
-        ),
-    transform_ratio=None,
-    transform_talea=None,
-    )
+context_map[score]['pitch_agent'] = materials.primary_pitch_class_agent
 
 ### TIMESPAN AGENTS ###
 
