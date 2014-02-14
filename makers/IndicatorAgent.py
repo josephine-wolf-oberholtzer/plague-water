@@ -84,9 +84,10 @@ class IndicatorAgent(PlagueWaterObject):
                 group = groups[0]
                 if first_leaf_indicators:
                     expr = first_leaf_indicators[0]
+                    self._attach_indicators(expr, group[0])
                 elif last_leaf_indicators:
                     expr = last_leaf_indicators[0]
-                self._attach_indicators(expr, group[0])
+                    self._attach_indicators(expr, group[0])
             elif 1 < len(groups):
                 first_group = groups[0]
                 last_group = groups[-1]
