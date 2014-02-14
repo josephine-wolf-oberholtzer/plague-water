@@ -18,81 +18,70 @@ segment_tempo = indicatortools.Tempo(durationtools.Duration(1, 8), 48)
 score_template = score_templates.PlagueWaterScoreTemplate()
 score = score_template()
 context_map = datastructuretools.ContextMap(score_template)
-context_map[score]['minimum_timespan_duration'] = durationtools.Duration(1, 8)
 context_map[score]['pitch_agent'] = materials.primary_pitch_class_agent
 
-### TIMESPAN AGENTS ###
+### PREFACE ###
 
-short_timespan_agent = makers.SemanticTimespanAgent(
-    leading_rest_durations=materials.short_durations(1),
+timespan_agent = makers.ConstantStepTimespanAgent(
     minimum_timespan_duration=durationtools.Duration(1, 8),
-    playing_durations=materials.short_durations(2),
-    playing_groupings=[1, 1, 1, 2],
-    tailing_rest_durations=materials.medium_durations(2),
-    )
-
-medium_timespan_agent = makers.SemanticTimespanAgent(
-    leading_rest_durations=materials.medium_durations(2),
-    minimum_timespan_duration=durationtools.Duration(1, 8),
-    playing_durations=materials.short_durations(8),
-    playing_groupings=[1, 2, 1, 1, 1],
-    tailing_rest_durations=materials.long_durations(5),
-    )
-
-long_timespan_agent = makers.SemanticTimespanAgent(
-    leading_rest_durations=materials.long_durations(1),
-    minimum_timespan_duration=durationtools.Duration(1, 8),
-    playing_durations=materials.medium_durations(9),
-    playing_groupings=[1, 2, 1, 1, 1, 2, 1, 2],
-    tailing_rest_durations=materials.long_durations(4),
+    step_durations=(
+        durationtools.Duration(5, 8),
+        durationtools.Duration(7, 8),
+        durationtools.Duration(9, 8),
+        ),
     )
 
 ### SEMANTIC CONTEXT MAKERS ###
 
-guitar_context_maker = makers.ContextMaker(
-    context_name='Guitar Voice',
-    initial_music_maker=new(materials.basic_music_maker,
-        grace_maker=makers.GraceAgent(
-            lengths=(1, 0, 1, 0, 0, 1, 2,),
-            ),
-        rhythm_maker=materials.pointillist_rhythm_maker,
-        timespan_agent=new(
-            short_timespan_agent.transform_cursors(1),
-            leading_rest_durations=None,
-            ),
-        ),
-    music_maker_indices=(0, 1, 0, 0, 1),
+saxophone_context_maker = makers.ContextMaker(
+    context_name='Saxophone Voice',
     music_makers=[
-        new(materials.basic_music_maker,
-            grace_maker=makers.GraceAgent(
-                lengths=(1, 0, 1, 0, 0, 1, 2,),
+        makers.MusicMaker(
+            dynamic_agent=makers.DynamicAgent(
+                initial_dynamic_expressions=(
+                    makers.DynamicExpression('p', 'o'),
+                    makers.DynamicExpression('ppp', 'o'),
+                    makers.DynamicExpression('pp', 'o'),
+                    ),
                 ),
-            rhythm_maker=materials.pointillist_rhythm_maker,
-            timespan_agent=short_timespan_agent.transform_cursors(1),
-            ),
-        new(materials.basic_music_maker,
-            rhythm_maker=materials.pointillist_rhythm_maker,
-            timespan_agent=medium_timespan_agent.transform_cursors(2),
+            grace_maker=makers.GraceMaker(
+                lengths=(1, 0, 0),
+                ),
+            indicator_agent=makers.IndicatorAgent(
+                each_leaf_indicators=('staccatissimo',),
+                ),
+            pitch_agent=materials.drum_pitch_agent,
+            rhythm_maker=materials.pointillist_rhythm_maker.rotate(1),
+            timespan_agent=new(timespan_agent,
+                playing_durations=materials.make_durations(2, 3)(2),
+                playing_groupings=[1, 1, 2],
+                ),
             ),
         ]
     )
 
-saxophone_context_maker = makers.ContextMaker(
-    context_name='Saxophone Voice',
-    music_maker_indices=(0, 0, 1, 0, 1),
+guitar_context_maker = makers.ContextMaker(
+    context_name='Guitar Voice',
     music_makers=[
-        new(materials.basic_music_maker,
-            rhythm_maker=materials.pointillist_rhythm_maker,
-            timespan_agent=short_timespan_agent.transform_cursors(3),
-            ),
-        new(materials.basic_music_maker,
-            grace_maker=makers.GraceAgent(
-                lengths=(1, 0, 1, 0, 0, 1, 2,),
+        makers.MusicMaker(
+            dynamic_agent=makers.DynamicAgent(
+                initial_dynamic_expressions=(
+                    makers.DynamicExpression('ppp', 'o'),
+                    makers.DynamicExpression('pp', 'o'),
+                    makers.DynamicExpression('p', 'o'),
+                    ),
                 ),
-            rhythm_maker=materials.pointillist_rhythm_maker,
-            timespan_agent=new(
-                medium_timespan_agent.transform_cursors(4),
-                playing_groupings=materials.medium_groupings(1),
+            grace_maker=makers.GraceMaker(
+                lengths=(1, 0),
+                ),
+            indicator_agent=makers.IndicatorAgent(
+                each_leaf_indicators=('staccatissimo',),
+                ),
+            pitch_agent=materials.drum_pitch_agent,
+            rhythm_maker=materials.pointillist_rhythm_maker.rotate(0),
+            timespan_agent=new(timespan_agent,
+                playing_durations=materials.make_durations(2, 3)(1),
+                playing_groupings=[1, 2],
                 ),
             ),
         ]
@@ -100,23 +89,24 @@ saxophone_context_maker = makers.ContextMaker(
 
 piano_rh_context_maker = makers.ContextMaker(
     context_name='Piano RH Voice',
-    music_maker_indices=(1, 0, 0, 1, 0),
     music_makers=[
-        new(materials.basic_music_maker,
-            grace_maker=makers.GraceAgent(
-                lengths=(1, 0, 1, 0, 0, 1, 2,),
+        makers.MusicMaker(
+            dynamic_agent=makers.DynamicAgent(
+                initial_dynamic_expressions=(
+                    makers.DynamicExpression('pp', 'o'),
+                    makers.DynamicExpression('p', 'o'),
+                    makers.DynamicExpression('ppp', 'o'),
+                    ),
                 ),
-            rhythm_maker=materials.pointillist_rhythm_maker,
-            timespan_agent=short_timespan_agent.transform_cursors(3),
-            ),
-        new(materials.basic_music_maker,
-            grace_maker=makers.GraceAgent(
-                lengths=(1, 0, 1, 0, 0, 1, 2,),
+            indicator_agent=makers.IndicatorAgent(
+                each_leaf_indicators=('staccatissimo',),
                 ),
-            rhythm_maker=materials.pointillist_rhythm_maker,
-            timespan_agent=new(
-                medium_timespan_agent.transform_cursors(3),
-                playing_groupings=materials.medium_groupings(3),
+            labels='pedaled',
+            pitch_agent=materials.drum_pitch_agent,
+            rhythm_maker=materials.pointillist_rhythm_maker.rotate(2),
+            timespan_agent=new(timespan_agent,
+                playing_durations=materials.make_durations(2, 3)(3),
+                playing_groupings=[2, 1],
                 ),
             ),
         ],
@@ -124,38 +114,49 @@ piano_rh_context_maker = makers.ContextMaker(
 
 piano_lh_context_maker = makers.ContextMaker(
     context_name='Piano LH Voice',
-    music_maker_indices=(0, 0, 1, 2, 0, 1, 0, 2),
     music_makers=[
-        new(materials.basic_music_maker,
-            grace_maker=makers.GraceAgent(
-                lengths=(1, 0, 1, 0, 0, 1, 2,),
+        makers.MusicMaker(
+            dynamic_agent=makers.DynamicAgent(
+                initial_dynamic_expressions=(
+                    makers.DynamicExpression('p', 'o'),
+                    makers.DynamicExpression('ppp', 'o'),
+                    makers.DynamicExpression('pp', 'o'),
+                    ),
                 ),
-            rhythm_maker=materials.pointillist_rhythm_maker,
-            timespan_agent=short_timespan_agent.transform_cursors(3),
-            ),
-        new(materials.basic_music_maker,
-            grace_maker=makers.GraceAgent(
-                lengths=(1, 0, 1, 0, 0, 1, 2,),
+            indicator_agent=makers.IndicatorAgent(
+                each_leaf_indicators=('staccatissimo',),
                 ),
-            rhythm_maker=materials.pointillist_rhythm_maker,
-            timespan_agent=medium_timespan_agent.transform_cursors(3),
+            labels='pedaled',
+            pitch_agent=materials.drum_pitch_agent,
+            rhythm_maker=materials.pointillist_rhythm_maker.rotate(3),
+            timespan_agent=new(timespan_agent,
+                playing_durations=materials.make_durations(2, 3)(4),
+                playing_groupings=[1, 2, 1],
+                ),
             ),
         ],
     )
 
 percussion_shaker_context_maker = makers.ContextMaker(
     context_name='Percussion Shaker Voice',
-    music_maker_indices=(0, 0, 1, 0, 1),
     music_makers=[
-        new(materials.basic_music_maker,
-            pitch_agent=materials.shaker_pitch_agent,
-            rhythm_maker=materials.pointillist_rhythm_maker,
-            timespan_agent=medium_timespan_agent.transform_cursors(9),
-            ),
-        new(materials.basic_music_maker,
-            pitch_agent=materials.shaker_pitch_agent,
-            rhythm_maker=materials.pointillist_rhythm_maker,
-            timespan_agent=long_timespan_agent.transform_cursors(10),
+        makers.MusicMaker(
+            dynamic_agent=makers.DynamicAgent(
+                initial_dynamic_expressions=(
+                    makers.DynamicExpression('ppp', 'o'),
+                    makers.DynamicExpression('p', 'o'),
+                    makers.DynamicExpression('pp', 'o'),
+                    ),
+                ),
+            indicator_agent=makers.IndicatorAgent(
+                each_leaf_indicators=('staccatissimo',),
+                ),
+            pitch_agent=materials.drum_pitch_agent,
+            rhythm_maker=materials.pointillist_rhythm_maker.rotate(4),
+            timespan_agent=new(timespan_agent,
+                playing_durations=materials.make_durations(2, 3)(5),
+                playing_groupings=[1, 1, 2, 1],
+                ),
             ),
         ],
     )
@@ -163,30 +164,24 @@ percussion_shaker_context_maker = makers.ContextMaker(
 percussion_woodblock_context_maker = makers.ContextMaker(
     context_name='Percussion Woodblock Voice',
     music_makers=[
-        new(materials.basic_music_maker,
-            grace_maker=makers.GraceAgent(
-                lengths=(1, 0, 1, 0, 0, 1, 2,),
-                ),
-            pitch_agent=materials.woodblock_pitch_agent,
-            rhythm_maker=materials.pointillist_rhythm_maker,
-            timespan_agent=long_timespan_agent.transform_cursors(11),
-            ),
+        materials.silent_music_maker,
         ],
     )
 
 percussion_drum_context_maker = makers.ContextMaker(
     context_name='Percussion Drum Voice',
-    music_maker_indices=(0, 0, 1, 0, 1),
     music_makers=[
-        new(materials.basic_music_maker,
+        makers.MusicMaker(
+            dynamic_agent=materials.midground_dynamic_agent,
+            grace_maker=makers.GraceMaker(
+                lengths=(1, 0),
+                ),
             pitch_agent=materials.drum_pitch_agent,
-            rhythm_maker=materials.pointillist_rhythm_maker,
-            timespan_agent=medium_timespan_agent.transform_cursors(12),
-            ),
-        new(materials.basic_music_maker,
-            pitch_agent=materials.drum_pitch_agent,
-            rhythm_maker=materials.pointillist_rhythm_maker,
-            timespan_agent=long_timespan_agent.transform_cursors((13, True)),
+            rhythm_maker=materials.flowing_rhythm_maker,
+            timespan_agent=new(timespan_agent,
+                playing_durations=materials.long_durations(1),
+                playing_groupings=materials.medium_groupings(),
+                ),
             ),
         ],
     )
