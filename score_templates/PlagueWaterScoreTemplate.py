@@ -3,6 +3,7 @@ import collections
 from abjad import attach
 from abjad.tools import abctools
 from abjad.tools import indicatortools
+from abjad.tools import pitchtools
 from abjad.tools import scoretools
 
 
@@ -19,10 +20,15 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
 
     def __call__(self):
 
+        ### TIME SIGNATURE CONTEXT ###
+
         time_signature_context = scoretools.Context(
             name='TimeSignatureContext',
             context_name='TimeSignatureContext',
             )
+        tag_string = 'tag score.saxophone.guitar.piano.percussion'
+        tag_command = indicatortools.LilyPondCommand(tag_string, 'before')
+        attach(tag_command, time_signature_context)
 
         ### SAXOPHONE ###
 
@@ -39,8 +45,14 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
             context_name='SaxophoneStaffGroup',
             name='Saxophone Staff Group',
             )
-
-        attach(indicatortools.Clef('bass'), saxophone_staff)
+        attach(indicatortools.Clef('treble'), saxophone_staff)
+        transpose_string = "transpose ef, c''"
+        transpose_command = indicatortools.LilyPondCommand(
+            transpose_string, 'before')
+        attach(transpose_command, saxophone_voice)
+        tag_command = indicatortools.LilyPondCommand(
+            'tag score.saxophone', 'before')
+        attach(tag_command, saxophone_staff_group)
 
         ### GUITAR ###
 
@@ -57,8 +69,14 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
             context_name='GuitarStaffGroup',
             name='Guitar Staff Group',
             )
-
-        attach(indicatortools.Clef('treble_8'), guitar_staff)
+        attach(indicatortools.Clef('treble'), guitar_staff)
+        transpose_string = "transpose c c'"
+        transpose_command = indicatortools.LilyPondCommand(
+            transpose_string, 'before')
+        attach(transpose_command, guitar_voice)
+        tag_command = indicatortools.LilyPondCommand(
+            'tag score.guitar', 'before')
+        attach(tag_command, guitar_staff_group)
 
         ### PIANO ###
 
@@ -78,10 +96,6 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
             context_name='PianoLowerStaff',
             name='Piano Lower Staff',
             )
-        #piano_dynamics = scoretools.Voice(
-        #    context_name='Dynamics',
-        #    name='Piano Dynamics',
-        #    )
         piano_pedals = scoretools.Voice(
             context_name='Dynamics',
             name='Piano Pedals',
@@ -89,13 +103,15 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
         piano_staff_group = scoretools.StaffGroup(
             [
                 piano_upper_staff,
-                #piano_dynamics,
                 piano_lower_staff,
                 piano_pedals,
                 ],
             context_name='PianoStaffGroup',
             name='Piano Staff Group',
             )
+        tag_command = indicatortools.LilyPondCommand(
+            'tag score.piano', 'before')
+        attach(tag_command, piano_staff_group)
 
         ### PERCUSSION ###
 
@@ -136,6 +152,9 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
         attach(indicatortools.Clef('percussion'), percussion_shaker_staff)
         attach(indicatortools.Clef('percussion'), percussion_woodblock_staff)
         attach(indicatortools.Clef('percussion'), percussion_drum_staff)
+        tag_command = indicatortools.LilyPondCommand(
+            'tag score.percussion', 'before')
+        attach(tag_command, piano_staff_group)
 
         ### SCORE ###
 
