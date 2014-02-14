@@ -22,12 +22,16 @@ class DynamicAgent(PlagueWaterObject):
         from plague_water import makers
         prototype = (type(None), makers.DynamicExpression)
         if cyclic_dynamic_expressions is not None:
+            if isinstance(cyclic_dynamic_expressions, prototype):
+                cyclic_dynamic_expressions = (cyclic_dynamic_expressions,)
             assert all(isinstance(x, prototype)
                 for x in cyclic_dynamic_expressions)
             assert len(cyclic_dynamic_expressions)
             cyclic_dynamic_expressions = tuple(cyclic_dynamic_expressions)
         self._cyclic_dynamic_expressions = cyclic_dynamic_expressions
         if initial_dynamic_expressions is not None:
+            if isinstance(initial_dynamic_expressions, prototype):
+                initial_dynamic_expressions = (initial_dynamic_expressions,)
             assert all(isinstance(x, prototype)
                 for x in initial_dynamic_expressions)
             assert len(initial_dynamic_expressions)
