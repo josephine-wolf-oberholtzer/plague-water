@@ -45,17 +45,20 @@ class GraceMaker(PlagueWaterObject):
         # LilyPond can't correctly typeset tuplets where the first leaf is a
         # rest, with an after-grace attached because it incorrectly computes
         # the slope for the tuplet bracket.
-        if isinstance(previous_leaf, scoretools.Rest):
-            parentage = inspect_(previous_leaf).get_parentage()
-            tuplet = None
-            for parent in parentage:
-                if isinstance(parent, scoretools.Tuplet):
-                    tuplet = parent
-                    break
-            if tuplet is not None:
-                leaves = list(tuplet.select_leaves())
-                if leaves.index(previous_leaf) == 0:
-                    return
+        parentage = inspect_(previous_leaf).get_parentage()
+        tuplet = None
+        for parent in parentage:
+            if isinstance(parent, scoretools.Tuplet):
+                tuplet = parent
+                break
+        if tuplet is not None:
+            leaves = list(tuplet.select_leaves())
+            if previous_leaf is leaves[0] and \
+                isinstance(previous_leaf, scoretools.Rest):
+                return
+            elif previous_leaf is leaves[-1]:
+                return
+
         grace_length = self._cursor()[0]
         if not grace_length:
             return
