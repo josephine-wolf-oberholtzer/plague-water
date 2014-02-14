@@ -1,10 +1,11 @@
 # -*- encoding: utf-8 -*-
+from abjad import attach
 from abjad import new
 from abjad.tools import datastructuretools
 from abjad.tools import durationtools
 from abjad.tools import mathtools
-from abjad.tools import systemtools
 from abjad.tools import rhythmmakertools
+from abjad.tools import systemtools
 from abjad.tools import timespantools
 from plague_water.makers.PlagueWaterObject import PlagueWaterObject
 
@@ -16,6 +17,7 @@ class ContextMaker(PlagueWaterObject):
     __slots__ = (
         '_context_name',
         '_context_dependencies',
+        '_initial_indicators',
         '_initial_music_maker',
         '_music_maker_indices',
         '_music_makers',
@@ -28,6 +30,7 @@ class ContextMaker(PlagueWaterObject):
         self,
         context_name=None,
         context_dependencies=None,
+        initial_indicators=None,
         initial_music_maker=None,
         music_maker_indices=None,
         music_makers=None,
@@ -40,6 +43,9 @@ class ContextMaker(PlagueWaterObject):
             context_dependencies = tuple(str(x) for x in context_dependencies)
         self._context_dependencies = context_dependencies
         assert isinstance(initial_music_maker, (makers.MusicMaker, type(None)))
+        if initial_indicators is not None:
+            initial_indicators = tuple(initial_indicators)
+        self._initial_indicators = initial_indicators
         self._initial_music_maker = initial_music_maker
         if music_maker_indices is not None:
             music_maker_indices = tuple(int(x) for x in music_maker_indices)
@@ -53,6 +59,15 @@ class ContextMaker(PlagueWaterObject):
         self._timespan_inventory = timespantools.TimespanInventory()
 
     ### PUBLIC METHODS ###
+
+    def attach_initial_indicators(
+        self,
+        music,
+        ):
+        if self.initial_indicators is not None:
+            initial_leaf = music.select_leaves()[0]
+            for indicator in self.initial_indicators:
+                attach(indicator, initial_leaf)
 
     def cleanup_timespans(
         self,
@@ -210,6 +225,10 @@ class ContextMaker(PlagueWaterObject):
     @property
     def context_dependencies(self):
         return self._context_dependencies
+
+    @property
+    def initial_indicators(self):
+        return self._initial_indicators
 
     @property
     def initial_music_maker(self):
