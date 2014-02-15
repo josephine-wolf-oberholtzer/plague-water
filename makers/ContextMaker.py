@@ -60,7 +60,7 @@ class ContextMaker(PlagueWaterObject):
 
     ### PUBLIC METHODS ###
 
-    def attach_initial_indicators(
+    def apply_initial_indicators(
         self,
         music,
         ):

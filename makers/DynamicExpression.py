@@ -96,17 +96,13 @@ class DynamicExpression(PlagueWaterObject):
         elif self.minimum_duration is not None:
             if group.get_duration() < self.minimum_duration:
                 is_short_group = True
-        includes_grace_notes = False
+        grace_notes = None
         previous_leaf = inspect_(group[0]).get_leaf(-1)
         if previous_leaf is not None:
             graces = inspect_(previous_leaf).get_grace_containers('after')
             if graces:
                 assert len(graces) == 1
                 grace_notes = list(graces[0].select_leaves())
-                group = grace_notes + list(group)
-                includes_grace_notes = True
-        if not isinstance(group, selectiontools.SliceSelection):
-            group = selectiontools.SliceSelection(group)
         start_token = self.hairpin_start_token
         stop_token = self.hairpin_stop_token
         if is_short_group or stop_token is None:
@@ -145,8 +141,6 @@ class DynamicExpression(PlagueWaterObject):
             )
         if is_circled:
             override(hairpin).hairpin.circled_tip = True
-        if includes_grace_notes:
-            hairpin._contiguity_constraint = None
         attach(hairpin, group)
 
     ### PUBLIC PROPERTIES ###
