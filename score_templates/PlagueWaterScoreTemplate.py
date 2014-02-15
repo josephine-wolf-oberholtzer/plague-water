@@ -51,7 +51,7 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
 
         attach(indicatortools.Clef('treble'), saxophone_staff)
 
-        transpose_string = "transpose ef, c''"
+        transpose_string = "transpose ef, c'"
         transpose_command = indicatortools.LilyPondCommand(
             transpose_string, 'before')
         attach(transpose_command, saxophone_voice)
