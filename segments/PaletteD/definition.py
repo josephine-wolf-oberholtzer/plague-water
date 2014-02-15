@@ -92,28 +92,45 @@ guitar_context_maker = makers.ContextMaker(
 
 piano_rh_context_maker = makers.ContextMaker(
     context_name='Piano RH Voice',
-    music_maker_indices=(1, 0, 0, 1, 0),
+    music_maker_indices=(1, 0, 0, 0),
     music_makers=[
         new(materials.piano_glissed_keys_music_maker,
             timespan_agent__leading_rest_durations=materials.short_durations,
             ),
+        makers.MusicMaker(
+            chord_agent=materials.clusters_chord_agent,
+            dynamic_agent=materials.background_dynamic_agent,
+            labels='pedaled',
+            rhythm_maker=materials.pointillist_rhythm_maker,
+            spanner_agent=materials.trilling_constantly_spanner_agent,
+            timespan_agent=new(
+                materials.pointillist_sparse_timespan_agent,
+                playing_durations=materials.very_short_durations,
+                playing_groupings=[1],
+                ),
+            )
         ],
     )
 
 piano_lh_context_maker = makers.ContextMaker(
     context_name='Piano LH Voice',
-    music_maker_indices=(0, 0, 1, 2, 0, 1, 0, 2),
+    music_maker_indices=(0, 0, 1, 0, 0, 0, 1),
     music_makers=[
         new(materials.piano_glissed_keys_music_maker,
             timespan_agent__leading_rest_durations=materials.long_durations,
             ),
-        new(materials.basic_music_maker,
-            grace_maker=makers.GraceMaker(
-                lengths=(1, 0, 1, 0, 0, 1, 2,),
-                ),
+        makers.MusicMaker(
+            chord_agent=materials.clusters_chord_agent,
+            dynamic_agent=materials.background_dynamic_agent,
+            labels='pedaled',
             rhythm_maker=materials.pointillist_rhythm_maker,
-            timespan_agent=long_timespan_agent.transform_cursors(10),
-            ),
+            spanner_agent=materials.trilling_constantly_spanner_agent,
+            timespan_agent=new(
+                materials.pointillist_sparse_timespan_agent,
+                playing_durations=materials.very_short_durations,
+                playing_groupings=[1],
+                ),
+            ).transform_cursors(4),
         ],
     )
 

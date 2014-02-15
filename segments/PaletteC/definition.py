@@ -65,6 +65,7 @@ piano_rh_context_maker = makers.ContextMaker(
     context_name='Piano RH Voice',
     music_makers=[
         makers.MusicMaker(
+            chord_agent=materials.clusters_chord_agent,
             dynamic_agent=materials.background_dynamic_agent,
             labels='pedaled',
             rhythm_maker=materials.pointillist_rhythm_maker,
@@ -82,6 +83,7 @@ piano_lh_context_maker = makers.ContextMaker(
     context_name='Piano LH Voice',
     music_makers=[
         makers.MusicMaker(
+            chord_agent=materials.domi_chord_agent,
             dynamic_agent=materials.background_dynamic_agent,
             labels='pedaled',
             rhythm_maker=materials.pointillist_rhythm_maker,
