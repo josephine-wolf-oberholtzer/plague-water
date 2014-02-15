@@ -36,6 +36,12 @@
     ragged-bottom = ##f
     ragged-last-bottom = ##t
     right-margin = 10\mm
+    system-system-spacing = #'(
+        (basic-distance . 0)
+        (minimum-distance . 0)
+        (padding . 8)
+        (stretchability . 60)
+        )
     top-margin = 10\mm
     top-markup-spacing = #'(
         (basic-distance . 0)
