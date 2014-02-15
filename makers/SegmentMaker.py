@@ -98,6 +98,7 @@ class SegmentMaker(PlagueWaterObject):
         self.apply_pitches()
         self.apply_registers()
         self.apply_chords()
+        self.apply_guitar_octavations()
         self.apply_piano_clefs_and_octavations()
         # self.apply_piano_staff_changes()
         self.color_piano_conflicts()
@@ -106,6 +107,21 @@ class SegmentMaker(PlagueWaterObject):
         self.apply_spanners()
         self.fix_grace_spanners()
         self.apply_initial_indicators()
+
+        for voice in iterate(self.score).by_class(Voice):
+            counter = 0
+            for music in voice:
+                for division in music:
+                    counter += 1
+                    voice_name = voice.name.replace(' ', '')
+                    segment_name = self.segment_id
+                    string = 'Segment{}:{}:{}'.format(
+                        segment_name,
+                        voice_name,
+                        counter,
+                        )
+                    comment = indicatortools.LilyPondComment(string)
+                    attach(comment, division)
 
         ### APPLY LAYOUT ###
         self.configure_score()
@@ -330,6 +346,8 @@ class SegmentMaker(PlagueWaterObject):
                         continue
                     inspector = inspect_(leaf)
                     music_maker = inspector.get_effective(makers.MusicMaker)
+                    if music_maker is None:
+                        continue
                     chord_agent = music_maker.chord_agent
                     if chord_agent is None:
                         continue
@@ -424,6 +442,60 @@ class SegmentMaker(PlagueWaterObject):
                 voice_name = voice.name
                 context_maker = self[voice_name]
                 context_maker.apply_initial_indicators(voice)
+                progress_indicator.advance()
+
+    def apply_guitar_octavations(self):
+        message = '\tapplying guitar octavations'
+        print message
+        staff = self.score['Guitar Staff']
+        leaves = list(iterate(staff).by_class(scoretools.Leaf))
+        groups = list(iterate(leaves).by_run(
+            (scoretools.Note, scoretools.Chord)))
+        for group in groups:
+            pitches = []
+            previous_leaf = inspect_(group[0]).get_leaf(-1)
+            if previous_leaf is not None:
+                inspector = inspect_(previous_leaf)
+                after_graces = inspector.get_grace_containers('after')
+                if after_graces:
+                    for grace_note in after_graces[0]:
+                        pitches.append(grace_note.written_pitch)
+            for leaf in group[:-1]:
+                if isinstance(leaf, scoretools.Note):
+                    pitches.append(leaf.written_pitch)
+                else:
+                    pitches.append(leaf.written_pitches)
+                inspector = inspect_(leaf)
+                after_graces = inspector.get_grace_containers('after')
+                if after_graces:
+                    for grace_note in after_graces[0]:
+                        pitches.append(grace_note.written_pitch)
+            leaf = group[-1]
+            if isinstance(leaf, scoretools.Note):
+                pitches.append(leaf.written_pitch)
+            else:
+                pitches.append(leaf.written_pitches)
+            average = int(sum(float(x) for x in pitches) / len(pitches))
+            average = pitchtools.NamedPitch(average)
+            octavation = None
+            if NamedPitch('B4') < average:
+                octavation = 1
+            if NamedPitch('C4') < min(pitches) and \
+                NamedPitch('C5') < max(pitches):
+                octavation = 1
+            if octavation is not None:
+                leaves = []
+                if previous_leaf is not None:
+                    inspector = inspect_(previous_leaf)
+                    after_graces = inspector.get_grace_containers('after')
+                    if after_graces:
+                        leaves.extend(after_graces[0].select_leaves())
+                leaves.extend(group)
+                octavation_spanner = spannertools.OctavationSpanner(
+                    start=octavation,
+                    )
+                octavation_spanner._contiguity_constraint = None
+                attach(octavation_spanner, leaves)
 
     def apply_piano_clefs_and_octavations(self):
         def cleanup(staff, current_clef=None):
@@ -439,10 +511,14 @@ class SegmentMaker(PlagueWaterObject):
                     clef = Clef('treble')
                     if NamedPitch('B5') < average:
                         octavation = 1
+                    if NamedPitch('B6') < average:
+                        octavation = 2
                 else:
                     clef = Clef('bass')
                     if average < NamedPitch('D2'):
                         octavation = -1
+                    if average < NamedPitch('D1'):
+                        octavation = -2
                 head = group[0]
                 leaf_to_attach_to = head
                 previous_leaf = inspect_(head).get_leaf(-1)
