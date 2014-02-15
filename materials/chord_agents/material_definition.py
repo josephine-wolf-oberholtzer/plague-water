@@ -74,27 +74,60 @@ domi_chord_agent = makers.ChordAgent(
         ),
     )
 
-increasing_clusters_chord_agent = makers.ChordAgent(
-    ratio=(1, 1, 1),
+clusters_chord_agent = makers.ChordAgent(
+    ratio=(1, 3, 1),
     talea=(
         (
+            None,
+            None,
+            makers.KeyClusterExpression(),
+            None,
+            makers.KeyClusterExpression(
+                include_black_keys=False,
+                ),
+            makers.KeyClusterExpression(
+                include_black_keys=False,
+                ),
+            makers.KeyClusterExpression(
+                include_white_keys=False,
+                staff_space_width=9,
+                ),
+            makers.KeyClusterExpression(),
             ),
         (
+            makers.KeyClusterExpression(
+                staff_space_width=7,
+                ),
+            makers.KeyClusterExpression(),
+            makers.KeyClusterExpression(
+                include_black_keys=False,
+                ),
+            makers.KeyClusterExpression(),
+            makers.KeyClusterExpression(
+                include_white_keys=False,
+                staff_space_width=9,
+                ),
+            None,
             ),
         (
-            ),
-        ),
-    )
-
-
-decreasing_clusters_chord_agent = makers.ChordAgent(
-    ratio=(1, 1, 1),
-    talea=(
-        (
-            ),
-        (
-            ),
-        (
+            None,
+            makers.KeyClusterExpression(
+                include_black_keys=False,
+                ),
+            makers.KeyClusterExpression(
+                staff_space_width=7,
+                ),
+            makers.KeyClusterExpression(),
+            None,
+            makers.KeyClusterExpression(
+                include_white_keys=False,
+                staff_space_width=9,
+                ),
+            None,
+            None,
+            makers.KeyClusterExpression(
+                include_black_keys=False,
+                ),
             ),
         ),
     )
@@ -103,19 +136,73 @@ decreasing_clusters_chord_agent = makers.ChordAgent(
 rare_chord_agent = makers.ChordAgent(
     ratio=(1, 1, 1),
     talea=(
-        [
-            ],
-        [
-            ],
-        [
-            ],
+        (
+            None,
+            makers.ChordExpression(interval_numbers=[3]),
+            makers.ChordExpression(interval_numbers=[2, 3, 8]),
+            None,
+            makers.KeyClusterExpression(),
+            makers.ChordExpression(interval_numbers=[3, 5]),
+            makers.KeyClusterExpression(
+                staff_space_width=7,
+                ),
+            makers.ChordExpression(interval_numbers=[-1, 3]),
+            makers.ChordExpression(interval_numbers=[-2, 3]),
+            makers.ChordExpression(interval_numbers=[3]),
+            None,
+            ),
+        (
+            None,
+            makers.ChordExpression(interval_numbers=[3]),
+            makers.ChordExpression(interval_numbers=[2, 3, 8]),
+            None,
+            None,
+            makers.KeyClusterExpression(),
+            None,
+            makers.ChordExpression(interval_numbers=[3, 5]),
+            makers.KeyClusterExpression(
+                staff_space_width=7,
+                ),
+            makers.ChordExpression(interval_numbers=[-1, 3]),
+            None,
+            None,
+            makers.ChordExpression(interval_numbers=[-2, 3]),
+            makers.ChordExpression(interval_numbers=[3]),
+            None,
+            ),
+        (
+            None,
+            makers.ChordExpression(interval_numbers=[3]),
+            makers.ChordExpression(interval_numbers=[2, 3, 8]),
+            None,
+            None,
+            None,
+            makers.KeyClusterExpression(),
+            None,
+            None,
+            makers.ChordExpression(interval_numbers=[3, 5]),
+            None,
+            None,
+            makers.KeyClusterExpression(
+                staff_space_width=7,
+                ),
+            makers.ChordExpression(interval_numbers=[-1, 3]),
+            None,
+            None,
+            makers.ChordExpression(interval_numbers=[3]),
+            makers.ChordExpression(interval_numbers=[-2, 3]),
+            None,
+            None,
+            makers.KeyClusterExpression(
+                staff_space_width=7,
+                ),
+            ),
         ),
     )
 
 
 __all__ = (
     'domi_chord_agent',
-    'decreasing_clusters_chord_agent',
-    'increasing_clusters_chord_agent',
+    'clusters_chord_agent',
     'rare_chord_agent',
     )
