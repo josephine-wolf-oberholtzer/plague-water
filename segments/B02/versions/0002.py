@@ -1,16 +1,16 @@
 # -*- encoding: utf-8 -*-
 from abjad import *
 from plague_water import makers
-from plague_water.segments import PaletteF
+from plague_water.segments import PaletteB
 
 ### BASE SEGMENT MAKER ###
 
-base_segment_maker = PaletteF.segment_maker
+base_segment_maker = PaletteB.segment_maker
 
 ### SEGMENT PARAMETERS ###
 
-segment_id = 7
-numerator = 5
+segment_id = 2
+numerator = 3
 denominator = 106
 segment_name = 'Segment {} ({}:{})'.format(
     segment_id,
@@ -29,30 +29,44 @@ target_segment_duration = makers.SegmentMaker.get_segment_target_duration(
 
 context_map = base_segment_maker.context_map.copy()
 context_map['Plague Water Score']['pitch_agent'] = new(
-    context_map['Plague Water Score']['pitch_agent'].rotate(8),
+    context_map['Plague Water Score']['pitch_agent'].rotate(0),
     )
 context_map['Saxophone Voice']['register_agent'] = makers.RegisterAgent(
     global_inflections=makers.RegisterCurve(
         ratio=(1,),
         registers=(
-            NamedPitch('F#2'),
-            NamedPitch('Eb3'),
+            NamedPitch('A2'),
+            NamedPitch('C2'),
             ),
         ),
     )
 context_map['Guitar Voice']['register_agent'] = makers.RegisterAgent(
-    global_inflections=NamedPitch('A3'),
+    global_inflections=makers.RegisterCurve(
+        ratio=(1,),
+        registers=(
+            NamedPitch('C3'),
+            NamedPitch('E2'),
+            ),
+        ),
     )
 context_map['Piano RH Voice']['register_agent'] = makers.RegisterAgent(
-    global_inflections=NamedPitch('F#6'),
+    global_inflections=NamedPitch('C4'),
     )
 context_map['Piano LH Voice']['register_agent'] = makers.RegisterAgent(
-    global_inflections=NamedPitch('A5'),
+    global_inflections=makers.RegisterCurve(
+        ratio=(1,),
+        registers=(
+            NamedPitch('A1'),
+            NamedPitch('F#2'),
+            ),
+        ),
     )
 
 ### CURSOR TRANSFORM ###
 
-cursor_transform = makers.CursorTransform(0)
+cursor_transform = makers.CursorTransform(
+    increment=0,
+    )
 
 ### GUITAR ###
 
@@ -107,10 +121,6 @@ piano_pedals_context_maker = new(piano_pedals_context_maker)
 
 segment_maker = new(
     base_segment_maker,
-    context_map=context_map,
-    segment_id=segment_id,
-    segment_name=segment_name,
-    target_segment_duration=target_segment_duration,
     context_makers=(
         guitar_context_maker,
         percussion_drum_context_maker,
@@ -120,7 +130,11 @@ segment_maker = new(
         piano_rh_context_maker,
         piano_pedals_context_maker,
         saxophone_context_maker,
-        )
+        ),
+    context_map=context_map,
+    segment_id=segment_id,
+    segment_name=segment_name,
+    target_segment_duration=target_segment_duration,
     )
 
 ### MAIN ###

@@ -5,12 +5,12 @@
 
 #(ly:set-option 'relative-includes #t)
 
-\include "../stylesheets/plague-water-paper.ly"
-\include "../stylesheets/plague-water-layout.ly"
-\include "../stylesheets/plague-water-header.ly"
+\include "../stylesheets/plague-water-paper.ily"
+\include "../stylesheets/plague-water-layout.ily"
+\include "../stylesheets/plague-water-header.ily"
 
 \score {
-    \include "plague-water-segment-A01.ly"
+    \keepWithTag #'saxophone { \include "plague-water-segment-A01.ly" }
 }
 
 \score {
