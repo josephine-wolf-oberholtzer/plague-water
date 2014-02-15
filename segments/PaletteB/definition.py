@@ -46,6 +46,9 @@ saxophone_context_maker = makers.ContextMaker(
 
 guitar_context_maker = makers.ContextMaker(
     context_name='Guitar Voice',
+    initial_indicators=(
+        Markup(r'\box \pad-around #0.5 \large \bold \caps "Color Two"', Up),
+        ),
     music_maker_indices=(0, 0, 0, 1, 0),
     music_makers=[
         makers.MusicMaker(

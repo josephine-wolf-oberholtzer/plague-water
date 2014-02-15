@@ -1,8 +1,5 @@
 # -*- encoding: utf-8 -*-
-from abjad import new
-from abjad.tools import datastructuretools
-from abjad.tools import durationtools
-from abjad.tools import indicatortools
+from abjad import *
 from plague_water import makers
 from plague_water import materials
 from plague_water import score_templates
@@ -62,6 +59,9 @@ saxophone_context_maker = makers.ContextMaker(
 
 guitar_context_maker = makers.ContextMaker(
     context_name='Guitar Voice',
+    initial_indicators=(
+        Markup(r'\box \pad-around #0.5 \large \bold \caps "Color Six"', Up),
+        ),
     music_makers=[
         makers.MusicMaker(
             dynamic_agent=makers.DynamicAgent(

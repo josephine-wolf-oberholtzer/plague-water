@@ -1,8 +1,5 @@
 # -*- encoding: utf-8 -*-
-from abjad import new
-from abjad.tools import datastructuretools
-from abjad.tools import durationtools
-from abjad.tools import indicatortools
+from abjad import *
 from plague_water import makers
 from plague_water import materials
 from plague_water import score_templates
@@ -23,20 +20,23 @@ context_map[score]['pitch_agent'] = materials.primary_pitch_class_agent
 
 ### SEMANTIC CONTEXT MAKERS ###
 
-guitar_context_maker = makers.ContextMaker(
-    context_name='Guitar Voice',
+saxophone_context_maker = makers.ContextMaker(
+    context_name='Saxophone Voice',
     music_makers=[
-        new(materials.guitar_fanfare_music_maker,
+        new(materials.saxophone_fanfare_music_maker,
             dynamic_agent=materials.foreground_dynamic_agent,
             timespan_agent__leading_rest_durations=materials.short_durations(4),
             ),
         ],
     )
 
-saxophone_context_maker = makers.ContextMaker(
-    context_name='Saxophone Voice',
+guitar_context_maker = makers.ContextMaker(
+    context_name='Guitar Voice',
+    initial_indicators=(
+        Markup(r'\box \pad-around #0.5 \large \bold \caps "Color One"', Up),
+        ),
     music_makers=[
-        new(materials.saxophone_fanfare_music_maker,
+        new(materials.guitar_fanfare_music_maker,
             dynamic_agent=materials.foreground_dynamic_agent,
             timespan_agent__leading_rest_durations=materials.short_durations(4),
             ),

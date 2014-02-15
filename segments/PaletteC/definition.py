@@ -1,9 +1,5 @@
 # -*- encoding: utf-8 -*-
-from abjad import new
-from abjad.tools import datastructuretools
-from abjad.tools import durationtools
-from abjad.tools import indicatortools
-from abjad.tools import spannertools
+from abjad import *
 from plague_water import makers
 from plague_water import materials
 from plague_water import score_templates
@@ -24,8 +20,26 @@ context_map[score]['pitch_agent'] = materials.primary_pitch_class_agent
 
 ### SEMANTIC CONTEXT MAKERS ###
 
+saxophone_context_maker = makers.ContextMaker(
+    context_name='Saxophone Voice',
+    music_makers=[
+        makers.MusicMaker(
+            dynamic_agent=materials.foreground_dynamic_agent,
+            grace_maker=makers.GraceMaker(
+                lengths=(0, 0, 2, 1, 3, 1, 1, 0, 2, 1),
+                ),
+            rhythm_maker=materials.flowing_rhythm_maker,
+            spanner_agent=materials.trilling_sparsely_spanner_agent,
+            timespan_agent=materials.sustained_long_timespan_agent,
+            ).transform_cursors(2),
+        ],
+    )
+
 guitar_context_maker = makers.ContextMaker(
     context_name='Guitar Voice',
+    initial_indicators=(
+        Markup(r'\box \pad-around #0.5 \large \bold \caps "Color Three"', Up),
+        ),
     music_makers=[
         makers.MusicMaker(
             dynamic_agent=materials.background_dynamic_agent,
@@ -44,21 +58,6 @@ guitar_context_maker = makers.ContextMaker(
                 playing_durations=materials.short_durations,
                 ),
             ).transform_cursors(5),
-        ],
-    )
-
-saxophone_context_maker = makers.ContextMaker(
-    context_name='Saxophone Voice',
-    music_makers=[
-        makers.MusicMaker(
-            dynamic_agent=materials.foreground_dynamic_agent,
-            grace_maker=makers.GraceMaker(
-                lengths=(0, 0, 2, 1, 3, 1, 1, 0, 2, 1),
-                ),
-            rhythm_maker=materials.flowing_rhythm_maker,
-            spanner_agent=materials.trilling_sparsely_spanner_agent,
-            timespan_agent=materials.sustained_long_timespan_agent,
-            ).transform_cursors(2),
         ],
     )
 

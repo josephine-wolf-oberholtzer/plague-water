@@ -45,27 +45,6 @@ long_timespan_agent = makers.SemanticTimespanAgent(
 
 ### SEMANTIC CONTEXT MAKERS ###
 
-guitar_context_maker = makers.ContextMaker(
-    context_name='Guitar Voice',
-    music_maker_indices=(0, 1, 0, 0, 1),
-    music_makers=[
-        new(materials.basic_music_maker,
-            grace_maker=makers.GraceMaker(
-                lengths=(1, 0, 1, 0, 0, 1, 2,),
-                ),
-            rhythm_maker=materials.pointillist_rhythm_maker,
-            timespan_agent=short_timespan_agent.transform_cursors(1),
-            ),
-        new(materials.basic_music_maker,
-            grace_maker=makers.GraceMaker(
-                lengths=(1, 0, 1, 0, 0, 1, 2,),
-                ),
-            rhythm_maker=materials.pointillist_rhythm_maker,
-            timespan_agent=medium_timespan_agent.transform_cursors(2),
-            ),
-        ]
-    )
-
 saxophone_context_maker = makers.ContextMaker(
     context_name='Saxophone Voice',
     music_maker_indices=(0, 0, 1, 0, 1),
@@ -83,6 +62,30 @@ saxophone_context_maker = makers.ContextMaker(
                 ),
             rhythm_maker=materials.pointillist_rhythm_maker,
             timespan_agent=medium_timespan_agent.transform_cursors(4),
+            ),
+        ]
+    )
+
+guitar_context_maker = makers.ContextMaker(
+    context_name='Guitar Voice',
+    initial_indicators=(
+        Markup(r'\box \pad-around #0.5 \large \bold \caps "Color Four"', Up),
+        ),
+    music_maker_indices=(0, 1, 0, 0, 1),
+    music_makers=[
+        new(materials.basic_music_maker,
+            grace_maker=makers.GraceMaker(
+                lengths=(1, 0, 1, 0, 0, 1, 2,),
+                ),
+            rhythm_maker=materials.pointillist_rhythm_maker,
+            timespan_agent=short_timespan_agent.transform_cursors(1),
+            ),
+        new(materials.basic_music_maker,
+            grace_maker=makers.GraceMaker(
+                lengths=(1, 0, 1, 0, 0, 1, 2,),
+                ),
+            rhythm_maker=materials.pointillist_rhythm_maker,
+            timespan_agent=medium_timespan_agent.transform_cursors(2),
             ),
         ]
     )
