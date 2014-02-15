@@ -104,7 +104,8 @@ class SegmentMaker(PlagueWaterObject):
         self.apply_indicators()
         self.apply_dynamics()
         self.apply_spanners()
-        self.apply_grace_slurs()
+        self.fix_grace_spanners()
+        self.apply_initial_indicators()
 
         ### APPLY LAYOUT ###
         self.configure_score()
@@ -356,8 +357,8 @@ class SegmentMaker(PlagueWaterObject):
                 music_maker_seeds[music_maker] += 1
                 progress_indicator.advance()
 
-    def apply_grace_slurs(self):
-        message = '\tapplying grace slurs'
+    def fix_grace_spanners(self):
+        message = '\tfixing grace spanners'
         with systemtools.ProgressIndicator(message) as progress_indicator:
             for leaf in iterate(self.score).by_class(scoretools.Leaf):
                 grace_containers = inspect_(leaf).get_grace_containers('after')
@@ -367,12 +368,17 @@ class SegmentMaker(PlagueWaterObject):
                 grace_container = grace_containers[0]
                 next_leaf = inspect_(leaf).get_leaf(1)
                 assert next_leaf is not None
-                slur_notes = list(grace_container.select_leaves())
-                assert len(slur_notes), (slur_notes, grace_container)
-                slur_notes.append(next_leaf)
+                grace_notes = list(grace_container.select_leaves())
+                assert len(grace_notes), (grace_notes, grace_container)
+                slur_notes = grace_notes + [next_leaf]
                 phrasing_slur = spannertools.PhrasingSlur()
                 phrasing_slur._contiguity_constraint = None
                 attach(phrasing_slur, slur_notes)
+                if 1 < len(grace_notes):
+                    beams = inspect_(grace_notes[0]).get_spanners(Beam)
+                    if not beams:
+                        beam = Beam()
+                        attach(beam, grace_notes)
                 progress_indicator.advance()
 
     def apply_graces(self):
@@ -410,6 +416,14 @@ class SegmentMaker(PlagueWaterObject):
                     )
                 music_maker_seeds[music_maker] += 1
                 progress_indicator.advance()
+
+    def apply_initial_indicators(self):
+        message = '\tapplying initial indicators'
+        with systemtools.ProgressIndicator(message) as progress_indicator:
+            for voice in iterate(self.score).by_class(Voice):
+                voice_name = voice.name
+                context_maker = self[voice_name]
+                context_maker.apply_initial_indicators(voice)
 
     def apply_piano_clefs_and_octavations(self):
         def cleanup(staff, current_clef=None):
