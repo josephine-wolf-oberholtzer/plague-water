@@ -74,6 +74,7 @@ guitar_context_maker = makers.ContextMaker(
     music_maker_indices=(0, 1, 0, 0, 1),
     music_makers=[
         new(materials.basic_music_maker,
+            chord_agent=materials.guitar_chord_agent,
             grace_maker=makers.GraceMaker(
                 lengths=(1, 0, 1, 0, 0, 1, 2,),
                 ),

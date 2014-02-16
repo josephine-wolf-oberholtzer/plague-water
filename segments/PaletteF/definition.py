@@ -60,13 +60,11 @@ saxophone_context_maker = makers.ContextMaker(
 guitar_context_maker = makers.ContextMaker(
     context_name='Guitar Voice',
     initial_indicators=(
-        Markup(r'''
-            \pad-around #5
-                \box \pad-around #0.5 \large \bold \caps "Color Six"
-            ''', Up),
+        Markup(r'\box \pad-around #0.5 \large \bold \caps "Color Six"', Up),
         ),
     music_makers=[
         makers.MusicMaker(
+            chord_agent=materials.guitar_chord_agent.rotate(1),
             dynamic_agent=makers.DynamicAgent(
                 initial_dynamic_expressions=(
                     makers.DynamicExpression('ppp', 'o'),

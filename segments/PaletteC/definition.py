@@ -42,16 +42,17 @@ guitar_context_maker = makers.ContextMaker(
         ),
     music_makers=[
         makers.MusicMaker(
+            chord_agent=materials.guitar_chord_agent,
             dynamic_agent=materials.background_dynamic_agent,
             grace_maker=makers.GraceMaker(
                 lengths=(0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1),
                 ),
-            indicator_agent=makers.IndicatorAgent(
-                last_leaf_indicators=(
-                    indicatortools.BendAfter(-4),
-                    indicatortools.BendAfter(4),
-                    ),
-                ),
+#            indicator_agent=makers.IndicatorAgent(
+#                last_leaf_indicators=(
+#                    indicatortools.BendAfter(-4),
+#                    indicatortools.BendAfter(4),
+#                    ),
+#                ),
             rhythm_maker=materials.pointillist_rhythm_maker,
             timespan_agent=new(
                 materials.pointillist_sparse_timespan_agent,
