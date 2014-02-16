@@ -66,6 +66,9 @@ cursor_transform = None
 
 guitar_context_maker = makers.ContextMaker(
     context_name='Guitar Voice',
+    initial_indicators=(
+        Markup(r'\box \pad-around #0.5 \large \bold \caps "Color Five"', Up),
+        ),
     music_makers=[
         materials.basic_music_maker,
         ],

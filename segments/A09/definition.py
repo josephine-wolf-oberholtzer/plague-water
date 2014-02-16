@@ -79,11 +79,22 @@ saxophone_context_maker = new(saxophone_context_maker)
 piano_rh_context_maker = base_segment_maker['Piano RH Voice']
 piano_rh_context_maker = piano_rh_context_maker.transform_cursors(
     cursor_transform)
-piano_rh_context_maker = new(piano_rh_context_maker)
+music_maker = piano_rh_context_maker.music_makers[0]
+piano_rh_context_maker = new(piano_rh_context_maker,
+    music_makers=(
+        new(music_maker, chord_agent=music_maker.chord_agent.rotate(1)),
+        ),
+    )
 
 piano_lh_context_maker = base_segment_maker['Piano LH Voice']
 piano_lh_context_maker = piano_lh_context_maker.transform_cursors(
     cursor_transform)
+music_maker = piano_lh_context_maker.music_makers[0]
+piano_lh_context_maker = new(piano_lh_context_maker,
+    music_makers=(
+        new(music_maker, chord_agent=music_maker.chord_agent.rotate(-1)),
+        ),
+    )
 
 ### PERCUSSION ###
 
@@ -91,18 +102,25 @@ percussion_shaker_context_maker = \
     base_segment_maker['Percussion Shaker Voice']
 percussion_shaker_context_maker = \
     percussion_shaker_context_maker.transform_cursors(cursor_transform)
-percussion_shaker_context_maker = new(percussion_shaker_context_maker)
+music_maker = percussion_shaker_context_maker.music_makers[0]
+percussion_shaker_context_maker = new(percussion_shaker_context_maker,
+    music_makers=(
+        new(music_maker, pitch_agent=music_maker.pitch_agent.rotate(1)),
+        ),
+    )
 
 percussion_woodblock_context_maker = \
     base_segment_maker['Percussion Woodblock Voice']
-percussion_woodblock_context_maker = \
-    percussion_woodblock_context_maker.transform_cursors(cursor_transform)
-percussion_woodblock_context_maker = new(percussion_woodblock_context_maker)
 
 percussion_drum_context_maker = base_segment_maker['Percussion Drum Voice']
 percussion_drum_context_maker = \
     percussion_drum_context_maker.transform_cursors(cursor_transform)
-percussion_drum_context_maker = new(percussion_drum_context_maker)
+music_maker = percussion_drum_context_maker.music_makers[0]
+percussion_drum_context_maker = new(percussion_drum_context_maker,
+    music_makers=(
+        new(music_maker, pitch_agent=music_maker.pitch_agent.rotate(1)),
+        ),
+    )
 
 ### DEPENDENT CONTEXT MAKERS ###
 
