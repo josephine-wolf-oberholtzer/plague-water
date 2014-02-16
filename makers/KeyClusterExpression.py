@@ -119,7 +119,7 @@ class KeyClusterExpression(PlagueWaterObject):
                 key_cluster = indicatortools.KeyCluster(
                     include_black_keys=self.include_black_keys,
                     include_white_keys=self.include_white_keys,
-                    markup_direction=Center,
+                    markup_direction=Up,
                     )
                 attach(key_cluster, chord)
                 if self.arpeggio_direction is not None:
