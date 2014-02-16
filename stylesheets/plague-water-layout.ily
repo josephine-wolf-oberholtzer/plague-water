@@ -1,4 +1,4 @@
-afterGraceFraction = #(cons 31 32)
+afterGraceFraction = #(cons 127 128)
 
 flat-brackets = #(lambda (grob)
     (let* (
@@ -70,7 +70,7 @@ LV = #(make-dynamic-script LV)
         \override VerticalAxisGroup.default-staff-staff-spacing = #'(
             (basic-distance . 6)
             (minimum-distance . 8)
-            (padding . 10)
+            (padding . 6)
             (stretchability . 0)
             )
     }
@@ -221,22 +221,29 @@ LV = #(make-dynamic-script LV)
         \remove Mark_engraver
         \remove Bar_number_engraver
         \override BarLine.hair-thickness = 0.5
-        \override BarLine.space-alist = #'((time-signature extra-space . 0.0) (custos minimum-space . 0.0) (clef minimum-space . 0.0) (key-signature extra-space . 0.0) (key-cancellation extra-space . 0.0) (first-note fixed-space . 0.0) (next-note semi-fixed-space . 0.0) (right-edge extra-space . 0.0))
+        \override BarLine.space-alist = #'(
+            (time-signature extra-space . 0.0)
+            (custos minimum-space . 0.0) 
+            (clef minimum-space . 0.0) 
+            (key-signature extra-space . 0.0) 
+            (key-cancellation extra-space . 0.0) 
+            (first-note fixed-space . 0.0) 
+            (next-note semi-fixed-space . 0.0) 
+            (right-edge extra-space . 0.0)
+            )
         \override Beam.beam-thickness = 0.75
         \override Beam.breakable = ##t
         \override Beam.length-fraction = 1.5
         \override DynamicLineSpanner.add-stem-support = ##t
-        \override DynamicLineSpanner.outside-staff-padding = 2
         \override DynamicLineSpanner.padding = 2
+        \override DynamicLineSpanner.outside-staff-padding = 2
         \override Glissando.breakable = ##t
         \override Glissando.thickness = 3
         \override GraceSpacing.common-shortest-duration = #(ly:make-moment 1 16)
         \override NoteCollision.merge-differently-dotted = ##t
         \override NoteColumn.ignore-collision = ##t
         \override OttavaBracket.add-stem-support = ##t
-        \override OttavaBracket.outside-staff-padding = 2
         \override OttavaBracket.padding = 2
-        \override OttavaBracket.whiteout = ##t
         \override PhrasingSlur.dash-definition = #'((0 1 0.5 0.5))
         \override Slur.dash-definition = #'((0 1 0.5 0.5))
         \override SpacingSpanner.base-shortest-duration = #(ly:make-moment 1 64)
@@ -253,36 +260,16 @@ LV = #(make-dynamic-script LV)
         \override StemTremolo.slope = 0.5
         \override SustainPedal.self-alignment-X = #LEFT
         \override TextScript.add-stem-support = ##t
-        \override TextScript.padding = 2
-        \override TextScript.staff-padding = 2
-        \override TextScript.outside-staff-padding = 2
+        \override TextScript.padding = 1
+        \override TextScript.staff-padding = 1
+        \override TextScript.outside-staff-padding = 1
+        \override TrillSpanner.outside-staff-padding = 2
         \override TrillPitchAccidental.avoid-slur = #'inside
-        \override TrillSpanner.add-stem-support = ##t
-        \override TrillSpanner.padding = 3
-        \override TrillSpanner.outside-staff-padding = 3
-        \override TrillSpanner.staff-padding = 4
         \override TupletBracket.avoid-scripts = ##t
         \override TupletBracket.full-length-to-extent = ##t
-        \override TupletBracket.outside-staff-padding = 6
         \override TupletBracket.padding = 2
         \override TupletNumber.font-size = 1
         \override TupletNumber.text = #tuplet-number::calc-fraction-text
-
-        \override StaffGrouper.staff-staff-spacing = #'(
-            (basic-distance . 0)
-            (minimum-distance . 6)
-            (padding . 7)
-            (stretchability . 1)
-            )
-        \override StaffGrouper.staffgroup-staff-spacing = #'(
-            (basic-distance . 0)
-            (minimum-distance . 6)
-            (padding . 7)
-            (stretchability . 1)
-            )
-
-        %\override Stem.direction = #UP
-        %\override TupletBracket.direction = #UP
 
         autoBeaming = ##f
         pedalSustainStyle = #'mixed

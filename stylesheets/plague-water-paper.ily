@@ -1,5 +1,5 @@
 #(set-default-paper-size "11x17" 'landscape)
-#(set-global-staff-size 10)
+#(set-global-staff-size 11)
 
 \paper {
     bottom-margin = 10\mm
@@ -36,12 +36,6 @@
     ragged-bottom = ##f
     ragged-last-bottom = ##t
     right-margin = 10\mm
-    system-system-spacing = #'(
-        (basic-distance . 0)
-        (minimum-distance . 0)
-        (padding . 8)
-        (stretchability . 60)
-        )
     top-margin = 10\mm
     top-markup-spacing = #'(
         (basic-distance . 0)
