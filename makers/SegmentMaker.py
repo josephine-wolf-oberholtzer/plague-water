@@ -107,21 +107,7 @@ class SegmentMaker(PlagueWaterObject):
         self.apply_spanners()
         self.fix_grace_spanners()
         self.apply_initial_indicators()
-
-        for voice in iterate(self.score).by_class(Voice):
-            counter = 0
-            for music in voice:
-                for division in music:
-                    counter += 1
-                    voice_name = voice.name.replace(' ', '')
-                    segment_name = self.segment_id
-                    string = 'Segment{}:{}:{}'.format(
-                        segment_name,
-                        voice_name,
-                        counter,
-                        )
-                    comment = indicatortools.LilyPondComment(string)
-                    attach(comment, division)
+        self.apply_tags()
 
         ### APPLY LAYOUT ###
         self.configure_score()
@@ -464,7 +450,7 @@ class SegmentMaker(PlagueWaterObject):
                 if isinstance(leaf, scoretools.Note):
                     pitches.append(leaf.written_pitch)
                 else:
-                    pitches.append(leaf.written_pitches)
+                    pitches.extend(leaf.written_pitches)
                 inspector = inspect_(leaf)
                 after_graces = inspector.get_grace_containers('after')
                 if after_graces:
@@ -473,8 +459,8 @@ class SegmentMaker(PlagueWaterObject):
             leaf = group[-1]
             if isinstance(leaf, scoretools.Note):
                 pitches.append(leaf.written_pitch)
-            else:
-                pitches.append(leaf.written_pitches)
+            elif isinstance(leaf, scoretools.Chord):
+                pitches.extend(leaf.written_pitches)
             average = int(sum(float(x) for x in pitches) / len(pitches))
             average = pitchtools.NamedPitch(average)
             octavation = None
@@ -679,6 +665,30 @@ class SegmentMaker(PlagueWaterObject):
                     )
                 music_maker_seeds[music_maker] += 1
                 progress_indicator.advance()
+
+    def apply_tags(self):
+        message = '\tapplying tags'
+        with systemtools.ForbidUpdate(self.score):
+            with systemtools.ProgressIndicator(message) as progress_indicator:
+                for voice in iterate(self.score).by_class(Voice):
+                    counter = 0
+                    for music in voice[:]:
+                        for division in music[:]:
+                            counter += 1
+                            outer_container = Container([division])
+                            voice_name = voice.name.replace(' ', '')
+                            segment_name = self.segment_id
+                            string = "tag #'Segment{}{}{}".format(
+                                segment_name,
+                                voice_name,
+                                counter,
+                                )
+                            command = indicatortools.LilyPondCommand(
+                                string,
+                                'before',
+                                )
+                            attach(command, outer_container)
+                            progress_indicator.advance()
 
     def build_and_persist(self, current_file_path):
         print 'Building {}'.format(self.segment_name)
