@@ -65,10 +65,11 @@ class GraceMaker(PlagueWaterObject):
         kind = 'after'
         leaf_to_attach_to = previous_leaf
         grace_notes = scoretools.make_notes([0], [(1, 16)] * grace_length)
-        command = indicatortools.LilyPondCommand('stopStaff', 'before')
-        attach(command, grace_notes[0])
-        command = indicatortools.LilyPondCommand('startStaff', 'before')
-        attach(command, grace_notes[0])
+        if isinstance(leaf_to_attach_to, scoretools.MultimeasureRest):
+            command = indicatortools.LilyPondCommand('stopStaff', 'before')
+            attach(command, grace_notes[0])
+            command = indicatortools.LilyPondCommand('startStaff', 'before')
+            attach(command, grace_notes[0])
         if 1 < len(grace_notes):
             beam = Beam()
             attach(beam, grace_notes)
