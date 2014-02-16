@@ -133,19 +133,21 @@ class RegisterAgent(PlagueWaterObject):
         octavation=None,
         logical_tie=None,
         ):
-        if self.instrument is not None:
-            assert inflection_pitch in self.instrument.pitch_range, (
-                'LO',
-                inflection_pitch.pitch_class_octave_label,
-                self.instrument.pitch_range,
-                self.global_inflections,
-                )
-            assert inflection_pitch + 17 in self.instrument.pitch_range, (
-                'HI',
-                (inflection_pitch + 17).pitch_class_octave_label,
-                self.instrument.pitch_range,
-                self.global_inflections,
-                )
+        pitch_range = inspect_(logical_tie.head).get_effective(
+            pitchtools.PitchRange)
+        assert pitch_range is not None
+        assert inflection_pitch in pitch_range, (
+            'LO',
+            inflection_pitch.pitch_class_octave_label,
+            pitch_range,
+            self.global_inflections,
+            )
+        assert inflection_pitch + 17 in pitch_range, (
+            'HI',
+            (inflection_pitch + 17).pitch_class_octave_label,
+            pitch_range,
+            self.global_inflections,
+            )
         octave_transposition_mapping = \
             pitchtools.OctaveTranspositionMapping([
                 ('[C0, C4)', inflection_pitch),
