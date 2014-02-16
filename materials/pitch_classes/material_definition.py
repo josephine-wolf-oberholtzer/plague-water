@@ -4,8 +4,10 @@ from plague_water import makers
 
 
 pitch_class_row = pitchtools.PitchClassSegment([0, 3, 2, 5, 11, 1])
-ratios = [x for x in mathtools.yield_all_compositions_of_integer(
-    len(pitch_class_row) // 2)
+ratios = [
+    mathtools.Ratio(x) for x in mathtools.yield_all_compositions_of_integer(
+        len(pitch_class_row))
+    if 1 not in x
     ]
 partitioned_sequences = [
     sequencetools.partition_sequence_by_ratio_of_lengths(
