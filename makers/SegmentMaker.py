@@ -107,7 +107,7 @@ class SegmentMaker(PlagueWaterObject):
         self.apply_spanners()
         self.fix_grace_spanners()
         self.apply_initial_indicators()
-        self.apply_tags()
+        # self.apply_tags()
 
         ### APPLY LAYOUT ###
         self.configure_score()
