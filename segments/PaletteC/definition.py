@@ -47,12 +47,9 @@ guitar_context_maker = makers.ContextMaker(
             grace_maker=makers.GraceMaker(
                 lengths=(0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1),
                 ),
-#            indicator_agent=makers.IndicatorAgent(
-#                last_leaf_indicators=(
-#                    indicatortools.BendAfter(-4),
-#                    indicatortools.BendAfter(4),
-#                    ),
-#                ),
+            indicator_agent=makers.IndicatorAgent(
+                inner_leaf_indicators=('tenuto',),
+                ),
             rhythm_maker=materials.pointillist_rhythm_maker,
             timespan_agent=new(
                 materials.pointillist_sparse_timespan_agent,
@@ -70,7 +67,9 @@ piano_rh_context_maker = makers.ContextMaker(
             dynamic_agent=materials.background_dynamic_agent,
             labels='pedaled',
             rhythm_maker=materials.pointillist_rhythm_maker,
-            spanner_agent=materials.trilling_constantly_spanner_agent,
+            spanner_agent=makers.SpannerAgent(
+                output_spanners=Slur,
+                ),
             timespan_agent=new(
                 materials.pointillist_sparse_timespan_agent,
                 playing_durations=materials.very_short_durations,
@@ -88,7 +87,9 @@ piano_lh_context_maker = makers.ContextMaker(
             dynamic_agent=materials.background_dynamic_agent,
             labels='pedaled',
             rhythm_maker=materials.pointillist_rhythm_maker,
-            spanner_agent=materials.trilling_constantly_spanner_agent,
+            spanner_agent=makers.SpannerAgent(
+                output_spanners=Slur,
+                ),
             timespan_agent=new(
                 materials.pointillist_sparse_timespan_agent,
                 playing_durations=materials.very_short_durations,
@@ -132,6 +133,12 @@ percussion_woodblock_context_maker = makers.ContextMaker(
 
 percussion_drum_context_maker = makers.ContextMaker(
     context_name='Percussion Drum Voice',
+    initial_indicators=(
+        Markup(r'''
+            \box \pad-around #0.5 \large \bold \caps
+            "Superball"
+            ''', Up),
+        ),
     music_makers=[
         makers.MusicMaker(
             dynamic_agent=materials.midground_dynamic_agent,
@@ -146,14 +153,6 @@ percussion_drum_context_maker = makers.ContextMaker(
                 talea=(0, 2, 1, 2, 0, 1, 2),
                 ),
             rhythm_maker=materials.flowing_rhythm_maker,
-            spanner_agent=makers.SpannerAgent(
-                cyclical_logical_tie_spanners=(
-                    makers.StemTremoloSpanner(),
-                    makers.StemTremoloSpanner(),
-                    None,
-                    ),
-                minimum_logical_tie_duration=durationtools.Duration(1, 8),
-                ),
             timespan_agent=materials.sustained_long_timespan_agent,
             ).transform_cursors(1),
         ],

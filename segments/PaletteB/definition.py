@@ -28,6 +28,10 @@ saxophone_context_maker = makers.ContextMaker(
             grace_maker=makers.GraceMaker(
                 lengths=(1, 0, 1, 0, 0, 1, 2,),
                 ),
+            indicator_agent=makers.IndicatorAgent(
+                first_leaf_indicators=('accent',),
+                inner_leaf_indicators=('tenuto',),
+                ),
             rhythm_maker=materials.winding_rhythm_maker,
             spanner_agent=materials.trilling_sparsely_spanner_agent,
             timespan_agent=materials.sustained_medium_timespan_agent,
@@ -56,6 +60,14 @@ guitar_context_maker = makers.ContextMaker(
             grace_maker=makers.GraceMaker(
                 lengths=(1, 0, 1, 0, 0, 1, 2,),
                 ),
+            indicator_agent=makers.IndicatorAgent(
+                first_leaf_indicators=('accent',),
+                inner_leaf_indicators=('tenuto',),
+                last_leaf_indicators=(
+                    indicatortools.BendAfter(-4),
+                    indicatortools.BendAfter(4),
+                    ),
+                ),
             rhythm_maker=materials.winding_rhythm_maker,
             spanner_agent=materials.trilling_sparsely_spanner_agent,
             timespan_agent=materials.sustained_medium_timespan_agent,
@@ -78,6 +90,10 @@ piano_rh_context_maker = makers.ContextMaker(
         makers.MusicMaker(
             chord_agent=materials.rare_chord_agent,
             dynamic_agent=materials.background_dynamic_agent,
+            indicator_agent=makers.IndicatorAgent(
+                first_leaf_indicators=('accent',),
+                inner_leaf_indicators=('staccato',),
+                ),
             rhythm_maker=materials.pointillist_rhythm_maker,
             timespan_agent=materials.pointillist_sparse_timespan_agent,
             ),
@@ -90,6 +106,10 @@ piano_lh_context_maker = makers.ContextMaker(
         makers.MusicMaker(
             chord_agent=materials.rare_chord_agent,
             dynamic_agent=materials.background_dynamic_agent,
+            indicator_agent=makers.IndicatorAgent(
+                first_leaf_indicators=('accent',),
+                inner_leaf_indicators=('staccato',),
+                ),
             rhythm_maker=materials.pointillist_rhythm_maker,
             timespan_agent=materials.pointillist_sparse_timespan_agent,
             ).transform_cursors(1),
@@ -101,6 +121,9 @@ percussion_shaker_context_maker = makers.ContextMaker(
     music_makers=[
         makers.MusicMaker(
             dynamic_agent=materials.background_dynamic_agent,
+            indicator_agent=makers.IndicatorAgent(
+                each_leaf_indicators=('staccatissimo',),
+                ),
             pitch_agent=new(materials.shaker_pitch_agent,
                 talea=(0, 3, 1, 2, 3, 2, 0, 1, 3),
                 ),
@@ -118,9 +141,12 @@ percussion_woodblock_context_maker = makers.ContextMaker(
             grace_maker=makers.GraceMaker(
                 lengths=(1, 0, 1, 2, 1, 0, 0, 0),
                 ),
+            indicator_agent=makers.IndicatorAgent(
+                each_leaf_indicators=('staccatissimo',),
+                ),
             pitch_agent=new(materials.woodblock_pitch_agent,
                 talea=(0, 3, 1, 4, 2, 3, 2, 0, 4, 1, 3),
-                ), 
+                ),
             rhythm_maker=materials.pointillist_rhythm_maker,
             timespan_agent=new(
                 materials.pointillist_sparse_timespan_agent,

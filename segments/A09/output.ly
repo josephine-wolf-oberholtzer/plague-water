@@ -522,10 +522,10 @@
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
 								\clef treble
-								<d f>16 -\accent \sfz
+								<f>16 -\accent \sfz
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<f' g' af' df''>16 -\staccato
+								<g' af' df''>16 -\staccato
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
 								af16 -\staccato
@@ -582,10 +582,10 @@
 							\times 3/5 {
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								<c f>16 -\accent \sfz \) [
+								<f>16 -\accent \sfz \) [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								<f af>8 -\staccato
+								<af>8 -\staccato
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
 								r8
@@ -596,10 +596,10 @@
 							\times 4/5 {
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								<ef af>16 -\accent \sfz
+								<af>16 -\accent \sfz
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<d f>16 -\staccato
+								<f>16 -\staccato
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
 								cs'16 -\staccato
@@ -645,7 +645,7 @@
 								a,,16 -\accent \sfz
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
-								<as, b, cs>8 -\staccato ]
+								<as, cs>8 -\staccato ]
 							}
 						}
 					}
@@ -672,7 +672,7 @@
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
 								\afterGrace
-								<e, g,>16 -\accent \sfz \) [
+								<g,>16 -\accent \sfz \) [
 								{
 									a,16 [ \(
 									b,16 ]
@@ -694,13 +694,13 @@
 								r16
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<d, f,>16 -\accent \f
+								<f,>16 -\accent \f
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<a,, c,>16 -\staccato
+								<c,>16 -\staccato
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<af, bf, cf ff>16 -\staccato
+								<bf, cf ff>16 -\staccato
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
 								r16 ]
@@ -767,7 +767,7 @@
 								}
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								<c, ef, f,>16 -\staccato \)
+								<ef, f,>16 -\staccato \)
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
 								r16 ]
@@ -799,13 +799,13 @@
 							\times 3/5 {
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								<c, ef,>16 -\accent \sfz \) [
+								<ef,>16 -\accent \sfz \) [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
 								b,,16 -\staccato
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
-								<f,, af,, bf,,>16 -\staccato
+								<af,, bf,,>16 -\staccato
 								\ottava #0
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
@@ -1179,6 +1179,16 @@
 								\set stemRightBeamCount = 1
 								\afterGrace
 								c'8 \mp [
+									^ \markup {
+										\box
+											\pad-around
+												#0.5
+												\large
+													\bold
+														\caps
+															"Soft Mallets"
+										,
+										}
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8

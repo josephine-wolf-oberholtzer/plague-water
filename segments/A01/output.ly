@@ -493,10 +493,10 @@
 								r16 [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<ef' gf'>16 -\accent \sfz
+								<gf'>16 -\accent \sfz
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
-								<fs' a'>16 -\staccato
+								<a'>16 -\staccato
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
 								r8 ]
@@ -524,10 +524,10 @@
 								ef'16 -\accent \sfz
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<cs'' e'' fs''>16 -\staccato
+								<e'' fs''>16 -\staccato
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<b' c'' ef''>16 -\staccato
+								<b' ef''>16 -\staccato
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
 								r16 ]
@@ -580,7 +580,7 @@
 							\times 3/5 {
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								<d' f'>16 -\accent \sfz \) [
+								<f'>16 -\accent \sfz \) [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
 								e'8 -\staccato
@@ -597,16 +597,10 @@
 								e'16 -\accent \sfz
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<d'' f''>16 -\staccato
+								<f''>16 -\staccato
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
-								<
-									\tweak #'color #red
-									f''
-									g''
-									af''
-									df'''
-								>16 -\staccato
+								<g'' af'' df'''>16 -\staccato
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
 								r8 ]
@@ -647,10 +641,10 @@
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
 								\clef treble
-								<f af>16 -\accent \sfz
+								<af>16 -\accent \sfz
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
-								<af' cf''>8 -\staccato ]
+								<cf''>8 -\staccato ]
 							}
 						}
 					}
@@ -689,7 +683,7 @@
 								}
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
-								<b d' e'>16 -\staccato \)
+								<d' e'>16 -\staccato \)
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
 								r8
@@ -705,10 +699,10 @@
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
 								\clef treble
-								<as b d'>16 -\accent \f
+								<as d'>16 -\accent \f
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<a c'>16 -\staccato
+								<c'>16 -\staccato
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
 								b'16 -\staccato
@@ -753,11 +747,11 @@
 							\times 4/5 {
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								<as b cs'>16 -\accent \sfz \) [
+								<as cs'>16 -\accent \sfz \) [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
 								\afterGrace
-								<f' af'>8 -\staccato
+								<af'>8 -\staccato
 								{
 									ef'16 \(
 								}
@@ -797,16 +791,10 @@
 								af16 -\accent \sfz \) [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<e' g'>16 -\staccato
+								<g'>16 -\staccato
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
-								<
-									d''
-									e''
-									\tweak #'color #red
-									f''
-									bf''
-								>16 -\staccato
+								<e'' f'' bf''>16 -\staccato
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
 								r8 ]
@@ -1179,6 +1167,16 @@
 								\set stemRightBeamCount = 1
 								\afterGrace
 								a8 \mp [
+									^ \markup {
+										\box
+											\pad-around
+												#0.5
+												\large
+													\bold
+														\caps
+															"Soft Mallets"
+										,
+										}
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8

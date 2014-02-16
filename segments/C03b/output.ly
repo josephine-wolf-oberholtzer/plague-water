@@ -374,10 +374,10 @@
 						{
 							\tweak #'text #tuplet-number::calc-fraction-text
 							\times 5/8 {
-								<d c'>4 \p
+								<d>4 -\tenuto \p
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
-								<gf ef'>8 [
+								<gf>8 -\tenuto [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
 								r8 ]
@@ -415,10 +415,10 @@
 							\times 2/3 {
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								<d b>16 \p [
+								<d>16 -\tenuto \p [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<b fs' a' gs''>16
+								<b fs' gs''>16 -\tenuto \arpeggio
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
 								r16 ]
@@ -466,10 +466,10 @@
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
 								\ottava #1
-								<ef' g' df''>16 \p
+								<ef' df''>16 -\tenuto \p
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								af'16 ]
+								af'16 -\tenuto ]
 								\ottava #0
 							}
 						}
@@ -514,8 +514,8 @@
 								\override Hairpin #'circled-tip = ##t
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
-								<f d'>8 \) \> \p
-								<fs e'>4
+								<f>8 -\tenuto \) \> \p
+								<fs>4 -\tenuto
 							}
 						}
 						\tag #'Segment3bGuitarVoice16
@@ -523,10 +523,10 @@
 							{
 								\set stemLeftBeamCount = -1
 								\set stemRightBeamCount = 1
-								<af f'>8 [
+								<af>8 -\tenuto [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
-								af'8 ] \!
+								af'8 -\tenuto ] \!
 								\revert Hairpin #'circled-tip
 							}
 						}
@@ -574,10 +574,10 @@
 								\set stemRightBeamCount = 2
 								\ottava #1
 								\clef treble
-								d'''16 \p [
+								d'''16 \p [ (
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								cs''''16 ]
+								cs''''16 ] )
 								\ottava #0
 							}
 						}
@@ -625,7 +625,7 @@
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
 								\ottava #1
-								<f'' a'' c''' e'''>16 \p
+								<f'' a'' c''' e'''>16 \p (
 									^ \markup {
 										\center-align
 											\concat
@@ -680,7 +680,7 @@
 								}
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<f'' a'' c'''>16
+								<f'' a'' c'''>16 )
 									^ \markup {
 										\center-align
 											\concat
@@ -1257,6 +1257,15 @@
 						{
 							{
 								r4
+									^ \markup {
+										\box
+											\pad-around
+												#0.5
+												\large
+													\bold
+														\caps
+															Superball
+										}
 								r8
 							}
 						}
@@ -1266,9 +1275,9 @@
 						{
 							\tweak #'text #tuplet-number::calc-fraction-text
 							\times 5/8 {
-								a2 :32 -\accent \mp
+								a2 -\accent \mp
 								r4
-								e'4 :32 \sfp
+								e'4 \sfp
 							}
 						}
 					}
@@ -1306,7 +1315,7 @@
 									\revert Flag #'stroke-style
 									\revert Stem #'length
 								}
-								a4 :32 \)
+								a4 \)
 							}
 						}
 					}
@@ -1333,7 +1342,7 @@
 									\revert Flag #'stroke-style
 									\revert Stem #'length
 								}
-								a4 :32 \)
+								a4 \)
 							}
 						}
 					}
@@ -1369,10 +1378,10 @@
 						\tag #'Segment3bPercussionDrumVoice10
 						{
 							{
-								c'4 :32 -\accent \mp \)
+								c'4 -\accent \mp \)
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
-								e'8 :64
+								e'8
 							}
 						}
 					}
@@ -1436,7 +1445,7 @@
 						{
 							\tweak #'text #tuplet-number::calc-fraction-text
 							\times 3/4 {
-								e'4 :32 -\accent \< \mp
+								e'4 -\accent \< \mp
 								c'4 -\accent ~
 							}
 						}
@@ -1445,7 +1454,7 @@
 							\tweak #'text #tuplet-number::calc-fraction-text
 							\times 3/5 {
 								c'4.
-								e'4 :32 \f
+								e'4 \f
 							}
 						}
 					}
@@ -1472,7 +1481,7 @@
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
 								c'8 -\accent \mp \)
-								e'4 :32
+								e'4
 							}
 						}
 					}

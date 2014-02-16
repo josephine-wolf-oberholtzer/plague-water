@@ -493,10 +493,10 @@
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
 								\clef treble
-								<c' ef'>16 -\accent \sfz
+								<ef'>16 -\accent \sfz
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
-								<bf' df'' ef'' gf''>16 -\staccato
+								<bf' df'' gf''>16 -\staccato
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
 								r8 ]
@@ -521,13 +521,13 @@
 								r16 [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<b' e''>16 -\accent \sfz
+								<e''>16 -\accent \sfz
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<ef'' gf''>16 -\staccato
+								<gf''>16 -\staccato
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<c'' ef''>16 -\staccato
+								<ef''>16 -\staccato
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
 								r16 ]
@@ -580,7 +580,7 @@
 							\times 3/5 {
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								<ef' af' cf''>16 -\accent \sfz \) [
+								<ef' cf''>16 -\accent \sfz \) [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
 								d''8 -\staccato
@@ -594,10 +594,10 @@
 							\times 4/5 {
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								<d'' e'' g''>16 -\accent \sfz
+								<d'' g''>16 -\accent \sfz
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<f'' af''>16 -\staccato
+								<af''>16 -\staccato
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
 								d'''16 -\staccato
@@ -640,10 +640,10 @@
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
 								\clef bass
-								<f af bf>16 -\accent \sfz
+								<af bf>16 -\accent \sfz
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
-								<b c' ef'>8 -\staccato ]
+								<b ef'>8 -\staccato ]
 							}
 						}
 					}
@@ -656,6 +656,7 @@
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
+									\clef treble
 									c16 \(
 									\revert Flag #'stroke-style
 									\revert Stem #'length
@@ -670,7 +671,7 @@
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
 								\afterGrace
-								<d f>16 -\accent \sfz \) [
+								<f>16 -\accent \sfz \) [
 								{
 									c'16 [ \(
 									ef16 ]
@@ -707,10 +708,11 @@
 								r16
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<cs e>16 -\accent \f
+								\clef bass
+								<e>16 -\accent \f
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<c ef>16 -\staccato
+								<ef>16 -\staccato
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
 								ef'16 -\staccato
@@ -755,7 +757,7 @@
 							\times 4/5 {
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								<d f>16 -\accent \sfz \) [
+								<f>16 -\accent \sfz \) [
 								\once \override Accidental.stencil = ##f
 								\once \override AccidentalCautionary.stencil = ##f
 								\once \override Arpeggio.X-offset = #-2
@@ -780,7 +782,7 @@
 								}
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								<ef af cf'>16 -\staccato \)
+								<ef cf'>16 -\staccato \)
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
 								r16 ]
@@ -833,7 +835,7 @@
 										}
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
-								<f af bf>16 -\staccato
+								<af bf>16 -\staccato
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
 								r8 ]
@@ -1206,6 +1208,16 @@
 								\set stemRightBeamCount = 1
 								\afterGrace
 								c'8 \mp [
+									^ \markup {
+										\box
+											\pad-around
+												#0.5
+												\large
+													\bold
+														\caps
+															"Soft Mallets"
+										,
+										}
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8

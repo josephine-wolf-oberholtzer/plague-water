@@ -207,7 +207,7 @@
 								}
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
-								<g e'>16 -\staccatissimo \)
+								<g>16 -\staccatissimo \)
 							}
 						}
 						\tag #'Segment7GuitarVoice2
@@ -218,10 +218,10 @@
 								r32
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<d c'>16 -\staccatissimo
+								<d>16 -\staccatissimo
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 0
-								<g e'>32 -\staccatissimo ]
+								<g>32 -\staccatissimo ]
 							}
 						}
 					}
@@ -264,10 +264,10 @@
 							{
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								<df c' bf'>16 -\staccatissimo \p \) [
+								<df bf'>16 -\staccatissimo \arpeggio \p \) [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								<b a'>16 -\staccatissimo ]
+								<b>16 -\staccatissimo ]
 							}
 						}
 					}
@@ -300,13 +300,13 @@
 								r16 [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<d cs' e' b'>16 -\staccatissimo \pp ~
+								<d cs' b'>16 -\staccatissimo \arpeggio \pp ~
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<d cs' e' b'>16
+								<d cs' b'>16
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
-								<ef' c''>16 -\staccatissimo
+								<ef'>16 -\staccatissimo
 							}
 						}
 						\tag #'Segment7GuitarVoice10
@@ -314,10 +314,10 @@
 							\times 2/3 {
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								<d a c' b'>16 -\staccatissimo
+								<d a b'>16 -\staccatissimo \arpeggio
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<c' e' bf'>16 -\staccatissimo
+								<c' bf'>16 -\staccatissimo
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
 								r16 ]
@@ -342,7 +342,7 @@
 								e''''16 -\staccatissimo \pp [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<a'''' c'''''>16 -\staccatissimo
+								<c'''''>16 -\staccatissimo
 								\ottava #0
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
@@ -386,7 +386,7 @@
 								e''''16 -\staccatissimo [ \> \ppp
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								<c'''' ef''''>8 -\staccatissimo
+								<ef''''>8 -\staccatissimo
 							}
 						}
 						\tag #'Segment7PianoRHVoice6
@@ -394,7 +394,7 @@
 							{
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								<c'''' d'''' ef'''' af''''>16 -\staccatissimo
+								<d'''' ef'''' af''''>16 -\staccatissimo
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
 								e''''16 -\staccatissimo ] \!
@@ -432,7 +432,7 @@
 								e''''8 -\staccatissimo \p [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								<a'''' c'''''>16 -\staccatissimo ]
+								<c'''''>16 -\staccatissimo ]
 								\ottava #0
 							}
 						}
@@ -484,10 +484,10 @@
 							{
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								<e''' g'''>16 -\staccatissimo
+								<g'''>16 -\staccatissimo
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								<a'' b'' c''' f'''>16 -\staccatissimo ] \!
+								<b'' c''' f'''>16 -\staccatissimo ] \!
 								\ottava #0
 								\revert Hairpin #'circled-tip
 							}
@@ -559,7 +559,7 @@
 								c''''16 -\staccatissimo
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								<c''' ef'''>16 -\staccatissimo ]
+								<ef'''>16 -\staccatissimo ]
 								\ottava #0
 							}
 						}
@@ -825,6 +825,16 @@
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
 								c'8 \mp [
+									^ \markup {
+										\box
+											\pad-around
+												#0.5
+												\large
+													\bold
+														\caps
+															Styrofoam
+										,
+										}
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
 								\afterGrace

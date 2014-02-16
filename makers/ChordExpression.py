@@ -49,7 +49,7 @@ class ChordExpression(PlagueWaterObject):
         arpeggio_direction=None,
         interval_numbers=None,
         ):
-        assert arpeggio_direction in (Up, Down, None)
+        assert arpeggio_direction in (Up, Down, Center, None)
         interval_numbers = frozenset(
             x for x in interval_numbers
             if x != 0
@@ -62,7 +62,7 @@ class ChordExpression(PlagueWaterObject):
 
     def __call__(self, logical_tie):
         assert isinstance(logical_tie, selectiontools.LogicalTie), logical_tie
-        interval_numbers = sorted(list(self.interval_numbers) + [0])
+        interval_numbers = sorted(list(self.interval_numbers))
         head = logical_tie.head
         base_pitch = head.written_pitch
         pitch_range = inspect_(head).get_effective(pitchtools.PitchRange)

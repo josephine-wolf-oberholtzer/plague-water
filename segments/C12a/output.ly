@@ -408,10 +408,10 @@
 							{
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
-								<bf, af>8 \p [
+								<bf,>8 -\tenuto \p [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								<f d'>16
+								<f>16 -\tenuto
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
 								r16 ]
@@ -450,10 +450,10 @@
 							\times 2/3 {
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								<g, fs a e'>16 \p [
+								<g, fs e'>16 -\tenuto \arpeggio \p [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<d' b'>16
+								<d'>16 -\tenuto
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
 								r16 ]
@@ -478,13 +478,13 @@
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
 								\afterGrace
-								<c a>16 \p
+								<c>16 -\tenuto \p
 								{
 									b'16 \(
 								}
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								<b fs' a' gs''>16 ] \)
+								<b fs' gs''>16 -\tenuto \arpeggio ] \)
 							}
 						}
 					}
@@ -525,10 +525,10 @@
 							{
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								<ef g df'>16 \p [
+								<ef df'>16 -\tenuto \p [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
-								af'8 ]
+								af'8 -\tenuto ]
 							}
 						}
 					}
@@ -564,10 +564,10 @@
 							\times 2/3 {
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
-								<f d'>8 \p [
+								<f>8 -\tenuto \p [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
-								<fs e'>16
+								<fs>16 -\tenuto
 							}
 						}
 						\tag #'Segment12aGuitarVoice18
@@ -579,13 +579,13 @@
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
 								\afterGrace
-								<cf af>16 \pp
+								<cf>16 -\tenuto \pp
 								{
 									b16 \(
 								}
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								d'16 ] \)
+								d'16 -\tenuto ] \)
 							}
 						}
 					}
@@ -667,7 +667,7 @@
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
 								\clef treble
-								<e'' g'' b'' d'''>8 \p [
+								<e'' g'' b'' d'''>8 \p [ (
 									^ \markup {
 										\center-align
 											\concat
@@ -685,7 +685,7 @@
 								}
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								<g'' b'' d'''>16 ]
+								<g'' b'' d'''>16 ] )
 									^ \markup {
 										\center-align
 											\concat
@@ -730,7 +730,7 @@
 								}
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								<c'' e'' g''>16 \p [
+								<c'' e'' g''>16 \p [ (
 									^ \markup {
 										\center-align
 											\natural
@@ -762,7 +762,7 @@
 								}
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								<f'' a'' c''' e''' g'''>16 ]
+								<f'' a'' c''' e''' g'''>16 ] )
 									^ \markup {
 										\center-align
 											\flat
@@ -833,7 +833,7 @@
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
 								\ottava #1
-								c'''16 \p [
+								c'''16 \p [ (
 								\once \override Accidental.stencil = ##f
 								\once \override AccidentalCautionary.stencil = ##f
 								\once \override Arpeggio.X-offset = #-2
@@ -843,7 +843,7 @@
 								}
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								<c''' e''' g'''>16 ]
+								<c''' e''' g'''>16 ] )
 									^ \markup {
 										\center-align
 											\natural
@@ -892,10 +892,10 @@
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
 								\clef treble
-								<c'' ef''>8 \p [
+								<ef''>8 \p [ (
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
-								<ef'' gf''>8 ]
+								<gf''>8 ] )
 							}
 						}
 					}
@@ -931,10 +931,10 @@
 							{
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								b'16 \p [
+								b'16 \p [ (
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								<a' c''>16 ]
+								<c''>16 ] )
 							}
 						}
 					}
@@ -996,10 +996,10 @@
 								r32 [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								f'16 \p
+								f'16 \p (
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 0
-								<af'' cf'''>32 ]
+								<cf'''>32 ] )
 							}
 						}
 					}
@@ -1040,10 +1040,10 @@
 							{
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								<f' g' af' df''>16 \p [
+								<g' af' df''>16 \p [ (
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								c''16 ]
+								c''16 ] )
 							}
 						}
 					}
@@ -1598,6 +1598,15 @@
 						{
 							{
 								r2
+									^ \markup {
+										\box
+											\pad-around
+												#0.5
+												\large
+													\bold
+														\caps
+															Superball
+										}
 							}
 						}
 					}
@@ -1605,8 +1614,8 @@
 						\tag #'Segment12aPercussionDrumVoice2
 						{
 							{
-								a4 :32 -\accent \mp
-								e'4 :32
+								a4 -\accent \mp
+								e'4
 							}
 						}
 					}
@@ -1637,7 +1646,7 @@
 									\revert Flag #'stroke-style
 									\revert Stem #'length
 								}
-								a2 :32 -\accent ~ \)
+								a2 -\accent ~ \)
 							}
 						}
 						\tag #'Segment12aPercussionDrumVoice5
@@ -1645,13 +1654,13 @@
 							{
 								\set stemLeftBeamCount = -1
 								\set stemRightBeamCount = 1
-								a8 :64 \f [
+								a8 \f [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
 								r8
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
-								c'8 :64 \mp ]
+								c'8 \mp ]
 							}
 						}
 					}
@@ -1689,7 +1698,7 @@
 							\tweak #'text #tuplet-number::calc-fraction-text
 							\times 5/6 {
 								\afterGrace
-								a4 :32 -\accent \) \< \mp
+								a4 -\accent \) \< \mp
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
@@ -1710,7 +1719,7 @@
 								c'8
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
-								e'8 :64 ] \f
+								e'8 ] \f
 							}
 						}
 					}
@@ -1741,7 +1750,7 @@
 						\tag #'Segment12aPercussionDrumVoice11
 						{
 							{
-								c'4 :32 -\accent \mp \)
+								c'4 -\accent \mp \)
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
 								\afterGrace
@@ -1755,7 +1764,7 @@
 								}
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
-								a8 :64 \sfp ] \)
+								a8 \sfp ] \)
 							}
 						}
 					}
@@ -1778,7 +1787,7 @@
 							\tweak #'text #tuplet-number::calc-fraction-text
 							\times 3/4 {
 								e'4 -\accent \mp
-								c'4 :32
+								c'4
 							}
 						}
 					}
@@ -1805,7 +1814,7 @@
 									\revert Flag #'stroke-style
 									\revert Stem #'length
 								}
-								c'4 :32 -\accent ~ \)
+								c'4 -\accent ~ \)
 							}
 						}
 						\tag #'Segment12aPercussionDrumVoice16
@@ -1813,7 +1822,7 @@
 							\times 2/3 {
 								\set stemLeftBeamCount = -1
 								\set stemRightBeamCount = 1
-								c'8 :64 \f [
+								c'8 \f [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
 								r8
@@ -1845,7 +1854,7 @@
 							\tweak #'text #tuplet-number::calc-fraction-text
 							\times 7/12 {
 								\afterGrace
-								e'2 :32 -\accent \mp \)
+								e'2 -\accent \mp \)
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
@@ -1853,7 +1862,7 @@
 									\revert Flag #'stroke-style
 									\revert Stem #'length
 								}
-								e'4 :32 \)
+								e'4 \)
 							}
 						}
 					}

@@ -212,7 +212,7 @@
 								}
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
-								<g e'>8 -\staccatissimo ] \)
+								<g>8 -\staccatissimo ] \)
 							}
 						}
 					}
@@ -239,13 +239,13 @@
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
 								\afterGrace
-								<f e' d''>16 -\staccatissimo \p [
+								<f d''>16 -\staccatissimo \arpeggio \p [
 								{
 									e'16 \(
 								}
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
-								<b a'>16 -\staccatissimo \)
+								<b>16 -\staccatissimo \)
 							}
 						}
 						\tag #'Segment10cGuitarVoice5
@@ -253,10 +253,10 @@
 							{
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								<c a>16 -\staccatissimo
+								<c>16 -\staccatissimo
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 3
-								<g, fs a e'>32 -\staccatissimo
+								<g, fs e'>32 -\staccatissimo \arpeggio
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 0
 								r32 ]
@@ -298,13 +298,13 @@
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
 								\afterGrace
-								<d cs' e' b'>16 -\staccatissimo \pp
+								<d cs' b'>16 -\staccatissimo \arpeggio \pp
 								{
 									c''16 \(
 								}
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 0
-								<g e'>32 -\staccatissimo ] \)
+								<g>32 -\staccatissimo ] \)
 							}
 						}
 					}
@@ -346,7 +346,7 @@
 								c''''16 -\staccatissimo [ \> \pp
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								<a'''' c'''''>8 -\staccatissimo
+								<c'''''>8 -\staccatissimo
 							}
 						}
 						\tag #'Segment10cPianoRHVoice2
@@ -354,7 +354,7 @@
 							{
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								<c'''' d'''' ef'''' af''''>16 -\staccatissimo
+								<d'''' ef'''' af''''>16 -\staccatissimo
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
 								e''''16 -\staccatissimo ] \!
@@ -388,7 +388,7 @@
 								a'''8 -\staccatissimo \ppp [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								<c'''' ef''''>16 -\staccatissimo ]
+								<ef''''>16 -\staccatissimo ]
 								\ottava #0
 							}
 						}
@@ -428,10 +428,10 @@
 								e''''16 -\staccatissimo \p [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<a'''' c'''''>16 -\staccatissimo
+								<c'''''>16 -\staccatissimo
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								<a''' b''' c'''' f''''>16 -\staccatissimo ]
+								<b''' c'''' f''''>16 -\staccatissimo ]
 								\ottava #0
 							}
 						}
@@ -506,10 +506,10 @@
 							{
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								<e''' g'''>16 -\staccatissimo
+								<g'''>16 -\staccatissimo
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								<a'' b'' c''' f'''>16 -\staccatissimo ] \!
+								<b'' c''' f'''>16 -\staccatissimo ] \!
 								\ottava #0
 								\revert Hairpin #'circled-tip
 							}
@@ -583,7 +583,7 @@
 								c'''16 -\staccatissimo
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								<c''' ef'''>16 -\staccatissimo ]
+								<ef'''>16 -\staccatissimo ]
 								\ottava #0
 							}
 						}
@@ -875,6 +875,16 @@
 							\times 2/3 {
 								\afterGrace
 								a4 \< \mp
+									^ \markup {
+										\box
+											\pad-around
+												#0.5
+												\large
+													\bold
+														\caps
+															Styrofoam
+										,
+										}
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8

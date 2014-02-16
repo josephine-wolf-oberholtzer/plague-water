@@ -65,10 +65,10 @@
 						{
 							\tweak #'text #tuplet-number::calc-fraction-text
 							\times 5/6 {
-								fs4 \) \< \mp
+								fs4 -\accent \) \< \mp
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
-								d'8 [
+								d'8 -\tenuto [
 							}
 						}
 						\tag #'Segment2SaxophoneVoice3
@@ -78,7 +78,7 @@
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
 								\afterGrace
-								c8
+								c8 -\accent
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
@@ -88,7 +88,7 @@
 								}
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								b,8 \)
+								b,8 -\tenuto \)
 							}
 						}
 						\tag #'Segment2SaxophoneVoice4
@@ -97,7 +97,7 @@
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
 								\pitchedTrill
-								cs'8 \f \startTrillSpan e'
+								cs'8 -\accent \f \startTrillSpan e'
 								<> \stopTrillSpan
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
@@ -118,11 +118,11 @@
 						{
 							{
 								\pitchedTrill
-								b,4 \< \mp \startTrillSpan e
+								b,4 -\accent \< \mp \startTrillSpan e
 								<> \stopTrillSpan
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								a16 [
+								a16 -\tenuto [
 							}
 						}
 						\tag #'Segment2SaxophoneVoice7
@@ -132,7 +132,7 @@
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
 								\afterGrace
-								b,8.
+								b,8. -\accent
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
@@ -142,7 +142,7 @@
 								}
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								b,8 \)
+								b,8 -\tenuto \)
 							}
 						}
 						\tag #'Segment2SaxophoneVoice8
@@ -151,7 +151,7 @@
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
 								\afterGrace
-								a8
+								a8 -\accent
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
@@ -162,7 +162,7 @@
 								}
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								b,8. \)
+								b,8. -\tenuto \)
 							}
 						}
 						\tag #'Segment2SaxophoneVoice9
@@ -170,7 +170,7 @@
 							{
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								a,16
+								a,16 -\accent
 							}
 						}
 						\tag #'Segment2SaxophoneVoice10
@@ -179,7 +179,7 @@
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
 								\pitchedTrill
-								b,8. \startTrillSpan d
+								b,8. -\accent \startTrillSpan d
 								<> \stopTrillSpan
 							}
 						}
@@ -188,10 +188,10 @@
 							\times 2/3 {
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								e16
+								e16 -\accent
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
-								af16 ~
+								af16 -\tenuto ~
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
 								af8 ~
@@ -200,7 +200,7 @@
 								af16
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
-								e16
+								e16 -\tenuto
 							}
 						}
 						\tag #'Segment2SaxophoneVoice12
@@ -208,7 +208,7 @@
 							{
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								f,16
+								f,16 -\accent
 							}
 						}
 						\tag #'Segment2SaxophoneVoice13
@@ -217,7 +217,7 @@
 							\times 3/4 {
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								e,8 \f
+								e,8 -\accent \f
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
 								r8 ]
@@ -322,10 +322,10 @@
 						\tag #'Segment2GuitarVoice2
 						{
 							{
-								af4 \) \< \mp
+								af4 -\accent \) \< \mp
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								cs'16 [
+								cs'16 - \bendAfter #'-4.0 [
 							}
 						}
 						\tag #'Segment2GuitarVoice3
@@ -335,7 +335,7 @@
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
 								\afterGrace
-								ef8.
+								ef8. -\accent
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
@@ -345,7 +345,7 @@
 								}
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								d8 \)
+								d8 - \bendAfter #'-4.0 \)
 							}
 						}
 						\tag #'Segment2GuitarVoice4
@@ -353,11 +353,11 @@
 							\times 4/5 {
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								c'8
+								c'8 -\accent
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
 								\pitchedTrill
-								b,8. ] \f \startTrillSpan d
+								b,8. - \bendAfter #'-4.0 ] \f \startTrillSpan d
 								<> \stopTrillSpan
 							}
 						}
@@ -377,7 +377,7 @@
 							\times 5/6 {
 								\afterGrace
 								\pitchedTrill
-								a4 \< \mp \startTrillSpan d'
+								a4 -\accent \< \mp \startTrillSpan d'
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
@@ -388,7 +388,7 @@
 								<> \stopTrillSpan
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
-								b8 \) [
+								b8 - \bendAfter #'4.0 \) [
 							}
 						}
 						\tag #'Segment2GuitarVoice7
@@ -398,7 +398,7 @@
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
 								\afterGrace
-								a,8
+								a,8 -\accent
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
@@ -409,7 +409,7 @@
 								}
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								b,8 \)
+								b,8 - \bendAfter #'4.0 \)
 							}
 						}
 						\tag #'Segment2GuitarVoice8
@@ -418,7 +418,7 @@
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
 								\afterGrace
-								af8
+								af8 -\accent
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
@@ -429,7 +429,7 @@
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
 								\pitchedTrill
-								b,8 \) \startTrillSpan d
+								b,8 - \bendAfter #'4.0 \) \startTrillSpan d
 								<> \stopTrillSpan
 							}
 						}
@@ -438,7 +438,7 @@
 							{
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								af,16
+								af,16 -\accent
 							}
 						}
 						\tag #'Segment2GuitarVoice10
@@ -447,10 +447,10 @@
 							\times 3/4 {
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
-								a,16
+								a,16 -\accent
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								af8.
+								af8. - \bendAfter #'4.0
 							}
 						}
 						\tag #'Segment2GuitarVoice11
@@ -458,8 +458,8 @@
 							\times 4/5 {
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								f16 ]
-								d4
+								f16 -\accent ]
+								d4 - \bendAfter #'4.0
 							}
 						}
 						\tag #'Segment2GuitarVoice12
@@ -467,7 +467,7 @@
 							{
 								\set stemLeftBeamCount = -1
 								\set stemRightBeamCount = 2
-								af,16 [
+								af,16 -\accent [
 							}
 						}
 						\tag #'Segment2GuitarVoice13
@@ -476,7 +476,7 @@
 							\times 3/5 {
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								f8. \f
+								f8. -\accent \f
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
 								r8 ]
@@ -507,7 +507,7 @@
 						{
 							{
 								\afterGrace
-								ef4 \mp
+								ef4 -\accent \mp
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
@@ -517,7 +517,7 @@
 								}
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								bf16 \)
+								bf16 - \bendAfter #'-4.0 \)
 							}
 						}
 					}
@@ -555,10 +555,10 @@
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
 								\clef treble
-								cs'16 \p
+								cs'16 -\accent \p
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
-								<f'' af''>16
+								<af''>16 -\staccato
 							}
 						}
 						\tag #'Segment2PianoRHVoice3
@@ -566,7 +566,7 @@
 							\times 2/3 {
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								<ef' f' gf' cf''>8
+								<f' gf' cf''>8 -\accent
 								\once \override Accidental.stencil = ##f
 								\once \override AccidentalCautionary.stencil = ##f
 								\once \override Arpeggio.X-offset = #-2
@@ -576,7 +576,7 @@
 								}
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = -1
-								<d' f' a'>16 ]
+								<d' f' a'>16 -\staccato ]
 									^ \markup {
 										\center-align
 											\concat
@@ -598,7 +598,7 @@
 								\once \override NoteHead.text = \markup {
 									\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
 								}
-								<g' b' d'' f''>4 \p
+								<g' b' d'' f''>4 -\accent \p
 									^ \markup {
 										\center-align
 											\concat
@@ -607,7 +607,7 @@
 													\flat
 												}
 										}
-								<d' ef' gf'>4
+								<d' gf'>4 -\staccato
 							}
 						}
 					}
@@ -646,13 +646,13 @@
 								r16 [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<d' e' f' bf'>16 \p ~
+								<e' f' bf'>16 -\accent \p ~
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<d' e' f' bf'>16
+								<e' f' bf'>16
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								af'16 ]
+								af'16 -\staccato ]
 							}
 						}
 					}
@@ -685,10 +685,10 @@
 						\tag #'Segment2PianoRHVoice12
 						{
 							{
-								<f' af'>4 \p
+								<af'>4 -\accent \p
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
-								cs''8 [
+								cs''8 -\staccato [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
 								r8 ]
@@ -726,8 +726,8 @@
 							\tweak #'text #tuplet-number::calc-fraction-text
 							\times 7/8 {
 								\clef bass
-								d,4 \p
-								<cs e fs>4
+								d,4 -\accent \p
+								<e fs>4 -\staccato
 							}
 						}
 					}
@@ -761,13 +761,13 @@
 								r16 [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								f,16 \p ~
+								f,16 -\accent \p ~
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
 								f,16
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								<b, d>16 ]
+								<d>16 -\staccato ]
 							}
 						}
 					}
@@ -795,8 +795,8 @@
 						\tag #'Segment2PianoLHVoice8
 						{
 							{
-								f,4 \p
-								<bf c' df' gf'>4
+								f,4 -\accent \p
+								<c' df' gf'>4 -\staccato
 							}
 						}
 					}
@@ -874,8 +874,8 @@
 						{
 							\tweak #'text #tuplet-number::calc-fraction-text
 							\times 7/12 {
-								g2 \p
-								f'4
+								g2 -\staccatissimo \p
+								f'4 -\staccatissimo
 							}
 						}
 					}
@@ -905,13 +905,13 @@
 							{
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								b16 \p [
+								b16 -\staccatissimo \p [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								d'16
+								d'16 -\staccatissimo
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								f'16 ]
+								f'16 -\staccatissimo ]
 							}
 						}
 					}
@@ -939,8 +939,8 @@
 						\tag #'Segment2PercussionShakerVoice8
 						{
 							{
-								d'4 \p
-								g4
+								d'4 -\staccatissimo \p
+								g4 -\staccatissimo
 							}
 						}
 					}
@@ -965,7 +965,7 @@
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
 								\afterGrace
-								f8 [ \> \p
+								f8 -\staccatissimo [ \> \p
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
@@ -975,16 +975,16 @@
 								}
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = -1
-								a8 ] \)
+								a8 -\staccatissimo ] \)
 							}
 						}
 						\tag #'Segment2PercussionWoodblockVoice2
 						{
 							{
-								g'4
+								g'4 -\staccatissimo
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
-								c'8 \! [
+								c'8 -\staccatissimo \! [
 								\revert Hairpin #'circled-tip
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
@@ -1010,7 +1010,7 @@
 								r16 [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								e'16 \p ~
+								e'16 -\staccatissimo \p ~
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
 								\afterGrace
@@ -1024,7 +1024,7 @@
 								}
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								f16 ] \)
+								f16 -\staccatissimo ] \)
 							}
 						}
 					}
@@ -1056,7 +1056,7 @@
 						{
 							{
 								\afterGrace
-								e'4 \p \)
+								e'4 -\staccatissimo \p \)
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
@@ -1064,7 +1064,7 @@
 									\revert Flag #'stroke-style
 									\revert Stem #'length
 								}
-								e'4 \)
+								e'4 -\staccatissimo \)
 							}
 						}
 					}
@@ -1086,10 +1086,10 @@
 								r8 [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								a8 \p
+								a8 -\staccatissimo \p
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
-								g'8 ]
+								g'8 -\staccatissimo ]
 							}
 						}
 					}
@@ -1117,10 +1117,10 @@
 								r8 [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								c'8 \p
+								c'8 -\staccatissimo \p
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
-								e'8 ]
+								e'8 -\staccatissimo ]
 							}
 						}
 					}
@@ -1143,13 +1143,13 @@
 								\override Hairpin #'circled-tip = ##t
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								c'8 ~ \> \p
+								c'8 -\staccatissimo ~ \> \p
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
 								c'8
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
-								f8 ] \!
+								f8 -\staccatissimo ] \!
 								\revert Hairpin #'circled-tip
 							}
 						}

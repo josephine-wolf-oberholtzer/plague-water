@@ -203,7 +203,7 @@
 								}
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								<c' a'>16 -\staccatissimo ] \)
+								<c'>16 -\staccatissimo ] \)
 							}
 						}
 					}
@@ -229,13 +229,13 @@
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
 								\afterGrace
-								<d c'>16 -\staccatissimo \p [
+								<d>16 -\staccatissimo \p [
 								{
 									c'16 \(
 								}
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
-								<f e' d''>16 -\staccatissimo \)
+								<f d''>16 -\staccatissimo \arpeggio \)
 							}
 						}
 						\tag #'Segment15GuitarVoice5
@@ -243,10 +243,10 @@
 							{
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								<d c'>16 -\staccatissimo
+								<d>16 -\staccatissimo
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 3
-								<g e'>32 -\staccatissimo
+								<g>32 -\staccatissimo
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 0
 								r32 ]
@@ -278,13 +278,13 @@
 								r16 [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<g, fs a e'>16 -\staccatissimo \pp ~
+								<g, fs e'>16 -\staccatissimo \arpeggio \pp ~
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<g, fs a e'>16
+								<g, fs e'>16
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								<ef c'>16 -\staccatissimo ]
+								<ef>16 -\staccatissimo ]
 							}
 						}
 					}
@@ -326,7 +326,7 @@
 								c''''8 -\staccatissimo [ \> \pp
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
-								<c'''' ef''''>16 -\staccatissimo
+								<ef''''>16 -\staccatissimo
 							}
 						}
 						\tag #'Segment15PianoRHVoice2
@@ -334,7 +334,7 @@
 							{
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								<c'''' d'''' ef'''' af''''>16 -\staccatissimo
+								<d'''' ef'''' af''''>16 -\staccatissimo
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
 								c''''16 -\staccatissimo \!
@@ -380,12 +380,7 @@
 										}
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								<
-									\tweak #'color #red
-									c''''
-									ef''''
-									f''''
-								>16 -\staccatissimo
+								<ef'''' f''''>16 -\staccatissimo
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
 								e''''16 -\staccatissimo ]
@@ -422,7 +417,7 @@
 								c''''16 -\staccatissimo \p [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
-								<c'''' ef''''>16 -\staccatissimo
+								<ef''''>16 -\staccatissimo
 							}
 						}
 						\tag #'Segment15PianoRHVoice8
@@ -430,7 +425,7 @@
 							{
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								<c'''' d'''' ef'''' af''''>16 -\staccatissimo
+								<d'''' ef'''' af''''>16 -\staccatissimo
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 3
 								e''''32 -\staccatissimo
@@ -511,16 +506,10 @@
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
 								\ottava #1
-								<a'' c'''>16 -\staccatissimo \pp [
+								<c'''>16 -\staccatissimo \pp [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
-								<
-									e'''
-									fs'''
-									g'''
-									\tweak #'color #red
-									c''''
-								>8 -\staccatissimo ]
+								<fs''' g''' c''''>8 -\staccatissimo ]
 								\ottava #0
 							}
 						}
@@ -545,7 +534,7 @@
 								c'''16 -\staccatissimo
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								<e'' g''>16 -\staccatissimo ]
+								<g''>16 -\staccatissimo ]
 							}
 						}
 					}
@@ -865,6 +854,16 @@
 								\once \override Staff.StaffSymbol.line-count = 1
 								\startStaff
 								R1 * 5/16
+									^ \markup {
+										\box
+											\pad-around
+												#0.5
+												\large
+													\bold
+														\caps
+															Styrofoam
+										,
+										}
 								\stopStaff
 								\startStaff
 							}

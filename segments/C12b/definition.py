@@ -56,7 +56,7 @@ context_map['Piano LH Voice']['register_agent'] = makers.RegisterAgent(
 ### CURSOR TRANSFORM ###
 
 cursor_transform = makers.CursorTransform(
-    increment=40,
+    increment=35,
     reverse=True,
     )
 

@@ -20,12 +20,8 @@
 				s1 * 11/16
 			}
 			{
-				\time 7/16
-				s1 * 7/16
-			}
-			{
-				\time 5/16
-				s1 * 5/16
+				\time 7/8
+				s1 * 7/8
 			}
 			{
 				\time 3/16
@@ -39,38 +35,35 @@
 				s1 * 7/8
 			}
 			{
-				\time 5/16
-				s1 * 5/16
-			}
-			{
-				\time 11/16
-				s1 * 11/16
-			}
-			{
-				s1 * 11/16
-			}
-			{
-				\time 7/16
-				s1 * 7/16
-			}
-			{
-				s1 * 7/16
+				\time 3/16
+				s1 * 3/16
 			}
 			{
 				\time 7/8
 				s1 * 7/8
 			}
 			{
+				s1 * 7/8
+			}
+			{
+				\time 3/16
+				s1 * 3/16
+			}
+			{
 				\time 5/16
 				s1 * 5/16
+			}
+			{
+				\time 7/8
+				s1 * 7/8
 			}
 			{
 				\time 7/16
 				s1 * 7/16
 			}
 			{
-				\time 3/16
-				s1 * 3/16
+				\time 5/8
+				s1 * 5/8
 			}
 		}
 		\tag score.saxophone
@@ -83,15 +76,17 @@
 						\tag #'Segment17bSaxophoneVoice1
 						{
 							{
-								\afterGrace
 								r16
-								{
-									\override Flag #'stroke-style = #"grace"
-									\override Stem #'length = #8
-									af,16 \(
-									\revert Flag #'stroke-style
-									\revert Stem #'length
-								}
+									_ \markup {
+										\pad-around
+											#2
+											\italic
+												(sempre
+										\dynamic
+											ppp
+										\italic
+											)
+										}
 							}
 						}
 					}
@@ -102,8 +97,21 @@
 							\times 5/6 {
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
-								b,8 \)
-								f4
+								r8 [
+								\set stemLeftBeamCount = 1
+								\set stemRightBeamCount = 1
+								\afterGrace
+								g,8 (
+								{
+									\override Flag #'stroke-style = #"grace"
+									\override Stem #'length = #8
+									af,16 \(
+									\revert Flag #'stroke-style
+									\revert Stem #'length
+								}
+								\set stemLeftBeamCount = 1
+								\set stemRightBeamCount = 0
+								b,8 ] \) )
 							}
 						}
 					}
@@ -118,28 +126,23 @@
 						\tag #'Segment17bSaxophoneVoice4
 						{
 							{
-								\afterGrace
 								r16
-								{
-									\override Flag #'stroke-style = #"grace"
-									\override Stem #'length = #8
-									af,16 \(
-									\revert Flag #'stroke-style
-									\revert Stem #'length
-								}
 							}
 						}
 					}
 					{
 						\tag #'Segment17bSaxophoneVoice5
 						{
-							\times 2/3 {
+							{
 								\set stemLeftBeamCount = 0
-								\set stemRightBeamCount = 1
-								b,8 \) [
+								\set stemRightBeamCount = 3
+								r32 [
 								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 2
+								g,16 (
+								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 0
-								d16 ]
+								f32 ] )
 							}
 						}
 					}
@@ -148,11 +151,11 @@
 						{
 							{
 								\afterGrace
-								r4
+								r8.
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
-									g,16 \(
+									b,16 \(
 									\revert Flag #'stroke-style
 									\revert Stem #'length
 								}
@@ -162,24 +165,16 @@
 					{
 						\tag #'Segment17bSaxophoneVoice7
 						{
-							\times 2/3 {
+							{
 								\set stemLeftBeamCount = 0
-								\set stemRightBeamCount = 1
-								f,8 \) [
-								\set stemLeftBeamCount = 1
-								\set stemRightBeamCount = 1
-								\afterGrace
-								af,8
-								{
-									\override Flag #'stroke-style = #"grace"
-									\override Stem #'length = #8
-									g,16 \(
-									\revert Flag #'stroke-style
-									\revert Stem #'length
-								}
-								\set stemLeftBeamCount = 1
+								\set stemRightBeamCount = 2
+								d,16 \) [ (
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 3
+								f32 )
+								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 0
-								f,8 ] \)
+								r32 ]
 							}
 						}
 					}
@@ -187,20 +182,28 @@
 						\tag #'Segment17bSaxophoneVoice8
 						{
 							{
+								r8
 								r16
 							}
 						}
+					}
+					{
 						\tag #'Segment17bSaxophoneVoice9
 						{
-							{
-								\stopStaff
-								\once \override Staff.StaffSymbol.line-count = 1
-								\startStaff
-								R1 * 3/16
-								\stopStaff
-								\startStaff
+							\times 2/3 {
+								\set stemLeftBeamCount = 0
+								\set stemRightBeamCount = 2
+								e,16 [ (
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 2
+								f16 )
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 0
+								r16 ]
 							}
 						}
+					}
+					{
 						\tag #'Segment17bSaxophoneVoice10
 						{
 							{
@@ -214,18 +217,21 @@
 							{
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
+								r16 [
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 2
 								\afterGrace
-								f,16 [
+								af,16 (
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
-									g,16 \(
+									b,16 \(
 									\revert Flag #'stroke-style
 									\revert Stem #'length
 								}
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								f16 ] \)
+								d16 ] \) )
 							}
 						}
 					}
@@ -233,20 +239,42 @@
 						\tag #'Segment17bSaxophoneVoice12
 						{
 							{
-								r4.
+								\stopStaff
+								\once \override Staff.StaffSymbol.line-count = 1
+								\startStaff
+								\afterGrace
+								R1 * 3/16
+								{
+									\override Flag #'stroke-style = #"grace"
+									\override Stem #'length = #8
+									\stopStaff
+									\startStaff
+									f,16 [ \(
+									g,16 ]
+									\revert Flag #'stroke-style
+									\revert Stem #'length
+								}
+								\stopStaff
+								\startStaff
 							}
 						}
 					}
 					{
 						\tag #'Segment17bSaxophoneVoice13
 						{
-							{
+							\times 2/3 {
 								\set stemLeftBeamCount = 0
-								\set stemRightBeamCount = 2
-								af,16 [
-								\set stemLeftBeamCount = 2
-								\set stemRightBeamCount = 0
-								f16 ]
+								\set stemRightBeamCount = 1
+								\afterGrace
+								f,8 \) (
+								{
+									\override Flag #'stroke-style = #"grace"
+									\override Stem #'length = #8
+									b,16 \(
+									\revert Flag #'stroke-style
+									\revert Stem #'length
+								}
+								d4 \) )
 							}
 						}
 					}
@@ -258,10 +286,25 @@
 								r4
 							}
 						}
+					}
+					{
 						\tag #'Segment17bSaxophoneVoice15
 						{
 							{
-								r8
+								\set stemLeftBeamCount = 0
+								\set stemRightBeamCount = 1
+								\afterGrace
+								d,8 [ (
+								{
+									\override Flag #'stroke-style = #"grace"
+									\override Stem #'length = #8
+									g,16 \(
+									\revert Flag #'stroke-style
+									\revert Stem #'length
+								}
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 0
+								f16 ] \) )
 							}
 						}
 					}
@@ -269,13 +312,58 @@
 						\tag #'Segment17bSaxophoneVoice16
 						{
 							{
+								r16
+							}
+						}
+						\tag #'Segment17bSaxophoneVoice17
+						{
+							{
+								\stopStaff
+								\once \override Staff.StaffSymbol.line-count = 1
+								\startStaff
+								R1 * 3/16
+								\stopStaff
+								\startStaff
+							}
+						}
+						\tag #'Segment17bSaxophoneVoice18
+						{
+							{
+								r8
+							}
+						}
+					}
+					{
+						\tag #'Segment17bSaxophoneVoice19
+						{
+							{
 								\set stemLeftBeamCount = 0
-								\set stemRightBeamCount = 3
-								r32 [
+								\set stemRightBeamCount = 2
+								c,16 [ (
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
 								\afterGrace
-								f,16
+								ef16
+								{
+									\override Flag #'stroke-style = #"grace"
+									\override Stem #'length = #8
+									af,16 \(
+									\revert Flag #'stroke-style
+									\revert Stem #'length
+								}
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 0
+								cs,16 ] \) )
+							}
+						}
+					}
+					{
+						\tag #'Segment17bSaxophoneVoice20
+						{
+							{
+								r16
+								\afterGrace
+								r8.
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
@@ -284,72 +372,6 @@
 									\revert Flag #'stroke-style
 									\revert Stem #'length
 								}
-								\set stemLeftBeamCount = 3
-								\set stemRightBeamCount = 0
-								d32 ] \)
-							}
-						}
-					}
-					{
-						\tag #'Segment17bSaxophoneVoice17
-						{
-							{
-								\afterGrace
-								r16
-								{
-									\override Flag #'stroke-style = #"grace"
-									\override Stem #'length = #8
-									b,16 \(
-									\revert Flag #'stroke-style
-									\revert Stem #'length
-								}
-							}
-						}
-					}
-					{
-						\tag #'Segment17bSaxophoneVoice18
-						{
-							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 3/4 {
-								\set stemLeftBeamCount = 0
-								\set stemRightBeamCount = 1
-								d,8 \) [
-								\set stemLeftBeamCount = 1
-								\set stemRightBeamCount = 0
-								c8 ]
-							}
-						}
-					}
-					{
-						\tag #'Segment17bSaxophoneVoice19
-						{
-							{
-								r8
-								r16
-							}
-						}
-					}
-					{
-						\tag #'Segment17bSaxophoneVoice20
-						{
-							\times 2/3 {
-								\set stemLeftBeamCount = 0
-								\set stemRightBeamCount = 1
-								r8 [
-								\set stemLeftBeamCount = 1
-								\set stemRightBeamCount = 1
-								\afterGrace
-								bf,8
-								{
-									\override Flag #'stroke-style = #"grace"
-									\override Stem #'length = #8
-									af,16 \(
-									\revert Flag #'stroke-style
-									\revert Stem #'length
-								}
-								\set stemLeftBeamCount = 1
-								\set stemRightBeamCount = 0
-								cs8 ] \)
 							}
 						}
 					}
@@ -357,39 +379,10 @@
 						\tag #'Segment17bSaxophoneVoice21
 						{
 							{
-								r16
-							}
-						}
-						\tag #'Segment17bSaxophoneVoice22
-						{
-							{
-								r8.
-								r16
-							}
-						}
-					}
-					{
-						\tag #'Segment17bSaxophoneVoice23
-						{
-							\times 2/3 {
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								r16 [
-								\set stemLeftBeamCount = 2
-								\set stemRightBeamCount = 2
-								ef,16
-								\set stemLeftBeamCount = 2
-								\set stemRightBeamCount = 1
-								f16
-							}
-						}
-						\tag #'Segment17bSaxophoneVoice24
-						{
-							{
-								\set stemLeftBeamCount = 1
-								\set stemRightBeamCount = 1
 								\afterGrace
-								c,8
+								cs,16 \) [ (
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
@@ -398,8 +391,44 @@
 									\revert Stem #'length
 								}
 								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 1
+								cs16 \)
+							}
+						}
+						\tag #'Segment17bSaxophoneVoice22
+						{
+							{
+								\set stemLeftBeamCount = 1
+								\set stemRightBeamCount = 3
+								r32
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 2
+								bf,16
+								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 0
-								c,16 ] \)
+								af,32 ] )
+							}
+						}
+					}
+					{
+						\tag #'Segment17bSaxophoneVoice23
+						{
+							{
+								r16
+							}
+						}
+						\tag #'Segment17bSaxophoneVoice24
+						{
+							{
+								\afterGrace
+								r8.
+								{
+									\override Flag #'stroke-style = #"grace"
+									\override Stem #'length = #8
+									af,16 \(
+									\revert Flag #'stroke-style
+									\revert Stem #'length
+								}
 							}
 						}
 					}
@@ -407,14 +436,21 @@
 						\tag #'Segment17bSaxophoneVoice25
 						{
 							{
-								r8
+								\set stemLeftBeamCount = 0
+								\set stemRightBeamCount = 1
+								c,8 \) [ (
+								\set stemLeftBeamCount = 1
+								\set stemRightBeamCount = 0
+								ef8 ] )
 							}
 						}
+					}
+					{
 						\tag #'Segment17bSaxophoneVoice26
 						{
 							{
 								r8.
-								r8
+								r16
 							}
 						}
 					}
@@ -427,10 +463,10 @@
 								r32 [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								c,16
+								f,16 (
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 0
-								cs32 ]
+								c32 ] )
 							}
 						}
 					}
@@ -438,59 +474,39 @@
 						\tag #'Segment17bSaxophoneVoice28
 						{
 							{
-								\stopStaff
-								\once \override Staff.StaffSymbol.line-count = 1
-								\startStaff
-								R1 * 7/16
-								\stopStaff
-								\startStaff
+								r16
 							}
 						}
 						\tag #'Segment17bSaxophoneVoice29
 						{
 							{
-								r4.
-								r8.
+								\stopStaff
+								\once \override Staff.StaffSymbol.line-count = 1
+								\startStaff
+								\afterGrace
+								R1 * 3/16
+								{
+									\override Flag #'stroke-style = #"grace"
+									\override Stem #'length = #8
+									\stopStaff
+									\startStaff
+									af,16 \(
+									\revert Flag #'stroke-style
+									\revert Stem #'length
+								}
+								\stopStaff
+								\startStaff
 							}
 						}
 					}
 					{
 						\tag #'Segment17bSaxophoneVoice30
 						{
-							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 3/4 {
+							{
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
 								\afterGrace
-								c,8 [
-								{
-									\override Flag #'stroke-style = #"grace"
-									\override Stem #'length = #8
-									af,16 \(
-									\revert Flag #'stroke-style
-									\revert Stem #'length
-								}
-								\set stemLeftBeamCount = 1
-								\set stemRightBeamCount = 2
-								cs16 \)
-								\set stemLeftBeamCount = 2
-								\set stemRightBeamCount = 0
-								r16 ]
-							}
-						}
-					}
-					{
-						\tag #'Segment17bSaxophoneVoice31
-						{
-							{
-								r8
-							}
-						}
-						\tag #'Segment17bSaxophoneVoice32
-						{
-							{
-								\afterGrace
-								r8
+								cs,8 \) [ (
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
@@ -499,53 +515,90 @@
 									\revert Flag #'stroke-style
 									\revert Stem #'length
 								}
+								\set stemLeftBeamCount = 1
+								\set stemRightBeamCount = 0
+								cs8 ] \) )
+							}
+						}
+					}
+					{
+						\tag #'Segment17bSaxophoneVoice31
+						{
+							{
+								r16
+							}
+						}
+						\tag #'Segment17bSaxophoneVoice32
+						{
+							{
+								r4.
+								r16
 							}
 						}
 					}
 					{
 						\tag #'Segment17bSaxophoneVoice33
 						{
-							\times 2/3 {
+							{
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								a,16 \) [
+								r16 [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								g,16
+								\afterGrace
+								ef,16 (
+								{
+									\override Flag #'stroke-style = #"grace"
+									\override Stem #'length = #8
+									af,16 \(
+									\revert Flag #'stroke-style
+									\revert Stem #'length
+								}
 								\set stemLeftBeamCount = 2
-								\set stemRightBeamCount = 0
-								r16 ]
+								\set stemRightBeamCount = 1
+								cs16 \)
+							}
+						}
+						\tag #'Segment17bSaxophoneVoice34
+						{
+							\times 2/3 {
+								\set stemLeftBeamCount = 1
+								\set stemRightBeamCount = 1
+								b,8 ]
+								f,4 )
 							}
 						}
 					}
 					{
-						\tag #'Segment17bSaxophoneVoice34
-						{
-							{
-								r16
-							}
-						}
 						\tag #'Segment17bSaxophoneVoice35
 						{
 							{
 								r8.
-								r8
+								r16
 							}
 						}
 					}
 					{
 						\tag #'Segment17bSaxophoneVoice36
 						{
-							\times 2/3 {
+							{
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
 								r16 [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								g,16
+								\afterGrace
+								a,16 (
+								{
+									\override Flag #'stroke-style = #"grace"
+									\override Stem #'length = #8
+									af,16 \(
+									\revert Flag #'stroke-style
+									\revert Stem #'length
+								}
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								a,16 ]
+								a,16 ] \) )
 							}
 						}
 					}
@@ -553,12 +606,32 @@
 						\tag #'Segment17bSaxophoneVoice37
 						{
 							{
-								\stopStaff
-								\once \override Staff.StaffSymbol.line-count = 1
-								\startStaff
-								R1 * 3/16
-								\stopStaff
-								\startStaff
+								r4.
+								r16
+							}
+						}
+					}
+					{
+						\tag #'Segment17bSaxophoneVoice38
+						{
+							{
+								\set stemLeftBeamCount = 0
+								\set stemRightBeamCount = 3
+								r32 [
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 2
+								a,16 (
+								\set stemLeftBeamCount = 3
+								\set stemRightBeamCount = 0
+								g,32 ] )
+							}
+						}
+					}
+					{
+						\tag #'Segment17bSaxophoneVoice39
+						{
+							{
+								r16
 							}
 						}
 					}
@@ -586,10 +659,20 @@
 														\caps
 															"Color Four"
 										}
+									_ \markup {
+										\pad-around
+											#2
+											\italic
+												(sempre
+										\dynamic
+											ppp
+										\italic
+											)
+										}
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
-									f'16 \(
+									af'16 \(
 									\revert Flag #'stroke-style
 									\revert Stem #'length
 								}
@@ -602,10 +685,10 @@
 							{
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								<a g'>16 \) [
+								<cs'>16 -\staccato \) [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 3
-								<cf'' af''>32
+								<af'>32 -\staccato
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 0
 								r32 ]
@@ -622,7 +705,8 @@
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
-									g'16 \(
+									\ottava #1
+									f'16 \(
 									\revert Flag #'stroke-style
 									\revert Stem #'length
 								}
@@ -635,10 +719,11 @@
 							\times 2/3 {
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								af'16 \) [
+								g'16 -\staccato \) [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								b'16
+								af''16 -\staccato
+								\ottava #0
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
 								r16
@@ -650,10 +735,10 @@
 							\times 3/4 {
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								f'8
+								b'8 -\staccato
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
-								g'8 ]
+								f'8 -\staccato ]
 							}
 						}
 					}
@@ -661,15 +746,55 @@
 						\tag #'Segment17bGuitarVoice6
 						{
 							{
-								\stopStaff
-								\once \override Staff.StaffSymbol.line-count = 1
-								\startStaff
-								R1 * 7/16
-								\stopStaff
-								\startStaff
+								r4.
 							}
 						}
+					}
+					{
 						\tag #'Segment17bGuitarVoice7
+						{
+							\times 2/3 {
+								\set stemLeftBeamCount = 0
+								\set stemRightBeamCount = 2
+								r16 [
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 2
+								<d cs' b'>16 -\staccato \arpeggio
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 1
+								<cf''>16 -\staccato
+							}
+						}
+						\tag #'Segment17bGuitarVoice8
+						{
+							{
+								\set stemLeftBeamCount = 1
+								\set stemRightBeamCount = 2
+								r16
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 2
+								<e'>16 -\staccato ~
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 2
+								\afterGrace
+								<e'>16
+								{
+									af'16 \(
+								}
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 0
+								<f'>16 -\staccato ] \)
+							}
+						}
+					}
+					{
+						\tag #'Segment17bGuitarVoice9
+						{
+							{
+								r8
+							}
+						}
+						\tag #'Segment17bGuitarVoice10
 						{
 							{
 								r16
@@ -677,27 +802,220 @@
 						}
 					}
 					{
-						\tag #'Segment17bGuitarVoice8
+						\tag #'Segment17bGuitarVoice11
 						{
 							\times 2/3 {
 								\set stemLeftBeamCount = 0
-								\set stemRightBeamCount = 1
-								r8 [
+								\set stemRightBeamCount = 2
+								<ef' c'''>16 -\staccato \arpeggio [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								\afterGrace
-								<c' b' d'' a''>8
-								{
-									b'16 \(
-								}
+								<g'>8 -\staccato
+							}
+						}
+						\tag #'Segment17bGuitarVoice12
+						{
+							{
 								\set stemLeftBeamCount = 1
+								\set stemRightBeamCount = 2
+								<df' cf''>16 -\staccato
+								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								<f' d''>8 ] \)
+								<cf'>16 -\staccato ]
 							}
 						}
 					}
 					{
-						\tag #'Segment17bGuitarVoice9
+						\tag #'Segment17bGuitarVoice13
+						{
+							{
+								r16
+							}
+						}
+						\tag #'Segment17bGuitarVoice14
+						{
+							{
+								\afterGrace
+								r4
+								{
+									\override Flag #'stroke-style = #"grace"
+									\override Stem #'length = #8
+									\ottava #1
+									g'16 \(
+									\revert Flag #'stroke-style
+									\revert Stem #'length
+								}
+							}
+						}
+					}
+					{
+						\tag #'Segment17bGuitarVoice15
+						{
+							\times 2/3 {
+								\set stemLeftBeamCount = 0
+								\set stemRightBeamCount = 1
+								f'8 -\staccato \) [
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 0
+								af''16 -\staccato ]
+								\ottava #0
+							}
+						}
+					}
+					{
+						\tag #'Segment17bGuitarVoice16
+						{
+							{
+								\afterGrace
+								r2
+								{
+									\override Flag #'stroke-style = #"grace"
+									\override Stem #'length = #8
+									\ottava #1
+									b'16 \(
+									\revert Flag #'stroke-style
+									\revert Stem #'length
+								}
+							}
+						}
+					}
+					{
+						\tag #'Segment17bGuitarVoice17
+						{
+							{
+								\set stemLeftBeamCount = 0
+								\set stemRightBeamCount = 2
+								\afterGrace
+								<f'>16 -\staccato \) [
+								{
+									g''16 [ \(
+									af''16 ]
+								}
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 2
+								\afterGrace
+								<e' b' cs'''>16 -\staccato \arpeggio \)
+								{
+									af'16 \(
+								}
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 0
+								<bf' af''>16 -\staccato ] \)
+								\ottava #0
+							}
+						}
+					}
+					{
+						\tag #'Segment17bGuitarVoice18
+						{
+							{
+								r4
+								r16
+							}
+						}
+					}
+					{
+						\tag #'Segment17bGuitarVoice19
+						{
+							{
+								\set stemLeftBeamCount = 0
+								\set stemRightBeamCount = 2
+								\ottava #1
+								\afterGrace
+								bf'16 -\staccato [
+								{
+									\override Flag #'stroke-style = #"grace"
+									\override Stem #'length = #8
+									af''16 \(
+									\revert Flag #'stroke-style
+									\revert Stem #'length
+								}
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 0
+								cs''16 -\staccato ] \)
+								\ottava #0
+							}
+						}
+					}
+					{
+						\tag #'Segment17bGuitarVoice20
+						{
+							{
+								r8.
+								r4
+							}
+						}
+						\tag #'Segment17bGuitarVoice21
+						{
+							{
+								r8.
+							}
+						}
+					}
+					{
+						\tag #'Segment17bGuitarVoice22
+						{
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 3/4 {
+								\set stemLeftBeamCount = 0
+								\set stemRightBeamCount = 1
+								\ottava #1
+								\afterGrace
+								ef'8 -\staccato [
+								{
+									\override Flag #'stroke-style = #"grace"
+									\override Stem #'length = #8
+									af''16 \(
+									\revert Flag #'stroke-style
+									\revert Stem #'length
+								}
+								\set stemLeftBeamCount = 1
+								\set stemRightBeamCount = 0
+								<ef'>8 -\staccato ] \)
+								\ottava #0
+							}
+						}
+					}
+					{
+						\tag #'Segment17bGuitarVoice23
+						{
+							{
+								r4
+							}
+						}
+					}
+					{
+						\tag #'Segment17bGuitarVoice24
+						{
+							{
+								\set stemLeftBeamCount = 0
+								\set stemRightBeamCount = 3
+								r32 [
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 2
+								<e'>16 -\staccato
+								\set stemLeftBeamCount = 3
+								\set stemRightBeamCount = 1
+								<c' a''>32 -\staccato \arpeggio
+							}
+						}
+						\tag #'Segment17bGuitarVoice25
+						{
+							\times 2/3 {
+								\set stemLeftBeamCount = 1
+								\set stemRightBeamCount = 2
+								<ds'>16 -\staccato
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 2
+								<f c' d''>16 -\staccato \arpeggio
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 0
+								r16 ]
+							}
+						}
+					}
+					{
+						\tag #'Segment17bGuitarVoice26
 						{
 							{
 								\stopStaff
@@ -708,270 +1026,53 @@
 								\startStaff
 							}
 						}
-					}
-					{
-						\tag #'Segment17bGuitarVoice10
-						{
-							{
-								\set stemLeftBeamCount = 0
-								\set stemRightBeamCount = 2
-								<fs e'>16 [
-								\set stemLeftBeamCount = 1
-								\set stemRightBeamCount = 0
-								<cf'' af''>8 ]
-							}
-						}
-					}
-					{
-						\tag #'Segment17bGuitarVoice11
-						{
-							{
-								\afterGrace
-								r4.
-								{
-									\override Flag #'stroke-style = #"grace"
-									\override Stem #'length = #8
-									\ottava #1
-									f'16 \(
-									\revert Flag #'stroke-style
-									\revert Stem #'length
-								}
-							}
-						}
-					}
-					{
-						\tag #'Segment17bGuitarVoice12
-						{
-							\times 2/3 {
-								\set stemLeftBeamCount = 0
-								\set stemRightBeamCount = 1
-								e'8 \) [
-								\set stemLeftBeamCount = 2
-								\set stemRightBeamCount = 0
-								af''16 ]
-								\ottava #0
-							}
-						}
-					}
-					{
-						\tag #'Segment17bGuitarVoice13
-						{
-							{
-								r8
-								r4
-							}
-						}
-						\tag #'Segment17bGuitarVoice14
-						{
-							{
-								\afterGrace
-								r8
-								{
-									\override Flag #'stroke-style = #"grace"
-									\override Stem #'length = #8
-									f'16 \(
-									\revert Flag #'stroke-style
-									\revert Stem #'length
-								}
-							}
-						}
-					}
-					{
-						\tag #'Segment17bGuitarVoice15
-						{
-							{
-								\set stemLeftBeamCount = 0
-								\set stemRightBeamCount = 2
-								\afterGrace
-								<g e'>16 \) [
-								{
-									b'16 [ \(
-									f''16 ]
-								}
-								\set stemLeftBeamCount = 2
-								\set stemRightBeamCount = 2
-								\afterGrace
-								<g d' f' e''>16 \)
-								{
-									af'16 \(
-								}
-								\set stemLeftBeamCount = 2
-								\set stemRightBeamCount = 0
-								<bf' d'' af''>16 ] \)
-							}
-						}
-					}
-					{
-						\tag #'Segment17bGuitarVoice16
-						{
-							{
-								r8.
-								r8
-							}
-						}
-					}
-					{
-						\tag #'Segment17bGuitarVoice17
-						{
-							{
-								\set stemLeftBeamCount = 0
-								\set stemRightBeamCount = 2
-								\ottava #1
-								\afterGrace
-								bf'16 [
-								{
-									\override Flag #'stroke-style = #"grace"
-									\override Stem #'length = #8
-									af''16 \(
-									\revert Flag #'stroke-style
-									\revert Stem #'length
-								}
-								\set stemLeftBeamCount = 2
-								\set stemRightBeamCount = 0
-								cs''16 ] \)
-								\ottava #0
-							}
-						}
-					}
-					{
-						\tag #'Segment17bGuitarVoice18
-						{
-							{
-								r4
-							}
-						}
-						\tag #'Segment17bGuitarVoice19
-						{
-							{
-								r8.
-								r8
-								r16
-							}
-						}
-					}
-					{
-						\tag #'Segment17bGuitarVoice20
-						{
-							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 3/4 {
-								\set stemLeftBeamCount = 0
-								\set stemRightBeamCount = 1
-								\ottava #1
-								\afterGrace
-								ef'8 [
-								{
-									\override Flag #'stroke-style = #"grace"
-									\override Stem #'length = #8
-									af''16 \(
-									\revert Flag #'stroke-style
-									\revert Stem #'length
-								}
-								\set stemLeftBeamCount = 1
-								\set stemRightBeamCount = 0
-								<ef' c''>8 ] \)
-								\ottava #0
-							}
-						}
-					}
-					{
-						\tag #'Segment17bGuitarVoice21
-						{
-							{
-								r8
-							}
-						}
-						\tag #'Segment17bGuitarVoice22
-						{
-							{
-								r8
-							}
-						}
-					}
-					{
-						\tag #'Segment17bGuitarVoice23
-						{
-							{
-								\set stemLeftBeamCount = 0
-								\set stemRightBeamCount = 3
-								r32 [
-								\set stemLeftBeamCount = 2
-								\set stemRightBeamCount = 2
-								<f ef'>16
-								\set stemLeftBeamCount = 3
-								\set stemRightBeamCount = 1
-								<ef' d'' c'''>32
-							}
-						}
-						\tag #'Segment17bGuitarVoice24
-						{
-							\times 2/3 {
-								\set stemLeftBeamCount = 1
-								\set stemRightBeamCount = 2
-								<g f'>16
-								\set stemLeftBeamCount = 2
-								\set stemRightBeamCount = 2
-								<cs' gs' b' as''>16
-								\set stemLeftBeamCount = 2
-								\set stemRightBeamCount = 0
-								r16 ]
-							}
-						}
-					}
-					{
-						\tag #'Segment17bGuitarVoice25
-						{
-							{
-								r16
-							}
-						}
-						\tag #'Segment17bGuitarVoice26
-						{
-							{
-								\afterGrace
-								r8.
-								{
-									\override Flag #'stroke-style = #"grace"
-									\override Stem #'length = #8
-									\ottava #1
-									af'16 [ \(
-									b'16 ]
-									\revert Flag #'stroke-style
-									\revert Stem #'length
-								}
-							}
-						}
-					}
-					{
 						\tag #'Segment17bGuitarVoice27
 						{
-							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 3/4 {
-								\set stemLeftBeamCount = 0
-								\set stemRightBeamCount = 1
+							{
 								\afterGrace
-								cs''8 \) [
+								r16
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
-									af''16 \(
+									\ottava #1
+									af'16 \(
 									\revert Flag #'stroke-style
 									\revert Stem #'length
 								}
-								\set stemLeftBeamCount = 1
-								\set stemRightBeamCount = 0
-								cs''8 ] \)
-								\ottava #0
 							}
 						}
 					}
 					{
 						\tag #'Segment17bGuitarVoice28
 						{
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 3/4 {
+								\set stemLeftBeamCount = 0
+								\set stemRightBeamCount = 1
+								\afterGrace
+								cs''8 -\staccato \) [
+								{
+									\override Flag #'stroke-style = #"grace"
+									\override Stem #'length = #8
+									af''16 \(
+									\revert Flag #'stroke-style
+									\revert Stem #'length
+								}
+								\set stemLeftBeamCount = 1
+								\set stemRightBeamCount = 0
+								cs''8 -\staccato ] \)
+								\ottava #0
+							}
+						}
+					}
+					{
+						\tag #'Segment17bGuitarVoice29
+						{
 							{
 								r16
 							}
 						}
-						\tag #'Segment17bGuitarVoice29
+						\tag #'Segment17bGuitarVoice30
 						{
 							{
 								r4.
@@ -979,7 +1080,7 @@
 						}
 					}
 					{
-						\tag #'Segment17bGuitarVoice30
+						\tag #'Segment17bGuitarVoice31
 						{
 							\times 2/3 {
 								\set stemLeftBeamCount = 0
@@ -987,17 +1088,15 @@
 								r8 [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								\ottava #1
-								<f' d''>8
+								<f'>8 -\staccato
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
-								<f' ef''>8 ]
-								\ottava #0
+								<d'>8 -\staccato ]
 							}
 						}
 					}
 					{
-						\tag #'Segment17bGuitarVoice31
+						\tag #'Segment17bGuitarVoice32
 						{
 							{
 								r4
@@ -1005,7 +1104,7 @@
 						}
 					}
 					{
-						\tag #'Segment17bGuitarVoice32
+						\tag #'Segment17bGuitarVoice33
 						{
 							\times 2/3 {
 								\set stemLeftBeamCount = 0
@@ -1013,35 +1112,25 @@
 								r8 [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								b'8
+								b'8 -\staccato
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
-								a'8 ]
+								a'8 -\staccato ]
 							}
 						}
 					}
 					{
-						\tag #'Segment17bGuitarVoice33
-						{
-							{
-								r16
-							}
-						}
 						\tag #'Segment17bGuitarVoice34
 						{
 							{
-								\stopStaff
-								\once \override Staff.StaffSymbol.line-count = 1
-								\startStaff
-								R1 * 7/16
-								\stopStaff
-								\startStaff
+								r16
+								r8
 							}
 						}
 						\tag #'Segment17bGuitarVoice35
 						{
 							{
-								r16
+								r4.
 							}
 						}
 					}
@@ -1055,13 +1144,21 @@
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
 								\afterGrace
-								<bf g'>16
+								<bf>16 -\staccato
 								{
 									af''16 \(
 								}
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 0
-								a'32 ] \)
+								a'32 -\staccato ] \)
+							}
+						}
+					}
+					{
+						\tag #'Segment17bGuitarVoice37
+						{
+							{
+								r8
 							}
 						}
 					}
@@ -1080,31 +1177,29 @@
 								\once \override Staff.StaffSymbol.line-count = 1
 								\startStaff
 								R1 * 11/16
+									_ \markup {
+										\pad-around
+											#2
+											\italic
+												(sempre
+										\dynamic
+											ppp
+										\italic
+											)
+										}
 							}
 						}
 						\tag #'Segment17bPianoRHVoice2
 						{
 							{
-								R1 * 7/16
-							}
-						}
-						\tag #'Segment17bPianoRHVoice3
-						{
-							{
-								R1 * 5/16
+								R1 * 7/8
 								\stopStaff
 								\startStaff
 							}
 						}
-						\tag #'Segment17bPianoRHVoice4
-						{
-							{
-								r8
-							}
-						}
 					}
 					{
-						\tag #'Segment17bPianoRHVoice5
+						\tag #'Segment17bPianoRHVoice3
 						{
 							{
 								\override Accidental #'stencil = ##f
@@ -1128,18 +1223,10 @@
 								\set stemRightBeamCount = 2
 								\ottava #2
 								\clef treble
-								cs''''16 [ \glissando \startTextSpan
-							}
-						}
-						\tag #'Segment17bPianoRHVoice6
-						{
-							{
-								\set stemLeftBeamCount = 1
-								\set stemRightBeamCount = 3
-								b'''32 \glissando
+								cs''''16. [ \glissando \startTextSpan
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 0
-								c''''32 ] \stopTextSpan
+								b'''32 ] \stopTextSpan
 								\ottava #0
 								\revert Accidental #'stencil
 								\revert Glissando #'bound-details
@@ -1152,21 +1239,21 @@
 						}
 					}
 					{
-						\tag #'Segment17bPianoRHVoice7
-						{
-							{
-								r8
-							}
-						}
-						\tag #'Segment17bPianoRHVoice8
+						\tag #'Segment17bPianoRHVoice4
 						{
 							{
 								r16
 							}
 						}
+						\tag #'Segment17bPianoRHVoice5
+						{
+							{
+								r8
+							}
+						}
 					}
 					{
-						\tag #'Segment17bPianoRHVoice9
+						\tag #'Segment17bPianoRHVoice6
 						{
 							{
 								\override Accidental #'stencil = ##f
@@ -1187,12 +1274,20 @@
 								\override TextSpanner #'direction = #up
 								\override Tie #'stencil = ##f
 								\set stemLeftBeamCount = 0
-								\set stemRightBeamCount = 1
-								\ottava #1
-								g'''8 [ \glissando \startTextSpan
+								\set stemRightBeamCount = 2
+								\ottava #2
+								c''''16 [ \glissando \startTextSpan
 							}
 						}
-						\tag #'Segment17bPianoRHVoice10
+						\tag #'Segment17bPianoRHVoice7
+						{
+							{
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 2
+								g''''16 \glissando
+							}
+						}
+						\tag #'Segment17bPianoRHVoice8
 						{
 							{
 								\set stemLeftBeamCount = 1
@@ -1213,16 +1308,15 @@
 						}
 					}
 					{
-						\tag #'Segment17bPianoRHVoice11
+						\tag #'Segment17bPianoRHVoice9
 						{
 							{
-								r16
-								r8
+								r8.
 							}
 						}
 					}
 					{
-						\tag #'Segment17bPianoRHVoice12
+						\tag #'Segment17bPianoRHVoice10
 						{
 							{
 								\override Accidental #'stencil = ##f
@@ -1261,21 +1355,22 @@
 						}
 					}
 					{
-						\tag #'Segment17bPianoRHVoice13
+						\tag #'Segment17bPianoRHVoice11
 						{
 							{
+								r8
 								r4
 							}
 						}
-						\tag #'Segment17bPianoRHVoice14
+						\tag #'Segment17bPianoRHVoice12
 						{
 							{
-								r8.
+								r16
 							}
 						}
 					}
 					{
-						\tag #'Segment17bPianoRHVoice15
+						\tag #'Segment17bPianoRHVoice13
 						{
 							\times 2/3 {
 								\set stemLeftBeamCount = 0
@@ -1323,79 +1418,16 @@
 						}
 					}
 					{
-						\tag #'Segment17bPianoRHVoice16
+						\tag #'Segment17bPianoRHVoice14
 						{
 							{
-								r4..
-								r16
-							}
-						}
-					}
-					{
-						\tag #'Segment17bPianoRHVoice17
-						{
-							{
-								\override Accidental #'stencil = ##f
-								\override Glissando #'bound-details #'left #'padding = #1.5
-								\override Glissando #'bound-details #'right #'end-on-accidental = ##f
-								\override Glissando #'bound-details #'right #'padding = #1.5
-								\override NoteHead #'style = #'cross
-								\override TextSpanner #'bound-details #'left #'text = \markup {
-									\center-align
-										\natural
-									}
-								\override TextSpanner #'bound-details #'right #'text = \markup {
-									\draw-line
-										#'(0 . -1)
-									}
-								\override TextSpanner #'bound-details #'right-broken #'text = ##f
-								\override TextSpanner #'dash-fraction = #1
-								\override TextSpanner #'direction = #up
-								\override Tie #'stencil = ##f
-								\set stemLeftBeamCount = 0
-								\set stemRightBeamCount = 1
-								\ottava #1
-								b'''8 [ \glissando \startTextSpan
-							}
-						}
-						\tag #'Segment17bPianoRHVoice18
-						{
-							{
-								\set stemLeftBeamCount = 1
-								\set stemRightBeamCount = 2
-								g''''16 \glissando
-							}
-						}
-						\tag #'Segment17bPianoRHVoice19
-						{
-							{
-								\set stemLeftBeamCount = 1
-								\set stemRightBeamCount = 3
-								a'''32 \glissando
-								\set stemLeftBeamCount = 3
-								\set stemRightBeamCount = 0
-								f'''32 ] \stopTextSpan
-								\ottava #0
-								\revert Accidental #'stencil
-								\revert Glissando #'bound-details
-								\revert NoteHead #'style
-								\revert TextSpanner #'bound-details
-								\revert TextSpanner #'dash-fraction
-								\revert TextSpanner #'direction
-								\revert Tie #'stencil
-							}
-						}
-					}
-					{
-						\tag #'Segment17bPianoRHVoice20
-						{
-							{
+								r4.
 								r8
 							}
 						}
 					}
 					{
-						\tag #'Segment17bPianoRHVoice21
+						\tag #'Segment17bPianoRHVoice15
 						{
 							{
 								\override Accidental #'stencil = ##f
@@ -1418,18 +1450,18 @@
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
 								\ottava #2
-								cs''''8 [ \glissando \startTextSpan
+								b'''8 [ \glissando \startTextSpan
 							}
 						}
-						\tag #'Segment17bPianoRHVoice22
+						\tag #'Segment17bPianoRHVoice16
 						{
 							{
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								b'''16. \glissando
+								g''''16. \glissando
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 0
-								c''''32 ] \stopTextSpan
+								a'''32 ] \stopTextSpan
 								\ottava #0
 								\revert Accidental #'stencil
 								\revert Glissando #'bound-details
@@ -1442,15 +1474,71 @@
 						}
 					}
 					{
-						\tag #'Segment17bPianoRHVoice23
+						\tag #'Segment17bPianoRHVoice17
 						{
 							{
-								r4
+								r8
 							}
 						}
 					}
 					{
-						\tag #'Segment17bPianoRHVoice24
+						\tag #'Segment17bPianoRHVoice18
+						{
+							{
+								\override Accidental #'stencil = ##f
+								\override Glissando #'bound-details #'left #'padding = #1.5
+								\override Glissando #'bound-details #'right #'end-on-accidental = ##f
+								\override Glissando #'bound-details #'right #'padding = #1.5
+								\override NoteHead #'style = #'cross
+								\override TextSpanner #'bound-details #'left #'text = \markup {
+									\center-align
+										\natural
+									}
+								\override TextSpanner #'bound-details #'right #'text = \markup {
+									\draw-line
+										#'(0 . -1)
+									}
+								\override TextSpanner #'bound-details #'right-broken #'text = ##f
+								\override TextSpanner #'dash-fraction = #1
+								\override TextSpanner #'direction = #up
+								\override Tie #'stencil = ##f
+								\set stemLeftBeamCount = 0
+								\set stemRightBeamCount = 1
+								\ottava #1
+								f'''8 [ \glissando \startTextSpan
+							}
+						}
+						\tag #'Segment17bPianoRHVoice19
+						{
+							{
+								\set stemLeftBeamCount = 1
+								\set stemRightBeamCount = 2
+								cs''''16. \glissando
+								\set stemLeftBeamCount = 3
+								\set stemRightBeamCount = 0
+								b'''32 ] \stopTextSpan
+								\ottava #0
+								\revert Accidental #'stencil
+								\revert Glissando #'bound-details
+								\revert NoteHead #'style
+								\revert TextSpanner #'bound-details
+								\revert TextSpanner #'dash-fraction
+								\revert TextSpanner #'direction
+								\revert Tie #'stencil
+							}
+						}
+					}
+					{
+						\tag #'Segment17bPianoRHVoice20
+						{
+							{
+								r8
+								r8
+							}
+						}
+					}
+					{
+						\tag #'Segment17bPianoRHVoice21
 						{
 							{
 								\override Accidental #'stencil = ##f
@@ -1472,19 +1560,19 @@
 								\override Tie #'stencil = ##f
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
-								\ottava #1
-								a'''8 [ \glissando \startTextSpan
+								\ottava #2
+								d''''8 [ \glissando \startTextSpan
 							}
 						}
-						\tag #'Segment17bPianoRHVoice25
+						\tag #'Segment17bPianoRHVoice22
 						{
 							{
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								b'''16. \glissando
+								f''''16. \glissando
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 0
-								c''''32 ] \stopTextSpan
+								cs''''32 ] \stopTextSpan
 								\ottava #0
 								\revert Accidental #'stencil
 								\revert Glissando #'bound-details
@@ -1497,25 +1585,30 @@
 						}
 					}
 					{
-						\tag #'Segment17bPianoRHVoice26
+						\tag #'Segment17bPianoRHVoice23
 						{
 							{
-								r16
 								r8
 							}
 						}
-						\tag #'Segment17bPianoRHVoice27
+						\tag #'Segment17bPianoRHVoice24
 						{
 							{
 								\stopStaff
 								\once \override Staff.StaffSymbol.line-count = 1
 								\startStaff
-								R1 * 7/16
+								R1 * 3/16
+							}
+						}
+						\tag #'Segment17bPianoRHVoice25
+						{
+							{
+								R1 * 5/16
 								\stopStaff
 								\startStaff
 							}
 						}
-						\tag #'Segment17bPianoRHVoice28
+						\tag #'Segment17bPianoRHVoice26
 						{
 							{
 								r8
@@ -1523,9 +1616,9 @@
 						}
 					}
 					{
-						\tag #'Segment17bPianoRHVoice29
+						\tag #'Segment17bPianoRHVoice27
 						{
-							{
+							\times 2/3 {
 								\once \override Accidental.stencil = ##f
 								\once \override AccidentalCautionary.stencil = ##f
 								\once \override Arpeggio.X-offset = #-2
@@ -1549,8 +1642,8 @@
 									\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
 								}
 								\set stemLeftBeamCount = 2
-								\set stemRightBeamCount = 0
-								<d'''' f'''' a''''>16 ]
+								\set stemRightBeamCount = 2
+								<d'''' f'''' a''''>16
 									^ \markup {
 										\center-align
 											\concat
@@ -1560,11 +1653,14 @@
 												}
 										}
 								\ottava #0
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 0
+								r16 ]
 							}
 						}
 					}
 					{
-						\tag #'Segment17bPianoRHVoice30
+						\tag #'Segment17bPianoRHVoice28
 						{
 							{
 								r8
@@ -1573,7 +1669,7 @@
 						}
 					}
 					{
-						\tag #'Segment17bPianoRHVoice31
+						\tag #'Segment17bPianoRHVoice29
 						{
 							{
 								\override Accidental #'stencil = ##f
@@ -1595,35 +1691,27 @@
 								\override Tie #'stencil = ##f
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
-								\ottava #2
-								f'''8 [ \glissando \startTextSpan
+								\ottava #1
+								d''''8 [ \glissando \startTextSpan
 							}
 						}
-						\tag #'Segment17bPianoRHVoice32
+						\tag #'Segment17bPianoRHVoice30
 						{
 							{
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								cs''''8 \glissando
+								a'''8 \glissando
 							}
 						}
-						\tag #'Segment17bPianoRHVoice33
+						\tag #'Segment17bPianoRHVoice31
 						{
 							{
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								b'''16 \glissando
-							}
-						}
-						\tag #'Segment17bPianoRHVoice34
-						{
-							{
-								\set stemLeftBeamCount = 1
-								\set stemRightBeamCount = 3
-								c''''32 \glissando
+								f'''16. \glissando
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 0
-								g''''32 ] \stopTextSpan
+								cs''''32 ] \stopTextSpan
 								\ottava #0
 								\revert Accidental #'stencil
 								\revert Glissando #'bound-details
@@ -1636,17 +1724,21 @@
 						}
 					}
 					{
-						\tag #'Segment17bPianoRHVoice35
+						\tag #'Segment17bPianoRHVoice32
 						{
 							{
-								r8
-								r8
 								r16
+							}
+						}
+						\tag #'Segment17bPianoRHVoice33
+						{
+							{
+								r4
 							}
 						}
 					}
 					{
-						\tag #'Segment17bPianoRHVoice36
+						\tag #'Segment17bPianoRHVoice34
 						{
 							{
 								\override Accidental #'stencil = ##f
@@ -1669,18 +1761,10 @@
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
 								\ottava #1
-								d''''16 [ \glissando \startTextSpan
-							}
-						}
-						\tag #'Segment17bPianoRHVoice37
-						{
-							{
-								\set stemLeftBeamCount = 1
-								\set stemRightBeamCount = 3
-								a'''32 \glissando
+								b'''16. [ \glissando \startTextSpan
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 0
-								f'''32 ] \stopTextSpan
+								c''''32 ] \stopTextSpan
 								\ottava #0
 								\revert Accidental #'stencil
 								\revert Glissando #'bound-details
@@ -1693,10 +1777,10 @@
 						}
 					}
 					{
-						\tag #'Segment17bPianoRHVoice38
+						\tag #'Segment17bPianoRHVoice35
 						{
 							{
-								r8
+								r4
 							}
 						}
 					}
@@ -1709,6 +1793,16 @@
 						{
 							{
 								r4..
+									_ \markup {
+										\pad-around
+											#2
+											\italic
+												(sempre
+										\dynamic
+											ppp
+										\italic
+											)
+										}
 							}
 						}
 					}
@@ -1762,23 +1856,13 @@
 						\tag #'Segment17bPianoLHVoice4
 						{
 							{
-								\stopStaff
-								\once \override Staff.StaffSymbol.line-count = 1
-								\startStaff
-								R1 * 7/16
-								\stopStaff
-								\startStaff
-							}
-						}
-						\tag #'Segment17bPianoLHVoice5
-						{
-							{
-								r8.
+								r4.
+								r4
 							}
 						}
 					}
 					{
-						\tag #'Segment17bPianoLHVoice6
+						\tag #'Segment17bPianoLHVoice5
 						{
 							{
 								\override Accidental #'stencil = ##f
@@ -1804,7 +1888,7 @@
 								d,,8 [ \glissando \startTextSpan
 							}
 						}
-						\tag #'Segment17bPianoLHVoice7
+						\tag #'Segment17bPianoLHVoice6
 						{
 							{
 								\set stemLeftBeamCount = 1
@@ -1825,13 +1909,7 @@
 						}
 					}
 					{
-						\tag #'Segment17bPianoLHVoice8
-						{
-							{
-								r16
-							}
-						}
-						\tag #'Segment17bPianoLHVoice9
+						\tag #'Segment17bPianoLHVoice7
 						{
 							{
 								\stopStaff
@@ -1840,30 +1918,36 @@
 								R1 * 3/16
 							}
 						}
-						\tag #'Segment17bPianoLHVoice10
+						\tag #'Segment17bPianoLHVoice8
+						{
+							{
+								R1 * 3/16
+							}
+						}
+						\tag #'Segment17bPianoLHVoice9
 						{
 							{
 								R1 * 7/8
 							}
 						}
-						\tag #'Segment17bPianoLHVoice11
+						\tag #'Segment17bPianoLHVoice10
 						{
 							{
-								R1 * 5/16
+								R1 * 3/16
 								\stopStaff
 								\startStaff
 							}
 						}
-						\tag #'Segment17bPianoLHVoice12
+						\tag #'Segment17bPianoLHVoice11
 						{
 							{
-								r4..
-								r8
+								r4.
+								r8.
 							}
 						}
 					}
 					{
-						\tag #'Segment17bPianoLHVoice13
+						\tag #'Segment17bPianoLHVoice12
 						{
 							{
 								\override Accidental #'stencil = ##f
@@ -1902,10 +1986,16 @@
 						}
 					}
 					{
+						\tag #'Segment17bPianoLHVoice13
+						{
+							{
+								r8.
+							}
+						}
 						\tag #'Segment17bPianoLHVoice14
 						{
 							{
-								r4..
+								r4
 								r16
 							}
 						}
@@ -1934,7 +2024,7 @@
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
 								\ottava #-1
-								g,,8 [ \glissando \startTextSpan
+								c,,8 [ \glissando \startTextSpan
 							}
 						}
 						\tag #'Segment17bPianoLHVoice16
@@ -1942,18 +2032,10 @@
 							{
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								d,16 \glissando
-							}
-						}
-						\tag #'Segment17bPianoLHVoice17
-						{
-							{
-								\set stemLeftBeamCount = 1
-								\set stemRightBeamCount = 3
-								f,,32 \glissando
+								g,,16. \glissando
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 0
-								cs,,32 ] \stopTextSpan
+								a,,,32 ] \stopTextSpan
 								\ottava #0
 								\revert Accidental #'stencil
 								\revert Glissando #'bound-details
@@ -1966,18 +2048,28 @@
 						}
 					}
 					{
+						\tag #'Segment17bPianoLHVoice17
+						{
+							{
+								r16
+								r4
+							}
+						}
 						\tag #'Segment17bPianoLHVoice18
 						{
 							{
-								r8
-								r4
+								\stopStaff
+								\once \override Staff.StaffSymbol.line-count = 1
+								\startStaff
+								R1 * 3/16
+								\stopStaff
+								\startStaff
 							}
 						}
 						\tag #'Segment17bPianoLHVoice19
 						{
 							{
 								r8.
-								r8
 							}
 						}
 					}
@@ -2005,7 +2097,7 @@
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
 								\ottava #-1
-								g,,8 [ \glissando \startTextSpan
+								b,,,8 [ \glissando \startTextSpan
 							}
 						}
 						\tag #'Segment17bPianoLHVoice21
@@ -2013,10 +2105,10 @@
 							{
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								d,16. \glissando
+								c,16. \glissando
 								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 0
-								a,,,32 ] \stopTextSpan
+								g,,32 ] \stopTextSpan
 								\ottava #0
 								\revert Accidental #'stencil
 								\revert Glissando #'bound-details
@@ -2042,19 +2134,13 @@
 								\stopStaff
 								\once \override Staff.StaffSymbol.line-count = 1
 								\startStaff
-								R1 * 5/16
+								R1 * 7/16
 							}
 						}
 						\tag #'Segment17bPianoLHVoice24
 						{
 							{
-								R1 * 7/16
-							}
-						}
-						\tag #'Segment17bPianoLHVoice25
-						{
-							{
-								R1 * 3/16
+								R1 * 5/8
 								\stopStaff
 								\startStaff
 							}
@@ -2073,13 +2159,13 @@
 					\tag #'Segment17bPianoPedals2
 					{
 						{
-							R1 * 7/16
+							R1 * 7/8
 						}
 					}
 					\tag #'Segment17bPianoPedals3
 					{
 						{
-							R1 * 5/16
+							R1 * 3/16
 						}
 					}
 					\tag #'Segment17bPianoPedals4
@@ -2091,67 +2177,55 @@
 					\tag #'Segment17bPianoPedals5
 					{
 						{
-							R1 * 3/16
+							R1 * 7/8
 						}
 					}
 					\tag #'Segment17bPianoPedals6
 					{
 						{
-							R1 * 7/8
+							R1 * 3/16
 						}
 					}
 					\tag #'Segment17bPianoPedals7
 					{
 						{
-							R1 * 5/16
+							R1 * 7/8
 						}
 					}
 					\tag #'Segment17bPianoPedals8
 					{
 						{
-							R1 * 11/16
+							R1 * 7/8
 						}
 					}
 					\tag #'Segment17bPianoPedals9
 					{
 						{
-							R1 * 11/16
+							R1 * 3/16
 						}
 					}
 					\tag #'Segment17bPianoPedals10
 					{
 						{
-							R1 * 7/16
+							R1 * 5/16
 						}
 					}
 					\tag #'Segment17bPianoPedals11
 					{
 						{
-							R1 * 7/16
+							R1 * 7/8
 						}
 					}
 					\tag #'Segment17bPianoPedals12
 					{
 						{
-							R1 * 7/8
+							R1 * 7/16
 						}
 					}
 					\tag #'Segment17bPianoPedals13
 					{
 						{
-							R1 * 5/16
-						}
-					}
-					\tag #'Segment17bPianoPedals14
-					{
-						{
-							R1 * 7/16
-						}
-					}
-					\tag #'Segment17bPianoPedals15
-					{
-						{
-							R1 * 3/16
+							R1 * 5/8
 						}
 					}
 				}
@@ -2166,15 +2240,17 @@
 						\tag #'Segment17bPercussionShakerVoice1
 						{
 							{
-								\afterGrace
 								r16
-								{
-									\override Flag #'stroke-style = #"grace"
-									\override Stem #'length = #8
-									g16 \(
-									\revert Flag #'stroke-style
-									\revert Stem #'length
-								}
+									_ \markup {
+										\pad-around
+											#2
+											\italic
+												(sempre
+										\dynamic
+											ppp
+										\italic
+											)
+										}
 							}
 						}
 					}
@@ -2183,14 +2259,25 @@
 						{
 							{
 								\set stemLeftBeamCount = 0
-								\set stemRightBeamCount = 1
-								b8 \) [
-								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								d'16
+								r16 [
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 2
+								g16 -\staccato ~
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 2
+								\afterGrace
+								g16
+								{
+									\override Flag #'stroke-style = #"grace"
+									\override Stem #'length = #8
+									b16 \(
+									\revert Flag #'stroke-style
+									\revert Stem #'length
+								}
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								r16 ]
+								d'16 -\staccato ] \)
 							}
 						}
 					}
@@ -2204,31 +2291,28 @@
 						\tag #'Segment17bPercussionShakerVoice4
 						{
 							{
-								\afterGrace
 								r8.
-								{
-									\override Flag #'stroke-style = #"grace"
-									\override Stem #'length = #8
-									f'16 \(
-									\revert Flag #'stroke-style
-									\revert Stem #'length
-								}
 							}
 						}
 					}
 					{
 						\tag #'Segment17bPercussionShakerVoice5
 						{
-							\times 2/3 {
+							{
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
-								g8 \) [
-								\set stemLeftBeamCount = 1
-								\set stemRightBeamCount = 1
-								b8
+								\afterGrace
+								f'8 -\staccato [
+								{
+									\override Flag #'stroke-style = #"grace"
+									\override Stem #'length = #8
+									g16 \(
+									\revert Flag #'stroke-style
+									\revert Stem #'length
+								}
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
-								r8 ]
+								b8 -\staccato ] \)
 							}
 						}
 					}
@@ -2236,15 +2320,16 @@
 						\tag #'Segment17bPercussionShakerVoice6
 						{
 							{
-								\stopStaff
-								\once \override Staff.StaffSymbol.line-count = 1
-								\startStaff
-								R1 * 5/16
+								r8.
+								r4
 							}
 						}
 						\tag #'Segment17bPercussionShakerVoice7
 						{
 							{
+								\stopStaff
+								\once \override Staff.StaffSymbol.line-count = 1
+								\startStaff
 								R1 * 3/16
 							}
 						}
@@ -2259,7 +2344,7 @@
 						\tag #'Segment17bPercussionShakerVoice9
 						{
 							{
-								r4.
+								r4
 							}
 						}
 					}
@@ -2272,66 +2357,66 @@
 								r8 [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								d'8
+								d'8 -\staccato
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								f'8
+								f'8 -\staccato
 							}
 						}
 						\tag #'Segment17bPercussionShakerVoice11
 						{
-							{
-								\set stemLeftBeamCount = 1
-								\set stemRightBeamCount = 3
-								r32
-								\set stemLeftBeamCount = 2
-								\set stemRightBeamCount = 2
-								g16
-								\set stemLeftBeamCount = 3
-								\set stemRightBeamCount = 1
-								b32
-							}
-						}
-						\tag #'Segment17bPercussionShakerVoice12
-						{
 							\times 2/3 {
 								\set stemLeftBeamCount = 1
-								\set stemRightBeamCount = 2
-								d'16
-								\set stemLeftBeamCount = 2
-								\set stemRightBeamCount = 2
-								f'16
-								\set stemLeftBeamCount = 2
-								\set stemRightBeamCount = 0
-								r16 ]
+								\set stemRightBeamCount = 1
+								g8 -\staccato ]
+								b4 -\staccato
 							}
 						}
 					}
 					{
+						\tag #'Segment17bPercussionShakerVoice12
+						{
+							{
+								\stopStaff
+								\once \override Staff.StaffSymbol.line-count = 1
+								\startStaff
+								R1 * 3/16
+								\stopStaff
+								\startStaff
+							}
+						}
 						\tag #'Segment17bPercussionShakerVoice13
 						{
 							{
-								r8.
-							}
-						}
-						\tag #'Segment17bPercussionShakerVoice14
-						{
-							{
-								r4..
-								r16
+								r4.
+								r8
 							}
 						}
 					}
 					{
-						\tag #'Segment17bPercussionShakerVoice15
+						\tag #'Segment17bPercussionShakerVoice14
 						{
 							\times 2/3 {
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 2
-								g16 [
+								r16 [
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 2
+								d'16 -\staccato
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 1
+								f'16 -\staccato
+							}
+						}
+						\tag #'Segment17bPercussionShakerVoice15
+						{
+							\times 2/3 {
 								\set stemLeftBeamCount = 1
+								\set stemRightBeamCount = 1
+								g8 -\staccato
+								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								b8 ]
+								b16 -\staccato ]
 							}
 						}
 					}
@@ -2339,7 +2424,7 @@
 						\tag #'Segment17bPercussionShakerVoice16
 						{
 							{
-								r16
+								r8
 							}
 						}
 						\tag #'Segment17bPercussionShakerVoice17
@@ -2348,27 +2433,43 @@
 								\stopStaff
 								\once \override Staff.StaffSymbol.line-count = 1
 								\startStaff
-								R1 * 11/16
-							}
-						}
-						\tag #'Segment17bPercussionShakerVoice18
-						{
-							{
-								R1 * 7/16
+								R1 * 7/8
 								\stopStaff
 								\startStaff
 							}
 						}
 					}
 					{
-						\tag #'Segment17bPercussionShakerVoice19
+						\tag #'Segment17bPercussionShakerVoice18
 						{
 							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 5/6 {
-								d'4
+							\times 3/4 {
+								\set stemLeftBeamCount = 0
+								\set stemRightBeamCount = 2
+								r16 [
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 2
+								d'16 -\staccato ~
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 2
+								d'16
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 1
+								f'16 -\staccato
+							}
+						}
+						\tag #'Segment17bPercussionShakerVoice19
+						{
+							{
 								\set stemLeftBeamCount = 1
+								\set stemRightBeamCount = 2
+								g16 -\staccato
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 2
+								b16 -\staccato
+								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								f'8
+								d'16 -\staccato ]
 							}
 						}
 					}
@@ -2383,8 +2484,19 @@
 						{
 							{
 								r4.
-								\afterGrace
 								r4
+							}
+						}
+					}
+					{
+						\tag #'Segment17bPercussionShakerVoice22
+						{
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 3/4 {
+								\set stemLeftBeamCount = 0
+								\set stemRightBeamCount = 1
+								\afterGrace
+								f'8 -\staccato [
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
@@ -2392,39 +2504,12 @@
 									\revert Flag #'stroke-style
 									\revert Stem #'length
 								}
-							}
-						}
-					}
-					{
-						\tag #'Segment17bPercussionShakerVoice22
-						{
-							{
-								\set stemLeftBeamCount = 0
+								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								\afterGrace
-								b16 \) [
-								{
-									\override Flag #'stroke-style = #"grace"
-									\override Stem #'length = #8
-									d'16 [ \(
-									f'16 ]
-									\revert Flag #'stroke-style
-									\revert Stem #'length
-								}
-								\set stemLeftBeamCount = 2
-								\set stemRightBeamCount = 2
-								\afterGrace
-								g16 \)
-								{
-									\override Flag #'stroke-style = #"grace"
-									\override Stem #'length = #8
-									b16 \(
-									\revert Flag #'stroke-style
-									\revert Stem #'length
-								}
+								b16 -\staccato \)
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								d'16 ] \)
+								r16 ]
 							}
 						}
 					}
@@ -2438,53 +2523,60 @@
 						\tag #'Segment17bPercussionShakerVoice24
 						{
 							{
-								\stopStaff
-								\once \override Staff.StaffSymbol.line-count = 1
-								\startStaff
-								R1 * 5/16
-								\stopStaff
-								\startStaff
+								r8.
+								\afterGrace
+								r8
+								{
+									\override Flag #'stroke-style = #"grace"
+									\override Stem #'length = #8
+									d'16 [ \(
+									f'16 ]
+									\revert Flag #'stroke-style
+									\revert Stem #'length
+								}
 							}
 						}
 					}
 					{
 						\tag #'Segment17bPercussionShakerVoice25
 						{
-							{
+							\times 2/3 {
 								\set stemLeftBeamCount = 0
+								\set stemRightBeamCount = 2
+								g16 -\staccato \) [
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 2
+								b16 -\staccato
+								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
+								r16
+							}
+						}
+						\tag #'Segment17bPercussionShakerVoice26
+						{
+							{
+								\set stemLeftBeamCount = 1
+								\set stemRightBeamCount = 2
 								\afterGrace
-								f'8 [
+								d'16 -\staccato
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
-									g16 \(
+									f'16 \(
 									\revert Flag #'stroke-style
 									\revert Stem #'length
 								}
-								\set stemLeftBeamCount = 1
+								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								b8 ] \)
+								g16 -\staccato ] \)
 							}
 						}
 					}
 					{
-						\tag #'Segment17bPercussionShakerVoice26
-						{
-							{
-								r16
-								r8
-							}
-						}
 						\tag #'Segment17bPercussionShakerVoice27
 						{
 							{
-								\stopStaff
-								\once \override Staff.StaffSymbol.line-count = 1
-								\startStaff
-								R1 * 3/16
-								\stopStaff
-								\startStaff
+								r2
 							}
 						}
 					}
@@ -2502,6 +2594,16 @@
 								\startStaff
 								\afterGrace
 								R1 * 11/16
+									_ \markup {
+										\pad-around
+											#2
+											\italic
+												(sempre
+										\dynamic
+											ppp
+										\italic
+											)
+										}
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
@@ -2519,34 +2621,42 @@
 					{
 						\tag #'Segment17bPercussionWoodblockVoice2
 						{
-							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 5/6 {
-								\set stemLeftBeamCount = 0
+							{
+								g'4 -\staccato \)
+								c'4 -\staccato
+							}
+						}
+						\tag #'Segment17bPercussionWoodblockVoice3
+						{
+							{
+								\set stemLeftBeamCount = -1
 								\set stemRightBeamCount = 1
-								a8 \) [
+								r8 [
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								c'8
+								\afterGrace
+								e'8 -\staccato
+								{
+									\override Flag #'stroke-style = #"grace"
+									\override Stem #'length = #8
+									a16 \(
+									\revert Flag #'stroke-style
+									\revert Stem #'length
+								}
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
-								r8 ]
+								g'8 -\staccato ] \)
 							}
 						}
 					}
 					{
-						\tag #'Segment17bPercussionWoodblockVoice3
-						{
-							{
-								r8
-							}
-						}
 						\tag #'Segment17bPercussionWoodblockVoice4
 						{
 							{
 								\stopStaff
 								\once \override Staff.StaffSymbol.line-count = 1
 								\startStaff
-								R1 * 5/16
+								R1 * 3/16
 							}
 						}
 						\tag #'Segment17bPercussionWoodblockVoice5
@@ -2558,7 +2668,7 @@
 						\tag #'Segment17bPercussionWoodblockVoice6
 						{
 							{
-								R1 * 3/16
+								R1 * 7/8
 								\stopStaff
 								\startStaff
 							}
@@ -2566,48 +2676,32 @@
 						\tag #'Segment17bPercussionWoodblockVoice7
 						{
 							{
-								r4
+								r16
 							}
 						}
 					}
 					{
 						\tag #'Segment17bPercussionWoodblockVoice8
 						{
-							{
+							\times 2/3 {
 								\set stemLeftBeamCount = 0
+								\set stemRightBeamCount = 2
+								r16 [
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 2
+								c'16 -\staccato
+								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
-								r8 [
-								\set stemLeftBeamCount = 1
-								\set stemRightBeamCount = 1
-								\afterGrace
-								e'8
-								{
-									\override Flag #'stroke-style = #"grace"
-									\override Stem #'length = #8
-									g'16 \(
-									\revert Flag #'stroke-style
-									\revert Stem #'length
-								}
-								\set stemLeftBeamCount = 1
-								\set stemRightBeamCount = 1
-								f8 \)
+								e'16 -\staccato
 							}
 						}
 						\tag #'Segment17bPercussionWoodblockVoice9
 						{
-							{
+							\times 2/3 {
 								\set stemLeftBeamCount = 1
-								\set stemRightBeamCount = 2
-								r16
-								\set stemLeftBeamCount = 2
-								\set stemRightBeamCount = 2
-								a16 ~
-								\set stemLeftBeamCount = 2
-								\set stemRightBeamCount = 2
-								a16
-								\set stemLeftBeamCount = 2
-								\set stemRightBeamCount = 0
-								c'16 ]
+								\set stemRightBeamCount = 1
+								f8 -\staccato ]
+								c'4 -\staccato
 							}
 						}
 					}
@@ -2615,67 +2709,90 @@
 						\tag #'Segment17bPercussionWoodblockVoice10
 						{
 							{
-								\stopStaff
-								\once \override Staff.StaffSymbol.line-count = 1
-								\startStaff
-								R1 * 5/16
+								r8
+								r2
 							}
 						}
 						\tag #'Segment17bPercussionWoodblockVoice11
 						{
 							{
-								R1 * 11/16
-								\stopStaff
-								\startStaff
-							}
-						}
-						\tag #'Segment17bPercussionWoodblockVoice12
-						{
-							{
-								r8.
+								r4.
 								r16
 							}
 						}
 					}
 					{
+						\tag #'Segment17bPercussionWoodblockVoice12
+						{
+							\times 2/3 {
+								\set stemLeftBeamCount = 0
+								\set stemRightBeamCount = 1
+								r8 [
+								\set stemLeftBeamCount = 1
+								\set stemRightBeamCount = 1
+								a8 -\staccato
+								\set stemLeftBeamCount = 1
+								\set stemRightBeamCount = 1
+								e'8 -\staccato
+							}
+						}
 						\tag #'Segment17bPercussionWoodblockVoice13
 						{
 							{
-								\set stemLeftBeamCount = 0
+								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
 								\afterGrace
-								e'8
+								a8 -\staccato
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
-									g'16 \(
+									e'16 \(
 									\revert Flag #'stroke-style
 									\revert Stem #'length
 								}
-								f4 \)
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 1
+								f16 -\staccato \)
+							}
+						}
+						\tag #'Segment17bPercussionWoodblockVoice14
+						{
+							{
+								\set stemLeftBeamCount = 1
+								\set stemRightBeamCount = 2
+								r16
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 2
+								\afterGrace
+								g'16 -\staccato
+								{
+									\override Flag #'stroke-style = #"grace"
+									\override Stem #'length = #8
+									c'16 [ \(
+									e'16 ]
+									\revert Flag #'stroke-style
+									\revert Stem #'length
+								}
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 0
+								a16 -\staccato ] \)
 							}
 						}
 					}
 					{
-						\tag #'Segment17bPercussionWoodblockVoice14
-						{
-							{
-								r16
-							}
-						}
 						\tag #'Segment17bPercussionWoodblockVoice15
 						{
 							{
 								\stopStaff
 								\once \override Staff.StaffSymbol.line-count = 1
 								\startStaff
-								R1 * 7/16
+								R1 * 5/16
 							}
 						}
 						\tag #'Segment17bPercussionWoodblockVoice16
 						{
 							{
-								R1 * 7/16
+								R1 * 7/8
 								\stopStaff
 								\startStaff
 							}
@@ -2683,35 +2800,35 @@
 						\tag #'Segment17bPercussionWoodblockVoice17
 						{
 							{
-								\afterGrace
-								r8
-								{
-									\override Flag #'stroke-style = #"grace"
-									\override Stem #'length = #8
-									a16 [ \(
-									c'16 ]
-									\revert Flag #'stroke-style
-									\revert Stem #'length
-								}
+								r16
 							}
 						}
 					}
 					{
 						\tag #'Segment17bPercussionWoodblockVoice18
 						{
-							{
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 3/4 {
+								\set stemLeftBeamCount = 0
+								\set stemRightBeamCount = 1
+								r8 [
+								\set stemLeftBeamCount = 1
+								\set stemRightBeamCount = 1
+								g'8 -\staccato ~
+								\set stemLeftBeamCount = 1
+								\set stemRightBeamCount = 1
 								\afterGrace
-								e'4 \)
+								g'8
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
-									g'16 \(
+									c'16 \(
 									\revert Flag #'stroke-style
 									\revert Stem #'length
 								}
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 0
-								f8 \)
+								e'8 -\staccato ] \)
 							}
 						}
 					}
@@ -2719,29 +2836,10 @@
 						\tag #'Segment17bPercussionWoodblockVoice19
 						{
 							{
-								r8
-								r4
-							}
-						}
-						\tag #'Segment17bPercussionWoodblockVoice20
-						{
-							{
 								\stopStaff
 								\once \override Staff.StaffSymbol.line-count = 1
 								\startStaff
-								R1 * 5/16
-							}
-						}
-						\tag #'Segment17bPercussionWoodblockVoice21
-						{
-							{
-								R1 * 7/16
-							}
-						}
-						\tag #'Segment17bPercussionWoodblockVoice22
-						{
-							{
-								R1 * 3/16
+								R1 * 5/8
 								\stopStaff
 								\startStaff
 							}
@@ -2757,6 +2855,25 @@
 						{
 							{
 								r16
+									^ \markup {
+										\box
+											\pad-around
+												#0.5
+												\large
+													\bold
+														\caps
+															Brush
+										}
+									_ \markup {
+										\pad-around
+											#2
+											\italic
+												(sempre
+										\dynamic
+											ppp
+										\italic
+											)
+										}
 							}
 						}
 					}
@@ -2767,13 +2884,10 @@
 							\times 3/4 {
 								\set stemLeftBeamCount = 0
 								\set stemRightBeamCount = 1
-								a8 [
+								c'8 :64 -\accent [
 								\set stemLeftBeamCount = 1
-								\set stemRightBeamCount = 2
-								c'16
-								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 1
-								r16
+								e'8 :64
 							}
 						}
 						\tag #'Segment17bPercussionDrumVoice3
@@ -2781,10 +2895,13 @@
 							{
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 1
-								e'8
+								c'8 :64 -\accent
 								\set stemLeftBeamCount = 1
+								\set stemRightBeamCount = 2
+								a16 :128
+								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								a8 ]
+								r16 ]
 							}
 						}
 					}
@@ -2799,24 +2916,23 @@
 						\tag #'Segment17bPercussionDrumVoice5
 						{
 							{
-								r8.
-								r16
+								r4
 							}
 						}
 					}
 					{
 						\tag #'Segment17bPercussionDrumVoice6
 						{
-							\times 2/3 {
+							{
 								\set stemLeftBeamCount = 0
-								\set stemRightBeamCount = 2
-								c'16 [
+								\set stemRightBeamCount = 3
+								r32 [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								e'16
-								\set stemLeftBeamCount = 2
+								e'16 :128 -\accent
+								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 0
-								r16 ]
+								c'32 ]
 							}
 						}
 					}
@@ -2824,7 +2940,7 @@
 						\tag #'Segment17bPercussionDrumVoice7
 						{
 							{
-								r16
+								r2
 							}
 						}
 						\tag #'Segment17bPercussionDrumVoice8
@@ -2833,119 +2949,22 @@
 								\stopStaff
 								\once \override Staff.StaffSymbol.line-count = 1
 								\startStaff
-								R1 * 5/16
+								R1 * 3/16
 							}
 						}
 						\tag #'Segment17bPercussionDrumVoice9
 						{
 							{
 								R1 * 3/16
+								\stopStaff
+								\startStaff
 							}
 						}
 						\tag #'Segment17bPercussionDrumVoice10
 						{
 							{
-								R1 * 3/16
-								\stopStaff
-								\startStaff
-							}
-						}
-						\tag #'Segment17bPercussionDrumVoice11
-						{
-							{
-								r4
-								r16
-							}
-						}
-					}
-					{
-						\tag #'Segment17bPercussionDrumVoice12
-						{
-							\times 2/3 {
-								r4
 								\afterGrace
-								a4
-								{
-									\override Flag #'stroke-style = #"grace"
-									\override Stem #'length = #8
-									c'16 \(
-									\revert Flag #'stroke-style
-									\revert Stem #'length
-								}
-								e'4 \)
-							}
-						}
-					}
-					{
-						\tag #'Segment17bPercussionDrumVoice13
-						{
-							{
-								r16
-							}
-						}
-						\tag #'Segment17bPercussionDrumVoice14
-						{
-							{
-								\stopStaff
-								\once \override Staff.StaffSymbol.line-count = 1
-								\startStaff
-								R1 * 5/16
-								\stopStaff
-								\startStaff
-							}
-						}
-						\tag #'Segment17bPercussionDrumVoice15
-						{
-							{
 								r8.
-								r8
-								r16
-							}
-						}
-					}
-					{
-						\tag #'Segment17bPercussionDrumVoice16
-						{
-							\times 2/3 {
-								\set stemLeftBeamCount = 0
-								\set stemRightBeamCount = 1
-								a8
-								c'4
-							}
-						}
-					}
-					{
-						\tag #'Segment17bPercussionDrumVoice17
-						{
-							{
-								r16
-							}
-						}
-						\tag #'Segment17bPercussionDrumVoice18
-						{
-							{
-								\stopStaff
-								\once \override Staff.StaffSymbol.line-count = 1
-								\startStaff
-								R1 * 11/16
-							}
-						}
-						\tag #'Segment17bPercussionDrumVoice19
-						{
-							{
-								R1 * 7/16
-								\stopStaff
-								\startStaff
-							}
-						}
-					}
-					{
-						\tag #'Segment17bPercussionDrumVoice20
-						{
-							\tweak #'text #tuplet-number::calc-fraction-text
-							\times 7/12 {
-								\afterGrace
-								e'2
 								{
 									\override Flag #'stroke-style = #"grace"
 									\override Stem #'length = #8
@@ -2953,7 +2972,115 @@
 									\revert Flag #'stroke-style
 									\revert Stem #'length
 								}
-								c'4 \)
+							}
+						}
+					}
+					{
+						\tag #'Segment17bPercussionDrumVoice11
+						{
+							{
+								e'4 :32 \)
+								c'4 :32
+							}
+						}
+					}
+					{
+						\tag #'Segment17bPercussionDrumVoice12
+						{
+							{
+								r8.
+							}
+						}
+						\tag #'Segment17bPercussionDrumVoice13
+						{
+							{
+								\stopStaff
+								\once \override Staff.StaffSymbol.line-count = 1
+								\startStaff
+								R1 * 3/16
+								\stopStaff
+								\startStaff
+							}
+						}
+						\tag #'Segment17bPercussionDrumVoice14
+						{
+							{
+								r4.
+							}
+						}
+					}
+					{
+						\tag #'Segment17bPercussionDrumVoice15
+						{
+							\times 2/3 {
+								\set stemLeftBeamCount = 0
+								\set stemRightBeamCount = 1
+								r8 [
+								\set stemLeftBeamCount = 1
+								\set stemRightBeamCount = 1
+								e'8 :64 -\accent
+								\set stemLeftBeamCount = 1
+								\set stemRightBeamCount = 0
+								a8 :64 ]
+							}
+						}
+					}
+					{
+						\tag #'Segment17bPercussionDrumVoice16
+						{
+							{
+								r4
+							}
+						}
+						\tag #'Segment17bPercussionDrumVoice17
+						{
+							{
+								\stopStaff
+								\once \override Staff.StaffSymbol.line-count = 1
+								\startStaff
+								R1 * 7/8
+								\stopStaff
+								\startStaff
+							}
+						}
+						\tag #'Segment17bPercussionDrumVoice18
+						{
+							{
+								r16
+							}
+						}
+					}
+					{
+						\tag #'Segment17bPercussionDrumVoice19
+						{
+							\times 2/3 {
+								\set stemLeftBeamCount = 0
+								\set stemRightBeamCount = 2
+								r16 [
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 2
+								e'16
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = -1
+								a16 ]
+							}
+						}
+						\tag #'Segment17bPercussionDrumVoice20
+						{
+							\tweak #'text #tuplet-number::calc-fraction-text
+							\times 5/6 {
+								\afterGrace
+								e'4 :32
+								{
+									\override Flag #'stroke-style = #"grace"
+									\override Stem #'length = #8
+									c'16 \(
+									\revert Flag #'stroke-style
+									\revert Stem #'length
+								}
+								\set stemLeftBeamCount = 1
+								\set stemRightBeamCount = 0
+								e'8 :64 \)
 							}
 						}
 					}
@@ -2970,16 +3097,16 @@
 					{
 						\tag #'Segment17bPercussionDrumVoice22
 						{
-							\times 2/3 {
+							{
 								\set stemLeftBeamCount = 0
-								\set stemRightBeamCount = 2
-								e'16 [
+								\set stemRightBeamCount = 3
+								r32 [
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								a16
-								\set stemLeftBeamCount = 2
+								c'16 :128 -\accent
+								\set stemLeftBeamCount = 3
 								\set stemRightBeamCount = 1
-								c'16
+								e'32
 							}
 						}
 						\tag #'Segment17bPercussionDrumVoice23
@@ -2987,13 +3114,13 @@
 							\times 2/3 {
 								\set stemLeftBeamCount = 1
 								\set stemRightBeamCount = 2
-								r16
+								c'16 -\accent
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 2
-								e'16
+								a16
 								\set stemLeftBeamCount = 2
 								\set stemRightBeamCount = 0
-								a16 ]
+								e'16 ]
 							}
 						}
 					}
@@ -3001,22 +3128,38 @@
 						\tag #'Segment17bPercussionDrumVoice24
 						{
 							{
-								r8.
+								r16
+								r4
 							}
 						}
 						\tag #'Segment17bPercussionDrumVoice25
 						{
 							{
-								\stopStaff
-								\once \override Staff.StaffSymbol.line-count = 1
-								\startStaff
-								R1 * 7/16
+								r4
 							}
 						}
+					}
+					{
 						\tag #'Segment17bPercussionDrumVoice26
 						{
 							{
-								R1 * 3/16
+								\set stemLeftBeamCount = 0
+								\set stemRightBeamCount = 2
+								c'16 :128 -\accent [
+								\set stemLeftBeamCount = 2
+								\set stemRightBeamCount = 3
+								e'32
+								\set stemLeftBeamCount = 3
+								\set stemRightBeamCount = 0
+								r32 ]
+							}
+						}
+					}
+					{
+						\tag #'Segment17bPercussionDrumVoice27
+						{
+							{
+								r4
 									_ \markup {
 										\italic
 											\right-column
@@ -3029,8 +3172,6 @@
 												}
 										}
 								\bar "|."
-								\stopStaff
-								\startStaff
 							}
 						}
 					}

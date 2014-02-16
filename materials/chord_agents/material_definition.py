@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-from abjad.tools import sequencetools
+from abjad import *
 from plague_water import makers
 from plague_water.materials.pitch_classes import pitch_class_segments
 
@@ -52,10 +52,16 @@ for pitch_class_segment in pitch_class_segments:
     guitar_interval_numbers.append(tuple(pruned_interval_numbers))
 
 
-guitar_chord_expressions = [
-    makers.ChordExpression(interval_numbers=interval_numbers)
-    for interval_numbers in guitar_interval_numbers
-    ]
+guitar_chord_expressions = []
+for interval_numbers in guitar_interval_numbers:
+    arpeggio_direction = None
+    if 2 < len(interval_numbers):
+        arpeggio_direction = Center
+    chord_expression = makers.ChordExpression(
+        arpeggio_direction=arpeggio_direction,
+        interval_numbers=interval_numbers,
+        )
+    guitar_chord_expressions.append(chord_expression)
 
 
 sequences = []

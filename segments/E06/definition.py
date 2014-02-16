@@ -31,31 +31,8 @@ target_segment_duration = makers.SegmentMaker.get_segment_target_duration(
 score_template = score_templates.PlagueWaterScoreTemplate()
 score = score_template()
 context_map = datastructuretools.ContextMap(score_template)
-context_map[score]['minimum_timespan_duration'] = durationtools.Duration(1, 8)
-context_map[score]['pitch_agent'] = makers.PitchClassAgent(
-    pitch_class_ratio=(1, 1, 1),
-    pitch_class_talea=(
-        [0, 3, 2, 5, 11, 1],
-        [2, 8, 10, 11],
-        [1, 4],
-        ),
-    transform_ratio=None,
-    transform_talea=None,
-    )
-context_map['Plague Water Score']['pitch_agent'] = new(
-    context_map['Plague Water Score']['pitch_agent'],
-    )
 context_map['Guitar Voice']['register_agent'] = makers.RegisterAgent(
     global_inflections=NamedPitch('E2'),
-    )
-context_map['Piano LH Voice']['register_agent'] = makers.RegisterAgent(
-    global_inflections=NamedPitch('C2'),
-    )
-context_map['Piano RH Voice']['register_agent'] = makers.RegisterAgent(
-    global_inflections=NamedPitch('C5'),
-    )
-context_map['Saxophone Voice']['register_agent'] = makers.RegisterAgent(
-    global_inflections=NamedPitch('C2'),
     )
 
 ### CURSOR TRANSFORM ###
@@ -69,9 +46,44 @@ guitar_context_maker = makers.ContextMaker(
     initial_indicators=(
         Markup(r'\box \pad-around #0.5 \large \bold \caps "Color Five"', Up),
         ),
-    music_makers=[
-        materials.basic_music_maker,
-        ],
+    initial_music_maker=makers.MusicMaker(
+        chord_agent=makers.ChordAgent(
+            ratio=(1,),
+            talea=(
+                (
+                    makers.ChordExpression(
+                        arpeggio_direction=Center,
+                        interval_numbers=[-5, 4, 11, 14],
+                        ),
+                    ),
+                ),
+            ),
+        dynamic_agent=makers.DynamicAgent(
+            initial_dynamic_expressions=makers.DynamicExpression(
+                hairpin_start_token='o',
+                hairpin_stop_token='fff',
+                ),
+            ),
+        indicator_agent=makers.IndicatorAgent(
+            apply_to_output=True,
+            last_leaf_indicators=(
+                Articulation('coda'),
+                ),
+            treat_each_leaf=True,
+            ),
+        rhythm_maker=rhythmmakertools.NoteRhythmMaker(
+            tie_specifier=rhythmmakertools.TieSpecifier(
+                tie_across_divisions=True,
+                ),
+            ),
+        timespan_agent=makers.SemanticTimespanAgent(
+            can_be_split=False,
+            minimum_timespan_duration=None,
+            playing_durations=[Duration(1, 8) * 16],
+            playing_groupings=[1],
+            tailing_rest_durations=[Duration(100)]
+            ),
+        ),
     )
 
 ### SAXOPHONE ###
@@ -79,7 +91,7 @@ guitar_context_maker = makers.ContextMaker(
 saxophone_context_maker = makers.ContextMaker(
     context_name='Saxophone Voice',
     music_makers=[
-        materials.basic_music_maker,
+        materials.silent_music_maker,
         ],
     )
 
@@ -88,14 +100,14 @@ saxophone_context_maker = makers.ContextMaker(
 piano_rh_context_maker = makers.ContextMaker(
     context_name='Piano RH Voice',
     music_makers=[
-        materials.basic_music_maker,
+        materials.silent_music_maker,
         ],
     )
 
 piano_lh_context_maker = makers.ContextMaker(
     context_name='Piano LH Voice',
     music_makers=[
-        materials.basic_music_maker,
+        materials.silent_music_maker,
         ],
     )
 
@@ -104,7 +116,7 @@ piano_lh_context_maker = makers.ContextMaker(
 percussion_shaker_context_maker = makers.ContextMaker(
     context_name='Percussion Shaker Voice',
     music_makers=[
-        new(materials.basic_music_maker,
+        new(materials.silent_music_maker,
             pitch_agent=materials.shaker_pitch_agent,
             ),
         ],
@@ -113,7 +125,7 @@ percussion_shaker_context_maker = makers.ContextMaker(
 percussion_woodblock_context_maker = makers.ContextMaker(
     context_name='Percussion Woodblock Voice',
     music_makers=[
-        new(materials.basic_music_maker,
+        new(materials.silent_music_maker,
             pitch_agent=materials.woodblock_pitch_agent,
             ),
         ],
@@ -122,7 +134,7 @@ percussion_woodblock_context_maker = makers.ContextMaker(
 percussion_drum_context_maker = makers.ContextMaker(
     context_name='Percussion Drum Voice',
     music_makers=[
-        new(materials.basic_music_maker,
+        new(materials.silent_music_maker,
             pitch_agent=materials.drum_pitch_agent,
             ),
         ],

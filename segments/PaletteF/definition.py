@@ -173,6 +173,11 @@ percussion_woodblock_context_maker = makers.ContextMaker(
 
 percussion_drum_context_maker = makers.ContextMaker(
     context_name='Percussion Drum Voice',
+    initial_indicators=(
+        Markup(r'''\box \pad-around #0.5 \large \bold \caps
+        "Styrofoam",
+        ''', Up),
+        ),
     music_makers=[
         makers.MusicMaker(
             dynamic_agent=materials.midground_dynamic_agent,
