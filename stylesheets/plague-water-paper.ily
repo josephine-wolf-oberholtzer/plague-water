@@ -1,4 +1,4 @@
-#(set-default-paper-size "11x17" 'portrait)
+#(set-default-paper-size "11x17" 'landscape)
 #(set-global-staff-size 12)
 
 \paper {
