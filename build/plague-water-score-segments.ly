@@ -9,6 +9,36 @@
 \include "../stylesheets/plague-water-layout.ily"
 \include "../stylesheets/plague-water-header.ily"
 
+#(set-default-paper-size "11x17" 'landscape)
+#(set-global-staff-size 10)
+
+\layout {
+    \context {
+        \Score
+        \override StaffGrouper.staff-staff-spacing = #'(
+            (basic-distance . 0)
+            (minimum-distance . 0)
+            (padding . 4)
+            (stretchability . 0)
+            )
+        \override VerticalAxisGroup.staff-staff-spacing = #'(
+            (basic-distance . 0)
+            (minimum-distance . 0)
+            (padding . 4)
+            (stretchability . 0)
+            )
+    }
+}
+
+\paper {
+    system-system-spacing = #'(
+        (basic-distance . 0)
+        (minimum-distance . 0)
+        (padding . 4)
+        (stretchability . 30)
+        )
+}
+
 \score {
     {
         \include "plague-water-segment-A01.ly"
