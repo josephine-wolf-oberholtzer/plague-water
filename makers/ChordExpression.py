@@ -62,9 +62,27 @@ class ChordExpression(PlagueWaterObject):
 
     def __call__(self, logical_tie):
         assert isinstance(logical_tie, selectiontools.LogicalTie), logical_tie
-        center_pitch = logical_tie[0].written_pitch
-        pitches = [center_pitch + x for x in self.interval_numbers]
-        pitches.append(center_pitch)
+        interval_numbers = sorted(list(self.interval_numbers) + [0])
+        head = logical_tie.head
+        base_pitch = head.written_pitch
+        pitch_range = inspect_(head).get_effective(pitchtools.PitchRange)
+        assert pitch_range is not None
+        assert base_pitch in pitch_range
+        maximum = max(interval_numbers)
+        minimum = min(interval_numbers)
+        maximum_pitch = base_pitch.transpose(maximum)
+        minimum_pitch = base_pitch.transpose(minimum)
+        if maximum_pitch not in pitch_range:
+            print 'CHORD: CEILING'
+            new_interval_numbers = [x - maximum for x in interval_numbers]
+        elif minimum_pitch not in pitch_range:
+            print 'CHORD: FLOOR'
+            new_interval_numbers = [x - minimum for x in interval_numbers]
+        else:
+            new_interval_numbers = interval_numbers
+        pitches = [base_pitch.transpose(x) for x in new_interval_numbers]
+        assert all(pitch in pitch_range for pitch in pitches), \
+            (pitch_range, base_pitch, interval_numbers, pitches)
         for i, leaf in enumerate(logical_tie):
             chord = Chord(leaf)
             chord.written_pitches = pitches
