@@ -25,6 +25,9 @@ saxophone_context_maker = makers.ContextMaker(
     music_makers=[
         new(materials.saxophone_fanfare_music_maker,
             dynamic_agent=materials.foreground_dynamic_agent,
+            indicator_agent__first_leaf_indicators=(
+                ('accent', 'snappizzicato'),
+                ),
             timespan_agent__leading_rest_durations=materials.short_durations(4),
             ),
         ],

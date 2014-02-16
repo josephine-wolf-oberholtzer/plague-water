@@ -45,7 +45,12 @@ saxophone_context_maker = makers.ContextMaker(
                 lengths=(1, 0, 0),
                 ),
             indicator_agent=makers.IndicatorAgent(
-                each_leaf_indicators=('staccatissimo',),
+                each_leaf_indicators=(
+                    ('staccatissimo',),
+                    ('snappizzicato',),
+                    ('snappizzicato', 'accent'),
+                    ('staccatissimo',),
+                    ),
                 ),
             pitch_agent=materials.drum_pitch_agent,
             rhythm_maker=materials.pointillist_rhythm_maker.rotate(1),

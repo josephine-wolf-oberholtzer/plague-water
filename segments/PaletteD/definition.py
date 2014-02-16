@@ -62,8 +62,25 @@ saxophone_context_maker = makers.ContextMaker(
                 ),
             rhythm_maker=materials.pointillist_rhythm_maker,
             spanner_agent=makers.SpannerAgent(
+                cyclical_output_spanners=(
+                    materials.airtone_spanner,
+                    None,
+                    ),
                 output_spanners=Slur,
                 ),
+            timespan_agent=short_timespan_agent.transform_cursors(3),
+            ),
+        new(materials.basic_music_maker,
+            grace_maker=makers.GraceMaker(
+                lengths=(1, 0, 1, 0, 0, 1, 2,),
+                ),
+            indicator_agent=makers.IndicatorAgent(
+                each_leaf_indicators=(
+                    ('snappizzicato',),
+                    ('snappizzicato', 'accent'),
+                    ),
+                ),
+            rhythm_maker=materials.pointillist_rhythm_maker,
             timespan_agent=short_timespan_agent.transform_cursors(3),
             ),
         ]
@@ -94,6 +111,10 @@ guitar_context_maker = makers.ContextMaker(
                 ),
             indicator_agent=makers.IndicatorAgent(
                 each_leaf_indicators=('staccato',),
+                last_leaf_indicators=(
+                    indicatortools.BendAfter(-4),
+                    indicatortools.BendAfter(4),
+                    ),
                 ),
             rhythm_maker=materials.pointillist_rhythm_maker,
             timespan_agent=medium_timespan_agent.transform_cursors(2),
@@ -137,7 +158,10 @@ piano_lh_context_maker = makers.ContextMaker(
             dynamic_agent=materials.background_dynamic_agent,
             labels='pedaled',
             rhythm_maker=materials.pointillist_rhythm_maker,
-            spanner_agent=materials.trilling_constantly_spanner_agent,
+            spanner_agent=new(
+                materials.trilling_constantly_spanner_agent,
+                minimum_logical_tie_duration=Duration(1, 16),
+                ),
             timespan_agent=new(
                 materials.pointillist_sparse_timespan_agent,
                 playing_durations=materials.very_short_durations,
