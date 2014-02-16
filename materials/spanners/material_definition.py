@@ -19,7 +19,12 @@ key_glissando_w_spanner = spannertools.make_solid_text_spanner_with_nib(
     markuptools.Markup(r'\center-align \natural'),
     )
 
+airtone_spanner = spannertools.make_solid_text_spanner_with_nib(
+    markuptools.Markup(r'\box \pad-around #0.5 air'),
+    )
+
 __all__ = (
+    'airtone_spanner',
     'key_glissando_spanner',
     'key_glissando_b_spanner',
     'key_glissando_w_spanner',
