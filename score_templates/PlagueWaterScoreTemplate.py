@@ -76,7 +76,7 @@ class PlagueWaterScoreTemplate(abctools.AbjadObject):
             name='Guitar Staff Group',
             )
 
-        pitch_range = pitchtools.PitchRange('[E2, D5]')
+        pitch_range = pitchtools.PitchRange('[E2, D6]')
         attach(pitch_range, guitar_staff_group, scope=scoretools.StaffGroup)
 
         attach(indicatortools.Clef('treble'), guitar_staff)
