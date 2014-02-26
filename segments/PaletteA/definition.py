@@ -2,7 +2,7 @@
 from abjad import *
 from plague_water import makers
 from plague_water import materials
-from plague_water import score_templates
+from plague_water import templates
 
 ### SEGMENT PARAMETERS ###
 
@@ -12,7 +12,7 @@ segment_tempo = indicatortools.Tempo(durationtools.Duration(1, 4), 64)
 
 ### CONTEXT MAP ###
 
-score_template = score_templates.PlagueWaterScoreTemplate()
+score_template = templates.PlagueWaterScoreTemplate()
 score = score_template()
 context_map = datastructuretools.ContextMap(score_template)
 context_map[score]['minimum_timespan_duration'] = durationtools.Duration(1, 8)
@@ -115,7 +115,7 @@ percussion_drum_context_maker = makers.ContextMaker(
     context_name='Percussion Drum Voice',
     initial_indicators=(
         Markup(r'''\box \pad-around #0.5 \large \bold \caps
-        "Soft Mallets",
+        "Soft Mallets"
         ''', Up),
         ),
     music_makers=[
