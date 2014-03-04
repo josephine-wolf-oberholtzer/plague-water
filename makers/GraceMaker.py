@@ -70,9 +70,6 @@ class GraceMaker(PlagueWaterObject):
             attach(command, grace_notes[0])
             command = indicatortools.LilyPondCommand('startStaff', 'before')
             attach(command, grace_notes[0])
-        if 1 < len(grace_notes):
-            beam = Beam()
-            attach(beam, grace_notes)
         assert len(grace_notes)
         grace_container = scoretools.GraceContainer(
             grace_notes,

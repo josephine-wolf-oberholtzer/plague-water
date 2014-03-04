@@ -30,7 +30,7 @@ class PercussionPitchAgent(PlagueWaterObject):
         lengths = tuple(lengths)
         self._lengths = lengths
         pitches = pitchtools.PitchSegment(
-            tokens=pitches,
+            items=pitches,
             item_class=pitchtools.NamedPitch,
             )
         assert len(pitches)

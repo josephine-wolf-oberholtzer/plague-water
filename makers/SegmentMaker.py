@@ -4,7 +4,7 @@ import itertools
 import os
 from abjad import *
 from plague_water import plague_water_configuration
-from plague_water import score_templates
+from plague_water import templates
 from plague_water.makers.PlagueWaterObject import PlagueWaterObject
 
 
@@ -75,7 +75,7 @@ class SegmentMaker(PlagueWaterObject):
             )
 
         ### CREATE SCORE ###
-        template = score_templates.PlagueWaterScoreTemplate()
+        template = templates.PlagueWaterScoreTemplate()
         self.score = template()
 
         ### BUILD TIMESPAN STRUCTURES ###
@@ -378,11 +378,11 @@ class SegmentMaker(PlagueWaterObject):
                 phrasing_slur = spannertools.PhrasingSlur()
                 phrasing_slur._contiguity_constraint = None
                 attach(phrasing_slur, slur_notes)
-                if 1 < len(grace_notes):
-                    beams = inspect_(grace_notes[0]).get_spanners(Beam)
-                    if not beams:
-                        beam = Beam()
-                        attach(beam, grace_notes)
+                #if 1 < len(grace_notes):
+                #    beams = inspect_(grace_notes[0]).get_spanners(Beam)
+                #    if not beams:
+                #        beam = Beam()
+                #        attach(beam, grace_notes)
                 progress_indicator.advance()
 
     def apply_graces(self):

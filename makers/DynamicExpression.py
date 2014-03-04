@@ -118,23 +118,23 @@ class DynamicExpression(PlagueWaterObject):
         stop_ordinal = NegativeInfinity
         if stop_token != 'o':
             stop_ordinal = Dynamic.dynamic_name_to_dynamic_ordinal(stop_token)
-        tokens = []
+        items = []
         is_circled = False
         if start_ordinal < stop_ordinal:
             if start_token != 'o':
-                tokens.append(start_token)
+                items.append(start_token)
             else:
                 is_circled = True
-            tokens.append('<')
-            tokens.append(stop_token)
+            items.append('<')
+            items.append(stop_token)
         elif stop_ordinal < start_ordinal:
-            tokens.append(start_token)
-            tokens.append('>')
+            items.append(start_token)
+            items.append('>')
             if stop_token != 'o':
-                tokens.append(stop_token)
+                items.append(stop_token)
             else:
                 is_circled = True
-        hairpin_descriptor = ' '.join(tokens)
+        hairpin_descriptor = ' '.join(items)
         hairpin = Hairpin(
             descriptor=hairpin_descriptor,
             include_rests=False,
