@@ -378,11 +378,13 @@ class SegmentMaker(PlagueWaterObject):
                 phrasing_slur = spannertools.PhrasingSlur()
                 phrasing_slur._contiguity_constraint = None
                 attach(phrasing_slur, slur_notes)
-                #if 1 < len(grace_notes):
-                #    beams = inspect_(grace_notes[0]).get_spanners(Beam)
-                #    if not beams:
-                #        beam = Beam()
-                #        attach(beam, grace_notes)
+                if 1 < len(grace_notes):
+                    beams = inspect_(grace_notes[0]).get_spanners(Beam)
+                    if not beams:
+                        beam = Beam()
+                        override(beam).beam.positions = schemetools.Scheme(
+                            'beam::place-broken-parts-individually')
+                        attach(beam, grace_notes)
                 progress_indicator.advance()
 
     def apply_graces(self):
