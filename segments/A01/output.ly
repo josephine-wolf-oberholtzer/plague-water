@@ -6,6 +6,7 @@
 \include "../../stylesheets/plague-water-header.ily"
 \include "../../stylesheets/plague-water-layout.ily"
 \include "../../stylesheets/plague-water-paper.ily"
+\include "../../stylesheets/plague-water-parts.ily"
 
 \score {
 	\context Score = "Plague Water Score" \with {
@@ -533,8 +534,10 @@
 							{
 								\override Flag #'stroke-style = #"grace"
 								\override Stem #'length = #8
+								\override Beam #'positions = #beam::place-broken-parts-individually
 								f16 [ \(
 								af16 ]
+								\revert Beam #'positions
 								\revert Flag #'stroke-style
 								\revert Stem #'length
 							}
@@ -906,7 +909,6 @@
 												\bold
 													\caps
 														"Soft Mallets"
-									,
 									}
 							{
 								\override Flag #'stroke-style = #"grace"

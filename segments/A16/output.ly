@@ -6,6 +6,7 @@
 \include "../../stylesheets/plague-water-header.ily"
 \include "../../stylesheets/plague-water-layout.ily"
 \include "../../stylesheets/plague-water-paper.ily"
+\include "../../stylesheets/plague-water-parts.ily"
 
 \score {
 	\context Score = "Plague Water Score" \with {
@@ -530,8 +531,10 @@
 							\afterGrace
 							<f>16 -\accent \sfz \) [
 							{
+								\override Beam #'positions = #beam::place-broken-parts-individually
 								c'16 [ \(
 								ef16 ]
+								\revert Beam #'positions
 							}
 							\once \override Accidental.stencil = ##f
 							\once \override AccidentalCautionary.stencil = ##f
@@ -947,7 +950,6 @@
 												\bold
 													\caps
 														"Soft Mallets"
-									,
 									}
 							{
 								\override Flag #'stroke-style = #"grace"

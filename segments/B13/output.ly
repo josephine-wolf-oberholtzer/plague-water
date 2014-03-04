@@ -6,6 +6,7 @@
 \include "../../stylesheets/plague-water-header.ily"
 \include "../../stylesheets/plague-water-layout.ily"
 \include "../../stylesheets/plague-water-paper.ily"
+\include "../../stylesheets/plague-water-parts.ily"
 
 \score {
 	\context Score = "Plague Water Score" \with {
@@ -153,8 +154,10 @@
 								\override Stem #'length = #8
 								\stopStaff
 								\startStaff
+								\override Beam #'positions = #beam::place-broken-parts-individually
 								a,16 [ \(
 								b,16 ]
+								\revert Beam #'positions
 								\revert Flag #'stroke-style
 								\revert Stem #'length
 							}
@@ -388,8 +391,10 @@
 							{
 								\override Flag #'stroke-style = #"grace"
 								\override Stem #'length = #8
+								\override Beam #'positions = #beam::place-broken-parts-individually
 								a16 [ \(
 								b16 ]
+								\revert Beam #'positions
 								\revert Flag #'stroke-style
 								\revert Stem #'length
 							}
@@ -1005,8 +1010,10 @@
 							{
 								\override Flag #'stroke-style = #"grace"
 								\override Stem #'length = #8
+								\override Beam #'positions = #beam::place-broken-parts-individually
 								g'16 [ \(
 								a16 ]
+								\revert Beam #'positions
 								\revert Flag #'stroke-style
 								\revert Stem #'length
 							}

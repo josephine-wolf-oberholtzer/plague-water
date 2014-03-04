@@ -6,6 +6,7 @@
 \include "../../stylesheets/plague-water-header.ily"
 \include "../../stylesheets/plague-water-layout.ily"
 \include "../../stylesheets/plague-water-paper.ily"
+\include "../../stylesheets/plague-water-parts.ily"
 
 \score {
 	\context Score = "Plague Water Score" \with {
@@ -665,7 +666,6 @@
 												\bold
 													\caps
 														Styrofoam
-									,
 									}
 							\stopStaff
 							\startStaff
