@@ -1,5 +1,5 @@
 #(set-default-paper-size "11x17" 'landscape)
-#(set-global-staff-size 12)
+#(set-global-staff-size 15)
 
 \paper {
     bottom-margin = 10\mm
@@ -32,18 +32,23 @@
     right-margin = 10\mm
     top-margin = 10\mm
 
-    markup-system-spacing =
-        #'((basic-distance . 0)
+    markup-system-spacing = #'(
+        (basic-distance . 0)
         (minimum-distance . 12)
         (padding . 0)
-        (stretchability . 0))
-    system-system-spacing =
-        #'((basic-distance . 0)
-        (padding . 8)
-        (stretchability . 0))
-    top-markup-spacing =
-        #'((basic-distance . 0)
+        (stretchability . 0)
+        )
+
+    system-system-spacing = #'(
+        (basic-distance . 0)
+        (padding . 12)
+        (stretchability . 100)
+        )
+
+    top-markup-spacing = #'(
+        (basic-distance . 0)
         (minimum-distance . 0)
-        (padding . 8)
-        (stretchability . 0))
+        (padding . 12)
+        (stretchability . 100)
+        )
 }

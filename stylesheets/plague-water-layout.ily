@@ -32,6 +32,9 @@ LV = #(make-dynamic-script LV)
     \context {
         \Staff
         \remove Time_signature_engraver
+        \override Beam.positions = #'(-8 . -8)
+        \override DynamicLineSpanner.staff-padding = 8
+        \override TupletBracket.positions = #'(-10 . -10)
     }
 
     %%% TIME SIGNATURE CONTEXT %%%
@@ -82,8 +85,8 @@ LV = #(make-dynamic-script LV)
         \name SaxophoneStaff
         \type Engraver_group
         \alias Staff
-        \override StaffSymbol.line-count = 5
         \override BarLine.bar-extent = #'(-2 . 2)
+        \override StaffSymbol.line-count = 5
         instrumentName = \markup { 
             \column { \hcenter-in #10 \italic { baritone saxophone } } }
         shortInstrumentName = \markup { 
@@ -105,8 +108,11 @@ LV = #(make-dynamic-script LV)
         \name GuitarStaff
         \type Engraver_group
         \alias Staff
-        \override StaffSymbol.line-count = 5
         \override BarLine.bar-extent = #'(-2 . 2)
+        \override Beam.positions = #'(-10 . -10)
+        \override DynamicLineSpanner.staff-padding = 10
+        \override TupletBracket.positions = #'(-12 . -12)
+        \override StaffSymbol.line-count = 5
         instrumentName = \markup { 
             \column { \hcenter-in #10 \italic { electric guitar } } }
         shortInstrumentName = \markup { 
@@ -137,6 +143,9 @@ LV = #(make-dynamic-script LV)
         \type Engraver_group
         \alias Staff
         \override BarLine.bar-extent = #'(-2 . 2)
+        \override Beam.positions = #'(-10 . -10)
+        \override DynamicLineSpanner.staff-padding = 10
+        \override TupletBracket.positions = #'(-12 . -12)
     }
 
     \context {
@@ -235,8 +244,7 @@ LV = #(make-dynamic-script LV)
         \override Beam.breakable = ##t
         \override Beam.length-fraction = 1.5
         \override DynamicLineSpanner.add-stem-support = ##t
-        \override DynamicLineSpanner.padding = 2
-        \override DynamicLineSpanner.outside-staff-padding = 2
+        \override DynamicLineSpanner.outside-staff-padding = 1
         \override Glissando.breakable = ##t
         \override Glissando.thickness = 3
         \override GraceSpacing.common-shortest-duration = #(ly:make-moment 1 16)
@@ -252,6 +260,7 @@ LV = #(make-dynamic-script LV)
         \override SpacingSpanner.uniform-stretching = ##t
         \override Stem.details.beamed-lengths = #'(6)
         \override Stem.details.lengths = #'(6)
+        \override Stem.direction = #DOWN
         \override Stem.stemlet-length = 1.5
         \override StemTremolo.beam-thickness = 0.75
         \override StemTremolo.beam-width = 1.5
@@ -260,17 +269,27 @@ LV = #(make-dynamic-script LV)
         \override StemTremolo.slope = 0.5
         \override SustainPedal.self-alignment-X = #LEFT
         \override TextScript.add-stem-support = ##t
+        \override TextScript.outside-staff-padding = 1
         \override TextScript.padding = 1
         \override TextScript.staff-padding = 1
-        \override TextScript.outside-staff-padding = 1
+        \override TrillPitchAccidental.avoid-slur = #'ignore
+        \override TrillPitchAccidental.layer = 1000
+        \override TrillPitchAccidental.whiteout = ##t
+        \override TrillPitchHead.layer = 1000
+        \override TrillPitchHead.whiteout = ##t
         \override TrillSpanner.outside-staff-padding = 2
-        \override TrillPitchAccidental.avoid-slur = #'inside
         \override TupletBracket.avoid-scripts = ##t
+        \override TupletBracket.direction = #DOWN
         \override TupletBracket.full-length-to-extent = ##t
-        \override TupletBracket.padding = 2
+        \override TupletBracket.outside-staff-padding = 1
         \override TupletNumber.font-size = 1
         \override TupletNumber.text = #tuplet-number::calc-fraction-text
-
+        \override VerticalAxisGroup.staff-staff-spacing = #'(
+            (basic-distance . 12)
+            (minimum-distance . 8)
+            (padding . 4)
+            (stretchability . 0)
+            )
         autoBeaming = ##f
         pedalSustainStyle = #'mixed
         proportionalNotationDuration = #(ly:make-moment 1 48)
