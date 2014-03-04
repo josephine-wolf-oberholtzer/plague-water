@@ -8,9 +8,7 @@
 \include "../../stylesheets/plague-water-paper.ily"
 \include "../../stylesheets/plague-water-layout.ily"
 \include "../../stylesheets/plague-water-header.ily"
-
-#(set-default-paper-size "11x17" 'portrait)
-#(set-global-staff-size 11)
+\include "../../stylesheets/plague-water-parts.ily"
 
 \score {
     \keepWithTag piano

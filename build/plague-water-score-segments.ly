@@ -10,7 +10,7 @@
 \include "../stylesheets/plague-water-header.ily"
 
 #(set-default-paper-size "11x17" 'landscape)
-#(set-global-staff-size 10)
+#(set-global-staff-size 13)
 
 \layout {
     \context {
@@ -19,12 +19,23 @@
             (basic-distance . 0)
             (minimum-distance . 0)
             (padding . 4)
-            (stretchability . 0)
+            (stretchability . 100)
             )
         \override VerticalAxisGroup.staff-staff-spacing = #'(
             (basic-distance . 0)
             (minimum-distance . 0)
             (padding . 4)
+            (stretchability . 100)
+            )
+        proportionalNotationDuration = #(ly:make-moment 1 32)
+    }
+    
+    \context {
+        \TimeSignatureContext
+        \override VerticalAxisGroup.default-staff-staff-spacing = #'(
+            (basic-distance . 6)
+            (minimum-distance . 8)
+            (padding . 6)
             (stretchability . 0)
             )
     }
