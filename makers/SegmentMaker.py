@@ -1123,7 +1123,6 @@ class SegmentMaker(PlagueWaterObject):
             aggregate_inventory.remove(timespans[0])
             context_maker.timespan_inventory.remove(timespan)
 
-
     ### PUBLIC PROPERTIES ###
 
     @property

@@ -39,6 +39,7 @@ class ConstantStepTimespanAgent(TimespanAgent):
 
     def __call__(
         self,
+        context_name=None,
         dependencies=None,
         initial_offset=None,
         maximum_offset=None,
@@ -68,6 +69,7 @@ class ConstantStepTimespanAgent(TimespanAgent):
         current_offset = initial_offset
         for duration in playing_durations:
             timespan = makers.PerformedTimespan(
+                context_name=context_name,
                 music_maker=music_maker,
                 start_offset=current_offset,
                 stop_offset=current_offset + duration,
