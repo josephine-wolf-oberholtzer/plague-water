@@ -1153,14 +1153,11 @@
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							r16 [
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
 							\ottava #1
-							<c'' bf''>16 -\staccato ~
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
 							\afterGrace
-							<c'' bf''>16
+							<c'' bf''>8 -\staccato
 							{
 								af''16 \(
 							}
@@ -1594,7 +1591,7 @@
 							\override Tie #'stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							\ottava #1
+							\ottava #2
 							\clef treble
 							a'''8 [ \glissando \startTextSpan
 						}
@@ -1604,7 +1601,7 @@
 							f''''16. \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							b''32 ] \stopTextSpan
+							b'''32 ] \stopTextSpan
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -1655,10 +1652,10 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							a''16. \glissando
+							a'''16. \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							f''32 ] \stopTextSpan
+							f'''32 ] \stopTextSpan
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -1696,10 +1693,10 @@
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							\ottava #2
-							cs''''16. [ \glissando \startTextSpan
+							cs'''16. [ \glissando \startTextSpan
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							b'''32 ] \stopTextSpan
+							b''''32 ] \stopTextSpan
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -1763,10 +1760,10 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							f'''16. \glissando
+							f''''16. \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							cs''32 ] \stopTextSpan
+							cs'''32 ] \stopTextSpan
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -1807,7 +1804,7 @@
 							b'''16. [ \glissando \startTextSpan
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							c'''32 ] \stopTextSpan
+							c''''32 ] \stopTextSpan
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -1849,7 +1846,7 @@
 							g'''16. [ \glissando \startTextSpan
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							a''32 ] \stopTextSpan
+							a'''32 ] \stopTextSpan
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -1908,7 +1905,7 @@
 							d''''16. \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							a''32 ] \stopTextSpan
+							a'''32 ] \stopTextSpan
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -1946,7 +1943,7 @@
 							\override Tie #'stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							\ottava #1
+							\ottava #2
 							f''''8 [ \glissando \startTextSpan
 						}
 						{
@@ -1955,7 +1952,7 @@
 							cs''''16. \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							b''32 ] \stopTextSpan
+							b'''32 ] \stopTextSpan
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -1994,15 +1991,15 @@
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							\ottava #1
-							c''''16 [ \glissando \startTextSpan
+							c'''16 [ \glissando \startTextSpan
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 3
-							g'''32 \glissando
+							g''''32 \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							d'''32 ] \stopTextSpan
+							d''''32 ] \stopTextSpan
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -2033,7 +2030,7 @@
 							}
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							\ottava #1
+							\ottava #2
 							\pitchedTrill
 							<b''' d'''' f'''' a''''>8 \p [ \startTrillSpan c'''''
 								^ \markup {
@@ -2058,7 +2055,7 @@
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
 							\pitchedTrill
-							<b'' d''' f'''>8 ] \startTrillSpan bf'''
+							<b''' d'''' f''''>8 ] \startTrillSpan bf''''
 								^ \markup {
 									\center-align
 										\concat
@@ -2104,7 +2101,7 @@
 							g'''16. [ \glissando \startTextSpan
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							d'''32 ] \stopTextSpan
+							d''''32 ] \stopTextSpan
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -2144,11 +2141,11 @@
 							\override Tie #'stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							\ottava #1
+							\ottava #2
 							a'''16. [ \glissando \startTextSpan
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							f'''32 ] \stopTextSpan
+							f''''32 ] \stopTextSpan
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -2187,10 +2184,10 @@
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							\ottava #2
-							cs''''16. [ \glissando \startTextSpan
+							cs'''16. [ \glissando \startTextSpan
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							b'''32 ] \stopTextSpan
+							b''''32 ] \stopTextSpan
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -2251,10 +2248,10 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							c'''16. \glissando
+							c''''16. \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							g''32 ] \stopTextSpan
+							g'''32 ] \stopTextSpan
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -2291,16 +2288,16 @@
 							\override Tie #'stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							\ottava #1
-							d''''8 [ \glissando \startTextSpan
+							\ottava #2
+							d'''8 [ \glissando \startTextSpan
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							a'''16. \glissando
+							a''''16. \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							cs'''32 ] \stopTextSpan
+							cs''''32 ] \stopTextSpan
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -2338,20 +2335,22 @@
 							\override Tie #'stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
+							\ottava #1
 							g'''8 [ \glissando \startTextSpan
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							d'''16 \glissando
+							d''''16 \glissando
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 3
-							a''32 \glissando
+							a'''32 \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							f''32 ] \stopTextSpan
+							f'''32 ] \stopTextSpan
+							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
 							\revert NoteHead #'style
@@ -2410,15 +2409,15 @@
 							\set stemRightBeamCount = 1
 							\ottava #-1
 							\clef bass
-							c,,8 [ \glissando \startTextSpan
+							c,8 [ \glissando \startTextSpan
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 2
-							g,16. \glissando
+							g,,16. \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							d,32 ] \stopTextSpan
+							d,,32 ] \stopTextSpan
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -2461,7 +2460,7 @@
 							cs,,16. [ \glissando \startTextSpan
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							c32 ] \stopTextSpan
+							c,32 ] \stopTextSpan
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -2500,7 +2499,7 @@
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
 							\pitchedTrill
-							f,8 ] \startTrillSpan bf,
+							f,,8 ] \startTrillSpan bf,,
 							\ottava #0
 							<> \stopTrillSpan
 						}
@@ -2560,7 +2559,7 @@
 							d,16. \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							a,32 ] \stopTextSpan
+							a,,32 ] \stopTextSpan
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -2603,10 +2602,10 @@
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							\ottava #-1
-							d,,16. [ \glissando \startTextSpan
+							d,16. [ \glissando \startTextSpan
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							f,32 ] \stopTextSpan
+							f,,32 ] \stopTextSpan
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -2645,15 +2644,17 @@
 							\override Tie #'stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
+							\ottava #-1
 							cs,,16 [ \glissando \startTextSpan
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 3
-							b,32 \glissando
+							b,,32 \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							c32 ] \stopTextSpan
+							c,32 ] \stopTextSpan
+							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
 							\revert NoteHead #'style
@@ -2706,10 +2707,10 @@
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							\ottava #-1
-							a,,,16. [ \glissando \startTextSpan
+							a,,16. [ \glissando \startTextSpan
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							f,32 ] \stopTextSpan
+							f,,32 ] \stopTextSpan
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -2748,15 +2749,17 @@
 							\override Tie #'stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
+							\ottava #-1
 							cs,,16 [ \glissando \startTextSpan
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 3
-							b,32 \glissando
+							b,,32 \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							c32 ] \stopTextSpan
+							c,32 ] \stopTextSpan
+							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
 							\revert NoteHead #'style
@@ -2784,25 +2787,15 @@
 							\once \override NoteHead.text = \markup {
 								\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
 							}
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
 							\ottava #-1
 							\pitchedTrill
-							<g,, b,, d,>16 \p ~ \startTrillSpan g,
+							<g,, b,, d,>8 \p \startTrillSpan g,
 								^ \markup {
 									\center-align
 										\natural
 									}
-							\once \override Accidental.stencil = ##f
-							\once \override AccidentalCautionary.stencil = ##f
-							\once \override Arpeggio.X-offset = #-2
-							\once \override NoteHead.stencil = #ly:text-interface::print
-							\once \override NoteHead.text = \markup {
-								\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-							}
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
-							<g,, b,, d,>16
 							<> \stopTrillSpan
 							\once \override Accidental.stencil = ##f
 							\once \override AccidentalCautionary.stencil = ##f
@@ -2817,7 +2810,7 @@
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
 							\pitchedTrill
-							<d, f, a,>16 ] \startTrillSpan c
+							<d,, f,, a,,>16 ] \startTrillSpan c,
 								^ \markup {
 									\center-align
 										\concat
@@ -2869,10 +2862,12 @@
 							\override Tie #'stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
+							\ottava #-1
 							c,,16. [ \glissando \startTextSpan
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							g32 ] \stopTextSpan
+							g,32 ] \stopTextSpan
+							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
 							\revert NoteHead #'style
@@ -2909,7 +2904,7 @@
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
 							\ottava #-1
-							d,,8 [ \glissando \startTextSpan
+							d,8 [ \glissando \startTextSpan
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -2917,7 +2912,7 @@
 							a,,16. \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							f,32 ] \stopTextSpan
+							f,,32 ] \stopTextSpan
 							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
@@ -2958,15 +2953,17 @@
 							\override Tie #'stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
+							\ottava #-1
 							f,,16 [ \glissando \startTextSpan
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 3
-							b,32 \glissando
+							b,,32 \glissando
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							c32 ] \stopTextSpan
+							c,32 ] \stopTextSpan
+							\ottava #0
 							\revert Accidental #'stencil
 							\revert Glissando #'bound-details
 							\revert NoteHead #'style
@@ -3073,6 +3070,7 @@
 				\context Voice = "Percussion Shaker Voice" {
 					{
 						{
+							\afterGrace
 							r4
 								_ \markup {
 									\pad-around
@@ -3084,66 +3082,63 @@
 									\italic
 										)
 									}
+							{
+								\override Flag #'stroke-style = #"grace"
+								\override Stem #'length = #8
+								g16 \(
+								\revert Flag #'stroke-style
+								\revert Stem #'length
+							}
 						}
 					}
 					{
-						\tweak #'text #tuplet-number::calc-fraction-text
-						\times 3/4 {
+						{
 							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							r16 [
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
-							g16 -\staccato ~
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
-							g16
+							\set stemRightBeamCount = 1
+							b8 -\staccato \) [
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
-							b16 -\staccato ]
+							r16 ]
 						}
 					}
 					{
 						{
 							r8.
-							\afterGrace
 							r4
-							{
-								\override Flag #'stroke-style = #"grace"
-								\override Stem #'length = #8
-								d'16 \(
-								\revert Flag #'stroke-style
-								\revert Stem #'length
-							}
 						}
 					}
 					{
-						{
+						\times 4/5 {
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							f'8 -\staccato \) [
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							g8 -\staccato
-						}
-						\times 2/3 {
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							r8
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
 							\afterGrace
-							b8 -\staccato
+							d'8 -\staccato [
 							{
 								\override Flag #'stroke-style = #"grace"
 								\override Stem #'length = #8
-								d'16 \(
+								f'16 \(
 								\revert Flag #'stroke-style
 								\revert Stem #'length
 							}
 							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							g8 -\staccato \)
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 1
+							r16
+						}
+						{
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							b8 -\staccato
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 2
+							r16
+						}
+						{
+							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
-							f'8 -\staccato ] \)
+							d'16 -\staccato ]
 						}
 					}
 					{
@@ -3164,16 +3159,13 @@
 						}
 					}
 					{
-						\times 2/3 {
+						{
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							r8 [
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							g8 -\staccato
+							f'8 -\staccato [
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							b8 -\staccato ]
+							g8 -\staccato ]
 						}
 					}
 					{
@@ -3194,16 +3186,9 @@
 						}
 					}
 					{
-						\times 2/3 {
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							r16 [
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
-							d'16 -\staccato
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							f'16 -\staccato ]
+						{
+							\set stemRightBeamCount = 1
+							b8 -\staccato
 						}
 					}
 					{
@@ -3222,36 +3207,23 @@
 						}
 					}
 					{
-						\tweak #'text #tuplet-number::calc-fraction-text
-						\times 3/4 {
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							r16 [
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
-							g16 -\staccato ~
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
-							g16
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 1
-							b16 -\staccato
-						}
 						{
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 2
-							d'16 -\staccato
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
-							f'16 -\staccato
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 1
+							d'8 -\staccato [
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
-							g16 -\staccato ]
+							r16 ]
 						}
 					}
 					{
 						{
-							r4
+							\stopStaff
+							\once \override Staff.StaffSymbol.line-count = 1
+							\startStaff
+							R1 * 7/16
+							\stopStaff
+							\startStaff
 						}
 						{
 							r8.
@@ -3260,15 +3232,8 @@
 					}
 					{
 						{
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							b16 -\staccato [
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 3
-							d'32 -\staccato
-							\set stemLeftBeamCount = 3
-							\set stemRightBeamCount = 0
-							r32 ]
+							\set stemRightBeamCount = 1
+							f'8 -\staccato
 						}
 					}
 					{
@@ -3279,7 +3244,7 @@
 							{
 								\override Flag #'stroke-style = #"grace"
 								\override Stem #'length = #8
-								f'16 \(
+								g16 \(
 								\revert Flag #'stroke-style
 								\revert Stem #'length
 							}
@@ -3288,14 +3253,22 @@
 					{
 						\times 2/3 {
 							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							g16 -\staccato \) [
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
-							b16 -\staccato
+							\set stemRightBeamCount = 1
+							\afterGrace
+							b8 -\staccato \) [
+							{
+								\override Flag #'stroke-style = #"grace"
+								\override Stem #'length = #8
+								\override Beam #'positions = #beam::place-broken-parts-individually
+								d'16 [ \(
+								f'16 ]
+								\revert Beam #'positions
+								\revert Flag #'stroke-style
+								\revert Stem #'length
+							}
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
-							r16 ]
+							g16 -\staccato ] \)
 						}
 					}
 					{
@@ -3308,42 +3281,38 @@
 						}
 					}
 					{
-						\times 2/3 {
+						{
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							r8 [
+							b8 -\staccato [
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
 							d'8 -\staccato
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							f'8 -\staccato
-						}
-						\tweak #'text #tuplet-number::calc-fraction-text
-						\times 3/4 {
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 2
-							r16
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
-							g16 -\staccato ~
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
-							g16
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 1
-							b16 -\staccato
 						}
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							d'8 -\staccato
+							f'8 -\staccato
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 1
+							r16
+						}
+						\tweak #'text #tuplet-number::calc-fraction-text
+						\times 5/6 {
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							f'8 -\staccato
+							g8 -\staccato
 							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							b8 -\staccato
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							r8
+						}
+						{
+							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
-							r8 ]
+							d'16 -\staccato ]
 						}
 					}
 					{
@@ -3353,30 +3322,20 @@
 							{
 								\override Flag #'stroke-style = #"grace"
 								\override Stem #'length = #8
-								\override Beam #'positions = #beam::place-broken-parts-individually
-								g16 [ \(
-								b16 ]
-								\revert Beam #'positions
+								f'16 \(
 								\revert Flag #'stroke-style
 								\revert Stem #'length
 							}
 						}
 					}
 					{
-						\tweak #'text #tuplet-number::calc-fraction-text
-						\times 5/6 {
+						{
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							\afterGrace
-							d'8 -\staccato \)
-							{
-								\override Flag #'stroke-style = #"grace"
-								\override Stem #'length = #8
-								f'16 \(
-								\revert Flag #'stroke-style
-								\revert Stem #'length
-							}
-							g4 -\staccato \)
+							g8 -\staccato \) [
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 0
+							r8. ]
 						}
 					}
 					{
@@ -3402,19 +3361,23 @@
 							b8 -\staccato [
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
-							d'16 -\staccato
+							r16
 						}
-						\tweak #'text #tuplet-number::calc-fraction-text
-						\times 5/6 {
+						\times 4/5 {
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							r8
+							d'8 -\staccato
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
 							f'8 -\staccato
 							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 2
+							r16
+						}
+						{
+							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
-							g8 -\staccato ]
+							g16 -\staccato ]
 						}
 					}
 					{
@@ -3430,33 +3393,16 @@
 					{
 						{
 							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							\afterGrace
-							b16 -\staccato [
-							{
-								\override Flag #'stroke-style = #"grace"
-								\override Stem #'length = #8
-								d'16 \(
-								\revert Flag #'stroke-style
-								\revert Stem #'length
-							}
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
-							f'16 -\staccato \)
+							\set stemRightBeamCount = 1
+							b8 -\staccato [
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
-							g16 -\staccato
-						}
-						\times 2/3 {
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 2
 							r16
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
-							b16 -\staccato
-							\set stemLeftBeamCount = 2
+						}
+						{
+							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							d'16 -\staccato ]
+							d'8 -\staccato ]
 						}
 					}
 					{
@@ -3465,25 +3411,25 @@
 						}
 						{
 							r8
-							r16
-						}
-					}
-					{
-						{
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
 							\afterGrace
-							f'16 -\staccato [
+							r16
 							{
 								\override Flag #'stroke-style = #"grace"
 								\override Stem #'length = #8
-								g16 \(
+								f'16 \(
 								\revert Flag #'stroke-style
 								\revert Stem #'length
 							}
+						}
+					}
+					{
+						\times 2/3 {
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 1
+							g8 -\staccato \) [
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
-							b16 -\staccato ] \)
+							b16 -\staccato ]
 						}
 					}
 					{
@@ -3533,43 +3479,31 @@
 						}
 					}
 					{
-						\tweak #'text #tuplet-number::calc-fraction-text
-						\times 5/6 {
+						{
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
 							g'8 -\staccato \) [
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							c'8 -\staccato
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							r8
+							r8.
 						}
 						{
 							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 2
-							\afterGrace
-							e'16 -\staccato
-							{
-								\override Flag #'stroke-style = #"grace"
-								\override Stem #'length = #8
-								a16 \(
-								\revert Flag #'stroke-style
-								\revert Stem #'length
-							}
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = -1
-							g'16 -\staccato ] \)
-						}
-						\tweak #'text #tuplet-number::calc-fraction-text
-						\times 3/4 {
-							c'4 -\staccato
-							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							e'8 -\staccato [
+							c'8 -\staccato
+						}
+						{
 							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							e'8 -\staccato
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							r8.
+						}
+						{
+							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
-							r8 ]
+							a16 -\staccato ]
 						}
 					}
 					{
@@ -3591,39 +3525,35 @@
 						}
 					}
 					{
-						{
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							r16 [
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
-							f16 -\staccato
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 1
-							c'16 -\staccato
-						}
 						\tweak #'text #tuplet-number::calc-fraction-text
-						\times 5/8 {
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							r8
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							a8 -\staccato ~
-							\set stemLeftBeamCount = 1
+						\times 3/4 {
+							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
 							\afterGrace
-							a8
+							g'8 -\staccato [
 							{
 								\override Flag #'stroke-style = #"grace"
 								\override Stem #'length = #8
-								e'16 \(
+								c'16 \(
 								\revert Flag #'stroke-style
 								\revert Stem #'length
 							}
 							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							e'8 -\staccato \)
+						}
+						{
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							f8 -\staccato
+						}
+						{
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							c'8 -\staccato
+							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
-							a8 -\staccato ] \)
+							r16 ]
 						}
 					}
 					{
@@ -3643,15 +3573,35 @@
 						}
 						{
 							r4.
+							r16
+						}
+					}
+					{
+						{
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 1
+							a8 -\staccato [
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							e'8 -\staccato
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 2
+							r16
+						}
+						{
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 0
+							a16 -\staccato ]
+						}
+					}
+					{
+						{
 							\afterGrace
 							r16
 							{
 								\override Flag #'stroke-style = #"grace"
 								\override Stem #'length = #8
-								\override Beam #'positions = #beam::place-broken-parts-individually
-								e'16 [ \(
-								f16 ]
-								\revert Beam #'positions
+								e'16 \(
 								\revert Flag #'stroke-style
 								\revert Stem #'length
 							}
@@ -3661,37 +3611,10 @@
 						{
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							\afterGrace
-							g'8 -\staccato \)
-							{
-								\override Flag #'stroke-style = #"grace"
-								\override Stem #'length = #8
-								c'16 \(
-								\revert Flag #'stroke-style
-								\revert Stem #'length
-							}
-							e'4 -\staccato \)
-						}
-					}
-					{
-						{
-							r16
-						}
-					}
-					{
-						\times 2/3 {
-							\afterGrace
-							a4 -\staccato
-							{
-								\override Flag #'stroke-style = #"grace"
-								\override Stem #'length = #8
-								g'16 \(
-								\revert Flag #'stroke-style
-								\revert Stem #'length
-							}
+							f8 -\staccato \) [
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							c'8 -\staccato \)
+							r8 ]
 						}
 					}
 					{
@@ -3708,23 +3631,44 @@
 							\startStaff
 						}
 						{
-							r8.
-						}
-					}
-					{
-						\tweak #'text #tuplet-number::calc-fraction-text
-						\times 7/12 {
-							e'4 -\staccato
 							\afterGrace
-							f4 -\staccato
+							r8.
 							{
 								\override Flag #'stroke-style = #"grace"
 								\override Stem #'length = #8
-								c'16 \(
+								\override Beam #'positions = #beam::place-broken-parts-individually
+								g'16 [ \(
+								c'16 ]
+								\revert Beam #'positions
 								\revert Flag #'stroke-style
 								\revert Stem #'length
 							}
-							a4 -\staccato \)
+						}
+					}
+					{
+						{
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 1
+							e'8 -\staccato \) [
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							r8.
+						}
+						\times 2/3 {
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							\afterGrace
+							a8 -\staccato
+							{
+								\override Flag #'stroke-style = #"grace"
+								\override Stem #'length = #8
+								g'16 \(
+								\revert Flag #'stroke-style
+								\revert Stem #'length
+							}
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 0
+							c'16 -\staccato ] \)
 						}
 					}
 					{
@@ -3738,20 +3682,7 @@
 							R1 * 7/8
 						}
 						{
-							\afterGrace
 							R1 * 3/16
-							{
-								\override Flag #'stroke-style = #"grace"
-								\override Stem #'length = #8
-								\stopStaff
-								\startStaff
-								\override Beam #'positions = #beam::place-broken-parts-individually
-								e'16 [ \(
-								a16 ]
-								\revert Beam #'positions
-								\revert Flag #'stroke-style
-								\revert Stem #'length
-							}
 							\stopStaff
 							\startStaff
 						}
@@ -3760,33 +3691,23 @@
 						{
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							\afterGrace
-							e'8 -\staccato \) [
-							{
-								\override Flag #'stroke-style = #"grace"
-								\override Stem #'length = #8
-								f16 \(
-								\revert Flag #'stroke-style
-								\revert Stem #'length
-							}
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							g'8 -\staccato \)
-						}
-						\tweak #'text #tuplet-number::calc-fraction-text
-						\times 3/4 {
+							e'8 -\staccato [
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
 							r8
+						}
+						{
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 2
+							f16 -\staccato
+						}
+						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							c'8 -\staccato ~
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							c'8
+							c'8 -\staccato
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							e'8 -\staccato ]
+							r8. ]
 						}
 					}
 					{
@@ -3814,9 +3735,16 @@
 					}
 					{
 						\tweak #'text #tuplet-number::calc-fraction-text
-						\times 5/8 {
-							g'4 -\staccato \)
-							c'4 -\staccato
+						\times 5/6 {
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 1
+							e'8 -\staccato \) [
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							a8 -\staccato
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 0
+							r8 ]
 						}
 					}
 					{
@@ -3837,20 +3765,24 @@
 						}
 					}
 					{
-						\tweak #'text #tuplet-number::calc-fraction-text
-						\times 5/8 {
+						{
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							r8 [
+							\afterGrace
+							e'8 -\staccato [
+							{
+								\override Flag #'stroke-style = #"grace"
+								\override Stem #'length = #8
+								f16 \(
+								\revert Flag #'stroke-style
+								\revert Stem #'length
+							}
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							e'8 -\staccato ~
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
-							e'8
-							\set stemLeftBeamCount = 1
+							g'8 -\staccato \)
+							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
-							f8 -\staccato ]
+							r16 ]
 						}
 					}
 					{
@@ -3871,28 +3803,28 @@
 							{
 								\override Flag #'stroke-style = #"grace"
 								\override Stem #'length = #8
-								c'16 \(
+								\override Beam #'positions = #beam::place-broken-parts-individually
+								c'16 [ \(
+								e'16 ]
+								\revert Beam #'positions
 								\revert Flag #'stroke-style
 								\revert Stem #'length
 							}
 						}
 					}
 					{
-						\tweak #'text #tuplet-number::calc-fraction-text
-						\times 3/4 {
-							\afterGrace
-							a4 -\staccato \)
-							{
-								\override Flag #'stroke-style = #"grace"
-								\override Stem #'length = #8
-								\override Beam #'positions = #beam::place-broken-parts-individually
-								e'16 [ \(
-								a16 ]
-								\revert Beam #'positions
-								\revert Flag #'stroke-style
-								\revert Stem #'length
-							}
-							e'4 -\staccato \)
+						{
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 1
+							a8 -\staccato \) [
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 1
+							r8.
+						}
+						{
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 0
+							g'16 -\staccato ]
 						}
 					}
 					{
@@ -3923,7 +3855,7 @@
 											\large
 												\bold
 													\caps
-														Brush
+														Styrofoam
 									}
 								_ \markup {
 									\pad-around
@@ -3938,16 +3870,9 @@
 						}
 					}
 					{
-						\times 2/3 {
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							c'16 -\accent [
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
-							e'16
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							r16 ]
+						{
+							\set stemRightBeamCount = 1
+							a8 :64 -\accent
 						}
 					}
 					{
@@ -3958,16 +3883,9 @@
 						}
 					}
 					{
-						\times 2/3 {
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							r16 [
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
-							c'16 -\accent
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							a16 ]
+						{
+							\set stemRightBeamCount = 1
+							a8 :64 -\accent
 						}
 					}
 					{
@@ -3997,122 +3915,10 @@
 						{
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							e'8 :64 \)
-							c'4 :32
-						}
-					}
-					{
-						{
-							r16
-						}
-						{
-							\stopStaff
-							\once \override Staff.StaffSymbol.line-count = 1
-							\startStaff
-							R1 * 7/16
-							\stopStaff
-							\startStaff
-						}
-						{
-							r8
-						}
-					}
-					{
-						\times 2/3 {
-							\set stemLeftBeamCount = 0
+							a8. :64 ~ \) [
+							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							e'8 :64 -\accent [
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							c'16 ]
-						}
-					}
-					{
-						{
-							r16
-						}
-						{
-							\stopStaff
-							\once \override Staff.StaffSymbol.line-count = 1
-							\startStaff
-							R1 * 3/16
-						}
-						{
-							R1 * 7/16
-						}
-						{
-							\afterGrace
-							R1 * 3/16
-							{
-								\override Flag #'stroke-style = #"grace"
-								\override Stem #'length = #8
-								\stopStaff
-								\startStaff
-								e'16 \(
-								\revert Flag #'stroke-style
-								\revert Stem #'length
-							}
-							\stopStaff
-							\startStaff
-						}
-					}
-					{
-						{
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							a16 :128 \) [
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
-							e'16 :128
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							c'16 :128 ]
-						}
-					}
-					{
-						{
-							r8.
-							r2
-						}
-						{
-							r8
-						}
-					}
-					{
-						\tweak #'text #tuplet-number::calc-fraction-text
-						\times 5/8 {
-							e'4 :32 -\accent
-							a4 :32
-						}
-						\tweak #'text #tuplet-number::calc-fraction-text
-						\times 3/4 {
-							\set stemLeftBeamCount = -1
-							\set stemRightBeamCount = 2
-							r16 [
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
-							c'16 :128 -\accent ~
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
-							c'16 :128
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							e'16 ]
-						}
-					}
-					{
-						{
-							r4
-						}
-						{
-							r8.
-						}
-					}
-					{
-						{
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							c'16 :128 -\accent [
+							a8 :64 ~
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
 							a16 :128 ]
@@ -4121,40 +3927,118 @@
 					{
 						{
 							r16
+						}
+						{
+							\stopStaff
+							\once \override Staff.StaffSymbol.line-count = 1
+							\startStaff
+							R1 * 7/16
+							\stopStaff
+							\startStaff
+						}
+						{
+							r8
+						}
+					}
+					{
+						{
+							\set stemRightBeamCount = 1
+							a8 :64 -\accent
+						}
+					}
+					{
+						{
+							r16
+						}
+						{
+							\stopStaff
+							\once \override Staff.StaffSymbol.line-count = 1
+							\startStaff
+							R1 * 3/16
+						}
+						{
+							R1 * 7/16
+						}
+						{
+							R1 * 3/16
+							\stopStaff
+							\startStaff
+						}
+					}
+					{
+						{
+							\set stemRightBeamCount = 1
+							a8. :64
+						}
+					}
+					{
+						{
+							r8.
+							r2
+						}
+						{
+							r8
+						}
+					}
+					{
+						{
+							\set stemLeftBeamCount = 0
+							\set stemRightBeamCount = 2
+							a16 :128 -\accent ~
+							a4 :32
+						}
+						{
+							\set stemLeftBeamCount = -1
+							\set stemRightBeamCount = 1
+							a8 :64 -\accent [
+							\set stemLeftBeamCount = 2
+							\set stemRightBeamCount = 0
+							a16 :128 ]
+						}
+					}
+					{
+						{
+							r4
+						}
+						{
+							r8.
+						}
+					}
+					{
+						{
+							\set stemRightBeamCount = 1
+							a8 :64 -\accent
+						}
+					}
+					{
+						{
+							r16
 							r2
 						}
 						{
 							r4.
 							r4
+							\afterGrace
 							r16
+							{
+								\override Flag #'stroke-style = #"grace"
+								\override Stem #'length = #8
+								a16 \(
+								\revert Flag #'stroke-style
+								\revert Stem #'length
+							}
 						}
 					}
 					{
-						\tweak #'text #tuplet-number::calc-fraction-text
-						\times 3/4 {
+						{
 							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							r16 [
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
-							e'16 :128 ~
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
-							e'16 :128
-							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
-							c'16
+							a8. :64 \) [
 						}
-						\times 2/3 {
+						{
 							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 2
-							a16
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
-							e'16
-							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
-							r16 ]
+							a8 :64 ]
 						}
 					}
 					{
@@ -4168,12 +4052,8 @@
 					}
 					{
 						{
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							e'16 :128 -\accent [
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							c'16 :128 ]
+							\set stemRightBeamCount = 1
+							a8 :64 -\accent
 						}
 					}
 					{
@@ -4196,50 +4076,45 @@
 						{
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
-							r8 [
+							a8 :64 ~ [
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
+							a8 :64 ~
+							\set stemLeftBeamCount = 1
+							\set stemRightBeamCount = 2
 							\afterGrace
-							c'8 :64
+							a16 :128
 							{
 								\override Flag #'stroke-style = #"grace"
 								\override Stem #'length = #8
-								e'16 \(
+								a16 \(
 								\revert Flag #'stroke-style
 								\revert Stem #'length
 							}
-							\set stemLeftBeamCount = 1
+							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
-							a8 :64 ] \)
+							a16 :128 ] \)
 						}
 					}
 					{
 						{
-							r16
-						}
-					}
-					{
-						\times 2/3 {
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 1
-							r8 [
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 1
 							\afterGrace
-							a8 :64
+							r16
 							{
 								\override Flag #'stroke-style = #"grace"
 								\override Stem #'length = #8
 								\override Beam #'positions = #beam::place-broken-parts-individually
-								e'16 [ \(
-								c'16 ]
+								a16 [ \(
+								a16 ]
 								\revert Beam #'positions
 								\revert Flag #'stroke-style
 								\revert Stem #'length
 							}
-							\set stemLeftBeamCount = 1
-							\set stemRightBeamCount = 0
-							e'8 :64 ] \)
+						}
+					}
+					{
+						{
+							a4 :32 \)
 						}
 					}
 					{
@@ -4250,20 +4125,9 @@
 						}
 					}
 					{
-						\tweak #'text #tuplet-number::calc-fraction-text
-						\times 3/4 {
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							r16 [
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
-							e'16 :128 -\accent ~
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 2
-							e'16 :128
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 0
-							a16 ]
+						{
+							\set stemRightBeamCount = 1
+							a8. :64 -\accent
 						}
 					}
 					{
@@ -4274,15 +4138,8 @@
 					}
 					{
 						{
-							\set stemLeftBeamCount = 0
-							\set stemRightBeamCount = 2
-							c'16 :128 -\accent [
-							\set stemLeftBeamCount = 2
-							\set stemRightBeamCount = 3
-							e'32
-							\set stemLeftBeamCount = 3
-							\set stemRightBeamCount = 0
-							r32 ]
+							\set stemRightBeamCount = 1
+							a8 :64 -\accent
 						}
 					}
 					{
