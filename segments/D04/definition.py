@@ -40,27 +40,15 @@ context_map['Guitar Voice']['register_agent'] = makers.RegisterAgent(
 context_map['Piano RH Voice']['register_agent'] = makers.RegisterAgent(
     global_inflections=NamedPitch('F#6'),
     phrase_inflections=(
-        makers.RegisterCurve(
-            ratio=(1,),
-            registers=(0, -12),
-            ),
-        makers.RegisterCurve(
-            ratio=(1,),
-            registers=(0, -18),
-            ),
+        makers.RegisterCurve((1,), (-6, 0)),
+        makers.RegisterCurve((1,), (0, -6)),
         ),
     )
 context_map['Piano LH Voice']['register_agent'] = makers.RegisterAgent(
     global_inflections=NamedPitch('A0'),
     phrase_inflections=(
-        makers.RegisterCurve(
-            ratio=(1,),
-            registers=(0, 12),
-            ),
-        makers.RegisterCurve(
-            ratio=(1,),
-            registers=(0, 18),
-            ),
+        makers.RegisterCurve((1,), (6, 0)),
+        makers.RegisterCurve((1,), (0, 6)),
         ),
     )
 

@@ -171,6 +171,41 @@ piano_lh_context_maker = makers.ContextMaker(
         ],
     )
 
+percussion_rhythm_maker_one = rhythmmakertools.TaleaRhythmMaker(
+    beam_specifier=rhythmmakertools.BeamSpecifier(
+        beam_each_division=False,
+        beam_divisions_together=False,
+        ),
+    tie_specifier=rhythmmakertools.TieSpecifier(
+        tie_across_divisions=False,
+        tie_split_notes=False,
+        ),
+    talea=rhythmmakertools.Talea(
+        counts=(5, 8, 7),
+        denominator=16,
+        ),
+    )
+
+percussion_rhythm_maker_two = rhythmmakertools.IncisedRhythmMaker(
+    beam_specifier=rhythmmakertools.BeamSpecifier(
+        beam_each_division=False,
+        beam_divisions_together=False,
+        ),
+    incise_specifier=rhythmmakertools.InciseSpecifier(
+        fill_with_notes=False,
+        incise_divisions=True,
+        prefix_talea=(2,),
+        prefix_lengths=(1, 1, 2, 1, 2),
+        talea_denominator=16,
+        ),
+    extra_counts_per_division=(0, 0, 0, 0, 1),
+    split_divisions_by_counts=(5, 7),
+    tie_specifier=rhythmmakertools.TieSpecifier(
+        tie_across_divisions=False,
+        tie_split_notes=False,
+        ),
+    )
+
 percussion_shaker_context_maker = makers.ContextMaker(
     context_name='Percussion Shaker Voice',
     initial_indicators=(sempre_ppp,),
@@ -184,7 +219,7 @@ percussion_shaker_context_maker = makers.ContextMaker(
                 each_leaf_indicators=('staccato',),
                 ),
             pitch_agent=materials.shaker_pitch_agent,
-            rhythm_maker=materials.pointillist_rhythm_maker,
+            rhythm_maker=percussion_rhythm_maker_two,
             timespan_agent=medium_timespan_agent.transform_cursors(9),
             ),
         new(materials.basic_music_maker,
@@ -192,7 +227,7 @@ percussion_shaker_context_maker = makers.ContextMaker(
                 each_leaf_indicators=('staccato',),
                 ),
             pitch_agent=materials.shaker_pitch_agent,
-            rhythm_maker=materials.pointillist_rhythm_maker,
+            rhythm_maker=percussion_rhythm_maker_two,
             timespan_agent=long_timespan_agent.transform_cursors(10),
             ),
         ],
@@ -212,7 +247,7 @@ percussion_woodblock_context_maker = makers.ContextMaker(
             pitch_agent=new(materials.woodblock_pitch_agent,
                 talea=(0, 4, 2, 3, 1, 4, 2, 3, 0, 2, 1, 3, 1, 3),
                 ),
-            rhythm_maker=materials.pointillist_rhythm_maker,
+            rhythm_maker=percussion_rhythm_maker_two,
             timespan_agent=long_timespan_agent.transform_cursors(12),
             ),
         ],
@@ -222,8 +257,8 @@ percussion_drum_context_maker = makers.ContextMaker(
     context_name='Percussion Drum Voice',
     initial_indicators=(
         Markup(r'''\box \pad-around #0.5 \large \bold \caps
-        "Brush"
-        ''', Up),
+            "Styrofoam"
+            ''', Up),
         sempre_ppp,
         ),
     music_maker_indices=(0, 0, 1, 0, 1),
@@ -233,9 +268,9 @@ percussion_drum_context_maker = makers.ContextMaker(
                 first_leaf_indicators=('accent',),
                 ),
             pitch_agent=new(materials.drum_pitch_agent,
-                talea=(1, 2, 1, 0, 2, 1, 2, 0),
+                talea=(0,),
                 ),
-            rhythm_maker=materials.pointillist_rhythm_maker,
+            rhythm_maker=percussion_rhythm_maker_one,
             spanner_agent=makers.SpannerAgent(
                 cyclical_logical_tie_spanners=makers.StemTremoloSpanner(),
                 minimum_logical_tie_duration=durationtools.Duration(1, 16),
@@ -247,9 +282,9 @@ percussion_drum_context_maker = makers.ContextMaker(
                 lengths=(1, 0, 1, 0, 0, 1, 2,),
                 ),
             pitch_agent=new(materials.drum_pitch_agent,
-                talea=(0, 2, 1, 2, 0, 2, 1, 2, 1, 0, 2, 1, 2, 0),
+                talea=(0,),
                 ),
-            rhythm_maker=materials.pointillist_rhythm_maker,
+            rhythm_maker=percussion_rhythm_maker_one,
             spanner_agent=makers.SpannerAgent(
                 logical_tie_spanners=makers.StemTremoloSpanner(),
                 minimum_logical_tie_duration=durationtools.Duration(1, 16),
