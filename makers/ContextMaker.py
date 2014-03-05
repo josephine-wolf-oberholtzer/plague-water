@@ -78,7 +78,7 @@ class ContextMaker(PlagueWaterObject):
         new_timespan_inventory = timespantools.TimespanInventory()
         for shard in self.timespan_inventory.split_at_offsets(split_offsets):
             for timespan in shard:
-                music_maker = timespan.annotation
+                music_maker = timespan.music_maker
                 if music_maker.timespan_has_minimum_length(timespan):
                     if music_maker.rhythm_maker != \
                         rhythmmakertools.RestRhythmMaker():
@@ -103,10 +103,12 @@ class ContextMaker(PlagueWaterObject):
                     context_name=self.context_name,
                     )
                 music_maker_timespan_inventory, current_offset = \
-                    music_maker.create_timespans(
+                    music_maker.timespan_agent(
+                        context_name=self.context_name,
                         dependencies=dependencies,
                         initial_offset=current_offset,
                         maximum_offset=target_segment_duration,
+                        music_maker=music_maker,
                         )
                 timespan_inventory.extend(music_maker_timespan_inventory)
                 progress_indicator.advance()
@@ -128,10 +130,12 @@ class ContextMaker(PlagueWaterObject):
                         context_name=self.context_name,
                         )
                     music_maker_timespan_inventory, current_offset = \
-                        music_maker.create_timespans(
+                        music_maker.timespan_agent(
+                            context_name=self.context_name,
                             dependencies=dependencies,
                             initial_offset=current_offset,
                             maximum_offset=target_segment_duration,
+                            music_maker=music_maker,
                             )
                     timespan_inventory.extend(music_maker_timespan_inventory)
                     counter += 1
@@ -167,8 +171,9 @@ class ContextMaker(PlagueWaterObject):
         for group in silence_timespan_inventory.partition(
             include_tangent_timespans=True,
             ):
-            fused_silence_timespan = timespantools.AnnotatedTimespan(
-                annotation=makers.MusicMaker(
+            fused_silence_timespan = makers.PerformedTimespan(
+                context_name=self.context_name,
+                music_maker=makers.MusicMaker(
                     rhythm_maker=rhythmmakertools.RestRhythmMaker(),
                     ),
                 start_offset=group.start_offset,

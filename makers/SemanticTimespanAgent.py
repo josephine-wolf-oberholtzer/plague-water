@@ -43,11 +43,13 @@ class SemanticTimespanAgent(TimespanAgent):
 
     def __call__(
         self,
+        context_name=None,
         dependencies=None,
         initial_offset=None,
         maximum_offset=None,
         music_maker=None,
         ):
+        from plague_water import makers
         assert isinstance(self.leading_rest_durations,
             (datastructuretools.StatalServerCursor, type(None))),\
             self.leading_rest_durations
@@ -79,8 +81,9 @@ class SemanticTimespanAgent(TimespanAgent):
             stop_offset = start_offset + playing_duration
             if maximum_offset <= stop_offset:
                 return timespan_inventory, maximum_offset
-            timespan = timespantools.AnnotatedTimespan(
-                annotation=music_maker,
+            timespan = makers.PerformedTimespan(
+                context_name=context_name,
+                music_maker=music_maker,
                 start_offset=start_offset,
                 stop_offset=stop_offset,
                 )

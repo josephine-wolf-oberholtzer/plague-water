@@ -38,11 +38,13 @@ class DependentTimespanAgent(TimespanAgent):
 
     def __call__(
         self,
+        context_name=None,
         dependencies=None,
         initial_offset=None,
         maximum_offset=None,
         music_maker=None,
         ):
+        from plague_water import makers
         assert initial_offset == 0
         assert dependencies
         dependency_timespans = timespantools.TimespanInventory()
@@ -50,8 +52,8 @@ class DependentTimespanAgent(TimespanAgent):
             dependency_timespans.extend(dependency.timespan_inventory)
         if self.labels is not None:
             dependency_timespans[:] = [x for x in dependency_timespans if
-                x.annotation.labels is not None and
-                any(label in x.annotation.labels for label in self.labels)
+                x.music_maker.labels is not None and
+                any(label in x.music_maker.labels for label in self.labels)
                 ]
         dependency_timespans.sort()
         timespan_inventory = timespantools.TimespanInventory()
@@ -66,8 +68,9 @@ class DependentTimespanAgent(TimespanAgent):
                     offsets.add(timespan.stop_offset)
             offsets = sorted(offsets)
             for start, stop in sequencetools.iterate_sequence_nwise(offsets):
-                timespan = timespantools.AnnotatedTimespan(
-                    annotation=music_maker,
+                timespan = makers.PerformedTimespan(
+                    context_name=context_name,
+                    music_maker=music_maker,
                     start_offset=start,
                     stop_offset=stop,
                     )

@@ -87,6 +87,7 @@ class SegmentMaker(PlagueWaterObject):
             for time_signature in self.time_signatures)
         self.cleanup_semantic_timespans()
         self.create_dependent_timespans()
+        self.remove_percussion_overlap()
         self.remove_empty_trailing_measures()
         self.create_silent_timespans()
 
@@ -1011,7 +1012,7 @@ class SegmentMaker(PlagueWaterObject):
             attach(materials.silent_music_maker, previous_silence)
             for music_maker, timespans in itertools.groupby(
                 timespan_inventory,
-                lambda x: x.annotation,
+                lambda x: x.music_maker,
                 ):
                 timespans = timespantools.TimespanInventory(timespans)
                 durations = [x.duration for x in timespans]
@@ -1092,6 +1093,36 @@ class SegmentMaker(PlagueWaterObject):
             time_signature.duration
             for time_signature in self.time_signatures
             )
+
+    def remove_percussion_overlap(self):
+        context_names = (
+            'Percussion Shaker Voice',
+            'Percussion Woodblock Voice',
+            'Percussion Drum Voice',
+            )
+        aggregate_inventory = timespantools.TimespanInventory()
+        percussion_context_makers = {}
+        for context_maker in self.context_makers:
+            if context_maker.context_name in context_names:
+                context_name = context_maker.context_name
+                percussion_context_makers[context_name] = context_maker
+                aggregate_inventory.extend(context_maker.timespan_inventory)
+        overlap_mapping = aggregate_inventory.compute_overlap_factor_mapping()
+        for timespan, overlap in overlap_mapping.items():
+            if overlap < 3:
+                continue
+            time_relation = timespantools.offset_happens_during_timespan(
+                offset=timespan.start_offset)
+            timespans = \
+                aggregate_inventory.get_timespans_that_satisfy_time_relation(
+                    time_relation=time_relation,
+                    )
+            timespans.sort(key=lambda x: x.duration)
+            timespan, context_name = timespans[0], timespans[0].context_name
+            context_maker = percussion_context_makers[context_name]
+            aggregate_inventory.remove(timespans[0])
+            context_maker.timespan_inventory.remove(timespan)
+
 
     ### PUBLIC PROPERTIES ###
 

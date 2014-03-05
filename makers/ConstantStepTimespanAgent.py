@@ -44,6 +44,7 @@ class ConstantStepTimespanAgent(TimespanAgent):
         maximum_offset=None,
         music_maker=None,
         ):
+        from plague_water import makers
         assert isinstance(self.playing_durations,
             datastructuretools.StatalServerCursor),\
             self.playing_durations
@@ -66,8 +67,8 @@ class ConstantStepTimespanAgent(TimespanAgent):
             playing_durations.pop()
         current_offset = initial_offset
         for duration in playing_durations:
-            timespan = timespantools.AnnotatedTimespan(
-                annotation=music_maker,
+            timespan = makers.PerformedTimespan(
+                music_maker=music_maker,
                 start_offset=current_offset,
                 stop_offset=current_offset + duration,
                 )

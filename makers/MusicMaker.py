@@ -147,20 +147,6 @@ class MusicMaker(PlagueWaterObject):
                     attach(beam, music)
         return leading_silence, music, tailing_silence
 
-    def create_timespans(
-        self,
-        dependencies=None,
-        initial_offset=None,
-        maximum_offset=None,
-        ):
-        result = self.timespan_agent(
-            dependencies=dependencies,
-            initial_offset=initial_offset,
-            maximum_offset=maximum_offset,
-            music_maker=self,
-            )
-        return result
-
     def timespan_has_minimum_length(self, timespan):
         return self.timespan_agent.timespan_has_minimum_length(timespan)
 
