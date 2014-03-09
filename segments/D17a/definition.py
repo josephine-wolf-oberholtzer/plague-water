@@ -40,20 +40,6 @@ context_map['Saxophone Voice']['register_agent'] = makers.RegisterAgent(
 context_map['Guitar Voice']['register_agent'] = makers.RegisterAgent(
     global_inflections=NamedPitch('Eb4'),
     )
-context_map['Piano RH Voice']['register_agent'] = makers.RegisterAgent(
-    global_inflections=NamedPitch('Eb6'),
-    phrase_inflections=(
-        makers.RegisterCurve((1,), (-6, 0)),
-        makers.RegisterCurve((1,), (0, -6)),
-        ),
-    )
-context_map['Piano LH Voice']['register_agent'] = makers.RegisterAgent(
-    global_inflections=NamedPitch('A0'),
-    phrase_inflections=(
-        makers.RegisterCurve((1,), (6, 0)),
-        makers.RegisterCurve((1,), (0, 6)),
-        ),
-    )
 
 ### CURSOR TRANSFORM ###
 
