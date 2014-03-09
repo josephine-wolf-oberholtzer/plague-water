@@ -60,7 +60,10 @@ piano_glissed_keys_music_maker = makers.MusicMaker(
             spanners.key_glissando_b_spanner,
             spanners.key_glissando_w_spanner,
             ),
-        output_spanners=spanners.key_glissando_spanner,
+        output_spanners=(
+            spanners.key_glissando_spanner,
+            spannertools.StaffLinesSpanner(lines=(-4, 4)),
+            ),
         ),
     timespan_agent=makers.SemanticTimespanAgent(
         playing_durations=(
