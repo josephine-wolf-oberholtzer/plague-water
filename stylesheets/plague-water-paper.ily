@@ -1,5 +1,5 @@
 #(set-default-paper-size "11x17" 'landscape)
-#(set-global-staff-size 15)
+#(set-global-staff-size 14)
 
 \paper {
     bottom-margin = 10\mm
@@ -24,7 +24,7 @@
         }
     }
     oddHeaderMarkup = \markup \fill-line { " " }
-    %page-breaking = #ly:minimal-breaking
+    page-breaking = #ly:optimal-breaking
     print-first-page-number = ##f
     print-page-number = ##t
     ragged-bottom = ##f

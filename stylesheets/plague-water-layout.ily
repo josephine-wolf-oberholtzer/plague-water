@@ -86,7 +86,10 @@ LV = #(make-dynamic-script LV)
         \type Engraver_group
         \alias Staff
         \override BarLine.bar-extent = #'(-2 . 2)
+        \override Beam.positions = #'(-8 . -8)
+        \override DynamicLineSpanner.staff-padding = 8
         \override StaffSymbol.line-count = 5
+        \override TupletBracket.positions = #'(-10 . -10)
         instrumentName = \markup { 
             \column { \hcenter-in #10 \italic { baritone saxophone } } }
         shortInstrumentName = \markup { 
@@ -143,15 +146,15 @@ LV = #(make-dynamic-script LV)
         \type Engraver_group
         \alias Staff
         \override BarLine.bar-extent = #'(-2 . 2)
-        \override Beam.positions = #'(-10 . -10)
-        \override DynamicLineSpanner.staff-padding = 10
-        \override TupletBracket.positions = #'(-12 . -12)
+        \override Beam.positions = #'(-9 . -9)
+        \override DynamicLineSpanner.staff-padding = 9
+        \override TupletBracket.positions = #'(-11 . -11)
     }
 
     \context {
         \Dynamics
         \override VerticalAxisGroup.nonstaff-relatedstaff-spacing = #'(
-            (padding . 3)
+            (padding . 2)
             )
     }
 
