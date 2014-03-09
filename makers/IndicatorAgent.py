@@ -10,6 +10,7 @@ class IndicatorAgent(PlagueWaterObject):
     ### CLASS VARIABLES ###
 
     __slots__ = (
+        '_apply_to_graces',
         '_apply_to_output',
         '_each_leaf_indicators',
         '_first_leaf_indicators',
@@ -22,6 +23,7 @@ class IndicatorAgent(PlagueWaterObject):
 
     def __init__(
         self,
+        apply_to_graces=None,
         apply_to_output=None,
         each_leaf_indicators=None,
         first_leaf_indicators=None,
@@ -29,12 +31,14 @@ class IndicatorAgent(PlagueWaterObject):
         last_leaf_indicators=None,
         treat_each_leaf=None,
         ):
+        assert isinstance(apply_to_graces, (bool, type(None)))
         assert isinstance(apply_to_output, (bool, type(None)))
         assert isinstance(each_leaf_indicators, (tuple, type(None)))
         assert isinstance(first_leaf_indicators, (tuple, type(None)))
         assert isinstance(inner_leaf_indicators, (tuple, type(None)))
         assert isinstance(last_leaf_indicators, (tuple, type(None)))
         assert isinstance(treat_each_leaf, (bool, type(None)))
+        self._apply_to_graces = apply_to_graces
         self._apply_to_output = apply_to_output
         self._each_leaf_indicators = each_leaf_indicators
         self._first_leaf_indicators = first_leaf_indicators
@@ -69,10 +73,12 @@ class IndicatorAgent(PlagueWaterObject):
             self.last_leaf_indicators,
             seed,
             )
+
         if self.apply_to_output:
             to_iterate = [music]
         else:
             to_iterate = music
+
         for division in to_iterate:
             if not self.treat_each_leaf:
                 iterator = iterate(division).by_logical_tie(pitched=True)
@@ -80,6 +86,7 @@ class IndicatorAgent(PlagueWaterObject):
             else:
                 iterator = iterate(division).by_class(scoretools.Leaf)
                 groups = tuple([x] for x in iterator)
+
             if 1 == len(groups):
                 group = groups[0]
                 if first_leaf_indicators:
@@ -88,6 +95,7 @@ class IndicatorAgent(PlagueWaterObject):
                 elif last_leaf_indicators:
                     expr = last_leaf_indicators[0]
                     self._attach_indicators(expr, group[0])
+
             elif 1 < len(groups):
                 first_group = groups[0]
                 last_group = groups[-1]
@@ -97,6 +105,7 @@ class IndicatorAgent(PlagueWaterObject):
                 if last_leaf_indicators:
                     expr = last_leaf_indicators[0]
                     self._attach_indicators(expr, last_group[0])
+
             if inner_leaf_indicators:
                 start = None
                 if first_leaf_indicators:
@@ -107,15 +116,23 @@ class IndicatorAgent(PlagueWaterObject):
                 for i, group in enumerate(groups[start:stop]):
                     expr = inner_leaf_indicators[i]
                     self._attach_indicators(expr, group[0])
+
             if each_leaf_indicators:
                 for i, group in enumerate(groups):
                     expr = each_leaf_indicators[i]
                     self._attach_indicators(expr, group[0])
+
         assert inspect_(music).is_well_formed()
 
     ### PRIVATE METHODS ###
 
     def _attach_indicators(self, expr, leaf):
+        if self.apply_to_graces:
+            previous_leaf = inspect_(leaf).get_leaf(-1)
+            if inspect_(previous_leaf).get_grace_containers('after'):
+                after_grace = inspect_(previous_leaf).get_grace_container(
+                    'after')
+                leaf = after_grace[0]
         if not isinstance(expr, tuple):
             expr = (expr,)
         for indicator in expr:
@@ -141,6 +158,10 @@ class IndicatorAgent(PlagueWaterObject):
         return result
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def apply_to_graces(self):
+        return self._apply_to_graces
 
     @property
     def apply_to_output(self):

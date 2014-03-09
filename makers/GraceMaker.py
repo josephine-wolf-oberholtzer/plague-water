@@ -78,6 +78,7 @@ class GraceMaker(PlagueWaterObject):
         override(grace_container).stem.length = 8
         override(grace_container).flag.stroke_style = \
             schemetools.Scheme('grace', force_quotes=True)
+        override(grace_container).script.font_size = 0.5
         attach(grace_container, leaf_to_attach_to)
 
     ### PUBLIC METHODS ###

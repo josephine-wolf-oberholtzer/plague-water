@@ -810,6 +810,8 @@ class SegmentMaker(PlagueWaterObject):
         score_block.items.append(self.score)
         lilypond_file.items.append(score_block)
         for file_path in plague_water_configuration.stylesheets_file_paths:
+            if 'parts' in file_path:
+                continue
             file_name = os.path.split(file_path)[-1]
             relative_file_path = os.path.join(
                 '..', '..', 'stylesheets',

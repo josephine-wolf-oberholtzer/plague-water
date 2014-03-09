@@ -11,7 +11,6 @@ class RegisterAgent(PlagueWaterObject):
     __slots__ = (
         '_division_inflections',
         '_global_inflections',
-        '_instrument',
         '_octavations',
         '_phrase_inflections',
         )
@@ -24,7 +23,6 @@ class RegisterAgent(PlagueWaterObject):
         global_inflections=None,
         octavations=None,
         phrase_inflections=None,
-        instrument=None,
         ):
         from plague_water import makers
         if global_inflections is not None:
@@ -54,13 +52,10 @@ class RegisterAgent(PlagueWaterObject):
                     x = pitchtools.NamedPitch(x)
                 result.append(x)
             division_inflections = self._expr_to_statal_server_cursor(result)
-        if instrument is not None:
-            assert isinstance(instrument, instrumenttools.Instrument)
         self._global_inflections = global_inflections
         self._division_inflections = division_inflections
         self._phrase_inflections = phrase_inflections
         self._octavations = self._expr_to_statal_server_cursor(octavations)
-        self._instrument = instrument
 
     ### SPECIAL METHODS ###
 
@@ -225,10 +220,6 @@ class RegisterAgent(PlagueWaterObject):
     @property
     def global_inflections(self):
         return self._global_inflections
-
-    @property
-    def instrument(self):
-        return self._instrument
 
     @property
     def phrase_inflections(self):
