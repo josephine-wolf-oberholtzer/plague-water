@@ -2,7 +2,6 @@
 from abjad import *
 from plague_water import makers
 from plague_water import materials
-from plague_water import templates
 
 ### SEGMENT PARAMETERS ###
 
@@ -28,7 +27,7 @@ target_segment_duration = makers.SegmentMaker.get_segment_target_duration(
 
 ### CONTEXT MAP ###
 
-score_template = templates.PlagueWaterScoreTemplate()
+score_template = makers.PlagueWaterScoreTemplate()
 score = score_template()
 context_map = datastructuretools.ContextMap(score_template)
 context_map['Guitar Voice']['register_agent'] = makers.RegisterAgent(

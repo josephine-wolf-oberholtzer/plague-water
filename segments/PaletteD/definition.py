@@ -2,7 +2,6 @@
 from abjad import *
 from plague_water import makers
 from plague_water import materials
-from plague_water import templates
 
 ### SEGMENT PARAMETERS ###
 
@@ -12,7 +11,7 @@ segment_tempo = indicatortools.Tempo(durationtools.Duration(1, 4), 96)
 
 ### CONTEXT MAP ###
 
-score_template = templates.PlagueWaterScoreTemplate()
+score_template = makers.PlagueWaterScoreTemplate()
 score = score_template()
 context_map = datastructuretools.ContextMap(score_template)
 context_map[score]['pitch_agent'] = materials.primary_pitch_class_agent

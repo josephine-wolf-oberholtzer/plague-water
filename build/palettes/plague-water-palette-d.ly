@@ -14,10 +14,10 @@
 
 \score {
     {
-        \include "../plague-water-segment-D04.ly"
-        \include "../plague-water-segment-D14.ly"
-        \include "../plague-water-segment-D17a.ly"
-        \include "../plague-water-segment-D17b.ly"
+        \include "../plague-water-D04.ly"
+        \include "../plague-water-D14.ly"
+        \include "../plague-water-D17a.ly"
+        \include "../plague-water-D17b.ly"
     }
 }
 

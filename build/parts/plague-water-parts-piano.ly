@@ -8,34 +8,114 @@
 \include "../../stylesheets/plague-water-paper.ily"
 \include "../../stylesheets/plague-water-layout.ily"
 \include "../../stylesheets/plague-water-header.ily"
-\include "../../stylesheets/plague-water-parts.ily"
+
+#(set-default-paper-size "11x17" 'landscape)
+#(set-global-staff-size 13)
+
+\layout {
+    \context {
+        \Score
+        \override StaffGrouper.staff-staff-spacing = #'(
+            (basic-distance . 12)
+            (minimum-distance . 8)
+            (padding . 2)
+            (stretchability . 0)
+            )
+        \override VerticalAxisGroup.staff-staff-spacing = #'(
+            (basic-distance . 12)
+            (minimum-distance . 8)
+            (padding . 2)
+            (stretchability . 0)
+            )
+        proportionalNotationDuration = #(ly:make-moment 1 32)
+    }
+    
+    \context {
+        \TimeSignatureContext
+        \override BarNumber.font-size = 1
+        \override MetronomeMark.font-size = 1
+        \override MetronomeMark.Y-offset = -2
+        \override RehearsalMark.font-size = 3
+        \override RehearsalMark.Y-offset = 4
+        \override TimeSignature.font-size = 1
+        \override VerticalAxisGroup.staff-staff-spacing = #'(
+            (basic-distance . 0)
+            (minimum-distance . 0)
+            (padding . 2)
+            (stretchability . 0)
+            )
+    }
+
+    \context {
+        \SaxophoneStaff
+        fontSize = #-4
+        \override StaffSymbol #'staff-space = #(magstep -4)
+        \override TupletBracket.positions = #'(-6.5 . -6.5)
+    }
+
+    \context {
+        \GuitarStaff
+        fontSize = #-4
+        \override StaffSymbol #'staff-space = #(magstep -4)
+        \override TupletBracket.positions = #'(-7.5 . -7.5)
+    }
+
+    \context {
+        \PercussionStaffGroup
+        fontSize = #-4
+        \override StaffSymbol #'staff-space = #(magstep -4)
+    }
+
+    \context {
+        \PercussionShakerStaff
+        \override TupletBracket.positions = #'(-6.5 . -6.5)
+    }
+
+    \context {
+        \PercussionWoodblockStaff
+        \override TupletBracket.positions = #'(-6.5 . -6.5)
+    }
+
+    \context {
+        \PercussionDrumStaff
+        \override TupletBracket.positions = #'(-6.5 . -6.5)
+    }
+}
+
+\paper {
+    system-system-spacing = #'(
+        (basic-distance . 0)
+        (minimum-distance . 0)
+        (padding . 2)
+        (stretchability . 30)
+        )
+}
 
 \score {
-    \keepWithTag piano
     {
-        \include "../plague-water-segment-A01.ly"
-        \include "../plague-water-segment-B02.ly"
-        \include "../plague-water-segment-C03a.ly"
-        \include "../plague-water-segment-C03b.ly"
-        \include "../plague-water-segment-D04.ly"
-        \include "../plague-water-segment-B05.ly"
-        \include "../plague-water-segment-E06.ly"
-        \include "../plague-water-segment-F07.ly"
-        \include "../plague-water-segment-B08.ly"
-        \include "../plague-water-segment-A09.ly"
-        \include "../plague-water-segment-F10a.ly"
-        \include "../plague-water-segment-F10b.ly"
-        \include "../plague-water-segment-F10c.ly"
-        \include "../plague-water-segment-F10d.ly"
-        \include "../plague-water-segment-A11.ly"
-        \include "../plague-water-segment-C12a.ly"
-        \include "../plague-water-segment-C12b.ly"
-        \include "../plague-water-segment-B13.ly"
-        \include "../plague-water-segment-D14.ly"
-        \include "../plague-water-segment-F15.ly"
-        \include "../plague-water-segment-A16.ly"
-        \include "../plague-water-segment-D17a.ly"
-        \include "../plague-water-segment-D17b.ly"
+        \include "../plague-water-A01.ly"
+        \include "../plague-water-B02.ly"
+        \include "../plague-water-C03a.ly"
+        \include "../plague-water-C03b.ly"
+        \include "../plague-water-D04.ly"
+        \include "../plague-water-B05.ly"
+        \include "../plague-water-E06.ly"
+        \include "../plague-water-F07.ly"
+        \include "../plague-water-B08.ly"
+        \include "../plague-water-A09.ly"
+        \include "../plague-water-F10a.ly"
+        \include "../plague-water-F10b.ly"
+        \include "../plague-water-F10c.ly"
+        \include "../plague-water-F10d.ly"
+        \include "../plague-water-A11.ly"
+        \include "../plague-water-C12a.ly"
+        \include "../plague-water-C12b.ly"
+        \include "../plague-water-B13.ly"
+        \include "../plague-water-D14.ly"
+        \include "../plague-water-F15.ly"
+        \include "../plague-water-A16.ly"
+        \include "../plague-water-D17a.ly"
+        \include "../plague-water-D17b.ly"
     }
 }
 

@@ -4,7 +4,6 @@ import itertools
 import os
 from abjad import *
 from plague_water import plague_water_configuration
-from plague_water import templates
 from plague_water.makers.PlagueWaterObject import PlagueWaterObject
 
 
@@ -60,6 +59,8 @@ class SegmentMaker(PlagueWaterObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, current_file_path=None):
+        from plague_water import makers
+
         ### VALIDATE AND SETUP ###
         self._prepare(
             allow_none_as_sentinel=False,
@@ -75,7 +76,7 @@ class SegmentMaker(PlagueWaterObject):
             )
 
         ### CREATE SCORE ###
-        template = templates.PlagueWaterScoreTemplate()
+        template = makers.PlagueWaterScoreTemplate()
         self.score = template()
 
         ### BUILD TIMESPAN STRUCTURES ###

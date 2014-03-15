@@ -2,7 +2,7 @@
 from abjad import *
 from plague_water import makers
 from plague_water import materials
-from plague_water import templates
+from plague_water import makers
 
 ### SEGMENT PARAMETERS ###
 
@@ -12,7 +12,7 @@ segment_tempo = indicatortools.Tempo(durationtools.Duration(1, 4), 64)
 
 ### CONTEXT MAP ###
 
-score_template = templates.PlagueWaterScoreTemplate()
+score_template = makers.PlagueWaterScoreTemplate()
 score = score_template()
 context_map = datastructuretools.ContextMap(score_template)
 context_map[score]['minimum_timespan_duration'] = durationtools.Duration(1, 8)
