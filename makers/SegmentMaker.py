@@ -13,35 +13,37 @@ class SegmentMaker(PlagueWaterObject):
 
     __slots__ = (
         'cached_meters',
+        'context_makers',
         'context_map',
         'is_final_segment',
         'lilypond_file',
         'measure_segmentation_talea',
         'meters',
         'permitted_time_signatures',
+        'rebarrings',
         'score',
         'segment_duration',
-        'segment_name',
         'segment_id',
-        'target_segment_duration',
+        'segment_name',
         'segment_tempo',
+        'target_segment_duration',
         'time_signatures',
-        'context_makers',
         )
 
     ### INITIALIZER ###
 
     def __init__(
         self,
+        context_makers=None,
         context_map=None,
         is_final_segment=None,
         measure_segmentation_talea=None,
         permitted_time_signatures=None,
+        rebarrings=None,
         segment_id=None,
         segment_name=None,
-        target_segment_duration=None,
         segment_tempo=None,
-        context_makers=None,
+        target_segment_duration=None,
         ):
         self._prepare(
             allow_none_as_sentinel=True,
@@ -49,6 +51,7 @@ class SegmentMaker(PlagueWaterObject):
             is_final_segment=is_final_segment,
             measure_segmentation_talea=measure_segmentation_talea,
             permitted_time_signatures=permitted_time_signatures,
+            rebarrings=rebarrings,
             segment_id=segment_id,
             segment_name=segment_name,
             target_segment_duration=target_segment_duration,
@@ -64,15 +67,16 @@ class SegmentMaker(PlagueWaterObject):
         ### VALIDATE AND SETUP ###
         self._prepare(
             allow_none_as_sentinel=False,
+            context_makers=self.context_makers,
             context_map=self.context_map,
             is_final_segment=self.is_final_segment,
             measure_segmentation_talea=self.measure_segmentation_talea,
             permitted_time_signatures=self.permitted_time_signatures,
+            rebarrings=self.rebarrings,
             segment_id=self.segment_id,
             segment_name=self.segment_name,
             segment_tempo=self.segment_tempo,
             target_segment_duration=self.target_segment_duration,
-            context_makers=self.context_makers,
             )
 
         ### CREATE SCORE ###
@@ -91,6 +95,14 @@ class SegmentMaker(PlagueWaterObject):
         self.remove_percussion_overlap()
         self.remove_empty_trailing_measures()
         self.create_silent_timespans()
+
+        ### APPLY REBARRINGS ###
+        if self.rebarrings is not None:
+            rebarrings = [TimeSignature(x) for x in self.rebarrings]
+            rebarring_duration = sum(x.duration for x in rebarrings)
+            assert self.segment_duration == rebarring_duration
+            self.time_signatures = tuple(rebarrings)
+            self.meters = tuple(metertools.Meter(x) for x in rebarrings)
 
         ### CREATE NOTATION ###
         self.populate_time_signature_context()
@@ -268,15 +280,16 @@ class SegmentMaker(PlagueWaterObject):
     def _prepare(
         self,
         allow_none_as_sentinel=False,
+        context_makers=None,
         context_map=None,
         is_final_segment=False,
         measure_segmentation_talea=None,
         permitted_time_signatures=None,
+        rebarrings=None,
         segment_id=None,
         segment_name=None,
         segment_tempo=None,
         target_segment_duration=None,
-        context_makers=None,
         ):
         from plague_water import makers
         ### TIMESPAN MAKERS ###
@@ -306,12 +319,14 @@ class SegmentMaker(PlagueWaterObject):
             assert 0 < target_segment_duration
         ### APPLY ###
         self.cached_meters = {}
+        self.context_makers = context_makers
         self.context_map = context_map
         self.is_final_segment = is_final_segment
         self.lilypond_file = None
         self.measure_segmentation_talea = measure_segmentation_talea
         self.meters = None
         self.permitted_time_signatures = permitted_time_signatures
+        self.rebarrings = rebarrings
         self.score = None
         self.segment_duration = None
         self.segment_id = str(segment_id)
@@ -319,7 +334,6 @@ class SegmentMaker(PlagueWaterObject):
         self.segment_tempo = segment_tempo
         self.target_segment_duration = target_segment_duration
         self.time_signatures = None
-        self.context_makers = context_makers
 
     ### PUBLIC METHODS ###
 
