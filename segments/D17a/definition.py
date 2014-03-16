@@ -28,6 +28,36 @@ target_segment_duration = makers.SegmentMaker.get_segment_target_duration(
     total_duration_in_seconds=480,
     )
 
+rebarrings = [
+    (7, 8),   # 222: (7, 8)
+    (3, 16),  # 223: (3, 16)
+    (5, 8),   # 224: (5, 8)
+    (7, 8),   # 225: (7, 8)
+    (7, 8),   # 226: (7, 8)
+    (3, 16),  # 227: (3, 16)
+    (7, 8),   # 228: (7, 8)
+    (7, 8),   # 229: (7, 8)
+    (2, 8),   # 230: (7, 16)
+    (3, 16),
+    (5, 8),   # 231: (5, 8)
+    (3, 16),  # 232: (11, 16)
+    (4, 8),
+    (7, 8),   # 233: (7, 8)
+    (3, 8),   # 234: (3, 16)
+    #         # 235: (3, 16)
+    (6, 8),   # 236: (5, 16)
+    #         # 237: (7, 16)
+    (3, 16),  # 238: (3, 16)
+    (7, 8),   # 239: (7, 8)
+    (3, 8),   # 240: (3, 16)
+    #         # 241: (3, 16)
+    (1, 8),   # 242: (5, 16)
+    (3, 16),
+    (7, 8),   # 243: (7, 8)
+    (6, 8),   # 244: (5, 16)
+    #         # 245: (7, 16)
+    ]
+
 ### CONTEXT MAP ###
 
 context_map = base_segment_maker.context_map.copy()
@@ -112,6 +142,7 @@ segment_maker = new(
         saxophone_context_maker,
         ),
     context_map=context_map,
+    rebarrings=rebarrings,
     segment_id=segment_id,
     segment_name=segment_name,
     target_segment_duration=target_segment_duration,

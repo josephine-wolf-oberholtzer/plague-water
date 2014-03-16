@@ -28,6 +28,26 @@ target_segment_duration = makers.SegmentMaker.get_segment_target_duration(
     total_duration_in_seconds=480,
     )
 
+rebarrings = [
+    (7, 8),   # 246: (11, 16)
+    #         # 247: (3, 16)
+    (3, 16),  # 248: (5, 16)
+    (1, 8),
+    (7, 8),   # 249: (7, 8)
+    (5, 8),   # 250: (5, 8)
+    (3, 16),  # 251: (3, 16)
+    (7, 8),   # 252: (7, 8)
+    (7, 8),   # 253: (7, 8)
+    (5, 8),   # 254: (3, 16)
+    #         # 255: (7, 16)
+    (7, 8),   # 256: (7, 8)
+    (3, 8),   # 257: (3, 16)
+    #         # 258: (3, 16)
+    (4, 8),   # 259: (5, 16)
+    #         # 260: (3, 16)
+    (3, 16),  # 261: (3, 16)
+    ]
+
 ### CONTEXT MAP ###
 
 context_map = base_segment_maker.context_map.copy()
@@ -113,6 +133,7 @@ segment_maker = new(
         ),
     context_map=context_map,
     is_final_segment=True,
+    rebarrings=rebarrings,
     segment_id=segment_id,
     segment_name=segment_name,
     target_segment_duration=target_segment_duration,

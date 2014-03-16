@@ -98,6 +98,7 @@ class SegmentMaker(PlagueWaterObject):
 
         ### APPLY REBARRINGS ###
         if self.rebarrings is not None:
+            print '\trebarring'
             rebarrings = [TimeSignature(x) for x in self.rebarrings]
             rebarring_duration = sum(x.duration for x in rebarrings)
             assert self.segment_duration == rebarring_duration
