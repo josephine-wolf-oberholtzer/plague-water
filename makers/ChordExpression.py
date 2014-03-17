@@ -81,6 +81,7 @@ class ChordExpression(PlagueWaterObject):
         else:
             new_interval_numbers = interval_numbers
         pitches = [base_pitch.transpose(x) for x in new_interval_numbers]
+        pitches = [NamedPitch(float(x)) for x in pitches]
         assert all(pitch in pitch_range for pitch in pitches), \
             (pitch_range, base_pitch, interval_numbers, pitches)
         for i, leaf in enumerate(logical_tie):

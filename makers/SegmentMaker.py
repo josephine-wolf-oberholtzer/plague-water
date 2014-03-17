@@ -90,13 +90,6 @@ class SegmentMaker(PlagueWaterObject):
             for meter in self.meters)
         self.segment_duration = sum(time_signature.duration
             for time_signature in self.time_signatures)
-        self.cleanup_semantic_timespans()
-        self.create_dependent_timespans()
-        self.remove_percussion_overlap()
-        self.remove_empty_trailing_measures()
-        self.create_silent_timespans()
-
-        ### APPLY REBARRINGS ###
         if self.rebarrings is not None:
             print '\trebarring'
             rebarrings = [TimeSignature(x) for x in self.rebarrings]
@@ -104,6 +97,11 @@ class SegmentMaker(PlagueWaterObject):
             assert self.segment_duration == rebarring_duration
             self.time_signatures = tuple(rebarrings)
             self.meters = tuple(metertools.Meter(x) for x in rebarrings)
+        self.cleanup_semantic_timespans()
+        self.create_dependent_timespans()
+        self.remove_percussion_overlap()
+        self.remove_empty_trailing_measures()
+        self.create_silent_timespans()
 
         ### CREATE NOTATION ###
         self.populate_time_signature_context()
@@ -122,7 +120,6 @@ class SegmentMaker(PlagueWaterObject):
         self.apply_spanners()
         self.fix_grace_spanners()
         self.apply_initial_indicators()
-        # self.apply_tags()
 
         ### APPLY LAYOUT ###
         self.configure_score()
@@ -565,54 +562,6 @@ class SegmentMaker(PlagueWaterObject):
             cleanup(upper_staff)
             cleanup(lower_staff)
 
-    def apply_piano_staff_changes(self):
-        message = '\tapplying piano staff changes'
-        with systemtools.ProgressIndicator(message) as progress_indicator:
-            piano_rh_voice = self.score['Piano RH Voice']
-            piano_lh_voice = self.score['Piano LH Voice']
-            piano_upper_staff = self.score['Piano Upper Staff']
-            piano_lower_staff = self.score['Piano Lower Staff']
-            old_piano_rh_staff = None
-            rh_iterator = iterate(piano_rh_voice).by_logical_tie(pitched=True)
-            for logical_tie in rh_iterator:
-                if isinstance(logical_tie[0], scoretools.Note):
-                    written_pitches = [logical_tie[0].written_pitch]
-                else:
-                    written_pitches = logical_tie[0].written_pitches
-                pitch_numbers = [float(x) for x in written_pitches]
-                pitch_center = sum(pitch_numbers) / len(pitch_numbers)
-                if 0 < pitch_center:
-                    new_piano_rh_staff = piano_upper_staff
-                else:
-                    new_piano_rh_staff = piano_lower_staff
-                if new_piano_rh_staff != old_piano_rh_staff:
-                    staff_change = indicatortools.StaffChange(
-                        staff=new_piano_rh_staff,
-                        )
-                    attach(staff_change, logical_tie[0], scope=Voice)
-                    old_piano_rh_staff = new_piano_rh_staff
-                    progress_indicator.advance()
-            old_piano_lh_staff = None
-            lh_iterator = iterate(piano_lh_voice).by_logical_tie(pitched=True)
-            for logical_tie in lh_iterator:
-                if isinstance(logical_tie[0], scoretools.Note):
-                    written_pitches = [logical_tie[0].written_pitch]
-                else:
-                    written_pitches = logical_tie[0].written_pitches
-                pitch_numbers = [float(x) for x in written_pitches]
-                pitch_center = sum(pitch_numbers) / len(pitch_numbers)
-                if 0 < pitch_center:
-                    new_piano_lh_staff = piano_upper_staff
-                else:
-                    new_piano_lh_staff = piano_lower_staff
-                if new_piano_lh_staff != old_piano_lh_staff:
-                    staff_change = indicatortools.StaffChange(
-                        staff=new_piano_lh_staff,
-                        )
-                    attach(staff_change, logical_tie[0], scope=Voice)
-                    old_piano_lh_staff = new_piano_lh_staff
-                    progress_indicator.advance()
-
     def apply_pitches(self):
         from plague_water import makers
         message = '\tapplying pitch classes'
@@ -684,30 +633,6 @@ class SegmentMaker(PlagueWaterObject):
                     )
                 music_maker_seeds[music_maker] += 1
                 progress_indicator.advance()
-
-    def apply_tags(self):
-        message = '\tapplying tags'
-        with systemtools.ForbidUpdate(self.score):
-            with systemtools.ProgressIndicator(message) as progress_indicator:
-                for voice in iterate(self.score).by_class(Voice):
-                    counter = 0
-                    for music in voice[:]:
-                        for division in music[:]:
-                            counter += 1
-                            outer_container = Container([division])
-                            voice_name = voice.name.replace(' ', '')
-                            segment_name = self.segment_id
-                            string = "tag #'Segment{}{}{}".format(
-                                segment_name,
-                                voice_name,
-                                counter,
-                                )
-                            command = indicatortools.LilyPondCommand(
-                                string,
-                                'before',
-                                )
-                            attach(command, outer_container)
-                            progress_indicator.advance()
 
     def build_and_persist(self, current_file_path):
         print 'Building {}'.format(self.segment_name)
