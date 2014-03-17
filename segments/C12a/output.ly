@@ -1,4 +1,4 @@
-\version "2.19.2"
+\version "2.19.3"
 \language "english"
 
 #(ly:set-option 'relative-includes #t)
@@ -6,7 +6,6 @@
 \include "../../stylesheets/plague-water-header.ily"
 \include "../../stylesheets/plague-water-layout.ily"
 \include "../../stylesheets/plague-water-paper.ily"
-\include "../../stylesheets/plague-water-parts.ily"
 
 \score {
 	\context Score = "Plague Water Score" \with {
@@ -99,6 +98,7 @@
 							R1 * 1/4
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								\stopStaff
 								\startStaff
@@ -107,6 +107,7 @@
 								af,16 ]
 								\revert Beam #'positions
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							\stopStaff
@@ -120,9 +121,11 @@
 							b,4 \sfz \) \startTrillSpan e
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								c'16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							<> \stopTrillSpan
@@ -134,6 +137,7 @@
 							r4
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								\override Beam #'positions = #beam::place-broken-parts-individually
 								b,16 [ \(
@@ -141,6 +145,7 @@
 								d16 ]
 								\revert Beam #'positions
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							\pitchedTrill
@@ -157,11 +162,13 @@
 							R1 * 1/4
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								\stopStaff
 								\startStaff
 								b,16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							\stopStaff
@@ -175,9 +182,11 @@
 							a,2 \sfz \)
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								b16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							\pitchedTrill
@@ -205,6 +214,7 @@
 							R1 * 1/2
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								\stopStaff
 								\startStaff
@@ -213,6 +223,7 @@
 								af16 ]
 								\revert Beam #'positions
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							\stopStaff
@@ -232,9 +243,11 @@
 							r16
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								b16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							\set stemLeftBeamCount = 2
@@ -262,12 +275,14 @@
 							f8 \sfz [
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								\override Beam #'positions = #beam::place-broken-parts-individually
 								b16 [ \(
 								af16 ]
 								\revert Beam #'positions
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							\set stemLeftBeamCount = 1
@@ -286,11 +301,13 @@
 							R1 * 1/4
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								\stopStaff
 								\startStaff
 								b16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							\stopStaff
@@ -304,6 +321,7 @@
 							f4 \sfz \)
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								\override Beam #'positions = #beam::place-broken-parts-individually
 								b16 [ \(
@@ -311,6 +329,7 @@
 								d'16 ]
 								\revert Beam #'positions
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							f'2 \)
@@ -415,7 +434,7 @@
 							}
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
-							<b fs' gs''>16 -\tenuto \arpeggio ] \)
+							<b fs' af''>16 -\tenuto \arpeggio ] \)
 						}
 					}
 					{
@@ -441,7 +460,7 @@
 						{
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							<ef df'>16 -\tenuto \p [
+							<ef cs'>16 -\tenuto \p [
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
 							af'8 -\tenuto ]
@@ -480,7 +499,7 @@
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 2
 							\afterGrace
-							<cf>16 -\tenuto \pp
+							<b,>16 -\tenuto \pp
 							{
 								b16 \(
 							}
@@ -724,7 +743,7 @@
 							<ef''>8 \p [ (
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
-							<gf''>8 ] )
+							<fs''>8 ] )
 						}
 					}
 					{
@@ -792,7 +811,7 @@
 							f'16 \p (
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 0
-							<cf'''>32 ] )
+							<b''>32 ] )
 						}
 					}
 					{
@@ -818,7 +837,7 @@
 						{
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
-							<g' af' df''>16 \p [ (
+							<g' af' cs''>16 \p [ (
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
 							c''16 ] )
@@ -1062,9 +1081,11 @@
 							r16
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								e'16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 						}
@@ -1110,9 +1131,11 @@
 							c'16 -\accent \mp
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								f16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							\set stemLeftBeamCount = 2
@@ -1156,9 +1179,11 @@
 							e'8 -\accent
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								f16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							\set stemLeftBeamCount = 2
@@ -1193,15 +1218,6 @@
 					{
 						{
 							r2
-								^ \markup {
-									\box
-										\pad-around
-											#0.5
-											\large
-												\bold
-													\caps
-														Superball
-									}
 						}
 					}
 					{
@@ -1227,9 +1243,11 @@
 							c'4 -\accent \< \mp
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								e'16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							a2 -\accent ~ \)
@@ -1261,9 +1279,11 @@
 							r8.
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								e'16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 						}
@@ -1275,9 +1295,11 @@
 							a4 -\accent \) \< \mp
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								e'16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							\set stemLeftBeamCount = 1
@@ -1302,11 +1324,13 @@
 							R1 * 1/4
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								\stopStaff
 								\startStaff
 								a16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							\stopStaff
@@ -1322,9 +1346,11 @@
 							r8 [
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								e'16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							\set stemLeftBeamCount = 1
@@ -1362,9 +1388,11 @@
 							e'8 -\accent \< \mp
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								a16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							c'4 -\accent ~ \)
@@ -1387,9 +1415,11 @@
 							r16
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								a16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 						}
@@ -1401,9 +1431,11 @@
 							e'2 -\accent \mp \)
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								c'16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							e'4 \)

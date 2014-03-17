@@ -376,75 +376,6 @@ class SegmentMaker(PlagueWaterObject):
                 music_maker_seeds[music_maker] += 1
                 progress_indicator.advance()
 
-    def fix_grace_spanners(self):
-        message = '\tfixing grace spanners'
-        with systemtools.ProgressIndicator(message) as progress_indicator:
-            for leaf in iterate(self.score).by_class(scoretools.Leaf):
-                grace_containers = inspect_(leaf).get_grace_containers('after')
-                if not grace_containers:
-                    continue
-                assert len(grace_containers) == 1
-                grace_container = grace_containers[0]
-                next_leaf = inspect_(leaf).get_leaf(1)
-                assert next_leaf is not None
-                grace_notes = list(grace_container.select_leaves())
-                assert len(grace_notes), (grace_notes, grace_container)
-                slur_notes = grace_notes + [next_leaf]
-                phrasing_slur = spannertools.PhrasingSlur()
-                phrasing_slur._contiguity_constraint = None
-                attach(phrasing_slur, slur_notes)
-                if 1 < len(grace_notes):
-                    beams = inspect_(grace_notes[0]).get_spanners(Beam)
-                    if not beams:
-                        beam = Beam()
-                        override(beam).beam.positions = schemetools.Scheme(
-                            'beam::place-broken-parts-individually')
-                        attach(beam, grace_notes)
-                progress_indicator.advance()
-
-    def fix_guero_glissandi(self):
-        message = '\tfixing guero glissandi'
-        contexts = select(
-            self.score['Piano Upper Staff'],
-            self.score['Piano Lower Staff'],
-            )
-        with systemtools.ProgressIndicator(message) as progress_indicator:
-            glissandi = set()
-            for leaf in iterate(contexts).by_class(scoretools.Leaf):
-                spanners = inspect_(leaf).get_spanners(Glissando)
-                if spanners:
-                    assert len(spanners) == 1
-                    glissandi.update(spanners)
-            for glissando in glissandi:
-                pitches = [x.written_pitch for x in glissando]
-                minimum = min(pitches)
-                maximum = max(pitches)
-                width = abs((maximum - minimum).semitones)
-                if 6 < width:
-                    continue
-                pitch_range = inspect_(glissando[0]).get_effective(
-                    pitchtools.PitchRange)
-                for leaf_one, leaf_two in sequencetools.iterate_sequence_nwise(
-                    glissando[:]):
-                    pitch_one = leaf_one.written_pitch
-                    pitch_two = leaf_two.written_pitch
-                    interval = pitch_one - pitch_two
-                    semitones = interval.semitones
-                    sign = mathtools.sign(semitones)
-                    if 6 < abs(semitones):
-                        continue
-                    if sign == 0:
-                        sign = 1
-                    distance = 7 * sign
-                    new_pitch_two = pitch_one.transpose(distance)
-                    if new_pitch_two not in pitch_range:
-                        sign *= -1
-                        distance = 7 * sign
-                        new_pitch_two = pitch_one.transpose(distance)
-                    leaf_two.written_pitch = new_pitch_two
-                pitches = [x.written_pitch for x in glissando]
-                progress_indicator.advance()
-
     def apply_graces(self):
         from plague_water import makers
         message = '\tmaking graces'
@@ -893,6 +824,75 @@ class SegmentMaker(PlagueWaterObject):
             maximum_repetitions=2,
             )
         return meters
+
+    def fix_grace_spanners(self):
+        message = '\tfixing grace spanners'
+        with systemtools.ProgressIndicator(message) as progress_indicator:
+            for leaf in iterate(self.score).by_class(scoretools.Leaf):
+                grace_containers = inspect_(leaf).get_grace_containers('after')
+                if not grace_containers:
+                    continue
+                assert len(grace_containers) == 1
+                grace_container = grace_containers[0]
+                next_leaf = inspect_(leaf).get_leaf(1)
+                assert next_leaf is not None
+                grace_notes = list(grace_container.select_leaves())
+                assert len(grace_notes), (grace_notes, grace_container)
+                slur_notes = grace_notes + [next_leaf]
+                phrasing_slur = spannertools.PhrasingSlur()
+                phrasing_slur._contiguity_constraint = None
+                attach(phrasing_slur, slur_notes)
+                if 1 < len(grace_notes):
+                    beams = inspect_(grace_notes[0]).get_spanners(Beam)
+                    if not beams:
+                        beam = Beam()
+                        override(beam).beam.positions = schemetools.Scheme(
+                            'beam::place-broken-parts-individually')
+                        attach(beam, grace_notes)
+                progress_indicator.advance()
+
+    def fix_guero_glissandi(self):
+        message = '\tfixing guero glissandi'
+        contexts = select(
+            self.score['Piano Upper Staff'],
+            self.score['Piano Lower Staff'],
+            )
+        with systemtools.ProgressIndicator(message) as progress_indicator:
+            glissandi = set()
+            for leaf in iterate(contexts).by_class(scoretools.Leaf):
+                spanners = inspect_(leaf).get_spanners(Glissando)
+                if spanners:
+                    assert len(spanners) == 1
+                    glissandi.update(spanners)
+            for glissando in glissandi:
+                pitches = [x.written_pitch for x in glissando]
+                minimum = min(pitches)
+                maximum = max(pitches)
+                width = abs((maximum - minimum).semitones)
+                if 8 < width:
+                    continue
+                pitch_range = inspect_(glissando[0]).get_effective(
+                    pitchtools.PitchRange)
+                for leaf_one, leaf_two in sequencetools.iterate_sequence_nwise(
+                    glissando[:]):
+                    pitch_one = leaf_one.written_pitch
+                    pitch_two = leaf_two.written_pitch
+                    interval = pitch_one - pitch_two
+                    semitones = interval.semitones
+                    sign = mathtools.sign(semitones)
+                    if 8 < abs(semitones):
+                        continue
+                    if sign == 0:
+                        sign = 1
+                    distance = 8 * sign
+                    new_pitch_two = pitch_one.transpose(distance)
+                    if new_pitch_two not in pitch_range:
+                        sign *= -1
+                        distance = 8 * sign
+                        new_pitch_two = pitch_one.transpose(distance)
+                    leaf_two.written_pitch = new_pitch_two
+                pitches = [x.written_pitch for x in glissando]
+                progress_indicator.advance()
 
     def get_initial_offset_and_meter_at_offset(self, offset):
         current_meters = list(self.meters)

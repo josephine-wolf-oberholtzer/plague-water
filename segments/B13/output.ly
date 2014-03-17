@@ -1,4 +1,4 @@
-\version "2.19.2"
+\version "2.19.3"
 \language "english"
 
 #(ly:set-option 'relative-includes #t)
@@ -6,7 +6,6 @@
 \include "../../stylesheets/plague-water-header.ily"
 \include "../../stylesheets/plague-water-layout.ily"
 \include "../../stylesheets/plague-water-paper.ily"
-\include "../../stylesheets/plague-water-parts.ily"
 
 \score {
 	\context Score = "Plague Water Score" \with {
@@ -58,9 +57,11 @@
 							r16
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								a,16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 						}
@@ -85,9 +86,11 @@
 							a,8 -\accent \startTrillSpan c
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								b16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							<> \stopTrillSpan
@@ -129,9 +132,11 @@
 							f4 -\accent \mp
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								a16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							\set stemLeftBeamCount = 1
@@ -151,6 +156,7 @@
 							R1 * 3/4
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								\stopStaff
 								\startStaff
@@ -159,6 +165,7 @@
 								b,16 ]
 								\revert Beam #'positions
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							\stopStaff
@@ -172,9 +179,11 @@
 							g,4 -\accent \) \< \mp \startTrillSpan bf,
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								a16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							<> \stopTrillSpan
@@ -205,9 +214,11 @@
 							r8.
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								a,16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 						}
@@ -230,9 +241,11 @@
 							f8 ]
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								a,16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							<> \stopTrillSpan
@@ -286,9 +299,11 @@
 									}
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								a,16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 						}
@@ -321,9 +336,11 @@
 							b8. -\accent
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								a,16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							\set stemLeftBeamCount = 2
@@ -371,11 +388,13 @@
 							R1 * 3/4
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								\stopStaff
 								\startStaff
 								a,16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							\stopStaff
@@ -390,12 +409,14 @@
 							g,4 -\accent \) \< \mp \startTrillSpan bf,
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								\override Beam #'positions = #beam::place-broken-parts-individually
 								a16 [ \(
 								b16 ]
 								\revert Beam #'positions
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							<> \stopTrillSpan
@@ -415,9 +436,11 @@
 							ef16 -\accent
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								a16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							\set stemLeftBeamCount = 2
@@ -439,9 +462,11 @@
 							ef4 -\accent \< \mp
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								a16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							\set stemLeftBeamCount = 0
@@ -557,7 +582,7 @@
 							r32
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 2
-							<bf cf' ff'>16 -\accent \< \pp
+							<bf b e'>16 -\accent \< \pp
 							\set stemLeftBeamCount = 3
 							\set stemRightBeamCount = 1
 							b32 -\staccato
@@ -594,7 +619,7 @@
 							f'16 -\accent \p
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 0
-							<gf' af'>16 -\staccato ]
+							<fs' af'>16 -\staccato ]
 						}
 					}
 					{
@@ -632,7 +657,7 @@
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 2
 							\clef bass
-							<g, af, df>16 -\accent \> \p
+							<g, af, cs>16 -\accent \> \p
 							\set stemLeftBeamCount = 2
 							\set stemRightBeamCount = 1
 							af,16 -\staccato
@@ -663,10 +688,10 @@
 						{
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							<ds, g,>8 -\accent
+							<ef, g,>8 -\accent
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							<cf,>8 -\staccato \!
+							<b,,>8 -\staccato \!
 							\revert Hairpin #'circled-tip
 						}
 						\times 2/3 {
@@ -729,7 +754,7 @@
 									}
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
-							<d, gf,>8 -\staccato
+							<d, fs,>8 -\staccato
 						}
 						{
 							\set stemLeftBeamCount = 1
@@ -942,9 +967,11 @@
 							f4 -\staccatissimo \p
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								e'16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							a4 -\staccatissimo \)
@@ -992,9 +1019,11 @@
 							e'8
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								c'16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							\set stemLeftBeamCount = 1
@@ -1009,12 +1038,14 @@
 							r16
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								\override Beam #'positions = #beam::place-broken-parts-individually
 								g'16 [ \(
 								a16 ]
 								\revert Beam #'positions
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 						}
@@ -1028,9 +1059,11 @@
 							e'8 -\staccatissimo \p \) [
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								f16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							\set stemLeftBeamCount = 1
@@ -1075,9 +1108,11 @@
 							c'4 -\staccatissimo \pp
 							{
 								\override Flag #'stroke-style = #"grace"
+								\override Script #'font-size = #0.5
 								\override Stem #'length = #8
 								f16 \(
 								\revert Flag #'stroke-style
+								\revert Script #'font-size
 								\revert Stem #'length
 							}
 							g'4 -\staccatissimo \)

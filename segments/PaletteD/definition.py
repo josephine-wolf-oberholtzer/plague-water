@@ -74,6 +74,7 @@ saxophone_context_maker = makers.ContextMaker(
                 lengths=(1, 0, 1, 0, 0, 1, 2,),
                 ),
             indicator_agent=makers.IndicatorAgent(
+                apply_to_graces=True,
                 each_leaf_indicators=(
                     ('snappizzicato',),
                     ('snappizzicato', 'accent'),
