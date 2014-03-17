@@ -120,6 +120,7 @@ class SegmentMaker(PlagueWaterObject):
         self.apply_spanners()
         self.fix_grace_spanners()
         self.apply_initial_indicators()
+        self.fix_guero_glissandi()
 
         ### APPLY LAYOUT ###
         self.configure_score()
@@ -399,6 +400,49 @@ class SegmentMaker(PlagueWaterObject):
                         override(beam).beam.positions = schemetools.Scheme(
                             'beam::place-broken-parts-individually')
                         attach(beam, grace_notes)
+                progress_indicator.advance()
+
+    def fix_guero_glissandi(self):
+        message = '\tfixing guero glissandi'
+        contexts = select(
+            self.score['Piano Upper Staff'],
+            self.score['Piano Lower Staff'],
+            )
+        with systemtools.ProgressIndicator(message) as progress_indicator:
+            glissandi = set()
+            for leaf in iterate(contexts).by_class(scoretools.Leaf):
+                spanners = inspect_(leaf).get_spanners(Glissando)
+                if spanners:
+                    assert len(spanners) == 1
+                    glissandi.update(spanners)
+            for glissando in glissandi:
+                pitches = [x.written_pitch for x in glissando]
+                minimum = min(pitches)
+                maximum = max(pitches)
+                width = abs((maximum - minimum).semitones)
+                if 6 < width:
+                    continue
+                pitch_range = inspect_(glissando[0]).get_effective(
+                    pitchtools.PitchRange)
+                for leaf_one, leaf_two in sequencetools.iterate_sequence_nwise(
+                    glissando[:]):
+                    pitch_one = leaf_one.written_pitch
+                    pitch_two = leaf_two.written_pitch
+                    interval = pitch_one - pitch_two
+                    semitones = interval.semitones
+                    sign = mathtools.sign(semitones)
+                    if 6 < abs(semitones):
+                        continue
+                    if sign == 0:
+                        sign = 1
+                    distance = 7 * sign
+                    new_pitch_two = pitch_one.transpose(distance)
+                    if new_pitch_two not in pitch_range:
+                        sign *= -1
+                        distance = 7 * sign
+                        new_pitch_two = pitch_one.transpose(distance)
+                    leaf_two.written_pitch = new_pitch_two
+                pitches = [x.written_pitch for x in glissando]
                 progress_indicator.advance()
 
     def apply_graces(self):
@@ -1038,6 +1082,7 @@ class SegmentMaker(PlagueWaterObject):
             )
 
     def remove_percussion_overlap(self):
+        print '\tremoving percussion overlap'
         context_names = (
             'Percussion Shaker Voice',
             'Percussion Woodblock Voice',
