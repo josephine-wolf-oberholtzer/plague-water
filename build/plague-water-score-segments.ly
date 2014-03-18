@@ -10,35 +10,36 @@
 \include "../stylesheets/plague-water-header.ily"
 
 #(set-default-paper-size "11x17" 'landscape)
-#(set-global-staff-size 13)
+#(set-global-staff-size 10)
 
 \layout {
     \context {
         \Score
         \override StaffGrouper.staff-staff-spacing = #'(
-            (basic-distance . 0)
-            (minimum-distance . 0)
-            (padding . 4)
-            (stretchability . 100)
+            (basic-distance . 12)
+            (minimum-distance . 8)
+            (padding . 2)
+            (stretchability . 0)
             )
         \override VerticalAxisGroup.staff-staff-spacing = #'(
-            (basic-distance . 0)
-            (minimum-distance . 0)
-            (padding . 4)
-            (stretchability . 100)
+            (basic-distance . 12)
+            (minimum-distance . 8)
+            (padding . 2)
+            (stretchability . 0)
             )
         proportionalNotationDuration = #(ly:make-moment 1 32)
     }
     
     \context {
         \TimeSignatureContext
-        \override VerticalAxisGroup.default-staff-staff-spacing = #'(
-            (basic-distance . 6)
-            (minimum-distance . 8)
+        \override VerticalAxisGroup.staff-staff-spacing = #'(
+            (basic-distance . 0)
+            (minimum-distance . 0)
             (padding . 6)
             (stretchability . 0)
             )
     }
+
 }
 
 \paper {
@@ -46,7 +47,7 @@
         (basic-distance . 0)
         (minimum-distance . 0)
         (padding . 4)
-        (stretchability . 30)
+        (stretchability . 100)
         )
 }
 
