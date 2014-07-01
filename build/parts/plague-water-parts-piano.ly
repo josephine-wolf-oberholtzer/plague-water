@@ -10,7 +10,7 @@
 \include "../../stylesheets/plague-water-header.ily"
 
 #(set-default-paper-size "11x17" 'landscape)
-#(set-global-staff-size 13)
+#(set-global-staff-size 12)
 
 \layout {
     \context {
@@ -29,7 +29,6 @@
             )
         proportionalNotationDuration = #(ly:make-moment 1 32)
     }
-    
     \context {
         \TimeSignatureContext
         \override BarNumber.font-size = 1
@@ -45,41 +44,6 @@
             (stretchability . 0)
             )
     }
-
-    \context {
-        \SaxophoneStaff
-        fontSize = #-4
-        \override StaffSymbol #'staff-space = #(magstep -4)
-        \override TupletBracket.positions = #'(-6.5 . -6.5)
-    }
-
-    \context {
-        \GuitarStaff
-        fontSize = #-4
-        \override StaffSymbol #'staff-space = #(magstep -4)
-        \override TupletBracket.positions = #'(-7.5 . -7.5)
-    }
-
-    \context {
-        \PercussionStaffGroup
-        fontSize = #-4
-        \override StaffSymbol #'staff-space = #(magstep -4)
-    }
-
-    \context {
-        \PercussionShakerStaff
-        \override TupletBracket.positions = #'(-6.5 . -6.5)
-    }
-
-    \context {
-        \PercussionWoodblockStaff
-        \override TupletBracket.positions = #'(-6.5 . -6.5)
-    }
-
-    \context {
-        \PercussionDrumStaff
-        \override TupletBracket.positions = #'(-6.5 . -6.5)
-    }
 }
 
 \paper {
@@ -92,6 +56,7 @@
 }
 
 \score {
+    \keepWithTag #'piano
     {
         \include "../plague-water-A01.ly"
         \include "../plague-water-B02.ly"

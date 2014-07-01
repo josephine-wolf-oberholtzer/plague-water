@@ -5,5 +5,5 @@ import collections
 metadata = collections.OrderedDict([
     ('forces_tagline', 'for Ensemble Nikel'),
     ('title', 'Plague Water'),
-    ('year_of_completion', 2014),
+    ('year', 2014),
     ])

@@ -15,6 +15,20 @@ class PlagueWaterConfiguration(systemtools.Configuration):
         if self['debug']:
             print message
 
+    ### PRIVATE METHODS ###
+
+    def _get_option_definitions(self):
+        options = {
+            'debug': {
+                'comment': [
+                    '',
+                    'Print diagnostic information when True.',
+                    ],
+                'spec': 'boolean(default=True)',
+                },
+            }
+        return options
+
     ### PRIVATE PROPERTIES ###
 
     @property
@@ -28,23 +42,10 @@ class PlagueWaterConfiguration(systemtools.Configuration):
             ' and should follow ini syntax.',
             ]
 
-    @property
-    def _option_definitions(self):
-        options = {
-            'debug': {
-                'comment': [
-                    '',
-                    'Print diagnostic information when True.',
-                    ],
-                'spec': 'boolean(default=True)',
-                },
-            }
-        return options
-
     ### PUBLIC PROPERTIES ###
 
     @property
-    def configuration_directory_path(self):
+    def configuration_directory(self):
         import plague_water
         return plague_water.__path__[0]
 
@@ -53,13 +54,13 @@ class PlagueWaterConfiguration(systemtools.Configuration):
         return 'plague_water.cfg'
 
     @property
-    def score_directory_path(self):
-        return self.configuration_directory_path
+    def score_directory(self):
+        return self.configuration_directory
 
     @property
-    def stylesheets_directory_path(self):
+    def stylesheets_directory(self):
         return os.path.join(
-            self.score_directory_path,
+            self.score_directory,
             'stylesheets',
             )
 
@@ -70,7 +71,7 @@ class PlagueWaterConfiguration(systemtools.Configuration):
         file_names.sort()
         for file_name in file_names:
             file_path = os.path.join(
-                self.stylesheets_directory_path,
+                self.stylesheets_directory,
                 file_name,
                 )
             result.append(file_path)
