@@ -13,7 +13,7 @@ class PlagueWaterConfiguration(systemtools.Configuration):
 
     def debug(self, message):
         if self['debug']:
-            print message
+            print(message)
 
     ### PRIVATE METHODS ###
 
