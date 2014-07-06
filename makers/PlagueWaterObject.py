@@ -21,7 +21,7 @@ class PlagueWaterObject(abctools.AbjadObject):
         try:
             result = hash(hash_values)
         except TypeError as e:
-            print hash_values
+            print(hash_values)
             raise e
         return result
 

@@ -11,7 +11,7 @@ class KeyClusterExpression(PlagueWaterObject):
         ...     arpeggio_direction=Up,
         ...     include_black_keys=False,
         ...     )
-        >>> print format(key_cluster_expression)
+        >>> print(format(key_cluster_expression))
         makers.KeyClusterExpression(
             arpeggio_direction=Up,
             include_black_keys=False,

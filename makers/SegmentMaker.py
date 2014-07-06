@@ -91,7 +91,7 @@ class SegmentMaker(PlagueWaterObject):
         self.segment_duration = sum(time_signature.duration
             for time_signature in self.time_signatures)
         if self.rebarrings is not None:
-            print '\trebarring'
+            print('\trebarring')
             rebarrings = [TimeSignature(x) for x in self.rebarrings]
             rebarring_duration = sum(x.duration for x in rebarrings)
             assert self.segment_duration == rebarring_duration
@@ -423,7 +423,7 @@ class SegmentMaker(PlagueWaterObject):
 
     def apply_guitar_octavations(self):
         message = '\tapplying guitar octavations'
-        print message
+        print(message)
         staff = self.score['Guitar Staff']
         leaves = list(iterate(staff).by_class(scoretools.Leaf))
         groups = list(iterate(leaves).by_run(
@@ -525,7 +525,7 @@ class SegmentMaker(PlagueWaterObject):
                     octavation_spanner._contiguity_constraint = None
                     attach(octavation_spanner, leaves)
         message = '\tapplying piano clefs and octavations'
-        print message
+        print(message)
         upper_staff = self.score['Piano Upper Staff']
         lower_staff = self.score['Piano Lower Staff']
         if self.segment_id == '1':
@@ -610,7 +610,7 @@ class SegmentMaker(PlagueWaterObject):
                 progress_indicator.advance()
 
     def build_and_persist(self, current_file_path):
-        print 'Building {}'.format(self.segment_name)
+        print('Building {}'.format(self.segment_name))
         with systemtools.Timer() as timer:
             current_directory_path = os.path.dirname(os.path.abspath(
                 os.path.expanduser(current_file_path)))
@@ -623,11 +623,11 @@ class SegmentMaker(PlagueWaterObject):
                 pdf_file_path=pdf_file_path,
                 remove_ly=False,
                 )
-            print '\tfinished in {} seconds'.format(
-                timer.elapsed_time)
+            print('\tfinished in {} seconds'.format(
+                timer.elapsed_time))
 
     def cleanup_semantic_timespans(self):
-        print '\tcleaning up semantic timespans'
+        print('\tcleaning up semantic timespans')
         split_offsets = []
         if self.measure_segmentation_talea:
             groups = sequencetools.partition_sequence_by_counts(
@@ -651,7 +651,7 @@ class SegmentMaker(PlagueWaterObject):
         from plague_water import makers
         from plague_water import materials
         message = '\tcleaning up silences'
-        print message
+        print(message)
         with systemtools.ForbidUpdate(self.score):
             for voice in iterate(self.score).by_class(Voice):
                 for music in voice:
@@ -719,7 +719,7 @@ class SegmentMaker(PlagueWaterObject):
                                 progress_indicator.advance()
 
     def configure_lilypond_file(self):
-        print '\tconfiguring lilypond file'
+        print('\tconfiguring lilypond file')
         lilypond_file = lilypondfiletools.LilyPondFile()
         lilypond_file.use_relative_includes = True
         score_block = lilypondfiletools.Block(name='score')
@@ -738,7 +738,7 @@ class SegmentMaker(PlagueWaterObject):
         self.lilypond_file = lilypond_file
 
     def configure_score(self):
-        print '\tconfiguring score'
+        print('\tconfiguring score')
         override(self.score).horizontal_bracket.color = 'red'
         rehearsal_mark_text = 'mark \\markup {{ ' \
             "\\override #'(box-padding . 0.5) " \
@@ -771,7 +771,7 @@ class SegmentMaker(PlagueWaterObject):
             self.score.add_final_bar_line('||')
 
     def create_dependent_timespans(self):
-        print '\tcreating dependent timespans'
+        print('\tcreating dependent timespans')
         from plague_water import makers
         ordered_context_makers = makers.ContextMaker.order_by_dependencies(
             self.context_makers)
@@ -787,7 +787,7 @@ class SegmentMaker(PlagueWaterObject):
                     )
 
     def create_semantic_timespans(self):
-        print '\tcreating semantic timespans'
+        print('\tcreating semantic timespans')
         from plague_water import makers
         ordered_context_makers = makers.ContextMaker.order_by_dependencies(
             self.context_makers)
@@ -800,7 +800,7 @@ class SegmentMaker(PlagueWaterObject):
                 )
 
     def create_silent_timespans(self):
-        print '\tcreating silent timespans'
+        print('\tcreating silent timespans')
         for context_maker in self.context_makers:
             context_maker.create_silent_timespans(
                 segment_duration=self.segment_duration,
@@ -808,7 +808,7 @@ class SegmentMaker(PlagueWaterObject):
                 )
 
     def find_meters(self):
-        print '\tfinding meters'
+        print('\tfinding meters')
         offset_counter = datastructuretools.TypedCounter(
             item_class=Offset,
             )
@@ -968,7 +968,7 @@ class SegmentMaker(PlagueWaterObject):
         self,
         rewrite_meter=True,
         ):
-        print '\tcreating rhythms'
+        print('\tcreating rhythms')
         seed = 0
         for context_maker in self.context_makers:
             context_name = context_maker.context_name
@@ -1032,7 +1032,7 @@ class SegmentMaker(PlagueWaterObject):
         return result, seed
 
     def populate_time_signature_context(self):
-        print '\tpopulating time signature context'
+        print('\tpopulating time signature context')
         measures = scoretools.make_spacer_skip_measures(
             self.time_signatures)
         self.score['TimeSignatureContext'].extend(measures)
@@ -1054,7 +1054,7 @@ class SegmentMaker(PlagueWaterObject):
         return type(sequence)(result)
 
     def remove_empty_trailing_measures(self):
-        print '\tremoving empty trailing measures'
+        print('\tremoving empty trailing measures')
         measure_start_offsets = mathtools.cumulative_sums(
             time_signature.duration
             for time_signature in self.time_signatures
@@ -1082,7 +1082,7 @@ class SegmentMaker(PlagueWaterObject):
             )
 
     def remove_percussion_overlap(self):
-        print '\tremoving percussion overlap'
+        print('\tremoving percussion overlap')
         context_names = (
             'Percussion Shaker Voice',
             'Percussion Woodblock Voice',

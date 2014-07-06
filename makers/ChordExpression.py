@@ -13,7 +13,7 @@ class ChordExpression(PlagueWaterObject):
         ...     arpeggio_direction=Down,
         ...     interval_numbers=(-1, 3, 7),
         ...     )
-        >>> print format(chord_expression)
+        >>> print(format(chord_expression))
         makers.ChordExpression(
             arpeggio_direction=Down,
             interval_numbers=frozenset([3, -1, 7]),
@@ -73,10 +73,10 @@ class ChordExpression(PlagueWaterObject):
         maximum_pitch = base_pitch.transpose(maximum)
         minimum_pitch = base_pitch.transpose(minimum)
         if maximum_pitch not in pitch_range:
-            print 'CHORD: CEILING'
+            print('CHORD: CEILING')
             new_interval_numbers = [x - maximum for x in interval_numbers]
         elif minimum_pitch not in pitch_range:
-            print 'CHORD: FLOOR'
+            print('CHORD: FLOOR')
             new_interval_numbers = [x - minimum for x in interval_numbers]
         else:
             new_interval_numbers = interval_numbers

@@ -11,7 +11,7 @@ class CursorTransform(abctools.AbjadObject):
         >>> iterable = [1, 2, 3, 4]
         >>> server = datastructuretools.StatalServer(iterable)
         >>> cursor = server()
-        >>> print format(cursor)
+        >>> print(format(cursor))
         datastructuretools.StatalServerCursor(
             statal_server=datastructuretools.StatalServer(
                 cyclic_tree=datastructuretools.CyclicPayloadTree(
@@ -32,7 +32,7 @@ class CursorTransform(abctools.AbjadObject):
         >>> from plague_water import makers
         >>> cursor_change = makers.CursorTransform(increment=3, reverse=True)
         >>> new_cursor = cursor_change(cursor)
-        >>> print format(new_cursor)
+        >>> print(format(new_cursor))
         datastructuretools.StatalServerCursor(
             statal_server=datastructuretools.StatalServer(
                 cyclic_tree=datastructuretools.CyclicPayloadTree(
