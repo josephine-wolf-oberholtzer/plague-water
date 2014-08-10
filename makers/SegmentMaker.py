@@ -308,7 +308,8 @@ class SegmentMaker(PlagueWaterObject):
         permitted_time_signatures = indicatortools.TimeSignatureInventory(
             permitted_time_signatures)
         assert len(permitted_time_signatures)
-        segment_tempo = Tempo(segment_tempo)
+        if not isinstance(segment_tempo, Tempo):
+            segment_tempo = Tempo(segment_tempo)
         if measure_segmentation_talea is not None:
             assert len(measure_segmentation_talea)
             assert mathtools.all_are_positive_integers(

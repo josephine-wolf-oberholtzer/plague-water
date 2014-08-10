@@ -49,7 +49,7 @@ for partitioned_sequence in partitioned_sequences:
 
 sequence = sequencetools.flatten_sequence(
     all_rotated_sequences,
-    classes=list,
+    classes=(list, tuple),
     )
 sequences = sequencetools.partition_sequence_by_ratio_of_lengths(
     sequence,
@@ -59,10 +59,9 @@ pitch_class_segments = sequencetools.zip_sequences(
     sequences,
     truncate=False,
     )
-print(pitch_class_segments)
 pitch_class_segments = sequencetools.flatten_sequence(
     pitch_class_segments,
-    classes=list,
+    classes=(list, tuple),
     )
 
 

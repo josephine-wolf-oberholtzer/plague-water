@@ -67,7 +67,7 @@ class PlagueWaterConfiguration(systemtools.Configuration):
     @property
     def stylesheets_file_paths(self):
         result = []
-        file_names = list(os.listdir(self.stylesheets_directory_path))
+        file_names = list(os.listdir(self.stylesheets_directory))
         file_names.sort()
         for file_name in file_names:
             file_path = os.path.join(
@@ -76,4 +76,3 @@ class PlagueWaterConfiguration(systemtools.Configuration):
                 )
             result.append(file_path)
         return tuple(result)
-

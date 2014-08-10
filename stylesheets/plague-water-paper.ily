@@ -3,6 +3,7 @@
 
 \paper {
     bottom-margin = 10\mm
+
     evenFooterMarkup = \markup \fill-line {
         " "
         \concat {
@@ -12,8 +13,6 @@
             %\hspace #18
         }
     }
-    evenHeaderMarkup = \markup \fill-line { " " }
-    left-margin = 30\mm
     oddFooterMarkup = \markup \fill-line {
         " "
         \concat {
@@ -23,7 +22,11 @@
             %\hspace #18
         }
     }
+
     oddHeaderMarkup = \markup \fill-line { " " }
+    evenHeaderMarkup = \markup \fill-line { " " }
+
+    left-margin = 30\mm
     page-breaking = #ly:optimal-breaking
     print-first-page-number = ##f
     print-page-number = ##t
