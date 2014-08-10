@@ -47,7 +47,10 @@ for partitioned_sequence in partitioned_sequences:
     all_rotated_sequences.append(sequence_group)
 
 
-sequence = sequencetools.flatten_sequence(all_rotated_sequences)
+sequence = sequencetools.flatten_sequence(
+    all_rotated_sequences,
+    classes=list,
+    )
 sequences = sequencetools.partition_sequence_by_ratio_of_lengths(
     sequence,
     [1, 1, 1],
@@ -56,7 +59,11 @@ pitch_class_segments = sequencetools.zip_sequences(
     sequences,
     truncate=False,
     )
-pitch_class_segments = sequencetools.flatten_sequence(pitch_class_segments)
+print(pitch_class_segments)
+pitch_class_segments = sequencetools.flatten_sequence(
+    pitch_class_segments,
+    classes=list,
+    )
 
 
 primary_pitch_class_agent = makers.PitchClassAgent(
