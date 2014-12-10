@@ -75,4 +75,9 @@ class StemTremoloSpanner(Spanner):
 
     @property
     def minimum_duration(self):
+        r'''Gets minimum logical tie duration to which stem tremolos will be
+        applied.
+
+        Returns minimum duration.
+        '''
         return self._minimum_duration

@@ -144,7 +144,7 @@ class RegisterAgent(PlagueWaterObject):
             self.global_inflections,
             )
         octave_transposition_mapping = \
-            pitchtools.OctaveTranspositionMapping([
+            pitchtools.Registration([
                 ('[C0, C4)', inflection_pitch),
                 ('[C4, C8)', inflection_pitch + 6),
                 ])
