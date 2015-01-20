@@ -3,10 +3,15 @@
 # C extensions
 *.so
 
+# LaTeX
+*.aux
+*.log
+
 # Packages
 *.egg
 *.egg-info
 dist
+!build
 eggs
 parts
 bin
@@ -33,5 +38,13 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
-/.settings
 
+# Etc.
+.DS_Store
+
+# Abjad IDE
+__illustrate_segment__.py
+__output_material__.py
+*.candidate.ly
+*.candidate.ps
+*.candidate.pdf
