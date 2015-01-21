@@ -295,7 +295,7 @@ LV = #(make-dynamic-script LV)
             )
         autoBeaming = ##f
         pedalSustainStyle = #'mixed
-        proportionalNotationDuration = #(ly:make-moment 1 48)
+        proportionalNotationDuration = #(ly:make-moment 1 24)
         tupletFullLength = ##t
     }
 }

@@ -3,6 +3,9 @@
 
 \paper {
     bottom-margin = 10\mm
+    right-margin = 10\mm
+    top-margin = 10\mm
+    left-margin = 30\mm
 
     evenFooterMarkup = \markup \fill-line {
         " "
@@ -26,14 +29,11 @@
     oddHeaderMarkup = \markup \fill-line { " " }
     evenHeaderMarkup = \markup \fill-line { " " }
 
-    left-margin = 30\mm
     page-breaking = #ly:optimal-breaking
     print-first-page-number = ##f
     print-page-number = ##t
     ragged-bottom = ##f
     ragged-last-bottom = ##t
-    right-margin = 10\mm
-    top-margin = 10\mm
 
     markup-system-spacing = #'(
         (basic-distance . 0)
