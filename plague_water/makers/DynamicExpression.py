@@ -23,10 +23,10 @@ class DynamicExpression(PlagueWaterObject):
             \new Staff {
                 c'8
                 d'8
-                e'8 \< \sfp
+                e'8 \sfp
                 f'8
                 g'8
-                a'8 \!
+                a'8
                 b'8
                 c''8
             }

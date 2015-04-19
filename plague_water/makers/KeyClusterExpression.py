@@ -12,7 +12,7 @@ class KeyClusterExpression(PlagueWaterObject):
         ...     include_black_keys=False,
         ...     )
         >>> print(format(key_cluster_expression))
-        makers.KeyClusterExpression(
+        plague_water.makers.KeyClusterExpression(
             arpeggio_direction=Up,
             include_black_keys=False,
             include_white_keys=True,
@@ -36,7 +36,7 @@ class KeyClusterExpression(PlagueWaterObject):
                 \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
             }
             <b d' f'>4 \arpeggio ~
-                _ \markup {
+                ^ \markup {
                     \center-align
                         \natural
                     }

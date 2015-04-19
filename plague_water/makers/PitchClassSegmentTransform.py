@@ -14,7 +14,7 @@ class PitchClassSegmentTransform(PlagueWaterObject):
         ...     transposition=3,
         ...     )
         >>> print(format(pitch_class_transform))
-        makers.PitchClassSegmentTransform(
+        plague_water.makers.PitchClassSegmentTransform(
             inversion=True,
             transposition=3,
             )

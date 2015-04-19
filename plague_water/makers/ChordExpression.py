@@ -11,12 +11,12 @@ class ChordExpression(PlagueWaterObject):
         >>> from plague_water import makers
         >>> chord_expression = makers.ChordExpression(
         ...     arpeggio_direction=Down,
-        ...     interval_numbers=(-1, 3, 7),
+        ...     interval_numbers=(-1, 0, 3, 7),
         ...     )
         >>> print(format(chord_expression))
         plague_water.makers.ChordExpression(
             arpeggio_direction=Down,
-            interval_numbers=frozenset([3, -1, 7]),
+            interval_numbers=frozenset([0, 3, -1, 7]),
             )
 
     ::
@@ -52,7 +52,6 @@ class ChordExpression(PlagueWaterObject):
         assert arpeggio_direction in (Up, Down, Center, None)
         interval_numbers = frozenset(
             x for x in interval_numbers
-            if x != 0
             )
         assert len(interval_numbers)
         self._arpeggio_direction = arpeggio_direction
@@ -66,24 +65,27 @@ class ChordExpression(PlagueWaterObject):
         head = logical_tie.head
         base_pitch = head.written_pitch
         pitch_range = inspect_(head).get_effective(pitchtools.PitchRange)
-        assert pitch_range is not None
-        assert base_pitch in pitch_range
+        #assert pitch_range is not None
+        if pitch_range is not None:
+            assert base_pitch in pitch_range
         maximum = max(interval_numbers)
         minimum = min(interval_numbers)
         maximum_pitch = base_pitch.transpose(maximum)
         minimum_pitch = base_pitch.transpose(minimum)
-        if maximum_pitch not in pitch_range:
-            print('CHORD: CEILING')
-            new_interval_numbers = [x - maximum for x in interval_numbers]
-        elif minimum_pitch not in pitch_range:
-            print('CHORD: FLOOR')
-            new_interval_numbers = [x - minimum for x in interval_numbers]
+        if pitch_range is not None:
+            if maximum_pitch not in pitch_range:
+                print('CHORD: CEILING')
+                new_interval_numbers = [x - maximum for x in interval_numbers]
+            elif minimum_pitch not in pitch_range:
+                print('CHORD: FLOOR')
+                new_interval_numbers = [x - minimum for x in interval_numbers]
         else:
             new_interval_numbers = interval_numbers
         pitches = [base_pitch.transpose(x) for x in new_interval_numbers]
         pitches = [NamedPitch(float(x)) for x in pitches]
-        assert all(pitch in pitch_range for pitch in pitches), \
-            (pitch_range, base_pitch, interval_numbers, pitches)
+        if pitch_range is not None:
+            assert all(pitch in pitch_range for pitch in pitches), \
+                (pitch_range, base_pitch, interval_numbers, pitches)
         for i, leaf in enumerate(logical_tie):
             chord = Chord(leaf)
             chord.written_pitches = pitches
