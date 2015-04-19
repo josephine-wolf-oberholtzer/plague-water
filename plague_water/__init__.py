@@ -1,4 +1,6 @@
 # -*- encoding: utf-8 -*-
-from . import configuration
-plague_water_configuration = configuration.PlagueWaterConfiguration()
-del configuration
+
+from plague_water.makers import *
+from plague_water import makers
+from plague_water.materials import *
+from plague_water import materials

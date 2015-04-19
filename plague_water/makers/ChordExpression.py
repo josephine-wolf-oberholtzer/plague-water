@@ -14,7 +14,7 @@ class ChordExpression(PlagueWaterObject):
         ...     interval_numbers=(-1, 3, 7),
         ...     )
         >>> print(format(chord_expression))
-        makers.ChordExpression(
+        plague_water.makers.ChordExpression(
             arpeggio_direction=Down,
             interval_numbers=frozenset([3, -1, 7]),
             )

@@ -36,16 +36,15 @@ fanfare_rhythm_maker = rhythmmakertools.IncisedRhythmMaker(
         beam_divisions_together=False,
         ),
     incise_specifier=rhythmmakertools.InciseSpecifier(
-        incise_divisions=True,
         prefix_talea=(1,),
-        prefix_lengths=(2, 2, 2, 3, 2),
+        prefix_counts=(2, 2, 2, 3, 2),
         talea_denominator=32,
         ),
     extra_counts_per_division=(1, 0, 0, 0, 1,),
     tie_specifier=rhythmmakertools.TieSpecifier(
         tie_across_divisions=False,
-        tie_split_notes=False,
         ),
+    #tie_split_notes=False,
     )
 
 
@@ -60,9 +59,9 @@ glissing_rhythm_maker = rhythmmakertools.IncisedRhythmMaker(
     incise_specifier=rhythmmakertools.InciseSpecifier(
         body_ratio=(1,),
         fill_with_notes=True,
-        incise_output=True,
-        prefix_lengths=(0,),
-        suffix_lengths=(1,),
+        outer_divisions_only=True,
+        prefix_counts=(0,),
+        suffix_counts=(1,),
         suffix_talea=(1,),
         talea_denominator=32,
         ),
@@ -105,7 +104,7 @@ pointillist_rhythm_maker = rhythmmakertools.TupletRhythmMaker(
         ),
     tie_specifier=rhythmmakertools.TieSpecifier(
         tie_across_divisions=False,
-        tie_split_notes=False,
+        #tie_split_notes=False,
         ),
     tuplet_ratios=(
         (1, 1),
@@ -134,12 +133,12 @@ winding_rhythm_maker = rhythmmakertools.TaleaRhythmMaker(
         beam_divisions_together=False,
         ),
     burnish_specifier=rhythmmakertools.BurnishSpecifier(
-        burnish_output=True,
-        lefts=(-1,),
-        middles=(0,),
-        rights=(-1,),
-        left_lengths=(1, 0, 0, 0),
-        right_lengths=(1, 0, 1, 1, 0),
+        outer_divisions_only=True,
+        left_classes=(-1,),
+        middle_classes=(0,),
+        right_classes=(-1,),
+        left_counts=(1, 0, 0, 0),
+        right_counts=(1, 0, 1, 1, 0),
         ),
     extra_counts_per_division=(2, 1, 1, 0),
     split_divisions_by_counts=(3, 5),
@@ -148,7 +147,7 @@ winding_rhythm_maker = rhythmmakertools.TaleaRhythmMaker(
         denominator=16,
         ),
     tie_specifier=rhythmmakertools.TieSpecifier(
-        tie_split_notes=False,
+        #tie_split_notes=False,
         ),
     )
 

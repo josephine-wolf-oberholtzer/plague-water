@@ -3,7 +3,6 @@ import collections
 import itertools
 import os
 from abjad import *
-from plague_water import plague_water_configuration
 from plague_water.makers.PlagueWaterObject import PlagueWaterObject
 
 
@@ -726,7 +725,7 @@ class SegmentMaker(PlagueWaterObject):
         score_block = lilypondfiletools.Block(name='score')
         score_block.items.append(self.score)
         lilypond_file.items.append(score_block)
-        for file_path in plague_water_configuration.stylesheets_file_paths:
+        for file_path in self.stylesheets_file_paths:
             if 'parts' in file_path:
                 continue
             file_name = os.path.split(file_path)[-1]
@@ -1119,3 +1118,28 @@ class SegmentMaker(PlagueWaterObject):
         measure_durations = [x.duration for x in self.time_signatures]
         measure_offsets = mathtools.cumulative_sums(measure_durations)
         return measure_offsets
+
+    @property
+    def score_directory(self):
+        import plague_water
+        return plague_water.__path__[0]
+
+    @property
+    def stylesheets_directory(self):
+        return os.path.join(
+            self.score_directory,
+            'stylesheets',
+            )
+
+    @property
+    def stylesheets_file_paths(self):
+        result = []
+        file_names = list(os.listdir(self.stylesheets_directory))
+        file_names.sort()
+        for file_name in file_names:
+            file_path = os.path.join(
+                self.stylesheets_directory,
+                file_name,
+                )
+            result.append(file_path)
+        return tuple(result)
