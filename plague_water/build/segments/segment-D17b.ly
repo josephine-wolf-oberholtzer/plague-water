@@ -1019,8 +1019,8 @@
 						}
 						{
 							R1 * 3/16
-							\stopStaff
-							\startStaff
+							%\stopStaff
+							%\startStaff
 						}
 					}
 				}
@@ -1556,8 +1556,8 @@
 							\once \override Staff.StaffSymbol.line-count = 1
 							\startStaff
 							R1 * 3/16
-							\stopStaff
-							\startStaff
+							%\stopStaff
+							%\startStaff
 						}
 					}
 				}
@@ -1860,8 +1860,8 @@
 						}
 						{
 							R1 * 3/16
-							\stopStaff
-							\startStaff
+							%\stopStaff
+							%\startStaff
 						}
 					}
 				}
@@ -2141,8 +2141,8 @@
 							\once \override Staff.StaffSymbol.line-count = 1
 							\startStaff
 							R1 * 3/16
-							\stopStaff
-							\startStaff
+							%\stopStaff
+							%\startStaff
 						}
 					}
 				}
@@ -2345,8 +2345,8 @@
 						}
 						{
 							R1 * 3/16
-							\stopStaff
-							\startStaff
+							%\stopStaff
+							%\startStaff
 						}
 					}
 				}
@@ -2558,8 +2558,8 @@
 											}
 									}
 							\bar "|."
-							\stopStaff
-							\startStaff
+							%\stopStaff
+							%\startStaff
 						}
 					}
 				}

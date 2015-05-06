@@ -102,10 +102,7 @@ LV = #(make-dynamic-script LV)
 }
 
 \layout {
-    \accidentalStyle neo-modern-cautionary
-    indent = 0
-    ragged-bottom = ##t
-    ragged-last = ##t
+    \accidentalStyle modern-cautionary
     ragged-right = ##t
 
     %%% COMMON %%%
