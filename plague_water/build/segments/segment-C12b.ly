@@ -1,5 +1,5 @@
 	\context Score = "Plague Water Score" \with {
-		\override HorizontalBracket #'color = #red
+		\override HorizontalBracket.color = #red
 	} <<
 		\tag score.saxophone.guitar.piano.percussion
 		\context TimeSignatureContext = "TimeSignatureContext" {
@@ -110,10 +110,10 @@
 							\afterGrace
 							r16
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
-								\override Beam #'positions = #beam::place-broken-parts-individually
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
+								\override Beam.positions = #beam::place-broken-parts-individually
 								d16 [ \(
 								c16 ]
 								\revert Beam #'positions
@@ -131,9 +131,9 @@
 							\pitchedTrill
 							cs8 \sfz \) [ \startTrillSpan fs
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								bf16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -148,10 +148,10 @@
 							\afterGrace
 							d'4
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
-								\override Beam #'positions = #beam::place-broken-parts-individually
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
+								\override Beam.positions = #beam::place-broken-parts-individually
 								af16 [ \(
 								d16
 								c16 ]
@@ -170,9 +170,9 @@
 							\afterGrace
 							ef2
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								b,16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -196,9 +196,9 @@
 							\afterGrace
 							R1 * 1/2
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								\stopStaff
 								\startStaff
 								bf16 \(
@@ -225,10 +225,10 @@
 							\afterGrace
 							r8 [
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
-								\override Beam #'positions = #beam::place-broken-parts-individually
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
+								\override Beam.positions = #beam::place-broken-parts-individually
 								b16 [ \(
 								af16 ]
 								\revert Beam #'positions
@@ -246,9 +246,9 @@
 							\afterGrace
 							a8
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								b16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -300,10 +300,10 @@
 							\afterGrace
 							r8
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
-								\override Beam #'positions = #beam::place-broken-parts-individually
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
+								\override Beam.positions = #beam::place-broken-parts-individually
 								b16 [ \(
 								af16 ]
 								\revert Beam #'positions
@@ -320,9 +320,9 @@
 							\afterGrace
 							f8 \sfz \) [
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								b16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -339,10 +339,10 @@
 							\afterGrace
 							d'8 ]
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
-								\override Beam #'positions = #beam::place-broken-parts-individually
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
+								\override Beam.positions = #beam::place-broken-parts-individually
 								b16 [ \(
 								af16
 								d16 ]
@@ -363,9 +363,9 @@
 							\afterGrace
 							R1 * 1/4
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								\stopStaff
 								\startStaff
 								b16 \(
@@ -383,9 +383,9 @@
 							\afterGrace
 							d4 \sfz \)
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								b16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -409,12 +409,12 @@
 							\afterGrace
 							R1 * 1/4
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								\stopStaff
 								\startStaff
-								\override Beam #'positions = #beam::place-broken-parts-individually
+								\override Beam.positions = #beam::place-broken-parts-individually
 								b16 [ \(
 								af16 ]
 								\revert Beam #'positions
@@ -434,9 +434,9 @@
 							\pitchedTrill
 							f8. \sfz \) [ \startTrillSpan gf
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								b16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -543,9 +543,9 @@
 							\afterGrace
 							r16
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								b16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -1466,9 +1466,9 @@
 							\afterGrace
 							f8 -\accent \mp [
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								a16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -1511,9 +1511,9 @@
 							\afterGrace
 							r16
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								g'16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -1632,9 +1632,9 @@
 							\afterGrace
 							c'4 -\accent \< \mp
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								e'16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -1663,9 +1663,9 @@
 							\afterGrace
 							r8.
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								e'16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -1679,9 +1679,9 @@
 							\afterGrace
 							a4 -\accent \mp \)
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								e'16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -1700,9 +1700,9 @@
 							\afterGrace
 							e'4 -\accent \< \mp
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								a16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -1718,9 +1718,9 @@
 							\afterGrace
 							c'8
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								e'16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -1759,9 +1759,9 @@
 							\afterGrace
 							e'8
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								a16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -1795,9 +1795,9 @@
 							\afterGrace
 							R1 * 1/4
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								\stopStaff
 								\startStaff
 								a16 \(
@@ -1815,9 +1815,9 @@
 							\afterGrace
 							e'2 -\accent \) \< \mp
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								c'16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -1842,9 +1842,9 @@
 							\afterGrace
 							r16
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								c'16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -1863,9 +1863,9 @@
 							\afterGrace
 							R1 * 1/4
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								\stopStaff
 								\startStaff
 								a16 \(
@@ -1891,7 +1891,7 @@
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
 							r8
-							\override Hairpin #'circled-tip = ##t
+							\override Hairpin.circled-tip = ##t
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 1
 							e'8 -\accent ~ \> \sfp
@@ -1910,9 +1910,9 @@
 							\afterGrace
 							a8.
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								c'16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
