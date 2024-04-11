@@ -1,5 +1,5 @@
 	\context Score = "Plague Water Score" \with {
-		\override HorizontalBracket #'color = #red
+		\override HorizontalBracket.color = #red
 	} <<
 		\tag score.saxophone.guitar.piano.percussion
 		\context TimeSignatureContext = "TimeSignatureContext" {
@@ -117,9 +117,9 @@
 										)
 									}
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								af,16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -129,19 +129,19 @@
 					}
 					{
 						\times 2/3 {
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override TextSpanner.bound-details.left.text = \markup {
 								\box
 									\pad-around
 										#0.5
 										air
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							b,16 \) [ ( \startTextSpan
@@ -161,9 +161,9 @@
 							\afterGrace
 							r8.
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								g,16 -\snappizzicato \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -195,9 +195,9 @@
 							\afterGrace
 							g,8 [ (
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								af,16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -247,9 +247,9 @@
 							\afterGrace
 							f,16 -\accent -\snappizzicato
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								b,16 -\snappizzicato \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -271,27 +271,27 @@
 					}
 					{
 						{
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override TextSpanner.bound-details.left.text = \markup {
 								\box
 									\pad-around
 										#0.5
 										air
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
 							\afterGrace
 							af,8 [ ( \startTextSpan
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								f16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -340,10 +340,10 @@
 							\afterGrace
 							d,8 (
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
-								\override Beam #'positions = #beam::place-broken-parts-individually
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
+								\override Beam.positions = #beam::place-broken-parts-individually
 								g,16 [ \(
 								af,16 ]
 								\revert Beam #'positions
@@ -394,9 +394,9 @@
 							\afterGrace
 							r16
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								g,16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -406,19 +406,19 @@
 					}
 					{
 						{
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override TextSpanner.bound-details.left.text = \markup {
 								\box
 									\pad-around
 										#0.5
 										air
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							f,16 \) [ ( \startTextSpan
@@ -441,9 +441,9 @@
 							\afterGrace
 							r4
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								af,16 -\snappizzicato \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -494,12 +494,12 @@
 							\afterGrace
 							R1 * 1/4
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								\stopStaff
 								\startStaff
-								\override Beam #'positions = #beam::place-broken-parts-individually
+								\override Beam.positions = #beam::place-broken-parts-individually
 								af,16 -\accent -\snappizzicato [ \(
 								b,16 ]
 								\revert Beam #'positions
@@ -529,9 +529,9 @@
 							\afterGrace
 							r4
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								af,16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -542,19 +542,19 @@
 					{
 						\tweak #'text #tuplet-number::calc-fraction-text
 						\times 5/6 {
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override TextSpanner.bound-details.left.text = \markup {
 								\box
 									\pad-around
 										#0.5
 										air
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
 							cs,4 \) ( \startTextSpan
 							\set stemLeftBeamCount = 1
 							\set stemRightBeamCount = 0
@@ -575,9 +575,9 @@
 							\afterGrace
 							R1 * 3/16
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								\stopStaff
 								\startStaff
 								af,16 -\snappizzicato \(
@@ -599,9 +599,9 @@
 							\afterGrace
 							bf,8 -\accent -\snappizzicato
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								af,16 -\snappizzicato \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -624,9 +624,9 @@
 							\afterGrace
 							f,16 [ (
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								af,16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -661,19 +661,19 @@
 					}
 					{
 						{
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override TextSpanner.bound-details.left.text = \markup {
 								\box
 									\pad-around
 										#0.5
 										air
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 3
 							r32 [ \startTextSpan
@@ -682,10 +682,10 @@
 							\afterGrace
 							d,16 (
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
-								\override Beam #'positions = #beam::place-broken-parts-individually
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
+								\override Beam.positions = #beam::place-broken-parts-individually
 								af,16 [ \(
 								b,16 ]
 								\revert Beam #'positions
@@ -718,9 +718,9 @@
 							\afterGrace
 							r4
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								af,16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -746,9 +746,9 @@
 							\afterGrace
 							f,16
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								af,16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -783,9 +783,9 @@
 							\afterGrace
 							ef,16 -\snappizzicato
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								af,16 -\accent -\snappizzicato \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -807,19 +807,19 @@
 					}
 					{
 						\times 2/3 {
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override TextSpanner.bound-details.left.text = \markup {
 								\box
 									\pad-around
 										#0.5
 										air
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							r16 [ \startTextSpan
@@ -860,10 +860,10 @@
 							\afterGrace
 							b,16 -\accent -\snappizzicato
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
-								\override Beam #'positions = #beam::place-broken-parts-individually
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
+								\override Beam.positions = #beam::place-broken-parts-individually
 								af,16 -\snappizzicato [ \(
 								b,16 ]
 								\revert Beam #'positions
@@ -900,9 +900,9 @@
 							\afterGrace
 							r8
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								af,16 -\snappizzicato \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -930,19 +930,19 @@
 					}
 					{
 						{
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override TextSpanner.bound-details.left.text = \markup {
 								\box
 									\pad-around
 										#0.5
 										air
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							r16 [ \startTextSpan
@@ -951,9 +951,9 @@
 							\afterGrace
 							a,16 (
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								af,16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -980,9 +980,9 @@
 							\afterGrace
 							g,8 -\accent -\snappizzicato
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								af,16 -\snappizzicato \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -1029,9 +1029,9 @@
 										)
 									}
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								f'16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -1058,9 +1058,9 @@
 							\afterGrace
 							r4
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								\ottava #1
 								g'16 \(
 								\revert Flag #'stroke-style
@@ -1138,9 +1138,9 @@
 							\afterGrace
 							r8
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								af'16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -1177,7 +1177,7 @@
 							\afterGrace
 							<af'>16 -\staccato \)
 							{
-								\override Beam #'positions = #beam::place-broken-parts-individually
+								\override Beam.positions = #beam::place-broken-parts-individually
 								g'16 [ \(
 								af'16 ]
 								\revert Beam #'positions
@@ -1193,9 +1193,9 @@
 							\afterGrace
 							r8.
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								\ottava #1
 								g'16 \(
 								\revert Flag #'stroke-style
@@ -1226,9 +1226,9 @@
 							\afterGrace
 							R1 * 3/16
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								\stopStaff
 								\startStaff
 								\ottava #1
@@ -1294,9 +1294,9 @@
 							\afterGrace
 							f'4 -\staccato
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								b'16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -1315,9 +1315,9 @@
 							\afterGrace
 							e'16 -\staccato
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								b'16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -1431,9 +1431,9 @@
 							\afterGrace
 							r8.
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								\ottava #1
 								af'16 \(
 								\revert Flag #'stroke-style
@@ -1467,9 +1467,9 @@
 							\afterGrace
 							R1 * 3/8
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								\stopStaff
 								\startStaff
 								af'16 \(
@@ -1510,9 +1510,9 @@
 							\afterGrace
 							ef'16 -\staccato
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								af''16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -1540,10 +1540,10 @@
 							\afterGrace
 							r8
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
-								\override Beam #'positions = #beam::place-broken-parts-individually
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
+								\override Beam.positions = #beam::place-broken-parts-individually
 								af'16 [ \(
 								b'16 ]
 								\revert Beam #'positions
@@ -1572,9 +1572,9 @@
 							\afterGrace
 							r16
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								\ottava #1
 								af'16 \(
 								\revert Flag #'stroke-style
@@ -1629,9 +1629,9 @@
 							\afterGrace
 							r16
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								af'16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -1663,9 +1663,9 @@
 							\afterGrace
 							a'16 -\staccato [
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								af''16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -1681,9 +1681,9 @@
 							\afterGrace
 							g'8 -\staccato
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								af'16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -1769,25 +1769,25 @@
 					}
 					{
 						{
-							\override Accidental #'stencil = ##f
-							\override AccidentalCautionary #'stencil = ##f
-							\override Glissando #'bound-details #'left #'padding = #1.5
-							\override Glissando #'bound-details #'right #'end-on-accidental = ##f
-							\override Glissando #'bound-details #'right #'padding = #1.5
-							\override NoteHead #'no-ledgers = ##t
-							\override NoteHead #'style = #'cross
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override Accidental.stencil = ##f
+							\override AccidentalCautionary.stencil = ##f
+							\override Glissando.bound-details.left.padding = #1.5
+							\override Glissando.bound-details.right.end-on-accidental = ##f
+							\override Glissando.bound-details.right.padding = #1.5
+							\override NoteHead.no-ledgers = ##t
+							\override NoteHead.style = #'cross
+							\override TextSpanner.bound-details.left.text = \markup {
 								\center-align
 									\flat
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
-							\override Tie #'stencil = ##f
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
+							\override Tie.stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							f'16. [ \glissando \startTextSpan
@@ -1813,25 +1813,25 @@
 					}
 					{
 						{
-							\override Accidental #'stencil = ##f
-							\override AccidentalCautionary #'stencil = ##f
-							\override Glissando #'bound-details #'left #'padding = #1.5
-							\override Glissando #'bound-details #'right #'end-on-accidental = ##f
-							\override Glissando #'bound-details #'right #'padding = #1.5
-							\override NoteHead #'no-ledgers = ##t
-							\override NoteHead #'style = #'cross
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override Accidental.stencil = ##f
+							\override AccidentalCautionary.stencil = ##f
+							\override Glissando.bound-details.left.padding = #1.5
+							\override Glissando.bound-details.right.end-on-accidental = ##f
+							\override Glissando.bound-details.right.padding = #1.5
+							\override NoteHead.no-ledgers = ##t
+							\override NoteHead.style = #'cross
+							\override TextSpanner.bound-details.left.text = \markup {
 								\center-align
 									\natural
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
-							\override Tie #'stencil = ##f
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
+							\override Tie.stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							c'16. [ \glissando \startTextSpan
@@ -1857,25 +1857,25 @@
 					}
 					{
 						{
-							\override Accidental #'stencil = ##f
-							\override AccidentalCautionary #'stencil = ##f
-							\override Glissando #'bound-details #'left #'padding = #1.5
-							\override Glissando #'bound-details #'right #'end-on-accidental = ##f
-							\override Glissando #'bound-details #'right #'padding = #1.5
-							\override NoteHead #'no-ledgers = ##t
-							\override NoteHead #'style = #'cross
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override Accidental.stencil = ##f
+							\override AccidentalCautionary.stencil = ##f
+							\override Glissando.bound-details.left.padding = #1.5
+							\override Glissando.bound-details.right.end-on-accidental = ##f
+							\override Glissando.bound-details.right.padding = #1.5
+							\override NoteHead.no-ledgers = ##t
+							\override NoteHead.style = #'cross
+							\override TextSpanner.bound-details.left.text = \markup {
 								\center-align
 									\flat
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
-							\override Tie #'stencil = ##f
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
+							\override Tie.stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
 							d'8 [ \glissando \startTextSpan
@@ -1975,25 +1975,25 @@
 					}
 					{
 						{
-							\override Accidental #'stencil = ##f
-							\override AccidentalCautionary #'stencil = ##f
-							\override Glissando #'bound-details #'left #'padding = #1.5
-							\override Glissando #'bound-details #'right #'end-on-accidental = ##f
-							\override Glissando #'bound-details #'right #'padding = #1.5
-							\override NoteHead #'no-ledgers = ##t
-							\override NoteHead #'style = #'cross
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override Accidental.stencil = ##f
+							\override AccidentalCautionary.stencil = ##f
+							\override Glissando.bound-details.left.padding = #1.5
+							\override Glissando.bound-details.right.end-on-accidental = ##f
+							\override Glissando.bound-details.right.padding = #1.5
+							\override NoteHead.no-ledgers = ##t
+							\override NoteHead.style = #'cross
+							\override TextSpanner.bound-details.left.text = \markup {
 								\center-align
 									\natural
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
-							\override Tie #'stencil = ##f
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
+							\override Tie.stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
 							b'8 [ \glissando \startTextSpan
@@ -2023,25 +2023,25 @@
 					}
 					{
 						{
-							\override Accidental #'stencil = ##f
-							\override AccidentalCautionary #'stencil = ##f
-							\override Glissando #'bound-details #'left #'padding = #1.5
-							\override Glissando #'bound-details #'right #'end-on-accidental = ##f
-							\override Glissando #'bound-details #'right #'padding = #1.5
-							\override NoteHead #'no-ledgers = ##t
-							\override NoteHead #'style = #'cross
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override Accidental.stencil = ##f
+							\override AccidentalCautionary.stencil = ##f
+							\override Glissando.bound-details.left.padding = #1.5
+							\override Glissando.bound-details.right.end-on-accidental = ##f
+							\override Glissando.bound-details.right.padding = #1.5
+							\override NoteHead.no-ledgers = ##t
+							\override NoteHead.style = #'cross
+							\override TextSpanner.bound-details.left.text = \markup {
 								\center-align
 									\natural
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
-							\override Tie #'stencil = ##f
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
+							\override Tie.stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
 							f'8 [ \glissando \startTextSpan
@@ -2071,25 +2071,25 @@
 					}
 					{
 						{
-							\override Accidental #'stencil = ##f
-							\override AccidentalCautionary #'stencil = ##f
-							\override Glissando #'bound-details #'left #'padding = #1.5
-							\override Glissando #'bound-details #'right #'end-on-accidental = ##f
-							\override Glissando #'bound-details #'right #'padding = #1.5
-							\override NoteHead #'no-ledgers = ##t
-							\override NoteHead #'style = #'cross
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override Accidental.stencil = ##f
+							\override AccidentalCautionary.stencil = ##f
+							\override Glissando.bound-details.left.padding = #1.5
+							\override Glissando.bound-details.right.end-on-accidental = ##f
+							\override Glissando.bound-details.right.padding = #1.5
+							\override NoteHead.no-ledgers = ##t
+							\override NoteHead.style = #'cross
+							\override TextSpanner.bound-details.left.text = \markup {
 								\center-align
 									\flat
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
-							\override Tie #'stencil = ##f
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
+							\override Tie.stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
 							c'8 [ \glissando \startTextSpan
@@ -2133,25 +2133,25 @@
 					}
 					{
 						{
-							\override Accidental #'stencil = ##f
-							\override AccidentalCautionary #'stencil = ##f
-							\override Glissando #'bound-details #'left #'padding = #1.5
-							\override Glissando #'bound-details #'right #'end-on-accidental = ##f
-							\override Glissando #'bound-details #'right #'padding = #1.5
-							\override NoteHead #'no-ledgers = ##t
-							\override NoteHead #'style = #'cross
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override Accidental.stencil = ##f
+							\override AccidentalCautionary.stencil = ##f
+							\override Glissando.bound-details.left.padding = #1.5
+							\override Glissando.bound-details.right.end-on-accidental = ##f
+							\override Glissando.bound-details.right.padding = #1.5
+							\override NoteHead.no-ledgers = ##t
+							\override NoteHead.style = #'cross
+							\override TextSpanner.bound-details.left.text = \markup {
 								\center-align
 									\natural
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
-							\override Tie #'stencil = ##f
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
+							\override Tie.stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							b'16. [ \glissando \startTextSpan
@@ -2179,25 +2179,25 @@
 					}
 					{
 						{
-							\override Accidental #'stencil = ##f
-							\override AccidentalCautionary #'stencil = ##f
-							\override Glissando #'bound-details #'left #'padding = #1.5
-							\override Glissando #'bound-details #'right #'end-on-accidental = ##f
-							\override Glissando #'bound-details #'right #'padding = #1.5
-							\override NoteHead #'no-ledgers = ##t
-							\override NoteHead #'style = #'cross
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override Accidental.stencil = ##f
+							\override AccidentalCautionary.stencil = ##f
+							\override Glissando.bound-details.left.padding = #1.5
+							\override Glissando.bound-details.right.end-on-accidental = ##f
+							\override Glissando.bound-details.right.padding = #1.5
+							\override NoteHead.no-ledgers = ##t
+							\override NoteHead.style = #'cross
+							\override TextSpanner.bound-details.left.text = \markup {
 								\center-align
 									\flat
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
-							\override Tie #'stencil = ##f
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
+							\override Tie.stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
 							g'8 [ \glissando \startTextSpan
@@ -2230,25 +2230,25 @@
 					}
 					{
 						{
-							\override Accidental #'stencil = ##f
-							\override AccidentalCautionary #'stencil = ##f
-							\override Glissando #'bound-details #'left #'padding = #1.5
-							\override Glissando #'bound-details #'right #'end-on-accidental = ##f
-							\override Glissando #'bound-details #'right #'padding = #1.5
-							\override NoteHead #'no-ledgers = ##t
-							\override NoteHead #'style = #'cross
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override Accidental.stencil = ##f
+							\override AccidentalCautionary.stencil = ##f
+							\override Glissando.bound-details.left.padding = #1.5
+							\override Glissando.bound-details.right.end-on-accidental = ##f
+							\override Glissando.bound-details.right.padding = #1.5
+							\override NoteHead.no-ledgers = ##t
+							\override NoteHead.style = #'cross
+							\override TextSpanner.bound-details.left.text = \markup {
 								\center-align
 									\natural
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
-							\override Tie #'stencil = ##f
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
+							\override Tie.stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							c'16. [ \glissando \startTextSpan
@@ -2330,25 +2330,25 @@
 					}
 					{
 						{
-							\override Accidental #'stencil = ##f
-							\override AccidentalCautionary #'stencil = ##f
-							\override Glissando #'bound-details #'left #'padding = #1.5
-							\override Glissando #'bound-details #'right #'end-on-accidental = ##f
-							\override Glissando #'bound-details #'right #'padding = #1.5
-							\override NoteHead #'no-ledgers = ##t
-							\override NoteHead #'style = #'cross
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override Accidental.stencil = ##f
+							\override AccidentalCautionary.stencil = ##f
+							\override Glissando.bound-details.left.padding = #1.5
+							\override Glissando.bound-details.right.end-on-accidental = ##f
+							\override Glissando.bound-details.right.padding = #1.5
+							\override NoteHead.no-ledgers = ##t
+							\override NoteHead.style = #'cross
+							\override TextSpanner.bound-details.left.text = \markup {
 								\center-align
 									\natural
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
-							\override Tie #'stencil = ##f
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
+							\override Tie.stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							f'16. [ \glissando \startTextSpan
@@ -2373,25 +2373,25 @@
 					}
 					{
 						{
-							\override Accidental #'stencil = ##f
-							\override AccidentalCautionary #'stencil = ##f
-							\override Glissando #'bound-details #'left #'padding = #1.5
-							\override Glissando #'bound-details #'right #'end-on-accidental = ##f
-							\override Glissando #'bound-details #'right #'padding = #1.5
-							\override NoteHead #'no-ledgers = ##t
-							\override NoteHead #'style = #'cross
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override Accidental.stencil = ##f
+							\override AccidentalCautionary.stencil = ##f
+							\override Glissando.bound-details.left.padding = #1.5
+							\override Glissando.bound-details.right.end-on-accidental = ##f
+							\override Glissando.bound-details.right.padding = #1.5
+							\override NoteHead.no-ledgers = ##t
+							\override NoteHead.style = #'cross
+							\override TextSpanner.bound-details.left.text = \markup {
 								\center-align
 									\flat
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
-							\override Tie #'stencil = ##f
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
+							\override Tie.stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							b'16. [ \glissando \startTextSpan
@@ -2416,25 +2416,25 @@
 					}
 					{
 						{
-							\override Accidental #'stencil = ##f
-							\override AccidentalCautionary #'stencil = ##f
-							\override Glissando #'bound-details #'left #'padding = #1.5
-							\override Glissando #'bound-details #'right #'end-on-accidental = ##f
-							\override Glissando #'bound-details #'right #'padding = #1.5
-							\override NoteHead #'no-ledgers = ##t
-							\override NoteHead #'style = #'cross
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override Accidental.stencil = ##f
+							\override AccidentalCautionary.stencil = ##f
+							\override Glissando.bound-details.left.padding = #1.5
+							\override Glissando.bound-details.right.end-on-accidental = ##f
+							\override Glissando.bound-details.right.padding = #1.5
+							\override NoteHead.no-ledgers = ##t
+							\override NoteHead.style = #'cross
+							\override TextSpanner.bound-details.left.text = \markup {
 								\center-align
 									\natural
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
-							\override Tie #'stencil = ##f
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
+							\override Tie.stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							g'16. [ \glissando \startTextSpan
@@ -2477,25 +2477,25 @@
 					}
 					{
 						{
-							\override Accidental #'stencil = ##f
-							\override AccidentalCautionary #'stencil = ##f
-							\override Glissando #'bound-details #'left #'padding = #1.5
-							\override Glissando #'bound-details #'right #'end-on-accidental = ##f
-							\override Glissando #'bound-details #'right #'padding = #1.5
-							\override NoteHead #'no-ledgers = ##t
-							\override NoteHead #'style = #'cross
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override Accidental.stencil = ##f
+							\override AccidentalCautionary.stencil = ##f
+							\override Glissando.bound-details.left.padding = #1.5
+							\override Glissando.bound-details.right.end-on-accidental = ##f
+							\override Glissando.bound-details.right.padding = #1.5
+							\override NoteHead.no-ledgers = ##t
+							\override NoteHead.style = #'cross
+							\override TextSpanner.bound-details.left.text = \markup {
 								\center-align
 									\flat
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
-							\override Tie #'stencil = ##f
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
+							\override Tie.stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							g'16. [ \glissando \startTextSpan
@@ -2521,25 +2521,25 @@
 					}
 					{
 						{
-							\override Accidental #'stencil = ##f
-							\override AccidentalCautionary #'stencil = ##f
-							\override Glissando #'bound-details #'left #'padding = #1.5
-							\override Glissando #'bound-details #'right #'end-on-accidental = ##f
-							\override Glissando #'bound-details #'right #'padding = #1.5
-							\override NoteHead #'no-ledgers = ##t
-							\override NoteHead #'style = #'cross
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override Accidental.stencil = ##f
+							\override AccidentalCautionary.stencil = ##f
+							\override Glissando.bound-details.left.padding = #1.5
+							\override Glissando.bound-details.right.end-on-accidental = ##f
+							\override Glissando.bound-details.right.padding = #1.5
+							\override NoteHead.no-ledgers = ##t
+							\override NoteHead.style = #'cross
+							\override TextSpanner.bound-details.left.text = \markup {
 								\center-align
 									\natural
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
-							\override Tie #'stencil = ##f
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
+							\override Tie.stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
 							cs'8 [ \glissando \startTextSpan
@@ -2572,25 +2572,25 @@
 					}
 					{
 						{
-							\override Accidental #'stencil = ##f
-							\override AccidentalCautionary #'stencil = ##f
-							\override Glissando #'bound-details #'left #'padding = #1.5
-							\override Glissando #'bound-details #'right #'end-on-accidental = ##f
-							\override Glissando #'bound-details #'right #'padding = #1.5
-							\override NoteHead #'no-ledgers = ##t
-							\override NoteHead #'style = #'cross
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override Accidental.stencil = ##f
+							\override AccidentalCautionary.stencil = ##f
+							\override Glissando.bound-details.left.padding = #1.5
+							\override Glissando.bound-details.right.end-on-accidental = ##f
+							\override Glissando.bound-details.right.padding = #1.5
+							\override NoteHead.no-ledgers = ##t
+							\override NoteHead.style = #'cross
+							\override TextSpanner.bound-details.left.text = \markup {
 								\center-align
 									\natural
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
-							\override Tie #'stencil = ##f
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
+							\override Tie.stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							g'16. [ \glissando \startTextSpan
@@ -2637,25 +2637,25 @@
 					}
 					{
 						{
-							\override Accidental #'stencil = ##f
-							\override AccidentalCautionary #'stencil = ##f
-							\override Glissando #'bound-details #'left #'padding = #1.5
-							\override Glissando #'bound-details #'right #'end-on-accidental = ##f
-							\override Glissando #'bound-details #'right #'padding = #1.5
-							\override NoteHead #'no-ledgers = ##t
-							\override NoteHead #'style = #'cross
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override Accidental.stencil = ##f
+							\override AccidentalCautionary.stencil = ##f
+							\override Glissando.bound-details.left.padding = #1.5
+							\override Glissando.bound-details.right.end-on-accidental = ##f
+							\override Glissando.bound-details.right.padding = #1.5
+							\override NoteHead.no-ledgers = ##t
+							\override NoteHead.style = #'cross
+							\override TextSpanner.bound-details.left.text = \markup {
 								\center-align
 									\flat
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
-							\override Tie #'stencil = ##f
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
+							\override Tie.stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							\clef treble
@@ -2690,25 +2690,25 @@
 					}
 					{
 						{
-							\override Accidental #'stencil = ##f
-							\override AccidentalCautionary #'stencil = ##f
-							\override Glissando #'bound-details #'left #'padding = #1.5
-							\override Glissando #'bound-details #'right #'end-on-accidental = ##f
-							\override Glissando #'bound-details #'right #'padding = #1.5
-							\override NoteHead #'no-ledgers = ##t
-							\override NoteHead #'style = #'cross
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override Accidental.stencil = ##f
+							\override AccidentalCautionary.stencil = ##f
+							\override Glissando.bound-details.left.padding = #1.5
+							\override Glissando.bound-details.right.end-on-accidental = ##f
+							\override Glissando.bound-details.right.padding = #1.5
+							\override NoteHead.no-ledgers = ##t
+							\override NoteHead.style = #'cross
+							\override TextSpanner.bound-details.left.text = \markup {
 								\center-align
 									\natural
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
-							\override Tie #'stencil = ##f
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
+							\override Tie.stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							a'16. [ \glissando \startTextSpan
@@ -2746,25 +2746,25 @@
 					}
 					{
 						{
-							\override Accidental #'stencil = ##f
-							\override AccidentalCautionary #'stencil = ##f
-							\override Glissando #'bound-details #'left #'padding = #1.5
-							\override Glissando #'bound-details #'right #'end-on-accidental = ##f
-							\override Glissando #'bound-details #'right #'padding = #1.5
-							\override NoteHead #'no-ledgers = ##t
-							\override NoteHead #'style = #'cross
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override Accidental.stencil = ##f
+							\override AccidentalCautionary.stencil = ##f
+							\override Glissando.bound-details.left.padding = #1.5
+							\override Glissando.bound-details.right.end-on-accidental = ##f
+							\override Glissando.bound-details.right.padding = #1.5
+							\override NoteHead.no-ledgers = ##t
+							\override NoteHead.style = #'cross
+							\override TextSpanner.bound-details.left.text = \markup {
 								\center-align
 									\flat
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
-							\override Tie #'stencil = ##f
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
+							\override Tie.stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
 							c'8 [ \glissando \startTextSpan
@@ -2805,25 +2805,25 @@
 					}
 					{
 						{
-							\override Accidental #'stencil = ##f
-							\override AccidentalCautionary #'stencil = ##f
-							\override Glissando #'bound-details #'left #'padding = #1.5
-							\override Glissando #'bound-details #'right #'end-on-accidental = ##f
-							\override Glissando #'bound-details #'right #'padding = #1.5
-							\override NoteHead #'no-ledgers = ##t
-							\override NoteHead #'style = #'cross
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override Accidental.stencil = ##f
+							\override AccidentalCautionary.stencil = ##f
+							\override Glissando.bound-details.left.padding = #1.5
+							\override Glissando.bound-details.right.end-on-accidental = ##f
+							\override Glissando.bound-details.right.padding = #1.5
+							\override NoteHead.no-ledgers = ##t
+							\override NoteHead.style = #'cross
+							\override TextSpanner.bound-details.left.text = \markup {
 								\center-align
 									\natural
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
-							\override Tie #'stencil = ##f
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
+							\override Tie.stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
 							cs'8 [ \glissando \startTextSpan
@@ -2857,25 +2857,25 @@
 					}
 					{
 						{
-							\override Accidental #'stencil = ##f
-							\override AccidentalCautionary #'stencil = ##f
-							\override Glissando #'bound-details #'left #'padding = #1.5
-							\override Glissando #'bound-details #'right #'end-on-accidental = ##f
-							\override Glissando #'bound-details #'right #'padding = #1.5
-							\override NoteHead #'no-ledgers = ##t
-							\override NoteHead #'style = #'cross
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override Accidental.stencil = ##f
+							\override AccidentalCautionary.stencil = ##f
+							\override Glissando.bound-details.left.padding = #1.5
+							\override Glissando.bound-details.right.end-on-accidental = ##f
+							\override Glissando.bound-details.right.padding = #1.5
+							\override NoteHead.no-ledgers = ##t
+							\override NoteHead.style = #'cross
+							\override TextSpanner.bound-details.left.text = \markup {
 								\center-align
 									\natural
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
-							\override Tie #'stencil = ##f
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
+							\override Tie.stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
 							d'8 [ \glissando \startTextSpan
@@ -2922,25 +2922,25 @@
 					}
 					{
 						{
-							\override Accidental #'stencil = ##f
-							\override AccidentalCautionary #'stencil = ##f
-							\override Glissando #'bound-details #'left #'padding = #1.5
-							\override Glissando #'bound-details #'right #'end-on-accidental = ##f
-							\override Glissando #'bound-details #'right #'padding = #1.5
-							\override NoteHead #'no-ledgers = ##t
-							\override NoteHead #'style = #'cross
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override Accidental.stencil = ##f
+							\override AccidentalCautionary.stencil = ##f
+							\override Glissando.bound-details.left.padding = #1.5
+							\override Glissando.bound-details.right.end-on-accidental = ##f
+							\override Glissando.bound-details.right.padding = #1.5
+							\override NoteHead.no-ledgers = ##t
+							\override NoteHead.style = #'cross
+							\override TextSpanner.bound-details.left.text = \markup {
 								\center-align
 									\flat
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
-							\override Tie #'stencil = ##f
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
+							\override Tie.stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
 							a'8 [ \glissando \startTextSpan
@@ -2970,25 +2970,25 @@
 					}
 					{
 						{
-							\override Accidental #'stencil = ##f
-							\override AccidentalCautionary #'stencil = ##f
-							\override Glissando #'bound-details #'left #'padding = #1.5
-							\override Glissando #'bound-details #'right #'end-on-accidental = ##f
-							\override Glissando #'bound-details #'right #'padding = #1.5
-							\override NoteHead #'no-ledgers = ##t
-							\override NoteHead #'style = #'cross
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override Accidental.stencil = ##f
+							\override AccidentalCautionary.stencil = ##f
+							\override Glissando.bound-details.left.padding = #1.5
+							\override Glissando.bound-details.right.end-on-accidental = ##f
+							\override Glissando.bound-details.right.padding = #1.5
+							\override NoteHead.no-ledgers = ##t
+							\override NoteHead.style = #'cross
+							\override TextSpanner.bound-details.left.text = \markup {
 								\center-align
 									\natural
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
-							\override Tie #'stencil = ##f
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
+							\override Tie.stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							d'16. [ \glissando \startTextSpan
@@ -3064,25 +3064,25 @@
 					}
 					{
 						{
-							\override Accidental #'stencil = ##f
-							\override AccidentalCautionary #'stencil = ##f
-							\override Glissando #'bound-details #'left #'padding = #1.5
-							\override Glissando #'bound-details #'right #'end-on-accidental = ##f
-							\override Glissando #'bound-details #'right #'padding = #1.5
-							\override NoteHead #'no-ledgers = ##t
-							\override NoteHead #'style = #'cross
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override Accidental.stencil = ##f
+							\override AccidentalCautionary.stencil = ##f
+							\override Glissando.bound-details.left.padding = #1.5
+							\override Glissando.bound-details.right.end-on-accidental = ##f
+							\override Glissando.bound-details.right.padding = #1.5
+							\override NoteHead.no-ledgers = ##t
+							\override NoteHead.style = #'cross
+							\override TextSpanner.bound-details.left.text = \markup {
 								\center-align
 									\flat
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
-							\override Tie #'stencil = ##f
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
+							\override Tie.stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 1
 							d'8 [ \glissando \startTextSpan
@@ -3115,25 +3115,25 @@
 					}
 					{
 						{
-							\override Accidental #'stencil = ##f
-							\override AccidentalCautionary #'stencil = ##f
-							\override Glissando #'bound-details #'left #'padding = #1.5
-							\override Glissando #'bound-details #'right #'end-on-accidental = ##f
-							\override Glissando #'bound-details #'right #'padding = #1.5
-							\override NoteHead #'no-ledgers = ##t
-							\override NoteHead #'style = #'cross
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override Accidental.stencil = ##f
+							\override AccidentalCautionary.stencil = ##f
+							\override Glissando.bound-details.left.padding = #1.5
+							\override Glissando.bound-details.right.end-on-accidental = ##f
+							\override Glissando.bound-details.right.padding = #1.5
+							\override NoteHead.no-ledgers = ##t
+							\override NoteHead.style = #'cross
+							\override TextSpanner.bound-details.left.text = \markup {
 								\center-align
 									\natural
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
-							\override Tie #'stencil = ##f
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
+							\override Tie.stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							b'16. [ \glissando \startTextSpan
@@ -3169,25 +3169,25 @@
 					}
 					{
 						{
-							\override Accidental #'stencil = ##f
-							\override AccidentalCautionary #'stencil = ##f
-							\override Glissando #'bound-details #'left #'padding = #1.5
-							\override Glissando #'bound-details #'right #'end-on-accidental = ##f
-							\override Glissando #'bound-details #'right #'padding = #1.5
-							\override NoteHead #'no-ledgers = ##t
-							\override NoteHead #'style = #'cross
-							\override TextSpanner #'bound-details #'left #'text = \markup {
+							\override Accidental.stencil = ##f
+							\override AccidentalCautionary.stencil = ##f
+							\override Glissando.bound-details.left.padding = #1.5
+							\override Glissando.bound-details.right.end-on-accidental = ##f
+							\override Glissando.bound-details.right.padding = #1.5
+							\override NoteHead.no-ledgers = ##t
+							\override NoteHead.style = #'cross
+							\override TextSpanner.bound-details.left.text = \markup {
 								\center-align
 									\natural
 								}
-							\override TextSpanner #'bound-details #'right #'text = \markup {
+							\override TextSpanner.bound-details.right.text = \markup {
 								\draw-line
 									#'(0 . -1)
 								}
-							\override TextSpanner #'bound-details #'right-broken #'text = ##f
-							\override TextSpanner #'dash-fraction = #1
-							\override TextSpanner #'direction = #up
-							\override Tie #'stencil = ##f
+							\override TextSpanner.bound-details.right-broken.text = ##f
+							\override TextSpanner.dash-fraction = #1
+							\override TextSpanner.direction = #up
+							\override Tie.stencil = ##f
 							\set stemLeftBeamCount = 0
 							\set stemRightBeamCount = 2
 							a'16. [ \glissando \startTextSpan
@@ -3314,9 +3314,9 @@
 										)
 									}
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								g16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -3342,9 +3342,9 @@
 							\afterGrace
 							r16
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								f'16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -3472,9 +3472,9 @@
 							\afterGrace
 							g8 -\staccato [
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								b16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -3490,10 +3490,10 @@
 							\afterGrace
 							r4.
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
-								\override Beam #'positions = #beam::place-broken-parts-individually
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
+								\override Beam.positions = #beam::place-broken-parts-individually
 								f'16 [ \(
 								g16 ]
 								\revert Beam #'positions
@@ -3579,9 +3579,9 @@
 							\afterGrace
 							R1 * 3/16
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								\stopStaff
 								\startStaff
 								b16 \(
@@ -3646,9 +3646,9 @@
 							\afterGrace
 							f'8 -\staccato [
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								g16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -3712,9 +3712,9 @@
 										)
 									}
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								\stopStaff
 								\startStaff
 								f16 \(
@@ -3752,9 +3752,9 @@
 							\afterGrace
 							g'8 -\staccato
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								c'16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -3823,9 +3823,9 @@
 							\afterGrace
 							r8
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								e'16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -3851,10 +3851,10 @@
 							\afterGrace
 							c'8 -\staccato
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
-								\override Beam #'positions = #beam::place-broken-parts-individually
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
+								\override Beam.positions = #beam::place-broken-parts-individually
 								e'16 [ \(
 								a16 ]
 								\revert Beam #'positions
@@ -3893,9 +3893,9 @@
 							\afterGrace
 							r16
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								c'16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -3962,9 +3962,9 @@
 							\afterGrace
 							r8
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								a16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -4020,9 +4020,9 @@
 							\afterGrace
 							e'8 -\staccato [
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								f16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -4126,9 +4126,9 @@
 							\afterGrace
 							r4
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								a16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -4186,9 +4186,9 @@
 							\afterGrace
 							a16 :128 [
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								a16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size
@@ -4296,9 +4296,9 @@
 							\afterGrace
 							r8
 							{
-								\override Flag #'stroke-style = #"grace"
-								\override Script #'font-size = #0.5
-								\override Stem #'length = #8
+								\override Flag.stroke-style = #"grace"
+								\override Script.font-size = #0.5
+								\override Stem.length = #8
 								a16 \(
 								\revert Flag #'stroke-style
 								\revert Script #'font-size

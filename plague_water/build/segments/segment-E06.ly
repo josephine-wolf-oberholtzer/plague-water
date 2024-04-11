@@ -1,5 +1,5 @@
 	\context Score = "Plague Water Score" \with {
-		\override HorizontalBracket #'color = #red
+		\override HorizontalBracket.color = #red
 	} <<
 		\tag score.saxophone.guitar.piano.percussion
 		\context TimeSignatureContext = "TimeSignatureContext" {
@@ -67,7 +67,7 @@
 				\context Voice = "Guitar Voice" {
 					{
 						{
-							\override Hairpin #'circled-tip = ##t
+							\override Hairpin.circled-tip = ##t
 							<g, e b d'>4. \arpeggio ~ \<
 								^ \markup {
 									\box
